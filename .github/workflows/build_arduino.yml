@@ -1,0 +1,53 @@
+name: Arduino CLI build
+
+on:
+  pull_request:
+    paths:
+      - "examples/**"
+  push:
+    paths:
+      - "examples/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        fqbn:
+          - "arduino:avr:yun"
+          - "arduino:avr:uno"
+          - "arduino:avr:diecimila"
+          - "arduino:avr:nano"
+          - "arduino:avr:mega"
+          - "arduino:avr:megaADK"
+          - "arduino:avr:leonardo"
+          - "arduino:avr:micro"
+          - "arduino:avr:esplora"
+          - "arduino:avr:mini"
+          - "arduino:avr:ethernet"
+          - "arduino:avr:fio"
+          - "arduino:avr:bt"
+          # - "arduino:avr:LilyPad"  # board not found
+          - "arduino:avr:LilyPadUSB"
+          - "arduino:avr:pro"
+          - "arduino:avr:atmegang"
+          - "arduino:avr:robotControl"
+          - "arduino:avr:robotMotor"
+          # - "arduino:avr:gemma"  # does not support SPI
+          - "arduino:avr:circuitplay32u4cat"
+          - "arduino:avr:yunmini"
+          - "arduino:avr:chiwawa"
+          - "arduino:avr:one"
+          - "arduino:avr:unowifi"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@main
+        with:
+          fqbn: ${{ matrix.fqbn }}
