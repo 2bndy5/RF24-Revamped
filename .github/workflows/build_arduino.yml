@@ -1,0 +1,78 @@
+name: Arduino CLI build
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/build_arduino.yml"
+      - "examples/**"
+      - "!examples/Usage/pingpair_maple/**"
+      - "!examples/rf24_ATTiny/timingSearch3pin/**"
+
+  push:
+    paths:
+      - ".github/workflows/build_arduino.yml"
+      - "examples/**"
+      - "!examples/Usage/pingpair_maple/**"
+      - "!examples/rf24_ATTiny/timingSearch3pin/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        fqbn:
+          - "arduino:avr:yun"
+          - "arduino:avr:uno"
+          - "arduino:avr:diecimila"
+          - "arduino:avr:nano"
+          - "arduino:avr:mega"
+          - "arduino:avr:megaADK"
+          - "arduino:avr:leonardo"
+          - "arduino:avr:micro"
+          - "arduino:avr:esplora"
+          - "arduino:avr:mini"
+          - "arduino:avr:ethernet"
+          - "arduino:avr:fio"
+          - "arduino:avr:bt"
+          # - "arduino:avr:LilyPad"  # board not found
+          - "arduino:avr:LilyPadUSB"
+          - "arduino:avr:pro"
+          - "arduino:avr:atmegang"
+          - "arduino:avr:robotControl"
+          - "arduino:avr:robotMotor"
+          # - "arduino:avr:gemma"  # does not support SPI
+          - "arduino:avr:circuitplay32u4cat"
+          - "arduino:avr:yunmini"
+          - "arduino:avr:chiwawa"
+          - "arduino:avr:one"
+          - "arduino:avr:unowifi"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@main
+        with:
+          sketch-paths: |
+            - examples/GettingStarted
+            - examples/GettingStarted_CallResponse
+            - examples/GettingStarted_HandlingData
+            - examples/GettingStarted_HandlingFailures
+            - examples/pingpair_ack
+            - examples/pingpair_dyn
+            - examples/pingpair_irq
+            - examples/pingpair_irq_simple
+            - examples/pingpair_multi_dyn
+            - examples/pingpair_sleepy
+            - examples/rf24_ATTiny/rf24ping85
+            - examples/scanner
+            - examples/starping
+            - examples/Transfer
+            - examples/TransferTimeouts
+            - examples/Usage/led_remote
+            - examples/Usage/nordic_fob
+          fqbn: ${{ matrix.fqbn }}

@@ -90,6 +90,7 @@ private:
     uint8_t pipe0_reading_address[5]; /**< Last address set on pipe 0 for reading. */
     uint8_t addr_width; /**< The address width to use - 3,4 or 5 bytes. */
     uint8_t config_reg; /**< For storing the value of the NRF_CONFIG register */
+    bool _is_p_variant; /** For storing the result of testing the toggleFeatures() affect */
 
 
 protected:
@@ -173,6 +174,10 @@ public:
      * radio.stopListening();
      * radio.write(&data,sizeof(data));
      * @endcode
+     *
+     * @note The TX FIFO is flushed when calling this function. This is meant
+     * to discard any ACK payloads that were not appended to acknowledgment
+     * packets.
      */
     void stopListening(void);
 
@@ -263,7 +268,7 @@ public:
      * you'll write to. Call stopListening() first.
      *
      * Addresses are assigned via a byte array, default is 5 byte address length
-  s   *
+     *
      * @code
      *   uint8_t addresses[][6] = {"1Node","2Node"};
      *   radio.openWritingPipe(addresses[0]);
@@ -388,12 +393,11 @@ public:
     void powerUp(void);
 
     /**
-    * Write for single NOACK writes. Optionally disables acknowledgements/autoretries for a single write.
-    *
-    * @note enableDynamicAck() must be called to enable this feature
+    * Write for single NOACK writes. Optionally disable
+    * acknowledgements/auto-retries for a single payload using the
+    * multicast parameter set to true.
     *
     * Can be used with enableAckPayload() to request a response
-    * @see enableDynamicAck()
     * @see setAutoAck()
     * @see write()
     *
@@ -434,10 +438,10 @@ public:
     bool writeFast(const void* buf, uint8_t len);
 
     /**
-    * WriteFast for single NOACK writes. Disables acknowledgements/autoretries for a single write.
+    * WriteFast for single NOACK writes. Optionally disable
+    * acknowledgements/auto-retries for a single payload using the
+    * multicast parameter set to true.
     *
-    * @note enableDynamicAck() must be called to enable this feature
-    * @see enableDynamicAck()
     * @see setAutoAck()
     *
     * @param buf Pointer to the data to be sent
@@ -544,16 +548,6 @@ public:
     void writeAckPayload(uint8_t pipe, const void* buf, uint8_t len);
 
     /**
-     * Determine if an ack payload was received in the most recent call to
-     * write(). The regular available() can also be used.
-     *
-     * Call read() to retrieve the ack payload.
-     *
-     * @return True if an ack payload is available.
-     */
-    bool isAckPayloadAvailable(void);
-
-    /**
      * Call this when you get an interrupt to find out why
      *
      * Tells you what caused the interrupt, and clears the state of
@@ -580,8 +574,7 @@ public:
      * @see startWrite()
      * @see writeBlocking()
      *
-     * For single noAck writes see:
-     * @see enableDynamicAck()
+     * For single noAck writes:
      * @see setAutoAck()
      *
      * @param buf Pointer to the data to be sent
@@ -606,7 +599,6 @@ public:
      * @see whatHappened()
      *
      * For single noAck writes see:
-     * @see enableDynamicAck()
      * @see setAutoAck()
      *
      * @param buf Pointer to the data to be sent
@@ -617,19 +609,34 @@ public:
     void startWrite(const void* buf, uint8_t len, const bool multicast);
 
     /**
-     * This function is mainly used internally to take advantage of the auto payload
-     * re-use functionality of the chip, but can be beneficial to users as well.
+     * The function will instruct the radio to re-use the payload in the
+     * top level (first out) of the TX FIFO buffers. This is used internally
+     * by writeBlocking() to initiate retries when a TX failure
+     * occurs. Retries are automatically initiated except with the standard
+     * write(). This way, data is not flushed from the buffer until calling
+     * flush_tx(). If the TX FIFO has only the one payload (in the top level),
+     * the re-used payload can be overwritten by using write(), writeFast(),
+     * writeBlocking(), startWrite(), or startFastWrite(). If the TX FIFO has
+     * other payloads enqueued, then the aforementioned functions will attempt
+     * to enqueue the a new payload in the TX FIFO (does not overwrite the top
+     * level of the TX FIFO). Currently, stopListening() also calls flush_tx()
+     * when ACK payloads are enabled (via enableAckPayload()).
      *
-     * The function will instruct the radio to re-use the data in the FIFO buffers,
-     * and instructs the radio to re-send once the timeout limit has been reached.
-     * Used by writeFast and writeBlocking to initiate retries when a TX failure
-     * occurs. Retries are automatically initiated except with the standard write().
-     * This way, data is not flushed from the buffer until switching between modes.
+     * Upon exiting, this function will set the CE pin HIGH to initiate the
+     * re-transmission process. If only 1 re-transmission is desired, then the
+     * CE pin should be set to LOW after the mandatory minumum pulse duration
+     * of 10 microseconds.
+     *
+     * @remark This function only applies when taking advantage of the
+     * auto-retry feature. See setAutoAck() and setRetries() to configure the
+     * auto-retry feature.
      *
      * @note This is to be used AFTER auto-retry fails if wanting to resend
-     * using the built-in payload reuse features.
-     * After issuing reUseTX(), it will keep reending the same payload forever or until
-     * a payload is written to the FIFO, or a flush_tx command is given.
+     * using the built-in payload reuse feature. After issuing reUseTX(), it
+     * will keep resending the same payload until a transmission failure
+     * occurs or the CE pin is set to LOW (whichever comes first). In the
+     * event of a re-transmission failure, simply call this function again to
+     * resume re-transmission of the same payload.
      */
     void reUseTX();
 
@@ -640,6 +647,13 @@ public:
      * @return Current value of status register
      */
     uint8_t flush_tx(void);
+
+    /**
+     * Empty the receive buffer
+     *
+     * @return Current value of status register
+     */
+    uint8_t flush_rx(void);
 
     /**
      * Test whether there was a carrier on the line for the
@@ -830,6 +844,13 @@ public:
     void enableAckPayload(void);
 
     /**
+     * Disable custom payloads on the ackowledge packets
+     *
+     * @see enableAckPayload()
+     */
+    void disableAckPayload(void);
+
+    /**
      * Enable dynamically-sized payloads
      *
      * This way you don't always have to send large packets just to send them
@@ -850,20 +871,6 @@ public:
     void disableDynamicPayloads(void);
 
     /**
-     * Enable dynamic ACKs (single write multicast or unicast) for chosen messages
-     *
-     * @note To enable full multicast or per-pipe multicast, use setAutoAck()
-     *
-     * @warning This MUST be called prior to attempting single write NOACK calls
-     * @code
-     * radio.enableDynamicAck();
-     * radio.write(&data,32,1);  // Sends a payload with no acknowledgement requested
-     * radio.write(&data,32,0);  // Sends a payload using auto-retry/autoACK
-     * @endcode
-     */
-    void enableDynamicAck();
-
-    /**
      * Determine whether the hardware is an nRF24L01+ or not.
      *
      * @return true if the hardware is nRF24L01+ (or compatible) and false
@@ -872,23 +879,70 @@ public:
     bool isPVariant(void);
 
     /**
-     * Enable or disable auto-acknowlede packets
+     * Enable or disable the auto-acknowledgement feature for all pipes. This
+     * feature is enabled by default. Auto-acknowledgement responds to every
+     * recieved payload with an empty ACK packet. These ACK packets get sent
+     * from the receiving radio back to the transmitting radio. To attach an
+     * ACK payload to a ACK packet, use writeAckPayload().
      *
-     * This is enabled by default, so it's only needed if you want to turn
-     * it off for some reason.
+     * If this feature is disabled on a transmitting radio, then the
+     * transmitting radio will always report that the payload was recieved
+     * (even if it was not). Please remember that this feature's configuration
+     * needs to match for transmitting and receiving radios.
      *
-     * @param enable Whether to enable (true) or disable (false) auto-acks
+     * @warning When using the `multicast` parameter to write(), this feature
+     * can be disabled for an individual payload. However, if this feature is
+     * disabled, then the `multicast` parameter will have no effect.
+     *
+     * @note If disabling auto-acknowledgment packets, the ACK payloads
+     * feature is also disabled as this feature is required to send ACK
+     * payloads.
+     *
+     * @see write()
+     * @see writeFast()
+     * @see startWriteFast()
+     * @see startWrite()
+     * @see writeAckPayload()
+     *
+     * @param enable Whether to enable (true) or disable (false) the
+     * auto-acknowledgment feature for all pipes
      */
     void setAutoAck(bool enable);
 
     /**
-     * Enable or disable auto-acknowlede packets on a per pipeline basis.
+     * Enable or disable the auto-acknowledgement feature for a specific pipe.
+     * This feature is enabled by default for all pipes. Auto-acknowledgement
+     * responds to every recieved payload with an empty ACK packet. These ACK
+     * packets get sent from the receiving radio back to the transmitting
+     * radio. To attach an ACK payload to a ACK packet, use writeAckPayload().
      *
-     * AA is enabled by default, so it's only needed if you want to turn
-     * it off/on for some reason on a per pipeline basis.
+     * Pipe 0 is used for TX operations, which include sending ACK packets. If
+     * using this feature on both TX & RX nodes, then pipe 0 must have this
+     * feature enabled for the RX & TX operations. If this feature is disabled
+     * on a transmitting radio's pipe 0, then the transmitting radio will
+     * always report that the payload was recieved (even if it was not).
+     * Remember to also enable this feature for any pipe that is openly
+     * listening to a transmitting radio with this feature enabled.
      *
-     * @param pipe Which pipeline to modify
-     * @param enable Whether to enable (true) or disable (false) auto-acks
+     * @warning If this feature is enabled for pipe 0, then the `multicast`
+     * parameter to write() can be used to disable this feature for an
+     * individual payload. However, if this feature is disabled for pipe 0,
+     * then the `multicast` parameter will have no effect.
+     *
+     * @note If disabling auto-acknowledgment packets on pipe 0, the ACK
+     * payloads feature is also disabled as this feature is required on pipe 0
+     * to send ACK payloads.
+     *
+     * @see write()
+     * @see writeFast()
+     * @see startWriteFast()
+     * @see startWrite()
+     * @see writeAckPayload()
+     *
+     * @param pipe Which pipe to configure. This number should be in range
+     * [0, 5].
+     * @param enable Whether to enable (true) or disable (false) the
+     * auto-acknowledgment feature for the specified pipe
      */
     void setAutoAck(uint8_t pipe, bool enable);
 
@@ -1014,11 +1068,31 @@ public:
      *
      * @param level Output power to use
      * @param channel The channel to use
+     *
+     * @warning If isPVariant() returns true, then this function takes extra
+     * measures that alter some settings. These settings alterations include:
+     * - setAutoAck() to false (for all pipes)
+     * - setRetries() to retry `0` times with a delay of 250 microseconds
+     * - set the TX address to 5 bytes of `0xFF`
+     * - flush_tx()
+     * - load a 32 byte payload of `0xFF` into the TX FIFO's top level
+     * - disableCRC()
      */
     void startConstCarrier(rf24_pa_dbm_e level, uint8_t channel);
 
     /**
      * Stop transmission of constant wave and reset PLL and CONT registers
+     *
+     * @warning this function will powerDown() the radio per recommendation of
+     * datasheet.
+     * @note If isPVariant() returns true, please remember to re-configure the radio's settings
+     * @code
+     * // re-establish default settings
+     * setCRCLength(RF24_CRC_16);
+     * setAutoAck(true);
+     * setRetries(5, 15);
+     * @endcode
+     * @see startConstCarrier()
      */
     void stopConstCarrier(void);
 
@@ -1066,14 +1140,34 @@ public:
     void openWritingPipe(uint64_t address);
 
     /**
-     * Empty the receive buffer
+     * Enable dynamic ACKs (single write multicast or unicast) for chosen
+     * messages.
      *
-     * @return Current value of status register
+     * @note This function is performed in begin(), so there's no need to
+     * manually call it anymore.
+     *
+     * @note To enable full multicast or per-pipe multicast, use setAutoAck()
+     *
+     * @code
+     * radio.write(&data,32,1);  // Sends a payload with no acknowledgement requested
+     * radio.write(&data,32,0);  // Sends a payload using auto-retry/autoACK
+     * @endcode
      */
-    uint8_t flush_rx(void);
+    void enableDynamicAck();
+
+    /**
+     * Determine if an ack payload was received in the most recent call to
+     * write(). The regular available() can also be used.
+     *
+     * Call read() to retrieve the ack payload.
+     *
+     * @return True if an ack payload is available.
+     */
+    bool isAckPayloadAvailable(void);
 
 private:
 
+    /**@}*/
     /**
      * @name Low-level internal interface.
      *
