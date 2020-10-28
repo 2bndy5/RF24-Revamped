@@ -21,7 +21,7 @@
     #include <Arduino.h>
 #endif
 
-#include <stddef.h>  
+#include <stddef.h>
 
 #include <SPI.h>
 

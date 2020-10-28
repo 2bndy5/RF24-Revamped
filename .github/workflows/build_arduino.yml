@@ -6,17 +6,34 @@ on:
       - ".github/workflows/build_arduino.yml"
       - "examples/**"
       - "!examples/Usage/pingpair_maple/**"
-      - "!examples/rf24_ATTiny/timingSearch3pin/**"
 
   push:
     paths:
       - ".github/workflows/build_arduino.yml"
       - "examples/**"
       - "!examples/Usage/pingpair_maple/**"
-      - "!examples/rf24_ATTiny/timingSearch3pin/**"
+      # - "!examples/rf24_ATTiny/timingSearch3pin/**"
 
 jobs:
+  check_formatting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check code formatting
+        uses: per1234/artistic-style-action@main
+        with:
+          options-file-path: ./examples/examples_formatter.conf
+          name-patterns: |
+            - '*.ino'
+            - '*.cpp'
+            - '*.hpp'
+            - '*.h'
+          target-paths: |
+            - examples
   build:
+    needs: check_formatting
     runs-on: ubuntu-latest
 
     strategy:
@@ -49,6 +66,23 @@ jobs:
           - "arduino:avr:chiwawa"
           - "arduino:avr:one"
           - "arduino:avr:unowifi"
+          - "arduino:mbed:nano33ble"
+          - "arduino:samd:mkr1000"
+          - "arduino:samd:mkrzero"
+          - "arduino:samd:mkrwifi1010"
+          - "arduino:samd:nano_33_iot"
+          - "arduino:samd:mkrfox1200"
+          - "arduino:samd:mkrwan1300"
+          - "arduino:samd:mkrwan1310"
+          - "arduino:samd:mkrgsm1400"
+          - "arduino:samd:mkrnb1500"
+          - "arduino:samd:mkrvidor4000"
+          - "arduino:samd:adafruit_circuitplayground_m0"
+          - "arduino:samd:mzero_pro_bl"
+          - "arduino:samd:mzero_bl"
+          - "arduino:samd:tian"
+          - "arduino:megaavr:uno2018"
+          # - "arduino:megaavr:nano4809"  # board not found
 
     steps:
       - name: Checkout
@@ -59,20 +93,68 @@ jobs:
         with:
           sketch-paths: |
             - examples/GettingStarted
-            - examples/GettingStarted_CallResponse
-            - examples/GettingStarted_HandlingData
-            - examples/GettingStarted_HandlingFailures
-            - examples/pingpair_ack
-            - examples/pingpair_dyn
-            - examples/pingpair_irq
-            - examples/pingpair_irq_simple
-            - examples/pingpair_multi_dyn
-            - examples/pingpair_sleepy
+            - examples/AcknowledgementPayloads
+            - examples/ManualAcknowledgements
+            - examples/StreamingData
+            - examples/MulticeiverDemo
+            - examples/InterruptConfigure
+          #   - examples/rf24_ATTiny/rf24ping85
+          #   - examples/old_backups/GettingStarted_HandlingData
+          #   - examples/old_backups/GettingStarted_HandlingFailures
+          #   - examples/old_backups/pingpair_dyn
+          #   - examples/old_backups/pingpair_irq
+          #   - examples/old_backups/pingpair_multi_dyn
+          #   - examples/old_backups/pingpair_sleepy
+          #   - examples/old_backups/scanner
+          #   - examples/old_backups/TransferTimeouts
+          #   - examples/old_backups/recipes/led_remote
+          #   - examples/old_backups/recipes/nordic_fob
+          #   - examples/old_backups/recipes/pingpair_maple
+          fqbn: ${{ matrix.fqbn }}
+  attiny:
+    needs: check_formatting
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        fqbn:
+          - ATTinyCore:avr:attinyx4
+          - ATTinyCore:avr:attinyx4opti
+          - ATTinyCore:avr:attinyx4micr
+          - ATTinyCore:avr:attinyx5
+          - ATTinyCore:avr:attinyx5micr
+          - ATTinyCore:avr:attinyx8
+          - ATTinyCore:avr:attinyx8opti
+          - ATTinyCore:avr:attinyx8micr
+          - ATTinyCore:avr:attinyx7
+          - ATTinyCore:avr:attinyx7opti
+          - ATTinyCore:avr:attinyx7micr
+          - ATTinyCore:avr:attinyx61
+          - ATTinyCore:avr:attinyx61opti
+          - ATTinyCore:avr:attinyx41
+          - ATTinyCore:avr:attinyx41opti
+          - ATTinyCore:avr:attinyx41micr
+          # - ATTinyCore:avr:attiny43  # doesn't seem to support USI implementation of SPI
+          - ATTinyCore:avr:attiny828
+          - ATTinyCore:avr:attiny828opti
+          - ATTinyCore:avr:attiny1634
+          - ATTinyCore:avr:attiny1634opti
+          - ATTinyCore:avr:attinyx313
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@main
+        with:
+          platforms: |
+            - source-url: "http://drazzy.com/package_drazzy.com_index.json"
+              name: "ATTinyCore:avr"
+            - name: "arduino:avr"
+          sketch-paths: |
             - examples/rf24_ATTiny/rf24ping85
-            - examples/scanner
-            - examples/starping
-            - examples/Transfer
-            - examples/TransferTimeouts
-            - examples/Usage/led_remote
-            - examples/Usage/nordic_fob
+          #  - examples/rf24_ATTiny  #timingSearch3pin example redefines SPI functions
           fqbn: ${{ matrix.fqbn }}
