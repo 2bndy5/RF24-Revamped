@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: Here are the most common issues and their solutions.</title>
+<title>Optimized high speed nRF24L01+ driver class documentation: Common Issues</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,18 +86,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Here are the most common issues and their solutions. </div>  </div>
+<div class="title">Common Issues </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md1"></a>
-I'm not receiving acks!</h2>
-<p>If you're not receiving acks correctly/reliably on data rates lower than 2MBPS, try adding a big capacitor close to the module/chip. Example issues: <a href="https://github.com/nRF24/RF24/issues/264">#264</a> <a href="https://github.com/nRF24/RF24/issues/211">#211</a>.</p>
-<p>For this application, please use Electrolytic or Tantalum capacitors. Ceramic capacitors will probably not be good enough. </p>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Settings that must match</h1>
+<p>Before you report undesirable behavior, please make sure that the following <a class="el" href="classRF24.html">RF24</a> configurations match on both receiving and transmitting nRF24L01 transceivers:</p><ol type="1">
+<li><code>setAddressWidth()</code></li>
+<li><code>setChannel()</code></li>
+<li><code>setDataRate()</code></li>
+<li><code>setAutoAck()</code></li>
+<li><code>enableDymanicPayloads()</code> or <code>disableDynamicPayloads()</code></li>
+<li><code>enableAckPayload()</code> or <code>disableAckPayload()</code> (requires auto-ack and dynamic payloads features)</li>
+<li><code>setPayloadSize()</code> (only if <code>disableDynamicPayloads()</code> was called)</li>
+<li><code>setCRClength()</code> or <code>disableCRCLength()</code> (the auto-ack feature automatically enables CRC because it is required)</li>
+</ol>
+<p>Also, it helps to think of an address as a path (a commonly shared route) instead of an identifying device destination. This means that addresses have to match for a payload to travel from one transceiver to another. However, the pipe numbers assigned with the matching address do not have to match. You can think of pipes as parking spots for the packets, while all packets' payloads live in a TX or RX FIFO buffer. Remember that the TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of 3 payloads (regardless of the maximum 32-byte payload size).</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Here are the most common issues and their solutions.</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+write() always returns true after setAutoAck(false)</h2>
+<p>Don't disabled the auto-ack feature. <a class="el" href="group__Porting__GPIO.html#ga957694ca061e30268dd8a4b28a08e59b">write()</a> has no reason to doubt that the payload was delivered if the auto-ack feature is disabled. We recommend you read the docs about setAutoAck() before disabling the auto-ack feature.</p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+write() returns false when the payload was received</h2>
+<p>If the settings match on both endpoint transceivers, then this can only mean that the receiving nRF24L01 failed to send an acknowledgement (ACK) packet back to the transmitting nRF24L01. Usually this is due to instability (electric noise) in the power lines (VCC and GND) going to the receiving nRF24L01.</p>
+<p>If you're not receiving ACK packets correctly/reliably on data rates lower than 2MBPS, try adding a big capacitor close to the module/chip. Example issues: <a href="https://github.com/nRF24/RF24/issues/264">#264</a> <a href="https://github.com/nRF24/RF24/issues/211">#211</a>.</p>
+<p>For reliability, please use Electrolytic or Tantalum capacitors. Ceramic capacitors may not be good enough (depending on the manufacturing source). </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 28 2020 21:03:21 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Mon Nov 16 2020 01:58:48 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
