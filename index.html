@@ -103,19 +103,19 @@ News</h1>
 <p><b>Aug 2020</b> <br  />
  v1.3.9</p><ul>
 <li>Fix broken compilation for some devices due to recent changes v1.3.8</li>
-<li>Introduces change that mainly reduces the time required to call startListening(), powerUp(), and powerDown()</li>
+<li>Introduces change that mainly reduces the time required to call <a class="el" href="classRF24.html#a30a2733a3889bdc331fe2d2f4f0f7b39">RF24::startListening()</a>, <a class="el" href="classRF24.html#a5cdaf47aa0edd6dca1b9a8bb7972a1a3">RF24::powerUp()</a>, and <a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">RF24::powerDown()</a></li>
 <li>Affects speed of switching from TX-&gt;RX. Users might consider starting updates of slower devices with this<br  />
  release to prevent missed packets when similar changes are introduced, affecting switching from RX-&gt;TX</li>
-<li>Clean up <a class="el" href="group__Porting__SPI.html#gaf79095574842d60a6297aa5b01b6185f">begin()</a> function (reduce program size)</li>
+<li>Clean up <a class="el" href="classRF24.html#a048a20c73c7d9b2e02dcbae6fb9c4ba8">RF24::begin()</a> function (reduce program size)</li>
 </ul>
 <p>v1.3.7</p><ul>
-<li>Bug fix for writeFast() function affecting <a class="el" href="classRF24.html">RF24</a> stack (all <a class="el" href="classRF24.html">RF24</a> libraries)</li>
+<li>Bug fix for <a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">RF24::writeFast()</a> function affecting <a class="el" href="classRF24.html">RF24</a> stack (all <a class="el" href="classRF24.html">RF24</a> libraries)</li>
 <li>Unify Arduino &amp; Linux constructor. Accept SPI speed in Hz as optional parameter</li>
 <li>Removal of BCM2835 SPI speed constants due to removal from BCM library</li>
 <li>Update to latest BCM2835 driver</li>
 <li>Bug fix for RPi <a class="el" href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis()</a> code</li>
 <li>Added Constant Carrier Wave functionality &amp; added to scanner example</li>
-<li>Modify setPALevel() to allow setting LNA gain via optional parameter</li>
+<li>Modify <a class="el" href="classRF24.html#ab6a711a9cc14fb459a4a1698b8665d82">RF24::setPALevel()</a> to allow setting LNA gain via optional parameter</li>
 <li>Cleanup of warnings, errors and old files</li>
 </ul>
 <p><b>March-July 2020</b></p><ul>
@@ -127,11 +127,11 @@ News</h1>
 <h1><a class="anchor" id="Useful"></a>
 Useful References</h1>
 <ul>
-<li><a href="http://nRF24.github.io/RF24/classRF24.html"><b>RF24 Class Documentation</b></a> </li>
-<li><a href="http://nRF24.github.io/RF24/pages.html"><b>Support &amp; Configuration</b></a> </li>
+<li><a href="classRF24.html"><b>RF24 Class Documentation</b></a> </li>
+<li><a href="pages.html"><b>Support &amp; Configuration</b></a> </li>
 <li><a href="https://github.com/nRF24/RF24/"><b>Source Code</b></a> </li>
-<li><a href="http://tmrh20.github.io/RF24/tmrh20/nRF24L01_datasheet_v2.pdf">nrf24L01 v2.0 Datasheet</a> </li>
-<li><a href="http://tmrh20.github.io/RF24/tmrh20/nRF24L01P_datasheet_v1.pdf">nrf24L01+ v1.0 Datasheet</a></li>
+<li><a href="http://github.com/nRF24/RF24/datasheets/nRF24L01_datasheet_v2.pdf">nRF24L01 v2.0 Datasheet</a> </li>
+<li><a href="http://github.com/nRF24/RF24/datasheets/nRF24L01P_datasheet_v1.pdf">nRF24L01+ v1.0 Datasheet</a></li>
 </ul>
 <p><b>Additional Information and Add-ons</b></p>
 <ul>
@@ -197,7 +197,7 @@ Platform Support Pages</h1>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 16 2020 01:58:48 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Sat Nov 21 2020 17:57:06 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

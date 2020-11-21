@@ -110,162 +110,169 @@ To run this example, enter </p><div class="fragment"><div class="line"><a name="
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"># Generic:</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;radio = <a class="code" href="classRF24.html">RF24</a>(22, 0)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"># RPi Alternate, with SPIDEV - Note: Edit RF24/arch/BBB/spi.cpp and</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"># set &#39;this-&gt;device = &quot;/dev/spidev0.0&quot;;;&#39; or as listed in /dev</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"># For this example, we will use different addresses</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"># An address need to be a buffer protocol object (bytearray)</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;address = [b<span class="stringliteral">&quot;1Node&quot;</span>, b<span class="stringliteral">&quot;2Node&quot;</span>]</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"># It is very helpful to think of an address as a path instead of as</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"># an identifying device destination</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"># to use different addresses on a pair of radios, we need a variable to</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"># uniquely identify which address this radio will use to transmit</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"># 0 uses address[0] to transmit, 1 uses address[1] to transmit</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;radio_number = bool(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    int(</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        input(</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="stringliteral">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        ) <span class="keywordflow">or</span> 0</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    )</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"># initialize the nRF24L01 on the spi bus</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordflow">if</span> <span class="keywordflow">not</span> radio.begin():</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">raise</span> RuntimeError(<span class="stringliteral">&quot;nRF24L01 hardware isn&#39;t responding&quot;</span>)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"># set the Power Amplifier level to -12 dBm since this test example is</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"># usually run with nRF24L01 transceivers in close proximity of each other</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;radio.setPALevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"># set TX address of RX node into the TX pipe</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;radio.openWritingPipe(address[radio_number])  <span class="comment"># always uses pipe 0</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"># using the python keyword global is bad practice. Instead we&#39;ll use a 1 item</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"># list to store our integer number for the payloads&#39; counter</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;counter = [0]</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"># For this example, we will use different addresses</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"># An address need to be a buffer protocol object (bytearray)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;address = [b<span class="stringliteral">&quot;1Node&quot;</span>, b<span class="stringliteral">&quot;2Node&quot;</span>]</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"># It is very helpful to think of an address as a path instead of as</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"># an identifying device destination</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"># to use different addresses on a pair of radios, we need a variable to</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"># uniquely identify which address this radio will use to transmit</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"># 0 uses address[0] to transmit, 1 uses address[1] to transmit</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;radio_number = bool(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    int(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        input(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="stringliteral">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        ) <span class="keywordflow">or</span> 0</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    )</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"># initialize the nRF24L01 on the spi bus</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordflow">if</span> <span class="keywordflow">not</span> radio.begin():</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">raise</span> RuntimeError(<span class="stringliteral">&quot;radio is not responding&quot;</span>)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"># set RX address of TX node into an RX pipe</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;radio.openReadingPipe(1, address[<span class="keywordflow">not</span> radio_number])  <span class="comment"># using pipe 1</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"># To save time during transmission, we&#39;ll set the payload size to be only what</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"># we need. A float value occupies 4 bytes in memory using len(struct.pack())</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"># &quot;&lt;b&quot; means a little endian unsigned byte</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"># we also need an addition 7 bytes for the payload message</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;radio.payloadSize = len(struct.pack(<span class="stringliteral">&quot;&lt;b&quot;</span>, 0)) + 7</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"># for debugging</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;radio.printDetails()</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"># using the python keyword global is bad practice. Instead we&#39;ll use a 1 item</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"># list to store our float number for the payloads sent</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;payload = [0]</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">def </span>master(count=10):</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;Transmits a message and an incrementing integer every second&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    radio.stopListening()  <span class="comment"># ensures the nRF24L01 is in TX mode</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"># set the Power Amplifier level to -12 dBm since this test example is</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"># usually run with nRF24L01 transceivers in close proximity of each other</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;radio.setPALevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"># set the TX address of the RX node into the TX pipe</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;radio.openWritingPipe(address[radio_number])  <span class="comment"># always uses pipe 0</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"># set the RX address of the TX node into a RX pipe</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;radio.openReadingPipe(1, address[<span class="keywordflow">not</span> radio_number])  <span class="comment"># using pipe 1</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"># To save time during transmission, we&#39;ll set the payload size to be only what</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"># we need. For this example, we&#39;ll be using a byte for the payload counter and</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"># 7 bytes for the payload message</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;radio.payloadSize = 8</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"># for debugging, we have 2 options that print a large block of details</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"># radio.printDetails();  # (smaller) function that prints raw register values</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"># radio.printPrettyDetails();  # (larger) function that prints human readable data</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">while</span> count:  <span class="comment"># only transmit `count` packets</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment"># use struct.pack to packetize your data into a usable payload</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="comment"># &quot;&lt;b&quot; means a single little endian unsigned byte.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment"># NOTE we added a b&quot;\x00&quot; byte as a c-string&#39;s NULL terminating 0</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        buffer = b<span class="stringliteral">&quot;Hello \x00&quot;</span> + struct.pack(<span class="stringliteral">&quot;&lt;b&quot;</span>, payload[0])</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        start_timer = time.monotonic_ns()  <span class="comment"># start timer</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        result = radio.write(buffer)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> result:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            print(<span class="stringliteral">&quot;Transmission failed or timed out&quot;</span>)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            radio.startListening()</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            timout = time.monotonic() * 1000 + 250  <span class="comment"># use 250 ms timeout</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            ack = b<span class="stringliteral">&quot;\x00&quot;</span> * len(buffer)  <span class="comment"># variable used for the response</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">while</span> ack[0] == 0 <span class="keywordflow">or</span> time.monotonic() * 1000 &lt; timout:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">if</span> radio.available():</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <span class="comment"># get the response &amp; save it to ack variable</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    ack = radio.read(radio.payloadSize)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    radio.stopListening()</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    radio.openWritingPipe(address[0])</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            end_timer = time.monotonic_ns()  <span class="comment"># end timer</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            print(</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="stringliteral">&quot;Transmission successful. Sent: {}{}.&quot;</span>.format(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    buffer[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    payload[0]</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                ),</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                end=<span class="stringliteral">&quot; &quot;</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            )</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">if</span> ack[0] == 0:</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                print(<span class="stringliteral">&quot;No response received.&quot;</span>)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="comment"># decode response&#39;s text as an string</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="comment"># NOTE ack[:6] ignores the NULL terminating 0</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                response = ack[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="comment"># use struct.unpack() to get the repsonse&#39;s appended int</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="comment"># NOTE ack[7:] discards NULL terminating 0, and</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="comment"># &quot;&lt;b&quot; means its a single little endian unsigned byte</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                payload[0] = struct.unpack(<span class="stringliteral">&quot;&lt;b&quot;</span>, ack[7:])[0]</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                print(</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    <span class="stringliteral">&quot;Received: {}{}. Roundtrip delay: {} us.&quot;</span>.format(</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        response,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        payload[0],</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        (end_timer - start_timer) / 1000</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    )</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                )</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        time.sleep(1)  <span class="comment"># make example readable by slowing down transmissions</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        count -= 1</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">def </span>slave(count=10):</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;Polls the radio and prints the received value. This method expires</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="stringliteral">    after 6 seconds of no received transmission&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    radio.startListening()  <span class="comment"># put radio into RX mode and power up</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">def </span>master(count=5):</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;Transmits a message and an incrementing integer every second, then</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">    wait for a response for up to 200 ms.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">    :param int count: The number of payloads to transmit (failed or</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral">        successful).</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    radio.stopListening()  <span class="comment"># ensures the nRF24L01 is in TX mode</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">while</span> count:  <span class="comment"># only transmit `count` packets</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment"># use bytes() to pack our counter data into the payload</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment"># NOTE b&quot;\x00&quot; byte is a c-string&#39;s NULL terminating 0</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        buffer = b<span class="stringliteral">&quot;Hello \x00&quot;</span> + bytes(counter)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        start_timer = time.monotonic_ns()  <span class="comment"># start timer</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        result = radio.write(buffer)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> result:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            print(<span class="stringliteral">&quot;Transmission failed or timed out&quot;</span>)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            radio.startListening()</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            timout = time.monotonic() * 1000 + 200  <span class="comment"># use 200 ms timeout</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="comment"># declare a variable to save the incoming response</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">while</span> <span class="keywordflow">not</span> radio.available() <span class="keywordflow">and</span> time.monotonic() * 1000 &lt; timout:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">pass</span>  <span class="comment"># wait for incoming payload or timeout</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            radio.stopListening()</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            end_timer = time.monotonic_ns()  <span class="comment"># end timer</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            print(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="stringliteral">&quot;Transmission successful. Sent: {}{}.&quot;</span>.format(</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    buffer[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    counter[0]</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                ),</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                end=<span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            )</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            has_payload, pipe_number = radio.available_pipe()</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> has_payload:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="comment"># grab the incoming payload</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                received = radio.read(radio.payloadSize)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="comment"># NOTE received[7:8] discards NULL terminating 0</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                counter[0] = received[7:8][0]  <span class="comment"># save the counter</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                print(</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    <span class="stringliteral">&quot;Received {} bytes on pipe {}: {}{}. &quot;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    <span class="stringliteral">&quot;Round-trip delay: {} us.&quot;</span>.format(</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        radio.payloadSize,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                        pipe_number,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                        bytes(received[:6]).decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                        counter[0],</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                        (end_timer - start_timer) / 1000</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    )</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                )</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                print(<span class="stringliteral">&quot;No response received.&quot;</span>)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        time.sleep(1)  <span class="comment"># make example readable by slowing down transmissions</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        count -= 1</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    start_timer = time.monotonic()  <span class="comment"># start a timer to detect timeout</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">while</span> count <span class="keywordflow">and</span> (time.monotonic() - start_timer) &lt; 6:</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="comment"># receive `count` payloads or wait 6 seconds till timing out</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        has_payload, pipe_number = radio.available_pipe()</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> has_payload:</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            count -= 1</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            received = radio.read(radio.payloadSize)  <span class="comment"># fetch the payload</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="comment"># use struct.unpack() to get the payload&#39;s appended int</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="comment"># NOTE received[7:] discards NULL terminating 0, and</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="comment"># &quot;&lt;b&quot; means its a single little endian unsigned byte</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            payload[0] = struct.unpack(<span class="stringliteral">&quot;&lt;b&quot;</span>, received[7:])[0] + 1</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="comment"># use bytes() to packetize our data into a usable payload</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="comment"># NOTE b&quot;\x00&quot; byte is a c-string&#39;s NULL terminating 0</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            buffer = b<span class="stringliteral">&quot;World \x00&quot;</span> + bytes([payload[0]])</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="comment"># save response&#39;s result</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            response = radio.write(buffer)</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="comment"># print the payload received and the response&#39;s payload</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            print(</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="stringliteral">&quot;Received {} bytes on pipe {}: {}{}.&quot;</span>.format(</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    radio.payloadSize,</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                    pipe_number,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    received[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                    payload[0] - 1</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                ),</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                end=<span class="stringliteral">&quot; &quot;</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            )</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">if</span> response:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                print(</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                    <span class="stringliteral">&quot;Sent: {}{}&quot;</span>.format(</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        buffer[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        payload[0]</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                    )</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                )</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                print(<span class="stringliteral">&quot;Response failed or timed out&quot;</span>)</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            start_timer = time.monotonic()  <span class="comment"># reset the timeout timer</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment"># recommended behavior is to keep in TX mode while idle</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    radio.stopListening()  <span class="comment"># put the nRF24L01 is in TX mode</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;print(</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;\</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="stringliteral">    RF24/examples_linux/manual_acknowledgements\n\</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="stringliteral">    Run slave() on receiver\n\</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="stringliteral">    Run master() on transmitter&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">def </span>slave(timeout=6):</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;Listen for any payloads and print the transaction</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="stringliteral">    :param int timeout: The number of seconds to wait (with no transmission)</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="stringliteral">        until exiting function.</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    radio.startListening()  <span class="comment"># put radio into RX mode and power up</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    start_timer = time.monotonic()  <span class="comment"># start a timer to detect timeout</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">while</span> (time.monotonic() - start_timer) &lt; timeout:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="comment"># receive `count` payloads or wait 6 seconds till timing out</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        has_payload, pipe_number = radio.available_pipe()</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordflow">if</span> has_payload:</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            received = radio.read(radio.payloadSize)  <span class="comment"># fetch the payload</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="comment"># NOTE received[7:8] discards NULL terminating 0</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            counter[0] = received[7:8][0] + 1  <span class="comment"># increment the counter</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="comment"># use bytes() to pack our counter data into the payload</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="comment"># NOTE b&quot;\x00&quot; byte is a c-string&#39;s NULL terminating 0</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            buffer = b<span class="stringliteral">&quot;World \x00&quot;</span> + bytes(counter)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            radio.stopListening()  <span class="comment"># put radio in TX mode</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            radio.writeFast(buffer)  <span class="comment"># load response into TX FIFO</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="comment"># keep retrying to send response for 150 milliseconds</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            result = radio.txStandBy(150)  <span class="comment"># save response&#39;s result</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment"># NOTE txStandBy() flushes TX FIFO on transmission failure</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            radio.startListening()  <span class="comment"># put radio back in RX mode</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment"># print the payload received payload</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            print(</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="stringliteral">&quot;Received {} bytes on pipe {}: {}{}.&quot;</span>.format(</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                    radio.payloadSize,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    pipe_number,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                    bytes(received[:6]).decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    received[7:8][0]</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                ),</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                end=<span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            )</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="keywordflow">if</span> result:  <span class="comment"># did response succeed?</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                <span class="comment"># print response&#39;s payload</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                print(</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    <span class="stringliteral">&quot;Sent: {}{}&quot;</span>.format(</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                        buffer[:6].decode(<span class="stringliteral">&quot;utf-8&quot;</span>),</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                        counter[0]</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    )</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                )</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                print(<span class="stringliteral">&quot;Response failed or timed out&quot;</span>)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            start_timer = time.monotonic()  <span class="comment"># reset the timeout timer</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="comment"># recommended behavior is to keep in TX mode while idle</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    radio.stopListening()  <span class="comment"># put the nRF24L01 is in TX mode</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;print(</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;\</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="stringliteral">    RF24/examples_linux/manual_acknowledgements\n\</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="stringliteral">    Run slave() on receiver\n\</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="stringliteral">    Run master() on transmitter&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;)</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00065">RF24.h:65</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00115">RF24.h:115</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 16 2020 01:58:48 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Sat Nov 21 2020 17:57:05 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

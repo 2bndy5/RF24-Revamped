@@ -9,8 +9,9 @@ var searchData=
   ['compatibility_2eh_23',['compatibility.h',['../compatibility_8h.html',1,'']]],
   ['cont_5fwave_24',['CONT_WAVE',['../nRF24L01_8h.html#a165f18ecbab7e3f232eeba3dbcd028d0',1,'nRF24L01.h']]],
   ['contributing_2emd_25',['CONTRIBUTING.md',['../CONTRIBUTING_8md.html',1,'']]],
-  ['crco_26',['CRCO',['../nRF24L01_8h.html#a253dd73b17f0ea7f71e55f52e796836a',1,'nRF24L01.h']]],
-  ['csdelay_27',['csDelay',['../classRF24.html#ad08121bf844f08dbe53f51576b7c4066',1,'RF24']]],
-  ['common_20issues_28',['Common Issues',['../md_COMMON_ISSUES.html',1,'']]],
-  ['contributing_29',['CONTRIBUTING',['../md_CONTRIBUTING.html',1,'']]]
+  ['crc_20length_26',['CRC length',['../group__CRCLength.html',1,'']]],
+  ['crco_27',['CRCO',['../nRF24L01_8h.html#a253dd73b17f0ea7f71e55f52e796836a',1,'nRF24L01.h']]],
+  ['csdelay_28',['csDelay',['../classRF24.html#ad08121bf844f08dbe53f51576b7c4066',1,'RF24']]],
+  ['common_20issues_29',['Common Issues',['../md_COMMON_ISSUES.html',1,'']]],
+  ['contributing_30',['CONTRIBUTING',['../md_CONTRIBUTING.html',1,'']]]
 ];
