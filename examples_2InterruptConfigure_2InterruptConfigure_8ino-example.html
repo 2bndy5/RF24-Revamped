@@ -89,12 +89,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">examples/InterruptConfigure/InterruptConfigure.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p><b>For Arduino</b><br  />
- <b>Written by 2bndy5 2020 </b><br  />
- This example uses Acknowledgement (ACK) payloads attached to ACK packets to demonstrate how the nRF24L01's IRQ (Interrupt Request) pin can be configured to detect when data is received, or when data has transmitted successfully, or when data has failed to transmit.</p>
+<p>Written by <a href="http://github.com/2bndy5">2bndy5</a> in 2020</p>
+<p>This example uses Acknowledgement (ACK) payloads attached to ACK packets to demonstrate how the nRF24L01's IRQ (Interrupt Request) pin can be configured to detect when data is received, or when data has transmitted successfully, or when data has failed to transmit.</p>
 <p>This example was written to be used on 2 devices acting as "nodes". Use the Serial Monitor to change each node's behavior.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * See documentation at https://tmrh20.github.io/RF24</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * See documentation at https://nRF24.github.io/RF24</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * See License information at root directory of this library</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author: Brendan Doherty (2bndy5)</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> */</span></div>
@@ -144,7 +143,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// initialize the transceiver on the SPI bus</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">if</span> (!radio.begin()) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    Serial.println(F(<span class="stringliteral">&quot;radio is not responding!!&quot;</span>));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    Serial.println(F(<span class="stringliteral">&quot;radio hardware is not responding!!&quot;</span>));</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">while</span> (1) {} <span class="comment">// hold in infinite loop</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
@@ -167,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// setup the IRQ_PIN</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a name="a1"></a><a class="code" href="group__Porting__General.html#ga361649efb4f1e2fa3c870ca203497d5e">pinMode</a>(IRQ_PIN, <a name="a2"></a><a class="code" href="group__Porting__General.html#ga1bb283bd7893b9855e2f23013891fc82">INPUT</a>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  attachInterrupt(digitalPinToInterrupt(IRQ_PIN), interruptHandler, FALLING);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// IMPORTANT: do not call radio.available(&amp;pipe_number) before calling</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// IMPORTANT: do not call radio.available() before calling</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">// radio.whatHappened() when the interruptHandler() is triggered by the</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">// IRQ pin FALLING event. According to the datasheet, the pipe information</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">// is unreliable during the IRQ pin FALLING transition.</span></div>
@@ -196,7 +195,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="comment">// additional setup specific to the node&#39;s role</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordflow">if</span> (role) {</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// setup for TX mode</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    radio.stopListening();                                  <span class="comment">// powerUp() into TX mode</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    radio.stopListening();                                  <span class="comment">// put radio in TX mode</span></div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">// setup for RX mode</span></div>
@@ -210,7 +209,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    radio.writeAckPayload(1, &amp;ack_payloads[1], ack_pl_size);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    radio.writeAckPayload(1, &amp;ack_payloads[2], ack_pl_size);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    radio.startListening(); <span class="comment">// powerUp() into RX mode</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    radio.startListening(); <span class="comment">// put radio in RX mode</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">// For debugging info</span></div>
@@ -434,7 +433,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="agroup__PALevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00050">RF24.h:50</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 21 2020 17:57:10 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Wed Dec 2 2020 02:24:22 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -89,12 +89,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">examples/StreamingData/StreamingData.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p><b>For Arduino</b><br  />
- <b>Written by 2bndy5 2020 </b><br  />
- A simple example of streaming data from 1 nRF24L01 transceiver to another.</p>
+<p>Written by <a href="http://github.com/2bndy5">2bndy5</a> in 2020</p>
+<p>A simple example of streaming data from 1 nRF24L01 transceiver to another.</p>
 <p>This example was written to be used on 2 devices acting as "nodes". Use the Serial Monitor to change each node's behavior.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * See documentation at https://tmrh20.github.io/RF24</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * See documentation at https://nRF24.github.io/RF24</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * See License information at root directory of this library</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author: Brendan Doherty 2bndy5</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> */</span></div>
@@ -138,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// initialize the transceiver on the SPI bus</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">if</span> (!radio.begin()) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    Serial.println(F(<span class="stringliteral">&quot;radio is not responding!!&quot;</span>));</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    Serial.println(F(<span class="stringliteral">&quot;radio hardware is not responding!!&quot;</span>));</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">while</span> (1) {} <span class="comment">// hold in infinite loop</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
@@ -175,9 +174,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">// additional setup specific to the node&#39;s role</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">if</span> (role) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    radio.stopListening();  <span class="comment">// powerUp() into TX mode</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    radio.stopListening();  <span class="comment">// put radio in TX mode</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    radio.startListening(); <span class="comment">// powerUp() into RX mode</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    radio.startListening(); <span class="comment">// put radio in RX mode</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="comment">// For debugging info</span></div>
@@ -280,7 +279,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="agroup__PALevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00050">RF24.h:50</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 21 2020 17:57:10 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Wed Dec 2 2020 02:24:22 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
