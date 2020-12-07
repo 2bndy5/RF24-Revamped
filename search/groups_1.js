@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['datarate_497',['datarate',['../group__Datarate.html',1,'']]]
+  ['datarate_499',['datarate',['../group__Datarate.html',1,'']]]
 ];

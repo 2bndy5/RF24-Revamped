@@ -4,7 +4,7 @@ var searchData=
   ['r_5fregister_144',['R_REGISTER',['../nRF24L01_8h.html#afb0b251378d3b14c508e51fd2c3157d6',1,'nRF24L01.h']]],
   ['r_5frx_5fpayload_145',['R_RX_PAYLOAD',['../nRF24L01_8h.html#a462d8c2314b823b724574c1ca73225a6',1,'nRF24L01.h']]],
   ['r_5frx_5fpl_5fwid_146',['R_RX_PL_WID',['../nRF24L01_8h.html#a14ea186f093047db160cee642e5bd901',1,'nRF24L01.h']]],
-  ['read_147',['read',['../classRF24.html#a8e2eacacfba96426c192066f04054c5b',1,'RF24::read()'],['../group__Porting__GPIO.html#ga783c8d81b91f178759766e7e62ea4b17',1,'read():&#160;gpio.h']]],
+  ['read_147',['read',['../classRF24.html#a8e2eacacfba96426c192066f04054c5b',1,'RF24::read()'],['../classGPIO.html#a83aea305a6600dcff18526b0157b6582',1,'GPIO::read()']]],
   ['readme_2emd_148',['README.md',['../README_8md.html',1,'']]],
   ['register_5fmask_149',['REGISTER_MASK',['../nRF24L01_8h.html#a866fc0cef05f3c63ba55a555f63648a2',1,'nRF24L01.h']]],
   ['reuse_5ftx_5fpl_150',['REUSE_TX_PL',['../nRF24L01_8h.html#a2f1d9bb858232e8b1494b60aa9a7d25a',1,'nRF24L01.h']]],

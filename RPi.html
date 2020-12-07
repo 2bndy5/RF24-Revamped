@@ -89,12 +89,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Linux General/Raspberry Pi </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="classRF24.html">RF24</a> supports a variety of Linux based devices via various drivers. Some boards like RPi can utilize multiple methods to drive the GPIO and SPI functionality.</p>
+<div class="textblock"><p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> supports a variety of Linux based devices via various drivers. Some boards like RPi can utilize multiple methods to drive the <a class="el" href="classGPIO.html" title="generic class for guidance about porting to an unsupported platform">GPIO</a> and <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> functionality.</p>
 <h1><a class="anchor" id="PreConfig"></a>
 Potential PreConfiguration</h1>
-<p>If SPI is not already enabled, load it on boot: </p><div class="fragment"><div class="line">sudo raspi-config  </div>
+<p>If <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> is not already enabled, load it on boot: </p><div class="fragment"><div class="line">sudo raspi-config  </div>
 </div><!-- fragment --><p> A. Update the tool via the menu as required<br  />
- B. Select <b>Advanced</b> and <b>enable the SPI kernel module</b> <br  />
+ B. Select <b>Advanced</b> and <b>enable the <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> kernel module</b> <br  />
  C. Update other software and libraries </p><div class="fragment"><div class="line">sudo apt-get update </div>
 </div><!-- fragment --> <div class="fragment"><div class="line">sudo apt-get upgrade </div>
 </div><!-- fragment --><p> <br  />
@@ -112,10 +112,10 @@ Build Options</h1>
 <h1><a class="anchor" id="Pins"></a>
 Connections and Pin Configuration</h1>
 <p>Using pin 15/GPIO 22 for CE, pin 24/GPIO8 (CE0) for CSN</p>
-<p>Can use any available SPI BUS for CSN.<br  />
+<p>Can use any available <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> BUS for CSN.<br  />
  In general, use</p><div class="fragment"><div class="line"><a class="code" href="classRF24.html">RF24</a> radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); </div>
 </div><!-- fragment --><p> for proper constructor to address correct spi device at /dev/spidev&lt;a&gt;.&lt;b&gt; <br  />
- Choose any GPIO output pin for radio CE pin.</p>
+ Choose any <a class="el" href="classGPIO.html" title="generic class for guidance about porting to an unsupported platform">GPIO</a> output pin for radio CE pin.</p>
 <p><b>General:</b> </p><div class="fragment"><div class="line"><a class="code" href="classRF24.html">RF24</a> radio(22,0); </div>
 </div><!-- fragment --><p><b>MRAA Constructor:</b></p>
 <div class="fragment"><div class="line"><a class="code" href="classRF24.html">RF24</a> radio(15,0); </div>
@@ -158,10 +158,10 @@ Connections and Pin Configuration</h1>
  </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00115">RF24.h:115</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 2 2020 02:24:22 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

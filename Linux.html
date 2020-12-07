@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Automated Install</h1>
 <p>(<b>Designed &amp; Tested on RPi</b> - Defaults to SPIDEV on devices supporting it)</p>
 <ol type="1">
-<li>Install prerequisites if there are any (MRAA, LittleWire libraries, setup SPI device etc)</li>
+<li>Install prerequisites if there are any (MRAA, LittleWire libraries, setup <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> device etc)</li>
 <li>Download the install.sh file from <a href="http://tmrh20.github.io/RF24Installer/RPi/install.sh">http://tmrh20.github.io/RF24Installer/RPi/install.sh</a> <div class="fragment"><div class="line">wget http:<span class="comment">//tmrh20.github.io/RF24Installer/RPi/install.sh </span></div>
 </div><!-- fragment --></li>
 <li>Make it executable <div class="fragment"><div class="line">chmod +x install.sh </div>
@@ -116,15 +116,15 @@ Automated Install</h1>
 <h1><a class="anchor" id="ManInstall"></a>
 Manual Install</h1>
 <ol type="1">
-<li>Install prerequisites if there are any (MRAA, LittleWire libraries, setup SPI device etc) <dl class="section note"><dt>Note</dt><dd>See the <a href="http://iotdk.intel.com/docs/master/mraa/index.html">MRAA </a> documentation for more info on installing MRAA <br  />
+<li>Install prerequisites if there are any (MRAA, LittleWire libraries, setup <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> device etc) <dl class="section note"><dt>Note</dt><dd>See the <a href="http://iotdk.intel.com/docs/master/mraa/index.html">MRAA </a> documentation for more info on installing MRAA <br  />
 </dd></dl>
 </li>
-<li>Make a directory to contain the <a class="el" href="classRF24.html">RF24</a> and possibly RF24Network lib and enter it <div class="fragment"><div class="line">mkdir ~/rf24libs</div>
+<li>Make a directory to contain the <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> and possibly RF24Network lib and enter it <div class="fragment"><div class="line">mkdir ~/rf24libs</div>
 <div class="line">cd ~/rf24libs</div>
 </div><!-- fragment --></li>
-<li>Clone the <a class="el" href="classRF24.html">RF24</a> repo <div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/tmrh20/RF24.git RF24 </span></div>
+<li>Clone the <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> repo <div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/tmrh20/RF24.git RF24 </span></div>
 </div><!-- fragment --></li>
-<li>Change to the new <a class="el" href="classRF24.html">RF24</a> directory <div class="fragment"><div class="line">cd <a class="code" href="classRF24.html">RF24</a> </div>
+<li>Change to the new <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> directory <div class="fragment"><div class="line">cd <a class="code" href="classRF24.html">RF24</a> </div>
 </div><!-- fragment --></li>
 <li>Configure build environment using<div class="fragment"><div class="line">./configure </div>
 </div><!-- fragment --> script. It auto detectes device and build environment. For overriding autodetections, use command-line switches, see<div class="fragment"><div class="line">./configure --help </div>
@@ -148,10 +148,10 @@ Manual Install</h1>
 </ol>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00115">RF24.h:115</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 2 2020 02:24:22 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

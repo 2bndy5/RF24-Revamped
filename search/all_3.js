@@ -3,7 +3,7 @@ var searchData=
   ['cd_17',['CD',['../nRF24L01_8h.html#a1050140a3d78b059f809a424e0d9e1c7',1,'nRF24L01.h']]],
   ['child_5fpipe_18',['child_pipe',['../RF24_8cpp.html#a9a5b7ef3dcd5ba656e19a1036ef212f5',1,'RF24.cpp']]],
   ['child_5fpipe_5fenable_19',['child_pipe_enable',['../RF24_8cpp.html#aa25724c48cf9fd6df84cfe7705d6e633',1,'RF24.cpp']]],
-  ['close_20',['close',['../group__Porting__GPIO.html#ga1b8cf31be61995207728f653ec11421f',1,'gpio.h']]],
+  ['close_20',['close',['../classGPIO.html#a360ae728f1f164b2fc78b5a67000c246',1,'GPIO']]],
   ['closereadingpipe_21',['closeReadingPipe',['../classRF24.html#a9944d93994a80037e3586f340f5e0107',1,'RF24']]],
   ['common_5fissues_2emd_22',['COMMON_ISSUES.md',['../COMMON__ISSUES_8md.html',1,'']]],
   ['compatibility_2eh_23',['compatibility.h',['../compatibility_8h.html',1,'']]],

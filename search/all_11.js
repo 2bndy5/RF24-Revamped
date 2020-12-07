@@ -2,9 +2,9 @@ var searchData=
 [
   ['testcarrier_245',['testCarrier',['../classRF24.html#ad0d522ccf39493510e64bf1740be790d',1,'RF24']]],
   ['testrpd_246',['testRPD',['../classRF24.html#a821285f3b54553f4402eb3fd0ac6d6c1',1,'RF24']]],
-  ['transfer_247',['transfer',['../group__Porting__SPI.html#gad8a210abb2138c105350cc91972edfa9',1,'spi.h']]],
-  ['transfern_248',['transfern',['../group__Porting__SPI.html#gade902816b77c7377afd02ea4cb7e30b5',1,'spi.h']]],
-  ['transfernb_249',['transfernb',['../group__Porting__SPI.html#ga26b5af7f6420d54b479af9eaf1b2e452',1,'spi.h']]],
+  ['transfer_247',['transfer',['../classSPI.html#aa7e8272a1aaa6b5531c316397143f553',1,'SPI']]],
+  ['transfern_248',['transfern',['../classSPI.html#a7203a9c3e950b882c00ad49057fd79a1',1,'SPI']]],
+  ['transfernb_249',['transfernb',['../classSPI.html#a223184144a4a33987bc6b5f946b4826e',1,'SPI']]],
   ['tx_5faddr_250',['TX_ADDR',['../nRF24L01_8h.html#aa734c6e08b9f794436eacbabe466a6c4',1,'nRF24L01.h']]],
   ['tx_5fds_251',['TX_DS',['../nRF24L01_8h.html#ab5f5243908a39ffd514fe701e9749bdc',1,'nRF24L01.h']]],
   ['tx_5fempty_252',['TX_EMPTY',['../nRF24L01_8h.html#ae4034d6a21b6646c8710d09e43bd9383',1,'nRF24L01.h']]],

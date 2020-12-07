@@ -11,7 +11,7 @@ var searchData=
   ['setretries_233',['setRetries',['../classRF24.html#a4c6d3959c8320e64568395f4ef507aef',1,'RF24']]],
   ['setup_5faw_234',['SETUP_AW',['../nRF24L01_8h.html#af5ef355ba3eca336db1285cab353ddc2',1,'nRF24L01.h']]],
   ['setup_5fretr_235',['SETUP_RETR',['../nRF24L01_8h.html#a2188309b3eceeae158dd64109cd919aa',1,'nRF24L01.h']]],
-  ['spi_236',['SPI',['../group__Porting__SPI.html#gacd293e741d829f9578b8c5ee49833608',1,'spi.h']]],
+  ['spi_236',['SPI',['../classSPI.html',1,'SPI'],['../classSPI.html#a2ba081c29fbdecc704c6bf00b24d5205',1,'SPI::SPI()']]],
   ['spi_2eh_237',['spi.h',['../spi_8h.html',1,'']]],
   ['startconstcarrier_238',['startConstCarrier',['../classRF24.html#ac43ad43c34337ec0de189105bab2213b',1,'RF24']]],
   ['startfastwrite_239',['startFastWrite',['../classRF24.html#acd19843064cb70ec23507412e519e4ef',1,'RF24']]],
