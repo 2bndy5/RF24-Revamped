@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title"><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> Portability </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> radio driver mainly utilizes the <a href="http://arduino.cc/en/reference/homePage">Arduino API</a> for <a class="el" href="classGPIO.html" title="generic class for guidance about porting to an unsupported platform">GPIO</a>, <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a>, and timing functions, which are easily replicated on various platforms. <br  />
+<div class="textblock"><p>The <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> radio driver mainly utilizes the <a href="http://arduino.cc/en/reference/homePage">Arduino API</a> for GPIO, SPI, and timing functions, which are easily replicated on various platforms. <br  />
 Support files for these platforms are stored under RF24/utility, and can be modified to provide the required functionality.</p>
 <p><br  />
  </p>
@@ -106,9 +106,9 @@ Basic Hardware Template</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="includes_8h.html">includes.h</a>  </td><td class="markdownTableBodyNone">Linux only. Defines specific platform, include correct RF24_arch_config file   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="spi_8h.html">spi.h</a>  </td><td class="markdownTableBodyNone">Provides standardized <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> ( transfer() ) methods   </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="spi_8h.html">spi.h</a>  </td><td class="markdownTableBodyNone">Provides standardized SPI ( <a class="el" href="group__Porting__SPI.html#gad8a210abb2138c105350cc91972edfa9">transfer()</a> ) methods   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="gpio_8h.html">gpio.h</a>  </td><td class="markdownTableBodyNone">Provides standardized <a class="el" href="classGPIO.html" title="generic class for guidance about porting to an unsupported platform">GPIO</a> ( <a class="el" href="group__Porting__General.html#gabda89b115581947337690b2f85bfab6e">digitalWrite()</a> ) methods   </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="gpio_8h.html">gpio.h</a>  </td><td class="markdownTableBodyNone">Provides standardized GPIO ( <a class="el" href="group__Porting__General.html#gabda89b115581947337690b2f85bfab6e">digitalWrite()</a> ) methods   </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="compatibility_8h.html">compatibility.h</a>  </td><td class="markdownTableBodyNone">Provides standardized timing (<a class="el" href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis()</a>, <a class="el" href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay()</a>) methods   </td></tr>
 <tr class="markdownTableRowEven">
@@ -126,7 +126,7 @@ Device Detection</h1>
 </li>
 <li>Secondary detection is completed in <a class="el" href="RF24__config_8h.html">RF24_config.h</a>, causing the include.h file to be included for all supported Linux devices <br  />
 </li>
-<li><a class="el" href="RF24_8h.html">RF24.h</a> contains the declaration for <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> and <a class="el" href="classGPIO.html" title="generic class for guidance about porting to an unsupported platform">GPIO</a> objects 'spi' and 'gpio' to be used for porting-in related functions.</li>
+<li><a class="el" href="RF24_8h.html">RF24.h</a> contains the declaration for SPI and GPIO objects 'spi' and 'gpio' to be used for porting-in related functions.</li>
 </ol>
 <p><br  />
  </p>
@@ -141,7 +141,7 @@ Code</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

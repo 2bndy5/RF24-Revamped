@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <p>Written by <a href="http://github.com/2bndy5">2bndy5</a> in 2020</p>
-<p>A simple example of sending data from 1 nRF24L01 transceiver to another with manually transmitted (non-automatic) Acknowledgement (ACK) payloads. This example still uses ACK packets, but they have no payloads. Instead the acknowledging response is sent with <code>write()</code>. This tactic allows for more updated acknowledgement payload data, where actual ACK payloads' data are outdated by 1 transmission because they have to loaded before receiving a transmission.</p>
+<p>A simple example of sending data from 1 nRF24L01 transceiver to another with manually transmitted (non-automatic) Acknowledgement (ACK) payloads. This example still uses ACK packets, but they have no payloads. Instead the acknowledging response is sent with <code><a class="el" href="group__Porting__GPIO.html#ga957694ca061e30268dd8a4b28a08e59b">write()</a></code>. This tactic allows for more updated acknowledgement payload data, where actual ACK payloads' data are outdated by 1 transmission because they have to loaded before receiving a transmission.</p>
 <p>This example was written to be used on 2 devices acting as "nodes". Use the Serial Monitor to change each node's behavior.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * See documentation at https://nRF24.github.io/RF24</span></div>
@@ -309,7 +309,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="agroup__Porting__General_html_gad5b3ec1ce839fa1c4337a7d0312e9749"><div class="ttname"><a href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis</a></div><div class="ttdeci">#define millis()</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00077">RF24_arch_config.h:77</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

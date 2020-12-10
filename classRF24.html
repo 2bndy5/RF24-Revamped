@@ -303,16 +303,16 @@ Optional Configurators</h2></td></tr>
 <p>Creates a new instance of this driver. Before using, you create an instance and send in the unique pins that this chip is connected to.</p>
 <p>See <a href="pages.html">Related Pages</a> for device specific information <br  />
 </p>
-<dl class="section note"><dt>Note</dt><dd>Users can specify default <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> speed by modifying <code>#define RF24_SPI_SPEED</code> in <a class="el" href="RF24__config_8h.html">RF24_config.h</a> <br  />
- For Arduino, <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> speed will only be properly configured this way on devices supporting <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> TRANSACTIONS <br  />
+<dl class="section note"><dt>Note</dt><dd>Users can specify default SPI speed by modifying <code>#define RF24_SPI_SPEED</code> in <a class="el" href="RF24__config_8h.html">RF24_config.h</a> <br  />
+ For Arduino, SPI speed will only be properly configured this way on devices supporting SPI TRANSACTIONS <br  />
  Older/Unsupported Arduino devices will use a default clock divider &amp; settings configuration <br  />
- Linux: The old way of setting <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> speeds using BCM2835 driver enums has been removed <br  />
+ Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed <br  />
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">_cepin</td><td>The pin attached to Chip Enable on the RF module </td></tr>
     <tr><td class="paramname">_cspin</td><td>The pin attached to Chip Select </td></tr>
-    <tr><td class="paramname">_spispeed</td><td>The <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> speed in Hz ie: 1000000 == 1Mhz </td></tr>
+    <tr><td class="paramname">_spispeed</td><td>The SPI speed in Hz ie: 1000000 == 1Mhz </td></tr>
   </table>
   </dd>
 </dl>
@@ -344,8 +344,8 @@ Optional Configurators</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>For storing the result of testing the toggleFeatures() affect <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> transactions</p>
-<p>Common code for <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> transactions including CSN toggle </p>
+<p>For storing the result of testing the toggleFeatures() affect SPI transactions</p>
+<p>Common code for SPI transactions including CSN toggle </p>
 
 <p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00086">86</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
@@ -414,7 +414,7 @@ Optional Configurators</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks if the chip is connected to the <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> bus </p>
+<p>Checks if the chip is connected to the SPI bus </p>
 
 <p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00780">780</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
@@ -2630,7 +2630,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
       </table>
 </div><div class="memdoc">
 <p>On all devices but Linux and ATTiny, a small delay is added to the CSN toggling function</p>
-<p>This is intended to minimise the speed of <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> polling due to radio commands</p>
+<p>This is intended to minimise the speed of SPI polling due to radio commands</p>
 <p>If using interrupts or timed requests, this can be set to 0 Default:5 </p>
 
 <p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01503">1503</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
@@ -2656,7 +2656,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 <div class="ttc" id="aclassRF24_html_a89f626fc4a58dd997153bcc0f8198b9e"><div class="ttname"><a href="classRF24.html#a89f626fc4a58dd997153bcc0f8198b9e">RF24::setCRCLength</a></div><div class="ttdeci">void setCRCLength(rf24_crclength_e length)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01553">RF24.cpp:1553</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

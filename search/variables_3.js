@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['output_5fhigh_362',['OUTPUT_HIGH',['../classGPIO.html#a3f6ee78073f6f25d5efa7cd9a69d494d',1,'GPIO']]],
-  ['output_5flow_363',['OUTPUT_LOW',['../classGPIO.html#a4f3ea2b2b920283e274c377680556971',1,'GPIO']]]
+  ['output_5fhigh_357',['OUTPUT_HIGH',['../group__Porting__GPIO.html#ga18fd76f29528fc97aadcdb78495ff6bf',1,'gpio.h']]],
+  ['output_5flow_358',['OUTPUT_LOW',['../group__Porting__GPIO.html#gaa29a50f0f8fc0a62076c7f4bc7dc70db',1,'gpio.h']]]
 ];

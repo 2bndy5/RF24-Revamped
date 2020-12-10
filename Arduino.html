@@ -91,16 +91,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> is fully compatible with Arduino boards <br  />
  See <b> <a href="http://www.arduino.cc/en/Reference/Board">http://www.arduino.cc/en/Reference/Board</a> </b> and <b> <a href="http://arduino.cc/en/Reference/SPI">http://arduino.cc/en/Reference/SPI</a> </b> for more information</p>
-<p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> makes use of the standard hardware <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> pins (MISO,MOSI,SCK) and requires two additional pins, to control the chip-select and chip-enable functions.<br  />
+<p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> makes use of the standard hardware SPI pins (MISO,MOSI,SCK) and requires two additional pins, to control the chip-select and chip-enable functions.<br  />
  These pins must be chosen and designated by the user, in <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> radio(ce_pin,cs_pin); and can use any available pins.</p>
 <p><br  />
  </p>
 <h1><a class="anchor" id="Alternate_SPI"></a>
 Alternate SPI Support</h1>
-<p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> supports alternate <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> methods, in case the standard hardware <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> pins are otherwise unavailable.</p>
+<p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> supports alternate SPI methods, in case the standard hardware SPI pins are otherwise unavailable.</p>
 <p><br  />
- <b>Software Driven <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a></b></p>
-<p>Software driven <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> is provided by the <a href="https://github.com/greiman/DigitalIO">DigitalIO</a> library</p>
+ <b>Software Driven SPI</b></p>
+<p>Software driven SPI is provided by the <a href="https://github.com/greiman/DigitalIO">DigitalIO</a> library</p>
 <p>Setup:<br  />
 </p><ol type="1">
 <li>Install the digitalIO library<br  />
@@ -118,8 +118,8 @@ Alternate SPI Support</h1>
 </pre> Or add the build flag/option <pre class="fragment">-DSOFT_SPI_MISO_PIN=16 -DSOFT_SPI_MOSI_PIN=15 -DSOFT_SPI_SCK_PIN=14
 </pre></dd></dl>
 <p><br  />
- <b>Alternate Hardware (UART) Driven <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a></b></p>
-<p>The Serial Port (UART) on Arduino can also function in <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> mode, and can double-buffer data, while the default <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> hardware cannot.</p>
+ <b>Alternate Hardware (UART) Driven SPI</b></p>
+<p>The Serial Port (UART) on Arduino can also function in SPI mode, and can double-buffer data, while the default SPI hardware cannot.</p>
 <p>The SPI_UART library is available at <a href="https://github.com/TMRh20/Sketches/tree/master/SPI_UART">https://github.com/TMRh20/Sketches/tree/master/SPI_UART</a></p>
 <p>Enabling:</p><ol type="1">
 <li>Install the SPI_UART library</li>
@@ -127,7 +127,7 @@ Alternate SPI Support</h1>
 <li>In your sketch, add<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;SPI_UART.h&gt;</span> </div>
 </div><!-- fragment --></li>
 </ol>
-<p>SPI_UART <a class="el" href="classSPI.html" title="generic class for guidance about porting to an unsupported platform">SPI</a> Pin Connections: </p><table class="markdownTable">
+<p>SPI_UART SPI Pin Connections: </p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">NRF  </th><th class="markdownTableHeadNone">Arduino Uno Pin   </th></tr>
 <tr class="markdownTableRowOdd">
@@ -147,7 +147,7 @@ See <a href="https://github.com/TMRh20/RF24/issues/24">https://github.com/TMRh20
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 7 2020 16:27:28 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
