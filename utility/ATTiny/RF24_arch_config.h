@@ -8,7 +8,6 @@
 #define __RF24_ARCH_CONFIG_H__
 
 /*** USER DEFINES:  ***/
-//#define FAILURE_HANDLING
 //#define MINIMAL
 /**********************/
 

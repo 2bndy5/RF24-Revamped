@@ -127,7 +127,7 @@ void loop() {
     Serial.print(F("Now sending... "));
     Serial.println(time);
 
-    radio.write( &time, sizeof(unsigned long) );
+    radio.send( &time, sizeof(unsigned long) );
 
     radio.startListening();                         // Now, continue listening
 
@@ -174,7 +174,7 @@ void loop() {
       }
 
       radio.stopListening();                                  // First, stop listening so we can talk
-      radio.write( &got_time, sizeof(unsigned long) );        // Send the final one back.
+      radio.send( &got_time, sizeof(unsigned long) );        // Send the final one back.
       Serial.println(F("Sent response."));
       radio.startListening();                                 // Now, resume listening so we catch the next packets.
     } else {

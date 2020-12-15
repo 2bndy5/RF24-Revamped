@@ -2,7 +2,7 @@
 A simple example of sending data from 1 nRF24L01 transceiver to another
 with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
 This example still uses ACK packets, but they have no payloads. Instead the
-acknowledging response is sent with `write()`. This tactic allows for more
+acknowledging response is sent with `send()`. This tactic allows for more
 updated acknowledgement payload data, where actual ACK payloads' data are
 outdated by 1 transmission because they have to loaded before receiving a
 transmission.
@@ -67,7 +67,7 @@ def master():
         # NOTE b"\x00" byte is a c-string's NULL terminating 0
         buffer = b"Hello \x00" + bytes(counter)
         start_timer = time.monotonic_ns()  # start timer
-        result = radio.write(buffer)
+        result = radio.send(buffer)
         if not result:
             failures += 1
             print("Transmission failed or timed out")
@@ -222,7 +222,7 @@ if __name__ == "__main__":
 
     # set the Power Amplifier level to -12 dBm since this test example is
     # usually run with nRF24L01 transceivers in close proximity of each other
-    radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+    radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radio_number])  # always uses pipe 0

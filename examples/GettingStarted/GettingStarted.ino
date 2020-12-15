@@ -66,7 +66,7 @@ void setup() {
   // Set the PA Level low to try preventing power supply related problems
   // because these examples are likely run with nodes in close proximity to
   // each other.
-  radio.setPALevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
+  radio.setPaLevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
 
   // save on transmission time by setting the radio to only transmit the
   // number of bytes we need to transmit a float
@@ -98,7 +98,7 @@ void loop() {
     // This device is a TX node
 
     unsigned long start_timer = micros();                    // start the timer
-    bool report = radio.write(&payload, sizeof(float));      // transmit & save the report
+    bool report = radio.send(&payload, sizeof(float));      // transmit & save the report
     unsigned long end_timer = micros();                      // end the timer
 
     if (report) {

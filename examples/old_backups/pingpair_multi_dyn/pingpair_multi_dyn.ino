@@ -121,12 +121,12 @@ void setup(void)
 
   // enable dynamic payloads
   radio.enableDynamicPayloads();
-  radio.setCRCLength( RF24_CRC_16 ) ;
+  radio.setCrc( RF24_CRC_16 ) ;
 
   // optionally, increase the delay between retries & # of retries
   radio.setRetries( 15, 5 ) ;
   radio.setAutoAck( true ) ;
-  //radio.setPALevel( RF24_PA_LOW ) ;
+  //radio.setPaLevel( RF24_PA_LOW ) ;
 
   //
   // Open pipes to other nodes for communication
@@ -178,7 +178,7 @@ void loop(void)
     // Take the time, and send it.  This will block until complete
     Serial.print(F("Now sending length "));
     Serial.println(next_payload_size);
-    radio.write( send_payload, next_payload_size, multicast );
+    radio.send( send_payload, next_payload_size, multicast );
 
     // Now, continue listening
     radio.startListening();
@@ -252,7 +252,7 @@ void loop(void)
       radio.stopListening();
 
       // Send the final one back.
-      radio.write( receive_payload, len, multicast );
+      radio.send( receive_payload, len, multicast );
       Serial.println(F("Sent response."));
 
       // Now, resume listening so we catch the next packets.

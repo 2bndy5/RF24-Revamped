@@ -68,7 +68,7 @@ void setup() {
   radio.begin();
 
   // Examples are usually run with both radios in close proximity to each other
-  radio.setPALevel(RF24_PA_LOW);          // defaults to RF24_PA_MAX
+  radio.setPaLevel(RF24_PA_LOW);          // defaults to RF24_PA_MAX
   radio.enableAckPayload();               // We will be using the ACK Payload feature which is not enabled by default
   radio.enableDynamicPayloads();          // Ack payloads are dynamic payloads
 
@@ -123,7 +123,7 @@ void loop() {
 void check_radio(void) {
 
   bool tx, fail, rx;                               // declare variables to store IRQ flags
-  radio.whatHappened(tx, fail, rx);                // What happened?
+  radio.clearStatusFlags(tx, fail, rx);                // What happened?
 
   if (tx) {                                        // Have we successfully transmitted?
     if (role == role_sender)

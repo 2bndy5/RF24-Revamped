@@ -12,7 +12,7 @@ nRF24L01 transceivers:
 6. `RF24::enableAckPayload()` or `RF24::disableAckPayload()` (requires auto-ack and
    dynamic payloads features)
 7. `RF24::setPayloadSize()` (only if the dynamic payloads feature is disabled -- it is disabled by default)
-8. `RF24::setCRCLength()` or `RF24::disableCRC()` (the auto-ack feature
+8. `RF24::setCrc()` or `RF24::disableCRC()` (the auto-ack feature
    automatically enables CRC because it is required)
 
 Also, it helps to think of an address as a path (a commonly shared route)
@@ -26,13 +26,13 @@ TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of
 
 ## Here are the most common issues and their solutions.
 
-### write() always returns true after setAutoAck(false)
-Don't disabled the auto-ack feature. RF24::write() has no reason to doubt
+### send() always returns true after setAutoAck(false)
+Don't disabled the auto-ack feature. RF24::send() has no reason to doubt
 that the payload was delivered if the auto-ack feature is disabled. We
 recommend you read the docs about RF24::setAutoAck() before disabling the
 auto-ack feature.
 
-### write() returns false when the payload was received
+### send() returns false when the payload was received
 If the settings match on both endpoint transceivers, then this can only
 mean that the receiving nRF24L01 failed to send an acknowledgement (ACK)
 packet back to the transmitting nRF24L01. Usually this is due to

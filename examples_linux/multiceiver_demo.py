@@ -70,7 +70,7 @@ def master(node_number):
         # payloads will include the node_number and a payload ID character
         payload = struct.pack("<ii", node_number, counter)
         start_timer = time.monotonic_ns()
-        report = radio.write(payload)
+        report = radio.send(payload)
         end_timer = time.monotonic_ns()
         # show something to see it isn't frozen
         print(
@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
     # set the Power Amplifier level to -12 dBm since this test example is
     # usually run with nRF24L01 transceivers in close proximity of each other
-    radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+    radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # To save time during transmission, we'll set the payload size to be only what
     # we need.

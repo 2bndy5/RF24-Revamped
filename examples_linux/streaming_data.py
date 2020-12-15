@@ -72,7 +72,7 @@ def master(count=1):
     :param int count: how many times to transmit the stream of data.
     """
     radio.stopListening()  # put radio in TX mode
-    radio.flush_tx()  # clear the TX FIFO so we can use all 3 levels
+    radio.flushTx()  # clear the TX FIFO so we can use all 3 levels
     failures = 0  # keep track of manual retries
     start_timer = time.monotonic_ns()  # start timer
     for multiplier in range(count):  # repeat transmit the same data stream
@@ -90,7 +90,7 @@ def master(count=1):
                     )
                     multiplier = count  # be sure to exit the for loop
                     break  # exit the while loop
-                radio.reUseTX()  # resend payload in top level of TX FIFO
+                radio.resend()  # resend payload in top level of TX FIFO
             else:  # transmission succeeded
                 buf_iter += 1
     end_timer = time.monotonic_ns()  # end timer
@@ -188,7 +188,7 @@ if __name__ == "__main__":
 
     # set the Power Amplifier level to -12 dBm since this test example is
     # usually run with nRF24L01 transceivers in close proximity of each other
-    radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+    radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radio_number])  # always uses pipe 0

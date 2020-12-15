@@ -97,7 +97,7 @@ void loop() {
     // Send the payload
     Serial.print(F("Now sending length "));
     Serial.println(send_payload_size);
-    radio.write(send_payload, send_payload_size);   // This will block until complete
+    radio.send(send_payload, send_payload_size);   // This will block until complete
 
     radio.startListening();                         // Now, continue listening
 
@@ -172,7 +172,7 @@ void loop() {
       // You will have better luck delivering your message if
       // you wait for the other node to start listening first
       delay(20);
-      radio.write(receive_payload, len);
+      radio.send(receive_payload, len);
       Serial.println(F("Sent response."));
 
       radio.startListening();                       // Now, resume listening so we catch the next packets.

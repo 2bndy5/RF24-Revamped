@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW); // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW); // RF24_PA_MAX is default.
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -131,7 +131,7 @@ void master() {
     unsigned int failure = 0;                                       // keep track of failures
     while (failure < 6) {
         clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer);            // start the timer
-        bool report = radio.write(&payload, sizeof(float));         // transmit & save the report
+        bool report = radio.send(&payload, sizeof(float));         // transmit & save the report
         uint32_t timerEllapsed = getMicros();                       // end the timer
 
         if (report) {

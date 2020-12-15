@@ -59,7 +59,7 @@ def master():
 
         # send the payload and prompt
         start_timer = time.monotonic_ns()  # start timer
-        result = radio.write(buffer)  # save the report
+        result = radio.send(buffer)  # save the report
         end_timer = time.monotonic_ns()  # stop timer
         if result:
             # print timer results upon transmission success
@@ -201,7 +201,7 @@ if __name__ == "__main__":
 
     # set the Power Amplifier level to -12 dBm since this test example is
     # usually run with nRF24L01 transceivers in close proximity of each other
-    radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+    radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # ACK payloads are dynamically sized.
     radio.enableDynamicPayloads()  # to use ACK payloads
@@ -211,7 +211,7 @@ if __name__ == "__main__":
 
     # set the Power Amplifier level to -12 dBm since this test example is
     # usually run with nRF24L01 transceivers in close proximity of each other
-    radio.setPALevel(RF24_PA_LOW)  # RF24_PA_MAX is default
+    radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radio_number])  # always uses pipe 0

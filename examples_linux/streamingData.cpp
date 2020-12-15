@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW); // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW); // RF24_PA_MAX is default.
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -202,7 +202,7 @@ void master() {
         makePayload(i);
         if (!radio.writeFast(&buffer, SIZE)) {
             failures++;
-            radio.reUseTX();
+            radio.resend();
         } else {
             i++;
         }

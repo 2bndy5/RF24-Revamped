@@ -8,7 +8,7 @@
  * A simple example of sending data from 1 nRF24L01 transceiver to another
  * with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
  * This example still uses ACK packets, but they have no payloads. Instead the
- * acknowledging response is sent with `write()`. This tactic allows for more
+ * acknowledging response is sent with `send()`. This tactic allows for more
  * updated acknowledgement payload data, where actual ACK payloads' data are
  * outdated by 1 transmission because they have to loaded before receiving a
  * transmission.
@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
@@ -149,7 +149,7 @@ void master() {
     unsigned int failures = 0;                                // keep track of failures
     while (failures < 6) {
         clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer);      // start the timer
-        bool report = radio.write(&payload, sizeof(payload)); // transmit & save the report
+        bool report = radio.send(&payload, sizeof(payload)); // transmit & save the report
 
         if (report) {
             // transmission successful; wait for response and print results

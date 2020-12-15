@@ -1,14 +1,13 @@
 /*
  TMRh20 2015
  RF24 Configuration file for Arduino Due
- 
+
 */
 
 #ifndef __RF24_ARCH_CONFIG_H__
 #define __RF24_ARCH_CONFIG_H__
 
 /*** USER DEFINES:  ***/
-//#define FAILURE_HANDLING
 //#define SERIAL_DEBUG
 //#define MINIMAL
 /**********************/

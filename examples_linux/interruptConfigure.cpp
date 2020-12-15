@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW);  // RF24_PA_MAX is default.
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
     // Interrupt Service Routine (ISR) callback function interruptHandler()
     attachInterrupt(IRQ_PIN, INT_EDGE_FALLING, &interruptHandler);
     // IMPORTANT: do not call radio.available() before calling
-    // radio.whatHappened() when the interruptHandler() is triggered by the
+    // radio.clearStatusFlags() when the interruptHandler() is triggered by the
     // IRQ pin FALLING event. According to the datasheet, the pipe information
     // is unreliable during the IRQ pin FALLING transition.
 
@@ -162,7 +162,7 @@ void master() {
 
     // Test the "data ready" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to ignore the 'data sent' event\n";
-    radio.maskIRQ(true, false, false); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(true, false, false); // args = "data_sent", "data_fail", "data_ready"
     cout << "   Pinging RX node for 'data ready' event...";
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
     pl_iterator++;                     // increment iterator for next test
@@ -170,37 +170,37 @@ void master() {
 
     // Test the "data sent" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to ignore the 'data ready' event\n";
-    radio.maskIRQ(false, false, true); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(false, false, true); // args = "data_sent", "data_fail", "data_ready"
     cout << "   Pinging RX node for 'data sent' event...";
-    radio.flush_tx();                  // flush payloads from any failed prior test
+    radio.flushTx();                  // flush payloads from any failed prior test
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
     pl_iterator++;                     // increment iterator for next test
 
 
     // Use this iteration to fill the RX node's FIFO which sets us up for the next test.
-    // write() uses virtual interrupt flags that work despite the masking of the IRQ pin
-    radio.maskIRQ(1, 1, 1); // disable IRQ masking for this step
+    // send() uses virtual interrupt flags that work despite the masking of the IRQ pin
+    radio.interruptConfig(1, 1, 1); // disable IRQ masking for this step
 
     cout << "\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected.\n";
-    // write() will call flush_tx() on 'data fail' events
-    if (radio.write(&tx_payloads[pl_iterator], tx_pl_size))
+    // send() will call flushTx() on 'data fail' events
+    if (radio.send(&tx_payloads[pl_iterator], tx_pl_size))
         cout << "RX node's FIFO is full; it is not listening any more" << endl;
     else {
         cout << "Transmission failed or timed out. Continuing anyway." << endl;
-        radio.flush_tx();
+        radio.flushTx();
     }
     pl_iterator++;                     // increment iterator for next test
 
 
     // test the "data fail" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to reflect all events\n";
-    radio.maskIRQ(0, 0, 0); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(0, 0, 0); // args = "data_sent", "data_fail", "data_ready"
     cout << "   Pinging inactive RX node for 'data fail' event...";
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
 
     // CE pin is still HIGH which consumes more power. Example is now idling so...
     radio.stopListening(); // ensure CE pin is LOW
-    // stopListening() also calls flush_tx() when ACK payloads are enabled
+    // stopListening() also calls flushTx() when ACK payloads are enabled
 
     if (radio.available()) {
         printRxFifo(ack_pl_size); // doing this will flush the RX FIFO
@@ -214,7 +214,7 @@ void master() {
 void slave() {
 
     // let IRQ pin only trigger on "data_ready" event in RX mode
-    radio.maskIRQ(1, 1, 0); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(1, 1, 0); // args = "data_sent", "data_fail", "data_ready"
 
     // Fill the TX FIFO with 3 ACK payloads for the first 3 received
     // transmissions on pipe 0.
@@ -224,7 +224,7 @@ void slave() {
 
     radio.startListening();            // put radio in RX mode
     time_t startTimer = time(nullptr); // start a timer
-    while (time(nullptr) - startTimer < 6 && !radio.rxFifoFull()) {
+    while (time(nullptr) - startTimer < 6 && !radio.isFifo()) {
         // use 6 second timeout & wait till RX FIFO is full
     }
     delay(100);                        // wait for ACK payload to finish transmitting
@@ -246,7 +246,7 @@ void slave() {
 void ping_n_wait() {
     // use the non-blocking call to write a payload and begin transmission
     // the "false" argument means we are expecting an ACK packet response
-    radio.startFastWrite(tx_payloads[pl_iterator], tx_pl_size, false);
+    radio.write(tx_payloads[pl_iterator], tx_pl_size, false);
 
     wait_for_event = true;
     while (wait_for_event) {
@@ -271,8 +271,8 @@ void interruptHandler() {
     cout << "\tIRQ pin is actively LOW" << endl;  // show that this function was called
 
     bool tx_ds, tx_df, rx_dr;                     // declare variables for IRQ masks
-    radio.whatHappened(tx_ds, tx_df, rx_dr);      // get values for IRQ masks
-    // whatHappened() clears the IRQ masks also. This is required for
+    radio.clearStatusFlags(tx_ds, tx_df, rx_dr);      // get values for IRQ masks
+    // clearStatusFlags() clears the IRQ masks also. This is required for
     // continued TX operations when a transmission fails.
     // clearing the IRQ masks resets the IRQ pin to its inactive state (HIGH)
 
@@ -281,7 +281,7 @@ void interruptHandler() {
     cout << ", data_ready: " << rx_dr << endl;    // print "data ready" mask state
 
     if (tx_df)                                    // if TX payload failed
-        radio.flush_tx();                         // clear all payloads from the TX FIFO
+        radio.flushTx();                         // clear all payloads from the TX FIFO
 
     // print if test passed or failed. Unintentional fails mean the RX node was not listening.
     if (pl_iterator == 0)
@@ -302,7 +302,7 @@ void interruptHandler() {
  */
 void printRxFifo(const uint8_t pl_size) {
     char rx_fifo[pl_size * 3 + 1];         // assuming RX FIFO is full; declare a buffer to hold it all
-    if (radio.rxFifoFull()) {
+    if (radio.isFifo()) {
         rx_fifo[pl_size * 3] = 0;          // add a NULL terminating char to use as a c-string
         radio.read(&rx_fifo, pl_size * 3); // this clears the RX FIFO (for this example)
     }
