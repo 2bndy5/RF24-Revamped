@@ -2199,8 +2199,8 @@ private:
  * See the included [*.py files in the "examples_linux" folder](example.html) for usage information.
  *
  * 5. Running the Example: <br>
- * Edit the pingpair_dyn.py example to configure the appropriate pins per the above documentation:
- * @code nano pingpair_dyn.py   @endcode
+ * Edit the getting_started.py example to configure the appropriate pins per the above documentation:
+ * @code nano getting_started.py   @endcode
  * Configure another device, Arduino or RPi with the [getting_started.py example](examples_linux_2getting_started_8py-example.html)<br>
  * Run the example
  * @code sudo python3 getting_started.py @endcode
