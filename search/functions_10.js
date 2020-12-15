@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7e_20gpio_349',['~ GPIO',['../group__Porting__GPIO.html#gac0a26a7a5b7f5cac1f44b231a8811afc',1,'gpio.h']]],
-  ['_7e_20spi_350',['~ SPI',['../group__Porting__SPI.html#ga7ebf01580f0e9ff57379341e2f9330d0',1,'spi.h']]]
+  ['write_342',['write',['../classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a',1,'RF24::write()'],['../group__Porting__GPIO.html#ga957694ca061e30268dd8a4b28a08e59b',1,'write():&#160;gpio.h']]],
+  ['writeackpayload_343',['writeAckPayload',['../classRF24.html#a36b9fc363d3560358fe430a600a6f385',1,'RF24']]]
 ];

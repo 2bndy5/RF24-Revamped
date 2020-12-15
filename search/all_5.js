@@ -13,13 +13,12 @@ var searchData=
   ['enaa_5fp4_58',['ENAA_P4',['../nRF24L01_8h.html#a3b5bebd442d3a0351e85100a69244810',1,'nRF24L01.h']]],
   ['enaa_5fp5_59',['ENAA_P5',['../nRF24L01_8h.html#ae28c4601af8b2f85827386fe9a27f9fa',1,'nRF24L01.h']]],
   ['enableackpayload_60',['enableAckPayload',['../classRF24.html#abf8efced2ee9edbcc6510878b20edc1b',1,'RF24']]],
-  ['enabledynamicack_61',['enableDynamicAck',['../classRF24.html#a6253607ac2a1995af91a35cea6899c31',1,'RF24']]],
-  ['enabledynamicpayloads_62',['enableDynamicPayloads',['../classRF24.html#a443888504975d7441d6452a09d09a8fa',1,'RF24']]],
-  ['endtransaction_63',['endTransaction',['../classRF24.html#a2b196efad61a1b8a9bf493150901edb4',1,'RF24']]],
-  ['erx_5fp0_64',['ERX_P0',['../nRF24L01_8h.html#a25999eca8c745b41102fb31489a90211',1,'nRF24L01.h']]],
-  ['erx_5fp1_65',['ERX_P1',['../nRF24L01_8h.html#a636432986a9972c8fc964def06ffdc79',1,'nRF24L01.h']]],
-  ['erx_5fp2_66',['ERX_P2',['../nRF24L01_8h.html#a115f3c3d9c945bbd660c1ddcba58340d',1,'nRF24L01.h']]],
-  ['erx_5fp3_67',['ERX_P3',['../nRF24L01_8h.html#a4d8b431c5dd89b67113a461fe872189a',1,'nRF24L01.h']]],
-  ['erx_5fp4_68',['ERX_P4',['../nRF24L01_8h.html#a2820784961d22e1ae9499090df929ad1',1,'nRF24L01.h']]],
-  ['erx_5fp5_69',['ERX_P5',['../nRF24L01_8h.html#af93d9be6cb2bac887584ab7f6805f7e9',1,'nRF24L01.h']]]
+  ['enabledynamicpayloads_61',['enableDynamicPayloads',['../classRF24.html#a443888504975d7441d6452a09d09a8fa',1,'RF24']]],
+  ['endtransaction_62',['endTransaction',['../classRF24.html#a2b196efad61a1b8a9bf493150901edb4',1,'RF24']]],
+  ['erx_5fp0_63',['ERX_P0',['../nRF24L01_8h.html#a25999eca8c745b41102fb31489a90211',1,'nRF24L01.h']]],
+  ['erx_5fp1_64',['ERX_P1',['../nRF24L01_8h.html#a636432986a9972c8fc964def06ffdc79',1,'nRF24L01.h']]],
+  ['erx_5fp2_65',['ERX_P2',['../nRF24L01_8h.html#a115f3c3d9c945bbd660c1ddcba58340d',1,'nRF24L01.h']]],
+  ['erx_5fp3_66',['ERX_P3',['../nRF24L01_8h.html#a4d8b431c5dd89b67113a461fe872189a',1,'nRF24L01.h']]],
+  ['erx_5fp4_67',['ERX_P4',['../nRF24L01_8h.html#a2820784961d22e1ae9499090df929ad1',1,'nRF24L01.h']]],
+  ['erx_5fp5_68',['ERX_P5',['../nRF24L01_8h.html#af93d9be6cb2bac887584ab7f6805f7e9',1,'nRF24L01.h']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: Python Wrapper (by https://github.com/mz-fuzzy)</title>
+<title>RF24 Revamped: Python Wrapper (by https://github.com/mz-fuzzy)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -91,9 +92,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="Prerequisites"></a>
 Prerequisites</h1>
-<p><b>Python2:</b></p>
-<div class="fragment"><div class="line">sudo apt-get install python-dev libboost-python-dev python-setuptools python-rpi.gpio </div>
-</div><!-- fragment --><p><b>Python3:</b></p>
+<p><b>Python2 is no longer supported</b></p>
+<p><b>Python3:</b></p>
 <div class="fragment"><div class="line">sudo apt-get install python3-dev libboost-python-dev python3-setuptools python3-rpi.gpio </div>
 </div><!-- fragment --><p><a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a>:</p>
 <p>The <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> lib needs to be built in C++ &amp; installed for the python wrapper to wrap it <br  />
@@ -103,7 +103,7 @@ Prerequisites</h1>
 <h1><a class="anchor" id="Install"></a>
 Installation:</h1>
 <ol type="1">
-<li>For python3 in Raspbian, it's needed to manually link python boost library, like this: <div class="fragment"><div class="line">sudo ln -s $(ls /usr/lib/arm-linux-gnueabihf/libboost_python3-py3*.so | tail -1) /usr/lib/arm-linux-gnueabihf/libboost_python3.so </div>
+<li>For python3 in Raspberry Pi OS (formerly known as Raspbian), it's needed to manually link python boost library, like this: <div class="fragment"><div class="line">sudo ln -s $(ls /usr/lib/arm-linux-gnueabihf/libboost_python3-py3*.so | tail -1) /usr/lib/arm-linux-gnueabihf/libboost_python3.so </div>
 </div><!-- fragment --></li>
 <li>Build the library. From the rf24libs/RF24/pyRF24 directory: <div class="fragment"><div class="line">./setup.py build   </div>
 </div><!-- fragment --> or<div class="fragment"><div class="line">python3 setup.py build </div>
@@ -111,13 +111,12 @@ Installation:</h1>
 </li>
 <li>Install the library <div class="fragment"><div class="line">sudo ./setup.py install  </div>
 </div><!-- fragment --> or<div class="fragment"><div class="line">sudo python3 setup.py install </div>
-</div><!-- fragment --> See the additional <a href="pages.html">Platform Support</a> pages for information on connecting your hardware <br  />
- See the included <a href="pingpair_dyn_8py-example.html">example </a> for usage information.</li>
+</div><!-- fragment --> See the additional [Platform Support](pages.html) pages for information on connecting your hardware <br  />
+ See the included <a href="example.html">*.py files in the "examples_linux" folder</a> for usage information.</li>
 <li>Running the Example: <br  />
  Edit the pingpair_dyn.py example to configure the appropriate pins per the above documentation: <div class="fragment"><div class="line">nano pingpair_dyn.py   </div>
-</div><!-- fragment --> Configure another device, Arduino or RPi with the <a href="pingpair_dyn_8py-example.html">pingpair_dyn</a> example <br  />
- Run the example <div class="fragment"><div class="line">sudo ./pingpair_dyn.py  </div>
-</div><!-- fragment --> or<div class="fragment"><div class="line">sudo python3 pingpair_dyn.py </div>
+</div><!-- fragment --> Configure another device, Arduino or RPi with the <a href="examples_linux_2getting_started_8py-example.html">getting_started.py example</a><br  />
+ Run the example <div class="fragment"><div class="line">sudo python3 getting_started.py </div>
 </div><!-- fragment --></li>
 </ol>
 <p><br  />
@@ -128,7 +127,7 @@ Installation:</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: examples_linux/multiceiver_demo.py</title>
+<title>RF24 Revamped: examples_linux/multiceiver_demo.py</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -157,7 +158,7 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment"># payloads will include the node_number and a payload ID character</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        payload = struct.pack(<span class="stringliteral">&quot;&lt;ii&quot;</span>, node_number, counter)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        start_timer = time.monotonic_ns()</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        report = radio.write(payload)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        report = radio.send(payload)</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        end_timer = time.monotonic_ns()</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment"># show something to see it isn&#39;t frozen</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        print(</div>
@@ -258,7 +259,7 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="comment"># set the Power Amplifier level to -12 dBm since this test example is</span></div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="comment"># usually run with nRF24L01 transceivers in close proximity of each other</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    radio.setPALevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    radio.setPaLevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="comment"># To save time during transmission, we&#39;ll set the payload size to be only what</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment"># we need.</span></div>
@@ -285,10 +286,10 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        radio.powerDown()</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        sys.exit()</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00092">RF24.h:92</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

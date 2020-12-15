@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: examples_linux/manual_acknowledgements.py</title>
+<title>RF24 Revamped: examples_linux/manual_acknowledgements.py</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -99,7 +100,7 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="stringliteral">A simple example of sending data from 1 nRF24L01 transceiver to another</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="stringliteral">with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral">This example still uses ACK packets, but they have no payloads. Instead the</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">acknowledging response is sent with `write()`. This tactic allows for more</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">acknowledging response is sent with `send()`. This tactic allows for more</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">updated acknowledgement payload data, where actual ACK payloads&#39; data are</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral">outdated by 1 transmission because they have to loaded before receiving a</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral">transmission.</span></div>
@@ -154,7 +155,7 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment"># NOTE b&quot;\x00&quot; byte is a c-string&#39;s NULL terminating 0</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        buffer = b<span class="stringliteral">&quot;Hello \x00&quot;</span> + bytes(counter)</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        start_timer = time.monotonic_ns()  <span class="comment"># start timer</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        result = radio.write(buffer)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        result = radio.send(buffer)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> result:</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            failures += 1</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            print(<span class="stringliteral">&quot;Transmission failed or timed out&quot;</span>)</div>
@@ -309,7 +310,7 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="comment"># set the Power Amplifier level to -12 dBm since this test example is</span></div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="comment"># usually run with nRF24L01 transceivers in close proximity of each other</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    radio.setPALevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    radio.setPaLevel(RF24_PA_LOW)  <span class="comment"># RF24_PA_MAX is default</span></div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment"># set the TX address of the RX node into the TX pipe</span></div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    radio.openWritingPipe(address[radio_number])  <span class="comment"># always uses pipe 0</span></div>
@@ -340,10 +341,10 @@ To run this example, enter </p><div class="fragment"><div class="line">python3 m
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        radio.powerDown()</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        sys.exit()</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00092">RF24.h:92</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: examples_linux/multiceiverDemo.cpp</title>
+<title>RF24 Revamped: examples_linux/multiceiverDemo.cpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -203,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// Set the PA Level low to try preventing power supply related problems</span></div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">// because these examples are likely run with nodes in close proximity to</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// each other.</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    radio.setPALevel(<a name="a1"></a><a class="code" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a>);         <span class="comment">// RF24_PA_MAX is default.</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    radio.setPaLevel(<a name="a1"></a><a class="code" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a>);         <span class="comment">// RF24_PA_MAX is default.</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">// save on transmission time by setting the radio to only transmit the</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="comment">// number of bytes we need to transmit a float</span></div>
@@ -266,7 +267,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> failures = 0;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">while</span> (failures &lt; 6) {</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        clock_gettime(CLOCK_MONOTONIC_RAW, &amp;startTimer);       <span class="comment">// start the timer</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordtype">bool</span> report = radio.write(&amp;payload, <span class="keyword">sizeof</span>(payload));  <span class="comment">// transmit &amp; save the report</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordtype">bool</span> report = radio.send(&amp;payload, <span class="keyword">sizeof</span>(payload));  <span class="comment">// transmit &amp; save the report</span></div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        uint32_t timerEllapsed = getMicros();                  <span class="comment">// end the timer</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">if</span> (report) {</div>
@@ -342,11 +343,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="agroup__Porting__General_html_ga70a331e8ddf9acf9d33c47b71cda4c5f"><div class="ttname"><a href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a></div><div class="ttdeci">#define delay(milisec)</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00075">RF24_arch_config.h:75</a></div></div>
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
-<div class="ttc" id="agroup__PALevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00049">RF24.h:49</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00092">RF24.h:92</a></div></div>
+<div class="ttc" id="agroup__PaLevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00049">RF24.h:49</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

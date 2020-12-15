@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: File Members</title>
+<title>RF24 Revamped: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -297,9 +298,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>FAILURE_HANDLING
-: <a class="el" href="RF24__config_8h.html#a80b7b445a2432fd652f91232b5558554">RF24_config.h</a>
-</li>
 <li>FEATURE
 : <a class="el" href="nRF24L01_8h.html#adf81f7b30b6c08465ce704956b446a2d">nRF24L01.h</a>
 </li>
@@ -474,18 +472,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>RF24_BBB
 : <a class="el" href="group__Porting__Includes.html#gadee4a62e9f3f0904f4b50abf8f085280">includes.h</a>
 </li>
-<li>RF24_CRC_16
-: <a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea6eeb0379e23be63559106d96ada47a56">RF24.h</a>
-</li>
-<li>RF24_CRC_8
-: <a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7eade0b6b3a0dd8729e2a17c49896e0a468">RF24.h</a>
-</li>
-<li>RF24_CRC_DISABLED
-: <a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea77871b6e6fac61d79be7edf1a60b9cbf">RF24.h</a>
-</li>
-<li>rf24_crclength_e
-: <a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">RF24.h</a>
-</li>
 <li>rf24_crclength_e_str_0
 : <a class="el" href="RF24_8cpp.html#adb5ff5327623e2f195f6120d01825843">RF24.cpp</a>
 </li>
@@ -550,7 +536,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="nRF24L01_8h.html#a4924d732f99c6ec5f872a286852d0d94">nRF24L01.h</a>
 </li>
 <li>rf24_pa_dbm_e
-: <a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">RF24.h</a>
 </li>
 <li>rf24_pa_dbm_e_str_0
 : <a class="el" href="RF24_8cpp.html#a4907ee7ceaf9a9a9424c6fd182aa1fb5">RF24.cpp</a>
@@ -568,19 +554,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="RF24_8cpp.html#a7a7eb6237fbdd4c831c2241133bc4700">RF24.cpp</a>
 </li>
 <li>RF24_PA_ERROR
-: <a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7">RF24.h</a>
 </li>
 <li>RF24_PA_HIGH
-: <a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533">RF24.h</a>
 </li>
 <li>RF24_PA_LOW
-: <a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24.h</a>
 </li>
 <li>RF24_PA_MAX
-: <a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d">RF24.h</a>
 </li>
 <li>RF24_PA_MIN
-: <a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff">RF24.h</a>
+: <a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff">RF24.h</a>
 </li>
 <li>RF24_POWERUP_DELAY
 : <a class="el" href="RF24__config_8h.html#a0bb6ee6736804ee3f6dd01699d9e13f5">RF24_config.h</a>
@@ -740,7 +726,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

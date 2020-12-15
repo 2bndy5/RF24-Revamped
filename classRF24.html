@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: RF24 Class Reference</title>
+<title>RF24 Revamped: RF24 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -124,12 +125,51 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a127105eb7a3b351cfe777c1cec50627a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e2eacacfba96426c192066f04054c5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a8e2eacacfba96426c192066f04054c5b">read</a> (void *buf, uint8_t len)</td></tr>
 <tr class="separator:a8e2eacacfba96426c192066f04054c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cd4c198a47704db20b6b5cf0731cd58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write</a> (const void *buf, uint8_t len)</td></tr>
-<tr class="separator:a4cd4c198a47704db20b6b5cf0731cd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013fcce587ddcb1eec3ba3492006495c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send</a> (const void *buf, uint8_t len)</td></tr>
+<tr class="separator:a013fcce587ddcb1eec3ba3492006495c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2e409e62d49a23e372a70b904ae30e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">openWritingPipe</a> (const uint8_t *address)</td></tr>
 <tr class="separator:af2e409e62d49a23e372a70b904ae30e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9edc910ccc1ffcff56814b08faca5535"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">openReadingPipe</a> (uint8_t number, const uint8_t *address)</td></tr>
 <tr class="separator:a9edc910ccc1ffcff56814b08faca5535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Advanced Operation</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Methods you can use to drive the chip in more advanced ways </p>
+</div></td></tr>
+<tr class="memitem:adc95213ed4c8569a90eb33122e16cea6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#adc95213ed4c8569a90eb33122e16cea6">printDetails</a> (void)</td></tr>
+<tr class="separator:adc95213ed4c8569a90eb33122e16cea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32205b4854f595b0d32dce9c95e93ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a32205b4854f595b0d32dce9c95e93ba2">printPrettyDetails</a> (void)</td></tr>
+<tr class="separator:a32205b4854f595b0d32dce9c95e93ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace7dd139fabc16b77cb8325faa07620f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ace7dd139fabc16b77cb8325faa07620f">available</a> (uint8_t *pipe_num)</td></tr>
+<tr class="separator:ace7dd139fabc16b77cb8325faa07620f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e041a325ce2e2f469ca68643587d03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aa9e041a325ce2e2f469ca68643587d03">isFifo</a> (bool about_tx, bool check_empty)</td></tr>
+<tr class="separator:aa9e041a325ce2e2f469ca68643587d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36d055f91bdb071e40a2da882bcbaade"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a36d055f91bdb071e40a2da882bcbaade">isFifo</a> (bool about_tx)</td></tr>
+<tr class="separator:a36d055f91bdb071e40a2da882bcbaade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a51923a09ba4f3478aba9be0f8a6a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">powerDown</a> (void)</td></tr>
+<tr class="separator:aa0a51923a09ba4f3478aba9be0f8a6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cdaf47aa0edd6dca1b9a8bb7972a1a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a5cdaf47aa0edd6dca1b9a8bb7972a1a3">powerUp</a> (void)</td></tr>
+<tr class="separator:a5cdaf47aa0edd6dca1b9a8bb7972a1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45af53a31199a6bd80c6b8646da0af87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a45af53a31199a6bd80c6b8646da0af87">send</a> (const void *buf, uint8_t len, const bool multicast)</td></tr>
+<tr class="separator:a45af53a31199a6bd80c6b8646da0af87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b9fc363d3560358fe430a600a6f385"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload</a> (uint8_t pipe, const void *buf, uint8_t len)</td></tr>
+<tr class="separator:a36b9fc363d3560358fe430a600a6f385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea33bc880fb660702e6217b7afbd6548"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags</a> (bool dataReady=true, bool dataSent=true, bool dataFail=true)</td></tr>
+<tr class="separator:aea33bc880fb660702e6217b7afbd6548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc137b4cba691c1a36f8425c5f7d0e4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write</a> (const void *buf, uint8_t len, const bool multicast, bool write_only=0)</td></tr>
+<tr class="separator:acc137b4cba691c1a36f8425c5f7d0e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4968f9e74eefc7809e5ba4bbc0a1271b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a4968f9e74eefc7809e5ba4bbc0a1271b">resend</a> ()</td></tr>
+<tr class="separator:a4968f9e74eefc7809e5ba4bbc0a1271b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1295da3dafa3a89090d2e0e34f9e1efb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx</a> (void)</td></tr>
+<tr class="separator:a1295da3dafa3a89090d2e0e34f9e1efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b7b3e958daaa46030f5d35b959a039f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a6b7b3e958daaa46030f5d35b959a039f">flushRx</a> (void)</td></tr>
+<tr class="separator:a6b7b3e958daaa46030f5d35b959a039f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d522ccf39493510e64bf1740be790d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ad0d522ccf39493510e64bf1740be790d">testCarrier</a> (void)</td></tr>
+<tr class="separator:ad0d522ccf39493510e64bf1740be790d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a821285f3b54553f4402eb3fd0ac6d6c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a821285f3b54553f4402eb3fd0ac6d6c1">testRPD</a> (void)</td></tr>
+<tr class="separator:a821285f3b54553f4402eb3fd0ac6d6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35e5f1533b7753806c42b76e782d917e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">isValid</a> ()</td></tr>
+<tr class="separator:a35e5f1533b7753806c42b76e782d917e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9944d93994a80037e3586f340f5e0107"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a9944d93994a80037e3586f340f5e0107">closeReadingPipe</a> (uint8_t pipe)</td></tr>
+<tr class="separator:a9944d93994a80037e3586f340f5e0107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Deprecated</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Methods provided for backwards compabibility. </p>
 </div></td></tr>
@@ -146,59 +186,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a5a669f1c68203d5317f8f452a2bff1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b196efad61a1b8a9bf493150901edb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a2b196efad61a1b8a9bf493150901edb4">endTransaction</a> ()</td></tr>
 <tr class="separator:a2b196efad61a1b8a9bf493150901edb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
-Advanced Operation</h2></td></tr>
-<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrpaf32cf1216e734b82e2b52429dae0bf6"></a> Methods you can use to drive the chip in more advanced ways </p>
-</td></tr>
-<tr class="memitem:a2e40fe66d1231a333aa2534e8491f828"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a2e40fe66d1231a333aa2534e8491f828">failureDetected</a></td></tr>
-<tr class="separator:a2e40fe66d1231a333aa2534e8491f828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc95213ed4c8569a90eb33122e16cea6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#adc95213ed4c8569a90eb33122e16cea6">printDetails</a> (void)</td></tr>
-<tr class="separator:adc95213ed4c8569a90eb33122e16cea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32205b4854f595b0d32dce9c95e93ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a32205b4854f595b0d32dce9c95e93ba2">printPrettyDetails</a> (void)</td></tr>
-<tr class="separator:a32205b4854f595b0d32dce9c95e93ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace7dd139fabc16b77cb8325faa07620f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ace7dd139fabc16b77cb8325faa07620f">available</a> (uint8_t *pipe_num)</td></tr>
-<tr class="separator:ace7dd139fabc16b77cb8325faa07620f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad22e44fe1a68747872fcb304a407fd30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ad22e44fe1a68747872fcb304a407fd30">rxFifoFull</a> ()</td></tr>
-<tr class="separator:ad22e44fe1a68747872fcb304a407fd30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a51923a09ba4f3478aba9be0f8a6a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">powerDown</a> (void)</td></tr>
-<tr class="separator:aa0a51923a09ba4f3478aba9be0f8a6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cdaf47aa0edd6dca1b9a8bb7972a1a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a5cdaf47aa0edd6dca1b9a8bb7972a1a3">powerUp</a> (void)</td></tr>
-<tr class="separator:a5cdaf47aa0edd6dca1b9a8bb7972a1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23bfe6502d74bb5bbccb3a7f2ba2b5ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a23bfe6502d74bb5bbccb3a7f2ba2b5ea">write</a> (const void *buf, uint8_t len, const bool multicast)</td></tr>
-<tr class="separator:a23bfe6502d74bb5bbccb3a7f2ba2b5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47b2516993481b58e724d1274a7fd9cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast</a> (const void *buf, uint8_t len)</td></tr>
-<tr class="separator:a47b2516993481b58e724d1274a7fd9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad16d53de0327c0b41d170cbda4bf41af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ad16d53de0327c0b41d170cbda4bf41af">writeFast</a> (const void *buf, uint8_t len, const bool multicast)</td></tr>
-<tr class="separator:ad16d53de0327c0b41d170cbda4bf41af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6fd8d5ee490d54ae1cb2e8fefee535f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ae6fd8d5ee490d54ae1cb2e8fefee535f">writeBlocking</a> (const void *buf, uint8_t len, uint32_t timeout)</td></tr>
-<tr class="separator:ae6fd8d5ee490d54ae1cb2e8fefee535f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12cc453453c94969d4d3f0edb3778c83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy</a> ()</td></tr>
-<tr class="separator:a12cc453453c94969d4d3f0edb3778c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7f54decbe9d06cb026a5d3dfb505116"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ab7f54decbe9d06cb026a5d3dfb505116">txStandBy</a> (uint32_t timeout, bool startTx=0)</td></tr>
-<tr class="separator:ab7f54decbe9d06cb026a5d3dfb505116"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36b9fc363d3560358fe430a600a6f385"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload</a> (uint8_t pipe, const void *buf, uint8_t len)</td></tr>
-<tr class="separator:a36b9fc363d3560358fe430a600a6f385"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb97dc4bdf4d2d84ea44060ac5b4ed89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened</a> (bool &amp;tx_ok, bool &amp;tx_fail, bool &amp;rx_ready)</td></tr>
-<tr class="separator:afb97dc4bdf4d2d84ea44060ac5b4ed89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd19843064cb70ec23507412e519e4ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#acd19843064cb70ec23507412e519e4ef">startFastWrite</a> (const void *buf, uint8_t len, const bool multicast, bool startTx=1)</td></tr>
-<tr class="separator:acd19843064cb70ec23507412e519e4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbf25b53d28d1fcc385fd9738a531b75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite</a> (const void *buf, uint8_t len, const bool multicast)</td></tr>
-<tr class="separator:adbf25b53d28d1fcc385fd9738a531b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaf7fa54d3ab2a85ce215b4bf6ae933b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aeaf7fa54d3ab2a85ce215b4bf6ae933b">reUseTX</a> ()</td></tr>
-<tr class="separator:aeaf7fa54d3ab2a85ce215b4bf6ae933b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb7915b1d2661a82137573344f659e81"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#adb7915b1d2661a82137573344f659e81">flush_tx</a> (void)</td></tr>
-<tr class="separator:adb7915b1d2661a82137573344f659e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a575c061519e7820e1850ad380c617d95"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a575c061519e7820e1850ad380c617d95">flush_rx</a> (void)</td></tr>
-<tr class="separator:a575c061519e7820e1850ad380c617d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0d522ccf39493510e64bf1740be790d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ad0d522ccf39493510e64bf1740be790d">testCarrier</a> (void)</td></tr>
-<tr class="separator:ad0d522ccf39493510e64bf1740be790d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a821285f3b54553f4402eb3fd0ac6d6c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a821285f3b54553f4402eb3fd0ac6d6c1">testRPD</a> (void)</td></tr>
-<tr class="separator:a821285f3b54553f4402eb3fd0ac6d6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35e5f1533b7753806c42b76e782d917e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">isValid</a> ()</td></tr>
-<tr class="separator:a35e5f1533b7753806c42b76e782d917e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9944d93994a80037e3586f340f5e0107"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a9944d93994a80037e3586f340f5e0107">closeReadingPipe</a> (uint8_t pipe)</td></tr>
-<tr class="separator:a9944d93994a80037e3586f340f5e0107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Optional Configurators</h2></td></tr>
@@ -230,43 +217,51 @@ Optional Configurators</h2></td></tr>
 <tr class="separator:a443888504975d7441d6452a09d09a8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a486c4c47a6973614ae595ae96f221165"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a486c4c47a6973614ae595ae96f221165">disableDynamicPayloads</a> (void)</td></tr>
 <tr class="separator:a486c4c47a6973614ae595ae96f221165"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6253607ac2a1995af91a35cea6899c31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a6253607ac2a1995af91a35cea6899c31">enableDynamicAck</a> ()</td></tr>
-<tr class="separator:a6253607ac2a1995af91a35cea6899c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6726f78f1f497e1746262c6d4c2e5cfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">allowMulticast</a> ()</td></tr>
+<tr class="separator:a6726f78f1f497e1746262c6d4c2e5cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62846750b82682beb7593719eb60ed60"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a62846750b82682beb7593719eb60ed60">isPVariant</a> (void)</td></tr>
 <tr class="separator:a62846750b82682beb7593719eb60ed60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec71746d59da978bcbb975167886a2cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a> (bool enable)</td></tr>
 <tr class="separator:aec71746d59da978bcbb975167886a2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60dba9e558f3620ab489af68ea3dea9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a60dba9e558f3620ab489af68ea3dea9c">setAutoAck</a> (uint8_t pipe, bool enable)</td></tr>
 <tr class="separator:a60dba9e558f3620ab489af68ea3dea9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6a711a9cc14fb459a4a1698b8665d82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ab6a711a9cc14fb459a4a1698b8665d82">setPALevel</a> (uint8_t level, bool lnaEnable=1)</td></tr>
-<tr class="separator:ab6a711a9cc14fb459a4a1698b8665d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7c4dcd84466168c5816382ceb366067"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#af7c4dcd84466168c5816382ceb366067">getPALevel</a> (void)</td></tr>
-<tr class="separator:af7c4dcd84466168c5816382ceb366067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54b26abd1846e5080a0439ee372f3b8b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a54b26abd1846e5080a0439ee372f3b8b">getARC</a> (void)</td></tr>
-<tr class="separator:a54b26abd1846e5080a0439ee372f3b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7d6260f84ce6e7d796bdc4dffa753ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ac7d6260f84ce6e7d796bdc4dffa753ff">setPaLevel</a> (uint8_t level, bool lnaEnable=1)</td></tr>
+<tr class="separator:ac7d6260f84ce6e7d796bdc4dffa753ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d78d3638af3245f840f5698e630c25f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a9d78d3638af3245f840f5698e630c25f">getPaLevel</a> (void)</td></tr>
+<tr class="separator:a9d78d3638af3245f840f5698e630c25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a674d681164a517bece9beb44d69c30f1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a674d681164a517bece9beb44d69c30f1">lastTxArc</a> (void)</td></tr>
+<tr class="separator:a674d681164a517bece9beb44d69c30f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb9920e7a95699748b003c4a839b0814"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aeb9920e7a95699748b003c4a839b0814">setDataRate</a> (<a class="el" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> speed)</td></tr>
 <tr class="separator:aeb9920e7a95699748b003c4a839b0814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72a7b11dafe8ffab6135f243decce0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a72a7b11dafe8ffab6135f243decce0d7">getDataRate</a> (void)</td></tr>
 <tr class="separator:a72a7b11dafe8ffab6135f243decce0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89f626fc4a58dd997153bcc0f8198b9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a89f626fc4a58dd997153bcc0f8198b9e">setCRCLength</a> (<a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a> length)</td></tr>
-<tr class="separator:a89f626fc4a58dd997153bcc0f8198b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba4ca91b829afcd94a4c11e0343e3796"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#aba4ca91b829afcd94a4c11e0343e3796">getCRCLength</a> (void)</td></tr>
-<tr class="separator:aba4ca91b829afcd94a4c11e0343e3796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eacd9ecfbc19864801d714c292cf8be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a5eacd9ecfbc19864801d714c292cf8be">disableCRC</a> (void)</td></tr>
-<tr class="separator:a5eacd9ecfbc19864801d714c292cf8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf68b9b0c9cd17179e9e144c3e7f9c45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#abf68b9b0c9cd17179e9e144c3e7f9c45">maskIRQ</a> (bool tx_ok, bool tx_fail, bool rx_ready)</td></tr>
-<tr class="separator:abf68b9b0c9cd17179e9e144c3e7f9c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac43ad43c34337ec0de189105bab2213b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b">startConstCarrier</a> (<a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> level, uint8_t channel)</td></tr>
+<tr class="memitem:af0461e493c60057679fdcfbbd066e141"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#af0461e493c60057679fdcfbbd066e141">setCrc</a> (uint8_t length)</td></tr>
+<tr class="separator:af0461e493c60057679fdcfbbd066e141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4921bc2ead573684fdca32e4a976f13"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#af4921bc2ead573684fdca32e4a976f13">getCrc</a> (void)</td></tr>
+<tr class="separator:af4921bc2ead573684fdca32e4a976f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a1be2cb92e9f14f7cf5921232b02ffc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a2a1be2cb92e9f14f7cf5921232b02ffc">update</a> (void)</td></tr>
+<tr class="separator:a2a1be2cb92e9f14f7cf5921232b02ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b864ca518c0e21085df8fc1dfb7204d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a7b864ca518c0e21085df8fc1dfb7204d">irqDr</a> (void)</td></tr>
+<tr class="separator:a7b864ca518c0e21085df8fc1dfb7204d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f17ced7559d6ecfffad31858e7b3d15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a8f17ced7559d6ecfffad31858e7b3d15">irqDs</a> (void)</td></tr>
+<tr class="separator:a8f17ced7559d6ecfffad31858e7b3d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a138c84cda83cc15d157cfa3d518d4183"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a138c84cda83cc15d157cfa3d518d4183">irqDf</a> (void)</td></tr>
+<tr class="separator:a138c84cda83cc15d157cfa3d518d4183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf4ed7ba5cae2d80618f11f0254d2f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#abcf4ed7ba5cae2d80618f11f0254d2f8">isTxFull</a> (void)</td></tr>
+<tr class="separator:abcf4ed7ba5cae2d80618f11f0254d2f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cc8e9fa014ef094c8810a24dd1203ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a7cc8e9fa014ef094c8810a24dd1203ca">interruptConfig</a> (bool dataReady=true, bool dataSent=true, bool dataFail=true)</td></tr>
+<tr class="separator:a7cc8e9fa014ef094c8810a24dd1203ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43ad43c34337ec0de189105bab2213b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b">startConstCarrier</a> (<a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> level, uint8_t channel)</td></tr>
 <tr class="separator:ac43ad43c34337ec0de189105bab2213b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38fa92d612b7b9b8a739a68ed7d88330"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRF24.html#a38fa92d612b7b9b8a739a68ed7d88330">stopConstCarrier</a> (void)</td></tr>
 <tr class="separator:a38fa92d612b7b9b8a739a68ed7d88330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="examples_2AcknowledgementPayloads_2AcknowledgementPayloads_8ino-example.html#_a0">examples/AcknowledgementPayloads/AcknowledgementPayloads.ino</a>, <a class="el" href="examples_2GettingStarted_2GettingStarted_8ino-example.html#_a0">examples/GettingStarted/GettingStarted.ino</a>, <a class="el" href="examples_2InterruptConfigure_2InterruptConfigure_8ino-example.html#_a0">examples/InterruptConfigure/InterruptConfigure.ino</a>, <a class="el" href="examples_2ManualAcknowledgements_2ManualAcknowledgements_8ino-example.html#_a0">examples/ManualAcknowledgements/ManualAcknowledgements.ino</a>, <a class="el" href="examples_2MulticeiverDemo_2MulticeiverDemo_8ino-example.html#_a0">examples/MulticeiverDemo/MulticeiverDemo.ino</a>, <a class="el" href="examples_2old_backups_2GettingStarted_HandlingFailures_2GettingStarted_HandlingFailures_8ino-example.html#_a0">examples/old_backups/GettingStarted_HandlingFailures/GettingStarted_HandlingFailures.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_dyn_2pingpair_dyn_8ino-example.html#_a0">examples/old_backups/pingpair_dyn/pingpair_dyn.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_irq_2pingpair_irq_8ino-example.html#_a0">examples/old_backups/pingpair_irq/pingpair_irq.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_sleepy_2pingpair_sleepy_8ino-example.html#_a0">examples/old_backups/pingpair_sleepy/pingpair_sleepy.ino</a>, <a class="el" href="examples_2old_backups_2scanner_2scanner_8ino-example.html#_a0">examples/old_backups/scanner/scanner.ino</a>, <a class="el" href="examples_2old_backups_2TransferTimeouts_2TransferTimeouts_8ino-example.html#_a0">examples/old_backups/TransferTimeouts/TransferTimeouts.ino</a>, <a class="el" href="examples_2rf24_ATTiny_2rf24ping85_2rf24ping85_8ino-example.html#_a0">examples/rf24_ATTiny/rf24ping85/rf24ping85.ino</a>, <a class="el" href="examples_2StreamingData_2StreamingData_8ino-example.html#_a0">examples/StreamingData/StreamingData.ino</a>, <a class="el" href="examples_linux_2acknowledgementPayloads_8cpp-example.html#_a0">examples_linux/acknowledgementPayloads.cpp</a>, <a class="el" href="examples_linux_2gettingstarted_8cpp-example.html#_a0">examples_linux/gettingstarted.cpp</a>, <a class="el" href="examples_linux_2manualAcknowledgements_8cpp-example.html#_a0">examples_linux/manualAcknowledgements.cpp</a>, <a class="el" href="examples_linux_2multiceiverDemo_8cpp-example.html#_a0">examples_linux/multiceiverDemo.cpp</a>, and <a class="el" href="examples_linux_2streamingData_8cpp-example.html#_a0">examples_linux/streamingData.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="examples_2AcknowledgementPayloads_2AcknowledgementPayloads_8ino-example.html#_a0">examples/AcknowledgementPayloads/AcknowledgementPayloads.ino</a>, <a class="el" href="examples_2GettingStarted_2GettingStarted_8ino-example.html#_a0">examples/GettingStarted/GettingStarted.ino</a>, <a class="el" href="examples_2InterruptConfigure_2InterruptConfigure_8ino-example.html#_a0">examples/InterruptConfigure/InterruptConfigure.ino</a>, <a class="el" href="examples_2ManualAcknowledgements_2ManualAcknowledgements_8ino-example.html#_a0">examples/ManualAcknowledgements/ManualAcknowledgements.ino</a>, <a class="el" href="examples_2MulticeiverDemo_2MulticeiverDemo_8ino-example.html#_a0">examples/MulticeiverDemo/MulticeiverDemo.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_dyn_2pingpair_dyn_8ino-example.html#_a0">examples/old_backups/pingpair_dyn/pingpair_dyn.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_irq_2pingpair_irq_8ino-example.html#_a0">examples/old_backups/pingpair_irq/pingpair_irq.ino</a>, <a class="el" href="examples_2old_backups_2pingpair_sleepy_2pingpair_sleepy_8ino-example.html#_a0">examples/old_backups/pingpair_sleepy/pingpair_sleepy.ino</a>, <a class="el" href="examples_2old_backups_2scanner_2scanner_8ino-example.html#_a0">examples/old_backups/scanner/scanner.ino</a>, <a class="el" href="examples_2rf24_ATTiny_2rf24ping85_2rf24ping85_8ino-example.html#_a0">examples/rf24_ATTiny/rf24ping85/rf24ping85.ino</a>, <a class="el" href="examples_2StreamingData_2StreamingData_8ino-example.html#_a0">examples/StreamingData/StreamingData.ino</a>, <a class="el" href="examples_linux_2acknowledgementPayloads_8cpp-example.html#_a0">examples_linux/acknowledgementPayloads.cpp</a>, <a class="el" href="examples_linux_2gettingstarted_8cpp-example.html#_a0">examples_linux/gettingstarted.cpp</a>, <a class="el" href="examples_linux_2manualAcknowledgements_8cpp-example.html#_a0">examples_linux/manualAcknowledgements.cpp</a>, <a class="el" href="examples_linux_2multiceiverDemo_8cpp-example.html#_a0">examples_linux/multiceiverDemo.cpp</a>, and <a class="el" href="examples_linux_2streamingData_8cpp-example.html#_a0">examples_linux/streamingData.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l00111">111</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l00092">92</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abe8f878e238644252ccf5ec27fba611d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abe8f878e238644252ccf5ec27fba611d">&#9670;&nbsp;</a></span>RF24()</h2>
@@ -317,7 +312,7 @@ Optional Configurators</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00423">423</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00415">415</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +391,7 @@ Optional Configurators</h2></td></tr>
 <p>Begin operation of the chip</p>
 <p>Call this in setup(), before calling any other methods. </p><div class="fragment"><div class="line">radio.begin() </div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00652">652</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00644">644</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +411,7 @@ Optional Configurators</h2></td></tr>
 </div><div class="memdoc">
 <p>Checks if the chip is connected to the SPI bus </p>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00780">780</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00772">772</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +433,7 @@ Optional Configurators</h2></td></tr>
 <p>Start listening on the pipes opened for reading.</p>
 <ol type="1">
 <li>Be sure to call <a class="el" href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">openReadingPipe()</a> first.</li>
-<li>Do not call <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> while in this mode, without first calling <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a>.</li>
+<li>Do not call <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> while in this mode, without first calling <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a>.</li>
 <li>Call <a class="el" href="classRF24.html#a127105eb7a3b351cfe777c1cec50627a">available()</a> to check for incoming traffic, and <a class="el" href="classRF24.html#a8e2eacacfba96426c192066f04054c5b">read()</a> to get it.</li>
 </ol>
 <p>Open reading pipe 1 using address <code>0xCCCECCCECC</code> </p><div class="fragment"><div class="line"><span class="keywordtype">byte</span> address[] = {0xCC, 0xCE, 0xCC, 0xCE, 0xCC};</div>
@@ -446,7 +441,7 @@ Optional Configurators</h2></td></tr>
 <div class="line">radio.startListening();</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>If there was a call to <a class="el" href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">openReadingPipe()</a> about pipe 0 prior to calling this function, then this function will re-write the address that was last set to reading pipe 0. This is because <a class="el" href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">openWritingPipe()</a> will overwrite the address to reading pipe 0 for proper auto-ack functionality. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00792">792</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00784">784</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -466,11 +461,11 @@ Optional Configurators</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Stop listening for incoming messages, and switch to transmit mode.</p>
-<p>Do this before calling <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>. </p><div class="fragment"><div class="line">radio.stopListening();</div>
-<div class="line">radio.write(&amp;data, <span class="keyword">sizeof</span>(data));</div>
+<p>Do this before calling <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>. </p><div class="fragment"><div class="line">radio.stopListening();</div>
+<div class="line">radio.send(&amp;data, <span class="keyword">sizeof</span>(data));</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>When the ACK payloads feature is enabled, the TX FIFO buffers are flushed when calling this function. This is meant to discard any ACK payloads that were not appended to acknowledgment packets. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00814">814</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00806">806</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -494,10 +489,10 @@ Optional Configurators</h2></td></tr>
 <div class="line">}</div>
 </div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#ace7dd139fabc16b77cb8325faa07620f">available(uint8_t*)</a></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if there is a payload available, false if none is</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>This function relies on the information about the pipe number that received the next available payload. According to the datasheet, the data about the pipe number that received the next available payload is "unreliable" during a FALLING transition on the IRQ pin. This means you should call <a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a> before calling this function during an ISR (Interrupt Service Routine).<br  />
+<dl class="section warning"><dt>Warning</dt><dd>This function relies on the information about the pipe number that received the next available payload. According to the datasheet, the data about the pipe number that received the next available payload is "unreliable" during a FALLING transition on the IRQ pin. This means you should call <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> before calling this function during an ISR (Interrupt Service Routine).<br  />
 For example: <div class="fragment"><div class="line"><span class="keywordtype">void</span> isrCallbackFunction() {</div>
 <div class="line">  <span class="keywordtype">bool</span> tx_ds, tx_df, rx_dr;</div>
-<div class="line">  radio.whatHappened(tx_ds, tx_df, rx_dr); <span class="comment">// resets the IRQ pin to HIGH</span></div>
+<div class="line">  radio.clearStatusFlags(tx_ds, tx_df, rx_dr); <span class="comment">// resets the IRQ pin to HIGH</span></div>
 <div class="line">  radio.available();                       <span class="comment">// returned data should now be reliable</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
@@ -507,7 +502,7 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <div class="line">}</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01140">1140</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00963">963</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -567,18 +562,18 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <div class="line">}</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01163">1163</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00986">986</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a4cd4c198a47704db20b6b5cf0731cd58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cd4c198a47704db20b6b5cf0731cd58">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
+<a id="a013fcce587ddcb1eec3ba3492006495c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a013fcce587ddcb1eec3ba3492006495c">&#9670;&nbsp;</a></span>send() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool RF24::write </td>
+          <td class="memname">bool RF24::send </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -608,11 +603,11 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
   </dd>
 </dl>
 <div class="fragment"><div class="line">radio.stopListening();</div>
-<div class="line">radio.write(&amp;data,<span class="keyword">sizeof</span>(data));</div>
+<div class="line">radio.send(&amp;data,<span class="keyword">sizeof</span>(data));</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
 To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
 <div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.write(buffer)</div>
+<div class="line">radio.send(buffer)</div>
 </div><!-- fragment --></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><ul>
 <li><code>true</code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</li>
@@ -620,7 +615,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00918">918</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00871">871</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -660,7 +655,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </dl>
 <dl class="section remark"><dt>Remarks</dt><dd>There is no address length parameter because this function will always write the number of bytes that the radio addresses are configured to use (set with <a class="el" href="classRF24.html#ad5aea7f9a3bd9c7d357fb296ce751f21">setAddressWidth()</a>). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01200">1200</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01078">1078</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +707,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </dl>
 <dl class="section remark"><dt>Remarks</dt><dd>There is no address length parameter because this function will always write the number of bytes (for pipes 0 and 1) that the radio addresses are configured to use (set with <a class="el" href="classRF24.html#ad5aea7f9a3bd9c7d357fb296ce751f21">setAddressWidth()</a>). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01252">1252</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01102">1102</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -740,7 +735,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <div class="line">}</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00528">528</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00520">520</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -768,7 +763,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <div class="line">}</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00572">572</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00564">564</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,10 +806,10 @@ To use this function in python: <div class="fragment"><div class="line"><span cl
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>According to the datasheet, the data saved to <em>pipe_num</em> is "unreliable" during a FALLING transition on the IRQ pin. This means you should call <a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a> before calling this function during an ISR (Interrupt Service Routine).<br  />
+<dl class="section warning"><dt>Warning</dt><dd>According to the datasheet, the data saved to <em>pipe_num</em> is "unreliable" during a FALLING transition on the IRQ pin. This means you should call <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> before calling this function during an ISR (Interrupt Service Routine).<br  />
 For example: <div class="fragment"><div class="line"><span class="keywordtype">void</span> isrCallbackFunction() {</div>
 <div class="line">  <span class="keywordtype">bool</span> tx_ds, tx_df, rx_dr;</div>
-<div class="line">  radio.whatHappened(tx_ds, tx_df, rx_dr); <span class="comment">// resets the IRQ pin to HIGH</span></div>
+<div class="line">  radio.clearStatusFlags(tx_ds, tx_df, rx_dr); <span class="comment">// resets the IRQ pin to HIGH</span></div>
 <div class="line">  uint8_t pipe;                            <span class="comment">// initialize pipe data</span></div>
 <div class="line">  radio.available(&amp;pipe);                  <span class="comment">// pipe data should now be reliable</span></div>
 <div class="line">}</div>
@@ -830,21 +825,32 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01147">1147</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00970">970</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad22e44fe1a68747872fcb304a407fd30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad22e44fe1a68747872fcb304a407fd30">&#9670;&nbsp;</a></span>rxFifoFull()</h2>
+<a id="aa9e041a325ce2e2f469ca68643587d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e041a325ce2e2f469ca68643587d03">&#9670;&nbsp;</a></span>isFifo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool RF24::rxFifoFull </td>
+          <td class="memname">bool RF24::isFifo </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>about_tx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check_empty</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -854,7 +860,27 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01042">1042</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00925">925</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a36d055f91bdb071e40a2da882bcbaade"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36d055f91bdb071e40a2da882bcbaade">&#9670;&nbsp;</a></span>isFifo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t RF24::isFifo </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>about_tx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00930">930</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -880,7 +906,7 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <div class="line">avr_enter_sleep_mode(); <span class="comment">// Custom function to sleep the device</span></div>
 <div class="line">radio.powerUp();</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00839">839</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00831">831</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -902,18 +928,18 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <p>Leave low-power mode - required for normal radio operation after calling <a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">powerDown()</a></p>
 <p>To return to low power mode, call <a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">powerDown()</a>. </p><dl class="section note"><dt>Note</dt><dd>This will take up to 5ms for maximum compatibility </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00849">849</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00841">841</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a23bfe6502d74bb5bbccb3a7f2ba2b5ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23bfe6502d74bb5bbccb3a7f2ba2b5ea">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
+<a id="a45af53a31199a6bd80c6b8646da0af87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45af53a31199a6bd80c6b8646da0af87">&#9670;&nbsp;</a></span>send() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool RF24::write </td>
+          <td class="memname">bool RF24::send </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -940,12 +966,12 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <p>Write for single NOACK writes. Optionally disable acknowledgements/auto-retries for a single payload using the multicast parameter set to true.</p>
 <p>Can be used with <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a> to request a response </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a></dd></dl>
+<a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
     <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6253607ac2a1995af91a35cea6899c31">enableDynamicAck()</a> at least once before setting this parameter. </td></tr>
+    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">allowMulticast()</a> at least once before setting this parameter. </td></tr>
   </table>
   </dd>
 </dl>
@@ -957,272 +983,10 @@ For example: <div class="fragment"><div class="line"><span class="keywordtype">v
 <dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
 To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
 <div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.write(buffer, <span class="keyword">False</span>)  <span class="comment"># False = the multicast parameter</span></div>
+<div class="line">radio.send(buffer, <span class="keyword">False</span>)  <span class="comment"># False = the multicast parameter</span></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00882">882</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a47b2516993481b58e724d1274a7fd9cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47b2516993481b58e724d1274a7fd9cb">&#9670;&nbsp;</a></span>writeFast() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::writeFast </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This will not block until the 3 FIFO buffers are filled with data. Once the FIFOs are full, writeFast will simply wait for success or timeout, and return 1 or 0 respectively. From a user perspective, just keep trying to send the same data. The library will keep auto retrying the current payload using the built in functionality. </p><dl class="section warning"><dt>Warning</dt><dd>It is important to never keep the nRF24L01 in TX mode and FIFO full for more than 4ms at a time. If the auto retransmit is enabled, the nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO to clear by issuing <a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> or ensure appropriate time between transmissions.</dd></dl>
-<div class="fragment"><div class="line">Example (Partial blocking):</div>
-<div class="line"> </div>
-<div class="line">        radio.<a class="code" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast</a>(&amp;buf,32);  <span class="comment">// Writes 1 payload to the buffers</span></div>
-<div class="line">        <a class="code" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy</a>();               <span class="comment">// Returns 0 if failed. 1 if success. Blocks only until MAX_RT timeout or success. Data flushed on fail.</span></div>
-<div class="line"> </div>
-<div class="line">        radio.writeFast(&amp;buf,32);  <span class="comment">// Writes 1 payload to the buffers</span></div>
-<div class="line">        <a class="code" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy</a>(1000);           <span class="comment">// Using extended timeouts, returns 1 if success. Retries failed payloads for 1 seconds before returning 0.</span></div>
-</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#ae6fd8d5ee490d54ae1cb2e8fefee535f">writeBlocking()</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
-    <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</li>
-<li><code>false</code> if the payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on.</li>
-</ul>
-</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
-To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
-<div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.writeFast(buffer)</div>
-</div><!-- fragment --> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01002">1002</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad16d53de0327c0b41d170cbda4bf41af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad16d53de0327c0b41d170cbda4bf41af">&#9670;&nbsp;</a></span>writeFast() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::writeFast </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>multicast</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>WriteFast for single NOACK writes. Optionally disable acknowledgements/auto-retries for a single payload using the multicast parameter set to true.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
-    <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6253607ac2a1995af91a35cea6899c31">enableDynamicAck()</a> at least once before setting this parameter. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if the payload passed to <em>buf</em> was loaded in the TX FIFO.</li>
-<li><code>false</code> if the payload passed to <em>buf</em> was not loaded in the TX FIFO because a previous payload already in the TX FIFO failed to transmit. This condition can only be reported if the auto-ack feature is on.</li>
-</ul>
-</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
-To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
-<div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.writeFast(buffer, <span class="keyword">False</span>)  <span class="comment"># False = the multicast parameter</span></div>
-</div><!-- fragment --> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00971">971</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ae6fd8d5ee490d54ae1cb2e8fefee535f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6fd8d5ee490d54ae1cb2e8fefee535f">&#9670;&nbsp;</a></span>writeBlocking()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::writeBlocking </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>timeout</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function extends the auto-retry mechanism to any specified duration. It will not block until the 3 FIFO buffers are filled with data. If so the library will auto retry until a new payload is written or the user specified timeout period is reached. </p><dl class="section warning"><dt>Warning</dt><dd>It is important to never keep the nRF24L01 in TX mode and FIFO full for more than 4ms at a time. If the auto retransmit is enabled, the nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO to clear by issuing <a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> or ensure appropriate time between transmissions.</dd></dl>
-<p>Example (Full blocking): </p><div class="fragment"><div class="line">radio.writeBlocking(&amp;buf, <span class="keyword">sizeof</span>(buf), 1000); <span class="comment">// Wait up to 1 second to write 1 payload to the buffers</span></div>
-<div class="line">radio.txStandBy(1000);                        <span class="comment">// Wait up to 1 second for the payload to send. Return 1 if ok, 0 if failed.</span></div>
-<div class="line">                                              <span class="comment">// Blocks only until user timeout or success. Data flushed on fail.</span></div>
-</div><!-- fragment --> <dl class="section note"><dt>Note</dt><dd>If used from within an interrupt, the interrupt should be disabled until completion, and sei(); called to enable <a class="el" href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis()</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
-    <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-    <tr><td class="paramname">timeout</td><td>User defined timeout in milliseconds.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
-To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
-<div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.writeBlocking(buffer, 1000)  <span class="comment"># 1000 means wait at most 1 second</span></div>
-</div><!-- fragment --></dd></dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if the payload passed to <em>buf</em> was loaded in the TX FIFO.</li>
-<li><code>false</code> if the payload passed to <em>buf</em> was not loaded in the TX FIFO because a previous payload already in the TX FIFO failed to transmit. This condition can only be reported if the auto-ack feature is on. </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00925">925</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a12cc453453c94969d4d3f0edb3778c83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12cc453453c94969d4d3f0edb3778c83">&#9670;&nbsp;</a></span>txStandBy() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::txStandBy </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function should be called as soon as transmission is finished to drop the radio back to STANDBY-I mode. If not issued, the radio will remain in STANDBY-II mode which, per the data sheet, is not a recommended operating mode.</p>
-<dl class="section note"><dt>Note</dt><dd>When transmitting data in rapid succession, it is still recommended by the manufacturer to drop the radio out of TX or STANDBY-II mode if there is time enough between sends for the FIFOs to empty. This is not required if auto-ack is enabled.</dd></dl>
-<p>Relies on built-in auto retry functionality.</p>
-<p>Example (Partial blocking): </p><div class="fragment"><div class="line">radio.writeFast(&amp;buf,32);</div>
-<div class="line">radio.writeFast(&amp;buf,32);</div>
-<div class="line">radio.writeFast(&amp;buf,32);  <span class="comment">//Fills the FIFO buffers up</span></div>
-<div class="line"><span class="keywordtype">bool</span> ok = <a class="code" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy</a>();     <span class="comment">//Returns 0 if failed. 1 if success.</span></div>
-<div class="line">                              <span class="comment">//Blocks only until MAX_RT timeout or success. Data flushed on fail.</span></div>
-</div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd>txStandBy(unsigned long timeout) </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if all payloads in the TX FIFO were delivered successfully and an acknowledgement (ACK packet) was received for each. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</li>
-<li><code>false</code> if a payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on. </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01049">1049</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ab7f54decbe9d06cb026a5d3dfb505116"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7f54decbe9d06cb026a5d3dfb505116">&#9670;&nbsp;</a></span>txStandBy() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::txStandBy </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>timeout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>startTx</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This function allows extended blocking and auto-retries per a user defined timeout</p>
-<p>Fully Blocking Example: </p><div class="fragment"><div class="line">radio.writeFast(&amp;buf,32);</div>
-<div class="line">radio.writeFast(&amp;buf,32);</div>
-<div class="line">radio.writeFast(&amp;buf,32);   <span class="comment">//Fills the FIFO buffers up</span></div>
-<div class="line"><span class="keywordtype">bool</span> ok = <a class="code" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy</a>(1000);  <span class="comment">//Returns 0 if failed after 1 second of retries. 1 if success.</span></div>
-<div class="line">                           <span class="comment">//Blocks only until user defined timeout or success. Data flushed on fail.</span></div>
-</div><!-- fragment --> <dl class="section note"><dt>Note</dt><dd>If used from within an interrupt, the interrupt should be disabled until completion, and sei(); called to enable <a class="el" href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis()</a>. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">timeout</td><td>Number of milliseconds to retry failed payloads </td></tr>
-    <tr><td class="paramname">startTx</td><td>If this is set to <code>true</code>, then this function puts the nRF24L01 in TX Mode. <code>false</code> leaves the primary mode (TX or RX) as it is, which can prevent the mandatory wait time to change modes. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if all payloads in the TX FIFO were delivered successfully and an acknowledgement (ACK packet) was received for each. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</li>
-<li><code>false</code> if a payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on. </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01078">1078</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00858">858</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1262,7 +1026,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a> </dd>
 <dd>
 <a class="el" href="classRF24.html#a443888504975d7441d6452a09d09a8fa">enableDynamicPayloads()</a></dd></dl>
-<dl class="section note"><dt>Note</dt><dd>ACK payloads are handled automatically by the radio chip when a regular payload is received. It is important to discard regular payloads in the TX FIFO (using <a class="el" href="classRF24.html#adb7915b1d2661a82137573344f659e81">flush_tx()</a>) before loading the first ACK payload into the TX FIFO. This function can be called before and after calling <a class="el" href="classRF24.html#a30a2733a3889bdc331fe2d2f4f0f7b39">startListening()</a>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>ACK payloads are handled automatically by the radio chip when a regular payload is received. It is important to discard regular payloads in the TX FIFO (using <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a>) before loading the first ACK payload into the TX FIFO. This function can be called before and after calling <a class="el" href="classRF24.html#a30a2733a3889bdc331fe2d2f4f0f7b39">startListening()</a>.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Only three of these can be pending at any time as there are only 3 FIFO buffers.<br  />
  Dynamic payloads must be enabled.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>ACK payloads are dynamic payloads. Calling <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a> will automatically enable dynamic payloads on pipe 0 (required for TX mode when expecting ACK payloads). To use ACK payloads on any other pipe in RX mode, call <a class="el" href="classRF24.html#a443888504975d7441d6452a09d09a8fa">enableDynamicPayloads()</a>.</dd></dl>
@@ -1285,33 +1049,33 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01380">1380</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01230">1230</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="afb97dc4bdf4d2d84ea44060ac5b4ed89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb97dc4bdf4d2d84ea44060ac5b4ed89">&#9670;&nbsp;</a></span>whatHappened()</h2>
+<a id="aea33bc880fb660702e6217b7afbd6548"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea33bc880fb660702e6217b7afbd6548">&#9670;&nbsp;</a></span>clearStatusFlags()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::whatHappened </td>
+          <td class="memname">void RF24::clearStatusFlags </td>
           <td>(</td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>tx_ok</em>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dataReady</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>tx_fail</em>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dataSent</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>rx_ready</em>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dataFail</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1322,33 +1086,33 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </div><div class="memdoc">
 <p>Call this when you get an Interrupt Request (IRQ) to find out why</p>
 <p>This function describes what event triggered the IRQ pin to go active LOW and clears the status of all events.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#abf68b9b0c9cd17179e9e144c3e7f9c45">maskIRQ()</a></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a7cc8e9fa014ef094c8810a24dd1203ca">interruptConfig()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">tx_ok</td><td>The transmission attempt completed (TX_DS). This does not imply that the transmitted data was received by another radio, rather this only reports if the attempt to send was completed. This will always be <code>true</code> when the auto-ack feature is disabled. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">tx_fail</td><td>The transmission failed to be acknowledged, meaning too many retries (MAX_RT) were made while expecting an ACK packet. This event is only triggered when auto-ack feature is enabled. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">rx_ready</td><td>There is a newly received payload (RX_DR) saved to RX FIFO buffers. Remember that the RX FIFO can only hold up to 3 payloads. Once the RX FIFO is full, all further received transmissions are rejected until there is space to save new data in the RX FIFO buffers.</td></tr>
+    <tr><td class="paramname">dataReady</td><td>There is a newly received payload (RX_DR) saved to RX FIFO buffers. Remember that the RX FIFO can only hold up to 3 payloads. Once the RX FIFO is full, all further received transmissions are rejected until there is space to save new data in the RX FIFO buffers. </td></tr>
+    <tr><td class="paramname">dataSent</td><td>The transmission attempt completed (TX_DS). This does not imply that the transmitted data was received by another radio, rather this only reports if the attempt to send was completed. This will always be <code>true</code> when the auto-ack feature is disabled. </td></tr>
+    <tr><td class="paramname">dataFail</td><td>The transmission failed to be acknowledged, meaning too many retries (MAX_RT) were made while expecting an ACK packet. This event is only triggered when auto-ack feature is enabled.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This function expects no parameters in the python wrapper. Instead, this function returns a 3 item tuple describing the IRQ events' status.<br  />
  To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let`radio` be the instantiated RF24 object</span></div>
-<div class="line">tx_ds, tx_df, rx_dr = radio.whatHappened()  <span class="comment"># get IRQ status flags</span></div>
+<div class="line">tx_ds, tx_df, rx_dr = radio.clearStatusFlags()  <span class="comment"># get IRQ status flags</span></div>
 <div class="line">print(<span class="stringliteral">&quot;tx_ds: {}, tx_df: {}, rx_dr: {}&quot;</span>.format(tx_ds, tx_df, rx_dr))</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01176">1176</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00999">999</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="acd19843064cb70ec23507412e519e4ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd19843064cb70ec23507412e519e4ef">&#9670;&nbsp;</a></span>startFastWrite()</h2>
+<a id="acc137b4cba691c1a36f8425c5f7d0e4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc137b4cba691c1a36f8425c5f7d0e4a">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::startFastWrite </td>
+          <td class="memname">bool RF24::write </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -1369,7 +1133,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>startTx</em> = <code>1</code>&#160;</td>
+          <td class="paramname"><em>write_only</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1379,132 +1143,68 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
       </table>
 </div><div class="memdoc">
 <p>Non-blocking write to the open writing pipe used for buffered writes</p>
-<dl class="section note"><dt>Note</dt><dd>Optimization: This function now leaves the CE pin high, so the radio will remain in TX or STANDBY-II Mode until a <a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> command is issued. Can be used as an alternative to <a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite()</a> if writing multiple payloads at once. </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>It is important to never keep the nRF24L01 in TX mode with FIFO full for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO to clear by issuing <a class="el" href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">txStandBy()</a> or ensure appropriate time between transmissions.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
+<dl class="section note"><dt>Note</dt><dd>Optimization: This function now leaves the CE pin high, so the radio will remain in TX or STANDBY-II Mode until a txStandBy() command is issued. Can be used as an alternative to startWrite() if writing multiple payloads at once. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>It is important to never keep the nRF24L01 in TX mode with FIFO full for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO to clear by issuing txStandBy() or ensure appropriate time between transmissions.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a> </dd>
+writeFast() </dd>
 <dd>
-<a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite()</a> </dd>
+startWrite() </dd>
 <dd>
-<a class="el" href="classRF24.html#ae6fd8d5ee490d54ae1cb2e8fefee535f">writeBlocking()</a></dd></dl>
+writeBlocking()</dd></dl>
 <p>For single noAck writes: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
     <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6253607ac2a1995af91a35cea6899c31">enableDynamicAck()</a> at least once before setting this parameter. </td></tr>
-    <tr><td class="paramname">startTx</td><td>If this is set to <code>true</code>, then this function sets the nRF24L01's CE pin to active (enabling TX transmissions). <code>false</code> has no effect on the nRF24L01's CE pin and simply loads the payload into the TX FIFO.</td></tr>
+    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">allowMulticast()</a> at least once before setting this parameter. </td></tr>
+    <tr><td class="paramname">write_only</td><td>If this is set to <code>true</code>, then this function sets the nRF24L01's CE pin to active (enabling TX transmissions). <code>false</code> has no effect on the nRF24L01's CE pin and simply loads the payload into the TX FIFO.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
 To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
 <div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.startFastWrite(buffer, <span class="keyword">False</span>, <span class="keyword">True</span>)  <span class="comment"># 3rd parameter is optional</span></div>
+<div class="line">radio.write(buffer, <span class="keyword">False</span>, <span class="keyword">True</span>)  <span class="comment"># 3rd parameter is optional</span></div>
 <div class="line"><span class="comment">#     False means expecting ACK response (multicast parameter)</span></div>
-<div class="line"><span class="comment">#     True means initiate transmission (startTx parameter)</span></div>
+<div class="line"><span class="comment">#     True means initiate transmission (write_only parameter)</span></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01014">1014</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00910">910</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="adbf25b53d28d1fcc385fd9738a531b75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbf25b53d28d1fcc385fd9738a531b75">&#9670;&nbsp;</a></span>startWrite()</h2>
+<a id="a4968f9e74eefc7809e5ba4bbc0a1271b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4968f9e74eefc7809e5ba4bbc0a1271b">&#9670;&nbsp;</a></span>resend()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool RF24::startWrite </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>multicast</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Non-blocking write to the open writing pipe</p>
-<p>Just like <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>, but it returns immediately. To find out what happened to the send, catch the IRQ and then call <a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a>.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#acd19843064cb70ec23507412e519e4ef">startFastWrite()</a> </dd>
-<dd>
-<a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a></dd></dl>
-<p>For single noAck writes see: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buf</td><td>Pointer to the data to be sent </td></tr>
-    <tr><td class="paramname">len</td><td>Number of bytes to be sent </td></tr>
-    <tr><td class="paramname">multicast</td><td>Request ACK response (false), or no ACK response (true). Be sure to have called <a class="el" href="classRF24.html#a6253607ac2a1995af91a35cea6899c31">enableDynamicAck()</a> at least once before setting this parameter.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>true</code> if payload was written to the TX FIFO buffers and the transmission was started.</li>
-<li><code>false</code> if the TX FIFO is full and the payload could not be written. In this condition, the transmission process is restarted. </li>
-</ul>
-</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
-To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
-<div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
-<div class="line">radio.startWrite(buffer, <span class="keyword">False</span>)  <span class="comment"># False = the multicast parameter</span></div>
-</div><!-- fragment --> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01027">1027</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aeaf7fa54d3ab2a85ce215b4bf6ae933b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaf7fa54d3ab2a85ce215b4bf6ae933b">&#9670;&nbsp;</a></span>reUseTX()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RF24::reUseTX </td>
+          <td class="memname">bool RF24::resend </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers. This is used internally by <a class="el" href="classRF24.html#ae6fd8d5ee490d54ae1cb2e8fefee535f">writeBlocking()</a> to initiate retries when a TX failure occurs. Retries are automatically initiated except with the standard <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>. This way, data is not flushed from the buffer until calling <a class="el" href="classRF24.html#adb7915b1d2661a82137573344f659e81">flush_tx()</a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>, <a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a>, <a class="el" href="classRF24.html#ae6fd8d5ee490d54ae1cb2e8fefee535f">writeBlocking()</a>, <a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite()</a>, or <a class="el" href="classRF24.html#acd19843064cb70ec23507412e519e4ef">startFastWrite()</a>. If the TX FIFO has other payloads enqueued, then the aforementioned functions will attempt to enqueue the a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> also calls <a class="el" href="classRF24.html#adb7915b1d2661a82137573344f659e81">flush_tx()</a> when ACK payloads are enabled (via <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a>).</p>
+<p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers. This is used internally by writeBlocking() to initiate retries when a TX failure occurs. Retries are automatically initiated except with the standard <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>. This way, data is not flushed from the buffer until calling <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>, writeFast(), writeBlocking(), startWrite(), or <a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write()</a>. If the TX FIFO has other payloads enqueued, then the aforementioned functions will attempt to enqueue the a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> also calls <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a> when ACK payloads are enabled (via <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a>).</p>
 <p>Upon exiting, this function will set the CE pin HIGH to initiate the re-transmission process. If only 1 re-transmission is desired, then the CE pin should be set to LOW after the mandatory minumum pulse duration of 10 microseconds.</p>
 <dl class="section remark"><dt>Remarks</dt><dd>This function only applies when taking advantage of the auto-retry feature. See <a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a> and <a class="el" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries()</a> to configure the auto-retry feature.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is to be used AFTER auto-retry fails if wanting to resend using the built-in payload reuse feature. After issuing <a class="el" href="classRF24.html#aeaf7fa54d3ab2a85ce215b4bf6ae933b">reUseTX()</a>, it will keep resending the same payload until a transmission failure occurs or the CE pin is set to LOW (whichever comes first). In the event of a re-transmission failure, simply call this function again to resume re-transmission of the same payload. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is to be used AFTER auto-retry fails if wanting to resend using the built-in payload reuse feature. After issuing <a class="el" href="classRF24.html#a4968f9e74eefc7809e5ba4bbc0a1271b">resend()</a>, it will keep resending the same payload until a transmission failure occurs or the CE pin is set to LOW (whichever comes first). In the event of a re-transmission failure, simply call this function again to resume re-transmission of the same payload. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00961">961</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00878">878</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="adb7915b1d2661a82137573344f659e81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb7915b1d2661a82137573344f659e81">&#9670;&nbsp;</a></span>flush_tx()</h2>
+<a id="a1295da3dafa3a89090d2e0e34f9e1efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1295da3dafa3a89090d2e0e34f9e1efb">&#9670;&nbsp;</a></span>flushTx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t RF24::flush_tx </td>
+          <td class="memname">uint8_t RF24::flushTx </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -1519,14 +1219,14 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 
 </div>
 </div>
-<a id="a575c061519e7820e1850ad380c617d95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a575c061519e7820e1850ad380c617d95">&#9670;&nbsp;</a></span>flush_rx()</h2>
+<a id="a6b7b3e958daaa46030f5d35b959a039f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b7b3e958daaa46030f5d35b959a039f">&#9670;&nbsp;</a></span>flushRx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t RF24::flush_rx </td>
+          <td class="memname">uint8_t RF24::flushRx </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -1560,7 +1260,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Useful to check for interference on the current channel.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if was carrier, false if not </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01440">1440</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01290">1290</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1588,7 +1288,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <div class="line">}</div>
 </div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>true if a signal less than or equal to -64dBm was detected, false if not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01447">1447</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01297">1297</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1617,7 +1317,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Test whether this is a real radio, or a mock shim for debugging. Setting either pin to 0xff is the way to indicate that this is not a real radio.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if this is a legitimate radio </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01046">1046</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l00814">814</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -1643,7 +1343,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01278">1278</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01128">1128</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1670,7 +1370,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01237">1237</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01087">1087</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1709,8 +1409,6 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Disable the auto-retry feature on a transmitter still uses the auto-ack feature (if enabled), except it will not retry to transmit if the payload was not acknowledged on the first attempt. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01597">1597</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a5e6e5a5f6c85d2638381cab2c0f3702e"></a>
@@ -1740,7 +1438,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00435">435</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00427">427</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1766,7 +1464,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </div><!-- fragment --></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The currently configured RF Channel </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00441">441</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00433">433</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1786,7 +1484,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
       </table>
 </div><div class="memdoc">
 <p>Set Static Payload Size</p>
-<p>This implementation uses a pre-stablished fixed payload size for all transmissions. If this method is never called, the driver will always transmit the maximum payload size (32 bytes), no matter how much was sent to <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>.</p>
+<p>This implementation uses a pre-stablished fixed payload size for all transmissions. If this method is never called, the driver will always transmit the maximum payload size (32 bytes), no matter how much was sent to <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>In the python wrapper, this function is the setter of the <code>payloadSize</code> attribute.<br  />
 To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
 <div class="line">radio.payloadSize = 16  <span class="comment"># set the static payload size to 16 bytes</span></div>
@@ -1798,7 +1496,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00449">449</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00441">441</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1825,7 +1523,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a343e5d23477181011dea030fafb1954f">setPayloadSize()</a></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes in the payload </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00461">461</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00453">453</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1856,7 +1554,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </div><!-- fragment --></dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Payload length of last-received dynamic payload </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01126">1126</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00949">949</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1881,7 +1579,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>ACK payloads are dynamic payloads. This function automatically enables dynamic payloads on pipe 0 by default. Call <a class="el" href="classRF24.html#a443888504975d7441d6452a09d09a8fa">enableDynamicPayloads()</a> to enable on all pipes (especially for RX nodes that use pipes other than pipe 0 to receive transmissions expecting responses with ACK payloads). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01335">1335</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01185">1185</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1903,7 +1601,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Disable custom payloads on the ackowledge packets</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01353">1353</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01203">1203</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1925,7 +1623,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Enable dynamically-sized payloads</p>
 <p>This way you don't always have to send large packets just to send them once in a while. This enables dynamic payloads on ALL pipes. </p>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01295">1295</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01145">1145</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1947,18 +1645,18 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Disable dynamically-sized payloads</p>
 <p>This disables dynamic payloads on ALL pipes. Since Ack Payloads requires Dynamic Payloads, Ack Payloads are also disabled. If dynamic payloads are later re-enabled and ack payloads are desired then <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a> must be called again as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01314">1314</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01164">1164</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6253607ac2a1995af91a35cea6899c31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6253607ac2a1995af91a35cea6899c31">&#9670;&nbsp;</a></span>enableDynamicAck()</h2>
+<a id="a6726f78f1f497e1746262c6d4c2e5cfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6726f78f1f497e1746262c6d4c2e5cfd">&#9670;&nbsp;</a></span>allowMulticast()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::enableDynamicAck </td>
+          <td class="memname">void RF24::allowMulticast </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -1971,10 +1669,10 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a> for all pipes </dd>
 <dd>
 <a class="el" href="classRF24.html#a60dba9e558f3620ab489af68ea3dea9c">setAutoAck(uint8_t, bool)</a> for individual pipes</dd></dl>
-<div class="fragment"><div class="line">radio.write(&amp;data, 32, 1); <span class="comment">// Sends a payload with no acknowledgement requested</span></div>
-<div class="line">radio.write(&amp;data, 32, 0); <span class="comment">// Sends a payload using auto-retry/autoACK</span></div>
+<div class="fragment"><div class="line">radio.send(&amp;data, 32, 1); <span class="comment">// Sends a payload with no acknowledgement requested</span></div>
+<div class="line">radio.send(&amp;data, 32, 0); <span class="comment">// Sends a payload using auto-retry/autoACK</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01367">1367</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01217">1217</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -1996,7 +1694,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Determine whether the hardware is an nRF24L01+ or not.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if the hardware is nRF24L01+ (or compatible) and false if its not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01400">1400</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01250">1250</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2017,15 +1715,15 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </div><div class="memdoc">
 <p>Enable or disable the auto-acknowledgement feature for all pipes. This feature is enabled by default. Auto-acknowledgement responds to every recieved payload with an empty ACK packet. These ACK packets get sent from the receiving radio back to the transmitting radio. To attach an ACK payload to a ACK packet, use <a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload()</a>.</p>
 <p>If this feature is disabled on a transmitting radio, then the transmitting radio will always report that the payload was recieved (even if it was not). Please remember that this feature's configuration needs to match for transmitting and receiving radios.</p>
-<dl class="section warning"><dt>Warning</dt><dd>When using the <code>multicast</code> parameter to <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>, this feature can be disabled for an individual payload. However, if this feature is disabled, then the <code>multicast</code> parameter will have no effect.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>When using the <code>multicast</code> parameter to <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>, this feature can be disabled for an individual payload. However, if this feature is disabled, then the <code>multicast</code> parameter will have no effect.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If disabling auto-acknowledgment packets, the ACK payloads feature is also disabled as this feature is required to send ACK payloads.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a> </dd>
+writeFast() </dd>
 <dd>
-<a class="el" href="classRF24.html#acd19843064cb70ec23507412e519e4ef">startFastWrite()</a> </dd>
+<a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite()</a> </dd>
+startWrite() </dd>
 <dd>
 <a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -2035,7 +1733,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01407">1407</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01257">1257</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2066,15 +1764,15 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 </div><div class="memdoc">
 <p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. Auto-acknowledgement responds to every recieved payload with an empty ACK packet. These ACK packets get sent from the receiving radio back to the transmitting radio. To attach an ACK payload to a ACK packet, use <a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload()</a>.</p>
 <p>Pipe 0 is used for TX operations, which include sending ACK packets. If using this feature on both TX &amp; RX nodes, then pipe 0 must have this feature enabled for the RX &amp; TX operations. If this feature is disabled on a transmitting radio's pipe 0, then the transmitting radio will always report that the payload was recieved (even if it was not). Remember to also enable this feature for any pipe that is openly listening to a transmitting radio with this feature enabled.</p>
-<dl class="section warning"><dt>Warning</dt><dd>If this feature is enabled for pipe 0, then the <code>multicast</code> parameter to <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> can be used to disable this feature for an individual payload. However, if this feature is disabled for pipe 0, then the <code>multicast</code> parameter will have no effect.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>If this feature is enabled for pipe 0, then the <code>multicast</code> parameter to <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> can be used to disable this feature for an individual payload. However, if this feature is disabled for pipe 0, then the <code>multicast</code> parameter will have no effect.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If disabling auto-acknowledgment packets on pipe 0, the ACK payloads feature is also disabled as this feature is required on pipe 0 to send ACK payloads.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">writeFast()</a> </dd>
+writeFast() </dd>
 <dd>
-<a class="el" href="classRF24.html#acd19843064cb70ec23507412e519e4ef">startFastWrite()</a> </dd>
+<a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write()</a> </dd>
 <dd>
-<a class="el" href="classRF24.html#adbf25b53d28d1fcc385fd9738a531b75">startWrite()</a> </dd>
+startWrite() </dd>
 <dd>
 <a class="el" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload()</a> </dd>
 <dd>
@@ -2089,18 +1787,18 @@ disableAckPayloads()</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01422">1422</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01272">1272</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ab6a711a9cc14fb459a4a1698b8665d82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6a711a9cc14fb459a4a1698b8665d82">&#9670;&nbsp;</a></span>setPALevel()</h2>
+<a id="ac7d6260f84ce6e7d796bdc4dffa753ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7d6260f84ce6e7d796bdc4dffa753ff">&#9670;&nbsp;</a></span>setPaLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::setPALevel </td>
+          <td class="memname">void RF24::setPaLevel </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -2121,7 +1819,7 @@ disableAckPayloads()</dd></dl>
 <p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">level</td><td>The desired <a class="el" href="group__PALevel.html">Power Amplifier level</a> as defined by <a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>. </td></tr>
+    <tr><td class="paramname">level</td><td>The desired <a class="el" href="group__PaLevel.html">Power Amplifier level</a> as defined by <a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>. </td></tr>
     <tr><td class="paramname">lnaEnable</td><td>Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below.<br  />
  <code>lnaEnable</code> only affects nRF24L01 modules with an LNA chip.</td></tr>
   </table>
@@ -2136,28 +1834,28 @@ description when<br  />
 description when<br  />
  <code>lnaEnable</code> = 0   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter"><a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff">RF24_PA_MIN</a> (0)  </td><td class="markdownTableBodyCenter">-18 dBm  </td><td class="markdownTableBodyCenter">-6 dBm  </td><td class="markdownTableBodyCenter">-12 dBm   </td></tr>
+<td class="markdownTableBodyCenter"><a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff">RF24_PA_MIN</a> (0)  </td><td class="markdownTableBodyCenter">-18 dBm  </td><td class="markdownTableBodyCenter">-6 dBm  </td><td class="markdownTableBodyCenter">-12 dBm   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter"><a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a> (1)  </td><td class="markdownTableBodyCenter">-12 dBm  </td><td class="markdownTableBodyCenter">-0 dBm  </td><td class="markdownTableBodyCenter">-4 dBm   </td></tr>
+<td class="markdownTableBodyCenter"><a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a> (1)  </td><td class="markdownTableBodyCenter">-12 dBm  </td><td class="markdownTableBodyCenter">-0 dBm  </td><td class="markdownTableBodyCenter">-4 dBm   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter"><a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533">RF24_PA_HIGH</a> (2)  </td><td class="markdownTableBodyCenter">-6 dBm  </td><td class="markdownTableBodyCenter">3 dBm  </td><td class="markdownTableBodyCenter">1 dBm   </td></tr>
+<td class="markdownTableBodyCenter"><a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533">RF24_PA_HIGH</a> (2)  </td><td class="markdownTableBodyCenter">-6 dBm  </td><td class="markdownTableBodyCenter">3 dBm  </td><td class="markdownTableBodyCenter">1 dBm   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter"><a class="el" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d">RF24_PA_MAX</a> (3)  </td><td class="markdownTableBodyCenter">0 dBm  </td><td class="markdownTableBodyCenter">7 dBm  </td><td class="markdownTableBodyCenter">4 dBm   </td></tr>
+<td class="markdownTableBodyCenter"><a class="el" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d">RF24_PA_MAX</a> (3)  </td><td class="markdownTableBodyCenter">0 dBm  </td><td class="markdownTableBodyCenter">7 dBm  </td><td class="markdownTableBodyCenter">4 dBm   </td></tr>
 </table>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="classRF24.html#af7c4dcd84466168c5816382ceb366067">getPALevel()</a> function does not care what was passed <code>lnaEnable</code> parameter. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="classRF24.html#a9d78d3638af3245f840f5698e630c25f">getPaLevel()</a> function does not care what was passed <code>lnaEnable</code> parameter. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01454">1454</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01304">1304</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af7c4dcd84466168c5816382ceb366067"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7c4dcd84466168c5816382ceb366067">&#9670;&nbsp;</a></span>getPALevel()</h2>
+<a id="a9d78d3638af3245f840f5698e630c25f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d78d3638af3245f840f5698e630c25f">&#9670;&nbsp;</a></span>getPaLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t RF24::getPALevel </td>
+          <td class="memname">uint8_t RF24::getPaLevel </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -2165,22 +1863,22 @@ description when<br  />
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fetches the current <a class="el" href="group__PALevel.html">Power Amplifier level</a>.</p>
-<dl class="section return"><dt>Returns</dt><dd>One of the values defined by <a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>.<br  />
- See tables in <a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> or <a class="el" href="classRF24.html#ab6a711a9cc14fb459a4a1698b8665d82">setPALevel()</a> </dd></dl>
+<p>Fetches the current <a class="el" href="group__PaLevel.html">Power Amplifier level</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>One of the values defined by <a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>.<br  />
+ See tables in <a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> or <a class="el" href="classRF24.html#ac7d6260f84ce6e7d796bdc4dffa753ff">setPaLevel()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01470">1470</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01320">1320</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a54b26abd1846e5080a0439ee372f3b8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54b26abd1846e5080a0439ee372f3b8b">&#9670;&nbsp;</a></span>getARC()</h2>
+<a id="a674d681164a517bece9beb44d69c30f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a674d681164a517bece9beb44d69c30f1">&#9670;&nbsp;</a></span>lastTxArc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t RF24::getARC </td>
+          <td class="memname">uint8_t RF24::lastTxArc </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -2192,7 +1890,7 @@ description when<br  />
 <p>Value resets with each new transmission. Allows roughly estimating signal strength.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns values from 0 to 15. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01478">1478</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01328">1328</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2231,7 +1929,7 @@ description when<br  />
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the change was successful </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01486">1486</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01336">1336</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2254,55 +1952,55 @@ description when<br  />
 <dl class="section return"><dt>Returns</dt><dd>One of the values defined by <a class="el" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a>.<br  />
  See table in <a class="el" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> or <a class="el" href="classRF24.html#aeb9920e7a95699748b003c4a839b0814">setDataRate()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01531">1531</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01381">1381</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a89f626fc4a58dd997153bcc0f8198b9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89f626fc4a58dd997153bcc0f8198b9e">&#9670;&nbsp;</a></span>setCRCLength()</h2>
+<a id="af0461e493c60057679fdcfbbd066e141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0461e493c60057679fdcfbbd066e141">&#9670;&nbsp;</a></span>setCrc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::setCRCLength </td>
+          <td class="memname">void RF24::setCrc </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a>&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>length</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the <a class="el" href="group__CRCLength.html">CRC length</a> (in bits) <br  />
-CRC cannot be disabled if auto-ack is enabled </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Set the CRC checksum length (in bytes) </p><dl class="section note"><dt>Note</dt><dd>CRC checking cannot be disabled if auto-ack is enabled </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">length</td><td>Specify one of the values (as defined by <a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a>) <table class="markdownTable">
+    <tr><td class="paramname">length</td><td>Specify the CRC checksum length in bytes <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><code>length</code> (enum value)  </th><th class="markdownTableHeadCenter">description   </th></tr>
+<th class="markdownTableHeadCenter"><code>length</code>  </th><th class="markdownTableHeadCenter">description   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter"><a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea77871b6e6fac61d79be7edf1a60b9cbf">RF24_CRC_DISABLED</a> (0)  </td><td class="markdownTableBodyCenter">to disable using CRC checksums   </td></tr>
+<td class="markdownTableBodyCenter">0  </td><td class="markdownTableBodyCenter">to disable using CRC checksums   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter"><a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7eade0b6b3a0dd8729e2a17c49896e0a468">RF24_CRC_8</a> (1)  </td><td class="markdownTableBodyCenter">to use 8-bit checksums   </td></tr>
+<td class="markdownTableBodyCenter">1  </td><td class="markdownTableBodyCenter">to use 8-bit checksums   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter"><a class="el" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea6eeb0379e23be63559106d96ada47a56">RF24_CRC_16</a> (2)  </td><td class="markdownTableBodyCenter">to use 16-bit checksums   </td></tr>
+<td class="markdownTableBodyCenter">2  </td><td class="markdownTableBodyCenter">to use 16-bit checksums   </td></tr>
 </table>
 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01553">1553</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01403">1403</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aba4ca91b829afcd94a4c11e0343e3796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba4ca91b829afcd94a4c11e0343e3796">&#9670;&nbsp;</a></span>getCRCLength()</h2>
+<a id="af4921bc2ead573684fdca32e4a976f13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4921bc2ead573684fdca32e4a976f13">&#9670;&nbsp;</a></span>getCrc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a> RF24::getCRCLength </td>
+          <td class="memname">uint8_t RF24::getCrc </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -2310,22 +2008,19 @@ CRC cannot be disabled if auto-ack is enabled </p><dl class="params"><dt>Paramet
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the <a class="el" href="group__CRCLength.html">CRC length</a> (in bits) <br  />
-CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section return"><dt>Returns</dt><dd>One of the values defined by <a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a>.<br  />
- See table in <a class="el" href="group__CRCLength.html#gadbe00719f3f835c82bd007081d040a7e">rf24_crclength_e</a> or <a class="el" href="classRF24.html#a89f626fc4a58dd997153bcc0f8198b9e">setCRCLength()</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01571">1571</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p>Get the CRC checksum length (in bytes) </p><dl class="section note"><dt>Note</dt><dd>CRC checksum is automatically when the auto-ack feature is enabled. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes used for a CRC checksum (see table in <a class="el" href="classRF24.html#af0461e493c60057679fdcfbbd066e141">setCrc()</a>) </dd></dl>
 
 </div>
 </div>
-<a id="a5eacd9ecfbc19864801d714c292cf8be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5eacd9ecfbc19864801d714c292cf8be">&#9670;&nbsp;</a></span>disableCRC()</h2>
+<a id="a2a1be2cb92e9f14f7cf5921232b02ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a1be2cb92e9f14f7cf5921232b02ffc">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::disableCRC </td>
+          <td class="memname">uint8_t RF24::update </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -2333,36 +2028,116 @@ CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section re
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Disable CRC validation</p>
-<dl class="section warning"><dt>Warning</dt><dd>CRC cannot be disabled if auto-ack/ESB is enabled. </dd></dl>
+<p>Retrieve the current status of the chip</p>
+<dl class="section return"><dt>Returns</dt><dd>Current value of status register </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01590">1590</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01032">1032</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
-<a id="abf68b9b0c9cd17179e9e144c3e7f9c45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf68b9b0c9cd17179e9e144c3e7f9c45">&#9670;&nbsp;</a></span>maskIRQ()</h2>
+<a id="a7b864ca518c0e21085df8fc1dfb7204d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b864ca518c0e21085df8fc1dfb7204d">&#9670;&nbsp;</a></span>irqDr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RF24::maskIRQ </td>
+          <td class="memname">bool RF24::irqDr </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01006">1006</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8f17ced7559d6ecfffad31858e7b3d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f17ced7559d6ecfffad31858e7b3d15">&#9670;&nbsp;</a></span>irqDs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RF24::irqDs </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01013">1013</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a138c84cda83cc15d157cfa3d518d4183"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a138c84cda83cc15d157cfa3d518d4183">&#9670;&nbsp;</a></span>irqDf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RF24::irqDf </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01020">1020</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abcf4ed7ba5cae2d80618f11f0254d2f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcf4ed7ba5cae2d80618f11f0254d2f8">&#9670;&nbsp;</a></span>isTxFull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RF24::isTxFull </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01025">1025</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7cc8e9fa014ef094c8810a24dd1203ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cc8e9fa014ef094c8810a24dd1203ca">&#9670;&nbsp;</a></span>interruptConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RF24::interruptConfig </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>tx_ok</em>, </td>
+          <td class="paramname"><em>dataReady</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>tx_fail</em>, </td>
+          <td class="paramname"><em>dataSent</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>rx_ready</em>&#160;</td>
+          <td class="paramname"><em>dataFail</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2376,18 +2151,18 @@ CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section re
 <li>"data failed": This means the data being sent was not recieved. This event is only triggered when the auto-ack feature is enabled.</li>
 <li>"data received": This means that data from a receiving payload has been loaded into the RX FIFO buffers. Remember that there are only 3 levels available in the RX FIFO buffers.</li>
 </ol>
-<p>By default, all events are configured to trigger the IRQ pin active LOW. When the IRQ pin is active, use <a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a> to determine what events triggered it. Remeber that calling <a class="el" href="classRF24.html#afb97dc4bdf4d2d84ea44060ac5b4ed89">whatHappened()</a> also clears these events' status, and the IRQ pin will then be reset to inactive HIGH.</p>
-<p>The following code configures the IRQ pin to only reflect the "data received" event: </p><div class="fragment"><div class="line">radio.maskIRQ(1, 1, 0);</div>
+<p>By default, all events are configured to trigger the IRQ pin active LOW. When the IRQ pin is active, use <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> to determine what events triggered it. Remeber that calling <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> also clears these events' status, and the IRQ pin will then be reset to inactive HIGH.</p>
+<p>The following code configures the IRQ pin to only reflect the "data received" event: </p><div class="fragment"><div class="line">radio.interruptConfig(1, 1, 0);</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tx_ok</td><td><code>true</code> ignores the "data sent" event, <code>false</code> reflects the "data sent" event on the IRQ pin. </td></tr>
-    <tr><td class="paramname">tx_fail</td><td><code>true</code> ignores the "data failed" event, <code>false</code> reflects the "data failed" event on the IRQ pin. </td></tr>
-    <tr><td class="paramname">rx_ready</td><td><code>true</code> ignores the "data received" event, <code>false</code> reflects the "data received" event on the IRQ pin. </td></tr>
+    <tr><td class="paramname">dataReady</td><td><code>true</code> ignores the "data received" event, <code>false</code> reflects the "data received" event on the IRQ pin. </td></tr>
+    <tr><td class="paramname">dataSent</td><td><code>true</code> ignores the "data sent" event, <code>false</code> reflects the "data sent" event on the IRQ pin. </td></tr>
+    <tr><td class="paramname">dataFail</td><td><code>true</code> ignores the "data failed" event, <code>false</code> reflects the "data failed" event on the IRQ pin. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01115">1115</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00938">938</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2400,7 +2175,7 @@ CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section re
         <tr>
           <td class="memname">void RF24::startConstCarrier </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__PALevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a>&#160;</td>
           <td class="paramname"><em>level</em>, </td>
         </tr>
         <tr>
@@ -2428,13 +2203,11 @@ CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section re
 <li><a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a> to false (for all pipes)</li>
 <li><a class="el" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries()</a> to retry <code>0</code> times with a delay of 250 microseconds</li>
 <li>set the TX address to 5 bytes of <code>0xFF</code></li>
-<li><a class="el" href="classRF24.html#adb7915b1d2661a82137573344f659e81">flush_tx()</a></li>
+<li><a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a></li>
 <li>load a 32 byte payload of <code>0xFF</code> into the TX FIFO's top level</li>
-<li><a class="el" href="classRF24.html#a5eacd9ecfbc19864801d714c292cf8be">disableCRC()</a> </li>
+<li>disableCRC() </li>
 </ul>
 </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01603">1603</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2456,13 +2229,11 @@ CRC checking cannot be disabled if auto-ack is enabled </p><dl class="section re
 <p>Stop transmission of constant wave and reset PLL and CONT registers</p>
 <dl class="section warning"><dt>Warning</dt><dd>this function will <a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">powerDown()</a> the radio per recommendation of datasheet. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If <a class="el" href="classRF24.html#a62846750b82682beb7593719eb60ed60">isPVariant()</a> returns true, please remember to re-configure the radio's settings <div class="fragment"><div class="line"><span class="comment">// re-establish default settings</span></div>
-<div class="line"><a class="code" href="classRF24.html#a89f626fc4a58dd997153bcc0f8198b9e">setCRCLength</a>(<a class="code" href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea6eeb0379e23be63559106d96ada47a56">RF24_CRC_16</a>);</div>
+<div class="line"><a class="code" href="classRF24.html#af0461e493c60057679fdcfbbd066e141">setCrc</a>(RF24_CRC_16);</div>
 <div class="line"><a class="code" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a>(<span class="keyword">true</span>);</div>
 <div class="line"><a class="code" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries</a>(5, 15);</div>
 </div><!-- fragment --> </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b">startConstCarrier()</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01637">1637</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2508,7 +2279,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01212">1212</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01042">1042</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2537,7 +2308,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01190">1190</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01068">1068</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
@@ -2556,45 +2327,15 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Determine if an ack payload was received in the most recent call to <a class="el" href="classRF24.html#a4cd4c198a47704db20b6b5cf0731cd58">write()</a>. The regular <a class="el" href="classRF24.html#a127105eb7a3b351cfe777c1cec50627a">available()</a> can also be used.</p>
+<p>Determine if an ack payload was received in the most recent call to <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>. The regular <a class="el" href="classRF24.html#a127105eb7a3b351cfe777c1cec50627a">available()</a> can also be used.</p>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Call <a class="el" href="classRF24.html#a8e2eacacfba96426c192066f04054c5b">read()</a> to retrieve the ack payload.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if an ack payload is available. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01393">1393</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l01243">1243</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2e40fe66d1231a333aa2534e8491f828"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e40fe66d1231a333aa2534e8491f828">&#9670;&nbsp;</a></span>failureDetected</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RF24::failureDetected</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>If a failure has been detected, it usually indicates a hardware issue. By default the library will cease operation when a failure is detected. This should allow advanced users to detect and resolve intermittent hardware issues.</p>
-<p>In most cases, the radio must be re-enabled via radio.begin(); and the appropriate settings applied after a failure occurs, if wanting to re-enable the device immediately.</p>
-<p>The three main failure modes of the radio include:</p>
-<p>Writing to radio: Radio unresponsive - Fixed internally by adding a timeout to the internal write functions in <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> (failure handling)</p>
-<p>Reading from radio: Available returns true always - Fixed by adding a timeout to available functions by the user. This is implemented internally in RF24Network.</p>
-<p>Radio configuration settings are lost - Fixed by monitoring a value that is different from the default, and re-configuring the radio if this setting reverts to the default.</p>
-<p>See the included example, GettingStarted_HandlingFailures</p>
-<div class="fragment"><div class="line"><span class="keywordflow">if</span>(radio.failureDetected){</div>
-<div class="line">  radio.begin();                       <span class="comment">// Attempt to re-configure the radio with defaults</span></div>
-<div class="line">  radio.failureDetected = 0;           <span class="comment">// Reset the detection value</span></div>
-<div class="line"> radio.openWritingPipe(addresses[1]); <span class="comment">// Re-configure pipe addresses</span></div>
-<div class="line">  radio.openReadingPipe(1,addresses[0]);</div>
-<div class="line">  report_failure();                    <span class="comment">// Blink leds, send a message, etc. to indicate failure</span></div>
-<div class="line">}</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01089">1089</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
-
-</div>
-</div>
 <a id="a958fb99f54415101ca008ab11b3bfe79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a958fb99f54415101ca008ab11b3bfe79">&#9670;&nbsp;</a></span>txDelay</h2>
 
@@ -2614,7 +2355,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 </ol>
 <dl class="section warning"><dt>Warning</dt><dd>If set to 0, ensure 130uS delay after <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> and before any sends </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01493">1493</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01233">1233</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -2633,7 +2374,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 <p>This is intended to minimise the speed of SPI polling due to radio commands</p>
 <p>If using interrupts or timed requests, this can be set to 0 Default:5 </p>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01503">1503</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01243">1243</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -2642,21 +2383,18 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 <li><a class="el" href="RF24_8cpp_source.html">RF24.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aclassRF24_html_a9edc910ccc1ffcff56814b08faca5535"><div class="ttname"><a href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">RF24::openReadingPipe</a></div><div class="ttdeci">void openReadingPipe(uint8_t number, const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01252">RF24.cpp:1252</a></div></div>
-<div class="ttc" id="agroup__CRCLength_html_ggadbe00719f3f835c82bd007081d040a7ea6eeb0379e23be63559106d96ada47a56"><div class="ttname"><a href="group__CRCLength.html#ggadbe00719f3f835c82bd007081d040a7ea6eeb0379e23be63559106d96ada47a56">RF24_CRC_16</a></div><div class="ttdeci">@ RF24_CRC_16</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00104">RF24.h:103</a></div></div>
+<div class="ttc" id="aclassRF24_html_a9edc910ccc1ffcff56814b08faca5535"><div class="ttname"><a href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">RF24::openReadingPipe</a></div><div class="ttdeci">void openReadingPipe(uint8_t number, const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01102">RF24.cpp:1102</a></div></div>
 <div class="ttc" id="agroup__Porting__General_html_ga361649efb4f1e2fa3c870ca203497d5e"><div class="ttname"><a href="group__Porting__General.html#ga361649efb4f1e2fa3c870ca203497d5e">pinMode</a></div><div class="ttdeci">#define pinMode(pin, direction)</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00074">RF24_arch_config.h:74</a></div></div>
-<div class="ttc" id="aclassRF24_html_aec71746d59da978bcbb975167886a2cc"><div class="ttname"><a href="classRF24.html#aec71746d59da978bcbb975167886a2cc">RF24::setAutoAck</a></div><div class="ttdeci">void setAutoAck(bool enable)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01407">RF24.cpp:1407</a></div></div>
+<div class="ttc" id="aclassRF24_html_aec71746d59da978bcbb975167886a2cc"><div class="ttname"><a href="classRF24.html#aec71746d59da978bcbb975167886a2cc">RF24::setAutoAck</a></div><div class="ttdeci">void setAutoAck(bool enable)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01257">RF24.cpp:1257</a></div></div>
 <div class="ttc" id="aprintf_8h_html_afc0d9ca32710dff550ebe56ab6b39d23"><div class="ttname"><a href="printf_8h.html#afc0d9ca32710dff550ebe56ab6b39d23">printf_begin</a></div><div class="ttdeci">void printf_begin(void)</div><div class="ttdef"><b>Definition:</b> <a href="printf_8h_source.html#l00029">printf.h:29</a></div></div>
-<div class="ttc" id="aclassRF24_html_a47b2516993481b58e724d1274a7fd9cb"><div class="ttname"><a href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">RF24::writeFast</a></div><div class="ttdeci">bool writeFast(const void *buf, uint8_t len)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01002">RF24.cpp:1002</a></div></div>
-<div class="ttc" id="aclassRF24_html_af2e409e62d49a23e372a70b904ae30e1"><div class="ttname"><a href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">RF24::openWritingPipe</a></div><div class="ttdeci">void openWritingPipe(const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01200">RF24.cpp:1200</a></div></div>
+<div class="ttc" id="aclassRF24_html_af2e409e62d49a23e372a70b904ae30e1"><div class="ttname"><a href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">RF24::openWritingPipe</a></div><div class="ttdeci">void openWritingPipe(const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01078">RF24.cpp:1078</a></div></div>
 <div class="ttc" id="aprintf_8h_html"><div class="ttname"><a href="printf_8h.html">printf.h</a></div></div>
-<div class="ttc" id="aclassRF24_html_a4c6d3959c8320e64568395f4ef507aef"><div class="ttname"><a href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">RF24::setRetries</a></div><div class="ttdeci">void setRetries(uint8_t delay, uint8_t count)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01597">RF24.cpp:1597</a></div></div>
+<div class="ttc" id="aclassRF24_html_a4c6d3959c8320e64568395f4ef507aef"><div class="ttname"><a href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">RF24::setRetries</a></div><div class="ttdeci">void setRetries(uint8_t delay, uint8_t count)</div></div>
 <div class="ttc" id="agroup__Porting__General_html_ga1bb283bd7893b9855e2f23013891fc82"><div class="ttname"><a href="group__Porting__General.html#ga1bb283bd7893b9855e2f23013891fc82">INPUT</a></div><div class="ttdeci">#define INPUT</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00071">RF24_arch_config.h:71</a></div></div>
-<div class="ttc" id="aclassRF24_html_a12cc453453c94969d4d3f0edb3778c83"><div class="ttname"><a href="classRF24.html#a12cc453453c94969d4d3f0edb3778c83">RF24::txStandBy</a></div><div class="ttdeci">bool txStandBy()</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01049">RF24.cpp:1049</a></div></div>
-<div class="ttc" id="aclassRF24_html_a89f626fc4a58dd997153bcc0f8198b9e"><div class="ttname"><a href="classRF24.html#a89f626fc4a58dd997153bcc0f8198b9e">RF24::setCRCLength</a></div><div class="ttdeci">void setCRCLength(rf24_crclength_e length)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01553">RF24.cpp:1553</a></div></div>
+<div class="ttc" id="aclassRF24_html_af0461e493c60057679fdcfbbd066e141"><div class="ttname"><a href="classRF24.html#af0461e493c60057679fdcfbbd066e141">RF24::setCrc</a></div><div class="ttdeci">void setCrc(uint8_t length)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01403">RF24.cpp:1403</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

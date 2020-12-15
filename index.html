@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: Optimized High Speed Driver for nRF24L01(+) 2.4GHz Wireless Transceiver</title>
+<title>RF24 Revamped: Optimized High Speed Driver for nRF24L01(+) 2.4GHz Wireless Transceiver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -93,111 +94,77 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Design Goals</h1>
 <p>This library fork is designed to be... </p><ul>
 <li>More compliant with the manufacturer specified operation of the chip, while allowing advanced users to work outside the recommended operation. </li>
-<li>Utilize the capabilities of the radio to their full potential via Arduino </li>
+<li>Utilize the capabilities of the radio to their full potential via multiple platforms (i.e. Arduino &amp; Raspberry Pi) </li>
 <li>More reliable, responsive, bug-free and feature rich </li>
 <li>Easy for beginners to use, with well documented examples and features </li>
 <li>Consumed with a public interface that's similar to other Arduino standard libraries</li>
 </ul>
-<h1><a class="anchor" id="News"></a>
-News</h1>
-<p><b>Aug 2020</b> <br  />
- v1.3.9</p><ul>
-<li>Fix broken compilation for some devices due to recent changes v1.3.8</li>
-<li>Introduces change that mainly reduces the time required to call <a class="el" href="classRF24.html#a30a2733a3889bdc331fe2d2f4f0f7b39">RF24::startListening()</a>, <a class="el" href="classRF24.html#a5cdaf47aa0edd6dca1b9a8bb7972a1a3">RF24::powerUp()</a>, and <a class="el" href="classRF24.html#aa0a51923a09ba4f3478aba9be0f8a6a1">RF24::powerDown()</a></li>
-<li>Affects speed of switching from TX-&gt;RX. Users might consider starting updates of slower devices with this<br  />
- release to prevent missed packets when similar changes are introduced, affecting switching from RX-&gt;TX</li>
-<li>Clean up <a class="el" href="classRF24.html#a048a20c73c7d9b2e02dcbae6fb9c4ba8">RF24::begin()</a> function (reduce program size)</li>
-</ul>
-<p>v1.3.7</p><ul>
-<li>Bug fix for <a class="el" href="classRF24.html#a47b2516993481b58e724d1274a7fd9cb">RF24::writeFast()</a> function affecting <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> stack (all <a class="el" href="classRF24.html" title="Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.">RF24</a> libraries)</li>
-<li>Unify Arduino &amp; Linux constructor. Accept SPI speed in Hz as optional parameter</li>
-<li>Removal of BCM2835 SPI speed constants due to removal from BCM library</li>
-<li>Update to latest BCM2835 driver</li>
-<li>Bug fix for RPi <a class="el" href="group__Porting__General.html#gad5b3ec1ce839fa1c4337a7d0312e9749">millis()</a> code</li>
-<li>Added Constant Carrier Wave functionality &amp; added to scanner example</li>
-<li>Modify <a class="el" href="classRF24.html#ab6a711a9cc14fb459a4a1698b8665d82">RF24::setPALevel()</a> to allow setting LNA gain via optional parameter</li>
-<li>Cleanup of warnings, errors and old files</li>
-</ul>
-<p><b>March-July 2020</b></p><ul>
-<li>Fixes for SPI_HAS_TRANSACTION detection (Affecting many devices)</li>
-<li>Add ability to configure SPI speed properly in Linux constructor</li>
-<li>Support multiple instances of SPIDEV on Linux</li>
-<li>Minor fixes &amp; changes</li>
-</ul>
+<h1><a class="anchor" id="changeLog"></a>
+Change Log</h1>
+<p>See <a href="http://github.com/2bndy5/RF24/releases">the releases</a> for a details on what was changed in each version of the library</p>
 <h1><a class="anchor" id="Useful"></a>
 Useful References</h1>
 <ul>
-<li><a href="classRF24.html"><b>RF24 Class Documentation</b></a> </li>
-<li><a href="pages.html"><b>Support &amp; Configuration</b></a> </li>
-<li><a href="https://github.com/nRF24/RF24/"><b>Source Code</b></a> </li>
-<li><a href="http://github.com/nRF24/RF24/datasheets/nRF24L01_datasheet_v2.pdf">nRF24L01 v2.0 Datasheet</a> </li>
-<li><a href="http://github.com/nRF24/RF24/datasheets/nRF24L01P_datasheet_v1.pdf">nRF24L01+ v1.0 Datasheet</a></li>
+<li><a href="classRF24.html">RF24 Class Documentation</a></li>
+<li>[Support &amp; Configuration(pages.html)</li>
+<li><a href="https://github.com/2bndy5/RF24/tree/revamp">Source Code</a></li>
+<li><a href="http://github.com/2bndy5/RF24/datasheets/nRF24L01_datasheet_v2.pdf">nRF24L01 v2.0 Datasheet</a></li>
+<li><a href="http://github.com/2bndy5/RF24/datasheets/nRF24L01P_datasheet_v1.pdf">nRF24L01+ v1.0 Datasheet</a></li>
 </ul>
-<p><b>Additional Information and Add-ons</b></p>
-<ul>
-<li><a href="http://nRF24.github.io/RF24Network"><b>RF24Network:</b> OSI Network Layer for multi-device communication. Create a home sensor network.</a> </li>
-<li><a href="http://nRF24.github.io/RF24Mesh"><b>RF24Mesh:</b> Dynamic Mesh Layer for RF24Network</a> </li>
-<li><a href="http://nRF24.github.io/RF24Ethernet"><b>RF24Ethernet:</b> TCP/IP Radio Mesh Networking (shares Arduino Ethernet API)</a> </li>
-<li><a href="http://nRF24.github.io/RF24Audio"><b>RF24Audio:</b> Realtime Wireless Audio streaming</a> </li>
-<li><a href="http://tmrh20.blogspot.com/2014/03/high-speed-data-transfers-and-wireless.html"><b>My Blog:</b> RF24 Optimization Overview</a> </li>
-<li><a href="http://tmrh20.blogspot.com/2016/08/raspberry-pilinux-with-nrf24l01.html"><b>My Blog:</b> RPi/Linux w/RF24Gateway</a> </li>
-<li><a href="http://tmrh20.github.io/">All TMRh20 Documentation Main Page</a></li>
-</ul>
-<p><b>More Information</b></p>
-<ul>
-<li><a href="http://TMRh20.blogspot.com">Project Blog: TMRh20.blogspot.com </a> </li>
-<li><a href="http://maniacalbits.blogspot.ca/">Maniacal Bits Blog</a> </li>
-<li><a href="https://maniacbug.wordpress.com/2012/03/30/rf24network/">Original Maniacbug RF24Network Blog Post</a> </li>
-<li><a href="https://github.com/maniacbug/RF24">ManiacBug on GitHub (Original Library Author)</a> </li>
-<li><a href="http://www.mysensors.org/">MySensors.org (User friendly sensor networks/IoT)</a></li>
-</ul>
-<p><br  />
-</p>
 <h1><a class="anchor" id="Platform_Support"></a>
 Platform Support Pages</h1>
 <ul>
-<li><a href="Arduino.html"><b>Arduino</b></a> (Uno, Nano, Mega, Due, Galileo, etc) </li>
-<li><a href="ATTiny.html"><b>ATTiny</b></a> </li>
-<li><a href="Linux.html"><b>Linux Installation</b></a>( <a href="RPi.html"><b>Linux/RPi General</b></a> , <a href="MRAA.html"><b>MRAA</b></a> supported boards ( Galileo, Edison, etc), <a href="LittleWire.html"><b>LittleWire</b></a>) </li>
-<li><a href="CrossCompile.html"><b>Cross-compilation</b></a> for linux devices </li>
-<li><a href="Python.html"><b>Python</b></a> wrapper available for Linux devices</li>
+<li><a href="Arduino.html">Arduino</a> (Uno, Nano, Mega, Due, Galileo, etc)</li>
+<li><a href="ATTiny.html">ATTiny</a></li>
+<li><a href="Linux.html">Linux Installation</a><ul>
+<li><a href="RPi.html">Linux/RPi General</a></li>
+<li><a href="MRAA.html">MRAA</a> supported boards (Galileo, Edison, etc)</li>
+<li><a href="LittleWire.html">LittleWire</a></li>
+</ul>
+</li>
+<li><a href="CrossCompile.html">Cross-compilation</a> for linux devices</li>
+<li><a href="Python.html">Python wrapper</a> available for Linux devices</li>
 </ul>
 <p><br  />
- <b>General µC Pin layout</b> (See the individual board support pages for more info)</p>
-<p>The table below shows how to connect the the pins of the NRF24L01(+) to different boards. CE and CSN are configurable.</p>
+ </p>
+<h1><a class="anchor" id="pinout"></a>
+General Microcontroller Pin layout</h1>
+<p><br  />
+ See the individual board support pages for more info</p>
+<div class="image">
+<img src="https://lastminuteengineers.com/wp-content/uploads/arduino/Pinout-nRF24L01-Wireless-Transceiver-Module.png" alt=""/>
+</div>
+<p> The table below shows how to connect the the pins of the NRF24L01(+) to different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">PIN  </th><th class="markdownTableHeadNone">NRF24L01  </th><th class="markdownTableHeadNone">Arduino UNO  </th><th class="markdownTableHeadNone">ATtiny25/45/85 [0]  </th><th class="markdownTableHeadNone">ATtiny44/84 [1]  </th><th class="markdownTableHeadNone">LittleWire [2]  </th><th class="markdownTableHeadNone">RPI  </th><th class="markdownTableHeadNone">RPi -P1 Connector   </th></tr>
+<th class="markdownTableHeadCenter">NRF24L01  </th><th class="markdownTableHeadCenter">Arduino UNO  </th><th class="markdownTableHeadCenter">ATtiny25/45/85 [0]  </th><th class="markdownTableHeadCenter">ATtiny44/84 [1]  </th><th class="markdownTableHeadCenter">LittleWire [2]  </th><th class="markdownTableHeadCenter">RPI  </th><th class="markdownTableHeadCenter">RPi -P1 Connector   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">GND  </td><td class="markdownTableBodyNone">GND  </td><td class="markdownTableBodyNone">pin 4  </td><td class="markdownTableBodyNone">pin 14  </td><td class="markdownTableBodyNone">GND  </td><td class="markdownTableBodyNone">rpi-gnd  </td><td class="markdownTableBodyNone">(25)   </td></tr>
+<td class="markdownTableBodyCenter">GND  </td><td class="markdownTableBodyCenter">GND  </td><td class="markdownTableBodyCenter">pin 4  </td><td class="markdownTableBodyCenter">pin 14  </td><td class="markdownTableBodyCenter">GND  </td><td class="markdownTableBodyCenter">rpi-gnd  </td><td class="markdownTableBodyCenter">(25)   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">VCC  </td><td class="markdownTableBodyNone">3.3V  </td><td class="markdownTableBodyNone">pin 8  </td><td class="markdownTableBodyNone">pin 1  </td><td class="markdownTableBodyNone">regulator 3.3V required  </td><td class="markdownTableBodyNone">rpi-3v3  </td><td class="markdownTableBodyNone">(17)   </td></tr>
+<td class="markdownTableBodyCenter">VCC  </td><td class="markdownTableBodyCenter">3.3V  </td><td class="markdownTableBodyCenter">pin 8  </td><td class="markdownTableBodyCenter">pin 1  </td><td class="markdownTableBodyCenter">regulator 3.3V required  </td><td class="markdownTableBodyCenter">rpi-3v3  </td><td class="markdownTableBodyCenter">(17)   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">CE  </td><td class="markdownTableBodyNone">digIO 7  </td><td class="markdownTableBodyNone">pin 2  </td><td class="markdownTableBodyNone">pin 12  </td><td class="markdownTableBodyNone">pin to 3.3V  </td><td class="markdownTableBodyNone">rpi-gpio22  </td><td class="markdownTableBodyNone">(15)   </td></tr>
+<td class="markdownTableBodyCenter">CE  </td><td class="markdownTableBodyCenter">digIO 7  </td><td class="markdownTableBodyCenter">pin 2  </td><td class="markdownTableBodyCenter">pin 12  </td><td class="markdownTableBodyCenter">pin to 3.3V  </td><td class="markdownTableBodyCenter">rpi-gpio22  </td><td class="markdownTableBodyCenter">(15)   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">4  </td><td class="markdownTableBodyNone">CSN  </td><td class="markdownTableBodyNone">digIO 8  </td><td class="markdownTableBodyNone">pin 3  </td><td class="markdownTableBodyNone">pin 11  </td><td class="markdownTableBodyNone">RESET  </td><td class="markdownTableBodyNone">rpi-gpio8  </td><td class="markdownTableBodyNone">(24)   </td></tr>
+<td class="markdownTableBodyCenter">CSN  </td><td class="markdownTableBodyCenter">digIO 8  </td><td class="markdownTableBodyCenter">pin 3  </td><td class="markdownTableBodyCenter">pin 11  </td><td class="markdownTableBodyCenter">RESET  </td><td class="markdownTableBodyCenter">rpi-gpio8  </td><td class="markdownTableBodyCenter">(24)   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">SCK  </td><td class="markdownTableBodyNone">digIO 13  </td><td class="markdownTableBodyNone">pin 7  </td><td class="markdownTableBodyNone">pin 9  </td><td class="markdownTableBodyNone">SCK  </td><td class="markdownTableBodyNone">rpi-sckl  </td><td class="markdownTableBodyNone">(23)   </td></tr>
+<td class="markdownTableBodyCenter">SCK  </td><td class="markdownTableBodyCenter">digIO 13  </td><td class="markdownTableBodyCenter">pin 7  </td><td class="markdownTableBodyCenter">pin 9  </td><td class="markdownTableBodyCenter">SCK  </td><td class="markdownTableBodyCenter">rpi-sckl  </td><td class="markdownTableBodyCenter">(23)   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">6  </td><td class="markdownTableBodyNone">MOSI  </td><td class="markdownTableBodyNone">digIO 11  </td><td class="markdownTableBodyNone">pin 6  </td><td class="markdownTableBodyNone">pin 7  </td><td class="markdownTableBodyNone">MOSI  </td><td class="markdownTableBodyNone">rpi-mosi  </td><td class="markdownTableBodyNone">(19)   </td></tr>
+<td class="markdownTableBodyCenter">MOSI  </td><td class="markdownTableBodyCenter">digIO 11  </td><td class="markdownTableBodyCenter">pin 6  </td><td class="markdownTableBodyCenter">pin 7  </td><td class="markdownTableBodyCenter">MOSI  </td><td class="markdownTableBodyCenter">rpi-mosi  </td><td class="markdownTableBodyCenter">(19)   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">7  </td><td class="markdownTableBodyNone">MISO  </td><td class="markdownTableBodyNone">digIO 12  </td><td class="markdownTableBodyNone">pin 5  </td><td class="markdownTableBodyNone">pin 8  </td><td class="markdownTableBodyNone">MISO  </td><td class="markdownTableBodyNone">rpi-miso  </td><td class="markdownTableBodyNone">(21)   </td></tr>
+<td class="markdownTableBodyCenter">MISO  </td><td class="markdownTableBodyCenter">digIO 12  </td><td class="markdownTableBodyCenter">pin 5  </td><td class="markdownTableBodyCenter">pin 8  </td><td class="markdownTableBodyCenter">MISO  </td><td class="markdownTableBodyCenter">rpi-miso  </td><td class="markdownTableBodyCenter">(21)   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">8  </td><td class="markdownTableBodyNone">IRQ  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">-   </td></tr>
+<td class="markdownTableBodyCenter">IRQ  </td><td class="markdownTableBodyCenter">-  </td><td class="markdownTableBodyCenter">-  </td><td class="markdownTableBodyCenter">-  </td><td class="markdownTableBodyCenter">-  </td><td class="markdownTableBodyCenter">-  </td><td class="markdownTableBodyCenter">-   </td></tr>
 </table>
 <ul>
-<li>[0] <a href="https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/attiny85-use-hints">https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/attiny85-use-hints</a> </li>
-<li>[1] <a href="http://highlowtech.org/?p=1695">http://highlowtech.org/?p=1695</a> </li>
-<li>[2] <a href="http://littlewire.cc/">http://littlewire.cc/</a> <br  />
-<br  />
-<br  />
- </li>
+<li>[0] <a href="https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/attiny85-use-hints">https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/attiny85-use-hints</a></li>
+<li>[1] <a href="http://highlowtech.org/?p=1695">http://highlowtech.org/?p=1695</a></li>
+<li>[2] <a href="http://littlewire.cc/">http://littlewire.cc/</a> </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Optimized high speed nRF24L01+ driver class documentation: examples/old_backups/scanner/scanner.ino</title>
+<title>RF24 Revamped: examples/old_backups/scanner/scanner.ino</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,11 +26,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Optimized high speed nRF24L01+ driver class documentation
-   &#160;<span id="projectnumber">v1.3.9</span>
+   <div id="projectname">RF24 Revamped
+   &#160;<span id="projectnumber">v1.3.10</span>
    </div>
-   <div id="projectbrief">TMRh20 2020 - Optimized fork of the nRF24L01+ driver</div>
+   <div id="projectbrief">2bndy5 2020 - Optimized fork of the nRF24L01+ driver by TMRh20</div>
   </td>
  </tr>
  </tbody>
@@ -182,7 +183,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      radio.stopListening();</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <a name="a2"></a><a class="code" href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a>(2);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      Serial.println(<span class="stringliteral">&quot;Starting Carrier Out&quot;</span>);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      radio.startConstCarrier(<a name="a3"></a><a class="code" href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a>, 40);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      radio.startConstCarrier(<a name="a3"></a><a class="code" href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a>, 40);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;e&#39;</span>) {</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      constCarrierMode = 0;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      radio.stopConstCarrier();</div>
@@ -232,14 +233,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="agroup__Porting__General_html_ga70a331e8ddf9acf9d33c47b71cda4c5f"><div class="ttname"><a href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a></div><div class="ttdeci">#define delay(milisec)</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00075">RF24_arch_config.h:75</a></div></div>
 <div class="ttc" id="aprintf_8h_html_afc0d9ca32710dff550ebe56ab6b39d23"><div class="ttname"><a href="printf_8h.html#afc0d9ca32710dff550ebe56ab6b39d23">printf_begin</a></div><div class="ttdeci">void printf_begin(void)</div><div class="ttdef"><b>Definition:</b> <a href="printf_8h_source.html#l00029">printf.h:29</a></div></div>
-<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00111">RF24.h:111</a></div></div>
+<div class="ttc" id="aclassRF24_html"><div class="ttname"><a href="classRF24.html">RF24</a></div><div class="ttdoc">Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver.</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00092">RF24.h:92</a></div></div>
 <div class="ttc" id="aprintf_8h_html"><div class="ttname"><a href="printf_8h.html">printf.h</a></div></div>
 <div class="ttc" id="aRF24_8h_html"><div class="ttname"><a href="RF24_8h.html">RF24.h</a></div></div>
 <div class="ttc" id="agroup__Porting__General_html_ga9384257bf5d5c1aae675b22cc3ecb91a"><div class="ttname"><a href="group__Porting__General.html#ga9384257bf5d5c1aae675b22cc3ecb91a">delayMicroseconds</a></div><div class="ttdeci">#define delayMicroseconds(usec)</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00076">RF24_arch_config.h:76</a></div></div>
-<div class="ttc" id="agroup__PALevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PALevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00049">RF24.h:49</a></div></div>
+<div class="ttc" id="agroup__PaLevel_html_gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"><div class="ttname"><a href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c">RF24_PA_LOW</a></div><div class="ttdeci">@ RF24_PA_LOW</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00049">RF24.h:49</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 10 2020 12:31:32 for Optimized high speed nRF24L01+ driver class documentation by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
