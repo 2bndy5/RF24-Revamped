@@ -208,143 +208,143 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
 <div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">writeAckPayload</a>(uint8_t pipe, <span class="keyword">const</span> <span class="keywordtype">void</span>* buf, uint8_t len);</div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags</a>(<span class="keywordtype">bool</span> dataReady=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataSent=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataFail=<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160; </div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* buf, uint8_t len, <span class="keyword">const</span> <span class="keywordtype">bool</span> multicast, <span class="keywordtype">bool</span> write_only = 0);</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160; </div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a4968f9e74eefc7809e5ba4bbc0a1271b">resend</a>();</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    uint8_t <a class="code" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    uint8_t <a class="code" href="classRF24.html#a6b7b3e958daaa46030f5d35b959a039f">flushRx</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#ad0d522ccf39493510e64bf1740be790d">testCarrier</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160; </div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a821285f3b54553f4402eb3fd0ac6d6c1">testRPD</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
-<div class="line"><a name="l00814"></a><span class="lineno"><a class="line" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">  814</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">isValid</a>()</div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    {</div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;        <span class="keywordflow">return</span> ce_pin != 0xff &amp;&amp; csn_pin != 0xff;</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;    }</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags</a>(<span class="keywordtype">bool</span> dataReady=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataSent=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataFail=<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* buf, uint8_t len, <span class="keyword">const</span> <span class="keywordtype">bool</span> multicast, <span class="keywordtype">bool</span> write_only = 0);</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160; </div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a4968f9e74eefc7809e5ba4bbc0a1271b">resend</a>();</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; </div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    uint8_t <a class="code" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    uint8_t <a class="code" href="classRF24.html#a6b7b3e958daaa46030f5d35b959a039f">flushRx</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#ad0d522ccf39493510e64bf1740be790d">testCarrier</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160; </div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a821285f3b54553f4402eb3fd0ac6d6c1">testRPD</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; </div>
+<div class="line"><a name="l00806"></a><span class="lineno"><a class="line" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">  806</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">isValid</a>()</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    {</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;        <span class="keywordflow">return</span> ce_pin != 0xff &amp;&amp; csn_pin != 0xff;</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    }</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160; </div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a9944d93994a80037e3586f340f5e0107">closeReadingPipe</a>(uint8_t pipe);</div>
 <div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160; </div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a9944d93994a80037e3586f340f5e0107">closeReadingPipe</a>(uint8_t pipe);</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160; </div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160; </div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ad5aea7f9a3bd9c7d357fb296ce751f21">setAddressWidth</a>(uint8_t a_width);</div>
-<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160; </div>
-<div class="line"><a name="l00861"></a><span class="lineno"><a class="line" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">  861</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries</a>(uint8_t <a class="code" href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a>, uint8_t count);</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160; </div>
-<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a5e6e5a5f6c85d2638381cab2c0f3702e">setChannel</a>(uint8_t channel);</div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160; </div>
-<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;    uint8_t <a class="code" href="classRF24.html#a6a66a94609309e17edaa1919e66cea0a">getChannel</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160; </div>
-<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a343e5d23477181011dea030fafb1954f">setPayloadSize</a>(uint8_t size);</div>
-<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160; </div>
-<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;    uint8_t <a class="code" href="classRF24.html#a0aa0c7cbe3d38fef4722f3f1d2d6c5f1">getPayloadSize</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160; </div>
-<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    uint8_t <a class="code" href="classRF24.html#a65963ed8d8fd45f847e2f673995b85e1">getDynamicPayloadSize</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160; </div>
-<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160; </div>
-<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a00e17eb6b56b915fd6df30a58784661f">disableAckPayload</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160; </div>
-<div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a443888504975d7441d6452a09d09a8fa">enableDynamicPayloads</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160; </div>
-<div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a486c4c47a6973614ae595ae96f221165">disableDynamicPayloads</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160; </div>
-<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">allowMulticast</a>();</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160; </div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ad5aea7f9a3bd9c7d357fb296ce751f21">setAddressWidth</a>(uint8_t a_width);</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160; </div>
+<div class="line"><a name="l00853"></a><span class="lineno"><a class="line" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">  853</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries</a>(uint8_t <a class="code" href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a>, uint8_t count);</div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160; </div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a5e6e5a5f6c85d2638381cab2c0f3702e">setChannel</a>(uint8_t channel);</div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160; </div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;    uint8_t <a class="code" href="classRF24.html#a6a66a94609309e17edaa1919e66cea0a">getChannel</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160; </div>
+<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a343e5d23477181011dea030fafb1954f">setPayloadSize</a>(uint8_t size);</div>
+<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160; </div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;    uint8_t <a class="code" href="classRF24.html#a0aa0c7cbe3d38fef4722f3f1d2d6c5f1">getPayloadSize</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160; </div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;    uint8_t <a class="code" href="classRF24.html#a65963ed8d8fd45f847e2f673995b85e1">getDynamicPayloadSize</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160; </div>
+<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160; </div>
+<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a00e17eb6b56b915fd6df30a58784661f">disableAckPayload</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160; </div>
+<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a443888504975d7441d6452a09d09a8fa">enableDynamicPayloads</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160; </div>
+<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a486c4c47a6973614ae595ae96f221165">disableDynamicPayloads</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160; </div>
+<div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">allowMulticast</a>();</div>
+<div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160; </div>
+<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a62846750b82682beb7593719eb60ed60">isPVariant</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160; </div>
-<div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a62846750b82682beb7593719eb60ed60">isPVariant</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160; </div>
-<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a>(<span class="keywordtype">bool</span> enable);</div>
-<div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160; </div>
-<div class="line"><a name="l01095"></a><span class="lineno"> 1095</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a>(uint8_t pipe, <span class="keywordtype">bool</span> enable);</div>
-<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160; </div>
-<div class="line"><a name="l01114"></a><span class="lineno"> 1114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ac7d6260f84ce6e7d796bdc4dffa753ff">setPaLevel</a>(uint8_t level, <span class="keywordtype">bool</span> lnaEnable = 1);</div>
+<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a>(<span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160; </div>
+<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck</a>(uint8_t pipe, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a name="l01088"></a><span class="lineno"> 1088</span>&#160; </div>
+<div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ac7d6260f84ce6e7d796bdc4dffa753ff">setPaLevel</a>(uint8_t level, <span class="keywordtype">bool</span> lnaEnable = 1);</div>
+<div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160; </div>
+<div class="line"><a name="l01114"></a><span class="lineno"> 1114</span>&#160;    uint8_t <a class="code" href="classRF24.html#a9d78d3638af3245f840f5698e630c25f">getPaLevel</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l01115"></a><span class="lineno"> 1115</span>&#160; </div>
-<div class="line"><a name="l01122"></a><span class="lineno"> 1122</span>&#160;    uint8_t <a class="code" href="classRF24.html#a9d78d3638af3245f840f5698e630c25f">getPaLevel</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01123"></a><span class="lineno"> 1123</span>&#160; </div>
-<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;    uint8_t <a class="code" href="classRF24.html#a674d681164a517bece9beb44d69c30f1">lastTxArc</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160; </div>
-<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#aeb9920e7a95699748b003c4a839b0814">setDataRate</a>(<a class="code" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> speed);</div>
+<div class="line"><a name="l01123"></a><span class="lineno"> 1123</span>&#160;    uint8_t <a class="code" href="classRF24.html#a674d681164a517bece9beb44d69c30f1">lastTxArc</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01124"></a><span class="lineno"> 1124</span>&#160; </div>
+<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#aeb9920e7a95699748b003c4a839b0814">setDataRate</a>(<a class="code" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> speed);</div>
+<div class="line"><a name="l01142"></a><span class="lineno"> 1142</span>&#160; </div>
+<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;    <a class="code" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> <a class="code" href="classRF24.html#a72a7b11dafe8ffab6135f243decce0d7">getDataRate</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160; </div>
-<div class="line"><a name="l01157"></a><span class="lineno"> 1157</span>&#160;    <a class="code" href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a> <a class="code" href="classRF24.html#a72a7b11dafe8ffab6135f243decce0d7">getDataRate</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01158"></a><span class="lineno"> 1158</span>&#160; </div>
-<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#af0461e493c60057679fdcfbbd066e141">setCrc</a>(uint8_t length);</div>
-<div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160; </div>
-<div class="line"><a name="l01176"></a><span class="lineno"><a class="line" href="classRF24.html#af4921bc2ead573684fdca32e4a976f13"> 1176</a></span>&#160;    uint8_t <a class="code" href="classRF24.html#af4921bc2ead573684fdca32e4a976f13">getCrc</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160; </div>
-<div class="line"><a name="l01183"></a><span class="lineno"> 1183</span>&#160;    uint8_t <a class="code" href="classRF24.html#a2a1be2cb92e9f14f7cf5921232b02ffc">update</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160; </div>
-<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a7b864ca518c0e21085df8fc1dfb7204d">irqDr</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a8f17ced7559d6ecfffad31858e7b3d15">irqDs</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a138c84cda83cc15d157cfa3d518d4183">irqDf</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#abcf4ed7ba5cae2d80618f11f0254d2f8">isTxFull</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01189"></a><span class="lineno"> 1189</span>&#160; </div>
-<div class="line"><a name="l01220"></a><span class="lineno"> 1220</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a7cc8e9fa014ef094c8810a24dd1203ca">interruptConfig</a>(<span class="keywordtype">bool</span> dataReady=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataSent=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataFail=<span class="keyword">true</span>);</div>
-<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160; </div>
-<div class="line"><a name="l01233"></a><span class="lineno"><a class="line" href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79"> 1233</a></span>&#160;    uint32_t <a class="code" href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79">txDelay</a>;</div>
-<div class="line"><a name="l01234"></a><span class="lineno"> 1234</span>&#160; </div>
-<div class="line"><a name="l01243"></a><span class="lineno"><a class="line" href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066"> 1243</a></span>&#160;    uint32_t <a class="code" href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066">csDelay</a>;</div>
-<div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160; </div>
-<div class="line"><a name="l01260"></a><span class="lineno"><a class="line" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b"> 1260</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b">startConstCarrier</a>(<a class="code" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> level, uint8_t channel);</div>
-<div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160; </div>
-<div class="line"><a name="l01276"></a><span class="lineno"><a class="line" href="classRF24.html#a38fa92d612b7b9b8a739a68ed7d88330"> 1276</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a38fa92d612b7b9b8a739a68ed7d88330">stopConstCarrier</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160; </div>
-<div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">openReadingPipe</a>(uint8_t number, uint64_t address);</div>
-<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160; </div>
-<div class="line"><a name="l01321"></a><span class="lineno"> 1321</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">openWritingPipe</a>(uint64_t address);</div>
-<div class="line"><a name="l01322"></a><span class="lineno"> 1322</span>&#160; </div>
-<div class="line"><a name="l01331"></a><span class="lineno"> 1331</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a30c2736fd0df9c8128cef408c8b88e92">isAckPayloadAvailable</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01332"></a><span class="lineno"> 1332</span>&#160; </div>
-<div class="line"><a name="l01333"></a><span class="lineno"> 1333</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l01334"></a><span class="lineno"> 1334</span>&#160; </div>
-<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;    <span class="keywordtype">void</span> csn(<span class="keywordtype">bool</span> mode);</div>
+<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#af0461e493c60057679fdcfbbd066e141">setCrc</a>(uint8_t length);</div>
+<div class="line"><a name="l01162"></a><span class="lineno"> 1162</span>&#160; </div>
+<div class="line"><a name="l01168"></a><span class="lineno"><a class="line" href="classRF24.html#af4921bc2ead573684fdca32e4a976f13"> 1168</a></span>&#160;    uint8_t <a class="code" href="classRF24.html#af4921bc2ead573684fdca32e4a976f13">getCrc</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160; </div>
+<div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160;    uint8_t <a class="code" href="classRF24.html#a2a1be2cb92e9f14f7cf5921232b02ffc">update</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160; </div>
+<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a7b864ca518c0e21085df8fc1dfb7204d">irqDr</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a8f17ced7559d6ecfffad31858e7b3d15">irqDs</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a138c84cda83cc15d157cfa3d518d4183">irqDf</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#abcf4ed7ba5cae2d80618f11f0254d2f8">isTxFull</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160; </div>
+<div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a7cc8e9fa014ef094c8810a24dd1203ca">interruptConfig</a>(<span class="keywordtype">bool</span> dataReady=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataSent=<span class="keyword">true</span>, <span class="keywordtype">bool</span> dataFail=<span class="keyword">true</span>);</div>
+<div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160; </div>
+<div class="line"><a name="l01225"></a><span class="lineno"><a class="line" href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79"> 1225</a></span>&#160;    uint32_t <a class="code" href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79">txDelay</a>;</div>
+<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160; </div>
+<div class="line"><a name="l01235"></a><span class="lineno"><a class="line" href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066"> 1235</a></span>&#160;    uint32_t <a class="code" href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066">csDelay</a>;</div>
+<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160; </div>
+<div class="line"><a name="l01252"></a><span class="lineno"><a class="line" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b"> 1252</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#ac43ad43c34337ec0de189105bab2213b">startConstCarrier</a>(<a class="code" href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a> level, uint8_t channel);</div>
+<div class="line"><a name="l01253"></a><span class="lineno"> 1253</span>&#160; </div>
+<div class="line"><a name="l01268"></a><span class="lineno"><a class="line" href="classRF24.html#a38fa92d612b7b9b8a739a68ed7d88330"> 1268</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a38fa92d612b7b9b8a739a68ed7d88330">stopConstCarrier</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160; </div>
+<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">openReadingPipe</a>(uint8_t number, uint64_t address);</div>
+<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160; </div>
+<div class="line"><a name="l01313"></a><span class="lineno"> 1313</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">openWritingPipe</a>(uint64_t address);</div>
+<div class="line"><a name="l01314"></a><span class="lineno"> 1314</span>&#160; </div>
+<div class="line"><a name="l01323"></a><span class="lineno"> 1323</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classRF24.html#a30c2736fd0df9c8128cef408c8b88e92">isAckPayloadAvailable</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l01324"></a><span class="lineno"> 1324</span>&#160; </div>
+<div class="line"><a name="l01325"></a><span class="lineno"> 1325</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l01326"></a><span class="lineno"> 1326</span>&#160; </div>
+<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    <span class="keywordtype">void</span> csn(<span class="keywordtype">bool</span> mode);</div>
+<div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160; </div>
+<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;    <span class="keywordtype">void</span> ce(<span class="keywordtype">bool</span> level);</div>
 <div class="line"><a name="l01356"></a><span class="lineno"> 1356</span>&#160; </div>
-<div class="line"><a name="l01363"></a><span class="lineno"> 1363</span>&#160;    <span class="keywordtype">void</span> ce(<span class="keywordtype">bool</span> level);</div>
-<div class="line"><a name="l01364"></a><span class="lineno"> 1364</span>&#160; </div>
-<div class="line"><a name="l01374"></a><span class="lineno"> 1374</span>&#160;    <span class="keywordtype">void</span> read_register(uint8_t reg, uint8_t* buf, uint8_t len);</div>
+<div class="line"><a name="l01366"></a><span class="lineno"> 1366</span>&#160;    <span class="keywordtype">void</span> read_register(uint8_t reg, uint8_t* buf, uint8_t len);</div>
+<div class="line"><a name="l01367"></a><span class="lineno"> 1367</span>&#160; </div>
+<div class="line"><a name="l01374"></a><span class="lineno"> 1374</span>&#160;    uint8_t read_register(uint8_t reg);</div>
 <div class="line"><a name="l01375"></a><span class="lineno"> 1375</span>&#160; </div>
-<div class="line"><a name="l01382"></a><span class="lineno"> 1382</span>&#160;    uint8_t read_register(uint8_t reg);</div>
-<div class="line"><a name="l01383"></a><span class="lineno"> 1383</span>&#160; </div>
-<div class="line"><a name="l01393"></a><span class="lineno"> 1393</span>&#160;    <span class="keywordtype">void</span> write_register(uint8_t reg, <span class="keyword">const</span> uint8_t* buf, uint8_t len);</div>
-<div class="line"><a name="l01394"></a><span class="lineno"> 1394</span>&#160; </div>
-<div class="line"><a name="l01403"></a><span class="lineno"> 1403</span>&#160;    <span class="keywordtype">void</span> write_register(uint8_t reg, uint8_t value, <span class="keywordtype">bool</span> is_cmd_only = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l01404"></a><span class="lineno"> 1404</span>&#160; </div>
-<div class="line"><a name="l01415"></a><span class="lineno"> 1415</span>&#160;    <span class="keywordtype">void</span> write_payload(<span class="keyword">const</span> <span class="keywordtype">void</span>* buf, uint8_t len, <span class="keyword">const</span> uint8_t writeType);</div>
-<div class="line"><a name="l01416"></a><span class="lineno"> 1416</span>&#160; </div>
-<div class="line"><a name="l01427"></a><span class="lineno"> 1427</span>&#160;    <span class="keywordtype">void</span> read_payload(<span class="keywordtype">void</span>* buf, uint8_t len);</div>
-<div class="line"><a name="l01428"></a><span class="lineno"> 1428</span>&#160; </div>
-<div class="line"><a name="l01429"></a><span class="lineno"> 1429</span>&#160;<span class="preprocessor">    #if !defined (MINIMAL)</span></div>
-<div class="line"><a name="l01430"></a><span class="lineno"> 1430</span>&#160; </div>
-<div class="line"><a name="l01438"></a><span class="lineno"> 1438</span>&#160;    <span class="keywordtype">void</span> print_status(uint8_t status);</div>
-<div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160; </div>
-<div class="line"><a name="l01447"></a><span class="lineno"> 1447</span>&#160;    <span class="keywordtype">void</span> print_observe_tx(uint8_t value);</div>
-<div class="line"><a name="l01448"></a><span class="lineno"> 1448</span>&#160; </div>
-<div class="line"><a name="l01460"></a><span class="lineno"> 1460</span>&#160;    <span class="keywordtype">void</span> print_byte_register(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, uint8_t reg, uint8_t qty = 1);</div>
-<div class="line"><a name="l01461"></a><span class="lineno"> 1461</span>&#160; </div>
-<div class="line"><a name="l01473"></a><span class="lineno"> 1473</span>&#160;    <span class="keywordtype">void</span> print_address_register(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, uint8_t reg, uint8_t qty = 1);</div>
-<div class="line"><a name="l01474"></a><span class="lineno"> 1474</span>&#160; </div>
-<div class="line"><a name="l01475"></a><span class="lineno"> 1475</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l01385"></a><span class="lineno"> 1385</span>&#160;    <span class="keywordtype">void</span> write_register(uint8_t reg, <span class="keyword">const</span> uint8_t* buf, uint8_t len);</div>
+<div class="line"><a name="l01386"></a><span class="lineno"> 1386</span>&#160; </div>
+<div class="line"><a name="l01395"></a><span class="lineno"> 1395</span>&#160;    <span class="keywordtype">void</span> write_register(uint8_t reg, uint8_t value, <span class="keywordtype">bool</span> is_cmd_only = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01396"></a><span class="lineno"> 1396</span>&#160; </div>
+<div class="line"><a name="l01407"></a><span class="lineno"> 1407</span>&#160;    <span class="keywordtype">void</span> write_payload(<span class="keyword">const</span> <span class="keywordtype">void</span>* buf, uint8_t len, <span class="keyword">const</span> uint8_t writeType);</div>
+<div class="line"><a name="l01408"></a><span class="lineno"> 1408</span>&#160; </div>
+<div class="line"><a name="l01419"></a><span class="lineno"> 1419</span>&#160;    <span class="keywordtype">void</span> read_payload(<span class="keywordtype">void</span>* buf, uint8_t len);</div>
+<div class="line"><a name="l01420"></a><span class="lineno"> 1420</span>&#160; </div>
+<div class="line"><a name="l01421"></a><span class="lineno"> 1421</span>&#160;<span class="preprocessor">    #if !defined (MINIMAL)</span></div>
+<div class="line"><a name="l01422"></a><span class="lineno"> 1422</span>&#160; </div>
+<div class="line"><a name="l01430"></a><span class="lineno"> 1430</span>&#160;    <span class="keywordtype">void</span> print_status(uint8_t status);</div>
+<div class="line"><a name="l01431"></a><span class="lineno"> 1431</span>&#160; </div>
+<div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160;    <span class="keywordtype">void</span> print_observe_tx(uint8_t value);</div>
+<div class="line"><a name="l01440"></a><span class="lineno"> 1440</span>&#160; </div>
+<div class="line"><a name="l01452"></a><span class="lineno"> 1452</span>&#160;    <span class="keywordtype">void</span> print_byte_register(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, uint8_t reg, uint8_t qty = 1);</div>
+<div class="line"><a name="l01453"></a><span class="lineno"> 1453</span>&#160; </div>
+<div class="line"><a name="l01465"></a><span class="lineno"> 1465</span>&#160;    <span class="keywordtype">void</span> print_address_register(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, uint8_t reg, uint8_t qty = 1);</div>
+<div class="line"><a name="l01466"></a><span class="lineno"> 1466</span>&#160; </div>
+<div class="line"><a name="l01467"></a><span class="lineno"> 1467</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l01468"></a><span class="lineno"> 1468</span>&#160; </div>
+<div class="line"><a name="l01475"></a><span class="lineno"> 1475</span>&#160;    <span class="keywordtype">void</span> toggle_features(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l01476"></a><span class="lineno"> 1476</span>&#160; </div>
-<div class="line"><a name="l01483"></a><span class="lineno"> 1483</span>&#160;    <span class="keywordtype">void</span> toggle_features(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l01484"></a><span class="lineno"> 1484</span>&#160; </div>
-<div class="line"><a name="l01487"></a><span class="lineno"> 1487</span>&#160;};</div>
-<div class="line"><a name="l01488"></a><span class="lineno"> 1488</span>&#160; </div>
-<div class="line"><a name="l01489"></a><span class="lineno"> 1489</span>&#160; </div>
-<div class="line"><a name="l02390"></a><span class="lineno"> 2390</span>&#160;<span class="preprocessor">#endif // __RF24_H__</span></div>
+<div class="line"><a name="l01479"></a><span class="lineno"> 1479</span>&#160;};</div>
+<div class="line"><a name="l01480"></a><span class="lineno"> 1480</span>&#160; </div>
+<div class="line"><a name="l01481"></a><span class="lineno"> 1481</span>&#160; </div>
+<div class="line"><a name="l02382"></a><span class="lineno"> 2382</span>&#160;<span class="preprocessor">#endif // __RF24_H__</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="agroup__Datarate_html_ga82745de4aa1251b7561564b3ed1d6522"><div class="ttname"><a href="group__Datarate.html#ga82745de4aa1251b7561564b3ed1d6522">rf24_datarate_e</a></div><div class="ttdeci">rf24_datarate_e</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00078">RF24.h:78</a></div></div>
 <div class="ttc" id="agroup__Porting__General_html_ga70a331e8ddf9acf9d33c47b71cda4c5f"><div class="ttname"><a href="group__Porting__General.html#ga70a331e8ddf9acf9d33c47b71cda4c5f">delay</a></div><div class="ttdeci">#define delay(milisec)</div><div class="ttdef"><b>Definition:</b> <a href="RF24__arch__config_8h_source.html#l00075">RF24_arch_config.h:75</a></div></div>
 <div class="ttc" id="agroup__PaLevel_html_gga1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7"><div class="ttname"><a href="group__PaLevel.html#gga1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7">RF24_PA_ERROR</a></div><div class="ttdeci">@ RF24_PA_ERROR</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00068">RF24.h:67</a></div></div>
 <div class="ttc" id="aclassRF24_html_a9edc910ccc1ffcff56814b08faca5535"><div class="ttname"><a href="classRF24.html#a9edc910ccc1ffcff56814b08faca5535">RF24::openReadingPipe</a></div><div class="ttdeci">void openReadingPipe(uint8_t number, const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01102">RF24.cpp:1102</a></div></div>
 <div class="ttc" id="aclassRF24_html_a8e2eacacfba96426c192066f04054c5b"><div class="ttname"><a href="classRF24.html#a8e2eacacfba96426c192066f04054c5b">RF24::read</a></div><div class="ttdeci">void read(void *buf, uint8_t len)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00986">RF24.cpp:986</a></div></div>
-<div class="ttc" id="aclassRF24_html_a958fb99f54415101ca008ab11b3bfe79"><div class="ttname"><a href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79">RF24::txDelay</a></div><div class="ttdeci">uint32_t txDelay</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l01233">RF24.h:1233</a></div></div>
+<div class="ttc" id="aclassRF24_html_a958fb99f54415101ca008ab11b3bfe79"><div class="ttname"><a href="classRF24.html#a958fb99f54415101ca008ab11b3bfe79">RF24::txDelay</a></div><div class="ttdeci">uint32_t txDelay</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l01225">RF24.h:1225</a></div></div>
 <div class="ttc" id="aclassRF24_html_a5cdaf47aa0edd6dca1b9a8bb7972a1a3"><div class="ttname"><a href="classRF24.html#a5cdaf47aa0edd6dca1b9a8bb7972a1a3">RF24::powerUp</a></div><div class="ttdeci">void powerUp(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00841">RF24.cpp:841</a></div></div>
 <div class="ttc" id="aclassRF24_html_a6726f78f1f497e1746262c6d4c2e5cfd"><div class="ttname"><a href="classRF24.html#a6726f78f1f497e1746262c6d4c2e5cfd">RF24::allowMulticast</a></div><div class="ttdeci">void allowMulticast()</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01217">RF24.cpp:1217</a></div></div>
 <div class="ttc" id="aclassRF24_html_a36b9fc363d3560358fe430a600a6f385"><div class="ttname"><a href="classRF24.html#a36b9fc363d3560358fe430a600a6f385">RF24::writeAckPayload</a></div><div class="ttdeci">bool writeAckPayload(uint8_t pipe, const void *buf, uint8_t len)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01230">RF24.cpp:1230</a></div></div>
 <div class="ttc" id="aclassRF24_html_a2a1be2cb92e9f14f7cf5921232b02ffc"><div class="ttname"><a href="classRF24.html#a2a1be2cb92e9f14f7cf5921232b02ffc">RF24::update</a></div><div class="ttdeci">uint8_t update(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01032">RF24.cpp:1032</a></div></div>
-<div class="ttc" id="aclassRF24_html_ad08121bf844f08dbe53f51576b7c4066"><div class="ttname"><a href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066">RF24::csDelay</a></div><div class="ttdeci">uint32_t csDelay</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l01243">RF24.h:1243</a></div></div>
+<div class="ttc" id="aclassRF24_html_ad08121bf844f08dbe53f51576b7c4066"><div class="ttname"><a href="classRF24.html#ad08121bf844f08dbe53f51576b7c4066">RF24::csDelay</a></div><div class="ttdeci">uint32_t csDelay</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l01235">RF24.h:1235</a></div></div>
 <div class="ttc" id="aclassRF24_html_a65963ed8d8fd45f847e2f673995b85e1"><div class="ttname"><a href="classRF24.html#a65963ed8d8fd45f847e2f673995b85e1">RF24::getDynamicPayloadSize</a></div><div class="ttdeci">uint8_t getDynamicPayloadSize(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00949">RF24.cpp:949</a></div></div>
 <div class="ttc" id="aclassRF24_html_a62846750b82682beb7593719eb60ed60"><div class="ttname"><a href="classRF24.html#a62846750b82682beb7593719eb60ed60">RF24::isPVariant</a></div><div class="ttdeci">bool isPVariant(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01250">RF24.cpp:1250</a></div></div>
 <div class="ttc" id="aclassRF24_html_a30a2733a3889bdc331fe2d2f4f0f7b39"><div class="ttname"><a href="classRF24.html#a30a2733a3889bdc331fe2d2f4f0f7b39">RF24::startListening</a></div><div class="ttdeci">void startListening(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00784">RF24.cpp:784</a></div></div>
@@ -365,7 +365,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="aclassRF24_html_abe8f878e238644252ccf5ec27fba611d"><div class="ttname"><a href="classRF24.html#abe8f878e238644252ccf5ec27fba611d">RF24::RF24</a></div><div class="ttdeci">RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spispeed=RF24_SPI_SPEED)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00415">RF24.cpp:415</a></div></div>
 <div class="ttc" id="agroup__Datarate_html_gga82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"><div class="ttname"><a href="group__Datarate.html#gga82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf">RF24_1MBPS</a></div><div class="ttdeci">@ RF24_1MBPS</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00080">RF24.h:80</a></div></div>
 <div class="ttc" id="aclassRF24_html_a138c84cda83cc15d157cfa3d518d4183"><div class="ttname"><a href="classRF24.html#a138c84cda83cc15d157cfa3d518d4183">RF24::irqDf</a></div><div class="ttdeci">bool irqDf(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01020">RF24.cpp:1020</a></div></div>
-<div class="ttc" id="aclassRF24_html_a35e5f1533b7753806c42b76e782d917e"><div class="ttname"><a href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">RF24::isValid</a></div><div class="ttdeci">bool isValid()</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00814">RF24.h:814</a></div></div>
+<div class="ttc" id="aclassRF24_html_a35e5f1533b7753806c42b76e782d917e"><div class="ttname"><a href="classRF24.html#a35e5f1533b7753806c42b76e782d917e">RF24::isValid</a></div><div class="ttdeci">bool isValid()</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00806">RF24.h:806</a></div></div>
 <div class="ttc" id="aclassRF24_html_af2e409e62d49a23e372a70b904ae30e1"><div class="ttname"><a href="classRF24.html#af2e409e62d49a23e372a70b904ae30e1">RF24::openWritingPipe</a></div><div class="ttdeci">void openWritingPipe(const uint8_t *address)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01078">RF24.cpp:1078</a></div></div>
 <div class="ttc" id="aclassRF24_html_a72a7b11dafe8ffab6135f243decce0d7"><div class="ttname"><a href="classRF24.html#a72a7b11dafe8ffab6135f243decce0d7">RF24::getDataRate</a></div><div class="ttdeci">rf24_datarate_e getDataRate(void)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01381">RF24.cpp:1381</a></div></div>
 <div class="ttc" id="aclassRF24_html_aea33bc880fb660702e6217b7afbd6548"><div class="ttname"><a href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">RF24::clearStatusFlags</a></div><div class="ttdeci">void clearStatusFlags(bool dataReady=true, bool dataSent=true, bool dataFail=true)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l00999">RF24.cpp:999</a></div></div>
@@ -411,7 +411,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="agroup__PaLevel_html_ga1e4cd0bea93e6b43422855fb0120aace"><div class="ttname"><a href="group__PaLevel.html#ga1e4cd0bea93e6b43422855fb0120aace">rf24_pa_dbm_e</a></div><div class="ttdeci">rf24_pa_dbm_e</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8h_source.html#l00035">RF24.h:35</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:44:34 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

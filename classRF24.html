@@ -1091,15 +1091,10 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
   <table class="params">
     <tr><td class="paramname">dataReady</td><td>There is a newly received payload (RX_DR) saved to RX FIFO buffers. Remember that the RX FIFO can only hold up to 3 payloads. Once the RX FIFO is full, all further received transmissions are rejected until there is space to save new data in the RX FIFO buffers. </td></tr>
     <tr><td class="paramname">dataSent</td><td>The transmission attempt completed (TX_DS). This does not imply that the transmitted data was received by another radio, rather this only reports if the attempt to send was completed. This will always be <code>true</code> when the auto-ack feature is disabled. </td></tr>
-    <tr><td class="paramname">dataFail</td><td>The transmission failed to be acknowledged, meaning too many retries (MAX_RT) were made while expecting an ACK packet. This event is only triggered when auto-ack feature is enabled.</td></tr>
+    <tr><td class="paramname">dataFail</td><td>The transmission failed to be acknowledged, meaning too many retries (MAX_RT) were made while expecting an ACK packet. This event is only triggered when auto-ack feature is enabled. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This function expects no parameters in the python wrapper. Instead, this function returns a 3 item tuple describing the IRQ events' status.<br  />
- To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let`radio` be the instantiated RF24 object</span></div>
-<div class="line">tx_ds, tx_df, rx_dr = radio.clearStatusFlags()  <span class="comment"># get IRQ status flags</span></div>
-<div class="line">print(<span class="stringliteral">&quot;tx_ds: {}, tx_df: {}, rx_dr: {}&quot;</span>.format(tx_ds, tx_df, rx_dr))</div>
-</div><!-- fragment --> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00999">999</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
@@ -1162,6 +1157,11 @@ writeBlocking()</dd></dl>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>true</code> if the payload was loaded into the TX FIFO.</li>
+<li><code>false</code> if the payload wasn't loaded into the TX FIFO because it is already full</li>
+</ul>
+</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The <em>len</em> parameter must be omitted when using the python wrapper because the length of the payload is determined automatically. <br  />
 To use this function in the python wrapper: <div class="fragment"><div class="line"><span class="comment"># let `radio` be the instantiated RF24 object</span></div>
 <div class="line">buffer = b<span class="stringliteral">&quot;Hello World&quot;</span>  <span class="comment"># a `bytes` object</span></div>
@@ -1188,10 +1188,14 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers. This is used internally by writeBlocking() to initiate retries when a TX failure occurs. Retries are automatically initiated except with the standard <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>. This way, data is not flushed from the buffer until calling <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>, writeFast(), writeBlocking(), startWrite(), or <a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write()</a>. If the TX FIFO has other payloads enqueued, then the aforementioned functions will attempt to enqueue the a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> also calls <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a> when ACK payloads are enabled (via <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a>).</p>
-<p>Upon exiting, this function will set the CE pin HIGH to initiate the re-transmission process. If only 1 re-transmission is desired, then the CE pin should be set to LOW after the mandatory minumum pulse duration of 10 microseconds.</p>
+<p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers when a TX failure occurs. Retries are automatically initiated except with the standard <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a>. This way, data is not flushed from the buffer until calling <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="el" href="classRF24.html#a013fcce587ddcb1eec3ba3492006495c">send()</a> or <a class="el" href="classRF24.html#acc137b4cba691c1a36f8425c5f7d0e4a">write()</a>. If the TX FIFO has other payloads enqueued, then the aforementioned functions will attempt to enqueue the a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> also calls <a class="el" href="classRF24.html#a1295da3dafa3a89090d2e0e34f9e1efb">flushTx()</a> when ACK payloads are enabled (via <a class="el" href="classRF24.html#abf8efced2ee9edbcc6510878b20edc1b">enableAckPayload()</a>).</p>
 <dl class="section remark"><dt>Remarks</dt><dd>This function only applies when taking advantage of the auto-retry feature. See <a class="el" href="classRF24.html#aec71746d59da978bcbb975167886a2cc">setAutoAck()</a> and <a class="el" href="classRF24.html#a4c6d3959c8320e64568395f4ef507aef">setRetries()</a> to configure the auto-retry feature.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is to be used AFTER auto-retry fails if wanting to resend using the built-in payload reuse feature. After issuing <a class="el" href="classRF24.html#a4968f9e74eefc7809e5ba4bbc0a1271b">resend()</a>, it will keep resending the same payload until a transmission failure occurs or the CE pin is set to LOW (whichever comes first). In the event of a re-transmission failure, simply call this function again to resume re-transmission of the same payload. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is to be used AFTER auto-retry fails if wanting to resend using the built-in payload reuse feature. In the event of a re-transmission failure, simply call this function again to resume re-transmission of the same payload.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>true if re-transmission was successful.</li>
+<li>false if the re-transmission failed or the TX FIFO was already empty. </li>
+</ul>
+</dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="RF24_8cpp_source.html#l00878">878</a> of file <a class="el" href="RF24_8cpp_source.html">RF24.cpp</a>.</p>
 
@@ -1317,7 +1321,7 @@ To use this function in the python wrapper: <div class="fragment"><div class="li
 <p>Test whether this is a real radio, or a mock shim for debugging. Setting either pin to 0xff is the way to indicate that this is not a real radio.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if this is a legitimate radio </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l00814">814</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l00806">806</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -2152,7 +2156,7 @@ description when<br  />
 <li>"data received": This means that data from a receiving payload has been loaded into the RX FIFO buffers. Remember that there are only 3 levels available in the RX FIFO buffers.</li>
 </ol>
 <p>By default, all events are configured to trigger the IRQ pin active LOW. When the IRQ pin is active, use <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> to determine what events triggered it. Remeber that calling <a class="el" href="classRF24.html#aea33bc880fb660702e6217b7afbd6548">clearStatusFlags()</a> also clears these events' status, and the IRQ pin will then be reset to inactive HIGH.</p>
-<p>The following code configures the IRQ pin to only reflect the "data received" event: </p><div class="fragment"><div class="line">radio.interruptConfig(1, 1, 0);</div>
+<p>The following code configures the IRQ pin to only reflect the "data received" event: </p><div class="fragment"><div class="line">radio.interruptConfig(0, 0, 1);</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dataReady</td><td><code>true</code> ignores the "data received" event, <code>false</code> reflects the "data received" event on the IRQ pin. </td></tr>
@@ -2355,7 +2359,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 </ol>
 <dl class="section warning"><dt>Warning</dt><dd>If set to 0, ensure 130uS delay after <a class="el" href="classRF24.html#a6f144d73fc447c8ac2d1a4166210fd88">stopListening()</a> and before any sends </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01233">1233</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01225">1225</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -2374,7 +2378,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 <p>This is intended to minimise the speed of SPI polling due to radio commands</p>
 <p>If using interrupts or timed requests, this can be set to 0 Default:5 </p>
 
-<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01243">1243</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RF24_8h_source.html#l01235">1235</a> of file <a class="el" href="RF24_8h_source.html">RF24.h</a>.</p>
 
 </div>
 </div>
@@ -2394,7 +2398,7 @@ Pipe 0 is also used by the writing pipe so should typically be avoided as a read
 <div class="ttc" id="aclassRF24_html_af0461e493c60057679fdcfbbd066e141"><div class="ttname"><a href="classRF24.html#af0461e493c60057679fdcfbbd066e141">RF24::setCrc</a></div><div class="ttdeci">void setCrc(uint8_t length)</div><div class="ttdef"><b>Definition:</b> <a href="RF24_8cpp_source.html#l01403">RF24.cpp:1403</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 15 2020 18:31:52 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Tue Dec 15 2020 18:44:34 for RF24 Revamped by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>
