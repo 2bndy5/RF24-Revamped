@@ -673,15 +673,6 @@ public:
      * @param dataFail The transmission failed to be acknowledged, meaning
      * too many retries (MAX_RT) were made while expecting an ACK packet. This
      * event is only triggered when auto-ack feature is enabled.
-     *
-     * @note This function expects no parameters in the python wrapper.
-     * Instead, this function returns a 3 item tuple describing the IRQ
-     * events' status.<br> To use this function in the python wrapper:
-     * @code{.py}
-     * # let`radio` be the instantiated RF24 object
-     * tx_ds, tx_df, rx_dr = radio.clearStatusFlags()  # get IRQ status flags
-     * print("tx_ds: {}, tx_df: {}, rx_dr: {}".format(tx_ds, tx_df, rx_dr))
-     * @endcode
      */
     void clearStatusFlags(bool dataReady=true, bool dataSent=true, bool dataFail=true);
 
@@ -713,6 +704,11 @@ public:
      * effect on the nRF24L01's CE pin and simply loads the payload into the
      * TX FIFO.
      *
+     * @return
+     * - `true` if the payload was loaded into the TX FIFO.
+     * - `false` if the payload wasn't loaded into the TX FIFO because it is
+     *   already full
+     *
      * @note The @a len parameter must be omitted when using the python
      * wrapper because the length of the payload is determined automatically.
      * <br>To use this function in the python wrapper:
@@ -728,33 +724,29 @@ public:
 
     /**
      * The function will instruct the radio to re-use the payload in the
-     * top level (first out) of the TX FIFO buffers. This is used internally
-     * by writeBlocking() to initiate retries when a TX failure
+     * top level (first out) of the TX FIFO buffers when a TX failure
      * occurs. Retries are automatically initiated except with the standard
      * send(). This way, data is not flushed from the buffer until calling
      * flushTx(). If the TX FIFO has only the one payload (in the top level),
-     * the re-used payload can be overwritten by using send(), writeFast(),
-     * writeBlocking(), startWrite(), or write(). If the TX FIFO has
-     * other payloads enqueued, then the aforementioned functions will attempt
-     * to enqueue the a new payload in the TX FIFO (does not overwrite the top
-     * level of the TX FIFO). Currently, stopListening() also calls flushTx()
-     * when ACK payloads are enabled (via enableAckPayload()).
-     *
-     * Upon exiting, this function will set the CE pin HIGH to initiate the
-     * re-transmission process. If only 1 re-transmission is desired, then the
-     * CE pin should be set to LOW after the mandatory minumum pulse duration
-     * of 10 microseconds.
+     * the re-used payload can be overwritten by using send() or write().
+     * If the TX FIFO has other payloads enqueued, then the aforementioned
+     * functions will attempt to enqueue the a new payload in the TX FIFO
+     * (does not overwrite the top level of the TX FIFO). Currently,
+     * stopListening() also calls flushTx() when ACK payloads are enabled
+     * (via enableAckPayload()).
      *
      * @remark This function only applies when taking advantage of the
      * auto-retry feature. See setAutoAck() and setRetries() to configure the
      * auto-retry feature.
      *
      * @note This is to be used AFTER auto-retry fails if wanting to resend
-     * using the built-in payload reuse feature. After issuing resend(), it
-     * will keep resending the same payload until a transmission failure
-     * occurs or the CE pin is set to LOW (whichever comes first). In the
-     * event of a re-transmission failure, simply call this function again to
+     * using the built-in payload reuse feature. In the event of a
+     * re-transmission failure, simply call this function again to
      * resume re-transmission of the same payload.
+     *
+     * @returns
+     * - true if re-transmission was successful.
+     * - false if the re-transmission failed or the TX FIFO was already empty.
      */
     bool resend();
 
@@ -1207,7 +1199,7 @@ public:
      * The following code configures the IRQ pin to only reflect the "data received"
      * event:
      * @code
-     * radio.interruptConfig(1, 1, 0);
+     * radio.interruptConfig(0, 0, 1);
      * @endcode
      *
      * @param dataReady `true` ignores the "data received" event, `false` reflects the
@@ -1822,7 +1814,7 @@ private:
  * @section Useful Useful References
  *
  * - [RF24 Class Documentation](classRF24.html)
- * - [Support & Configuration(pages.html)
+ * - [Support & Configuration](pages.html)
  * - [Source Code](https://github.com/2bndy5/RF24/tree/revamp)
  * - [nRF24L01 v2.0 Datasheet](http://github.com/2bndy5/RF24/datasheets/nRF24L01_datasheet_v2.pdf)
  * - [nRF24L01+ v1.0 Datasheet](http://github.com/2bndy5/RF24/datasheets/nRF24L01P_datasheet_v1.pdf)
