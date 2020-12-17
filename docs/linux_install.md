@@ -72,5 +72,5 @@ Generic Linux devices are supported via the following drivers:
     ```
 3. Verify install by running an example.
     ```eval_rst
-    See the `gettingStarted.cpp example <examples.html#gettingStarted-cpp>`_ for an example of pin configuration.
+    See the `gettingstarted.cpp example <examples.html#gettingstarted-cpp>`_ for an example of pin configuration.
     ```
