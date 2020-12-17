@@ -129,9 +129,8 @@ def slave(timeout=6):
             # NOTE b"\x00" byte is a c-string's NULL terminating 0
             buffer = b"World \x00" + bytes(counter)
             radio.stopListening()  # put radio in TX mode
-            radio.writeFast(buffer)  # load response into TX FIFO
             # keep retrying to send response for 150 milliseconds
-            result = radio.txStandBy(150)  # save response's result
+            result = radio.send(buffer)  # load response into TX FIFO
             # NOTE txStandBy() flushes TX FIFO on transmission failure
             radio.startListening()  # put radio back in RX mode
             # print the payload received payload

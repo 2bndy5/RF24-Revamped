@@ -49,6 +49,7 @@ jobs:
       run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme
     - name: run Sphinx
       run: |
+        ls
         cd docs
         sphinx-build -E -W . _build
     - name: upload to github pages

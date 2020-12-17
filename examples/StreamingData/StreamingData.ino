@@ -112,7 +112,7 @@ void loop() {
       makePayload(i);                           // make the payload
       if (!radio.writeFast(&buffer, SIZE)) {
         failures++;
-        radio.resend();
+        // radio.resend();
       } else {
         i++;
       }

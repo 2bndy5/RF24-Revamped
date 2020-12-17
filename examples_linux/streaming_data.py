@@ -90,7 +90,7 @@ def master(count=1):
                     )
                     multiplier = count  # be sure to exit the for loop
                     break  # exit the while loop
-                radio.resend()  # resend payload in top level of TX FIFO
+                # radio.resend()  # resend payload in top level of TX FIFO
             else:  # transmission succeeded
                 buf_iter += 1
     end_timer = time.monotonic_ns()  # end timer

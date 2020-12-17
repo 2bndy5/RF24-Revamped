@@ -216,8 +216,7 @@ void slave() {
 
             // transmit response & save result to `report`
             radio.stopListening();                           // put in TX mode
-            radio.writeFast(&payload, sizeof(payload));      // load response into TX FIFO
-            bool report = radio.txStandBy(150);              // keep retrying for 150 ms
+            bool report = radio.send(&payload, sizeof(payload));      // load response into TX FIFO
             radio.startListening();                          // put back in RX mode
 
             // print summary of transactions

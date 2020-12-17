@@ -202,7 +202,7 @@ void master() {
         makePayload(i);
         if (!radio.writeFast(&buffer, SIZE)) {
             failures++;
-            radio.resend();
+            // radio.resend();
         } else {
             i++;
         }
