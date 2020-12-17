@@ -7,7 +7,7 @@ wrapper was initially written by [mz-fuzzy](https://github.com/mz-fuzzy)
 
 ## Prerequisites Prerequisites
 ### Python3
-The [python examples](examples.html#python-wrapper-examples) need Python v3.7 because of the `time.monotonic_ns()` call for measuring microseconds.
+The [python examples](examples.html#python-wrapper-examples) need Python v3.7 because of the [time.monotonic_ns()](https://docs.python.org/3.7/library/time.html#time.monotonic_ns) call for measuring microseconds.
 
 ```shell
 sudo apt-get install python3-dev libboost-python-dev python3-setuptools python3-rpi.gpio

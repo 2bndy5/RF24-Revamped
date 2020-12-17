@@ -154,7 +154,7 @@ getting_started.py
 
 |get_start_desc|
 |2_or_more_devs|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -164,7 +164,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
@@ -178,7 +178,7 @@ acknowledgement_payloads.py
 
 |ac_pl_desc|
 |2_or_more_devs|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -188,7 +188,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
@@ -202,7 +202,7 @@ manual_acknowledgements.py
 
 |manack_desc|
 |2_or_more_devs|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -212,7 +212,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
@@ -225,7 +225,7 @@ multiceiver_demo.py
 -------------------------
 
 |multiceiver_desc|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -235,7 +235,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
@@ -249,7 +249,7 @@ streaming_data.py
 
 |streaming_desc|
 |2_or_more_devs|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -259,7 +259,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
@@ -273,7 +273,7 @@ interrup_configure.py
 
 |interrupt_desc|
 |2_or_more_devs|
-Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
+Remember to `install the Python wrapper <python_wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -283,7 +283,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver| :py:func:`time.monotonic_ns()`.
+    |required_py_ver| `time.monotonic_ns() <https://docs.python.org/3.7/library/time.html#time.monotonic_ns>`_.
 
 |ctrl_c_quit|
 
