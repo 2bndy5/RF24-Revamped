@@ -893,7 +893,7 @@ public:
      * Set RF communication channel. The frequency used by a channel is
      * calculated as:
      *
-     * 2400 MHz + <channel number>
+     * 2400 MHz + \<channel number>
      *
      * Meaning the default channel of 76 uses the approximate frequency of
      * 2476 MHz.
