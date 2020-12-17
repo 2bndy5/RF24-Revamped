@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Linux cross-compilation &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ATXMEGA" href="atxmega.html" />
+    <link rel="prev" title="Python Wrapper Installation" href="python_wrapper.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux cross-compilation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mandatory-prerequisites">Mandatory Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-compilation-steps">Cross compilation steps:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-comilation-steps-for-python-wrapper">Cross comilation steps for python wrapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-prerequisites">Python Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-installation-steps">Python Installation steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Linux cross-compilation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cross_compilation.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linux-cross-compilation">
+<h1>Linux cross-compilation<a class="headerlink" href="#linux-cross-compilation" title="Permalink to this headline">¶</a></h1>
+<p>RF24 library supports cross-compilation. Advantages of cross-compilation:</p>
+<ul class="simple">
+<li><p>development tools don’t have to be installed on target machine</p></li>
+<li><p>resources of target machine don’t have to be sufficient for compilation</p></li>
+<li><p>compilation time can be reduced for large projects</p></li>
+</ul>
+<div class="section" id="mandatory-prerequisites">
+<h2>Mandatory Prerequisites<a class="headerlink" href="#mandatory-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Following prerequisites need to be assured:</p>
+<ul>
+<li><p>ssh passwordless access to target machine <a class="reference external" href="https://linuxconfig.org/passwordless-ssh">read this for help</a></p></li>
+<li><p>sudo of a remote user without password <a class="reference external" href="http://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands">read this for help</a></p></li>
+<li><p>cross-compilation toolchain for your target machine</p>
+<p>For the Raspberry Pi:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/raspberrypi/tools rpi_tools
+</pre></div>
+</div>
+<p>and cross-compilation tools must be in PATH, for example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/your/dir/rpi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="cross-compilation-steps">
+<h2>Cross compilation steps:<a class="headerlink" href="#cross-compilation-steps" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>clone RF24 to a machine for cross-compilation</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/2bndy5/RF24
+<span class="nb">cd</span> RF24
+git checkout revamp
+</pre></div>
+</div>
+</li>
+<li><p>configure for cross compilation</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --remote<span class="o">=</span>pi@target_linux_host
+</pre></div>
+</div>
+<p>or to manually specify a driver (see <code class="docutils literal notranslate"><span class="pre">./configure</span> <span class="pre">--help</span></code>)</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --remote<span class="o">=</span>pi@target_linux_host --driver<span class="o">=</span>&lt;driver&gt;
+</pre></div>
+</div>
+</li>
+<li><p>build</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+</li>
+<li><p>(optional) install library to cross-compilation machine into cross-exvironment - important for compilation of examples</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo make install
+</pre></div>
+</div>
+</li>
+<li><p>upload library to target machine</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make upload
+</pre></div>
+</div>
+</li>
+<li><p>(optional) compile examples</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> examples_linux
+make
+</pre></div>
+</div>
+</li>
+<li><p>(optional) upload examples to target machine</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make upload
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="cross-comilation-steps-for-python-wrapper">
+<h2>Cross comilation steps for python wrapper<a class="headerlink" href="#cross-comilation-steps-for-python-wrapper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-prerequisites">
+<h3>Python Prerequisites<a class="headerlink" href="#python-prerequisites" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Python setuptools must be installed on both target and cross-compilation machines</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install setuptools
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-setuptools
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="python-installation-steps">
+<h3>Python Installation steps<a class="headerlink" href="#python-installation-steps" title="Permalink to this headline">¶</a></h3>
+<ol>
+<li><p>Assure having libboost-python-dev library in your cross-compilation environment. Alternatively, you can install it into your target machine and copy /usr and /lib directories to the cross-compilation machine.</p>
+<p>For example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p rpi_root <span class="o">&amp;&amp;</span> rsync -a pi@target_linux_host:/usr :/lib rpi_root
+<span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=/your/dir/rpi_root -I/your/dir/rpi_root/usr/include/python2.7/&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Build the python wrapper</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> pyRF24
+./setup.py build --compiler<span class="o">=</span>crossunix
+</pre></div>
+</div>
+</li>
+<li><p>Make the egg package</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./setup.py bdist_egg --plat-name<span class="o">=</span>cross
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dist/RF24-&lt;version&gt;-cross.egg</span></code> should be created.</p>
+</li>
+<li><p>Upload it to the target machine and install there:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scp dist/RF24-*-cross.egg pi@target_linux_host:
+ssh pi@target_linux_host <span class="s1">&#39;sudo easy_install RF24-*-cross.egg&#39;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="atxmega.html" class="btn btn-neutral float-right" title="ATXMEGA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="python_wrapper.html" class="btn btn-neutral float-left" title="Python Wrapper Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

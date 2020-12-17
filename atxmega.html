@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ATXMEGA &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RF24 Portability" href="portability.html" />
+    <link rel="prev" title="Linux cross-compilation" href="cross_compilation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ATXMEGA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparation">Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ATXMEGA</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/atxmega.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="atxmega">
+<h1>ATXMEGA<a class="headerlink" href="#atxmega" title="Permalink to this headline">¶</a></h1>
+<p>The RF24 driver can be build as a static library with Atmel Studio 7 in order to be included as any other library in another program for the XMEGA family.</p>
+<p>Currently only the <strong>ATXMEGA D3</strong> family is implemented.</p>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>Create an empty GCC Static Library project in AS7.</p>
+<p>As not all files are required, copy the following directory structure in the project:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>utility\
+ATXMegaD3\
+    compatibility.c
+    compatibility.h
+    gpio.cpp
+    gpio.h
+    gpio_helper.c
+    gpio_helper.h
+    includes.h
+    RF24_arch_config.h
+    spi.cpp
+    spi.h
+nRF24L01.h
+printf.h
+RF24.cpp
+RF24.h
+RF24_config.h
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Add the library to your project!</p>
+<p>In the file where the <code class="docutils literal notranslate"><span class="pre">main()</span></code> is put the following in order to update the millisecond functionality:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ISR</span><span class="p">(</span><span class="n">TCE0_OVF_vect</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">update_milisec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Declare the rf24 radio with <code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(XMEGA_PORTC_PIN3,</span> <span class="pre">XMEGA_SPI_PORT_C);</span></code></p>
+<p>First parameter is the CE pin which can be any available pin on the uC.</p>
+<p>Second parameter is the CS which can be on port C (<code class="docutils literal notranslate"><span class="pre">XMEGA_SPI_PORT_C</span></code>) or on port D (<code class="docutils literal notranslate"><span class="pre">XMEGA_SPI_PORT_D</span></code>).</p>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">__start_timer()</span></code> to start the millisecond timer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note about the millisecond functionality:</p>
+<p>The millisecond functionality is based on the TCE0 so don’t use these pins as IO.</p>
+</div>
+<p>The operating frequency of the uC is 32MHz. If you have other frequency change the TCE0 registers appropriatly in function <code class="docutils literal notranslate"><span class="pre">__start_timer()</span></code> in <em>compatibility.c</em> file for your frequency.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="portability.html" class="btn btn-neutral float-right" title="RF24 Portability" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cross_compilation.html" class="btn btn-neutral float-left" title="Linux cross-compilation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

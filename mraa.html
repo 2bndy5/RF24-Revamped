@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MRAA &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="General Linux/Raspberry Pi" href="rpi_general.html" />
+    <link rel="prev" title="Linux Installation" href="linux_install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MRAA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-setup-and-installation">Setup Setup and installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MRAA</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mraa.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mraa">
+<h1>MRAA<a class="headerlink" href="#mraa" title="Permalink to this headline">¶</a></h1>
+<p>MRAA is a Low Level Skeleton Library for Communication on GNU/Linux platforms
+See <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/index.html">MRAA docs</a> for more information</p>
+<p>RF24 supports all MRAA supported platforms, but might not be tested on each individual platform due to the wide range of hardware support:</p>
+<p><a class="reference external" href="https://github.com/2bndy5/RF24/issues">Report an RF24 bug or issue</a></p>
+<div class="section" id="setup-setup-and-installation">
+<h2>Setup Setup and installation<a class="headerlink" href="#setup-setup-and-installation" title="Permalink to this headline">¶</a></h2>
+<p>Build using the <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/index.html">MRAA library</a>
+MRAA is not included.</p>
+<ol>
+<li><p>Install, and build MRAA</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/intel-iot-devkit/mraa.git
+<span class="nb">cd</span> mraa
+mkdir build
+<span class="nb">cd</span> build
+cmake .. -DBUILDSWIGNODE<span class="o">=</span>OFF
+sudo make install
+</pre></div>
+</div>
+</li>
+<li><p>Complete the install</p>
+<p>open a text editor</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano /etc/ld.so.conf
+</pre></div>
+</div>
+<p>Add the line <code class="docutils literal notranslate"><span class="pre">/usr/local/lib/arm-linux-gnueabihf</span></code></p>
+<p>Run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ldconfig
+</pre></div>
+</div>
+</li>
+<li><p>Install RF24, using MRAA</p>
+<p>See <a class="reference external" href="linux_install.html">Linux Installation</a></p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rpi_general.html" class="btn btn-neutral float-right" title="General Linux/Raspberry Pi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linux_install.html" class="btn btn-neutral float-left" title="Linux Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

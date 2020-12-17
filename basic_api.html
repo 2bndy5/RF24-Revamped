@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic API &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced API" href="advanced_api.html" />
+    <link rel="prev" title="Arduino examples" href="examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constructor">Constructor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#begin">begin()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openreadingpipe">openReadingPipe()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#closereadingpipe">closeReadingPipe()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openwritingpipe">openWritingPipe()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#startlistening">startListening()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stoplistening">stopListening()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#any">any()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available">available()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read">read()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#send">send()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Basic API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/basic_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-api">
+<h1>Basic API<a class="headerlink" href="#basic-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt id="_CPPv44RF24">
+<span id="_CPPv34RF24"></span><span id="_CPPv24RF24"></span><span id="RF24"></span><span class="target" id="classRF24"></span><em class="property">class </em><code class="sig-name descname">RF24</code><a class="headerlink" href="#_CPPv44RF24" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t">
+<span id="_CPPv3N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="RF24::RF24__uint16_t.uint16_t.uint32_t"></span><span class="target" id="classRF24_1abe8f878e238644252ccf5ec27fba611d"></span><code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="RF24::RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">RF24</code><span class="sig-paren">(</span>uint16_t <em>_cepin</em>, uint16_t <em>_cspin</em>, uint32_t <em>_spispeed</em> = RF24_SPI_SPEED<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new instance of this driver. </p>
+<p><a class="reference internal" href="#classRF24"><span class="std std-ref">RF24</span></a> Constructor</p>
+<p>Before using, you create an instance and send in the unique pins that this chip is connected to.</p>
+<p> <p><p>See <a class="reference external" href="arduino.html">Arduino</a>, <a class="reference external" href="attiny">ATTiny</a>, or <a class="reference external" href="linux_general">Linux</a> pages for device specific information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Users can specify default SPI speed by modifying <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">RF24_SPI_SPEED</span></code> in RF24_config.h
+For Arduino, SPI speed will only be properly configured this way on devices supporting SPI TRANSACTIONS.
+Older/Unsupported Arduino devices will use a default clock divider and settings configuration
+Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed</p>
+</div>
+</p>
+</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_cepin</span></code>: The pin attached to Chip Enable on the RF module </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_cspin</span></code>: The pin attached to Chip Select </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_spispeed</span></code>: The SPI speed in Hz ie: 1000000 == 1Mhz </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="begin">
+<h2>begin()<a class="headerlink" href="#begin" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF245beginEv">
+<span id="_CPPv3N4RF245beginEv"></span><span id="_CPPv2N4RF245beginEv"></span><span id="RF24::begin__void"></span><span class="target" id="classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">begin</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Begin operation of the chip</p>
+<p>Call this in setup(), before calling any other methods. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> 
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+</div>
+<div class="section" id="openreadingpipe">
+<h2>openReadingPipe()<a class="headerlink" href="#openreadingpipe" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t">
+<span id="_CPPv3N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="RF24::openReadingPipe__uint8_t.uint8_tCP"></span><span class="target" id="classRF24_1a9edc910ccc1ffcff56814b08faca5535"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openReadingPipe</code><span class="sig-paren">(</span>uint8_t <em>number</em>, <em class="property">const</em> uint8_t *<em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open a pipe for reading</p>
+<p>Up to 6 pipes can be open for reading at once. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
+<p><p>There is no address length parameter because this function will always write the number of bytes (for pipes 0 and 1) that the radio addresses are configured to use (set with </p>
+<a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a><p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pipes 0 and 1 will store a full 5-byte address. Pipes 2-5 will
+technically only store a single byte, borrowing up to 4 additional bytes
+from pipe 1 per the assigned address width.</p>
+<p>Pipes 1-5 should share the same address, except the first byte.
+Only the first byte in the array should be unique, e.g.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">addresses</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Prime&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">,</span> <span class="s">&quot;3xxxx&quot;</span><span class="p">,</span> <span class="s">&quot;4xxxx&quot;</span><span class="p">};</span>
+<span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">addresses</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// address used is &quot;Prime&quot;</span>
+<span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">addresses</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// address used is &quot;2Node&quot;</span>
+<span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">addresses</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="c1">// address used is &quot;3Node&quot;</span>
+<span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">addresses</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span> <span class="c1">// address used is &quot;4Node&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the reading pipe 0 is opened by this function, the address
+passed to this function (for pipe 0) will be restored at every call to
+<cite>startListening()</cite>, but the address for pipe 0 is ONLY restored if the LSB is a
+non-zero value.</p>
+<p>Read <a class="reference external" href="http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html">http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html</a>
+to understand how to avoid using malformed addresses. This address
+restoration is implemented because of the underlying neccessary
+functionality of <cite>openWritingPipe()</cite>.</p>
+</div>
+</p>
+ </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe to open. Only pipe numbers 0-5 are available, an address assigned to any pipe number not in that range will be ignored. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 24, 32 or 40 bit address of the pipe to open.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t">
+<span id="_CPPv3N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="RF24::openReadingPipe__uint8_t.uint64_t"></span><span class="target" id="classRF24_1aa7e8523f86f9f8f20c274e0c89a5fd45"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openReadingPipe</code><span class="sig-paren">(</span>uint8_t <em>number</em>, uint64_t <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open a pipe for reading <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe(uint8_t, const uint8_t*)</span></a><p><div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Pipes 1-5 should share the first 32 bits.
+Only the least significant byte should be unique, e.g.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0xF0F0F0F0AA</span><span class="p">);</span>
+<span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0xF0F0F0F066</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Pipe 0 is also used by the writing pipe so should typically be avoided
+as a reading pipe.</p>
+<p>If used, the reading pipe 0 address needs to be restored at avery call to
+<cite>startListening()</cite>, and the address is ONLY restored if the LSB is a non-zero value.</p>
+<p>Read <a class="reference external" href="http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html">http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html</a></p>
+</div>
+</p>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe# to open, 0-5. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="closereadingpipe">
+<h2>closeReadingPipe()<a class="headerlink" href="#closereadingpipe" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416closeReadingPipeE7uint8_t">
+<span id="_CPPv3N4RF2416closeReadingPipeE7uint8_t"></span><span id="_CPPv2N4RF2416closeReadingPipeE7uint8_t"></span><span id="RF24::closeReadingPipe__uint8_t"></span><span class="target" id="classRF24_1a9944d93994a80037e3586f340f5e0107"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">closeReadingPipe</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416closeReadingPipeE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close a pipe after it has been previously opened. Can be safely called without having previously opened a pipe. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: Which pipe number to close, any integer not in range [0, 5] is ignored. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="openwritingpipe">
+<h2>openWritingPipe()<a class="headerlink" href="#openwritingpipe" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2415openWritingPipeEPK7uint8_t">
+<span id="_CPPv3N4RF2415openWritingPipeEPK7uint8_t"></span><span id="_CPPv2N4RF2415openWritingPipeEPK7uint8_t"></span><span id="RF24::openWritingPipe__uint8_tCP"></span><span class="target" id="classRF24_1af2e409e62d49a23e372a70b904ae30e1"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openWritingPipe</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>New: Open a pipe for writing via byte array. Old addressing format retained for compatibility.</p>
+<p>Only one writing pipe can be opened at once, but this function changes the address that is used to transmit (ACK payloads/packets do not apply here). Be sure to call <a class="reference internal" href="#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> prior to calling this function.</p>
+<p>Addresses are assigned via a byte array, default is 5 byte address length</p>
+<p> <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">addresses</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">addresses</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0xCC</span><span class="p">,</span> <span class="mh">0xCE</span><span class="p">,</span> <span class="mh">0xCC</span><span class="p">,</span> <span class="mh">0xCE</span><span class="p">,</span> <span class="mh">0xCC</span><span class="p">};</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+<span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x33</span><span class="p">;</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function will overwrite the address set to reading pipe 0
+as stipulated by the datasheet for proper auto-ack functionality in TX
+mode. Use this function to ensure proper transmission acknowledgement
+when the address set to reading pipe 0 (via <cite>openReadingPipe()</cite>) does not
+match the address passed to this function. If the auto-ack feature is
+disabled, then this function will still overwrite the address for
+reading pipe 0 regardless.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a></p>
+</dd>
+<dt><strong>Remark</strong></dt><dd><p>There is no address length parameter because this function will always write the number of bytes that the radio addresses are configured to use (set with <a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>). </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The address to be used for outgoing transmissions (uses pipe 0). Coordinate this address amongst other receiving nodes (the pipe numbers don’t need to match).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2415openWritingPipeE8uint64_t">
+<span id="_CPPv3N4RF2415openWritingPipeE8uint64_t"></span><span id="_CPPv2N4RF2415openWritingPipeE8uint64_t"></span><span id="RF24::openWritingPipe__uint64_t"></span><span class="target" id="classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openWritingPipe</code><span class="sig-paren">(</span>uint64_t <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open a pipe for writing <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>openWritingPipe(const uint8_t)  <p><p>Addresses are 40-bit hex values, e.g.:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">openWritingPipe</span><span class="p">(</span><span class="mh">0xF0F0F0F0F0</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="startlistening">
+<h2>startListening()<a class="headerlink" href="#startlistening" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2414startListeningEv">
+<span id="_CPPv3N4RF2414startListeningEv"></span><span id="_CPPv2N4RF2414startListeningEv"></span><span id="RF24::startListening__void"></span><span class="target" id="classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">startListening</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414startListeningEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start listening on the pipes opened for reading.</p>
+<p><ol class="loweralpha simple">
+<li><p>Be sure to call <a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe()</span></a> first.</p></li>
+<li><p>Do not call <a class="reference internal" href="#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> while in this mode, without first calling <a class="reference internal" href="#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a>.</p></li>
+<li><p>Call <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a> to check for incoming traffic, and <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a> to get it.</p></li>
+</ol>
+</p>
+<p>Open reading pipe 1 using address <code class="docutils literal notranslate"><span class="pre">0xCCCECCCECC</span></code><p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">byte</span> <span class="n">address</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0xCC</span><span class="p">,</span> <span class="mh">0xCE</span><span class="p">,</span> <span class="mh">0xCC</span><span class="p">,</span> <span class="mh">0xCE</span><span class="p">,</span> <span class="mh">0xCC</span><span class="p">};</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">address</span><span class="p">);</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there was a call to openReadingPipe() about pipe 0 prior to
+calling this function, then this function will re-write the address
+that was last set to reading pipe 0. This is because <cite>openWritingPipe()</cite>
+will overwrite the address to reading pipe 0 for proper auto-ack
+functionality.</p>
+</div>
+</p>
+ </p>
+</dd></dl>
+
+</div>
+<div class="section" id="stoplistening">
+<h2>stopListening()<a class="headerlink" href="#stoplistening" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2413stopListeningEv">
+<span id="_CPPv3N4RF2413stopListeningEv"></span><span id="_CPPv2N4RF2413stopListeningEv"></span><span id="RF24::stopListening__void"></span><span class="target" id="classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">stopListening</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413stopListeningEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop listening for incoming messages, and switch to transmit mode.</p>
+<p>Do this before calling <a class="reference internal" href="#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the ACK payloads feature is enabled, the TX FIFO buffers are
+flushed when calling this function. This is meant to discard any ACK
+payloads that were not appended to acknowledgment packets.</p>
+</div>
+</p>
+ </p>
+</dd></dl>
+
+</div>
+<div class="section" id="any">
+<h2>any()<a class="headerlink" href="#any" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="available">
+<h2>available()<a class="headerlink" href="#available" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF249availableEv">
+<span id="_CPPv3N4RF249availableEv"></span><span id="_CPPv2N4RF249availableEv"></span><span id="RF24::available__void"></span><span class="target" id="classRF24_1a127105eb7a3b351cfe777c1cec50627a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">available</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF249availableEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether there are bytes available to be read  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+ <p><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function relies on the information about the pipe number
+that received the next available payload. According to the datasheet,
+the data about the pipe number that received the next available payload
+is “unreliable” during a FALLING transition on the IRQ pin. This means
+you should call <cite>clearStatusFlags()</cite> before calling this function
+during an ISR (Interrupt Service Routine).</p>
+<p>For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span> <span class="c1">// resets the IRQ pin to HIGH</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">();</span>                           <span class="c1">// returned data should now be reliable</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">attachInterrupt</span><span class="p">(</span><span class="n">digitalPinToInterrupt</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">),</span> <span class="n">isrCallbackFunction</span><span class="p">,</span> <span class="n">FALLING</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ace7dd139fabc16b77cb8325faa07620f"><span class="std std-ref">available(uint8_t*)</span></a> </p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>True if there is a payload available, false if none is</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF249availableEP7uint8_t">
+<span id="_CPPv3N4RF249availableEP7uint8_t"></span><span id="_CPPv2N4RF249availableEP7uint8_t"></span><span id="RF24::available__uint8_tP"></span><span class="target" id="classRF24_1ace7dd139fabc16b77cb8325faa07620f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">available</code><span class="sig-paren">(</span>uint8_t *<em>pipe_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF249availableEP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test whether there are bytes available to be read from the FIFO buffers.</p>
+<p> <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is named <cite>available_pipe()</cite> in the python wrapper.
+Additionally, the <cite>available_pipe()</cite> function (which
+takes no arguments) returns a 2 item tuple containing (ordered by
+tuple’s indices):</p>
+<ul class="simple">
+<li><p>A boolean describing if there is a payload available to read from
+the RX FIFO buffers.</p></li>
+<li><p>The pipe number that received the next available payload in the RX
+FIFO buffers. If the item at the tuple’s index 0 is <cite>False</cite>, then
+this pipe number is invalid.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use this function in python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instatiated RF24 object</span>
+<span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>  <span class="c1"># expand the tuple to 2 variables</span>
+<span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Received a payload with pipe&quot;</span><span class="p">,</span> <span class="n">pipe_number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</p>
+</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a payload available in the top (first out) level RX FIFO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if there is nothing available in the RX FIFO because it is empty. </p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">pipe_num</span></code>: Which pipe has the payload available  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">pipeNum</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipeNum</span><span class="p">)){</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Received data on pipe &quot;</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">pipeNum</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>According to the datasheet, the data saved to the <code class="docutils literal notranslate"><span class="pre">pipe_num</span></code>
+parameter is “unreliable” during a FALLING transition on the IRQ pin.
+This means you should call <cite>clearStatusFlags()</cite> before calling this
+function during an ISR (Interrupt Service Routine).</p>
+</div>
+<p>For example:
+.. code-block:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>   <span class="c1">// resets the IRQ pin to HIGH</span>
+  <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>               <span class="c1">// initialize pipe data</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">);</span> <span class="c1">// pipe data should now be reliable</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">attachInterrupt</span><span class="p">(</span><span class="n">digitalPinToInterrupt</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">),</span> <span class="n">isrCallbackFunction</span><span class="p">,</span> <span class="n">FALLING</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="read">
+<h2>read()<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF244readEPv7uint8_t">
+<span id="_CPPv3N4RF244readEPv7uint8_t"></span><span id="_CPPv2N4RF244readEPv7uint8_t"></span><span id="RF24::read__voidP.uint8_t"></span><span class="target" id="classRF24_1a8e2eacacfba96426c192066f04054c5b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">read</code><span class="sig-paren">(</span>void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244readEPv7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read payload data from the RX FIFO buffer(s).</p>
+<p>The length of data read is usually the next available payload’s length <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use this function in the python wrapper, remember that
+only the <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter is required because this function (in the
+python wrapper) returns the payload data as a buffer protocol object
+(bytearray object).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
+<span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">getDynamicPayloadSize</span><span class="p">()</span>  <span class="c1"># or radio.getPayloadSize() for static payload sizes</span>
+    <span class="n">received_payload</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</p>
+<dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1a0aa0c7cbe3d38fef4722f3f1d2d6c5f1"><span class="std std-ref">getPayloadSize()</span></a>, getDynamicPayloadSize()<p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I specifically chose <cite>void*</cite> as a data type to make it easier
+for beginners to use.  No casting needed.</p>
+</div>
+</p>
+</p>
+</dd>
+<dt><strong>Remark</strong></dt><dd><p>Remember that each call to <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a> fetches data from the RX FIFO beginning with the first byte from the first available payload. A payload is not removed from the RX FIFO until it’s entire length (or more) is fetched using <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a>.<ul class="simple">
+<li><p>If <em>len</em> parameter’s value is less than the available payload’s length, then the payload remains in the RX FIFO.</p></li>
+<li><p>If <em>len</em> parameter’s value is greater than the first of multiple available payloads, then the data saved to the <em>buf</em> parameter’s object will be supplemented with data from the next available payload.</p></li>
+<li><p>If <em>len</em> parameter’s value is greater than the last available payload’s length, then the last byte in the payload is used as padding for the data saved to the <em>buf</em> parameter’s object. The nRF24L01 will repeatedly use the last byte from the last payload even when <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a> is called with an empty RX FIFO.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to a buffer where the data should be written </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Maximum number of bytes to read into the buffer. This value should match the length of the object referenced using the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter. The absolute maximum number of bytes that can be read in one call is 32 (for dynamic payload lengths) or whatever number was previously passed to <a class="reference internal" href="configure_api.html#classRF24_1a343e5d23477181011dea030fafb1954f"><span class="std std-ref">setPayloadSize()</span></a> (for static payload lengths). </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>No return value. Use <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a>.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function no longer returns a boolean. Use available to
+determine if packets are available. The <code class="docutils literal notranslate"><span class="pre">RX_DR</span></code> Interrupt flag is now
+cleared with this function instead of when calling <cite>available()</cite>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</p>
+ </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="send">
+<h2>send()<a class="headerlink" href="#send" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF244sendEPKv7uint8_t">
+<span id="_CPPv3N4RF244sendEPKv7uint8_t"></span><span id="_CPPv2N4RF244sendEPKv7uint8_t"></span><span id="RF24::send__voidCP.uint8_t"></span><span class="target" id="classRF24_1a013fcce587ddcb1eec3ba3492006495c"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Be sure to call <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a> first to set the destination of where to write to.</p>
+<p>This blocks until the message is successfully acknowledged by the receiver or the timeout/retransmit maxima are reached. In the current configuration, the max delay here is 60-70ms.</p>
+<p>The maximum size of data written is the fixed payload size, see <a class="reference internal" href="configure_api.html#classRF24_1a0aa0c7cbe3d38fef4722f3f1d2d6c5f1"><span class="std std-ref">getPayloadSize()</span></a>. However, you can write less, and the remainder will just be filled with zeroes.</p>
+<p>TX/RX/RT interrupt flags will be cleared every time write is called</p>
+<p><p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter must be omitted when using the python
+wrapper because the length of the payload is determined automatically.</p>
+<p>To use this function in the python wrapper:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello World&quot;</span>  <span class="c1"># a `bytes` object</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</p>
+<dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF244sendEPKv7uint8_tKb">
+<span id="_CPPv3N4RF244sendEPKv7uint8_tKb"></span><span id="_CPPv2N4RF244sendEPKv7uint8_tKb"></span><span id="RF24::send__voidCP.uint8_t.bC"></span><span class="target" id="classRF24_1a45af53a31199a6bd80c6b8646da0af87"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em>, <em class="property">const</em> bool <em>multicast</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_tKb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write for single NOACK writes. Optionally disable acknowledgements/auto-retries for a single payload using the multicast parameter set to true.</p>
+<p>Can be used with <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a> to request a response <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter must be omitted when using the python
+wrapper because the length of the payload is determined automatically.</p>
+<p>To use this function in the python wrapper:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello World&quot;</span>  <span class="c1"># a `bytes` object</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># False = the multicast parameter</span>
+</pre></div>
+</div>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a>, <a class="reference internal" href="#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> </p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicast</span></code>: Request ACK response (false), or no ACK response (true). Be sure to have called <a class="reference internal" href="configure_api.html#classRF24_1a6726f78f1f497e1746262c6d4c2e5cfd"><span class="std std-ref">allowMulticast()</span></a> at least once before setting this parameter. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="advanced_api.html" class="btn btn-neutral float-right" title="Advanced API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="examples.html" class="btn btn-neutral float-left" title="Arduino examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

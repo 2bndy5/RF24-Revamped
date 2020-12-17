@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Common Issues &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Arduino" href="arduino.html" />
+    <link rel="prev" title="Configuration API" href="configure_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Common Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#settings-that-must-match">Settings that must match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-most-common-issues-and-their-solutions">The most common issues and their solutions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#send-always-returns-true-after-setautoack-false">send() always returns true after setAutoAck(false)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-returns-false-when-the-payload-was-received">send() returns false when the payload was received</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Common Issues</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/common_issues.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="common-issues">
+<h1>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="settings-that-must-match">
+<h2>Settings that must match<a class="headerlink" href="#settings-that-must-match" title="Permalink to this headline">¶</a></h2>
+<p>Before you report undesirable behavior, please make sure that the
+following RF24 configurations match on both receiving and transmitting
+nRF24L01 transceivers:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setAddressWidth()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setChannel()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setDataRate()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setAutoAck()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::enableDynamicPayloads()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableDynamicPayloads()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::enableAckPayload()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableAckPayload()</span></code> (requires auto-ack and dynamic payloads features)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setPayloadSize()</span></code> (only if the dynamic payloads feature is disabled – it is disabled by default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setCrc()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableCRC()</span></code> (the auto-ack feature automatically enables CRC because it is required)</p></li>
+</ol>
+<p>Also, it helps to think of an address as a path (a commonly shared route)
+instead of an identifying device destination. This means that addresses
+have to match for a payload to travel from one transceiver to another.
+However, the pipe numbers assigned with the matching address do not have
+to match. You can think of pipes as parking spots for the packets, while
+all packets’ payloads live in a TX or RX FIFO buffer. Remember that the
+TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of
+3 payloads (regardless of the maximum 32-byte payload size).</p>
+</div>
+<div class="section" id="the-most-common-issues-and-their-solutions">
+<h2>The most common issues and their solutions<a class="headerlink" href="#the-most-common-issues-and-their-solutions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="send-always-returns-true-after-setautoack-false">
+<h3>send() always returns true after setAutoAck(false)<a class="headerlink" href="#send-always-returns-true-after-setautoack-false" title="Permalink to this headline">¶</a></h3>
+<p>Don’t disabled the auto-ack feature. RF24::send() has no reason to doubt
+that the payload was delivered if the auto-ack feature is disabled. We
+recommend you read the docs about RF24::setAutoAck() before disabling the
+auto-ack feature.</p>
+</div>
+<div class="section" id="send-returns-false-when-the-payload-was-received">
+<h3>send() returns false when the payload was received<a class="headerlink" href="#send-returns-false-when-the-payload-was-received" title="Permalink to this headline">¶</a></h3>
+<p>If the settings match on both endpoint transceivers, then this can only
+mean that the receiving nRF24L01 failed to send an acknowledgement (ACK)
+packet back to the transmitting nRF24L01. Usually this is due to
+instability (electric noise) in the power lines (VCC and GND) going to
+the receiving nRF24L01.</p>
+<p>If you’re not receiving ACK packets correctly/reliably on data rates
+lower than 2MBPS, try adding a big capacitor close to the module/chip.
+Example issues: <a class="reference external" href="https://github.com/nRF24/RF24/issues/264">#264</a>
+<a class="reference external" href="https://github.com/nRF24/RF24/issues/211">#211</a>.</p>
+<p>For reliability, please use Electrolytic or Tantalum capacitors. Ceramic
+capacitors may not be good enough (depending on the manufacturing source).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="arduino.html" class="btn btn-neutral float-right" title="Arduino" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configure_api.html" class="btn btn-neutral float-left" title="Configuration API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

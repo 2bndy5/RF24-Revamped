@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Arduino &mdash; RF24 Revemped 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ATTiny Support" href="attiny.html" />
+    <link rel="prev" title="Common Issues" href="common_issues.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+          
+
+          
+            
+            <img src="_static/Logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Related Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Arduino</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#alternate-spi-alternate-spi-support">Alternate_SPI Alternate SPI Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#software-driven-spi">Software Driven SPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternate-hardware-uart-driven-spi">Alternate Hardware (UART) Driven  SPI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RF24 Revemped</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Arduino</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/arduino.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arduino">
+<h1>Arduino<a class="headerlink" href="#arduino" title="Permalink to this headline">¶</a></h1>
+<p>RF24 is fully compatible with Arduino boards</p>
+<p>See <a class="reference external" href="http://www.arduino.cc/en/Reference/Board">Arduino Board Reference</a>
+and <a class="reference external" href="http://arduino.cc/en/Reference/SPI">SPI Reference</a> for more information</p>
+<p>RF24 makes use of the standard hardware SPI pins (MISO, MOSI, SCK) and requires two additional pins, to control
+the chip-select and chip-enable functions.</p>
+<p>These pins must be chosen and designated by the user, in
+<code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(ce_pin,</span> <span class="pre">cs_pin);</span></code> and can use any available pins.</p>
+<div class="section" id="alternate-spi-alternate-spi-support">
+<h2>Alternate_SPI Alternate SPI Support<a class="headerlink" href="#alternate-spi-alternate-spi-support" title="Permalink to this headline">¶</a></h2>
+<p>RF24 supports alternate SPI methods, in case the standard hardware SPI pins are otherwise unavailable.</p>
+<div class="section" id="software-driven-spi">
+<h3>Software Driven SPI<a class="headerlink" href="#software-driven-spi" title="Permalink to this headline">¶</a></h3>
+<p>Software driven SPI is provided by the <a class="reference external" href="https://github.com/greiman/DigitalIO">DigitalIO</a> library</p>
+<p>Setup:</p>
+<ol>
+<li><p>Install the digitalIO library<br></p></li>
+<li><p>Open RF24_config.h in a text editor.
+Uncomment the line</p>
+<p><code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">SOFTSPI</span></code></p>
+<p>or add the build flag/option</p>
+<p><code class="docutils literal notranslate"><span class="pre">-DSOFTSPI</span></code></p>
+</li>
+<li><p>In your sketch, add</p>
+<p><code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">DigitalIO.h</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pins are listed as follows and can be modified by editing the RF24_config.h file.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define SOFT_SPI_MISO_PIN 16</span>
+<span class="cp">#define SOFT_SPI_MOSI_PIN 15</span>
+<span class="cp">#define SOFT_SPI_SCK_PIN 14</span>
+</pre></div>
+</div>
+<p>Or add the build flag/option
+<code class="docutils literal notranslate"><span class="pre">-DSOFT_SPI_MISO_PIN=16</span> <span class="pre">-DSOFT_SPI_MOSI_PIN=15</span> <span class="pre">-DSOFT_SPI_SCK_PIN=14</span></code></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="alternate-hardware-uart-driven-spi">
+<h3>Alternate Hardware (UART) Driven  SPI<a class="headerlink" href="#alternate-hardware-uart-driven-spi" title="Permalink to this headline">¶</a></h3>
+<p>The Serial Port (UART) on Arduino can also function in SPI mode, and can double-buffer data, while the
+default SPI hardware cannot.</p>
+<p>The SPI_UART library is available at <a class="reference external" href="https://github.com/TMRh20/Sketches/tree/master/SPI_UART">TMRh20’s Sketches repo</a></p>
+<p>Enabling:</p>
+<ol class="simple">
+<li><p>Install the SPI_UART library</p></li>
+<li><p>Edit RF24_config.h and uncomment <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">SPI_UART</span></code></p></li>
+<li><p>In your sketch, add <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;SPI_UART.h&gt;</span></code></p></li>
+</ol>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">SPI_UART SPI Pin Connections</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NRF</p></th>
+<th class="head"><p>Arduino Uno Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MOSI</p></td>
+<td><p>TX(0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>MISO</p></td>
+<td><p>RX(1)</p></td>
+</tr>
+<tr class="row-even"><td><p>SCK</p></td>
+<td><p>XCK(4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CE</p></td>
+<td><p>User Specified</p></td>
+</tr>
+<tr class="row-even"><td><p>CSN</p></td>
+<td><p>User Specified</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SPI_UART on Mega boards requires soldering to an unused pin on the chip.
+See <a class="reference external" href="https://github.com/TMRh20/RF24/issues/24">#24</a>  for more information on
+SPI_UART.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="attiny.html" class="btn btn-neutral float-right" title="ATTiny Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="common_issues.html" class="btn btn-neutral float-left" title="Common Issues" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, 2bndy5
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
