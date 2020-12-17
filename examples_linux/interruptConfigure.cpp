@@ -223,7 +223,7 @@ void slave() {
 
     radio.startListening();            // put radio in RX mode
     time_t startTimer = time(nullptr); // start a timer
-    while (time(nullptr) - startTimer < 6 && !radio.isFifo()) {
+    while (time(nullptr) - startTimer < 6 && !radio.isFifo(false, true)()) {
         // use 6 second timeout & wait till RX FIFO is full
     }
     delay(100);                        // wait for ACK payload to finish transmitting
@@ -301,7 +301,7 @@ void interruptHandler() {
  */
 void printRxFifo(const uint8_t pl_size) {
     char rx_fifo[pl_size * 3 + 1];         // assuming RX FIFO is full; declare a buffer to hold it all
-    if (radio.isFifo()) {
+    if (radio.isFifo(false, true)()) {
         rx_fifo[pl_size * 3] = 0;          // add a NULL terminating char to use as a c-string
         radio.read(&rx_fifo, pl_size * 3); // this clears the RX FIFO (for this example)
     }

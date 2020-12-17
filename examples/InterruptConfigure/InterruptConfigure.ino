@@ -165,7 +165,7 @@ void loop() {
       Serial.println(F("\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected."));
       // send() will call flushTx() on 'data fail' events
       if (radio.send(&tx_payloads[pl_iterator], tx_pl_size)) {
-        if (radio.isFifo()) {
+        if (radio.isFifo(false, true)()) {
           Serial.println(F("RX node's FIFO is full; it is not listening any more"));
         } else {
           Serial.println("Transmission successful, but the RX node might still be listening.");
@@ -220,7 +220,7 @@ void loop() {
   } else if (!role) {
     // This device is a RX node
 
-    if (radio.isFifo()) {
+    if (radio.isFifo(false, true)()) {
       // wait until RX FIFO is full then stop listening
 
       delay(100);             // let ACK payload finish transmitting
@@ -329,7 +329,7 @@ void printRxFifo() {
 
     uint8_t pl_size = !role ? tx_pl_size : ack_pl_size;
     char rx_fifo[pl_size * 3 + 1];       // RX FIFO is full & we know ACK payloads' size
-    if (radio.isFifo()) {
+    if (radio.isFifo(false, true)()) {
       rx_fifo[pl_size * 3] = 0;          // add a NULL terminating char to use as a c-string
       radio.read(&rx_fifo, pl_size * 3); // this clears the RX FIFO (for this example)
     } else {

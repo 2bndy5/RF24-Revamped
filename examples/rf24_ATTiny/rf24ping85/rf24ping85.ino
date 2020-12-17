@@ -1,5 +1,5 @@
 /**
- * See documentation at https://2bndy5.github.io/RF24
+ * See documentation at https://nRF24.github.io/RF24
  * See License information at root directory of this library
  * written in 2014 by tong67 (https://github.com/tong67)
  * Updated 2020 by 2bndy5 (http://github.com/2bndy5) for the
@@ -18,7 +18,7 @@
  * A simple example of sending data from 1 nRF24L01 transceiver to another
  * with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
  * This example still uses ACK packets, but they have no payloads. Instead the
- * acknowledging response is sent with `send()`. This tactic allows for more
+ * acknowledging response is sent with `write()`. This tactic allows for more
  * updated acknowledgement payload data, where actual ACK payloads' data are
  * outdated by 1 transmission because they have to loaded before receiving a
  * transmission.
@@ -128,7 +128,7 @@ void setup() {
   // Set the PA Level low to try preventing power supply related problems
   // because these examples are likely run with nodes in close proximity to
   // each other.
-  radio.setPaLevel(RF24_PA_LOW); // RF24_PA_MAX is default.
+  radio.setPALevel(RF24_PA_LOW); // RF24_PA_MAX is default.
 
   // save on transmission time by setting the radio to only transmit the
   // number of bytes we need to transmit a float

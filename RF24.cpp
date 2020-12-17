@@ -860,12 +860,12 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
     // Only going to be 1 packet in the FIFO at a time using this method, so just flush
     flushTx();
     write(buf, len, multicast);
-    while (status & (_BV(TX_DS) | _BV(MAX_RT)))) {
+    while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
         // Wait until complete or failed
         update();
     }
     ce(LOW);
-    return irqDs;
+    return irqDs();
 }
 
 bool RF24::send(const void* buf, uint8_t len)
@@ -882,7 +882,7 @@ bool RF24::resend()
 
     // exit early if TX FIFO is empty
     if (isFifo(1, 1)) {
-        return 0
+        return 0;
     }
 
     // issue re-use tx cmd
@@ -891,13 +891,13 @@ bool RF24::resend()
     // start transmission
     ce(LOW);
     ce(HIGH);
-    while (status & (_BV(TX_DS) | _BV(MAX_RT)))) {
+    while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
         // Wait until complete or failed
         update();
     }
     ce(LOW);
 
-    return irqDs;
+    return irqDs();
 }
 
 /****************************************************************************/
@@ -924,7 +924,7 @@ bool RF24::write(const void* buf, uint8_t len, const bool multicast, bool write_
 
 bool RF24::isFifo(bool about_tx, bool check_empty)
 {
-    return isFifo(about_tx) & _BV(1 - check_empty)
+    return isFifo(about_tx) & _BV(1 - check_empty);
 }
 
 uint8_t RF24::isFifo(bool about_tx)
@@ -1402,6 +1402,7 @@ void RF24::setCrc(uint8_t length)
         config_reg |= _BV(CRCO);
     } else if (length == 1) {
         config_reg |= _BV(EN_CRC);
+    }
     write_register(NRF_CONFIG, config_reg);
 }
 
@@ -1451,7 +1452,7 @@ void RF24::startConstCarrier(rf24_pa_dbm_e level, uint8_t channel)
         // truncation of the payload with the current RF24::payload_size value
         write_register(W_TX_PAYLOAD, reinterpret_cast<const uint8_t*>(&dummy_buf), 32);
 
-        disableCRC();
+        setCrc(0);  // disable CRC
     }
     setPaLevel(level);
     setChannel(channel);

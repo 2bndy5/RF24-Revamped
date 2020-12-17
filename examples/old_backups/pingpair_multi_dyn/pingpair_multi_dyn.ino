@@ -121,12 +121,12 @@ void setup(void)
 
   // enable dynamic payloads
   radio.enableDynamicPayloads();
-  radio.setCrc( RF24_CRC_16 ) ;
+  radio.setCRCLength( RF24_CRC_16 ) ;
 
   // optionally, increase the delay between retries & # of retries
   radio.setRetries( 15, 5 ) ;
   radio.setAutoAck( true ) ;
-  //radio.setPaLevel( RF24_PA_LOW ) ;
+  //radio.setPALevel( RF24_PA_LOW ) ;
 
   //
   // Open pipes to other nodes for communication

@@ -41,6 +41,10 @@ jobs:
       with:
           working-directory: '.'
           doxyfile-path: './Doxyfile'
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
     - name: install Sphinx, breathe, recommonmark, sphinx-rtd-theme
       run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme
     - name: run Sphinx

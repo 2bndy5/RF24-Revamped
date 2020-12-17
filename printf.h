@@ -21,7 +21,7 @@
 
 int serial_putc(char c, FILE *)
 {
-  Serial.send(c);
+  Serial.write(c);
   return c;
 }
 #endif

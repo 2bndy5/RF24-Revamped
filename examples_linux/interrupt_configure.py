@@ -116,7 +116,7 @@ def print_rx_fifo(pl_size):
 
     :param int pl_size: the expected size of each payload
     """
-    if radio.isFifo():
+    if radio.isFifo(false, true)():
             # all 3 payloads received were 5 bytes each, and RX FIFO is full
             # so, fetching 15 bytes from the RX FIFO also flushes RX FIFO
             print(
@@ -159,7 +159,7 @@ def master():
     radio.interruptConfig(1, 1, 1)  # disable IRQ pin for this step
     if radio.send(tx_payloads[2]):
         # when send_only parameter is True, send() ignores RX FIFO usage
-        if radio.isFifo():
+        if radio.isFifo(false, true)():
             print("RX node's FIFO is full; it is not listening any more")
         else:
             print(
@@ -196,7 +196,7 @@ def slave(timeout=6):  # will listen for 6 seconds before timing out
     radio.writeAckPayload(1, ack_payloads[2])
     radio.startListening()  # start listening & clear status flags
     start_timer = time.monotonic()  # start timer now
-    while not radio.isFifo() and time.monotonic() - start_timer < timeout:
+    while not radio.isFifo(false, true)() and time.monotonic() - start_timer < timeout:
         # if RX FIFO is not full and timeout is not reached, then keep waiting
         pass
     time.sleep(0.1)  # wait for last ACK payload to transmit

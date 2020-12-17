@@ -761,7 +761,7 @@ public:
      *
      *         # let `radio` be the instantiated RF24 object
      *         buffer = b"Hello World"  # a `bytes` object
-     *         radio.write(buffer, False, True)  # 3rd parameter is optional
+     *         radio.send(buffer, False, True)  # 3rd parameter is optional
      *         #     False means expecting ACK response (multicast parameter)
      *         #     True means initiate transmission (write_only parameter)
      * @endrst
