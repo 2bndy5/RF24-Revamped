@@ -3,7 +3,8 @@
 .*.swp
 *.orig
 .swp
-docs/
+docs/doxygen/
+docs/_build/
 output/
 ojam/
 out/
