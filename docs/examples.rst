@@ -7,8 +7,8 @@
 .. |use_serial_mon| replace:: Use the Serial Monitor to change each node's behavior.
 .. |ctrl_c_quit| replace:: Use ``ctrl+c`` to quit at any time, but remember state the radio will persist until another example or application uses it.
 .. |2_or_more_devs| replace:: This example was written to be used on 2 devices acting as "nodes".
-.. |install_wrapper| replace:: Remember to install the `python_wrapper`_, then navigate to the "RF24/examples_linux" folder.
-.. |required_py_ver| replace:: This example requires python v3.7 or newer because it measures transmission time with :py:func:`time.monotonic_ns()`.
+.. |nav2py_ex_dir| replace:: then navigate to the "RF24/examples_linux" folder.
+.. |required_py_ver| replace:: This example requires python v3.7 or newer because it measures transmission time with
 
 Arduino examples
 ================
@@ -154,7 +154,7 @@ getting_started.py
 
 |get_start_desc|
 |2_or_more_devs|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -164,7 +164,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
@@ -178,7 +178,7 @@ acknowledgement_payloads.py
 
 |ac_pl_desc|
 |2_or_more_devs|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -188,7 +188,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
@@ -202,7 +202,7 @@ manual_acknowledgements.py
 
 |manack_desc|
 |2_or_more_devs|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -212,7 +212,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
@@ -225,7 +225,7 @@ multiceiver_demo.py
 -------------------------
 
 |multiceiver_desc|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -235,7 +235,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
@@ -249,7 +249,7 @@ streaming_data.py
 
 |streaming_desc|
 |2_or_more_devs|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -259,7 +259,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
@@ -273,7 +273,7 @@ interrup_configure.py
 
 |interrupt_desc|
 |2_or_more_devs|
-
+Remember to `install the Python wrapper <python-wrapper.html>`_, |nav2py_ex_dir|
 To run this example, enter
 
 .. code-block:: shell
@@ -283,7 +283,7 @@ To run this example, enter
 and follow the prompts.
 
 .. note::
-    |required_py_ver|
+    |required_py_ver| :py:func:`time.monotonic_ns()`.
 
 |ctrl_c_quit|
 
