@@ -547,9 +547,9 @@ public:
      * .. code-block::
      *
      *     void isrCallbackFunction() {
-     *       radio.clearStatusFlags(); // resets the IRQ pin to HIGH
-     *       uint8_t pipe;                                // initialize pipe data
-     *       radio.available(&amp;pipe);                  // pipe data should now be reliable
+     *       radio.clearStatusFlags();   // resets the IRQ pin to HIGH
+     *       uint8_t pipe;               // initialize pipe data
+     *       radio.available(&amp;pipe); // pipe data should now be reliable
      *     }
      *
      *     void setup() {

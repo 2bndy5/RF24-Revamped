@@ -31,10 +31,8 @@ jobs:
       uses: actions/checkout@v2
     - name: overwrite doxygen tags
       run: |
-        mkdir docs
         touch doxygenAction
         echo "PROJECT_NUMBER = ${{ steps.latest_ver.outputs.release }}" >> doxygenAction
-        echo "OUTPUT_DIRECTORY = ./docs" >> doxygenAction
         echo "@INCLUDE = doxygenAction" >> Doxyfile
     - name: run doxygen
       uses: mattnotmitt/doxygen-action@v1
