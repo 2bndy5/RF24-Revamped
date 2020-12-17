@@ -201,48 +201,38 @@ as needed, allowing devices from ATTiny to Raspberry Pi to utilize the same
 core RF24 driver.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 31%" />
+<col style="width: 69%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>File</p></th>
 <th class="head"><p>Purpose</p></th>
-<th class="head"></th>
-<th class="head"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>RF24_arch_config.h</p></td>
-<td><p>Basic Arduino/AVR compatibility</p></td>
-<td><p>includes for remaining support files</p></td>
-<td><p>etc</p></td>
+<td><p>Basic Arduino/AVR compatibility, includes
+for remaining support files, etc</p></td>
 </tr>
 <tr class="row-odd"><td><p>includes.h</p></td>
-<td><p>Linux only. Defines specific platform</p></td>
-<td><p>include correct RF24_arch_config file</p></td>
-<td></td>
+<td><p>Linux only. Defines specific platform,
+include correct RF24_arch_config file</p></td>
 </tr>
 <tr class="row-even"><td><p>spi.h</p></td>
-<td><p>Provides standardized SPI ( transfer() ) methods</p></td>
-<td></td>
-<td></td>
+<td><p>Provides standardized SPI ( transfer() )
+methods</p></td>
 </tr>
 <tr class="row-odd"><td><p>gpio.h</p></td>
-<td><p>Provides standardized GPIO ( digitalWrite() ) methods</p></td>
-<td></td>
-<td></td>
+<td><p>Provides standardized GPIO
+( digitalWrite() ) methods</p></td>
 </tr>
 <tr class="row-even"><td><p>compatibility.h</p></td>
-<td><p>Provides standardized timing (millis()</p></td>
-<td><p>delay()) methods</p></td>
-<td></td>
+<td><p>Provides standardized timing (millis()
+and delay()) methods</p></td>
 </tr>
 <tr class="row-odd"><td><p>your_custom_file.h</p></td>
-<td><p>Provides access to custom drivers for spi</p></td>
-<td><p>gpio</p></td>
-<td><p>etc</p></td>
+<td><p>Provides access to custom drivers for
+spi, gpio, etc</p></td>
 </tr>
 </tbody>
 </table>

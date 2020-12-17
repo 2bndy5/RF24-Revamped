@@ -193,14 +193,14 @@
 following RF24 configurations match on both receiving and transmitting
 nRF24L01 transceivers:</p>
 <ol class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setAddressWidth()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setChannel()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setDataRate()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setAutoAck()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::enableDynamicPayloads()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableDynamicPayloads()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::enableAckPayload()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableAckPayload()</span></code> (requires auto-ack and dynamic payloads features)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setPayloadSize()</span></code> (only if the dynamic payloads feature is disabled – it is disabled by default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RF24::setCrc()</span></code> or <code class="docutils literal notranslate"><span class="pre">RF24::disableCRC()</span></code> (the auto-ack feature automatically enables CRC because it is required)</p></li>
+<li><p><a class="reference external" href="advanced_api.html#setaddresswidth">setAddressWidth()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#setchannel">setChannel()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#setdatarate">setDataRate()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#setautoack">setAutoAck()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#enabledynamicpayloads">enableDynamicPayloads()</a> or <a class="reference external" href="configure_api.html#disabledynamicpayloads">disableDynamicPayloads()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#enableackpayload">enableAckPayload()</a> or <a class="reference external" href="configure_api.html#disableackpayload">disableAckPayload()</a> (requires auto-ack and dynamic payloads features)</p></li>
+<li><p><a class="reference external" href="configure_api.html#setpayloadsize">setPayloadSize()</a> (only if the dynamic payloads feature is disabled – it is disabled by default)</p></li>
+<li><p><a class="reference external" href="configure_api.html#setcrc">setCrc()</a> (the auto-ack feature automatically enables CRC because it is required)</p></li>
 </ol>
 <p>Also, it helps to think of an address as a path (a commonly shared route)
 instead of an identifying device destination. This means that addresses
@@ -215,9 +215,9 @@ TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of
 <h2>The most common issues and their solutions<a class="headerlink" href="#the-most-common-issues-and-their-solutions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="send-always-returns-true-after-setautoack-false">
 <h3>send() always returns true after setAutoAck(false)<a class="headerlink" href="#send-always-returns-true-after-setautoack-false" title="Permalink to this headline">¶</a></h3>
-<p>Don’t disabled the auto-ack feature. RF24::send() has no reason to doubt
+<p>Don’t disabled the auto-ack feature. <a class="reference external" href="basic_api.html#send">send()</a> has no reason to doubt
 that the payload was delivered if the auto-ack feature is disabled. We
-recommend you read the docs about RF24::setAutoAck() before disabling the
+recommend you read the docs about <a class="reference external" href="configure_api.html#setautoack">setAutoAck()</a> before disabling the
 auto-ack feature.</p>
 </div>
 <div class="section" id="send-returns-false-when-the-payload-was-received">

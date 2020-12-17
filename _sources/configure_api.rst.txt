@@ -44,12 +44,12 @@ setRetries()
 
 .. doxygenfunction:: setRetries()
 
-enableAckPayloads()
+enableAckPayload()
 ******************************
 
 .. doxygenfunction:: enableAckPayload()
 
-disableAckPayloads()
+disableAckPayload()
 ******************************
 
 .. doxygenfunction:: disableAckPayload()
