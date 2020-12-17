@@ -250,8 +250,7 @@ public:
      *     .. code-block::
      *
      *         void isrCallbackFunction() {
-     *           bool tx_ds, tx_df, rx_dr;
-     *           radio.clearStatusFlags(tx_ds, tx_df, rx_dr); // resets the IRQ pin to HIGH
+     *           radio.clearStatusFlags(); // resets the IRQ pin to HIGH
      *           radio.available();                           // returned data should now be reliable
      *         }
      *
@@ -548,8 +547,7 @@ public:
      * .. code-block::
      *
      *     void isrCallbackFunction() {
-     *       bool tx_ds, tx_df, rx_dr;
-     *       radio.clearStatusFlags(tx_ds, tx_df, rx_dr); // resets the IRQ pin to HIGH
+     *       radio.clearStatusFlags(); // resets the IRQ pin to HIGH
      *       uint8_t pipe;                                // initialize pipe data
      *       radio.available(&amp;pipe);                  // pipe data should now be reliable
      *     }
@@ -1102,7 +1100,7 @@ public:
      *     payloads.
      *
      * @endrst
-     * @see send(), writeFast(), write(), startWrite(), writeAckPayload()
+     * @see send(), write(), writeAckPayload()
      * @param enable Whether to enable (true) or disable (false) the
      * auto-acknowledgment feature for all pipes
      */
@@ -1134,7 +1132,7 @@ public:
      *     to send ACK payloads.
      *
      * @endrst
-     * @see send(), writeFast(), write(), startWrite(), writeAckPayload(), enableAckPayloads(), disableAckPayloads()
+     * @see send(), write(), writeAckPayload(), enableAckPayloads(), disableAckPayloads()
      * @param pipe Which pipe to configure. This number should be in range [0, 5].
      * @param enable Whether to enable (true) or disable (false) the
      * auto-acknowledgment feature for the specified pipe

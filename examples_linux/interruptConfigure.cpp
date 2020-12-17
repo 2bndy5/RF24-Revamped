@@ -269,26 +269,25 @@ void interruptHandler() {
 
     cout << "\tIRQ pin is actively LOW" << endl;  // show that this function was called
 
-    bool tx_ds, tx_df, rx_dr;                     // declare variables for IRQ masks
-    radio.clearStatusFlags(tx_ds, tx_df, rx_dr);      // get values for IRQ masks
+    radio.clearStatusFlags();      // get values for IRQ masks
     // clearStatusFlags() clears the IRQ masks also. This is required for
     // continued TX operations when a transmission fails.
     // clearing the IRQ masks resets the IRQ pin to its inactive state (HIGH)
 
-    cout << "\tdata_sent: " << tx_ds;             // print "data sent" mask state
-    cout << ", data_fail: " << tx_df;             // print "data fail" mask state
-    cout << ", data_ready: " << rx_dr << endl;    // print "data ready" mask state
+    cout << "\tdata_sent: " << radio.irqDs();             // print "data sent" mask state
+    cout << ", data_fail: " << radio.irqDf();             // print "data fail" mask state
+    cout << ", data_ready: " << radio.irqDr() << endl;    // print "data ready" mask state
 
-    if (tx_df)                                    // if TX payload failed
+    if (radio.irqDf())                                    // if TX payload failed
         radio.flushTx();                         // clear all payloads from the TX FIFO
 
     // print if test passed or failed. Unintentional fails mean the RX node was not listening.
     if (pl_iterator == 0)
-        cout << "   'Data Ready' event test " << (rx_dr ? "passed" : "failed") << endl;
+        cout << "   'Data Ready' event test " << (radio.irqDr() ? "passed" : "failed") << endl;
     else if (pl_iterator == 1)
-        cout << "   'Data Sent' event test " << (tx_ds ? "passed" : "failed") << endl;
+        cout << "   'Data Sent' event test " << (radio.irqDs() ? "passed" : "failed") << endl;
     else if (pl_iterator == 3)
-        cout << "   'Data Fail' event test " << (tx_df ? "passed" : "failed") << endl;
+        cout << "   'Data Fail' event test " << (radio.irqDf() ? "passed" : "failed") << endl;
 
     wait_for_event = false; // ready to continue
 } // interruptHandler

@@ -200,7 +200,7 @@ void master() {
     clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer); // start the timer
     while (i < SIZE) {
         makePayload(i);
-        if (!radio.writeFast(&buffer, SIZE)) {
+        if (!radio.send(&buffer, SIZE)) {
             failures++;
             // radio.resend();
         } else {

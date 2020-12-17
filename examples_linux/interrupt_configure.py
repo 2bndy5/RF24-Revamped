@@ -62,26 +62,26 @@ ack_payloads = (b"Yak ", b"Back", b" ACK")
 def interrupt_handler(channel):
     """This function is called when IRQ pin is detected active LOW"""
     print("IRQ pin", channel, "went active LOW.")
-    tx_ds, tx_df, rx_dr = radio.clearStatusFlags()   # get IRQ status flags
-    if tx_df:
+    radio.clearStatusFlags()   # get IRQ status flags
+    if radio.irqDf():
         radio.flushTx()
-    print("\ttx_ds: {}, tx_df: {}, rx_dr: {}".format(tx_ds, tx_df, rx_dr))
+    print("\tirqDs: {}, irqDf: {}, irqDr(): {}".format(radio.irqDs(), radio.irqDf(), radio.irqDr()))
     if pl_iterator[0] == 0:
         print(
             "    'data ready' event test {}".format(
-                "passed" if rx_dr else "failed"
+                "passed" if radio.irqDr() else "failed"
             )
         )
     elif pl_iterator[0] == 1:
         print(
             "    'data sent' event test {}".format(
-                "passed" if tx_ds else "failed"
+                "passed" if radio.irqDs() else "failed"
             )
         )
     elif pl_iterator[0] == 3:
         print(
             "    'data fail' event test {}".format(
-                "passed" if tx_df else "failed"
+                "passed" if radio.irqDf() else "failed"
             )
         )
 
@@ -144,13 +144,13 @@ def master():
 
     # on data ready test
     print("\nConfiguring IRQ pin to only ignore 'on data sent' event")
-    radio.interruptConfig(True, False, False)  # args = tx_ds, tx_df, rx_dr
+    radio.interruptConfig(True, False, False)  # args = irqDs(), irqDf(), irqDr()
     print("    Pinging slave node for an ACK payload...", end=" ")
     _ping_n_wait(0)
 
     # on "data sent" test
     print("\nConfiguring IRQ pin to only ignore 'on data ready' event")
-    radio.interruptConfig(False, False, True)  # args = tx_ds, tx_df, rx_dr
+    radio.interruptConfig(False, False, True)  # args = irqDs(), irqDf(), irqDr()
     print("    Pinging slave node again...             ", end=" ")
     _ping_n_wait(1)
 
@@ -172,7 +172,7 @@ def master():
 
     # on "data fail" test
     print("\nConfiguring IRQ pin to go active for all events.")
-    radio.interruptConfig(False, False, False)  # args = tx_ds, tx_df, rx_dr
+    radio.interruptConfig(False, False, False)  # args = irqDs(), irqDf(), irqDr()
     print("    Sending a ping to inactive slave node...", end=" ")
     _ping_n_wait(3)
 

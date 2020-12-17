@@ -80,7 +80,7 @@ def master(count=1):
         while buf_iter < SIZE:  # cycle through all the payloads
             buffer = make_buffer(buf_iter)  # make a payload
 
-            if not radio.writeFast(buffer):  # transmission failed
+            if not radio.send(buffer):  # transmission failed
                 failures += 1  # increment manual retry count
                 if failures > 99 and buf_iter < 7 and multiplier < 2:
                     # we need to prevent an infinite loop

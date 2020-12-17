@@ -110,7 +110,7 @@ void loop() {
     unsigned long start_timer = micros();       // start the timer
     while (i < SIZE) {
       makePayload(i);                           // make the payload
-      if (!radio.writeFast(&buffer, SIZE)) {
+      if (!radio.send(&buffer, SIZE)) {
         failures++;
         // radio.resend();
       } else {

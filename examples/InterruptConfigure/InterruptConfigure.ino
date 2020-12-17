@@ -287,33 +287,32 @@ void interruptHandler() {
 
   Serial.println(F("\tIRQ pin is actively LOW")); // show that this function was called
   delayMicroseconds(250);
-  bool tx_ds, tx_df, rx_dr;                       // declare variables for IRQ masks
-  radio.clearStatusFlags(tx_ds, tx_df, rx_dr);        // get values for IRQ masks
+  radio.clearStatusFlags();        // get values for IRQ masks
   // clearStatusFlags() clears the IRQ masks also. This is required for
   // continued TX operations when a transmission fails.
   // clearing the IRQ masks resets the IRQ pin to its inactive state (HIGH)
 
   Serial.print(F("\tdata_sent: "));
-  Serial.print(tx_ds);                            // print "data sent" mask state
+  Serial.print(radio.irqDs());                            // print "data sent" mask state
   Serial.print(F(", data_fail: "));
-  Serial.print(tx_df);                            // print "data fail" mask state
+  Serial.print(radio.irqDf());                            // print "data fail" mask state
   Serial.print(F(", data_ready: "));
-  Serial.println(rx_dr);                          // print "data ready" mask state
+  Serial.println(radio.irqDr());                          // print "data ready" mask state
 
-  if (tx_df)                                      // if TX payload failed
+  if (radio.irqDf())                                      // if TX payload failed
     radio.flushTx();                             // clear all payloads from the TX FIFO
 
   // print if test passed or failed. Unintentional fails mean the RX node was not listening.
   // pl_iterator has already been incremented by now
   if (pl_iterator <= 1) {
     Serial.print(F("   'Data Ready' event test "));
-    Serial.println(rx_dr ? F("passed") : F("failed"));
+    Serial.println(radio.irqDr() ? F("passed") : F("failed"));
   } else if (pl_iterator == 2) {
     Serial.print(F("   'Data Sent' event test "));
-    Serial.println(tx_ds ? F("passed") : F("failed"));
+    Serial.println(radio.irqDs() ? F("passed") : F("failed"));
   } else if (pl_iterator == 4) {
     Serial.print(F("   'Data Fail' event test "));
-    Serial.println(tx_df ? F("passed") : F("failed"));
+    Serial.println(radio.irqDf() ? F("passed") : F("failed"));
   }
   wait_for_event = false; // ready to continue with loop() operations
 } // interruptHandler
