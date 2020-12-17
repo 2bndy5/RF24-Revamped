@@ -1,4 +1,4 @@
-name: DoxyGen build
+name: DoxyGen to Sphinx
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ on:
       - edited
 
 jobs:
-  build-doxygen:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
       id: latest_ver
       uses: pozetroninc/github-action-get-latest-release@master
       with:
-        repository: nRF24/RF24
+        repository: 2bndy5/RF24
     - name: checkout
       uses: actions/checkout@v2
     - name: overwrite doxygen tags
@@ -36,14 +36,20 @@ jobs:
         echo "PROJECT_NUMBER = ${{ steps.latest_ver.outputs.release }}" >> doxygenAction
         echo "OUTPUT_DIRECTORY = ./docs" >> doxygenAction
         echo "@INCLUDE = doxygenAction" >> Doxyfile
-    - name: build doxygen
+    - name: run doxygen
       uses: mattnotmitt/doxygen-action@v1
       with:
           working-directory: '.'
           doxyfile-path: './Doxyfile'
+    - name: install Sphinx, breathe, recommonmark, sphinx-rtd-theme
+      run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme
+    - name: run Sphinx
+      run: |
+        cd docs
+        sphinx-build -E -W . _build
     - name: upload to github pages
       # if: ${{ github.event_name == 'release'}}
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/html
+        publish_dir: ./docs/_build

@@ -6,7 +6,7 @@
 /**
  * Example of spi.h class declaration for SPI portability
  *
- * @defgroup Porting_SPI Porting: SPI
+ * @defgroup porting_spi Porting: SPI
  *
  * @{
  */
@@ -24,7 +24,7 @@
 
 using namespace std;
 
-// class SPI {
+class SPI {
 public:
 
 	/**

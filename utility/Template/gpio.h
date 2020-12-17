@@ -8,14 +8,14 @@
 /**
  * Example of gpio.h class declaration for GPIO portability
  *
- * @defgroup Porting_GPIO Porting: GPIO
+ * @defgroup porting_gpio Porting: GPIO
  *
  * @{
  */
 
 #include <cstdio>
 
-// class GPIO {
+class GPIO {
 public:
     /* Constants */
     static const int DIRECTION_OUT = 1;
@@ -27,7 +27,7 @@ public:
     GPIO();
 
     /**
-     * Similar to Arduino pinMode(pin,mode);
+     * Similar to Arduino pinMode(pin, mode);
      * @param port
      * @param DDR
      */
@@ -46,7 +46,7 @@ public:
     static int read(int port);
 
     /**
-    * Similar to Arduino digitalWrite(pin,state);
+    * Similar to Arduino digitalWrite(pin, state);
     * @param port
     * @param value
     */

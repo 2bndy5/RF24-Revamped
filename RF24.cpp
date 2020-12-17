@@ -1240,13 +1240,6 @@ bool RF24::writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
 
 /****************************************************************************/
 
-bool RF24::isAckPayloadAvailable(void)
-{
-    return available(NULL);
-}
-
-/****************************************************************************/
-
 bool RF24::isPVariant(void)
 {
     return _is_p_variant;

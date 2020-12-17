@@ -13,7 +13,7 @@
 /**
  * Example of compatibility.h class declaration for timing functions portability
  *
- * @defgroup Porting_Timing Porting: Timing
+ * @defgroup porting_timing Porting: Timing
  *
  * @{
  */

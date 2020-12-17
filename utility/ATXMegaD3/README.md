@@ -1,4 +1,4 @@
-This is a fork from **http://nRF24.github.io/RF24** which can be build as a static library for Atmel Studio 7.
+This is a fork from **http://2bndy5.github.io/RF24** which can be build as a static library for Atmel Studio 7.
 
 Not all files are needed.
 
@@ -51,4 +51,4 @@ Call the **__start_timer()** to start the millisecond timer.
 
 
 
-** For further information please see http://nRF24.github.io/RF24 for all documentation**
+** For further information please see http://2bndy5.github.io/RF24 for all documentation**

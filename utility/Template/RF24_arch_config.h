@@ -15,7 +15,7 @@
 /**
  * Example of RF24_arch_config.h for RF24 portability
  *
- * @defgroup Porting_General Porting: General
+ * @defgroup porting_general Porting: General
  *
  * @{
  */

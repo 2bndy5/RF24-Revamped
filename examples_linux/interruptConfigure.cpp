@@ -1,5 +1,5 @@
 /*
- * See documentation at https://nRF24.github.io/RF24
+ * See documentation at https://2bndy5.github.io/RF24
  * See License information at root directory of this library
  * Author: Brendan Doherty (2bndy5)
  */
@@ -14,7 +14,6 @@
  * Use `ctrl+c` to quit at any time.
  */
 #include <ctime>       // time()
-#include <cstring>     // strcmp()
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
@@ -37,7 +36,7 @@ volatile bool wait_for_event = false; // used to signify that the event is handl
 // Generic:
 RF24 radio(22, 0);
 /****************** Linux (BBB,x86,etc) ***********************/
-// See http://nRF24.github.io/RF24/pages.html for more information on usage
+// See http://2bndy5.github.io/RF24/pages.html for more information on usage
 // See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA
 // See https://www.kernel.org/doc/Documentation/spi/spidev for more information on SPIDEV
 
@@ -317,22 +316,4 @@ void printRxFifo(const uint8_t pl_size) {
 
     // print the entire RX FIFO with 1 buffer
     cout << "Complete RX FIFO: " << rx_fifo << endl;
-}
-
-
-
-/**
- * print a manual page of instructions on how to use this example's CLI args
- */
-void printHelp(string progName) {
-    cout << "usage: " << progName << " [-h] [-n {0,1}] [-r {0,1}]\n\n"
-         << "This example uses Acknowledgement (ACK) payloads attached to ACK packets to\n"
-         << "demonstrate how the nRF24L01's IRQ (Interrupt Request) pin can be\n"
-         << "configured to detect when data is received, or when data has transmitted\n"
-         << "successfully, or when data has failed to transmit.\n"
-         << "\nThis example was written to be used on 2 devices acting as 'nodes'.\n"
-         << "\noptional arguments:\n  -h, --help\t\tshow this help message and exit\n"
-         << "  -n {0,1}, --node {0,1}\n\t\t\tthe identifying radio number\n"
-         << "  -r {0,1}, --role {0,1}\n\t\t\t'1' specifies the TX role."
-         << " '0' specifies the RX role." << endl;
 }

@@ -1,5 +1,5 @@
 /*
- * See documentation at https://nRF24.github.io/RF24
+ * See documentation at https://2bndy5.github.io/RF24
  * See License information at root directory of this library
  * Author: Brendan Doherty (2bndy5)
  */

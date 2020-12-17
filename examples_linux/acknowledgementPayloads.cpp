@@ -1,5 +1,5 @@
 /*
- * See documentation at https://nRF24.github.io/RF24
+ * See documentation at https://2bndy5.github.io/RF24
  * See License information at root directory of this library
  * Author: Brendan Doherty (2bndy5)
  */
@@ -12,7 +12,6 @@
  * Use `ctrl+c` to quit at any time.
  */
 #include <ctime>       // time()
-#include <cstring>     // strcmp()
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
@@ -29,7 +28,7 @@ using namespace std;
 // Generic:
 RF24 radio(22, 0);
 /****************** Linux (BBB,x86,etc) ***********************/
-// See http://nRF24.github.io/RF24/pages.html for more information on usage
+// See http://2bndy5.github.io/RF24/pages.html for more information on usage
 // See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA
 // See https://www.kernel.org/doc/Documentation/spi/spidev for more information on SPIDEV
 

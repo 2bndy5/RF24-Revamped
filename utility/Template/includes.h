@@ -6,7 +6,7 @@
 /**
  * Example of includes.h for RF24 Linux portability
  *
- * @defgroup Porting_Includes Porting: Includes
+ * @defgroup porting_includes Porting: Includes
  *
  * @{
  */
