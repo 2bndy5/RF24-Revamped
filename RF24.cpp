@@ -125,7 +125,7 @@ void RF24::read_register(uint8_t reg, uint8_t* buf, uint8_t len)
     #else // !defined(RF24_LINUX)
 
     beginTransaction();
-    status = _SPI.transferreg;
+    status = _SPI.transfer(reg);
     while (len--) {
         *buf++ = _SPI.transfer(0xFF);
     }
@@ -155,7 +155,7 @@ uint8_t RF24::read_register(uint8_t reg)
     #else // !defined(RF24_LINUX)
 
     beginTransaction();
-    status = _SPI.transferreg;
+    status = _SPI.transfer(reg);
     result = _SPI.transfer(0xff);
     endTransaction();
 
@@ -235,7 +235,7 @@ void RF24::write_payload(const void* buf, uint8_t data_len, const uint8_t writeT
     uint8_t blank_len = !data_len ? 1 : 0;
     if (!(dyn_pl_enabled & 1)) {
         data_len = rf24_min(data_len, payload_size[0]);
-        blank_len = payload_size - data_len;
+        blank_len = payload_size[0] - data_len;
     }
     else {
         data_len = rf24_min(data_len, 32);
@@ -465,7 +465,7 @@ void RF24::setPayloadLength(uint8_t size, uint8_t pipe)
     // write static payload size setting for all pipes
     if (pipe < 6) {
         payload_size[pipe] = size;
-        write_register(RX_PW_P0 + pipe, payload_size);
+        write_register(RX_PW_P0 + pipe, payload_size[pipe]);
     }
 }
 
@@ -969,7 +969,7 @@ uint8_t RF24::any(void)
 {
     feature_reg = read_register(FEATURE);
     uint8_t pipe = (status >> RX_P_NO) & 7;
-    if (pipe < 6){
+    if (pipe < 6) {
         if (feature_reg & _BV(EN_DPL)) {
             return read_register(R_RX_PL_WID);
         } else {
@@ -1213,7 +1213,7 @@ bool RF24::getDynamicPayloads(uint8_t pipe)
         dyn_pl_enabled = read_register(DYNPD);
         auto_ack_enabled = read_register(EN_AA);
         if ((auto_ack_enabled & dyn_pl_enabled) | _BV(pipe)) {
-            return !pipe ? feature_reg | _BV(EN_DPL) : true;
+            return !pipe ? (bool)(feature_reg | _BV(EN_DPL)) : true;
         }
         return false;
     }
