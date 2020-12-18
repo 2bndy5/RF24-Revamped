@@ -1073,7 +1073,7 @@ public:
      * @return Payload length in bytes of next available payload in the RX FIFO.
      * If no payload is available then this function returns 0.
      */
-    uint8_t RF24::any(void);
+    uint8_t any(void);
 
     /**
      * Enable custom payloads in the acknowledge packets
