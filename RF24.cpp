@@ -451,7 +451,7 @@ void RF24::setPayloadLength(uint8_t size)
     // write static payload size setting for all pipes
     for (uint8_t i = 0; i < 6; ++i) {
         payload_size[i] = size;
-        write_register(RX_PW_P0 + i, payload_size);
+        write_register(RX_PW_P0 + i, payload_size[i]);
     }
 }
 
@@ -1207,16 +1207,16 @@ void RF24::setDynamicPayloads(bool enable, uint8_t pipe)
 
 bool RF24::getDynamicPayloads(uint8_t pipe)
 {
+    // update prerequisite features' statuses
+    feature_reg = read_register(FEATURE);
     if (pipe < 6) {
-        // update prerequisite features' statuses
-        feature_reg = read_register(FEATURE);
         dyn_pl_enabled = read_register(DYNPD);
         auto_ack_enabled = read_register(EN_AA);
         if ((auto_ack_enabled & dyn_pl_enabled) | _BV(pipe)) {
             return !pipe ? (bool)(feature_reg | _BV(EN_DPL)) : true;
         }
-        return false;
     }
+    return (bool)(feature_reg | _BV(EN_DPL));
 }
 
 /****************************************************************************/
@@ -1328,10 +1328,11 @@ void RF24::setAutoAck(bool enable, uint8_t pipe)
 
 bool RF24::getAutoAck(uint8_t pipe)
 {
+    auto_ack_enabled = read_register(EN_AA);
     if (pipe < 6) {
-        auto_ack_enabled = read_register(EN_AA);
-        return auto_ack_enabled & _BV(pipe);
+        return (bool)(auto_ack_enabled & _BV(pipe));
     }
+    return (bool)(auto_ack_enabled & 1);
 }
 
 /****************************************************************************/
