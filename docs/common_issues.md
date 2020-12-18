@@ -1,19 +1,16 @@
 # Common Issues
-
-
 ## Settings that must match
-
 Before you report undesirable behavior, please make sure that the
 following RF24 configurations match on both receiving and transmitting
 nRF24L01 transceivers:
 
-1. [setAddressWidth()](advanced_api.html#setaddresswidth)
+1. [setAddressLength()](advanced_api.html#setaddresswidth)
 2. [setChannel()](configure_api.html#setchannel)
 3. [setDataRate()](configure_api.html#setdatarate)
 4. [setAutoAck()](configure_api.html#setautoack)
-5. [enableDynamicPayloads()](configure_api.html#enabledynamicpayloads) or [disableDynamicPayloads()](configure_api.html#disabledynamicpayloads)
+5. [setDynamicPayloads()](configure_api.html#enabledynamicpayloads) or [disableDynamicPayloads()](configure_api.html#disabledynamicpayloads)
 6. [enableAckPayload()](configure_api.html#enableackpayload) or [disableAckPayload()](configure_api.html#disableackpayload) (requires auto-ack and dynamic payloads features)
-7. [setPayloadSize()](configure_api.html#setpayloadsize) (only if the dynamic payloads feature is disabled -- it is disabled by default)
+7. [setPayloadLength()](configure_api.html#setpayloadsize) (only if the dynamic payloads feature is disabled -- it is disabled by default)
 8. [setCrc()](configure_api.html#setcrc) (the auto-ack feature automatically enables CRC because it is required)
 
 Also, it helps to think of an address as a path (a commonly shared route)
@@ -24,20 +21,13 @@ to match. You can think of pipes as parking spots for the packets, while
 all packets' payloads live in a TX or RX FIFO buffer. Remember that the
 TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of
 3 payloads (regardless of the maximum 32-byte payload size).
-
 ## The most common issues and their solutions
-
-
 ### send() always returns true after setAutoAck(false)
-
-
 Don't disabled the auto-ack feature. [send()](basic_api.html#send) has no reason to doubt
 that the payload was delivered if the auto-ack feature is disabled. We
 recommend you read the docs about [setAutoAck()](configure_api.html#setautoack) before disabling the
 auto-ack feature.
-
 ### send() returns false when the payload was received
-
 If the settings match on both endpoint transceivers, then this can only
 mean that the receiving nRF24L01 failed to send an acknowledgement (ACK)
 packet back to the transmitting nRF24L01. Usually this is due to

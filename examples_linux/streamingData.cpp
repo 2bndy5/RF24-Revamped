@@ -135,7 +135,7 @@ int main(int argc, char** argv) {
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
-    radio.setPayloadSize(SIZE);    // default value is the maximum 32 bytes
+    radio.setPayloadLength(SIZE);    // default value is the maximum 32 bytes
 
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to

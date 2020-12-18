@@ -76,7 +76,7 @@ void setup() {
   radio.setPaLevel(RF24_PA_LOW);     // RF24_PA_MAX is default.
 
   // to use ACK payloads, we need to enable dynamic payload lengths (for all nodes)
-  radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
+  radio.setDynamicPayloads(true);    // ACK payloads are dynamically sized
 
   // Acknowledgement packets have no payloads by default. We need to enable
   // this feature for all nodes (TX & RX) to use ACK payloads.
@@ -99,7 +99,7 @@ void setup() {
 
     memcpy(payload.message, "World ", 6);                       // set the payload message
     // load the payload for the first received transmission on pipe 0
-    radio.writeAckPayload(1, &payload, sizeof(PayloadStruct));
+    radio.writeAck(1, &payload, sizeof(PayloadStruct));
 
     radio.startListening();                                     // put radio in RX mode
   }
@@ -132,7 +132,7 @@ void loop() {
         PayloadStruct received;
         radio.read(&received, sizeof(received));             // get incoming ACK payload
         Serial.print(F(" Recieved "));
-        Serial.print(radio.getDynamicPayloadSize());         // print incoming payload size
+        Serial.print(radio.any());         // print incoming payload size
         Serial.print(F(" bytes on pipe "));
         Serial.print(pipe);                                  // print pipe number that received the ACK
         Serial.print(F(": "));
@@ -159,7 +159,7 @@ void loop() {
 
     uint8_t pipe;
     if (radio.available(&pipe)) {                    // is there a payload? get the pipe number that recieved it
-      uint8_t bytes = radio.getDynamicPayloadSize(); // get the size of the payload
+      uint8_t bytes = radio.any(); // get the size of the payload
       PayloadStruct received;
       radio.read(&received, sizeof(received));       // get incoming payload
       Serial.print(F("Received "));
@@ -176,7 +176,7 @@ void loop() {
       // save incoming counter & increment for next outgoing
       payload.counter = received.counter + 1;
       // load the payload for the first received transmission on pipe 0
-      radio.writeAckPayload(1, &payload, sizeof(payload));
+      radio.writeAck(1, &payload, sizeof(payload));
     }
   } // role
 
@@ -201,7 +201,7 @@ void loop() {
       memcpy(payload.message, "World ", 6); // change payload message
 
       // load the payload for the first received transmission on pipe 0
-      radio.writeAckPayload(1, &payload, sizeof(PayloadStruct));
+      radio.writeAck(1, &payload, sizeof(PayloadStruct));
       radio.startListening();
     }
   }

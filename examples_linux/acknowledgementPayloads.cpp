@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
     radioNumber = input.length() > 0 && (uint8_t)input[0] == 49;
 
     // to use ACK payloads, we need to enable dynamic payload lengths
-    radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
+    radio.setDynamicPayloads(true);    // ACK payloads are dynamically sized
 
     // Acknowledgement packets have no payloads by default. We need to enable
     // this feature for all nodes (TX & RX) to use ACK payloads.
@@ -156,7 +156,7 @@ void master() {
                 PayloadStruct received;
                 radio.read(&received, sizeof(received));          // get incoming ACK payload
                 cout << " Received ";
-                cout << radio.getDynamicPayloadSize();            // print incoming payload size
+                cout << radio.any();            // print incoming payload size
                 cout << " bytes on pipe " << (unsigned int)pipe;  // print pipe that received it
                 cout << ": " << received.message;                 // print incoming message
                 cout << (unsigned int)received.counter << endl;   // print incoming counter
@@ -185,14 +185,14 @@ void slave() {
     memcpy(payload.message, "World ", 6);                    // set the payload message
 
     // load the payload for the first received transmission on pipe 0
-    radio.writeAckPayload(1, &payload, sizeof(payload));
+    radio.writeAck(1, &payload, sizeof(payload));
 
     radio.startListening();                                  // put radio in RX mode
     time_t startTimer = time(nullptr);                       // start a timer
     while (time(nullptr) - startTimer < 6) {                 // use 6 second timeout
         uint8_t pipe;
         if (radio.available(&pipe)) {                        // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.getDynamicPayloadSize();   // get the size of the payload
+            uint8_t bytes = radio.any();   // get the size of the payload
             PayloadStruct received;
             radio.read(&received, sizeof(received));         // fetch payload from RX FIFO
             cout << "Received " << (unsigned int)bytes;      // print the size of the payload
@@ -207,7 +207,7 @@ void slave() {
             // save incoming counter & increment for next outgoing
             payload.counter = received.counter + 1;
             // load the payload for the first received transmission on pipe 0
-            radio.writeAckPayload(1, &payload, sizeof(payload));
+            radio.writeAck(1, &payload, sizeof(payload));
         } // if received something
     } // while
     cout << "Nothing received in 6 seconds. Leaving RX role." << endl;

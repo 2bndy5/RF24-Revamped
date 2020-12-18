@@ -70,7 +70,7 @@ void setup() {
   // Examples are usually run with both radios in close proximity to each other
   radio.setPALevel(RF24_PA_LOW);          // defaults to RF24_PA_MAX
   radio.enableAckPayload();               // We will be using the ACK Payload feature which is not enabled by default
-  radio.enableDynamicPayloads();          // Ack payloads are dynamic payloads
+  radio.setDynamicPayloads(true);          // Ack payloads are dynamic payloads
 
   // Open a writing and reading pipe on each radio, with opposite addresses
   if (role == role_sender) {
@@ -82,7 +82,7 @@ void setup() {
     radio.startListening();               // First we need to start listening
 
     // Add an ACK payload for the first time around; 1 is the pipe number to acknowledge
-    radio.writeAckPayload(1, &message_count, sizeof(message_count));
+    radio.writeAck(1, &message_count, sizeof(message_count));
     ++message_count;                      // increment counter by 1 for next ACK payload
   }
 
@@ -165,7 +165,7 @@ void check_radio(void) {
       Serial.println(got_time);
 
       // Add an ACK payload for the next time around; 1 is the pipe number to acknowledge
-      radio.writeAckPayload(1, &message_count, sizeof(message_count));
+      radio.writeAck(1, &message_count, sizeof(message_count));
       ++message_count;                                                  // increment packet counter
     }
   }

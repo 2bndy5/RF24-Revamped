@@ -191,9 +191,9 @@ def slave(timeout=6):  # will listen for 6 seconds before timing out
     """
     pl_iterator[0] = 0  # reset this to indicate event is a 'data_ready' event
     # setup radio to recieve pings, fill TX FIFO with ACK payloads
-    radio.writeAckPayload(1, ack_payloads[0])
-    radio.writeAckPayload(1, ack_payloads[1])
-    radio.writeAckPayload(1, ack_payloads[2])
+    radio.writeAck(1, ack_payloads[0])
+    radio.writeAck(1, ack_payloads[1])
+    radio.writeAck(1, ack_payloads[2])
     radio.startListening()  # start listening & clear status flags
     start_timer = time.monotonic()  # start timer now
     while not radio.isFifo(False, True) and time.monotonic() - start_timer < timeout:
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # ACK payloads are dynamically sized.
-    radio.enableDynamicPayloads()  # to use ACK payloads
+    radio.setDynamicPayloads(True)  # to use ACK payloads
 
     # this example uses the ACK payload to trigger the IRQ pin active for
     # the "on data received" event

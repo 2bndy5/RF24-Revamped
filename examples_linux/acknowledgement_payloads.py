@@ -75,7 +75,7 @@ def master():
             has_payload, pipe_number = radio.available_pipe()
             if has_payload:
                 # print the received ACK that was automatically sent
-                length = radio.getDynamicPayloadSize()
+                length = radio.any()
                 response = radio.read(length)
                 print(
                     "Received {} on pipe {}: {}{}".format(
@@ -111,13 +111,13 @@ def slave(timeout=6):
     buffer = b"World \x00" + bytes(counter)
     # we must set the ACK payload data and corresponding
     # pipe number [0,5]
-    radio.writeAckPayload(1, buffer)  # load ACK for first response
+    radio.writeAck(1, buffer)  # load ACK for first response
 
     start_timer = time.monotonic()  # start timer
     while (time.monotonic() - start_timer) < timeout:
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
-            length = radio.getDynamicPayloadSize()  # grab the payload length
+            length = radio.any()  # grab the payload length
             received = radio.read(length)  # fetch 1 payload from RX FIFO
             # increment counter from received payload
             counter[0] = received[7:8][0] + 1 if received[7:8][0] < 255 else 0
@@ -132,7 +132,7 @@ def slave(timeout=6):
                 )
             )
             buffer = b"World \x00" + bytes(counter)  # build a new ACK payload
-            radio.writeAckPayload(1, buffer)  # load ACK for next response
+            radio.writeAck(1, buffer)  # load ACK for next response
             start_timer = time.monotonic()  # reset timer
 
     print("Nothing received in 6 seconds. Leaving RX role")
@@ -204,7 +204,7 @@ if __name__ == "__main__":
     radio.setPaLevel(RF24_PA_LOW)  # RF24_PA_MAX is default
 
     # ACK payloads are dynamically sized.
-    radio.enableDynamicPayloads()  # to use ACK payloads
+    radio.setDynamicPayloads(True)  # to use ACK payloads
 
     # to enable the custom ACK payload feature
     radio.enableAckPayload()

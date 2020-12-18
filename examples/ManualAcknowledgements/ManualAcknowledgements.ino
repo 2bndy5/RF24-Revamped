@@ -84,7 +84,7 @@ void setup() {
 
   // save on transmission time by setting the radio to only transmit the
   // number of bytes we need to transmit a float
-  radio.setPayloadSize(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
+  radio.setPayloadLength(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
 
   // set the TX address of the RX node into the TX pipe
   radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -143,7 +143,7 @@ void loop() {
         PayloadStruct received;
         radio.read(&received, sizeof(received));             // get payload from RX FIFO
         Serial.print(F(" Received "));
-        Serial.print(radio.getPayloadSize());                // print the size of the payload
+        Serial.print(radio.any());                // print the size of the payload
         Serial.print(F(" bytes on pipe "));
         Serial.print(pipe);                                  // print the pipe number
         Serial.print(F(": "));
@@ -178,7 +178,7 @@ void loop() {
 
       // print summary of transactions
       Serial.print(F("Received "));
-      Serial.print(radio.getPayloadSize());    // print the size of the payload
+      Serial.print(radio.any());    // print the size of the payload
       Serial.print(F(" bytes on pipe "));
       Serial.print(pipe);                      // print the pipe number
       Serial.print(F(": "));

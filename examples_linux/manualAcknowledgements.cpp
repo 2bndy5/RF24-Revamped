@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
-    radio.setPayloadSize(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
+    radio.setPayloadLength(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -166,7 +166,7 @@ void master() {
             uint8_t pipe;
             cout << "Transmission successful! ";
             if (radio.available(&pipe)) {                    // is there a payload received? grab the pipe number that received it
-                uint8_t bytes = radio.getPayloadSize();      // grab the incoming payload size
+                uint8_t bytes = radio.any();      // grab the incoming payload size
                 cout << "Round trip delay = ";
                 cout << ellapsedTime;                        // print the timer result
                 cout << " us. Sent: " << payload.message;    // print outgoing message
@@ -209,7 +209,7 @@ void slave() {
     while (time(nullptr) - startTimer < 6) {                 // use 6 second timeout
         uint8_t pipe;
         if (radio.available(&pipe)) {                        // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.getPayloadSize();          // get size of incoming payload
+            uint8_t bytes = radio.any();          // get size of incoming payload
             PayloadStruct received;
             radio.read(&received, sizeof(received));         // get incoming payload
             payload.counter = received.counter + 1;          // increment payload for response

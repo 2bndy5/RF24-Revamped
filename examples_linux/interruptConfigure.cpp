@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
     radioNumber = input.length() > 0 && (uint8_t)input[0] == 49;
 
     // to use ACK payloads, we need to enable dynamic payload lengths
-    radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
+    radio.setDynamicPayloads(true);    // ACK payloads are dynamically sized
 
     // Acknowledgement packets have no payloads by default. We need to enable
     // this feature for all nodes (TX & RX) to use ACK payloads.
@@ -217,9 +217,9 @@ void slave() {
 
     // Fill the TX FIFO with 3 ACK payloads for the first 3 received
     // transmissions on pipe 0.
-    radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-    radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-    radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
     radio.startListening();            // put radio in RX mode
     time_t startTimer = time(nullptr); // start a timer

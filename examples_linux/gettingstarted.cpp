@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
-    radio.setPayloadSize(sizeof(payload)); // float datatype occupies 4 bytes
+    radio.setPayloadLength(sizeof(payload)); // float datatype occupies 4 bytes
 
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
@@ -163,7 +163,7 @@ void slave() {
     while (time(nullptr) - startTimer < 6) {                 // use 6 second timeout
         uint8_t pipe;
         if (radio.available(&pipe)) {                        // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.getDynamicPayloadSize();   // get the size of the payload
+            uint8_t bytes = radio.any();   // get the size of the payload
             radio.read(&payload, bytes);                     // fetch payload from FIFO
             cout << "Received " << (unsigned int)bytes;      // print the size of the payload
             cout << " bytes on pipe " << (unsigned int)pipe; // print the pipe number

@@ -120,7 +120,7 @@ void setup(void)
   radio.begin();
 
   // enable dynamic payloads
-  radio.enableDynamicPayloads();
+  radio.setDynamicPayloads(true);
   radio.setCRCLength( RF24_CRC_16 ) ;
 
   // optionally, increase the delay between retries & # of retries
@@ -198,7 +198,7 @@ void loop(void)
     else
     {
       // Grab the response, compare, and send to debugging spew
-      uint8_t len = radio.getDynamicPayloadSize();
+      uint8_t len = radio.any();
       radio.read( receive_payload, len );
 
       // Put a zero at the end for easy printing
@@ -235,7 +235,7 @@ void loop(void)
       while (radio.available())
       {
         // Fetch the payload, and see if this was the last one.
-        len = radio.getDynamicPayloadSize();
+        len = radio.any();
         radio.read( receive_payload, len );
 
         // Put a zero at the end for easy printing

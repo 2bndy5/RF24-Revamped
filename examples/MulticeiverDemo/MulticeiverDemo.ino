@@ -81,7 +81,7 @@ void setup() {
 
   // save on transmission time by setting the radio to only transmit the
   // number of bytes we need to transmit a float
-  radio.setPayloadSize(sizeof(payload)); // 2x int datatype occupy 8 bytes
+  radio.setPayloadLength(sizeof(payload)); // 2x int datatype occupy 8 bytes
 
   // Set the pipe addresses accordingly. This function additionally also
   // calls startListening() or stopListening() and sets the payload's nodeID
@@ -127,7 +127,7 @@ void loop() {
 
     uint8_t pipe;
     if (radio.available(&pipe)) {             // is there a payload? get the pipe number that recieved it
-      uint8_t bytes = radio.getPayloadSize(); // get the size of the payload
+      uint8_t bytes = radio.any(); // get the size of the payload
       radio.read(&payload, bytes);            // fetch payload from FIFO
       Serial.print(F("Received "));
       Serial.print(bytes);                    // print the size of the payload

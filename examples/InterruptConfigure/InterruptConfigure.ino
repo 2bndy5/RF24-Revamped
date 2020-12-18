@@ -94,7 +94,7 @@ void setup() {
   // For this example we use acknowledgment (ACK) payloads to trigger the
   // IRQ pin when data is received on the TX node.
   // to use ACK payloads, we need to enable dynamic payload lengths
-  radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
+  radio.setDynamicPayloads(true);    // ACK payloads are dynamically sized
 
   // Acknowledgement packets have no payloads by default. We need to enable
   // this feature for all nodes (TX & RX) to use ACK payloads.
@@ -120,9 +120,9 @@ void setup() {
 
     // Fill the TX FIFO with 3 ACK payloads for the first 3 received
     // transmissions on pipe 1
-    radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-    radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-    radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+    radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
     radio.startListening(); // put radio in RX mode
   }
@@ -229,9 +229,9 @@ void loop() {
 
       // Fill the TX FIFO with 3 ACK payloads for the first 3 received
       // transmissions on pipe 1.
-      radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-      radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-      radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
       delay(100);             // let TX node finish its role
       radio.startListening(); // We're ready to start over. Begin listening.
@@ -270,9 +270,9 @@ void loop() {
       // Fill the TX FIFO with 3 ACK payloads for the first 3 received
       // transmissions on pipe 1
       radio.flushTx(); // make sure there is room for 3 new ACK payloads
-      radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-      radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-      radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+      radio.writeAck(1, &ack_payloads[2], ack_pl_size);
       radio.startListening();
     }
   } // Serial.available()

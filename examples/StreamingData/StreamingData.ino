@@ -76,7 +76,7 @@ void setup() {
 
   // save on transmission time by setting the radio to only transmit the
   // number of bytes we need to transmit
-  radio.setPayloadSize(SIZE);     // default value is the maximum 32 bytes
+  radio.setPayloadLength(SIZE);     // default value is the maximum 32 bytes
 
   // set the TX address of the RX node into the TX pipe
   radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0

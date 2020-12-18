@@ -56,7 +56,7 @@ bp::object read_wrap(RF24 &ref, int maxlen)
     char *buf = new char[maxlen + 1];
     ref.read(buf, maxlen);
     bp::object
-        py_ba(bp::handle<>(PyByteArray_FromStringAndSize(buf, maxlen < ref.getPayloadSize() ? maxlen : ref.getPayloadSize())));
+        py_ba(bp::handle<>(PyByteArray_FromStringAndSize(buf, maxlen < ref.getPayloadLength() ? maxlen : ref.getPayloadLength())));
     delete[] buf;
     return py_ba;
 }
@@ -71,9 +71,9 @@ bool write_wrap2(RF24 &ref, bp::object buf, const bool multicast)
     return ref.send(get_bytes_or_bytearray_str(buf), get_bytes_or_bytearray_ln(buf), multicast);
 }
 
-void writeAckPayload_wrap(RF24 &ref, uint8_t pipe, bp::object buf)
+void writeAck_wrap(RF24 &ref, uint8_t pipe, bp::object buf)
 {
-    ref.writeAckPayload(pipe, get_bytes_or_bytearray_str(buf), get_bytes_or_bytearray_ln(buf));
+    ref.writeAck(pipe, get_bytes_or_bytearray_str(buf), get_bytes_or_bytearray_ln(buf));
 }
 
 void write_wrap1(RF24 &ref, bp::object buf, const bool multicast)
@@ -118,6 +118,16 @@ void clearStatusFlags_wrap2(RF24 &ref, bool dataReady, bool dataSent)
 void clearStatusFlags_wrap1(RF24 &ref, bool dataReady)
 {
     ref.clearStatusFlags(dataReady);
+}
+
+bool getDynamicPayloads_wrap(RF24 &ref)
+{
+    return ref.getDynamicPayloads(0);
+}
+
+bool getPayloadLength_wrap(RF24 &ref)
+{
+    return ref.getPayloadLength(0);
 }
 
 // ******************** enums **************************
@@ -245,7 +255,7 @@ BOOST_PYTHON_MODULE(RF24)
         .def(bp::init<uint8_t, uint8_t, uint32_t>((bp::arg("_cepin"), bp::arg("_cspin"), bp::arg("spispeed"))))
 #endif
         .def("begin", &RF24::begin)
-        .def("setAddressWidth", &RF24::setAddressWidth)
+        .def("setAddressLength", &RF24::setAddressLength)
         .def("openWritingPipe", &openWritingPipe_wrap, (bp::arg("address")))
         .def("openWritingPipe", (void (::RF24::*)(::uint64_t))(&::RF24::openWritingPipe), (bp::arg("address")))
         .def("openReadingPipe", &openReadingPipe_wrap, (bp::arg("number"), bp::arg("address")))
@@ -271,21 +281,30 @@ BOOST_PYTHON_MODULE(RF24)
         .add_property("channel", &RF24::getChannel, &RF24::setChannel)
         .def("setRetries", &RF24::setRetries, (bp::arg("delay"), bp::arg("count")))
         .def("setAutoAck", (void (::RF24::*)(bool))(&::RF24::setAutoAck), (bp::arg("enable")))
-        .def("setAutoAck", (void (::RF24::*)(::uint8_t, bool))(&::RF24::setAutoAck), (bp::arg("pipe"), bp::arg("enable")))
-        .add_property("payloadSize", &RF24::getPayloadSize, &RF24::setPayloadSize)
-        .def("enableDynamicPayloads", &RF24::enableDynamicPayloads)
-        .def("disableDynamicPayloads", &RF24::disableDynamicPayloads)
-        .def("getDynamicPayloadSize", &RF24::getDynamicPayloadSize)
+        .def("setAutoAck", (void (::RF24::*)(bool, uint8_t))(&::RF24::setAutoAck), (bp::arg("enable"), bp::arg("pipe")))
+        .def("getAutoAck", &RF24::getAutoAck, (bp::arg("pipe")))
+        .add_property("autoAck", &RF24::setAutoAck, &RF24::getAutoAck)
+        .def("setPayloadLength", &RF24::setPayloadLength, (bp::arg("enable"), bp::arg("pipe")))
+        .def("getPayloadLength", &RF24::getPayloadLength, (bp::arg("pipe")))
+        .add_property("payloadLength", &RF24::getPayloadLength, &RF24::setPayloadLength)
+        .def("setDynamicPayloads", (void (::RF24::*)(bool))(&RF24::setDynamicPayloads), (bp::arg("enable")))
+        .def("setDynamicPayloads", (void (::RF24::*)(bool, uint8_t))(&RF24::setDynamicPayloads), (bp::arg("enable"), bp::arg("pipe")))
+        .def("getDynamicPayloads", &RF24::getDynamicPayloads, (bp::arg("pipe")=0))
+        .add_property("dynamicPayloads", &RF24::getDynamicPayloads, &RF24::setDynamicPayloads)
+        .def("any", &RF24::any)
         .def("enableAckPayload", &RF24::enableAckPayload)
-        .def("writeAckPayload", writeAckPayload_wrap, (bp::arg("pipe"), bp::arg("buf")))
+        .def("writeAck", writeAck_wrap, (bp::arg("pipe"), bp::arg("buf")))
         .def("getCrc", &RF24::getCrc)
         .def("setCrc", &RF24::setCrc, (bp::arg("length")))
+        .add_property("crc", &RF24::getCrc, &RF24::setCrc)
         .def("getDataRate", &RF24::getDataRate)
         .def("setDataRate", &RF24::setDataRate, (bp::arg("speed")))
+        .add_property("dataRate", &RF24::getDataRate, &RF24::setDataRate)
         .def("getPaLevel", &RF24::getPaLevel)
         .def("setPaLevel", &RF24::setPaLevel, (bp::arg("level"), bp::arg("lnaEnable")))
         .def("setPaLevel", &setPaLevel_wrap, (bp::arg("level")))
-        .def("interruptConfig", &RF24::interruptConfig, (bp::arg("tx_ok"), bp::arg("tx_fail"), bp::arg("rx_ready")))
+        .add_property("paLevel", &RF24::getPaLevel, &RF24::setPaLevel_wrap)
+        .def("interruptConfig", &RF24::interruptConfig, (bp::arg("dataReady"), bp::arg("dataSent"), bp::arg("dataFail")))
         .def("update", &RF24::update)
         .def("clearStatusFlags", &RF24::clearStatusFlags, (bp::arg("dataReady"), bp::arg("dataSent"), bp::arg("dataFail")))
         .def("clearStatusFlags", &RF24::clearStatusFlags_wrap2, (bp::arg("dataReady"), bp::arg("dataSent")))
@@ -293,12 +312,13 @@ BOOST_PYTHON_MODULE(RF24)
         .def_readwrite("irqDs", &RF24::irqDs)
         .def_readwrite("irqDr", &RF24::irqDr)
         .def_readwrite("irqDf", &RF24::irqDf)
-        .def_readwrite("isTxFull", &RF24::isTxFull);
-        .def("isFifo", &RF24::isFifo)
+        .def_readwrite("isTxFull", &RF24::isTxFull)
+        .def("isFifo", &RF24::isFifo, (bp::arg("about_tx"), bp::arg("check_empty")))
+        .def("isFifo", &RF24::isFifo, (bp::arg("about_tx")))
         .def("isPVariant", &RF24::isPVariant)
         .def("isValid", &RF24::isValid)
         .def("testCarrier", &RF24::testCarrier)
-        .def("testRPD", &RF24::testRPD)
+        .def("testRpd", &RF24::testRpd)
         .def("startConstCarrier", &RF24::startConstCarrier, (bp::arg("level"), bp::arg("channel")))
-        .def("stopConstCarrier", &RF24::stopConstCarrier)
+        .def("stopConstCarrier", &RF24::stopConstCarrier);
 }

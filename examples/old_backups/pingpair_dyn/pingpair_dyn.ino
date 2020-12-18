@@ -67,7 +67,7 @@ void setup(void)
 
   // Setup and configure rf radio
   radio.begin();
-  radio.enableDynamicPayloads();  // Enable dynamic payloads
+  radio.setDynamicPayloads(true);  // Enable dynamic payloads
   radio.setRetries(5, 15);        // delay between retries = 5 * 250 + 250 = 1500 microseconds, number of retries = 15
 
   // Open a writing and reading pipe on each radio, with opposite addresses
@@ -115,7 +115,7 @@ void loop() {
     } else {
       // Grab the response and print it
 
-      uint8_t len = radio.getDynamicPayloadSize();  // get payload's length
+      uint8_t len = radio.any();  // get payload's length
 
       // If an illegal payload size was detected, all RX payloads will be flushed
       if (!len)
@@ -148,7 +148,7 @@ void loop() {
     while (radio.available())                       // if there is data ready
     {
 
-      uint8_t len = radio.getDynamicPayloadSize();  // Fetch the the payload size
+      uint8_t len = radio.any();  // Fetch the the payload size
 
       // If an illegal payload size was detected, all RX payloads will be flushed
       if (!len)
