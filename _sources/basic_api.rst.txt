@@ -46,6 +46,7 @@ stopListening()
 any()
 ******************
 
+.. doxygenfunction:: any()
 
 available()
 ******************

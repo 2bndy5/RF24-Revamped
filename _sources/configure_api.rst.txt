@@ -12,32 +12,41 @@ Datarate enum
 
 .. doxygengroup:: Datarate
 
-enableDynamicPayloads()
+setDynamicPayloads()
 ******************************
 
-.. doxygenfunction:: enableDynamicPayloads()
+.. doxygenfunction:: setDynamicPayloads(bool)
 
-disableDynamicPayloads()
+.. doxygenfunction:: setDynamicPayloads(bool, uint8_t)
+
+getDynamicPayloads()
 ******************************
 
-.. doxygenfunction:: disableDynamicPayloads()
+.. doxygenfunction:: getDynamicPayloads
 
-setPayloadSize()
+setPayloadLength()
 ******************************
 
-.. doxygenfunction:: setPayloadSize()
+.. doxygenfunction:: setPayloadLength(uint8_t)
 
-getPayloadSize()
+.. doxygenfunction:: setPayloadLength(uint8_t, uint8_t)
+
+getPayloadLength()
 ******************************
 
-.. doxygenfunction:: getPayloadSize()
+.. doxygenfunction:: getPayloadLength
 
 setAutoAck()
 ******************************
 
 .. doxygenfunction:: setAutoAck(bool)
 
-.. doxygenfunction:: setAutoAck(uint8_t, bool)
+.. doxygenfunction:: setAutoAck(bool, uint8_t)
+
+getAutoAck()
+******************************
+
+.. doxygenfunction:: getAutoAck
 
 setRetries()
 ******************************

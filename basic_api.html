@@ -234,10 +234,26 @@ Linux: The old way of setting SPI speeds using BCM2835 driver enums has been rem
 <dt id="_CPPv4N4RF245beginEv">
 <span id="_CPPv3N4RF245beginEv"></span><span id="_CPPv2N4RF245beginEv"></span><span id="RF24::begin__void"></span><span class="target" id="classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">begin</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Begin operation of the chip</p>
-<p>Call this in setup(), before calling any other methods. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> 
+<p>Call this in setup(), before calling any other methods.  <p><div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use this function to determine if there is a hardware problem
+before continueing application.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// if the radio is unresponsive?</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>      <span class="c1">// hold in infinite loop</span>
+<span class="p">}</span>
 </pre></div>
 </div>
- </p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the radio is not responding to SPI transactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the radio is respondive to SPI transactions </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
 </dd></dl>
 
 </div>
@@ -249,8 +265,8 @@ Linux: The old way of setting SPI speeds using BCM2835 driver enums has been rem
 <dd><p>Open a pipe for reading</p>
 <p>Up to 6 pipes can be open for reading at once. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
 <p><p>There is no address length parameter because this function will always write the number of bytes (for pipes 0 and 1) that the radio addresses are configured to use (set with </p>
-<a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>). <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a><p><div class="admonition note">
+<a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a><p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pipes 0 and 1 will store a full 5-byte address. Pipes 2-5 will
 technically only store a single byte, borrowing up to 4 additional bytes
@@ -269,12 +285,12 @@ Only the first byte in the array should be unique, e.g.</p>
 <p class="admonition-title">Warning</p>
 <p>If the reading pipe 0 is opened by this function, the address
 passed to this function (for pipe 0) will be restored at every call to
-<cite>startListening()</cite>, but the address for pipe 0 is ONLY restored if the LSB is a
+<a class="reference internal" href="#_CPPv4N4RF2414startListeningEv" title="RF24::startListening"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">startListening()</span></code></a>, but the address for pipe 0 is ONLY restored if the LSB is a
 non-zero value.</p>
 <p>Read <a class="reference external" href="http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html">http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html</a>
 to understand how to avoid using malformed addresses. This address
 restoration is implemented because of the underlying neccessary
-functionality of <cite>openWritingPipe()</cite>.</p>
+functionality of <a class="reference internal" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="RF24::openWritingPipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">openWritingPipe()</span></code></a>.</p>
 </div>
 </p>
  </p>
@@ -303,17 +319,18 @@ Only the least significant byte should be unique, e.g.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Pipe 0 is also used by the writing pipe so should typically be avoided
-as a reading pipe.</p>
+<p>Pipe 0 is also used by the writing pipe so should typically be
+avoided as a reading pipe.</p>
 <p>If used, the reading pipe 0 address needs to be restored at avery call to
-<cite>startListening()</cite>, and the address is ONLY restored if the LSB is a non-zero value.</p>
+<a class="reference internal" href="#_CPPv4N4RF2414startListeningEv" title="RF24::startListening"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">startListening()</span></code></a>, and the address is ONLY restored if the LSB is a
+non-zero value.</p>
 <p>Read <a class="reference external" href="http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html">http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html</a></p>
 </div>
 </p>
-</p>
+ </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe# to open, 0-5. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe number to open, should be in range [0, 5]. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
 </ul>
 </dd>
@@ -360,16 +377,16 @@ as a reading pipe.</p>
 <p>This function will overwrite the address set to reading pipe 0
 as stipulated by the datasheet for proper auto-ack functionality in TX
 mode. Use this function to ensure proper transmission acknowledgement
-when the address set to reading pipe 0 (via <cite>openReadingPipe()</cite>) does not
-match the address passed to this function. If the auto-ack feature is
+when the address set to reading pipe 0 (via <a class="reference internal" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="RF24::openReadingPipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">openReadingPipe()</span></code></a>) does
+not match the address passed to this function. If the auto-ack feature is
 disabled, then this function will still overwrite the address for
 reading pipe 0 regardless.</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a></p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a></p>
 </dd>
-<dt><strong>Remark</strong></dt><dd><p>There is no address length parameter because this function will always write the number of bytes that the radio addresses are configured to use (set with <a class="reference internal" href="advanced_api.html#classRF24_1ad5aea7f9a3bd9c7d357fb296ce751f21"><span class="std std-ref">setAddressWidth()</span></a>). </p>
+<dt><strong>Remark</strong></dt><dd><p>There is no address length parameter because this function will always write the number of bytes that the radio addresses are configured to use (set with <a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>). </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The address to be used for outgoing transmissions (uses pipe 0). Coordinate this address amongst other receiving nodes (the pipe numbers don’t need to match).</p></li>
@@ -388,7 +405,7 @@ reading pipe 0 regardless.</p>
 </pre></div>
 </div>
 </p>
-</p>
+ </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
@@ -418,9 +435,9 @@ reading pipe 0 regardless.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If there was a call to openReadingPipe() about pipe 0 prior to
+<p>If there was a call to <a class="reference internal" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="RF24::openReadingPipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">openReadingPipe()</span></code></a> about pipe 0 prior to
 calling this function, then this function will re-write the address
-that was last set to reading pipe 0. This is because <cite>openWritingPipe()</cite>
+that was last set to reading pipe 0. This is because <a class="reference internal" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="RF24::openWritingPipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">openWritingPipe()</span></code></a>
 will overwrite the address to reading pipe 0 for proper auto-ack
 functionality.</p>
 </div>
@@ -452,6 +469,16 @@ payloads that were not appended to acknowledgment packets.</p>
 </div>
 <div class="section" id="any">
 <h2>any()<a class="headerlink" href="#any" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF243anyEv">
+<span id="_CPPv3N4RF243anyEv"></span><span id="_CPPv2N4RF243anyEv"></span><span id="RF24::any__void"></span><span class="target" id="classRF24_1af6b7754d874efe564e539de64e5c8ae8"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">any</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF243anyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get next available payload length in bytes. This function is compatible with static or dynamic payloads. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Payload length in bytes of next available payload in the RX FIFO. If no payload is available then this function returns 0. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
 </div>
 <div class="section" id="available">
 <h2>available()<a class="headerlink" href="#available" title="Permalink to this headline">¶</a></h2>
@@ -470,7 +497,7 @@ payloads that were not appended to acknowledgment packets.</p>
 that received the next available payload. According to the datasheet,
 the data about the pipe number that received the next available payload
 is “unreliable” during a FALLING transition on the IRQ pin. This means
-you should call <cite>clearStatusFlags()</cite> before calling this function
+you should call <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416clearStatusFlagsEbbb" title="RF24::clearStatusFlags"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">clearStatusFlags()</span></code></a> before calling this function
 during an ISR (Interrupt Service Routine).</p>
 <p>For example:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
@@ -489,7 +516,11 @@ during an ISR (Interrupt Service Routine).</p>
  <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ace7dd139fabc16b77cb8325faa07620f"><span class="std std-ref">available(uint8_t*)</span></a> </p>
 </dd>
-<dt><strong>Return</strong></dt><dd><p>True if there is a payload available, false if none is</p>
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p>true if there is a payload available in the RX FIFO buffers</p></li>
+<li><p>false if there is no payload available in the RX FIFO buffers</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </p>
@@ -501,8 +532,8 @@ during an ISR (Interrupt Service Routine).</p>
 <dd><p>Test whether there are bytes available to be read from the FIFO buffers.</p>
 <p> <p><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function is named <cite>available_pipe()</cite> in the python wrapper.
-Additionally, the <cite>available_pipe()</cite> function (which
+<p>This function is named <code class="docutils literal notranslate"><span class="pre">available_pipe()</span></code> in the python wrapper.
+Additionally, the <code class="docutils literal notranslate"><span class="pre">available_pipe()</span></code> function (which
 takes no arguments) returns a 2 item tuple containing (ordered by
 tuple’s indices):</p>
 <ul class="simple">
@@ -545,15 +576,14 @@ this pipe number is invalid.</p></li>
 <p class="admonition-title">Warning</p>
 <p>According to the datasheet, the data saved to the <code class="docutils literal notranslate"><span class="pre">pipe_num</span></code>
 parameter is “unreliable” during a FALLING transition on the IRQ pin.
-This means you should call <cite>clearStatusFlags()</cite> before calling this
+This means you should call <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416clearStatusFlagsEbbb" title="RF24::clearStatusFlags"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">clearStatusFlags()</span></code></a> before calling this
 function during an ISR (Interrupt Service Routine).</p>
 </div>
-<p>For example:
-.. code-block:</p>
+<p>For example:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>   <span class="c1">// resets the IRQ pin to HIGH</span>
-  <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>               <span class="c1">// initialize pipe data</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">);</span> <span class="c1">// pipe data should now be reliable</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span> <span class="c1">// resets the IRQ pin to HIGH</span>
+  <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>             <span class="c1">// initialize pipe data</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">);</span>   <span class="c1">// pipe data should now be reliable</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
@@ -585,17 +615,17 @@ python wrapper) returns the payload data as a buffer protocol object
 (bytearray object).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
 <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">getDynamicPayloadSize</span><span class="p">()</span>  <span class="c1"># or radio.getPayloadSize() for static payload sizes</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
     <span class="n">received_payload</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </p>
 <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1a0aa0c7cbe3d38fef4722f3f1d2d6c5f1"><span class="std std-ref">getPayloadSize()</span></a>, getDynamicPayloadSize()<p><div class="admonition note">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>, getDynamicPayloadSize(), <a class="reference internal" href="#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a><p><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>I specifically chose <cite>void*</cite> as a data type to make it easier
-for beginners to use.  No casting needed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">void*</span></code> was chosen specifically as a data type to make it easier
+for beginners to use (no casting needed).</p>
 </div>
 </p>
 </p>
@@ -608,8 +638,8 @@ for beginners to use.  No casting needed.</p>
 </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to a buffer where the data should be written </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Maximum number of bytes to read into the buffer. This value should match the length of the object referenced using the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter. The absolute maximum number of bytes that can be read in one call is 32 (for dynamic payload lengths) or whatever number was previously passed to <a class="reference internal" href="configure_api.html#classRF24_1a343e5d23477181011dea030fafb1954f"><span class="std std-ref">setPayloadSize()</span></a> (for static payload lengths). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">buf</span></code>: Pointer to a buffer where the data should be written </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Maximum number of bytes to read into the buffer. This value should match the length of the object referenced using the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter. The absolute maximum number of bytes that can be read in one call is 32 (for dynamic payload lengths) or whatever number was previously passed to <a class="reference internal" href="configure_api.html#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength()</span></a> (for static payload lengths). </p></li>
 </ul>
 </dd>
 </dl>
@@ -618,8 +648,8 @@ for beginners to use.  No casting needed.</p>
 <dt><strong>Return</strong></dt><dd><p>No return value. Use <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a>.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This function no longer returns a boolean. Use available to
-determine if packets are available. The <code class="docutils literal notranslate"><span class="pre">RX_DR</span></code> Interrupt flag is now
-cleared with this function instead of when calling <cite>available()</cite>.</p>
+determine if packets are available. The <a class="reference internal" href="advanced_api.html#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a> Interrupt flag is
+cleared with this function.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
 <span class="p">}</span>
@@ -641,8 +671,8 @@ cleared with this function instead of when calling <cite>available()</cite>.</p>
 <span id="_CPPv3N4RF244sendEPKv7uint8_t"></span><span id="_CPPv2N4RF244sendEPKv7uint8_t"></span><span id="RF24::send__voidCP.uint8_t"></span><span class="target" id="classRF24_1a013fcce587ddcb1eec3ba3492006495c"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Be sure to call <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a> first to set the destination of where to write to.</p>
 <p>This blocks until the message is successfully acknowledged by the receiver or the timeout/retransmit maxima are reached. In the current configuration, the max delay here is 60-70ms.</p>
-<p>The maximum size of data written is the fixed payload size, see <a class="reference internal" href="configure_api.html#classRF24_1a0aa0c7cbe3d38fef4722f3f1d2d6c5f1"><span class="std std-ref">getPayloadSize()</span></a>. However, you can write less, and the remainder will just be filled with zeroes.</p>
-<p>TX/RX/RT interrupt flags will be cleared every time write is called</p>
+<p>The maximum size of data written is the fixed payload size, see <a class="reference internal" href="configure_api.html#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>. However, you can write less, and the remainder will just be filled with zeroes.</p>
+<p>The <a class="reference internal" href="advanced_api.html#classRF24_1a8f17ced7559d6ecfffad31858e7b3d15"><span class="std std-ref">irqDs()</span></a> and <a class="reference internal" href="advanced_api.html#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a> interrupt flags will be cleared upon entering this function</p>
 <p><p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
 <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
 </pre></div>
@@ -659,20 +689,17 @@ wrapper because the length of the payload is determined automatically.</p>
 </div>
 </div>
 </p>
-<dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-<p><dl class="simple">
+ <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on. </p></li>
 </ul>
 </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent</p></li>
+</ul>
 </dd>
 </dl>
 </p>

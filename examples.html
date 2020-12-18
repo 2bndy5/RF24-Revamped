@@ -435,7 +435,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
   <span class="c1">// number of bytes we need to transmit a float</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// float datatype occupies 4 bytes</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// float datatype occupies 4 bytes</span>
 
   <span class="c1">// set the TX address of the RX node into the TX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
@@ -485,7 +485,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                   <span class="c1">// fetch payload from FIFO</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                           <span class="c1">// print the size of the payload</span>
@@ -813,7 +813,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="n">radio</span><span class="p">.</span><span class="n">setPaLevel</span><span class="p">(</span><span class="n">RF24_PA_LOW</span><span class="p">);</span>     <span class="c1">// RF24_PA_MAX is default.</span>
 
   <span class="c1">// to use ACK payloads, we need to enable dynamic payload lengths (for all nodes)</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">enableDynamicPayloads</span><span class="p">();</span>    <span class="c1">// ACK payloads are dynamically sized</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>    <span class="c1">// ACK payloads are dynamically sized</span>
 
   <span class="c1">// Acknowledgement packets have no payloads by default. We need to enable</span>
   <span class="c1">// this feature for all nodes (TX &amp; RX) to use ACK payloads.</span>
@@ -836,7 +836,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
     <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                     <span class="c1">// put radio in RX mode</span>
   <span class="p">}</span>
@@ -869,7 +869,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
         <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>             <span class="c1">// get incoming ACK payload</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">());</span>         <span class="c1">// print incoming payload size</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>         <span class="c1">// print incoming payload size</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                                  <span class="c1">// print pipe number that received the ACK</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
@@ -896,7 +896,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
       <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>       <span class="c1">// get incoming payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
@@ -913,7 +913,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
       <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
       <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 
@@ -938,7 +938,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
 
       <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
@@ -1258,7 +1258,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
   <span class="c1">// number of bytes we need to transmit a float</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
 
   <span class="c1">// set the TX address of the RX node into the TX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
@@ -1317,7 +1317,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
         <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>             <span class="c1">// get payload from RX FIFO</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Received &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">());</span>                <span class="c1">// print the size of the payload</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                <span class="c1">// print the size of the payload</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                                  <span class="c1">// print the pipe number</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
@@ -1352,7 +1352,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
       <span class="c1">// print summary of transactions</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">());</span>    <span class="c1">// print the size of the payload</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>    <span class="c1">// print the size of the payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                      <span class="c1">// print the pipe number</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
@@ -1681,7 +1681,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
   <span class="c1">// number of bytes we need to transmit a float</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
 
   <span class="c1">// Set the pipe addresses accordingly. This function additionally also</span>
   <span class="c1">// calls startListening() or stopListening() and sets the payload&#39;s nodeID</span>
@@ -1727,7 +1727,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>             <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>            <span class="c1">// fetch payload from FIFO</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                    <span class="c1">// print the size of the payload</span>
@@ -2069,7 +2069,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
   <span class="c1">// number of bytes we need to transmit</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>     <span class="c1">// default value is the maximum 32 bytes</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>     <span class="c1">// default value is the maximum 32 bytes</span>
 
   <span class="c1">// set the TX address of the RX node into the TX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
@@ -2627,7 +2627,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// For this example we use acknowledgment (ACK) payloads to trigger the</span>
   <span class="c1">// IRQ pin when data is received on the TX node.</span>
   <span class="c1">// to use ACK payloads, we need to enable dynamic payload lengths</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">enableDynamicPayloads</span><span class="p">();</span>    <span class="c1">// ACK payloads are dynamically sized</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>    <span class="c1">// ACK payloads are dynamically sized</span>
 
   <span class="c1">// Acknowledgement packets have no payloads by default. We need to enable</span>
   <span class="c1">// this feature for all nodes (TX &amp; RX) to use ACK payloads.</span>
@@ -2653,9 +2653,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
     <span class="c1">// transmissions on pipe 1</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// put radio in RX mode</span>
   <span class="p">}</span>
@@ -2762,9 +2762,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
       <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
       <span class="c1">// transmissions on pipe 1.</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
 
       <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>             <span class="c1">// let TX node finish its role</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// We&#39;re ready to start over. Begin listening.</span>
@@ -2803,9 +2803,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
       <span class="c1">// transmissions on pipe 1</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span> <span class="c1">// make sure there is room for 3 new ACK payloads</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// Serial.available()</span>
@@ -3154,7 +3154,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
     <span class="c1">// number of bytes we need to transmit a float</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// float datatype occupies 4 bytes</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// float datatype occupies 4 bytes</span>
 
     <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
     <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -3245,7 +3245,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
+            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                     <span class="c1">// fetch payload from FIFO</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span> <span class="c1">// print the pipe number</span>
@@ -3590,7 +3590,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">49</span><span class="p">;</span>
 
     <span class="c1">// to use ACK payloads, we need to enable dynamic payload lengths</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">enableDynamicPayloads</span><span class="p">();</span>    <span class="c1">// ACK payloads are dynamically sized</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>    <span class="c1">// ACK payloads are dynamically sized</span>
 
     <span class="c1">// Acknowledgement packets have no payloads by default. We need to enable</span>
     <span class="c1">// this feature for all nodes (TX &amp; RX) to use ACK payloads.</span>
@@ -3669,7 +3669,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
                 <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
                 <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>          <span class="c1">// get incoming ACK payload</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Received &quot;</span><span class="p">;</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">();</span>            <span class="c1">// print incoming payload size</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>            <span class="c1">// print incoming payload size</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>  <span class="c1">// print pipe that received it</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>                 <span class="c1">// print incoming message</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// print incoming counter</span>
@@ -3698,14 +3698,14 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                    <span class="c1">// set the payload message</span>
 
     <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                  <span class="c1">// put radio in RX mode</span>
     <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                       <span class="c1">// start a timer</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getDynamicPayloadSize</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
+            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
             <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>         <span class="c1">// fetch payload from RX FIFO</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
@@ -3720,7 +3720,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
             <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
             <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
             <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
         <span class="p">}</span> <span class="c1">// if received something</span>
     <span class="p">}</span> <span class="c1">// while</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Nothing received in 6 seconds. Leaving RX role.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -4104,7 +4104,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
     <span class="c1">// number of bytes we need to transmit a float</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
 
     <span class="c1">// set the TX address of the RX node into the TX pipe</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
@@ -4177,7 +4177,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
             <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission successful! &quot;</span><span class="p">;</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload received? grab the pipe number that received it</span>
-                <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">();</span>      <span class="c1">// grab the incoming payload size</span>
+                <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>      <span class="c1">// grab the incoming payload size</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Round trip delay = &quot;</span><span class="p">;</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ellapsedTime</span><span class="p">;</span>                        <span class="c1">// print the timer result</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; us. Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>    <span class="c1">// print outgoing message</span>
@@ -4220,7 +4220,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">();</span>          <span class="c1">// get size of incoming payload</span>
+            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>          <span class="c1">// get size of incoming payload</span>
             <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>         <span class="c1">// get incoming payload</span>
             <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>          <span class="c1">// increment payload for response</span>
@@ -4673,7 +4673,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
     <span class="c1">// number of bytes we need to transmit a float</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
 
     <span class="c1">// For debugging info</span>
     <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
@@ -4779,7 +4779,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                       <span class="c1">// use 6 second timeout</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                              <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">getPayloadSize</span><span class="p">();</span>                <span class="c1">// get the size of the payload</span>
+            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>                <span class="c1">// get the size of the payload</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                           <span class="c1">// fetch payload from FIFO</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>            <span class="c1">// print the size of the payload</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>       <span class="c1">// print the pipe number</span>
@@ -5260,7 +5260,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
     <span class="c1">// number of bytes we need to transmit a float</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadSize</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>    <span class="c1">// default value is the maximum 32 bytes</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>    <span class="c1">// default value is the maximum 32 bytes</span>
 
     <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
     <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -5829,7 +5829,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">49</span><span class="p">;</span>
 
     <span class="c1">// to use ACK payloads, we need to enable dynamic payload lengths</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">enableDynamicPayloads</span><span class="p">();</span>    <span class="c1">// ACK payloads are dynamically sized</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>    <span class="c1">// ACK payloads are dynamically sized</span>
 
     <span class="c1">// Acknowledgement packets have no payloads by default. We need to enable</span>
     <span class="c1">// this feature for all nodes (TX &amp; RX) to use ACK payloads.</span>
@@ -5961,9 +5961,9 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
     <span class="c1">// transmissions on pipe 0.</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>            <span class="c1">// put radio in RX mode</span>
     <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span> <span class="c1">// start a timer</span>
@@ -6824,7 +6824,7 @@ To run this example, enter</p>
             <span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
                 <span class="c1"># print the received ACK that was automatically sent</span>
-                <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">getDynamicPayloadSize</span><span class="p">()</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span>
                     <span class="s2">&quot;Received </span><span class="si">{}</span><span class="s2"> on pipe </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6860,13 +6860,13 @@ To run this example, enter</p>
     <span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;World </span><span class="se">\x00</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
     <span class="c1"># we must set the ACK payload data and corresponding</span>
     <span class="c1"># pipe number [0,5]</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>  <span class="c1"># load ACK for first response</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>  <span class="c1"># load ACK for first response</span>
 
     <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># start timer</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">:</span>
         <span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">getDynamicPayloadSize</span><span class="p">()</span>  <span class="c1"># grab the payload length</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>  <span class="c1"># grab the payload length</span>
             <span class="n">received</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>  <span class="c1"># fetch 1 payload from RX FIFO</span>
             <span class="c1"># increment counter from received payload</span>
             <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">received</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">received</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">255</span> <span class="k">else</span> <span class="mi">0</span>
@@ -6881,7 +6881,7 @@ To run this example, enter</p>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;World </span><span class="se">\x00</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>  <span class="c1"># build a new ACK payload</span>
-            <span class="n">radio</span><span class="o">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>  <span class="c1"># load ACK for next response</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>  <span class="c1"># load ACK for next response</span>
             <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># reset timer</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nothing received in 6 seconds. Leaving RX role&quot;</span><span class="p">)</span>
@@ -6953,7 +6953,7 @@ To run this example, enter</p>
     <span class="n">radio</span><span class="o">.</span><span class="n">setPaLevel</span><span class="p">(</span><span class="n">RF24_PA_LOW</span><span class="p">)</span>  <span class="c1"># RF24_PA_MAX is default</span>
 
     <span class="c1"># ACK payloads are dynamically sized.</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">enableDynamicPayloads</span><span class="p">()</span>  <span class="c1"># to use ACK payloads</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># to use ACK payloads</span>
 
     <span class="c1"># to enable the custom ACK payload feature</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">enableAckPayload</span><span class="p">()</span>
@@ -8899,9 +8899,9 @@ To run this example, enter</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># reset this to indicate event is a &#39;data_ready&#39; event</span>
     <span class="c1"># setup radio to recieve pings, fill TX FIFO with ACK payloads</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">writeAckPayload</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">startListening</span><span class="p">()</span>  <span class="c1"># start listening &amp; clear status flags</span>
     <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># start timer now</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">radio</span><span class="o">.</span><span class="n">isFifo</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timer</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">:</span>
@@ -8977,7 +8977,7 @@ To run this example, enter</p>
     <span class="n">radio</span><span class="o">.</span><span class="n">setPaLevel</span><span class="p">(</span><span class="n">RF24_PA_LOW</span><span class="p">)</span>  <span class="c1"># RF24_PA_MAX is default</span>
 
     <span class="c1"># ACK payloads are dynamically sized.</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">enableDynamicPayloads</span><span class="p">()</span>  <span class="c1"># to use ACK payloads</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">setDynamicPayloads</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># to use ACK payloads</span>
 
     <span class="c1"># this example uses the ACK payload to trigger the IRQ pin active for</span>
     <span class="c1"># the &quot;on data received&quot; event</span>

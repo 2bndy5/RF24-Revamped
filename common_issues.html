@@ -193,13 +193,13 @@
 following RF24 configurations match on both receiving and transmitting
 nRF24L01 transceivers:</p>
 <ol class="simple">
-<li><p><a class="reference external" href="advanced_api.html#setaddresswidth">setAddressWidth()</a></p></li>
+<li><p><a class="reference external" href="advanced_api.html#setaddresswidth">setAddressLength()</a></p></li>
 <li><p><a class="reference external" href="configure_api.html#setchannel">setChannel()</a></p></li>
 <li><p><a class="reference external" href="configure_api.html#setdatarate">setDataRate()</a></p></li>
 <li><p><a class="reference external" href="configure_api.html#setautoack">setAutoAck()</a></p></li>
-<li><p><a class="reference external" href="configure_api.html#enabledynamicpayloads">enableDynamicPayloads()</a> or <a class="reference external" href="configure_api.html#disabledynamicpayloads">disableDynamicPayloads()</a></p></li>
+<li><p><a class="reference external" href="configure_api.html#enabledynamicpayloads">setDynamicPayloads()</a> or <a class="reference external" href="configure_api.html#disabledynamicpayloads">disableDynamicPayloads()</a></p></li>
 <li><p><a class="reference external" href="configure_api.html#enableackpayload">enableAckPayload()</a> or <a class="reference external" href="configure_api.html#disableackpayload">disableAckPayload()</a> (requires auto-ack and dynamic payloads features)</p></li>
-<li><p><a class="reference external" href="configure_api.html#setpayloadsize">setPayloadSize()</a> (only if the dynamic payloads feature is disabled – it is disabled by default)</p></li>
+<li><p><a class="reference external" href="configure_api.html#setpayloadsize">setPayloadLength()</a> (only if the dynamic payloads feature is disabled – it is disabled by default)</p></li>
 <li><p><a class="reference external" href="configure_api.html#setcrc">setCrc()</a> (the auto-ack feature automatically enables CRC because it is required)</p></li>
 </ol>
 <p>Also, it helps to think of an address as a path (a commonly shared route)

@@ -2,15 +2,15 @@
 Advanced API
 ------------
 
-isPVariant()
+writeAck()
 ******************************
 
-.. doxygenfunction:: isPVariant()
+.. doxygenfunction:: writeAck()
 
-writeAckPayload()
+update()
 ******************************
 
-.. doxygenfunction:: writeAckPayload()
+.. doxygenfunction:: update
 
 irqDr()
 ******************************
@@ -47,11 +47,6 @@ isTxFull()
 
 .. doxygenfunction:: isTxFull()
 
-update()
-******************************
-
-.. doxygenfunction:: update()
-
 resend()
 ******************************
 
@@ -79,20 +74,30 @@ isFifo()
 
 .. doxygenfunction:: isFifo(bool, bool)
 
-setAddressWidth()
+setAddressLength()
 ******************
 
-.. doxygenfunction:: setAddressWidth()
+.. doxygenfunction:: setAddressLength
+
+getAddressLength()
+******************
+
+.. doxygenfunction:: getAddressLength
 
 lastTxArc()
 ******************************
 
-.. doxygenfunction:: lastTxArc()
+.. doxygenfunction:: lastTxArc
 
-testRPD()
+isPVariant()
 ******************************
 
-.. doxygenfunction:: testRPD()
+.. doxygenfunction:: isPVariant
+
+testRpd()
+******************************
+
+.. doxygenfunction:: testRpd()
 
 startConstCarrier()
 ******************************
