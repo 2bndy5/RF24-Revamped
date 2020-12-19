@@ -48,7 +48,7 @@ Platform Support Pages
   * `Linux/RPi General <rpi_general.html>`_
   * `MRAA (Galileo, Edison, etc) supported board <mraa.html>`_
   * `LittleWire <LittleWire.html>`_
-* `Cross-compilation for linux devices <crosscompile.html>`_
+* `Cross-compilation for linux devices <cross_compilation.html>`_
 * `Python wrapper available for Linux devices <python_wrapper.html>`_
 
 General Microcontroller Pin layout
@@ -96,11 +96,11 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    advanced_api
    configure_api
 
-.. .. toctree::
-..    :maxdepth: 4
-..    :caption: Porting Templates
+.. toctree::
+   :maxdepth: 4
+   :caption: Porting Templates
 
-..    templates
+   templates
 
 .. toctree::
    :maxdepth: 4

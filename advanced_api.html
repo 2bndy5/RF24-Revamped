@@ -123,6 +123,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Porting Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
@@ -487,7 +495,7 @@ wrapper because the length of the payload is determined automatically.</p>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">multicast</span></code>: Request ACK packet response (<code class="docutils literal notranslate"><span class="pre">false</span></code>), or no ACK packet response (<code class="docutils literal notranslate"><span class="pre">true</span></code>). Be sure to have called <a class="reference internal" href="configure_api.html#classRF24_1a6726f78f1f497e1746262c6d4c2e5cfd"><span class="std std-ref">allowMulticast()</span></a> at least once before setting this parameter. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicast</span></code>: Request ACK packet response (<code class="docutils literal notranslate"><span class="pre">false</span></code>), or no ACK packet response (<code class="docutils literal notranslate"><span class="pre">true</span></code>). Be sure to have called <a class="reference internal" href="configure_api.html#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a> at least once before setting this parameter. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">write_only</span></code>: If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, then this function sets the CE pin to active (enabling TX transmissions). <code class="docutils literal notranslate"><span class="pre">false</span></code> has no effect on the CE pin and simply loads the payload into the TX FIFO. </p></li>
 </ul>
 </dd>

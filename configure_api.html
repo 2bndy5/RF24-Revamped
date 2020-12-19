@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Common Issues" href="common_issues.html" />
+    <link rel="next" title="About General" href="templates.html" />
     <link rel="prev" title="Advanced API" href="advanced_api.html" /> 
 </head>
 
@@ -122,6 +122,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#getpalevel">getPaLevel()</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Porting Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
@@ -656,8 +664,8 @@ responses with ACK payloads).</p>
 <div class="section" id="allowmulticast">
 <h2>allowMulticast()<a class="headerlink" href="#allowmulticast" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2414allowMulticastEv">
-<span id="_CPPv3N4RF2414allowMulticastEv"></span><span id="_CPPv2N4RF2414allowMulticastEv"></span><span id="RF24::allowMulticast"></span><span class="target" id="classRF24_1a6726f78f1f497e1746262c6d4c2e5cfd"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N4RF2414allowMulticastEb">
+<span id="_CPPv3N4RF2414allowMulticastEb"></span><span id="_CPPv2N4RF2414allowMulticastEb"></span><span id="RF24::allowMulticast__b"></span><span class="target" id="classRF24_1ad66301ac22535ffa7cea85db71b784eb"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Enable dynamic ACKs (single write multicast or unicast) for chosen messages.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This function must be called once before using the multicast
@@ -828,15 +836,17 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <span id="_CPPv3N4RF246setCrcE7uint8_t"></span><span id="_CPPv2N4RF246setCrcE7uint8_t"></span><span id="RF24::setCrc__uint8_t"></span><span class="target" id="classRF24_1af0461e493c60057679fdcfbbd066e141"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setCrc</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setCrcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the CRC checksum length (in bytes)  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>CRC checking cannot be disabled if auto-ack is enabled</p>
+<p>CRC checking cannot be disabled if auto-ack is enabled.
+Additionally, CRC checksum is automatically used when the auto-ack
+feature is enabled.</p>
 </div>
 </p>
  <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table class="docutils align-default">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table class="colwidths-given docutils align-default">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 30%" />
+<col style="width: 70%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>length</p></th>
@@ -871,7 +881,8 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <span id="_CPPv3N4RF246getCrcEv"></span><span id="_CPPv2N4RF246getCrcEv"></span><span id="RF24::getCrc__void"></span><span class="target" id="classRF24_1af4921bc2ead573684fdca32e4a976f13"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getCrc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getCrcEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the CRC checksum length (in bytes)  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>CRC checksum is automatically when the auto-ack feature is enabled.</p>
+<p>CRC checksum is automatically used when the auto-ack feature is
+enabled.</p>
 </div>
 </p>
  <dl class="simple">
@@ -887,10 +898,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setPaLevelE7uint8_tb">
 <span id="_CPPv3N4RF2410setPaLevelE7uint8_tb"></span><span id="_CPPv2N4RF2410setPaLevelE7uint8_tb"></span><span id="RF24::setPaLevel__uint8_t.b"></span><span class="target" id="classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPaLevel</code><span class="sig-paren">(</span>uint8_t <em>level</em>, bool <em>lnaEnable</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The desired <a class="reference internal" href="#group__PaLevel"><span class="std std-ref">Power Amplifier level</span></a> as defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>: Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below.<code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> only affects nRF24L01 modules with an LNA chip.  <p><table class="docutils align-default">
+<dd><p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 39%" />
 <col style="width: 12%" />
@@ -900,29 +908,32 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">level</span></code> (enum value)</p></th>
 <th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with
-<code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
-<th class="head"><p>Si24R1 with
-<code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="RF24_PA_MIN"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MIN</span></code></a> (0)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="RF24_PA_MIN"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MIN</span></code></a> (0)</p></td>
 <td><p>-18 dBm</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>-12 dBm</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="RF24_PA_LOW"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_LOW</span></code></a> (1)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="RF24_PA_LOW"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_LOW</span></code></a> (1)</p></td>
 <td><p>-12 dBm</p></td>
-<td><p>-0 dBm</p></td>
+<td><p>0 dBm</p></td>
 <td><p>-4 dBm</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="RF24_PA_HIGH"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_HIGH</span></code></a> (2)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="RF24_PA_HIGH"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_HIGH</span></code></a> (2)</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>3 dBm</p></td>
 <td><p>1 dBm</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="RF24_PA_MAX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MAX</span></code></a> (3)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="RF24_PA_MAX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MAX</span></code></a> (3)</p></td>
 <td><p>0 dBm</p></td>
 <td><p>7 dBm</p></td>
 <td><p>4 dBm</p></td>
@@ -934,7 +945,10 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <p>The <a class="reference internal" href="#_CPPv4N4RF2410getPaLevelEv" title="RF24::getPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getPaLevel()</span></code></a> function does not care what was passed <code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> parameter.</p>
 </div>
 </p>
- </p></li>
+ <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The desired <a class="reference internal" href="#group__PaLevel"><span class="std std-ref">Power Amplifier level</span></a> as defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>: Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below.<code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> only affects nRF24L01 modules with an LNA chip.</p></li>
 </ul>
 </dd>
 </dl>
@@ -966,7 +980,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="common_issues.html" class="btn btn-neutral float-right" title="Common Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="templates.html" class="btn btn-neutral float-right" title="About General" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="advanced_api.html" class="btn btn-neutral float-left" title="Advanced API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
