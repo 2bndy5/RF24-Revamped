@@ -1149,7 +1149,7 @@ public:
      * @see setAutoAck(bool) for all pipes or setAutoAck(uint8_t, bool) for individual
      * pipes
      */
-    void allowMulticast();
+    void allowMulticast(bool);
 
     /**
      * Determine whether the hardware is an nRF24L01+ or not.
@@ -1231,14 +1231,16 @@ public:
      * @param lnaEnable Enable or Disable the LNA (Low Noise Amplifier) Gain.
      * See table for Si24R1 modules below.<br> @p lnaEnable only affects
      * nRF24L01 modules with an LNA chip.
+     *
      * @rst
      * +--------------------------------+----------+--------------------+--------------------+
      * | ``level`` (enum value)         | nRF24L01 | Si24R1 with        | Si24R1 with        |
+     * +--------------------------------+----------+--------------------+--------------------+
      * |                                |          | ``lnaEnabled`` = 1 | ``lnaEnabled`` = 0 |
      * +================================+==========+====================+====================+
      * | :enumerator:`RF24_PA_MIN` (0)  | -18 dBm  |       -6 dBm       |   -12 dBm          |
      * +--------------------------------+----------+--------------------+--------------------+
-     * | :enumerator:`RF24_PA_LOW` (1)  | -12 dBm  |       -0 dBm       |    -4 dBm          |
+     * | :enumerator:`RF24_PA_LOW` (1)  | -12 dBm  |        0 dBm       |    -4 dBm          |
      * +--------------------------------+----------+--------------------+--------------------+
      * | :enumerator:`RF24_PA_HIGH` (2) |  -6 dBm  |        3 dBm       |     1 dBm          |
      * +--------------------------------+----------+--------------------+--------------------+
@@ -1300,16 +1302,19 @@ public:
     /**
      * Set the CRC checksum length (in bytes)
      * @rst
-     * .. note:: CRC checking cannot be disabled if auto-ack is enabled
+     * .. note:: CRC checking cannot be disabled if auto-ack is enabled.
+     *     Additionally, CRC checksum is automatically used when the auto-ack
+     *     feature is enabled.
      * @endrst
      * @param length Specify the CRC checksum length in bytes
      * @rst
      * .. csv-table::
      *     :header: "length", "description"
+     *     :widths: 3, 7
      *
      *     "0", "to disable using CRC checksums"
-     *     "1", "to use 8-bit checksums        "
-     *     "2", "to use 16-bit checksums       "
+     *     "1", "to use 8-bit checksums"
+     *     "2", "to use 16-bit checksums"
      * @endrst
      */
     void setCrc(uint8_t length);
@@ -1317,7 +1322,8 @@ public:
     /**
      * Get the CRC checksum length (in bytes)
      * @rst
-     * .. note:: CRC checksum is automatically when the auto-ack feature is enabled.
+     * .. note:: CRC checksum is automatically used when the auto-ack feature is
+     *     enabled.
      * @endrst
      * @return The number of bytes used for a CRC checksum (see table in setCrc())
      */
