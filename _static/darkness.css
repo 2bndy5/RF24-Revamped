@@ -120,6 +120,14 @@ td.linenos pre {
   color: #45BFCC;
 }
 
+.highlight .nc {
+  color: #25C7E1;
+}
+
+.highlight .cp {
+  color: #FF69B6;
+}
+
 /* ----------------------table sections---------------------------------------- */
 
 thead .row-even {
