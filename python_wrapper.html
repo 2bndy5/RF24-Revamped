@@ -90,23 +90,16 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul class="current">
@@ -128,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -204,7 +198,7 @@
 <h2>Prerequisites Prerequisites<a class="headerlink" href="#prerequisites-prerequisites" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="python3">
 <h3>Python3<a class="headerlink" href="#python3" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference external" href="examples.html#python-wrapper-examples">python examples</a> need Python v3.7 because of the <a class="reference external" href="https://docs.python.org/3.7/library/time.html#time.monotonic_ns">time.monotonic_ns()</a> call for measuring microseconds.</p>
+<p>The <a class="reference external" href="py_examples.html#python-wrapper-examples">python examples</a> need Python v3.7 because of the <a class="reference external" href="https://docs.python.org/3.7/library/time.html#time.monotonic_ns">time.monotonic_ns()</a> call for measuring microseconds.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python3-dev libboost-python-dev python3-setuptools python3-rpi.gpio
 </pre></div>
 </div>
@@ -238,7 +232,7 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo python3 setup.py install
 </pre></div>
 </div>
-<p>See the included <a class="reference external" href="examples.html#python-wrapper-examples">*.py files in the “examples_linux” folder</a>
+<p>See the included <a class="reference external" href="cpp_examples.html#python-wrapper-examples">*.py files in the “examples_linux” folder</a>
 and the <a class="reference external" href="rf24_api">RF24 documentation</a> for usage information.</p>
 </li>
 <li><p>Running the Example:</p>
@@ -249,9 +243,9 @@ and the <a class="reference external" href="rf24_api">RF24 documentation</a> for
 </div>
 <p>Configure another device with one of:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="examples.html#getting-started-py">getting_started.py Python example</a></p></li>
-<li><p><a class="reference external" href="examples.html#gettingstarted-ino">GettingStarted.ino Arduino example</a></p></li>
-<li><p><a class="reference external" href="examples.html#gettingStarted-cpp">gettingStarted.cpp Linux example</a></p></li>
+<li><p><a class="reference external" href="py_examples.html#getting-started-py">getting_started.py Python example</a></p></li>
+<li><p><a class="reference external" href="ino_examples.html#gettingstarted-ino">GettingStarted.ino Arduino example</a></p></li>
+<li><p><a class="reference external" href="cpp_examples.html#gettingStarted-cpp">gettingStarted.cpp Linux example</a></p></li>
 </ul>
 <p>Run the example</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo python3 getting_started.py

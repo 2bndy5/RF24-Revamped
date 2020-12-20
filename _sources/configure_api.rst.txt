@@ -51,64 +51,69 @@ getAutoAck()
 setRetries()
 ******************************
 
-.. doxygenfunction:: setRetries()
+.. doxygenfunction:: setRetries
 
 enableAckPayload()
 ******************************
 
-.. doxygenfunction:: enableAckPayload()
+.. doxygenfunction:: enableAckPayload
 
 disableAckPayload()
 ******************************
 
-.. doxygenfunction:: disableAckPayload()
+.. doxygenfunction:: disableAckPayload
 
 allowMulticast()
 ******************************
 
-.. doxygenfunction:: allowMulticast()
+.. doxygenfunction:: allowMulticast
+
+isAllowMulticast()
+******************************
+
+.. doxygenfunction:: isAllowMulticast
 
 interruptConfig()
 ******************************
 
-.. doxygenfunction:: interruptConfig()
+.. doxygenfunction:: interruptConfig
 
 setDataRate()
 ******************************
 
-.. doxygenfunction:: setDataRate()
+.. doxygenfunction:: setDataRate
 
 getDataRate()
 ******************************
 
-.. doxygenfunction:: getDataRate()
+.. doxygenfunction:: getDataRate
 
 setChannel()
 ******************************
 
-.. doxygenfunction:: setChannel()
+.. doxygenfunction:: setChannel
 
 getChannel()
 ******************************
 
-.. doxygenfunction:: getChannel()
+.. doxygenfunction:: getChannel
 
 setCrc()
 ******************************
 
-.. doxygenfunction:: setCrc()
+.. doxygenfunction:: setCrc
 
 getCrc()
 ******************************
 
-.. doxygenfunction:: getCrc()
+.. doxygenfunction:: getCrc
 
 setPaLevel()
 ******************************
 
-.. doxygenfunction:: setPaLevel()
+.. doxygenfunction:: setPaLevel
 
 getPaLevel()
 ******************************
 
-.. doxygenfunction:: getPaLevel()
+.. doxygenfunction:: getPaLevel

@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Arduino examples" href="examples.html" /> 
+    <link rel="next" title="Arduino examples" href="ino_examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,23 +89,16 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
@@ -119,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -209,11 +203,11 @@ changed in each version of the library</p>
 <div class="section" id="useful-references">
 <h2>Useful References<a class="headerlink" href="#useful-references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="classRF24.html">RF24 Class Documentation</a></p></li>
+<li><p><a class="reference external" href="basic_api.html">RF24 Class Documentation</a></p></li>
 <li><p><a class="reference external" href="pages.html">Support &amp; Configuration</a></p></li>
 <li><p><a class="reference external" href="https://github.com/2bndy5/RF24/tree/revamp">Source Code</a></p></li>
-<li><p><a class="reference external" href="http://github.com/2bndy5/RF24/datasheets/nRF24L01_datasheet_v2.pdf">nRF24L01 v2.0 Datasheet</a></p></li>
-<li><p><a class="reference external" href="http://github.com/2bndy5/RF24/datasheets/nRF24L01P_datasheet_v1.pdf">nRF24L01+ v1.0 Datasheet</a></p></li>
+<li><p><a class="reference external" href="http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01_datasheet_v2.pdf">nRF24L01 v2.0 Datasheet</a></p></li>
+<li><p><a class="reference external" href="http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01P_datasheet_v1.pdf">nRF24L01+ v1.0 Datasheet</a></p></li>
 </ul>
 </div>
 <div class="section" id="platform-support-pages">
@@ -341,31 +335,36 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#gettingstarted-ino">GettingStarted.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#acknowledgementpayloads-ino">AcknowledgementPayloads.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#manualacknowledgements-ino">ManualAcknowledgements.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#multiceiverdemo-ino">MulticeiverDemo.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#streamingdata-ino">StreamingData.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#interruptconfigure-ino">InterruptConfigure.ino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#gettingstarted-ino">GettingStarted.ino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#acknowledgementpayloads-ino">AcknowledgementPayloads.ino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#manualacknowledgements-ino">ManualAcknowledgements.ino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#multiceiverdemo-ino">MulticeiverDemo.ino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#streamingdata-ino">StreamingData.ino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ino_examples.html#interruptconfigure-ino">InterruptConfigure.ino</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#gettingstarted-cpp">gettingstarted.cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#acknowledgementpayloads-cpp">acknowledgementPayloads.cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#manualacknowledgements-cpp">manualAcknowledgements.cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#multiceiverdemo-cpp">multiceiverDemo.cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#streamingdata-cpp">streamingData.cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#interruptconfigure-cpp">interruptConfigure.cpp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#gettingstarted-cpp">gettingstarted.cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#acknowledgementpayloads-cpp">acknowledgementPayloads.cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#manualacknowledgements-cpp">manualAcknowledgements.cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#multiceiverdemo-cpp">multiceiverDemo.cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#streamingdata-cpp">streamingData.cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_examples.html#interruptconfigure-cpp">interruptConfigure.cpp</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#getting-started-py">getting_started.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#acknowledgement-payloads-py">acknowledgement_payloads.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#manual-acknowledgements-py">manual_acknowledgements.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#multiceiver-demo-py">multiceiver_demo.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#streaming-data-py">streaming_data.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#interrup-configure-py">interrup_configure.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#getting-started-py">getting_started.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#acknowledgement-payloads-py">acknowledgement_payloads.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#manual-acknowledgements-py">manual_acknowledgements.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#multiceiver-demo-py">multiceiver_demo.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#streaming-data-py">streaming_data.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="py_examples.html#interrup-configure-py">interrup_configure.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="attiny_examples.html#rf24ping85">rf24ping85</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attiny_examples.html#timingsearch3pin">timingSearch3pin</a></li>
 </ul>
 </li>
 </ul>
@@ -388,17 +387,18 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#resend">resend()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#write">write()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#ce">ce()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#writeack">writeAck()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#update">update()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#istxfull">isTxFull()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqdr">irqDr()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqdf">irqDf()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqds">irqDs()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#clearstatusflags">clearStatusFlags()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#powerup">powerUp()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#powerdown">powerDown()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#istxfull">isTxFull()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#resend">resend()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#write">write()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#flushrx">flushRx()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#flushtx">flushTx()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#isfifo">isFifo()</a></li>
@@ -407,8 +407,9 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#lasttxarc">lastTxArc()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#ispvariant">isPVariant()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#testrpd">testRpd()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#startconstcarrier">startConstCarrier()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#stopconstcarrier">stopConstCarrier()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#testcarrier">testCarrier()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#startcarrierwave">startCarrierWave()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#stopcarrierwave">stopCarrierWave()</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a><ul>
@@ -424,6 +425,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#enableackpayload">enableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#disableackpayload">disableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#allowmulticast">allowMulticast()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#isallowmulticast">isAllowMulticast()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#interruptconfig">interruptConfig()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#setdatarate">setDataRate()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#getdatarate">getDataRate()</a></li>
@@ -435,16 +437,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#getpalevel">getPaLevel()</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -533,6 +525,14 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <li class="toctree-l2"><a class="reference internal" href="portability.html#ported-code">Ported Code</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#about-general">About General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -554,7 +554,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="examples.html" class="btn btn-neutral float-right" title="Arduino examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ino_examples.html" class="btn btn-neutral float-right" title="Arduino examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

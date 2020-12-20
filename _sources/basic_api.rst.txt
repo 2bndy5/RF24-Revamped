@@ -6,8 +6,7 @@ Constructor
 ******************
 
 .. doxygenclass:: RF24
-
-.. doxygenfunction:: RF24
+    :members: RF24
 
 begin()
 **********************
@@ -46,7 +45,7 @@ stopListening()
 any()
 ******************
 
-.. doxygenfunction:: any()
+.. doxygenfunction:: any
 
 available()
 ******************
@@ -66,4 +65,3 @@ send()
 .. doxygenfunction:: send(const void *buf, uint8_t len)
 
 .. doxygenfunction:: send(const void *buf, uint8_t len, const bool multicast)
-

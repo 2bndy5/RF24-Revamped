@@ -39,6 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Templated Files for Platform Support" href="templates.html" />
     <link rel="prev" title="ATXMEGA" href="atxmega.html" /> 
 </head>
 
@@ -89,23 +90,16 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul class="current">
@@ -127,6 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ported-code">Ported Code</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -209,8 +204,8 @@ as needed, allowing devices from ATTiny to Raspberry Pi to utilize the same
 core RF24 driver.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>File</p></th>
@@ -218,29 +213,23 @@ core RF24 driver.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>RF24_arch_config.h</p></td>
-<td><p>Basic Arduino/AVR compatibility, includes
-for remaining support files, etc</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="templates.html#about-general">RF24_arch_config.h</a></p></td>
+<td><p>Basic Arduino/AVR compatibility, includes for remaining support files, etc</p></td>
 </tr>
-<tr class="row-odd"><td><p>includes.h</p></td>
-<td><p>Linux only. Defines specific platform,
-include correct RF24_arch_config file</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="templates.html#about-includes">includes.h</a></p></td>
+<td><p>Linux only. Defines specific platform, include correct <em>RF24_arch_config</em> file</p></td>
 </tr>
-<tr class="row-even"><td><p>spi.h</p></td>
-<td><p>Provides standardized SPI ( transfer() )
-methods</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="templates.html#about-spi">spi.h</a></p></td>
+<td><p>Provides standardized SPI (<code class="docutils literal notranslate"><span class="pre">transfer()</span></code>) methods</p></td>
 </tr>
-<tr class="row-odd"><td><p>gpio.h</p></td>
-<td><p>Provides standardized GPIO
-( digitalWrite() ) methods</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="templates.html#about-gpio">gpio.h</a></p></td>
+<td><p>Provides standardized GPIO (<code class="docutils literal notranslate"><span class="pre">digitalWrite()</span></code>) methods</p></td>
 </tr>
-<tr class="row-even"><td><p>compatibility.h</p></td>
-<td><p>Provides standardized timing (millis()
-and delay()) methods</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="templates.h#about-timing">compatibility.h</a></p></td>
+<td><p>Provides standardized timing (<code class="docutils literal notranslate"><span class="pre">millis()</span></code> and <code class="docutils literal notranslate"><span class="pre">delay()</span></code>) methods</p></td>
 </tr>
 <tr class="row-odd"><td><p>your_custom_file.h</p></td>
-<td><p>Provides access to custom drivers for
-spi, gpio, etc</p></td>
+<td><p>Provides access to custom drivers for spi, gpio, etc</p></td>
 </tr>
 </tbody>
 </table>
@@ -272,6 +261,8 @@ used for porting-in related functions.</p></li>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="templates.html" class="btn btn-neutral float-right" title="Templated Files for Platform Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="atxmega.html" class="btn btn-neutral float-left" title="ATXMEGA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

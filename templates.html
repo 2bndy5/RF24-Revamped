@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>About General &mdash; RF24 Revemped 2.0 documentation</title>
+  <title>Templated Files for Platform Support &mdash; RF24 Revemped 2.0 documentation</title>
   
 
   
@@ -39,8 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Common Issues" href="common_issues.html" />
-    <link rel="prev" title="Configuration API" href="configure_api.html" /> 
+    <link rel="prev" title="RF24 Portability" href="portability.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,9 +89,10 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -100,16 +100,8 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#about-spi">About SPI</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
@@ -120,6 +112,14 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Templated Files for Platform Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about-general">About General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#about-includes">About Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#about-timing">About Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#about-gpio">About GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#about-spi">About SPI</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -166,7 +166,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>About General</li>
+      <li>Templated Files for Platform Support</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -185,344 +185,447 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="about-general">
-<h1>About General<a class="headerlink" href="#about-general" title="Permalink to this headline">¶</a></h1>
-<dl class="group">
-<dt>
-<span class="target" id="group__porting__general"></span><em>group</em> <code class="sig-name descname">porting_general</code></dt>
-<dd><p>Example of RF24_arch_config.h for <a class="reference internal" href="basic_api.html#classRF24"><span class="std std-ref">RF24</span></a> portability </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Defines</p>
-<dl class="cpp macro">
-<dt id="c.RF24_LINUX">
-<span class="target" id="group__porting__general_1gac9c625ddccaf6226fc77d5d903d160e9"></span><code class="sig-name descname">RF24_LINUX</code><a class="headerlink" href="#c.RF24_LINUX" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+  <div class="section" id="templated-files-for-platform-support">
+<h1>Templated Files for Platform Support<a class="headerlink" href="#templated-files-for-platform-support" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-general">
+<h2>About General<a class="headerlink" href="#about-general" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/utility/Template/RF24_arch_config.h</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef __ARCH_CONFIG_H__</span>
+<span class="cp">#define __ARCH_CONFIG_H__</span>
 
-<dl class="cpp macro">
-<dt id="c._BV">
-<span class="target" id="group__porting__general_1ga483c9de27db573099572f5485ef841c9"></span><code class="sig-name descname">_BV</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#c._BV" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#define RF24_LINUX</span>
 
-<dl class="cpp macro">
-<dt id="c._SPI">
-<span class="target" id="group__porting__general_1gaa9e44ba356b97be27806db7f96ff527d"></span><code class="sig-name descname">_SPI</code><a class="headerlink" href="#c._SPI" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;spi.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;gpio.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;compatibility.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
 
-<dl class="cpp macro">
-<dt id="c.IF_SERIAL_DEBUG">
-<span class="target" id="group__porting__general_1gab2cf239a98bc5d0beee4ceb41a5dd549"></span><code class="sig-name descname">IF_SERIAL_DEBUG</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#c.IF_SERIAL_DEBUG" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#define _BV(x) (1 &lt;&lt; (x))</span>
+<span class="cp">#define _SPI spi</span>
 
-<dl class="cpp macro">
-<dt id="c.PSTR">
-<span class="target" id="group__porting__general_1ga9c00057fd19e916cc1aa0a5949336beb"></span><code class="sig-name descname">PSTR</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PSTR" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#undef SERIAL_DEBUG</span>
+<span class="cp">#ifdef SERIAL_DEBUG</span>
+    <span class="cp">#define IF_SERIAL_DEBUG(x) ({x;})</span>
+<span class="cp">#else</span>
+    <span class="cp">#define IF_SERIAL_DEBUG(x)</span>
+<span class="cp">#endif</span>
 
-<dl class="cpp macro">
-<dt id="c.printf_P">
-<span class="target" id="group__porting__general_1ga758ad569cbda7c5ddfaa902e8eed3360"></span><code class="sig-name descname">printf_P</code><a class="headerlink" href="#c.printf_P" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="c1">// Avoid spurious warnings</span>
+<span class="cp">#if 1</span>
+    <span class="cp">#if !defined(NATIVE) &amp;&amp; defined(ARDUINO)</span>
+        <span class="cp">#undef PROGMEM</span>
+        <span class="cp">#define PROGMEM __attribute__(( section(&quot;.progmem.data&quot;) ))</span>
+        <span class="cp">#undef PSTR</span>
+        <span class="cp">#define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &amp;__c[0];}))</span>
+    <span class="cp">#endif</span>
+<span class="cp">#endif</span>
 
-<dl class="cpp macro">
-<dt id="c.strlen_P">
-<span class="target" id="group__porting__general_1ga05dde754db9944c90362c1f861d358ba"></span><code class="sig-name descname">strlen_P</code><a class="headerlink" href="#c.strlen_P" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="k">typedef</span> <span class="kt">uint16_t</span> <span class="n">prog_uint16_t</span><span class="p">;</span>
+<span class="cp">#define PSTR(x) (x)</span>
+<span class="cp">#define printf_P printf</span>
+<span class="cp">#define strlen_P strlen</span>
+<span class="cp">#define PROGMEM</span>
+<span class="cp">#define pgm_read_word(p) (*(p))</span>
+<span class="cp">#define PRIPSTR &quot;%s&quot;</span>
+<span class="cp">#define pgm_read_byte(p) (*(p))</span>
 
-<dl class="cpp macro">
-<dt id="c.PROGMEM">
-<span class="target" id="group__porting__general_1ga75acaba9e781937468d0911423bc0c35"></span><code class="sig-name descname">PROGMEM</code><a class="headerlink" href="#c.PROGMEM" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="c1">// Function, constant map as a result of migrating from Arduino</span>
+<span class="cp">#define LOW GPIO::OUTPUT_LOW</span>
+<span class="cp">#define HIGH GPIO::OUTPUT_HIGH</span>
+<span class="cp">#define INPUT GPIO::DIRECTION_IN</span>
+<span class="cp">#define OUTPUT GPIO::DIRECTION_OUT</span>
+<span class="cp">#define digitalWrite(pin, value) GPIO::write(pin, value)</span>
+<span class="cp">#define pinMode(pin, direction) GPIO::open(pin, direction)</span>
+<span class="cp">#define delay(milisec) __msleep(milisec)</span>
+<span class="cp">#define delayMicroseconds(usec) __usleep(usec)</span>
+<span class="cp">#define millis() __millis()</span>
 
-<dl class="cpp macro">
-<dt id="c.pgm_read_word">
-<span class="target" id="group__porting__general_1gaa59a94d7ea755db0d7811b543253ebc4"></span><code class="sig-name descname">pgm_read_word</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.pgm_read_word" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.PRIPSTR">
-<span class="target" id="group__porting__general_1ga7642e6d60f41fc769b32962c8c513668"></span><code class="sig-name descname">PRIPSTR</code><a class="headerlink" href="#c.PRIPSTR" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.pgm_read_byte">
-<span class="target" id="group__porting__general_1gae6778ca2c38951f24bd39f9c38cab9b2"></span><code class="sig-name descname">pgm_read_byte</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.pgm_read_byte" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.LOW">
-<span class="target" id="group__porting__general_1gab811d8c6ff3a505312d3276590444289"></span><code class="sig-name descname">LOW</code><a class="headerlink" href="#c.LOW" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.HIGH">
-<span class="target" id="group__porting__general_1ga5bb885982ff66a2e0a0a45a8ee9c35e2"></span><code class="sig-name descname">HIGH</code><a class="headerlink" href="#c.HIGH" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.INPUT">
-<span class="target" id="group__porting__general_1ga1bb283bd7893b9855e2f23013891fc82"></span><code class="sig-name descname">INPUT</code><a class="headerlink" href="#c.INPUT" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.OUTPUT">
-<span class="target" id="group__porting__general_1ga61a3c9a18380aafb6e430e79bf596557"></span><code class="sig-name descname">OUTPUT</code><a class="headerlink" href="#c.OUTPUT" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.digitalWrite">
-<span class="target" id="group__porting__general_1gabda89b115581947337690b2f85bfab6e"></span><code class="sig-name descname">digitalWrite</code><span class="sig-paren">(</span><em>pin</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.digitalWrite" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.pinMode">
-<span class="target" id="group__porting__general_1ga361649efb4f1e2fa3c870ca203497d5e"></span><code class="sig-name descname">pinMode</code><span class="sig-paren">(</span><em>pin</em>, <em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.pinMode" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.delay">
-<span class="target" id="group__porting__general_1ga70a331e8ddf9acf9d33c47b71cda4c5f"></span><code class="sig-name descname">delay</code><span class="sig-paren">(</span><em>milisec</em><span class="sig-paren">)</span><a class="headerlink" href="#c.delay" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.delayMicroseconds">
-<span class="target" id="group__porting__general_1ga9384257bf5d5c1aae675b22cc3ecb91a"></span><code class="sig-name descname">delayMicroseconds</code><span class="sig-paren">(</span><em>usec</em><span class="sig-paren">)</span><a class="headerlink" href="#c.delayMicroseconds" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt id="c.millis">
-<span class="target" id="group__porting__general_1gad5b3ec1ce839fa1c4337a7d0312e9749"></span><code class="sig-name descname">millis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.millis" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
+<span class="cp">#endif </span><span class="c1">// __ARCH_CONFIG_H__</span>
+</pre></div>
+</td></tr></table></div>
 </div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Typedefs</p>
-<dl class="cpp type">
-<dt id="_CPPv413prog_uint16_t">
-<span id="_CPPv313prog_uint16_t"></span><span id="_CPPv213prog_uint16_t"></span><span id="prog_uint16_t"></span><span class="target" id="group__porting__general_1ga05ca2f20b55933ad782917161d54287d"></span><em class="property">typedef </em>uint16_t <code class="sig-name descname">prog_uint16_t</code><a class="headerlink" href="#_CPPv413prog_uint16_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="about-includes">
-<h1>About Includes<a class="headerlink" href="#about-includes" title="Permalink to this headline">¶</a></h1>
-<dl class="group">
-<dt>
-<span class="target" id="group__porting__includes"></span><em>group</em> <code class="sig-name descname">porting_includes</code></dt>
-<dd><p>Example of includes.h for <a class="reference internal" href="basic_api.html#classRF24"><span class="std std-ref">RF24</span></a> Linux portability </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Defines</p>
-<dl class="cpp macro">
-<dt id="c.RF24_BBB">
-<span class="target" id="group__porting__includes_1gadee4a62e9f3f0904f4b50abf8f085280"></span><code class="sig-name descname">RF24_BBB</code><a class="headerlink" href="#c.RF24_BBB" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Define a specific platform for this configuration </p>
-</dd></dl>
+<h2>About Includes<a class="headerlink" href="#about-includes" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/utility/Template/includes.h</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef __RF24_INCLUDES_H__</span>
+<span class="cp">#define __RF24_INCLUDES_H__</span>
 
+<span class="cm">/**</span>
+<span class="cm"> * Define a specific platform for this configuration. For example.</span>
+<span class="cm"> * our platform is named &quot;BBB&quot;.</span>
+<span class="cm"> */</span>
+<span class="cp">#define RF24_BBB</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Load the correct configuration for this platform</span>
+<span class="cm"> */</span>
+<span class="cp">#include</span> <span class="cpf">&quot;BBB/RF24_arch_config.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</td></tr></table></div>
 </div>
-</dd></dl>
-
 </div>
 <div class="section" id="about-timing">
-<h1>About Timing<a class="headerlink" href="#about-timing" title="Permalink to this headline">¶</a></h1>
-<dl class="group">
-<dt>
-<span class="target" id="group__porting__timing"></span><em>group</em> <code class="sig-name descname">porting_timing</code></dt>
-<dd><p>Example of compatibility.h class declaration for timing functions portability </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv48__msleepi">
-<span id="_CPPv38__msleepi"></span><span id="_CPPv28__msleepi"></span><span id="__msleep__i"></span><span class="target" id="group__porting__timing_1ga4c2e4dffa20576f5b3d9c2f9bb052106"></span>void <code class="sig-name descname">__msleep</code><span class="sig-paren">(</span>int <em>milisec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48__msleepi" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<h2>About Timing<a class="headerlink" href="#about-timing" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">/utility/Template/compatibility.h</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef COMPATIBLITY_H</span>
+<span class="cp">#define COMPATIBLITY_H</span>
 
-<dl class="cpp function">
-<dt id="_CPPv48__usleepi">
-<span id="_CPPv38__usleepi"></span><span id="_CPPv28__usleepi"></span><span id="__usleep__i"></span><span class="target" id="group__porting__timing_1gaec87320f2886551c012814de85713681"></span>void <code class="sig-name descname">__usleep</code><span class="sig-paren">(</span>int <em>milisec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48__usleepi" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#ifdef __cplusplus</span>
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
+<span class="cp">#endif</span>
 
-<dl class="cpp function">
-<dt id="_CPPv413__start_timerv">
-<span id="_CPPv313__start_timerv"></span><span id="_CPPv213__start_timerv"></span><span id="__start_timer"></span><span class="target" id="group__porting__timing_1ga6c8e606d2db30ac66d24b35056a8f819"></span>void <code class="sig-name descname">__start_timer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413__start_timerv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
 
-<dl class="cpp function">
-<dt id="_CPPv48__millisv">
-<span id="_CPPv38__millisv"></span><span id="_CPPv28__millisv"></span><span id="__millis"></span><span class="target" id="group__porting__timing_1gad13c7acd564917af4f86b655035a6424"></span>long <code class="sig-name descname">__millis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48__millisv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<span class="kt">void</span> <span class="nf">__msleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
 
+<span class="kt">void</span> <span class="nf">__usleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">__start_timer</span><span class="p">();</span>
+
+<span class="kt">long</span> <span class="nf">__millis</span><span class="p">();</span>
+
+<span class="cp">#ifdef    __cplusplus</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#endif    </span><span class="cm">/* COMPATIBLITY_H */</span><span class="cp"></span>
+</pre></div>
+</td></tr></table></div>
 </div>
-</dd></dl>
-
 </div>
 <div class="section" id="about-gpio">
-<h1>About GPIO<a class="headerlink" href="#about-gpio" title="Permalink to this headline">¶</a></h1>
-<dl class="group">
-<dt>
-<span class="target" id="group__porting__gpio"></span><em>group</em> <code class="sig-name descname">porting_gpio</code></dt>
-<dd><p>Example of gpio.h class declaration for <a class="reference internal" href="#classGPIO"><span class="std std-ref">GPIO</span></a> portability </p>
-<dl class="cpp class">
-<dt id="_CPPv44GPIO">
-<span id="_CPPv34GPIO"></span><span id="_CPPv24GPIO"></span><span id="GPIO"></span><span class="target" id="classGPIO"></span><em class="property">class </em><code class="sig-name descname">GPIO</code><a class="headerlink" href="#_CPPv44GPIO" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;gpio.h&gt;</em><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4N4GPIO4openEii">
-<span id="_CPPv3N4GPIO4openEii"></span><span id="_CPPv2N4GPIO4openEii"></span><span id="GPIO::open__i.i"></span><span class="target" id="classGPIO_1aa78f7db1062bcb0c5e947f30db8f2fdf"></span>void <code class="sig-name descname">open</code><span class="sig-paren">(</span>int <em>port</em>, int <em>DDR</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4GPIO4openEii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Similar to Arduino <a class="reference internal" href="#group__porting__general_1ga361649efb4f1e2fa3c870ca203497d5e"><span class="std std-ref">pinMode(pin, mode)</span></a>; <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DDR</span></code>: </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+<h2>About GPIO<a class="headerlink" href="#about-gpio" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/utility/Template/gpio.h</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N4GPIO5closeEi">
-<span id="_CPPv3N4GPIO5closeEi"></span><span id="_CPPv2N4GPIO5closeEi"></span><span id="GPIO::close__i"></span><span class="target" id="classGPIO_1a360ae728f1f164b2fc78b5a67000c246"></span>void <code class="sig-name descname">close</code><span class="sig-paren">(</span>int <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4GPIO5closeEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+<span class="k">class</span> <span class="nc">GPIO</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="cm">/* Constants */</span>
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_OUT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_IN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N4GPIO4readEi">
-<span id="_CPPv3N4GPIO4readEi"></span><span id="_CPPv2N4GPIO4readEi"></span><span id="GPIO::read__i"></span><span class="target" id="classGPIO_1a83aea305a6600dcff18526b0157b6582"></span>int <code class="sig-name descname">read</code><span class="sig-paren">(</span>int <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4GPIO4readEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Similar to Arduino digitalRead(pin); <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_HIGH</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_LOW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N4GPIO5writeEii">
-<span id="_CPPv3N4GPIO5writeEii"></span><span id="_CPPv2N4GPIO5writeEii"></span><span id="GPIO::write__i.i"></span><span class="target" id="classGPIO_1a8b3130bf18907a7c2658a96d2021cf66"></span>void <code class="sig-name descname">write</code><span class="sig-paren">(</span>int <em>port</em>, int <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4GPIO5writeEii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Similar to Arduino <a class="reference internal" href="#group__porting__general_1gabda89b115581947337690b2f85bfab6e"><span class="std std-ref">digitalWrite(pin, state)</span></a>; <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+    <span class="n">GPIO</span><span class="p">();</span>
 
+    <span class="cm">/**</span>
+<span class="cm">     * Similar to Arduino pinMode(pin, mode);</span>
+<span class="cm">     * @param port</span>
+<span class="cm">     * @param DDR</span>
+<span class="cm">     */</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">open</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">DDR</span><span class="p">);</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param port</span>
+<span class="cm">     */</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Similar to Arduino digitalRead(pin);</span>
+<span class="cm">     * @param port</span>
+<span class="cm">     */</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">read</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
+
+    <span class="cm">/**</span>
+<span class="cm">    * Similar to Arduino digitalWrite(pin, state);</span>
+<span class="cm">    * @param port</span>
+<span class="cm">    * @param value</span>
+<span class="cm">    */</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">GPIO</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
 </div>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="about-spi">
-<h1>About SPI<a class="headerlink" href="#about-spi" title="Permalink to this headline">¶</a></h1>
-<dl class="group">
-<dt>
-<span class="target" id="group__porting__spi"></span><em>group</em> <code class="sig-name descname">porting_spi</code></dt>
-<dd><p>Example of spi.h class declaration for <a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> portability </p>
-<dl class="cpp class">
-<dt id="_CPPv43SPI">
-<span id="_CPPv33SPI"></span><span id="_CPPv23SPI"></span><span id="SPI"></span><span class="target" id="classSPI"></span><em class="property">class </em><code class="sig-name descname">SPI</code><a class="headerlink" href="#_CPPv43SPI" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;spi.h&gt;</em><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4N3SPI3SPIEv">
-<span id="_CPPv3N3SPI3SPIEv"></span><span id="_CPPv2N3SPI3SPIEv"></span><span id="SPI::SPI"></span><span class="target" id="classSPI_1a2ba081c29fbdecc704c6bf00b24d5205"></span><code class="sig-name descname">SPI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3SPI3SPIEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> constructor </p>
-</dd></dl>
+<h2>About SPI<a class="headerlink" href="#about-spi" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">/utility/Template/spi.h</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;inttypes.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/spi/spidev.h&gt;</span><span class="cp"></span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N3SPI5beginEi">
-<span id="_CPPv3N3SPI5beginEi"></span><span id="_CPPv2N3SPI5beginEi"></span><span id="SPI::begin__i"></span><span class="target" id="classSPI_1aa5ff163f013953428c7e36970c441e60"></span>void <code class="sig-name descname">begin</code><span class="sig-paren">(</span>int <em>busNo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3SPI5beginEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Start <a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> </p>
-</dd></dl>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N3SPI8transferE7uint8_t">
-<span id="_CPPv3N3SPI8transferE7uint8_t"></span><span id="_CPPv2N3SPI8transferE7uint8_t"></span><span id="SPI::transfer__uint8_t"></span><span class="target" id="classSPI_1aa7e8272a1aaa6b5531c316397143f553"></span>uint8_t <code class="sig-name descname">transfer</code><span class="sig-paren">(</span>uint8_t <em>tx_</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3SPI8transferE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Transfer a single byte <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>Data returned via spi </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tx_</span></code>: Byte to send </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+<span class="k">class</span> <span class="nc">SPI</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N3SPI10transfernbEPcPc8uint32_t">
-<span id="_CPPv3N3SPI10transfernbEPcPc8uint32_t"></span><span id="_CPPv2N3SPI10transfernbEPcPc8uint32_t"></span><span id="SPI::transfernb__cP.cP.uint32_t"></span><span class="target" id="classSPI_1a223184144a4a33987bc6b5f946b4826e"></span>void <code class="sig-name descname">transfernb</code><span class="sig-paren">(</span>char *<em>tbuf</em>, char *<em>rbuf</em>, uint32_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3SPI10transfernbEPcPc8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Transfer a buffer of data <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tbuf</span></code>: Transmit buffer </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rbuf</span></code>: Receive buffer </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of the data </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+	<span class="cm">/**</span>
+<span class="cm">	 * SPI constructor</span>
+<span class="cm">	 */</span>
+	<span class="n">SPI</span><span class="p">();</span>
 
-<dl class="cpp function">
-<dt id="_CPPv4N3SPI9transfernEPc8uint32_t">
-<span id="_CPPv3N3SPI9transfernEPc8uint32_t"></span><span id="_CPPv2N3SPI9transfernEPc8uint32_t"></span><span id="SPI::transfern__cP.uint32_t"></span><span class="target" id="classSPI_1a7203a9c3e950b882c00ad49057fd79a1"></span>void <code class="sig-name descname">transfern</code><span class="sig-paren">(</span>char *<em>buf</em>, uint32_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3SPI9transfernEPc8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Transfer a buffer of data without an rx buffer <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to a buffer of data </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of the data </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+	<span class="cm">/**</span>
+<span class="cm">	 * Start SPI</span>
+<span class="cm">	 */</span>
+	<span class="kt">void</span> <span class="nf">begin</span><span class="p">(</span><span class="kt">int</span> <span class="n">busNo</span><span class="p">);</span>
 
+	<span class="cm">/**</span>
+<span class="cm">	 * Transfer a single byte</span>
+<span class="cm">	 * @param tx_ Byte to send</span>
+<span class="cm">	 * @return Data returned via spi</span>
+<span class="cm">	 */</span>
+	<span class="kt">uint8_t</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">tx_</span><span class="p">);</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Transfer a buffer of data</span>
+<span class="cm">	 * @param tbuf Transmit buffer</span>
+<span class="cm">	 * @param rbuf Receive buffer</span>
+<span class="cm">	 * @param len Length of the data</span>
+<span class="cm">	 */</span>
+	<span class="kt">void</span> <span class="nf">transfernb</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">tbuf</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rbuf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Transfer a buffer of data without an rx buffer</span>
+<span class="cm">	 * @param buf Pointer to a buffer of data</span>
+<span class="cm">	 * @param len Length of the data</span>
+<span class="cm">	 */</span>
+	<span class="kt">void</span> <span class="nf">transfern</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
+
+	<span class="k">virtual</span> <span class="o">~</span> <span class="n">SPI</span><span class="p">();</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+	<span class="cm">/** Default SPI device */</span>
+	<span class="n">string</span> <span class="n">device</span><span class="p">;</span>
+	<span class="cm">/** SPI Mode set */</span>
+	<span class="kt">uint8_t</span> <span class="n">mode</span><span class="p">;</span>
+	<span class="cm">/** word size*/</span>
+	<span class="kt">uint8_t</span> <span class="n">bits</span><span class="p">;</span>
+	<span class="cm">/** Set SPI speed*/</span>
+	<span class="kt">uint32_t</span> <span class="n">speed</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+
+	<span class="kt">void</span> <span class="nf">init</span><span class="p">();</span>
+
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
 </div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N3SPI6deviceE">
-<span id="_CPPv3N3SPI6deviceE"></span><span id="_CPPv2N3SPI6deviceE"></span><span id="SPI::device__string"></span><span class="target" id="classSPI_1ada88abf448fe92e5ce37975a2c4c3be1"></span>string <code class="sig-name descname">device</code><a class="headerlink" href="#_CPPv4N3SPI6deviceE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Default <a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> device </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3SPI4modeE">
-<span id="_CPPv3N3SPI4modeE"></span><span id="_CPPv2N3SPI4modeE"></span><span id="SPI::mode__uint8_t"></span><span class="target" id="classSPI_1a19e2761b7c73286901cfee3cd1878d53"></span>uint8_t <code class="sig-name descname">mode</code><a class="headerlink" href="#_CPPv4N3SPI4modeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> Mode set </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3SPI4bitsE">
-<span id="_CPPv3N3SPI4bitsE"></span><span id="_CPPv2N3SPI4bitsE"></span><span id="SPI::bits__uint8_t"></span><span class="target" id="classSPI_1aad6f9b0224134b57601ab83e86a1fda6"></span>uint8_t <code class="sig-name descname">bits</code><a class="headerlink" href="#_CPPv4N3SPI4bitsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>word size </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3SPI5speedE">
-<span id="_CPPv3N3SPI5speedE"></span><span id="_CPPv2N3SPI5speedE"></span><span id="SPI::speed__uint32_t"></span><span class="target" id="classSPI_1abbfcd5f1f5ebc461fa08ce4d046ed139"></span>uint32_t <code class="sig-name descname">speed</code><a class="headerlink" href="#_CPPv4N3SPI5speedE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set <a class="reference internal" href="#classSPI"><span class="std std-ref">SPI</span></a> speed </p>
-</dd></dl>
-
 </div>
-</dd></dl>
-
-<dl class="cpp type">
-<dt id="_CPPv4St">
-<span id="_CPPv3St"></span><span id="_CPPv2St"></span><span id="std"></span><span class="target" id="namespacestd"></span><em class="property">namespace </em><code class="sig-name descname">std</code><a class="headerlink" href="#_CPPv4St" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -533,10 +636,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="common_issues.html" class="btn btn-neutral float-right" title="Common Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="configure_api.html" class="btn btn-neutral float-left" title="Configuration API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="portability.html" class="btn btn-neutral float-left" title="RF24 Portability" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

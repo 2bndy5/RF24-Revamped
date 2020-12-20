@@ -16,27 +16,15 @@ as needed, allowing devices from ATTiny to Raspberry Pi to utilize the same
 core RF24 driver.
 
 ```eval_rst
-+-------------------+------------------------------------------+
-|       File        |               Purpose                    |
-+===================+==========================================+
-|RF24_arch_config.h | Basic Arduino/AVR compatibility, includes|
-|                   | for remaining support files, etc         |
-+-------------------+------------------------------------------+
-| includes.h        | Linux only. Defines specific platform,   |
-|                   | include correct RF24_arch_config file    |
-+-------------------+------------------------------------------+
-| spi.h             | Provides standardized SPI ( transfer() ) |
-|                   | methods                                  |
-+-------------------+------------------------------------------+
-| gpio.h            | Provides standardized GPIO               |
-|                   | ( digitalWrite() ) methods               |
-+-------------------+------------------------------------------+
-| compatibility.h   | Provides standardized timing (millis()   |
-|                   | and delay()) methods                     |
-+-------------------+------------------------------------------+
-| your_custom_file.h| Provides access to custom drivers for    |
-|                   | spi, gpio, etc                           |
-+-------------------+------------------------------------------+
+.. csv-table::
+    :header: File, Purpose
+
+    "`RF24_arch_config.h <templates.html#about-general>`_", "Basic Arduino/AVR compatibility, includes for remaining support files, etc"
+    "`includes.h <templates.html#about-includes>`_", "Linux only. Defines specific platform, include correct *RF24_arch_config* file"
+    "`spi.h <templates.html#about-spi>`_", "Provides standardized SPI (``transfer()``) methods"
+    "`gpio.h <templates.html#about-gpio>`_", "Provides standardized GPIO (``digitalWrite()``) methods"
+    "`compatibility.h <templates.h#about-timing>`_", "Provides standardized timing (``millis()`` and ``delay()``) methods"
+    "your_custom_file.h", "Provides access to custom drivers for spi, gpio, etc"
 ```
 
 Examples are provided via the included hardware support templates in *RF24/utility*

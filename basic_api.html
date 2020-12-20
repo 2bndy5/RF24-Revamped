@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Advanced API" href="advanced_api.html" />
-    <link rel="prev" title="Arduino examples" href="examples.html" /> 
+    <link rel="prev" title="ATTiny examples" href="attiny_examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,9 +90,10 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul class="current">
@@ -113,14 +114,6 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
@@ -133,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -206,11 +200,11 @@
 <dt id="_CPPv44RF24">
 <span id="_CPPv34RF24"></span><span id="_CPPv24RF24"></span><span id="RF24"></span><span class="target" id="classRF24"></span><em class="property">class </em><code class="sig-name descname">RF24</code><a class="headerlink" href="#_CPPv44RF24" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver. </p>
-</dd></dl>
-
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t">
-<span id="_CPPv3N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="RF24::RF24__uint16_t.uint16_t.uint32_t"></span><span class="target" id="classRF24_1abe8f878e238644252ccf5ec27fba611d"></span><code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="RF24::RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">RF24</code><span class="sig-paren">(</span>uint16_t <em>_cepin</em>, uint16_t <em>_cspin</em>, uint32_t <em>_spispeed</em> = RF24_SPI_SPEED<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="RF24::RF24__uint16_t.uint16_t.uint32_t"></span><span class="target" id="classRF24_1abe8f878e238644252ccf5ec27fba611d"></span><code class="sig-name descname">RF24</code><span class="sig-paren">(</span>uint16_t <em>_cepin</em>, uint16_t <em>_cspin</em>, uint32_t <em>_spispeed</em> = RF24_SPI_SPEED<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Creates a new instance of this driver. </p>
 <p><a class="reference internal" href="#classRF24"><span class="std std-ref">RF24</span></a> Constructor</p>
 <p>Before using, you create an instance and send in the unique pins that this chip is connected to.</p>
@@ -228,11 +222,14 @@ Linux: The old way of setting SPI speeds using BCM2835 driver enums has been rem
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">_cepin</span></code>: The pin attached to Chip Enable on the RF module </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">_cspin</span></code>: The pin attached to Chip Select </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">_spispeed</span></code>: The <a class="reference internal" href="templates.html#classSPI"><span class="std std-ref">SPI</span></a> speed in Hz ie: 1000000 == 1Mhz </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_spispeed</span></code>: The SPI speed in Hz ie: 1000000 == 1Mhz </p></li>
 </ul>
 </dd>
 </dl>
 </p>
+</dd></dl>
+
+</div>
 </dd></dl>
 
 </div>
@@ -255,8 +252,8 @@ before continueing application.</p>
 </p>
  <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the radio is not responding to <a class="reference internal" href="templates.html#classSPI"><span class="std std-ref">SPI</span></a> transactions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the radio is respondive to <a class="reference internal" href="templates.html#classSPI"><span class="std std-ref">SPI</span></a> transactions </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the radio is not responding to SPI transactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the radio is responsive to SPI transactions </p></li>
 </ul>
 </p>
 </dd>
@@ -762,7 +759,7 @@ wrapper because the length of the payload is determined automatically.</p>
         <a href="advanced_api.html" class="btn btn-neutral float-right" title="Advanced API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="examples.html" class="btn btn-neutral float-left" title="Arduino examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="attiny_examples.html" class="btn btn-neutral float-left" title="ATTiny examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About General" href="templates.html" />
+    <link rel="next" title="Common Issues" href="common_issues.html" />
     <link rel="prev" title="Advanced API" href="advanced_api.html" /> 
 </head>
 
@@ -90,9 +90,10 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul class="current">
@@ -111,6 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disableackpayload">disableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#allowmulticast">allowMulticast()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isallowmulticast">isAllowMulticast()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interruptconfig">interruptConfig()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setdatarate">setDataRate()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getdatarate">getDataRate()</a></li>
@@ -122,14 +124,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#getpalevel">getPaLevel()</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
@@ -143,6 +137,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -237,14 +232,16 @@
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 1</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"><p>lnaEnabled = 1</p></th>
+<th class="head"><p>lnaEnabled = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>-18 dBm</p></td>
+<tr class="row-odd"><td><p>-18 dBm</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>-12 dBm</p></td>
 </tr>
@@ -265,14 +262,16 @@ lnaEnabled = 0</p></th>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 1</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"><p>lnaEnabled = 1</p></th>
+<th class="head"><p>lnaEnabled = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>-12 dBm</p></td>
+<tr class="row-odd"><td><p>-12 dBm</p></td>
 <td><p>0 dBm</p></td>
 <td><p>-4 dBm</p></td>
 </tr>
@@ -293,14 +292,16 @@ lnaEnabled = 0</p></th>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 1</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"><p>lnaEnabled = 1</p></th>
+<th class="head"><p>lnaEnabled = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>-6 dBm</p></td>
+<tr class="row-odd"><td><p>-6 dBm</p></td>
 <td><p>3 dBm</p></td>
 <td><p>1 dBm</p></td>
 </tr>
@@ -321,14 +322,16 @@ lnaEnabled = 0</p></th>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 1</p></th>
-<th class="head"><p>Si24R1 with
-lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+<th class="head"><p>Si24R1 with</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"><p>lnaEnabled = 1</p></th>
+<th class="head"><p>lnaEnabled = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0 dBm</p></td>
+<tr class="row-odd"><td><p>0 dBm</p></td>
 <td><p>7 dBm</p></td>
 <td><p>4 dBm</p></td>
 </tr>
@@ -356,7 +359,7 @@ lnaEnabled = 0</p></th>
 <dt>
 <span class="target" id="group__Datarate"></span><em>group</em> <code class="sig-name descname">Datarate</code></dt>
 <dd><p>How fast data moves through the air. Units are in bits per second (bps). <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aeb9920e7a95699748b003c4a839b0814"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
 </dd>
 </dl>
 </p>
@@ -539,7 +542,7 @@ payloads.</p>
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"><span class="std std-ref">writeAck()</span></a> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (true) or disable (false) the auto-acknowledgment feature for all pipes </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
 </ul>
 </dd>
 </dl>
@@ -566,10 +569,10 @@ to send ACK payloads.</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"><span class="std std-ref">writeAck()</span></a>, enableAckPayloads(), disableAckPayloads() </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"><span class="std std-ref">writeAck()</span></a>, <a class="reference internal" href="#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>, <a class="reference internal" href="#classRF24_1a00e17eb6b56b915fd6df30a58784661f"><span class="std std-ref">disableAckPayload()</span></a> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (true) or disable (false) the auto-acknowledgment feature for the specified pipe </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: Which pipe to configure. This number should be in range [0, 5]. </p></li>
 </ul>
 </dd>
@@ -585,8 +588,8 @@ to send ACK payloads.</p>
 <span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p>true if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
-<li><p>false if the auto-ack feature is disabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the auto-ack feature is disabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
 </ul>
 </p>
 </dd>
@@ -679,7 +682,20 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a> for all pipes or setAutoAck(uint8_t, bool) for individual pipes </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a>, <a class="reference internal" href="#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="isallowmulticast">
+<h2>isAllowMulticast()<a class="headerlink" href="#isallowmulticast" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416isAllowMulticastEv">
+<span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -719,12 +735,12 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <h2>setDataRate()<a class="headerlink" href="#setdatarate" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
-<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1aeb9920e7a95699748b003c4a839b0814"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the transmission <a class="reference internal" href="#group__Datarate"><span class="std std-ref">datarate</span></a></p>
 <p> <p><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules (when
-<a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns false).</p>
+<a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
 </div>
 </p>
  <dl class="simple">
@@ -768,8 +784,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dt id="_CPPv4N4RF2411getDataRateEv">
 <span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fetches the currently configured transmission <a class="reference internal" href="#group__Datarate"><span class="std std-ref">datarate</span></a> <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>.<p> See table in </p>
-<a class="reference internal" href="#group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a> or <a class="reference internal" href="#classRF24_1aeb9920e7a95699748b003c4a839b0814"><span class="std std-ref">setDataRate()</span></a> </p>
+<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
 </dd>
 </dl>
 </p>
@@ -942,7 +957,8 @@ enabled.</p>
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <a class="reference internal" href="#_CPPv4N4RF2410getPaLevelEv" title="RF24::getPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getPaLevel()</span></code></a> function does not care what was passed <code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> parameter.</p>
+<p>The <a class="reference internal" href="#_CPPv4N4RF2410getPaLevelEv" title="RF24::getPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getPaLevel()</span></code></a> function does not care what was passed <code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>
+parameter.</p>
 </div>
 </p>
  <dl class="simple">
@@ -962,8 +978,7 @@ enabled.</p>
 <dt id="_CPPv4N4RF2410getPaLevelEv">
 <span id="_CPPv3N4RF2410getPaLevelEv"></span><span id="_CPPv2N4RF2410getPaLevelEv"></span><span id="RF24::getPaLevel__void"></span><span class="target" id="classRF24_1a9d78d3638af3245f840f5698e630c25f"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPaLevel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getPaLevelEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fetches the current <a class="reference internal" href="#group__PaLevel"><span class="std std-ref">Power Amplifier level</span></a>. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>.<p> See tables in </p>
-<a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a> or <a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">setPaLevel()</span></a> </p>
+<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. See tables in <a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">setPaLevel()</span></a> </p>
 </dd>
 </dl>
 </p>
@@ -980,7 +995,7 @@ enabled.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="templates.html" class="btn btn-neutral float-right" title="About General" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="common_issues.html" class="btn btn-neutral float-right" title="Common Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="advanced_api.html" class="btn btn-neutral float-left" title="Advanced API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

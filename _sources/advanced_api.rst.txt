@@ -2,70 +2,75 @@
 Advanced API
 ------------
 
-writeAck()
-******************************
-
-.. doxygenfunction:: writeAck()
-
-update()
-******************************
-
-.. doxygenfunction:: update
-
-irqDr()
-******************************
-
-.. doxygenfunction:: irqDr()
-
-irqDf()
-******************************
-
-.. doxygenfunction:: irqDf()
-
-irqDs()
-******************************
-
-.. doxygenfunction:: irqDs()
-
-clearStatusFlags()
-******************************
-
-.. doxygenfunction:: clearStatusFlags()
-
-powerUp()
-******************************
-
-.. doxygenfunction:: powerUp()
-
-powerDown()
-******************************
-
-.. doxygenfunction:: powerDown()
-
-isTxFull()
-******************************
-
-.. doxygenfunction:: isTxFull()
-
 resend()
 ******************************
 
-.. doxygenfunction:: resend()
+.. doxygenfunction:: resend
 
 write()
 ******************************
 
 .. doxygenfunction:: RF24::write(const void*, uint8_t, const bool, bool)
 
+ce()
+******************************
+
+.. doxygenfunction:: ce
+
+writeAck()
+******************************
+
+.. doxygenfunction:: writeAck
+
+update()
+******************************
+
+.. doxygenfunction:: update
+
+isTxFull()
+******************************
+
+.. doxygenfunction:: isTxFull
+
+irqDr()
+******************************
+
+.. doxygenfunction:: irqDr
+
+irqDf()
+******************************
+
+.. doxygenfunction:: irqDf
+
+irqDs()
+******************************
+
+.. doxygenfunction:: irqDs
+
+clearStatusFlags()
+******************************
+
+.. doxygenfunction:: clearStatusFlags
+
+powerUp()
+******************************
+
+.. doxygenfunction:: powerUp
+
+powerDown()
+******************************
+
+.. doxygenfunction:: powerDown
+
 flushRx()
 ******************************
 
-.. doxygenfunction:: flushRx()
+.. doxygenfunction:: flushRx
 
 flushTx()
 ******************************
 
-.. doxygenfunction:: flushTx()
+.. doxygenfunction:: flushTx
 
 isFifo()
 ******************************
@@ -97,14 +102,19 @@ isPVariant()
 testRpd()
 ******************************
 
-.. doxygenfunction:: testRpd()
+.. doxygenfunction:: testRpd
 
-startConstCarrier()
+testCarrier()
 ******************************
 
-.. doxygenfunction:: startConstCarrier()
+.. doxygenfunction:: testCarrier
 
-stopConstCarrier()
+startCarrierWave()
 ******************************
 
-.. doxygenfunction:: stopConstCarrier()
+.. doxygenfunction:: startCarrierWave
+
+stopCarrierWave()
+******************************
+
+.. doxygenfunction:: stopCarrierWave

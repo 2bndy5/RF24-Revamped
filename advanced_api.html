@@ -90,25 +90,27 @@
             
               <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#linux-examples">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html#python-wrapper-examples">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#resend">resend()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write">write()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ce">ce()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writeack">writeAck()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#update">update()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#istxfull">isTxFull()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#irqdr">irqDr()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#irqdf">irqDf()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#irqds">irqDs()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clearstatusflags">clearStatusFlags()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#powerup">powerUp()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#powerdown">powerDown()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#istxfull">isTxFull()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#resend">resend()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#write">write()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#flushrx">flushRx()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#flushtx">flushTx()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#isfifo">isFifo()</a></li>
@@ -117,19 +119,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#lasttxarc">lastTxArc()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ispvariant">isPVariant()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#testrpd">testRpd()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#startconstcarrier">startConstCarrier()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#stopconstcarrier">stopConstCarrier()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testcarrier">testCarrier()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#startcarrierwave">startCarrierWave()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stopcarrierwave">stopCarrierWave()</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Porting Templates</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">About General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-includes">About Includes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-timing">About Timing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-gpio">About GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html#about-spi">About SPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Related Pages</span></p>
 <ul>
@@ -143,6 +138,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
 </ul>
 
             
@@ -210,6 +206,103 @@
             
   <div class="section" id="advanced-api">
 <h1>Advanced API<a class="headerlink" href="#advanced-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="resend">
+<h2>resend()<a class="headerlink" href="#resend" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246resendEv">
+<span id="_CPPv3N4RF246resendEv"></span><span id="_CPPv2N4RF246resendEv"></span><span id="RF24::resend"></span><span class="target" id="classRF24_1a4968f9e74eefc7809e5ba4bbc0a1271b"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">resend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246resendEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers when a TX failure occurs. The auto-retry feature is applied just like when calling <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>. Calling this function prevents succefully sent payloads from being removed from the TX FIFO buffer until calling <a class="reference internal" href="#classRF24_1a1295da3dafa3a89090d2e0e34f9e1efb"><span class="std std-ref">flushTx()</span></a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>. If the TX FIFO has other payloads enqueued, then using <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a> will attempt to enqueue a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="reference internal" href="basic_api.html#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> also calls <a class="reference internal" href="#classRF24_1a1295da3dafa3a89090d2e0e34f9e1efb"><span class="std std-ref">flushTx()</span></a> when ACK payloads are enabled (via <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>).</p>
+<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1a4c6d3959c8320e64568395f4ef507aef"><span class="std std-ref">setRetries()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is to be used AFTER auto-retry fails if wanting to resend
+using the built-in payload reuse feature. In the event of a
+re-transmission failure, simply call this function again to
+resume re-transmission of the same payload.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if re-transmission was successful.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the re-transmission failed or the TX FIFO was already empty. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="write">
+<h2>write()<a class="headerlink" href="#write" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF245writeEPKv7uint8_tKbb">
+<span id="_CPPv3N4RF245writeEPKv7uint8_tKbb"></span><span id="_CPPv2N4RF245writeEPKv7uint8_tKbb"></span><span id="RF24::write__voidCP.uint8_t.bC.b"></span><span class="target" id="classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em>, <em class="property">const</em> bool <em>multicast</em>, bool <em>write_only</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245writeEPKv7uint8_tKbb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write a payload to the TX FIFO buffers.</p>
+<p> <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function leaves the CE pin HIGH, so the radio will remain in TX or
+StandBy-II Mode until a <a class="reference internal" href="#_CPPv4N4RF242ceEb" title="RF24::ce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ce()</span></code></a> is called to set the pin LOW (into
+StandBy-I mode). Can be used as an alternative to <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_t" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code></a> if using
+all 3 levels of the TX FIFO  to manage multiple payloads at once.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important to never keep the nRF24L01 in TX mode with FIFO full
+for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the
+nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
+to clear by calling <a class="reference internal" href="#_CPPv4N4RF242ceEb" title="RF24::ce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ce()</span></code></a> to the the CE pin inactive LOW.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>; to control ACK responses: <a class="reference internal" href="configure_api.html#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was loaded into the TX FIFO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload wasn’t loaded into the TX FIFO because it is already full.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter must be omitted when using the python
+wrapper because the length of the payload is determined automatically.</p>
+<p>To use this function in the python wrapper:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello World&quot;</span>  <span class="c1"># a `bytes` object</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># 3rd parameter is optional</span>
+<span class="c1">#     False means expecting ACK response (multicast parameter)</span>
+<span class="c1">#     True means initiate transmission (write_only parameter)</span>
+</pre></div>
+</div>
+</div>
+</p>
+ </p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicast</span></code>: Request ACK packet response (<code class="docutils literal notranslate"><span class="pre">false</span></code>), or no ACK packet response (<code class="docutils literal notranslate"><span class="pre">true</span></code>). Be sure to have called <a class="reference internal" href="configure_api.html#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a> at least once before setting this parameter. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_only</span></code>: If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, then this function sets the CE pin to active (enabling TX transmissions). <code class="docutils literal notranslate"><span class="pre">false</span></code> has no effect on the CE pin and simply loads the payload into the TX FIFO. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ce">
+<h2>ce()<a class="headerlink" href="#ce" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF242ceEb">
+<span id="_CPPv3N4RF242ceEb"></span><span id="_CPPv2N4RF242ceEb"></span><span id="RF24::ce__b"></span><span class="target" id="classRF24_1a318d46d4573a4a5fb07baee6f0a9219f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ce</code><span class="sig-paren">(</span>bool <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF242ceEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set chip enable <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: HIGH to actively begin transmission or LOW to put in standby. Please see data sheet for a much more detailed description of this pin. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
 <div class="section" id="writeack">
 <h2>writeAck()<a class="headerlink" href="#writeack" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
@@ -281,6 +374,26 @@ pipe in RX mode, call <a class="reference internal" href="configure_api.html#_CP
 </dd>
 </dl>
 </p>
+</dd></dl>
+
+</div>
+<div class="section" id="istxfull">
+<h2>isTxFull()<a class="headerlink" href="#istxfull" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF248isTxFullEv">
+<span id="_CPPv3N4RF248isTxFullEv"></span><span id="_CPPv2N4RF248isTxFullEv"></span><span id="RF24::isTxFull__void"></span><span class="target" id="classRF24_1abcf4ed7ba5cae2d80618f11f0254d2f8"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isTxFull</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF248isTxFullEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A flag that describes when all 3 levels of the TX FIFO are occupied with a payload.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling this function does not update the data it returns. Use
+<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This data is updated on every SPI transaction (which is pratically
+every other function).</p>
+</div>
+</p>
+ </p>
 </dd></dl>
 
 </div>
@@ -399,108 +512,6 @@ In full powerDown mode, the radio will consume approximately 900nA (.0009mA)</p>
 </div>
 </p>
  </p>
-</dd></dl>
-
-</div>
-<div class="section" id="istxfull">
-<h2>isTxFull()<a class="headerlink" href="#istxfull" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF248isTxFullEv">
-<span id="_CPPv3N4RF248isTxFullEv"></span><span id="_CPPv2N4RF248isTxFullEv"></span><span id="RF24::isTxFull__void"></span><span class="target" id="classRF24_1abcf4ed7ba5cae2d80618f11f0254d2f8"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isTxFull</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF248isTxFullEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A flag that describes when all 3 levels of the TX FIFO are occupied with a payload.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Calling this function does not update the data it returns. Use
-<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>This data is updated on every SPI transaction (which is pratically
-every other function).</p>
-</div>
-</p>
- </p>
-</dd></dl>
-
-</div>
-<div class="section" id="resend">
-<h2>resend()<a class="headerlink" href="#resend" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF246resendEv">
-<span id="_CPPv3N4RF246resendEv"></span><span id="_CPPv2N4RF246resendEv"></span><span id="RF24::resend"></span><span class="target" id="classRF24_1a4968f9e74eefc7809e5ba4bbc0a1271b"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">resend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246resendEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers when a TX failure occurs. The auto-retry feature is applied just like when calling <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>. Calling this function prevents succefully sent payloads from being removed from the TX FIFO buffer until calling <a class="reference internal" href="#classRF24_1a1295da3dafa3a89090d2e0e34f9e1efb"><span class="std std-ref">flushTx()</span></a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>. If the TX FIFO has other payloads enqueued, then using <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a> will attempt to enqueue a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="reference internal" href="basic_api.html#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> also calls <a class="reference internal" href="#classRF24_1a1295da3dafa3a89090d2e0e34f9e1efb"><span class="std std-ref">flushTx()</span></a> when ACK payloads are enabled (via <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>).</p>
-<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1a4c6d3959c8320e64568395f4ef507aef"><span class="std std-ref">setRetries()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is to be used AFTER auto-retry fails if wanting to resend
-using the built-in payload reuse feature. In the event of a
-re-transmission failure, simply call this function again to
-resume re-transmission of the same payload.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p>true if re-transmission was successful.</p></li>
-<li><p>false if the re-transmission failed or the TX FIFO was already empty. </p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="write">
-<h2>write()<a class="headerlink" href="#write" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF245writeEPKv7uint8_tKbb">
-<span id="_CPPv3N4RF245writeEPKv7uint8_tKbb"></span><span id="_CPPv2N4RF245writeEPKv7uint8_tKbb"></span><span id="RF24::write__voidCP.uint8_t.bC.b"></span><span class="target" id="classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em>, <em class="property">const</em> bool <em>multicast</em>, bool <em>write_only</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245writeEPKv7uint8_tKbb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Write a payload to the TX FIFO buffers.</p>
-<p> <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function leaves the CE pin HIGH, so the radio will remain in TX or
-StandBy-II Mode until a <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ce()</span></code> is called to set the pin LOW (into
-StandBy-I mode). Can be used as an alternative to <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_t" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code></a> if using
-all 3 levels of the TX FIFO  to manage multiple payloads at once.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>It is important to never keep the nRF24L01 in TX mode with FIFO full
-for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the
-nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
-to clear by calling <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ce()</span></code> to the the CE pin inactive LOW.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>; to control ACK responses: setAutoAck(uint8_t, bool) </p>
-</dd>
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was loaded into the TX FIFO.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload wasn’t loaded into the TX FIFO because it is already full.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter must be omitted when using the python
-wrapper because the length of the payload is determined automatically.</p>
-<p>To use this function in the python wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello World&quot;</span>  <span class="c1"># a `bytes` object</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># 3rd parameter is optional</span>
-<span class="c1">#     False means expecting ACK response (multicast parameter)</span>
-<span class="c1">#     True means initiate transmission (write_only parameter)</span>
-</pre></div>
-</div>
-</div>
-</p>
- </p></li>
-</ul>
-</p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">multicast</span></code>: Request ACK packet response (<code class="docutils literal notranslate"><span class="pre">false</span></code>), or no ACK packet response (<code class="docutils literal notranslate"><span class="pre">true</span></code>). Be sure to have called <a class="reference internal" href="configure_api.html#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a> at least once before setting this parameter. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">write_only</span></code>: If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, then this function sets the CE pin to active (enabling TX transmissions). <code class="docutils literal notranslate"><span class="pre">false</span></code> has no effect on the CE pin and simply loads the payload into the TX FIFO. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
 </dd></dl>
 
 </div>
@@ -634,7 +645,7 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 <dt id="_CPPv4N4RF2410isPVariantEv">
 <span id="_CPPv3N4RF2410isPVariantEv"></span><span id="_CPPv2N4RF2410isPVariantEv"></span><span id="RF24::isPVariant__void"></span><span class="target" id="classRF24_1a62846750b82682beb7593719eb60ed60"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isPVariant</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410isPVariantEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determine whether the hardware is an nRF24L01+ or not. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>true if the hardware is nRF24L01+ (or compatible) and false if its not. </p>
+<dt><strong>Return</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the hardware is nRF24L01+ (or compatible) and <code class="docutils literal notranslate"><span class="pre">false</span></code> if its not. </p>
 </dd>
 </dl>
 </p>
@@ -646,7 +657,7 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 <dl class="cpp function">
 <dt id="_CPPv4N4RF247testRpdEv">
 <span id="_CPPv3N4RF247testRpdEv"></span><span id="_CPPv2N4RF247testRpdEv"></span><span id="RF24::testRpd__void"></span><span class="target" id="classRF24_1a70406f376d9edd7be30fc7d9e1562d2f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">testRpd</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF247testRpdEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Test whether a signal (carrier or otherwise) greater than or equal to -64dBm is present on the channel. Valid only on nRF24L01P(+) hardware. On nRF24L01, use testCarrier().</p>
+<dd><p>Test whether a signal (carrier wave or otherwise) greater than or equal to -64dBm is present on the channel. Valid only on nRF24L01P(+) hardware. On nRF24L01, use <a class="reference internal" href="#classRF24_1ad0d522ccf39493510e64bf1740be790d"><span class="std std-ref">testCarrier()</span></a>.</p>
 <p>Useful to check for interference on the current channel and channel hopping strategies.</p>
 <p> <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">goodSignal</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">testRpd</span><span class="p">();</span>
 <span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>
@@ -657,26 +668,57 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function is synonomous with <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">testCarrier()</span></code>, but the data
+<p>This function is synonomous with <a class="reference internal" href="#_CPPv4N4RF2411testCarrierEv" title="RF24::testCarrier"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">testCarrier()</span></code></a>, but the data
 returned by both function differs slightly by variants of the nRF24L01.
 This function is meant for the plus variant of the nRF24L01+.</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a62846750b82682beb7593719eb60ed60"><span class="std std-ref">isPVariant()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a62846750b82682beb7593719eb60ed60"><span class="std std-ref">isPVariant()</span></a>, <a class="reference internal" href="#classRF24_1a301af5ef53f9325683a0d86928c29388"><span class="std std-ref">startCarrierWave()</span></a>, <a class="reference internal" href="#classRF24_1a94bd33b2e759f7877588d3119aefdd80"><span class="std std-ref">stopCarrierWave()</span></a> </p>
 </dd>
-<dt><strong>Return</strong></dt><dd><p>true if a signal less than or equal to -64dBm was detected, false if not. </p>
+<dt><strong>Return</strong></dt><dd><p>This data is reset upon entering RX mode.<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if a signal with an amplitude of greater than or equal to -64dBm was detected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if no signal with an amplitude of greater than or equal to -64 dBm was detected. </p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
 </div>
-<div class="section" id="startconstcarrier">
-<h2>startConstCarrier()<a class="headerlink" href="#startconstcarrier" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="testcarrier">
+<h2>testCarrier()<a class="headerlink" href="#testcarrier" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2417startConstCarrierE13rf24_pa_dbm_e7uint8_t">
-<span id="_CPPv3N4RF2417startConstCarrierE13rf24_pa_dbm_e7uint8_t"></span><span id="_CPPv2N4RF2417startConstCarrierE13rf24_pa_dbm_e7uint8_t"></span><span id="RF24::startConstCarrier__rf24_pa_dbm_e.uint8_t"></span><span class="target" id="classRF24_1ac43ad43c34337ec0de189105bab2213b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">startConstCarrier</code><span class="sig-paren">(</span><a class="reference internal" href="configure_api.html#_CPPv413rf24_pa_dbm_e" title="rf24_pa_dbm_e">rf24_pa_dbm_e</a> <em>level</em>, uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2417startConstCarrierE13rf24_pa_dbm_e7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N4RF2411testCarrierEv">
+<span id="_CPPv3N4RF2411testCarrierEv"></span><span id="_CPPv2N4RF2411testCarrierEv"></span><span id="RF24::testCarrier__void"></span><span class="target" id="classRF24_1ad0d522ccf39493510e64bf1740be790d"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">testCarrier</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411testCarrierEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test whether there was a carrier wave signal was detected during the previous listening period.</p>
+<p>Useful to check for interference on the current channel.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is synonomous with <a class="reference internal" href="#_CPPv4N4RF247testRpdEv" title="RF24::testRpd"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">testRpd()</span></code></a>, but the data
+returned by both function differs slightly by variants of the nRF24L01.
+This function is meant for the non-plus variant of the nRF24L01.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a62846750b82682beb7593719eb60ed60"><span class="std std-ref">isPVariant()</span></a>, <a class="reference internal" href="#classRF24_1a301af5ef53f9325683a0d86928c29388"><span class="std std-ref">startCarrierWave()</span></a>, <a class="reference internal" href="#classRF24_1a94bd33b2e759f7877588d3119aefdd80"><span class="std std-ref">stopCarrierWave()</span></a> </p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>This data is reset upon entering RX mode.<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if a carrier wave was deteced</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if no carrier wave was detected </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="startcarrierwave">
+<h2>startCarrierWave()<a class="headerlink" href="#startcarrierwave" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t">
+<span id="_CPPv3N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t"></span><span id="_CPPv2N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t"></span><span id="RF24::startCarrierWave__rf24_pa_dbm_e.uint8_t"></span><span class="target" id="classRF24_1a301af5ef53f9325683a0d86928c29388"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">startCarrierWave</code><span class="sig-paren">(</span><a class="reference internal" href="configure_api.html#_CPPv413rf24_pa_dbm_e" title="rf24_pa_dbm_e">rf24_pa_dbm_e</a> <em>level</em>, uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Transmission of constant carrier wave with defined frequency and output power <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: Output power to use </p></li>
@@ -702,11 +744,11 @@ measures that alter some settings. These settings alterations include:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="stopconstcarrier">
-<h2>stopConstCarrier()<a class="headerlink" href="#stopconstcarrier" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="stopcarrierwave">
+<h2>stopCarrierWave()<a class="headerlink" href="#stopcarrierwave" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2416stopConstCarrierEv">
-<span id="_CPPv3N4RF2416stopConstCarrierEv"></span><span id="_CPPv2N4RF2416stopConstCarrierEv"></span><span id="RF24::stopConstCarrier__void"></span><span class="target" id="classRF24_1a38fa92d612b7b9b8a739a68ed7d88330"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">stopConstCarrier</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416stopConstCarrierEv" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N4RF2415stopCarrierWaveEv">
+<span id="_CPPv3N4RF2415stopCarrierWaveEv"></span><span id="_CPPv2N4RF2415stopCarrierWaveEv"></span><span id="RF24::stopCarrierWave__void"></span><span class="target" id="classRF24_1a94bd33b2e759f7877588d3119aefdd80"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">stopCarrierWave</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415stopCarrierWaveEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Stop transmission of constant wave and reset PLL and CONT registers  <p><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>this function will <a class="reference internal" href="#_CPPv4N4RF249powerDownEv" title="RF24::powerDown"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">powerDown()</span></code></a> the radio per recommendation
@@ -725,7 +767,7 @@ re-configure the radio’s settings</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ac43ad43c34337ec0de189105bab2213b"><span class="std std-ref">startConstCarrier()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a301af5ef53f9325683a0d86928c29388"><span class="std std-ref">startCarrierWave()</span></a> </p>
 </dd>
 </dl>
 </p>
