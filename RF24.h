@@ -211,7 +211,7 @@ public:
      * unique pins that this chip is connected to.
      *
      * @rst
-     * See `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, or `Linux &lt;linux_general&gt;`_ pages for device specific information.
+     * See `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, or `Linux &lt;rpi_general&gt;`_ pages for device specific information.
      *
      * .. note::
      *     Users can specify default SPI speed by modifying ``#define RF24_SPI_SPEED`` in RF24_config.h
@@ -1545,9 +1545,18 @@ public:
     void openWritingPipe(uint64_t address);
 
     /**
-     * Set chip enable
-     * @param level HIGH to actively begin transmission or LOW to put in standby.
-     * Please see data sheet for a much more detailed description of this pin.
+     * Set the radio's CE (Chip Enable) pin. In RX mode, this pin controls
+     * weather the radio is actively listening. In TX mode, this pin
+     * controls how much data from the TX FIFO buffers is transmitted.
+     * Keep in mind that a minimum 10 microseconds pulse will send only
+     * 1 payload from the TX FIFO, and the radio requires at least a 130
+     * microsecond pulse to start actively listening in RX mode.
+     * @param level Use `true` for active `HIGH` state. Use `false` for
+     * inactive `LOW` state.
+     * @rst
+     * .. important:: Please see data sheet for a much more detailed
+     *     description of this pin's usage.
+     * @endrst
      */
     void ce(bool level);
 
