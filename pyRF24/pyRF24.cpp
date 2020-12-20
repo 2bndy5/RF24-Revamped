@@ -319,6 +319,6 @@ BOOST_PYTHON_MODULE(RF24)
         .def("isValid", &RF24::isValid)
         .def("testCarrier", &RF24::testCarrier)
         .def("testRpd", &RF24::testRpd)
-        .def("startConstCarrier", &RF24::startConstCarrier, (bp::arg("level"), bp::arg("channel")))
-        .def("stopConstCarrier", &RF24::stopConstCarrier);
+        .def("startCarrierWave", &RF24::startCarrierWave, (bp::arg("level"), bp::arg("channel")))
+        .def("stopCarrierWave", &RF24::stopCarrierWave);
 }

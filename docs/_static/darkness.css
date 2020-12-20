@@ -121,6 +121,11 @@ td.linenos pre {
 }
 
 /* ----------------------table sections---------------------------------------- */
+
+thead .row-even {
+  border-top-style: hidden;
+}
+
 .wy-table thead,
 .rst-content table.docutils thead,
 .rst-content table.field-list thead {
@@ -388,6 +393,14 @@ body {
 }
 
 /* -----------------------------------------API sections-------------------------------------- */
+
+.breatheparameterlist li tt + p {
+  display: inline;
+}
+
+.breatheenumvalues li tt + p {
+  display: inline;
+}
 
 .wy-table-bordered-all td,
 .rst-content table.docutils td {

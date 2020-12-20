@@ -37,6 +37,7 @@ typedef enum {
      * @rst
      * +----------+----------------+----------------+
      * | nRF24L01 | Si24R1 with    | Si24R1 with    |
+     * +----------+----------------+----------------+
      * |          | lnaEnabled = 1 | lnaEnabled = 0 |
      * +==========+================+================+
      * | -18 dBm  |  -6 dBm        |  -12 dBm       |
@@ -49,6 +50,7 @@ typedef enum {
      * @rst
      * +----------+----------------+----------------+
      * | nRF24L01 | Si24R1 with    | Si24R1 with    |
+     * +----------+----------------+----------------+
      * |          | lnaEnabled = 1 | lnaEnabled = 0 |
      * +==========+================+================+
      * | -12 dBm  |  0 dBm         |    -4 dBm      |
@@ -61,6 +63,7 @@ typedef enum {
      * @rst
      * +----------+----------------+----------------+
      * | nRF24L01 | Si24R1 with    | Si24R1 with    |
+     * +----------+----------------+----------------+
      * |          | lnaEnabled = 1 | lnaEnabled = 0 |
      * +==========+================+================+
      * | -6 dBm   |    3 dBm       |    1 dBm       |
@@ -73,6 +76,7 @@ typedef enum {
      * @rst
      * +----------+----------------+----------------+
      * | nRF24L01 | Si24R1 with    | Si24R1 with    |
+     * +----------+----------------+----------------+
      * |          | lnaEnabled = 1 | lnaEnabled = 0 |
      * +==========+================+================+
      * |  0 dBm   |   7 dBm        |    4 dBm       |
@@ -147,6 +151,17 @@ protected:
 
     /** SPI function to end transactions that includes setting CSN pin inactive HIGH */
     inline void endTransaction();
+
+    /**
+     * Set chip select pin
+     *
+     * Running SPI bus at PI_CLOCK_DIV2 so we don't waste time transferring data
+     * and best of all, we make use of the radio's FIFO buffers. A lower speed
+     * means we're less likely to effectively leverage our FIFOs and pay a higher
+     * AVR runtime cost as toll.
+     * @param mode HIGH to take this unit off the SPI bus, LOW to put it on
+     */
+    void csn(bool mode);
 
     /**
      * Read a chunk of data in from a register
@@ -231,7 +246,7 @@ public:
      * @endrst
      * @return
      * - `true` if the radio is not responding to SPI transactions
-     * - `false` if the radio is respondive to SPI transactions
+     * - `false` if the radio is responsive to SPI transactions
      */
     bool begin(void);
 
@@ -804,7 +819,7 @@ public:
      *     nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
      *     to clear by calling :func:`ce()` to the the CE pin inactive LOW.
      * @endrst
-     * @see send(); to control ACK responses: setAutoAck(uint8_t, bool)
+     * @see send(); to control ACK responses: setAutoAck(bool, uint8_t)
      * @param buf Pointer to the data to be sent
      * @param len Number of bytes to be sent
      * @param multicast Request ACK packet response (`false`), or no ACK packet response
@@ -857,8 +872,8 @@ public:
      *     resume re-transmission of the same payload.
      * @endrst
      * @returns
-     * - true if re-transmission was successful.
-     * - false if the re-transmission failed or the TX FIFO was already empty.
+     * - `true` if re-transmission was successful.
+     * - `false` if the re-transmission failed or the TX FIFO was already empty.
      */
     bool resend();
 
@@ -877,22 +892,24 @@ public:
     uint8_t flushRx(void);
 
     /**
-     * Test whether there was a carrier on the line for the
+     * Test whether there was a carrier wave signal was detected during the
      * previous listening period.
      *
      * Useful to check for interference on the current channel.
-     * @return true if was carrier, false if not
      * @rst
      * .. note:: This function is synonomous with :func:`testRpd()`, but the data
      *     returned by both function differs slightly by variants of the nRF24L01.
      *     This function is meant for the non-plus variant of the nRF24L01.
      * @endrst
-     * @see isPVariant()
+     * @see isPVariant(), startCarrierWave(), stopCarrierWave()
+     * @return This data is reset upon entering RX mode.
+     * - `true` if a carrier wave was deteced
+     * - `false` if no carrier wave was detected
      */
     bool testCarrier(void);
 
     /**
-     * Test whether a signal (carrier or otherwise) greater than
+     * Test whether a signal (carrier wave or otherwise) greater than
      * or equal to -64dBm is present on the channel. Valid only
      * on nRF24L01P(+) hardware. On nRF24L01, use testCarrier().
      *
@@ -912,17 +929,21 @@ public:
      *     returned by both function differs slightly by variants of the nRF24L01.
      *     This function is meant for the plus variant of the nRF24L01+.
      * @endrst
-     * @see isPVariant()
-     * @return true if a signal less than or equal to -64dBm was detected,
-     * false if not.
+     * @see isPVariant(), startCarrierWave(), stopCarrierWave()
+     * @return This data is reset upon entering RX mode.
+     * - `true` if a signal with an amplitude of greater than or equal to -64dBm
+     * was detected.
+     * - `false` if no signal with an amplitude of greater than or equal to -64 dBm
+     * was detected.
+     *
      */
     bool testRpd(void);
 
     /**
-     * Test whether this is a real radio, or a mock shim for
-     * debugging. Setting either pin to 0xff is the way to
-     * indicate that this is not a real radio.
-     * @return true if this is a legitimate radio
+     * Test whether this is a real radio, or a mock shim for debugging. Setting
+     * both CE & CSN pins to `0xFF` is the way to indicate that this is not a
+     * real radio.
+     * @return `true` if this is a legitimate radio, `false` if not.
      */
     bool isValid()
     {
@@ -1146,14 +1167,20 @@ public:
      *     radio.send(&amp;data, 32, 1); // Sends a payload with no acknowledgement requested
      *     radio.send(&amp;data, 32, 0); // Sends a payload using auto-retry/auto-ack features
      * @endrst
-     * @see setAutoAck(bool) for all pipes or setAutoAck(uint8_t, bool) for individual
-     * pipes
+     * @see setAutoAck(bool), setAutoAck(bool, uint8_t)
      */
     void allowMulticast(bool);
 
     /**
+     * @return If the `multicast` parameter to write() or send() will have any
+     * affect. This is configured using allowMulticast().
+     */
+    bool isAllowMulticast(void);
+
+    /**
      * Determine whether the hardware is an nRF24L01+ or not.
-     * @return true if the hardware is nRF24L01+ (or compatible) and false if its not.
+     * @return `true` if the hardware is nRF24L01+ (or compatible) and `false`
+     * if its not.
      */
     bool isPVariant(void);
 
@@ -1178,7 +1205,7 @@ public:
      *     payloads.
      * @endrst
      * @see send(), write(), writeAck()
-     * @param enable Whether to enable (true) or disable (false) the
+     * @param enable Whether to enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for all pipes
      */
     void setAutoAck(bool enable);
@@ -1207,8 +1234,8 @@ public:
      *     payloads feature is also disabled as this feature is required on pipe 0
      *     to send ACK payloads.
      * @endrst
-     * @see send(), write(), writeAck(), enableAckPayloads(), disableAckPayloads()
-     * @param enable Whether to enable (true) or disable (false) the
+     * @see send(), write(), writeAck(), enableAckPayload(), disableAckPayload()
+     * @param enable Whether to enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for the specified pipe
      * @param pipe Which pipe to configure. This number should be in range [0, 5].
      */
@@ -1220,8 +1247,8 @@ public:
      * is not specified, then the status of the auto-ack feature about pipe 0 is
      * returned.
      * @return
-     * - true if the auto-ack feature is enabled for the specified @p pipe
-     * - false if the auto-ack feature is disabled for the specified @p pipe
+     * - `true` if the auto-ack feature is enabled for the specified @p pipe
+     * - `false` if the auto-ack feature is disabled for the specified @p pipe
      */
     bool getAutoAck(uint8_t pipe=0);
 
@@ -1247,15 +1274,16 @@ public:
      * | :enumerator:`RF24_PA_MAX` (3)  |   0 dBm  |        7 dBm       |     4 dBm          |
      * +--------------------------------+----------+--------------------+--------------------+
      *
-     * .. note:: The :func:`getPaLevel()` function does not care what was passed ``lnaEnable`` parameter.
+     * .. note:: The :func:`getPaLevel()` function does not care what was passed ``lnaEnable``
+     *     parameter.
      * @endrst
      */
     void setPaLevel(uint8_t level, bool lnaEnable=1);
 
     /**
      * Fetches the current @ref PaLevel.
-     * @return One of the values defined by @ref rf24_pa_dbm_e.<br>
-     * See tables in @ref rf24_pa_dbm_e or setPaLevel()
+     * @return One of the values defined by @ref rf24_pa_dbm_e. See tables in
+     * setPaLevel()
      */
     uint8_t getPaLevel(void);
 
@@ -1276,7 +1304,7 @@ public:
      *
      * @rst
      * .. warning:: Setting :enumerator:`RF24_250KBPS` will fail for non-plus modules (when
-     *     :func:`isPVariant()` returns false).
+     *     :func:`isPVariant()` returns ``false``).
      * @endrst
      * @param speed Specify one of the following values (as defined by
      * @ref rf24_datarate_e):
@@ -1290,12 +1318,12 @@ public:
      * @endrst
      * @return true if the change was successful
      */
-    bool setDataRate(rf24_datarate_e speed);
+    void setDataRate(rf24_datarate_e speed);
 
     /**
      * Fetches the currently configured transmission @ref Datarate
-     * @return One of the values defined by @ref rf24_datarate_e.<br>
-     * See table in @ref rf24_datarate_e or setDataRate()
+     * @return One of the values defined by @ref rf24_datarate_e.
+     * See table in setDataRate()
      */
     rf24_datarate_e getDataRate(void);
 
@@ -1454,7 +1482,7 @@ public:
      *     - :func:`setCrc()` to ``0``.
      * @endrst
      */
-    void startConstCarrier(rf24_pa_dbm_e level, uint8_t channel);
+    void startCarrierWave(rf24_pa_dbm_e level, uint8_t channel);
 
     /**
      * Stop transmission of constant wave and reset PLL and CONT registers
@@ -1471,9 +1499,9 @@ public:
      *         setAutoAck(true);
      *         setRetries(5, 15);
      * @endrst
-     * @see startConstCarrier()
+     * @see startCarrierWave()
      */
-    void stopConstCarrier(void);
+    void stopCarrierWave(void);
 
     /**
      * Open a pipe for reading
@@ -1516,25 +1544,14 @@ public:
      */
     void openWritingPipe(uint64_t address);
 
-private:
-
-    /**
-     * Set chip select pin
-     *
-     * Running SPI bus at PI_CLOCK_DIV2 so we don't waste time transferring data
-     * and best of all, we make use of the radio's FIFO buffers. A lower speed
-     * means we're less likely to effectively leverage our FIFOs and pay a higher
-     * AVR runtime cost as toll.
-     * @param mode HIGH to take this unit off the SPI bus, LOW to put it on
-     */
-    void csn(bool mode);
-
     /**
      * Set chip enable
      * @param level HIGH to actively begin transmission or LOW to put in standby.
      * Please see data sheet for a much more detailed description of this pin.
      */
     void ce(bool level);
+
+private:
 
     /**
      * Write the transmit payload
@@ -1606,93 +1623,12 @@ private:
     #endif
 
     /**
-     * Turn on or off the special features of the chip
+     * Turn on or off the basic features of the chip.
      *
-     * The chip has certain 'features' which are only available when the 'features'
-     * are enabled.  See the datasheet for details.
+     * This function is required to be executed on
+     * start-up of non-plus variants of the nRF24L01 transceivers.
      */
     void toggle_features(void);
 
 };
-
-/**
- * @example{lineno} examples/old_backups/pingpair_irq/pingpair_irq.ino
- * Updated by [TMRh20](https://github.com/TMRh20)
- *
- * This is an example of how to user interrupts to interact with the radio, and a demonstration
- * of how to use them to sleep when receiving, and not miss any payloads.<br>
- * The pingpair_sleepy example expands on sleep functionality with a timed sleep option for the transmitter.
- * Sleep functionality is built directly into my fork of the RF24Network library<br>
- */
-
-/**
- * @example{lineno} examples/old_backups/pingpair_sleepy/pingpair_sleepy.ino
- * Updated by [TMRh20](https://github.com/TMRh20)
- *
- * This is an example of how to use the RF24 class to create a battery-
- * efficient system.  It is just like the GettingStarted_CallResponse example, but the<br>
- * ping node powers down the radio and sleeps the MCU after every
- * ping/pong cycle, and the receiver sleeps between payloads. <br>
- */
-
-/**
- * @example{lineno} examples/rf24_ATTiny/rf24ping85/rf24ping85.ino
- * <b>2014 Contribution by [tong67](https://github.com/tong67)</b><br>
- * Updated 2020 by [2bndy5](http://github.com/2bndy5) for the
- * [SpenceKonde ATTinyCore](https://github.com/SpenceKonde/ATTinyCore)<br>
- * The RF24 library uses the [ATTinyCore by
- * SpenceKonde](https://github.com/SpenceKonde/ATTinyCore)
- *
- * This sketch is a duplicate of the ManualAcknowledgements.ino example
- * (without all the Serial input/output code), and it demonstrates
- * a ATTiny25/45/85 or ATTiny24/44/84 driving the nRF24L01 transceiver using
- * the RF24 class to communicate with another node.
- *
- * A simple example of sending data from 1 nRF24L01 transceiver to another
- * with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
- * This example still uses ACK packets, but they have no payloads. Instead the
- * acknowledging response is sent with `send()`. This tactic allows for more
- * updated acknowledgement payload data, where actual ACK payloads' data are
- * outdated by 1 transmission because they have to loaded before receiving a
- * transmission.
- *
- * This example was written to be used on 2 devices acting as "nodes".
- */
-
-/**
- * @example{lineno} examples/rf24_ATTiny/timingSearch3pin/timingSearch3pin.ino
- * <b>2014 Contribution by [tong67](https://github.com/tong67)</b><br>
- * Updated 2020 by [2bndy5](http://github.com/2bndy5) for the
- * [SpenceKonde ATTinyCore](https://github.com/SpenceKonde/ATTinyCore)<br>
- * The RF24 library uses the [ATTinyCore by
- * SpenceKonde](https://github.com/SpenceKonde/ATTinyCore)
- *
- * This sketch can be used to determine the best settle time values to use for
- * RF24::csDelay in RF24::csn() (private function).
- * @see RF24::csDelay
- *
- * The settle time values used here are 100/20. However, these values depend
- * on the actual used RC combiniation and voltage drop by LED. The
- * intermediate results are written to TX (PB3, pin 2 -- using Serial).
- *
- * For schematic details, see introductory comment block in the rf24ping85.ino sketch.
- */
-
-/**
- * @example{lineno} examples/old_backups/pingpair_dyn/pingpair_dyn.ino
- *
- * This is an example of how to use payloads of a varying (dynamic) size on Arduino.
- */
-
-/**
- * @example{lineno} examples/old_backups/scanner/scanner.ino
- *
- * Example to detect interference on the various channels available.
- * This is a good diagnostic tool to check whether you're picking a
- * good channel for your application.
- *
- * Inspired by cpixip.
- * See http://arduino.cc/forum/index.php/topic,54795.0.html
- */
-
 #endif // __RF24_H__

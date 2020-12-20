@@ -32,11 +32,11 @@ changed in each version of the library
 Useful References
 -----------------
 
-* `RF24 Class Documentation <classRF24.html>`_
+* `RF24 Class Documentation <basic_api.html>`_
 * `Support & Configuration <pages.html>`_
 * `Source Code <https://github.com/2bndy5/RF24/tree/revamp>`_
-* `nRF24L01 v2.0 Datasheet <http://github.com/2bndy5/RF24/datasheets/nRF24L01_datasheet_v2.pdf>`_
-* `nRF24L01+ v1.0 Datasheet <http://github.com/2bndy5/RF24/datasheets/nRF24L01P_datasheet_v1.pdf>`_
+* `nRF24L01 v2.0 Datasheet <http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01_datasheet_v2.pdf>`_
+* `nRF24L01+ v1.0 Datasheet <http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01P_datasheet_v1.pdf>`_
 
 Platform Support Pages
 ----------------------
@@ -86,7 +86,10 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    :maxdepth: 3
    :caption: Examples
 
-   examples
+   ino_examples
+   cpp_examples
+   py_examples
+   attiny_examples
 
 .. toctree::
    :maxdepth: 4
@@ -95,12 +98,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    basic_api
    advanced_api
    configure_api
-
-.. toctree::
-   :maxdepth: 4
-   :caption: Porting Templates
-
-   templates
 
 .. toctree::
    :maxdepth: 4
@@ -116,6 +113,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    cross_compilation
    atxmega
    portability
+   templates
 
 Indices and tables
 ==================

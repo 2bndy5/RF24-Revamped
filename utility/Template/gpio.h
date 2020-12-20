@@ -5,14 +5,6 @@
  * Class declaration for SPI helper files
  */
 
-/**
- * Example of gpio.h class declaration for GPIO portability
- *
- * @defgroup porting_gpio Porting: GPIO
- *
- * @{
- */
-
 #include <cstdio>
 
 class GPIO {
@@ -52,7 +44,5 @@ public:
     */
     static void write(int port, int value);
 
-    virtual ~ GPIO();
+    virtual ~GPIO();
 };
-
-/**@}*/

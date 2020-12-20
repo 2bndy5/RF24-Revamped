@@ -10,14 +10,6 @@
  * Class declaration for SPI helper files
  */
 
-/**
- * Example of compatibility.h class declaration for timing functions portability
- *
- * @defgroup porting_timing Porting: Timing
- *
- * @{
- */
-
 #ifndef COMPATIBLITY_H
 #define COMPATIBLITY_H
 
@@ -42,5 +34,3 @@ long __millis();
 #endif
 
 #endif    /* COMPATIBLITY_H */
-
-/**@}*/

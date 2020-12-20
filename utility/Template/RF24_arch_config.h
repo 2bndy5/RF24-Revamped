@@ -12,14 +12,6 @@
  * General defines and includes for RF24/Linux
  */
 
-/**
- * Example of RF24_arch_config.h for RF24 portability
- *
- * @defgroup porting_general Porting: General
- *
- * @{
- */
-
 
 #ifndef __ARCH_CONFIG_H__
 #define __ARCH_CONFIG_H__
@@ -77,6 +69,3 @@ typedef uint16_t prog_uint16_t;
 #define millis() __millis()
 
 #endif // __ARCH_CONFIG_H__
-
-
-/**@}*/

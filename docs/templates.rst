@@ -1,34 +1,42 @@
+Templated Files for Platform Support
+====================================
 
 About General
-================
+------------------------
 
-.. doxygengroup:: porting_general
-    :members:
+.. literalinclude:: ../utility/Template/RF24_arch_config.h
+    :caption: /utility/Template/RF24_arch_config.h
+    :lineno-start: 16
+    :lines: 16-
 
 About Includes
-================
+------------------------
 
-.. doxygengroup:: porting_includes
-    :members:
+.. literalinclude:: ../utility/Template/includes.h
+    :caption: /utility/Template/includes.h
+    :lineno-start: 6
+    :lines: 6-
 
 About Timing
-================
+------------------------
 
-.. doxygengroup:: porting_timing
-    :members:
+.. literalinclude:: ../utility/Template/compatibility.h
+    :caption: /utility/Template/compatibility.h
+    :lineno-start: 13
+    :lines: 13-
 
 About GPIO
-================
+------------------------
 
-.. doxygengroup:: porting_gpio
-    :members:
-    :private-members:
-    :protected-members:
+.. literalinclude:: ../utility/Template/gpio.h
+    :caption: /utility/Template/gpio.h
+    :lineno-start: 8
+    :lines: 8-
 
 About SPI
-================
+------------------------
 
-.. doxygengroup:: porting_spi
-    :members:
-    :private-members:
-    :protected-members:
+.. literalinclude:: ../utility/Template/spi.h
+    :caption: /utility/Template/spi.h
+    :lineno-start: 6
+    :lines: 6-

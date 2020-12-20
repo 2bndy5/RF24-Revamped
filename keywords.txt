@@ -49,7 +49,7 @@ update                  KEYWORD2
 interruptConfig         KEYWORD2
 txDelay                 KEYWORD2
 csDelay                 KEYWORD2
-startConstCarrier       KEYWORD2
-stopConstCarrier        KEYWORD2
+startCarrierWave       KEYWORD2
+stopCarrierWave        KEYWORD2
 allowMulticast          KEYWORD2
 printf_begin	        KEYWORD2

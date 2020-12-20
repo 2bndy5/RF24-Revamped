@@ -3,13 +3,6 @@
  * Class declaration for SPI helper files
  */
 
-/**
- * Example of spi.h class declaration for SPI portability
- *
- * @defgroup porting_spi Porting: SPI
- *
- * @{
- */
 #include <string>
 #include <stdint.h>
 #include <unistd.h>
@@ -76,5 +69,3 @@ private:
 	void init();
 
 };
-
-/**@}*/

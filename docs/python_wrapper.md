@@ -7,7 +7,7 @@ wrapper was initially written by [mz-fuzzy](https://github.com/mz-fuzzy)
 
 ## Prerequisites Prerequisites
 ### Python3
-The [python examples](examples.html#python-wrapper-examples) need Python v3.7 because of the [time.monotonic_ns()](https://docs.python.org/3.7/library/time.html#time.monotonic_ns) call for measuring microseconds.
+The [python examples](py_examples.html#python-wrapper-examples) need Python v3.7 because of the [time.monotonic_ns()](https://docs.python.org/3.7/library/time.html#time.monotonic_ns) call for measuring microseconds.
 
 ```shell
 sudo apt-get install python3-dev libboost-python-dev python3-setuptools python3-rpi.gpio
@@ -43,7 +43,7 @@ See `Linux Installation <linux_install.html>`_ and
     ```
 
     ```eval_rst
-    See the included `*.py files in the "examples_linux" folder <examples.html#python-wrapper-examples>`_
+    See the included `*.py files in the "examples_linux" folder <cpp_examples.html#python-wrapper-examples>`_
     and the `RF24 documentation <rf24_api>`_ for usage information.
     ```
 4. Running the Example:
@@ -61,9 +61,9 @@ See `Linux Installation <linux_install.html>`_ and
     ```eval_rst
     Configure another device with one of:
 
-    * `getting_started.py Python example <examples.html#getting-started-py>`_
-    * `GettingStarted.ino Arduino example <examples.html#gettingstarted-ino>`_
-    * `gettingStarted.cpp Linux example <examples.html#gettingStarted-cpp>`_
+    * `getting_started.py Python example <py_examples.html#getting-started-py>`_
+    * `GettingStarted.ino Arduino example <ino_examples.html#gettingstarted-ino>`_
+    * `gettingStarted.cpp Linux example <cpp_examples.html#gettingStarted-cpp>`_
     ```
     Run the example
     ```shell

@@ -1249,15 +1249,19 @@ void RF24::disableAckPayload(void)
 
 /****************************************************************************/
 
-void RF24::allowMulticast(void)
+void RF24::allowMulticast(bool enable)
 {
-    //
-    // enable dynamic ack features
-    //
-    //toggle_features();
-    write_register(FEATURE, read_register(FEATURE) | _BV(EN_DYN_ACK));
+    feature_reg &= ~ _BV(EN_DYN_ACK);
+    feature_reg |= enable ? _BV(EN_DYN_ACK) : 0;
+    write_register(FEATURE, feature_reg);
+}
 
-    IF_SERIAL_DEBUG(printf("FEATURE=%i\r\n", read_register(FEATURE)));
+/****************************************************************************/
+
+bool RF24::isAllowMulticast(void)
+{
+    feature_reg = read_register(FEATURE);
+    return (bool)(feature_reg & _BV(EN_DYN_ACK));
 }
 
 /****************************************************************************/
@@ -1383,13 +1387,10 @@ uint8_t RF24::lastTxArc(void)
 
 /****************************************************************************/
 
-bool RF24::setDataRate(rf24_datarate_e speed)
+void RF24::setDataRate(rf24_datarate_e speed)
 {
-    bool result = false;
-    uint8_t setup = read_register(RF_SETUP);
-
     // HIGH and LOW '00' is 1Mbs - our default
-    setup &= ~(_BV(RF_DR_LOW) | _BV(RF_DR_HIGH));
+    uint8_t setup = read_register(RF_SETUP) & ~(_BV(RF_DR_LOW) | _BV(RF_DR_HIGH));
 
     #if !defined(F_CPU) || F_CPU > 20000000
     txDelay = 280;
@@ -1418,12 +1419,6 @@ bool RF24::setDataRate(rf24_datarate_e speed)
         }
     }
     write_register(RF_SETUP, setup);
-
-    // Verify our result
-    if (read_register(RF_SETUP) == setup) {
-        result = true;
-    }
-    return result;
 }
 
 /****************************************************************************/
@@ -1489,7 +1484,7 @@ void RF24::setRetries(uint8_t delay, uint8_t count)
 }
 
 /****************************************************************************/
-void RF24::startConstCarrier(rf24_pa_dbm_e level, uint8_t channel)
+void RF24::startCarrierWave(rf24_pa_dbm_e level, uint8_t channel)
 {
     stopListening();
     write_register(RF_SETUP, read_register(RF_SETUP) | _BV(CONT_WAVE) | _BV(PLL_LOCK));
@@ -1523,7 +1518,7 @@ void RF24::startConstCarrier(rf24_pa_dbm_e level, uint8_t channel)
 }
 
 /****************************************************************************/
-void RF24::stopConstCarrier()
+void RF24::stopCarrierWave()
 {
     /*
      * A note from the datasheet:
