@@ -325,6 +325,16 @@ body {
   color: #fff !important;
 }
 
+.rst-content .highlighted {
+  background:#3c3106;
+  box-shadow:0 0 0 2px #518a0d;
+}
+
+#search-results .context {
+  color:#e1e1e1;
+  font-size:90%
+}
+
 /* -------------------------------------sidebar sections------------------------------------------------ */
 .wy-side-nav-search {
   background-color: #006B09;
