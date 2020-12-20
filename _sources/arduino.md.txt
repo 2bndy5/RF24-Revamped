@@ -11,7 +11,7 @@ the chip-select and chip-enable functions.
 These pins must be chosen and designated by the user, in
 `RF24 radio(ce_pin, cs_pin);` and can use any available pins.
 
-## Alternate_SPI Alternate SPI Support
+## Alternate SPI Support
 
 RF24 supports alternate SPI methods, in case the standard hardware SPI pins are otherwise unavailable.
 

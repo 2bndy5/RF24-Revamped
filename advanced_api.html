@@ -293,9 +293,15 @@ wrapper because the length of the payload is determined automatically.</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF242ceEb">
 <span id="_CPPv3N4RF242ceEb"></span><span id="_CPPv2N4RF242ceEb"></span><span id="RF24::ce__b"></span><span class="target" id="classRF24_1a318d46d4573a4a5fb07baee6f0a9219f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ce</code><span class="sig-paren">(</span>bool <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF242ceEb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set chip enable <dl class="simple">
+<dd><p>Set the radio’s CE (Chip Enable) pin. In RX mode, this pin controls weather the radio is actively listening. In TX mode, this pin controls how much data from the TX FIFO buffers is transmitted. Keep in mind that a minimum 10 microseconds pulse will send only 1 payload from the TX FIFO, and the radio requires at least a 130 microsecond pulse to start actively listening in RX mode. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: HIGH to actively begin transmission or LOW to put in standby. Please see data sheet for a much more detailed description of this pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: Use <code class="docutils literal notranslate"><span class="pre">true</span></code> for active <code class="docutils literal notranslate"><span class="pre">HIGH</span></code> state. Use <code class="docutils literal notranslate"><span class="pre">false</span></code> for inactive <code class="docutils literal notranslate"><span class="pre">LOW</span></code> state.  <p><div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please see data sheet for a much more detailed
+description of this pin’s usage.</p>
+</div>
+</p>
+ </p></li>
 </ul>
 </dd>
 </dl>
