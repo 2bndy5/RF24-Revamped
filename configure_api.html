@@ -102,11 +102,21 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#palevel-enum">PaLevel enum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#datarate-enum">Datarate enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setdynamicpayloads">setDynamicPayloads()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setdynamicpayloads">setDynamicPayloads()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unilateral-pipe-control-of-dynamic-payloads">Unilateral pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#getdynamicpayloads">getDynamicPayloads()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setpayloadlength">setPayloadLength()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getpayloadlength">getPayloadLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setautoack">setAutoAck()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setautoack">setAutoAck()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unilateral-pipe-control-of-autoack">Unilateral pipe control of AutoAck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#getautoack">getAutoAck()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setretries">setRetries()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
@@ -395,13 +405,40 @@
 </div>
 <div class="section" id="setdynamicpayloads">
 <h2>setDynamicPayloads()<a class="headerlink" href="#setdynamicpayloads" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unilateral-pipe-control-of-dynamic-payloads">
+<h3>Unilateral pipe control of Dynamic Payloads<a class="headerlink" href="#unilateral-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418setDynamicPayloadsEb">
 <span id="_CPPv3N4RF2418setDynamicPayloadsEb"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb"></span><span id="RF24::setDynamicPayloads__b"></span><span class="target" id="classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Enable or disable dynamically sized payloads for all pipes</p>
-<p>If this feature is enabled, then the static payload lengths configuration is not used. </p>
+<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the dynamic payload length feature for all pipes. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
 </dd></dl>
 
+</div>
+<div class="section" id="binary-pipe-control-of-dynamic-payloads">
+<h3>Binary pipe control of Dynamic Payloads<a class="headerlink" href="#binary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418setDynamicPayloadsE7uint8_t">
+<span id="_CPPv3N4RF2418setDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsE7uint8_t"></span><span id="RF24::setDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a64eff1afa46b72a82437a0aaa96037f0"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable dynamically sized payloads for all pipes using a binary integer.</p>
+<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the dynamic payload length feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-control-of-dynamic-payloads">
+<h3>Individual pipe control of Dynamic Payloads<a class="headerlink" href="#individual-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t">
 <span id="_CPPv3N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="RF24::setDynamicPayloads__b.uint8_t"></span><span class="target" id="classRF24_1a6c0a9dc68af50d365640fca65b285462"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
@@ -417,18 +454,28 @@
 </dd></dl>
 
 </div>
+</div>
 <div class="section" id="getdynamicpayloads">
 <h2>getDynamicPayloads()<a class="headerlink" href="#getdynamicpayloads" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418getDynamicPayloadsE7uint8_t">
-<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a89ed4f950c099185c253867b2f759635"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a4add0966514d1d41d8727cb080495c5a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the configuration of dynamically sized payloads for a specific pipe.</p>
 <p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"><span class="std std-ref">setDynamicPayloads(bool)</span></a>, <a class="reference internal" href="#classRF24_1a6c0a9dc68af50d365640fca65b285462"><span class="std std-ref">setDynamicPayloads(bool, uint8_t)</span></a> </p>
-</dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. If this parameter is not specified, then the data returned is about pipe 0. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. </p></li>
 </ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418getDynamicPayloadsEv">
+<span id="_CPPv3N4RF2418getDynamicPayloadsEv"></span><span id="_CPPv2N4RF2418getDynamicPayloadsEv"></span><span id="RF24::getDynamicPayloads__void"></span><span class="target" id="classRF24_1aa9e7a1fc7eb38b8edd729b4739395db4"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the configuration of dynamically sized payloads for all pipes.</p>
+<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the dynamic payload feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit position 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
 </dd>
 </dl>
 </p>
@@ -521,6 +568,8 @@ then this setting is not used for that pipe.</p>
 </div>
 <div class="section" id="setautoack">
 <h2>setAutoAck()<a class="headerlink" href="#setautoack" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unilateral-pipe-control-of-autoack">
+<h3>Unilateral pipe control of AutoAck<a class="headerlink" href="#unilateral-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setAutoAckEb">
 <span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br /></dt>
@@ -539,8 +588,6 @@ payloads.</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1acc137b4cba691c1a36f8425c5f7d0e4a"><span class="std std-ref">write()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"><span class="std std-ref">writeAck()</span></a> </p>
-</dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
 </ul>
@@ -549,6 +596,40 @@ payloads.</p>
 </p>
 </dd></dl>
 
+</div>
+<div class="section" id="binary-pipe-control-of-autoack">
+<h3>Binary pipe control of AutoAck<a class="headerlink" href="#binary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410setAutoAckE7uint8_t">
+<span id="_CPPv3N4RF2410setAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckE7uint8_t"></span><span id="RF24::setAutoAck__uint8_t"></span><span class="target" id="classRF24_1acfc547884cf2337322c45bcec86a36b7"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. Auto-acknowledgement responds to every recieved payload with an empty ACK packet. These ACK packets get sent from the receiving radio back to the transmitting radio. To attach an ACK payload to a ACK packet, use <a class="reference internal" href="advanced_api.html#classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"><span class="std std-ref">writeAck()</span></a>.</p>
+<p>Pipe 0 is used for TX operations, which include sending ACK packets. If using this feature on both TX &amp; RX nodes, then pipe 0 must have this feature enabled for the RX &amp; TX operations. If this feature is disabled on a transmitting radio’s pipe 0, then the transmitting radio will always report that the payload was recieved (even if it was not). Remember to also enable this feature for any pipe that is openly listening to a transmitting radio with this feature enabled.</p>
+<p> <p><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If this feature is enabled for pipe 0, then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code>
+parameter to <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_t" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code></a> can be used to disable this feature for an
+individual payload. However, if this feature is disabled for pipe 0,
+then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter will have no effect.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If disabling auto-acknowledgment packets on pipe 0, the ACK
+payloads feature is also disabled as this feature is required on pipe 0
+to send ACK payloads.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the auto-acknowledgement feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-control-of-autoack">
+<h3>Individual pipe control of AutoAck<a class="headerlink" href="#individual-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setAutoAckEb7uint8_t">
 <span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
@@ -581,11 +662,22 @@ to send ACK payloads.</p>
 </dd></dl>
 
 </div>
+</div>
 <div class="section" id="getautoack">
 <h2>getAutoAck()<a class="headerlink" href="#getautoack" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
+<dt id="_CPPv4N4RF2410getAutoAckEv">
+<span id="_CPPv3N4RF2410getAutoAckEv"></span><span id="_CPPv2N4RF2410getAutoAckEv"></span><span id="RF24::getAutoAck__void"></span><span class="target" id="classRF24_1ab6e303cf4919a6501ad88b2590528856"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetch the status of the auto-ack feature for all pipes. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the auto-acknowledgement feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit positions 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt id="_CPPv4N4RF2410getAutoAckE7uint8_t">
-<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a0ecdc7030ac70978dcfabb5645356c8d"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>

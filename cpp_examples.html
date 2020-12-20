@@ -1247,7 +1247,11 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 255
 256
 257
-258</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
+258
+259
+260
+261
+262</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
@@ -1447,7 +1451,11 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
             <span class="c1">// transmit response &amp; save result to `report`</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                           <span class="c1">// put in TX mode</span>
-            <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>      <span class="c1">// load response into TX FIFO</span>
+            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_response</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+            <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// send response</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">report</span> <span class="o">&amp;&amp;</span> <span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_response</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>
+            <span class="p">}</span>
             <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                          <span class="c1">// put back in RX mode</span>
 
             <span class="c1">// print summary of transactions</span>
@@ -2301,7 +2309,14 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 288
 289
 290
-291</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">       // abs()</span><span class="cp"></span>
+291
+292
+293
+294
+295
+296
+297
+298</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">       // abs()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="c1">     // strcmp()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
@@ -2485,26 +2500,33 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">master</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                           <span class="c1">// put radio in TX mode</span>
-
+    <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">failures</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                       <span class="c1">// keep track of failures</span>
     <span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
     <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_MONOTONIC_RAW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">startTimer</span><span class="p">);</span> <span class="c1">// start the timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">))</span> <span class="p">{</span>
-            <span class="n">failures</span><span class="o">++</span><span class="p">;</span>
-            <span class="c1">// radio.resend();</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span> <span class="o">&amp;&amp;</span> <span class="n">failures</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// most likely no device is listening for the data stream</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Too many failures detected. &quot;</span><span class="p">;</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Aborting at payload &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-            <span class="k">break</span><span class="p">;</span>
+        <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">failures</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+                <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>
+                <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// most likely no device is listening for the data stream</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Too many failures detected. &quot;</span><span class="p">;</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Aborting at payload &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span> <span class="c1">// while</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="kt">uint32_t</span> <span class="n">ellapsedTime</span> <span class="o">=</span> <span class="n">getMicros</span><span class="p">();</span>             <span class="c1">// end the timer</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Time to transmit data = &quot;</span><span class="p">;</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ellapsedTime</span><span class="p">;</span>                            <span class="c1">// print the timer result</span>
@@ -3041,7 +3063,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// Test the &quot;data ready&quot; event with the IRQ pin</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data sent&#39; event</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Pinging RX node for &#39;data ready&#39; event...&quot;</span><span class="p">;</span>
     <span class="n">ping_n_wait</span><span class="p">();</span>                     <span class="c1">// transmit a payload and detect the IRQ pin</span>
     <span class="n">pl_iterator</span><span class="o">++</span><span class="p">;</span>                     <span class="c1">// increment iterator for next test</span>
@@ -3049,7 +3071,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// Test the &quot;data sent&quot; event with the IRQ pin</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data ready&#39; event</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Pinging RX node for &#39;data sent&#39; event...&quot;</span><span class="p">;</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span>                  <span class="c1">// flush payloads from any failed prior test</span>
     <span class="n">ping_n_wait</span><span class="p">();</span>                     <span class="c1">// transmit a payload and detect the IRQ pin</span>
@@ -3058,10 +3080,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// Use this iteration to fill the RX node&#39;s FIFO which sets us up for the next test.</span>
     <span class="c1">// send() uses virtual interrupt flags that work despite the masking of the IRQ pin</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// disable IRQ masking for this step</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// disable IRQ masking for this step</span>
 
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Sending 1 payload to fill RX node&#39;s FIFO. IRQ pin is neglected.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="c1">// send() will call flushTx() on &#39;data fail&#39; events</span>
+    <span class="c1">// send() will call flushTx() before calling write()</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tx_payloads</span><span class="p">[</span><span class="n">pl_iterator</span><span class="p">],</span> <span class="n">tx_pl_size</span><span class="p">))</span>
         <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;RX node&#39;s FIFO is full; it is not listening any more&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
     <span class="k">else</span> <span class="p">{</span>
@@ -3073,7 +3095,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 
     <span class="c1">// test the &quot;data fail&quot; event with the IRQ pin</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to reflect all events</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// all args default to true</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Pinging inactive RX node for &#39;data fail&#39; event...&quot;</span><span class="p">;</span>
     <span class="n">ping_n_wait</span><span class="p">();</span>                     <span class="c1">// transmit a payload and detect the IRQ pin</span>
 
@@ -3093,7 +3115,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="kt">void</span> <span class="nf">slave</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="c1">// let IRQ pin only trigger on &quot;data_ready&quot; event in RX mode</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
 
     <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
     <span class="c1">// transmissions on pipe 0.</span>

@@ -1090,7 +1090,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 216
 217
 218
-219</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+219
+220
+221</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
 
@@ -1245,9 +1247,11 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
       <span class="c1">// transmit response &amp; save result to `report`</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                   <span class="c1">// put in TX mode</span>
-
-      <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>  <span class="c1">// load response to TX FIFO</span>
-
+      <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_response</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+      <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>  <span class="c1">// send response</span>
+      <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">report</span> <span class="o">&amp;&amp;</span> <span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_response</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>
+      <span class="p">}</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                  <span class="c1">// put back in RX mode</span>
 
       <span class="c1">// print summary of transactions</span>
@@ -1849,7 +1853,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
 182
 183
 184
-185</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+185
+186
+187
+188
+189
+190
+191
+192</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
 
@@ -1945,23 +1956,30 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span>
     <span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                           <span class="c1">// make the payload</span>
     <span class="kt">uint8_t</span> <span class="n">failures</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>       <span class="c1">// start the timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                           <span class="c1">// make the payload</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">failures</span><span class="o">++</span><span class="p">;</span>
-        <span class="c1">// radio.resend();</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span> <span class="o">&amp;&amp;</span> <span class="n">failures</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">makePayload</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                           <span class="c1">// make the payload</span>
       <span class="p">}</span>
-
-      <span class="k">if</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Too many failures detected. Aborting at payload &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="k">break</span><span class="p">;</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+      <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">())</span> <span class="p">{</span>
+          <span class="n">failures</span><span class="o">++</span><span class="p">;</span>
+          <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+          <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>
+          <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Too many failures detected. Aborting at payload &quot;</span><span class="p">));</span>
+            <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">}</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>         <span class="c1">// end the timer</span>
 
     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Time to transmit = &quot;</span><span class="p">));</span>
@@ -2465,7 +2483,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// setup for RX mode</span>
 
     <span class="c1">// let IRQ pin only trigger on &quot;data ready&quot; event in RX mode</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
 
     <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
     <span class="c1">// transmissions on pipe 1</span>
@@ -2495,24 +2513,24 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="c1">// Test the &quot;data ready&quot; event with the IRQ pin</span>
 
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data sent&#39; event&quot;</span><span class="p">));</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging RX node for &#39;data ready&#39; event...&quot;</span><span class="p">));</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Test the &quot;data sent&quot; event with the IRQ pin</span>
 
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data ready&#39; event&quot;</span><span class="p">));</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging RX node for &#39;data sent&#39; event...&quot;</span><span class="p">));</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Use this iteration to fill the RX node&#39;s FIFO which sets us up for the next test.</span>
 
       <span class="c1">// send() uses virtual interrupt flags that work despite the masking of the IRQ pin</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// disable IRQ masking for this step</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);;</span> <span class="c1">// disable IRQ masking for this step</span>
 
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Sending 1 payload to fill RX node&#39;s FIFO. IRQ pin is neglected.&quot;</span><span class="p">));</span>
-      <span class="c1">// send() will call flushTx() on &#39;data fail&#39; events</span>
+      <span class="c1">// send() will call flushTx() before calling write()</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tx_payloads</span><span class="p">[</span><span class="n">pl_iterator</span><span class="p">],</span> <span class="n">tx_pl_size</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
           <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RX node&#39;s FIFO is full; it is not listening any more&quot;</span><span class="p">));</span>
@@ -2528,7 +2546,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="c1">// test the &quot;data fail&quot; event with the IRQ pin</span>
 
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to reflect all events&quot;</span><span class="p">));</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// args = &quot;data_sent&quot;, &quot;data_fail&quot;, &quot;data_ready&quot;</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// all args default to true</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging inactive RX node for &#39;data fail&#39; event...&quot;</span><span class="p">));</span>
     <span class="p">}</span>
 
@@ -2614,7 +2632,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// the IRQ pin should only trigger on &quot;data ready&quot; event</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// the IRQ pin should only trigger on &quot;data ready&quot; event</span>
 
       <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
       <span class="c1">// transmissions on pipe 1</span>

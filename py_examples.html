@@ -1343,13 +1343,7 @@ To run this example, enter</p>
 244
 245
 246
-247
-248
-249
-250
-251
-252
-253</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+247</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
@@ -1357,22 +1351,21 @@ To run this example, enter</p>
 
 
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span>
-    <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
+    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
 <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
     <span class="s2">&quot;--node&quot;</span><span class="p">,</span>
     <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
     <span class="n">choices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the identifying radio number (or node ID number)&quot;</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the identifying radio number (or node ID number)&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="s2">&quot;-r&quot;</span><span class="p">,</span>
     <span class="s2">&quot;--role&quot;</span><span class="p">,</span>
     <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
     <span class="n">choices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&#39;1&#39; specifies the TX role. &#39;0&#39; specifies the RX role.&quot;</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&#39;1&#39; specifies the TX role. &#39;0&#39; specifies the RX role.&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
@@ -1421,10 +1414,9 @@ To run this example, enter</p>
             <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span>  <span class="c1"># end timer</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;Transmission successful. Sent: </span><span class="si">{}{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">buffer</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                    <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">buffer</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="p">),</span>
-                <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
+                <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
@@ -1439,7 +1431,7 @@ To run this example, enter</p>
                         <span class="n">pipe_number</span><span class="p">,</span>
                         <span class="nb">bytes</span><span class="p">(</span><span class="n">received</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
                         <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                        <span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+                        <span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1469,9 +1461,11 @@ To run this example, enter</p>
             <span class="c1"># NOTE b&quot;\x00&quot; byte is a c-string&#39;s NULL terminating 0</span>
             <span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;World </span><span class="se">\x00</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
             <span class="n">radio</span><span class="o">.</span><span class="n">stopListening</span><span class="p">()</span>  <span class="c1"># put radio in TX mode</span>
-            <span class="c1"># keep retrying to send response for 150 milliseconds</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># load response into TX FIFO</span>
-            <span class="c1"># NOTE txStandBy() flushes TX FIFO on transmission failure</span>
+            <span class="n">start_response</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># send response</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">result</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_response</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="c1"># keep retrying to send response for 150 milliseconds</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">resend</span><span class="p">()</span>
             <span class="n">radio</span><span class="o">.</span><span class="n">startListening</span><span class="p">()</span>  <span class="c1"># put radio back in RX mode</span>
             <span class="c1"># print the payload received payload</span>
             <span class="nb">print</span><span class="p">(</span>
@@ -1479,18 +1473,13 @@ To run this example, enter</p>
                     <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span><span class="p">,</span>
                     <span class="n">pipe_number</span><span class="p">,</span>
                     <span class="nb">bytes</span><span class="p">(</span><span class="n">received</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                    <span class="n">received</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">received</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
                 <span class="p">),</span>
-                <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
+                <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">result</span><span class="p">:</span>  <span class="c1"># did response succeed?</span>
                 <span class="c1"># print response&#39;s payload</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;Sent: </span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">buffer</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                        <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sent: </span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">buffer</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response failed or timed out&quot;</span><span class="p">)</span>
             <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># reset the timeout timer</span>
@@ -1508,11 +1497,14 @@ To run this example, enter</p>
 <span class="sd">        - True when role is complete &amp; app should continue running.</span>
 <span class="sd">        - False when app should exit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
-        <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter &#39;T&#39; for transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">input</span><span class="p">(</span>
+            <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;T&#39; for transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="p">)</span>
     <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -1552,11 +1544,7 @@ To run this example, enter</p>
     <span class="n">radio_number</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">node</span>  <span class="c1"># uses default value from `parser`</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if &#39;--node&#39; arg wasn&#39;t specified</span>
         <span class="n">radio_number</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span>
-            <span class="nb">int</span><span class="p">(</span>
-                <span class="nb">input</span><span class="p">(</span>
-                    <span class="s2">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span>
-                <span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span>
-            <span class="p">)</span>
+            <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
         <span class="p">)</span>
 
     <span class="c1"># set the Power Amplifier level to -12 dBm since this test example is</span>
@@ -1792,16 +1780,7 @@ To run this example, enter</p>
 187
 188
 189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+190</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
@@ -1809,15 +1788,14 @@ To run this example, enter</p>
 
 
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span>
-    <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
+    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
 <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
     <span class="s2">&quot;--node&quot;</span><span class="p">,</span>
     <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">),</span>
     <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the identifying node ID number for the TX role. &quot;</span>
-         <span class="s2">&quot;Use &#39;R&#39; or &#39;r&#39; to specify the RX role&quot;</span>
+    <span class="s2">&quot;Use &#39;R&#39; or &#39;r&#39; to specify the RX role&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
@@ -1843,7 +1821,7 @@ To run this example, enter</p>
     <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xCD\xB6\xB5\xB4\xB3</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xA3\xB6\xB5\xB4\xB3</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x0F\xB6\xB5\xB4\xB3</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x05\xB6\xB5\xB4\xB3</span><span class="s2">&quot;</span>
+    <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x05\xB6\xB5\xB4\xB3</span><span class="s2">&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="c1"># It is very helpful to think of an address as a path instead of as</span>
 <span class="c1"># an identifying device destination</span>
@@ -1869,11 +1847,8 @@ To run this example, enter</p>
         <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span>
         <span class="c1"># show something to see it isn&#39;t frozen</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;Transmission of payloadID </span><span class="si">{}</span><span class="s2"> as node </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">counter</span><span class="p">,</span>
-                <span class="n">node_number</span>
-            <span class="p">),</span>
-            <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
+            <span class="s2">&quot;Transmission of payloadID </span><span class="si">{}</span><span class="s2"> as node </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">node_number</span><span class="p">),</span>
+            <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
@@ -1903,19 +1878,11 @@ To run this example, enter</p>
         <span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
             <span class="c1"># unpack payload</span>
-            <span class="n">nodeID</span><span class="p">,</span> <span class="n">payloadID</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span>
-                <span class="s2">&quot;&lt;ii&quot;</span><span class="p">,</span>
-                <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span><span class="p">)</span>
-            <span class="p">)</span>
+            <span class="n">nodeID</span><span class="p">,</span> <span class="n">payloadID</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&lt;ii&quot;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span><span class="p">))</span>
             <span class="c1"># show the pipe number that received the payload</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;Received </span><span class="si">{}</span><span class="s2"> bytes on pipe </span><span class="si">{}</span><span class="s2"> from node </span><span class="si">{}</span><span class="s2">. PayloadID: &quot;</span>
-                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span><span class="p">,</span>
-                    <span class="n">pipe_number</span><span class="p">,</span>
-                    <span class="n">nodeID</span><span class="p">,</span>
-                    <span class="n">payloadID</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span><span class="p">,</span> <span class="n">pipe_number</span><span class="p">,</span> <span class="n">nodeID</span><span class="p">,</span> <span class="n">payloadID</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>  <span class="c1"># reset timer with every payload</span>
 
@@ -1931,12 +1898,15 @@ To run this example, enter</p>
 <span class="sd">        - True when role is complete &amp; app should continue running.</span>
 <span class="sd">        - False when app should exit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
-        <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter a number in range [0, 5] to use a specific node ID for &quot;</span>
-        <span class="s2">&quot;transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">input</span><span class="p">(</span>
+            <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter a number in range [0, 5] to use a specific node ID for &quot;</span>
+            <span class="s2">&quot;transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="p">)</span>
     <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -2226,7 +2196,15 @@ To run this example, enter</p>
 216
 217
 218
-219</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+219
+220
+221
+222
+223
+224
+225
+226
+227</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">RF24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span>
@@ -2300,11 +2278,20 @@ To run this example, enter</p>
     <span class="n">start_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span>  <span class="c1"># start timer</span>
     <span class="k">for</span> <span class="n">multiplier</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>  <span class="c1"># repeat transmit the same data stream</span>
         <span class="n">buf_iter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># iterator of payloads for the while loop</span>
-        <span class="k">while</span> <span class="n">buf_iter</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">:</span>  <span class="c1"># cycle through all the payloads</span>
-            <span class="n">buffer</span> <span class="o">=</span> <span class="n">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">)</span>  <span class="c1"># make a payload</span>
-
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buffer</span><span class="p">):</span>  <span class="c1"># transmission failed</span>
-                <span class="n">failures</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment manual retry count</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">buf_iter</span> <span class="o">&lt;</span> <span class="n">SIZE</span> <span class="ow">and</span> <span class="n">failures</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+             <span class="c1"># cycle through all the payloads</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">ce</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">radio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="n">buf_iter</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">:</span>
+                <span class="n">buf_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">make_buffer</span><span class="p">(</span><span class="n">buf_iter</span><span class="p">)</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">ce</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">radio</span><span class="o">.</span><span class="n">isFifo</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDf</span><span class="p">():</span>
+                    <span class="n">failures</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment manual retry count</span>
+                    <span class="n">radio</span><span class="o">.</span><span class="n">ce</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">radio</span><span class="o">.</span><span class="n">clearStatusFlags</span><span class="p">()</span>
+                    <span class="n">radio</span><span class="o">.</span><span class="n">ce</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">failures</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="ow">and</span> <span class="n">buf_iter</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">multiplier</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="c1"># we need to prevent an infinite loop</span>
                     <span class="nb">print</span><span class="p">(</span>
@@ -2314,8 +2301,7 @@ To run this example, enter</p>
                     <span class="n">multiplier</span> <span class="o">=</span> <span class="n">count</span>  <span class="c1"># be sure to exit the for loop</span>
                     <span class="k">break</span>  <span class="c1"># exit the while loop</span>
                 <span class="c1"># radio.resend()  # resend payload in top level of TX FIFO</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># transmission succeeded</span>
-                <span class="n">buf_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">ce</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">end_timer</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic_ns</span><span class="p">()</span>  <span class="c1"># end timer</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;Time to transmit data = </span><span class="si">{}</span><span class="s2"> us. Detected </span><span class="si">{}</span><span class="s2"> failures.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -2751,8 +2737,7 @@ To run this example, enter</p>
 296
 297
 298
-299
-300</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+299</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
@@ -2760,22 +2745,21 @@ To run this example, enter</p>
 
 
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span>
-    <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
+    <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span>
 <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
     <span class="s2">&quot;--node&quot;</span><span class="p">,</span>
     <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
     <span class="n">choices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the identifying radio number (or node ID number)&quot;</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the identifying radio number (or node ID number)&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="s2">&quot;-r&quot;</span><span class="p">,</span>
     <span class="s2">&quot;--role&quot;</span><span class="p">,</span>
     <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
     <span class="n">choices</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&#39;1&#39; specifies the TX role. &#39;0&#39; specifies the RX role.&quot;</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&#39;1&#39; specifies the TX role. &#39;0&#39; specifies the RX role.&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1">########### USER CONFIGURATION ###########</span>
@@ -2808,10 +2792,14 @@ To run this example, enter</p>
 <span class="k">def</span> <span class="nf">interrupt_handler</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This function is called when IRQ pin is detected active LOW&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IRQ pin&quot;</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="s2">&quot;went active LOW.&quot;</span><span class="p">)</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">clearStatusFlags</span><span class="p">()</span>   <span class="c1"># get IRQ status flags</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">clearStatusFlags</span><span class="p">()</span>  <span class="c1"># get IRQ status flags</span>
     <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDf</span><span class="p">():</span>
         <span class="n">radio</span><span class="o">.</span><span class="n">flushTx</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">irqDs: </span><span class="si">{}</span><span class="s2">, irqDf: </span><span class="si">{}</span><span class="s2">, irqDr(): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">radio</span><span class="o">.</span><span class="n">irqDs</span><span class="p">(),</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDf</span><span class="p">(),</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDr</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;\dataReady: </span><span class="si">{}</span><span class="s2">, dataFail: </span><span class="si">{}</span><span class="s2">, dataSent: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">irqDs</span><span class="p">(),</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDf</span><span class="p">(),</span> <span class="n">radio</span><span class="o">.</span><span class="n">irqDr</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;    &#39;data ready&#39; event test </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -2854,7 +2842,7 @@ To run this example, enter</p>
     <span class="n">pl_iterator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pl_iter</span>
     <span class="c1"># the following False parameter means we&#39;re expecting an ACK packet</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="n">pl_iter</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># wait 100 ms for interrupt_handler() to complete</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># wait 100 ms for interrupt_handler() to complete</span>
 
 
 <span class="k">def</span> <span class="nf">print_rx_fifo</span><span class="p">(</span><span class="n">pl_size</span><span class="p">):</span>
@@ -2863,12 +2851,9 @@ To run this example, enter</p>
 <span class="sd">    :param int pl_size: the expected size of each payload</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">isFifo</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
-            <span class="c1"># all 3 payloads received were 5 bytes each, and RX FIFO is full</span>
-            <span class="c1"># so, fetching 15 bytes from the RX FIFO also flushes RX FIFO</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">&quot;Complete RX FIFO:&quot;</span><span class="p">,</span>
-                <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-            <span class="p">)</span>
+        <span class="c1"># all 3 payloads received were 5 bytes each, and RX FIFO is full</span>
+        <span class="c1"># so, fetching 15 bytes from the RX FIFO also flushes RX FIFO</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete RX FIFO:&quot;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
         <span class="k">while</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
@@ -2880,37 +2865,37 @@ To run this example, enter</p>
 <span class="k">def</span> <span class="nf">master</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Transmits 4 times and reports results</span>
 
-<span class="sd">        1. successfully receive ACK payload first</span>
-<span class="sd">        2. successfully transmit on second</span>
-<span class="sd">        3. send a third payload to fill RX node&#39;s RX FIFO</span>
-<span class="sd">           (supposedly making RX node unresponsive)</span>
-<span class="sd">        4. intentionally fail transmit on the fourth</span>
+<span class="sd">    1. successfully receive ACK payload first</span>
+<span class="sd">    2. successfully transmit on second</span>
+<span class="sd">    3. send a third payload to fill RX node&#39;s RX FIFO</span>
+<span class="sd">       (supposedly making RX node unresponsive)</span>
+<span class="sd">    4. intentionally fail transmit on the fourth</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">stopListening</span><span class="p">()</span>  <span class="c1"># put radio in TX mode</span>
 
     <span class="c1"># on data ready test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to only ignore &#39;on data sent&#39; event&quot;</span><span class="p">)</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># args = irqDs(), irqDf(), irqDr()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = dataReady, dataSent, dataFail</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node for an ACK payload...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
     <span class="n">_ping_n_wait</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># on &quot;data sent&quot; test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to only ignore &#39;on data ready&#39; event&quot;</span><span class="p">)</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = irqDs(), irqDf(), irqDr()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = dataReady, dataSent, dataFail</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Pinging slave node again...             &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
     <span class="n">_ping_n_wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># trigger slave node to stopListening() by filling slave node&#39;s RX FIFO</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sending one extra payload to fill RX FIFO on slave node.&quot;</span><span class="p">)</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># disable IRQ pin for this step</span>
+    <span class="c1"># disable IRQ pin for this step</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
         <span class="c1"># when send_only parameter is True, send() ignores RX FIFO usage</span>
         <span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">isFifo</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RX node&#39;s FIFO is full; it is not listening any more&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">&quot;Transmission successful, but the RX node might still be &quot;</span>
-                <span class="s2">&quot;listening.&quot;</span>
+                <span class="s2">&quot;Transmission successful, but the RX node might still be &quot;</span> <span class="s2">&quot;listening.&quot;</span>
             <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">radio</span><span class="o">.</span><span class="n">flushTx</span><span class="p">()</span>
@@ -2918,7 +2903,7 @@ To run this example, enter</p>
 
     <span class="c1"># on &quot;data fail&quot; test</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuring IRQ pin to go active for all events.&quot;</span><span class="p">)</span>
-    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># args = irqDs(), irqDf(), irqDr()</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># args = dataReady, dataSent, dataFail</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Sending a ping to inactive slave node...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
     <span class="n">_ping_n_wait</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
@@ -2958,11 +2943,14 @@ To run this example, enter</p>
 <span class="sd">        - True when role is complete &amp; app should continue running.</span>
 <span class="sd">        - False when app should exit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
-        <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter &#39;T&#39; for transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">input</span><span class="p">(</span>
+            <span class="s2">&quot;*** Enter &#39;R&#39; for receiver role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;T&#39; for transmitter role.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;*** Enter &#39;Q&#39; to quit example.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="s2">&quot;?&quot;</span>
+    <span class="p">)</span>
     <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -3003,11 +2991,7 @@ To run this example, enter</p>
     <span class="n">radio_number</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">node</span>  <span class="c1"># uses default value from `parser`</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if &#39;--node&#39; arg wasn&#39;t specified</span>
         <span class="n">radio_number</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span>
-            <span class="nb">int</span><span class="p">(</span>
-                <span class="nb">input</span><span class="p">(</span>
-                    <span class="s2">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span>
-                <span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span>
-            <span class="p">)</span>
+            <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39; &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
         <span class="p">)</span>
 
     <span class="c1"># set the Power Amplifier level to -12 dBm since this test example is</span>
