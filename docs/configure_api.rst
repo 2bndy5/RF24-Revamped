@@ -15,14 +15,27 @@ Datarate enum
 setDynamicPayloads()
 ******************************
 
+Unilateral pipe control of Dynamic Payloads
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. doxygenfunction:: setDynamicPayloads(bool)
+
+Binary pipe control of Dynamic Payloads
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. doxygenfunction:: setDynamicPayloads(uint8_t)
+
+Individual pipe control of Dynamic Payloads
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. doxygenfunction:: setDynamicPayloads(bool, uint8_t)
 
 getDynamicPayloads()
 ******************************
 
-.. doxygenfunction:: getDynamicPayloads
+.. doxygenfunction:: getDynamicPayloads(uint8_t)
+
+.. doxygenfunction:: getDynamicPayloads(void)
 
 setPayloadLength()
 ******************************
@@ -39,14 +52,27 @@ getPayloadLength()
 setAutoAck()
 ******************************
 
+Unilateral pipe control of AutoAck
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. doxygenfunction:: setAutoAck(bool)
+
+Binary pipe control of AutoAck
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. doxygenfunction:: setAutoAck(uint8_t)
+
+Individual pipe control of AutoAck
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. doxygenfunction:: setAutoAck(bool, uint8_t)
 
 getAutoAck()
 ******************************
 
-.. doxygenfunction:: getAutoAck
+.. doxygenfunction:: getAutoAck(void)
+
+.. doxygenfunction:: getAutoAck(uint8_t)
 
 setRetries()
 ******************************

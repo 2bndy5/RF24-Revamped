@@ -171,9 +171,11 @@ void loop() {
 
       // transmit response & save result to `report`
       radio.stopListening();                   // put in TX mode
-
-      bool report = radio.send(&payload, sizeof(payload));  // load response to TX FIFO
-
+      unsigned long start_response = millis();
+      bool report = radio.send(&payload, sizeof(payload));  // send response
+      while (!report && millis() - start_response < 200) {
+        report = radio.resend();
+      }
       radio.startListening();                  // put back in RX mode
 
       // print summary of transactions

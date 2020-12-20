@@ -106,23 +106,30 @@ void loop() {
 
     radio.flushTx();
     uint8_t i = 0;
+    makePayload(i);                           // make the payload
     uint8_t failures = 0;
     unsigned long start_timer = micros();       // start the timer
-    while (i < SIZE) {
-      makePayload(i);                           // make the payload
-      if (!radio.send(&buffer, SIZE)) {
-        failures++;
-        // radio.resend();
-      } else {
+    while (i < SIZE && failures < 100) {
+      while (!radio.write(&buffer, SIZE, false, true) && i < SIZE) {
         i++;
+        makePayload(i);                           // make the payload
       }
-
-      if (failures >= 100) {
-        Serial.print(F("Too many failures detected. Aborting at payload "));
-        Serial.println(buffer[0]);
-        break;
+      radio.ce(true);
+      while(!radio.isFifo(true, true)) {
+        if (radio.irqDf()) {
+          failures++;
+          radio.ce(false);
+          radio.clearStatusFlags();
+          radio.ce(true);
+          if (failures >= 100) {
+            Serial.print(F("Too many failures detected. Aborting at payload "));
+            Serial.println(buffer[0]);
+            break;
+          }
+        }
       }
     }
+    radio.ce(false);
     unsigned long end_timer = micros();         // end the timer
 
     Serial.print(F("Time to transmit = "));

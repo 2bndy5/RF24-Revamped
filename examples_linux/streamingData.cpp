@@ -194,26 +194,33 @@ void setRole() {
  */
 void master() {
     radio.stopListening();                           // put radio in TX mode
-
+    radio.flushTx();
     unsigned int failures = 0;                       // keep track of failures
     uint8_t i = 0;
+    makePayload(i);
     clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer); // start the timer
-    while (i < SIZE) {
-        makePayload(i);
-        if (!radio.send(&buffer, SIZE)) {
-            failures++;
-            // radio.resend();
-        } else {
+    while (i < SIZE && failures < 100) {
+        while (!radio.write(&buffer, SIZE, false, false) && i < SIZE) {
             i++;
+            makePayload(i);
         }
-
-        if (failures >= 100) {
-            // most likely no device is listening for the data stream
-            cout << "Too many failures detected. ";
-            cout << "Aborting at payload " << buffer[0];
-            break;
+        radio.ce(true);
+        if (!radio.isFifo(true, true)) {
+            if (radio.irqDf()) {
+                failures++;
+                radio.ce(false);
+                radio.clearStatusFlags();
+                radio.ce(true);
+            }
+            if (failures >= 100) {
+                // most likely no device is listening for the data stream
+                cout << "Too many failures detected. ";
+                cout << "Aborting at payload " << buffer[0];
+                break;
+            }
         }
     } // while
+    radio.ce(false);
     uint32_t ellapsedTime = getMicros();             // end the timer
     cout << "Time to transmit data = ";
     cout << ellapsedTime;                            // print the timer result

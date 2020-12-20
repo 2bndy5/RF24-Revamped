@@ -14,15 +14,14 @@ from RF24 import RF24, RF24_PA_LOW
 
 
 parser = argparse.ArgumentParser(
-    description=__doc__,
-    formatter_class=argparse.RawDescriptionHelpFormatter
+    description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
 )
 parser.add_argument(
     "-n",
     "--node",
     choices=("0", "1", "2", "3", "4", "5", "R", "r"),
     help="the identifying node ID number for the TX role. "
-         "Use 'R' or 'r' to specify the RX role"
+    "Use 'R' or 'r' to specify the RX role",
 )
 
 ########### USER CONFIGURATION ###########
@@ -48,7 +47,7 @@ addresses = [
     b"\xCD\xB6\xB5\xB4\xB3",
     b"\xA3\xB6\xB5\xB4\xB3",
     b"\x0F\xB6\xB5\xB4\xB3",
-    b"\x05\xB6\xB5\xB4\xB3"
+    b"\x05\xB6\xB5\xB4\xB3",
 ]
 # It is very helpful to think of an address as a path instead of as
 # an identifying device destination
@@ -74,11 +73,8 @@ def master(node_number):
         end_timer = time.monotonic_ns()
         # show something to see it isn't frozen
         print(
-            "Transmission of payloadID {} as node {}".format(
-                counter,
-                node_number
-            ),
-            end=" "
+            "Transmission of payloadID {} as node {}".format(counter, node_number),
+            end=" ",
         )
         if report:
             print(
@@ -108,19 +104,11 @@ def slave(timeout=10):
         has_payload, pipe_number = radio.available_pipe()
         if has_payload:
             # unpack payload
-            nodeID, payloadID = struct.unpack(
-                "<ii",
-                radio.read(radio.payloadSize)
-            )
+            nodeID, payloadID = struct.unpack("<ii", radio.read(radio.payloadSize))
             # show the pipe number that received the payload
             print(
                 "Received {} bytes on pipe {} from node {}. PayloadID: "
-                "{}".format(
-                    radio.payloadSize,
-                    pipe_number,
-                    nodeID,
-                    payloadID
-                )
+                "{}".format(radio.payloadSize, pipe_number, nodeID, payloadID)
             )
             start_timer = time.monotonic()  # reset timer with every payload
 
@@ -136,12 +124,15 @@ def set_role():
         - True when role is complete & app should continue running.
         - False when app should exit
     """
-    user_input = input(
-        "*** Enter 'R' for receiver role.\n"
-        "*** Enter a number in range [0, 5] to use a specific node ID for "
-        "transmitter role.\n"
-        "*** Enter 'Q' to quit example.\n"
-    ) or "?"
+    user_input = (
+        input(
+            "*** Enter 'R' for receiver role.\n"
+            "*** Enter a number in range [0, 5] to use a specific node ID for "
+            "transmitter role.\n"
+            "*** Enter 'Q' to quit example.\n"
+        )
+        or "?"
+    )
     user_input = user_input.split()
     if user_input[0].upper().startswith("R"):
         if len(user_input) > 1:

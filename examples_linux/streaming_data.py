@@ -77,11 +77,20 @@ def master(count=1):
     start_timer = time.monotonic_ns()  # start timer
     for multiplier in range(count):  # repeat transmit the same data stream
         buf_iter = 0  # iterator of payloads for the while loop
-        while buf_iter < SIZE:  # cycle through all the payloads
-            buffer = make_buffer(buf_iter)  # make a payload
-
-            if not radio.send(buffer):  # transmission failed
-                failures += 1  # increment manual retry count
+        buffer = make_buffer(buf_iter)
+        while buf_iter < SIZE and failures < 100:
+             # cycle through all the payloads
+            radio.ce(False)
+            while not radio.write(buffer, False, False) and buf_iter < SIZE:
+                buf_iter += 1
+                make_buffer(buf_iter)
+            radio.ce(True)
+            while radio.isFifo(True, True):
+                if radio.irqDf():
+                    failures += 1  # increment manual retry count
+                    radio.ce(False)
+                    radio.clearStatusFlags()
+                    radio.ce(True)
                 if failures > 99 and buf_iter < 7 and multiplier < 2:
                     # we need to prevent an infinite loop
                     print(
@@ -91,8 +100,7 @@ def master(count=1):
                     multiplier = count  # be sure to exit the for loop
                     break  # exit the while loop
                 # radio.resend()  # resend payload in top level of TX FIFO
-            else:  # transmission succeeded
-                buf_iter += 1
+    radio.ce(False)
     end_timer = time.monotonic_ns()  # end timer
     print(
         "Time to transmit data = {} us. Detected {} failures.".format(

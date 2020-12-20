@@ -161,7 +161,7 @@ void master() {
 
     // Test the "data ready" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to ignore the 'data sent' event\n";
-    radio.interruptConfig(true, false, false); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(true, false, true); // args = dataReady, dataSent, dataFail
     cout << "   Pinging RX node for 'data ready' event...";
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
     pl_iterator++;                     // increment iterator for next test
@@ -169,7 +169,7 @@ void master() {
 
     // Test the "data sent" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to ignore the 'data ready' event\n";
-    radio.interruptConfig(false, false, true); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(false, true, true); // args = dataReady, dataSent, dataFail
     cout << "   Pinging RX node for 'data sent' event...";
     radio.flushTx();                  // flush payloads from any failed prior test
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
@@ -178,10 +178,10 @@ void master() {
 
     // Use this iteration to fill the RX node's FIFO which sets us up for the next test.
     // send() uses virtual interrupt flags that work despite the masking of the IRQ pin
-    radio.interruptConfig(1, 1, 1); // disable IRQ masking for this step
+    radio.interruptConfig(false, false, false); // disable IRQ masking for this step
 
     cout << "\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected.\n";
-    // send() will call flushTx() on 'data fail' events
+    // send() will call flushTx() before calling write()
     if (radio.send(&tx_payloads[pl_iterator], tx_pl_size))
         cout << "RX node's FIFO is full; it is not listening any more" << endl;
     else {
@@ -193,7 +193,7 @@ void master() {
 
     // test the "data fail" event with the IRQ pin
     cout << "\nConfiguring IRQ pin to reflect all events\n";
-    radio.interruptConfig(0, 0, 0); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(); // all args default to true
     cout << "   Pinging inactive RX node for 'data fail' event...";
     ping_n_wait();                     // transmit a payload and detect the IRQ pin
 
@@ -213,7 +213,7 @@ void master() {
 void slave() {
 
     // let IRQ pin only trigger on "data_ready" event in RX mode
-    radio.interruptConfig(1, 1, 0); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(true, false, false); // args = dataReady, dataSent, dataFail
 
     // Fill the TX FIFO with 3 ACK payloads for the first 3 received
     // transmissions on pipe 0.

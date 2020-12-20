@@ -1166,16 +1166,25 @@ void RF24::toggle_features(void)
 
 void RF24::setDynamicPayloads(bool enable)
 {
+    setDynamicPayloads(enable ? 0x3F : 0);
+}
+
+/****************************************************************************/
+
+void RF24::setDynamicPayloads(uint8_t binary_enable)
+{
     // Enable/Disable dynamic payloads on all pipes
-    feature_reg &= ~_BV(EN_DPL);
-    feature_reg |= enable ? _BV(EN_DPL) : 0;
-    dyn_pl_enabled = enable ? 0x3F : 0;
+    feature_reg = read_register(FEATURE) & ~_BV(EN_DPL);
+    feature_reg |= (bool)binary_enable ? _BV(EN_DPL) : 0;
     write_register(FEATURE, feature_reg);
+
+    dyn_pl_enabled = binary_enable & 0x3F;
     write_register(DYNPD, dyn_pl_enabled);
 
+    auto_ack_enabled = read_register(EN_AA);
     // force enable auto-ack if needed
-    if (enable) {
-        auto_ack_enabled = 0x3F;
+    if (dyn_pl_enabled != (auto_ack_enabled & dyn_pl_enabled)) {
+        auto_ack_enabled |= dyn_pl_enabled;
         write_register(EN_AA, auto_ack_enabled);
     }
 }
@@ -1186,20 +1195,9 @@ void RF24::setDynamicPayloads(bool enable, uint8_t pipe)
 {
     if (pipe < 6) {
         // Enable/Disable dynamic payloads on per pipe
-        dyn_pl_enabled &= ~_BV(pipe);
+        dyn_pl_enabled = read_register(DYNPD) & ~_BV(pipe);
         dyn_pl_enabled |= enable ? _BV(pipe) : 0;
-        write_register(DYNPD, dyn_pl_enabled);
-
-        // handle EN_DPL flag of FEATURE register
-        feature_reg &= ~_BV(EN_DPL);
-        feature_reg |= dyn_pl_enabled ? _BV(EN_DPL) : 0;
-        write_register(FEATURE, feature_reg);
-
-        // force enable auto-ack for all pipes that have dynamic payloads enabled
-        if (dyn_pl_enabled != (auto_ack_enabled & dyn_pl_enabled)) {
-            auto_ack_enabled |= dyn_pl_enabled;
-            write_register(EN_AA, auto_ack_enabled);
-        }
+        setDynamicPayloads(dyn_pl_enabled);
     }
 }
 
@@ -1217,6 +1215,14 @@ bool RF24::getDynamicPayloads(uint8_t pipe)
         }
     }
     return (bool)(feature_reg | _BV(EN_DPL));
+}
+
+/****************************************************************************/
+
+uint8_t RF24::getDynamicPayloads(void)
+{
+    dyn_pl_enabled = read_register(DYNPD);
+    return dyn_pl_enabled & 0x3F;
 }
 
 /****************************************************************************/
@@ -1288,20 +1294,7 @@ bool RF24::isPVariant(void)
 
 void RF24::setAutoAck(bool enable)
 {
-    auto_ack_enabled = enable ? 0x3F : 0;
-    if (!enable) {
-        if (feature_reg & _BV(EN_ACK_PAY)) {
-            // dissable ACK payloads feature
-            feature_reg &= ~_BV(EN_ACK_PAY);
-        } else if (dyn_pl_enabled) {
-            // otherwise only disable dynamic payloads
-            dyn_pl_enabled = 0;
-            write_register(DYNPD, dyn_pl_enabled);
-            feature_reg &= ~_BV(EN_DPL);
-        }
-        write_register(FEATURE, feature_reg);
-    }
-    write_register(EN_AA, auto_ack_enabled);
+    setAutoAck(enable ? 0x3F : 0);
 }
 
 /****************************************************************************/
@@ -1311,21 +1304,29 @@ void RF24::setAutoAck(bool enable, uint8_t pipe)
     if (pipe < 6) {
         auto_ack_enabled = read_register(EN_AA) & ~_BV(pipe);
         auto_ack_enabled |= enable ? _BV(pipe) : 0;
-        if (!enable) {
-            auto_ack_enabled &= ~_BV(pipe);
-            if ((feature_reg & _BV(EN_ACK_PAY)) && !pipe) {
-                feature_reg &= ~_BV(EN_ACK_PAY);
-            } else if (dyn_pl_enabled & _BV(pipe)) {
-                dyn_pl_enabled &= ~_BV(pipe);
-                write_register(DYNPD, dyn_pl_enabled);
-            }
-            if (!dyn_pl_enabled) {
-                feature_reg &= ~_BV(EN_DPL);
-            }
-            write_register(FEATURE, feature_reg);
-        }
-        write_register(EN_AA, auto_ack_enabled);
+        setAutoAck(auto_ack_enabled);
     }
+}
+
+/****************************************************************************/
+
+void RF24::setAutoAck(uint8_t binary_enable)
+{
+    auto_ack_enabled = binary_enable & 0x3F;
+    dyn_pl_enabled = read_register(DYNPD);
+    feature_reg = read_register(FEATURE);
+    if (~auto_ack_enabled & dyn_pl_enabled) {
+        dyn_pl_enabled = ~(~auto_ack_enabled & dyn_pl_enabled);
+        write_register(DYNPD, dyn_pl_enabled);
+        if ((feature_reg & _BV(EN_ACK_PAY)) && !(auto_ack_enabled & 1)) {
+            feature_reg &= ~_BV(EN_ACK_PAY);
+        }
+        if (!dyn_pl_enabled) {
+            feature_reg &= ~_BV(EN_DPL);
+        }
+        write_register(FEATURE, feature_reg);
+    }
+    write_register(EN_AA, auto_ack_enabled);
 }
 
 /****************************************************************************/
@@ -1337,6 +1338,14 @@ bool RF24::getAutoAck(uint8_t pipe)
         return (bool)(auto_ack_enabled & _BV(pipe));
     }
     return (bool)(auto_ack_enabled & 1);
+}
+
+/****************************************************************************/
+
+uint8_t RF24::getAutoAck(void)
+{
+    auto_ack_enabled = read_register(EN_AA);
+    return auto_ack_enabled & 0x3F;
 }
 
 /****************************************************************************/

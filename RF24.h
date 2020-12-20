@@ -1128,8 +1128,22 @@ public:
      *
      * If this feature is enabled, then the static payload lengths configuration
      * is not used.
+     * @param enable Enable (`true`) or disable (`false`) the dynamic payload length
+     * feature for all pipes.
      */
     void setDynamicPayloads(bool enable);
+
+    /**
+     * Enable or disable dynamically sized payloads for all pipes using a binary integer.
+     *
+     * If this feature is enabled, then the static payload lengths configuration
+     * is not used.
+     * @param binary_enable A binary integer to control the dynamic payload length feature
+     * for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (`1`)
+     * enables the feature for the corresponding pipe; a low bit (`0`) disables the feature
+     * for the corresponding pipe.
+     */
+    void setDynamicPayloads(uint8_t binary_enable);
 
     /**
      * Enable or disable dynamically sized payloads for a specific pipe.
@@ -1148,10 +1162,22 @@ public:
      * If this feature is enabled for any pipe, then the static payload length
      * configuration for that pipe is not used.
      * @param pipe the specific pipe concerning the dynamic payload length feature.
-     * If this parameter is not specified, then the data returned is about pipe 0.
-     * @see setDynamicPayloads(bool), setDynamicPayloads(bool, uint8_t)
      */
-    bool getDynamicPayloads(uint8_t pipe=0);
+    bool getDynamicPayloads(uint8_t pipe);
+
+    /**
+     * Get the configuration of dynamically sized payloads for all pipes.
+     *
+     * If this feature is enabled for any pipe, then the static payload length
+     * configuration for that pipe is not used.
+     * @return A binary integer where each bit represents the dynamic payload
+     * feature configuration for a specific pipe. Bit position 0 represents
+     * pipe 0, and bit position 5 represents pipe 5. A high bit (`1`) enables
+     * the feature for the corresponding pipe; a low bit (`0`) disables the
+     * feature for the corresponding pipe. Bit position 6 and 7 will always be
+     * `0`.
+     */
+    uint8_t getDynamicPayloads(void);
 
     /**
      * Enable dynamic ACKs (single write multicast or unicast) for chosen
@@ -1204,11 +1230,41 @@ public:
      *     feature is also disabled as this feature is required to send ACK
      *     payloads.
      * @endrst
-     * @see send(), write(), writeAck()
      * @param enable Whether to enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for all pipes
      */
     void setAutoAck(bool enable);
+
+    /**
+     * Enable or disable the auto-acknowledgement feature for a specific pipe.
+     * This feature is enabled by default for all pipes. Auto-acknowledgement
+     * responds to every recieved payload with an empty ACK packet. These ACK
+     * packets get sent from the receiving radio back to the transmitting
+     * radio. To attach an ACK payload to a ACK packet, use writeAck().
+     *
+     * Pipe 0 is used for TX operations, which include sending ACK packets. If
+     * using this feature on both TX & RX nodes, then pipe 0 must have this
+     * feature enabled for the RX & TX operations. If this feature is disabled
+     * on a transmitting radio's pipe 0, then the transmitting radio will
+     * always report that the payload was recieved (even if it was not).
+     * Remember to also enable this feature for any pipe that is openly
+     * listening to a transmitting radio with this feature enabled.
+     *
+     * @rst
+     * .. warning:: If this feature is enabled for pipe 0, then the ``multicast``
+     *     parameter to :func:`send()` can be used to disable this feature for an
+     *     individual payload. However, if this feature is disabled for pipe 0,
+     *     then the ``multicast`` parameter will have no effect.
+     * .. note:: If disabling auto-acknowledgment packets on pipe 0, the ACK
+     *     payloads feature is also disabled as this feature is required on pipe 0
+     *     to send ACK payloads.
+     * @endrst
+     * @param binary_enable A binary integer to control the auto-acknowledgement feature
+     * for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (`1`)
+     * enables the feature for the corresponding pipe; a low bit (`0`) disables the feature
+     * for the corresponding pipe.
+     */
+    void setAutoAck(uint8_t binary_enable);
 
     /**
      * Enable or disable the auto-acknowledgement feature for a specific pipe.
@@ -1250,7 +1306,18 @@ public:
      * - `true` if the auto-ack feature is enabled for the specified @p pipe
      * - `false` if the auto-ack feature is disabled for the specified @p pipe
      */
-    bool getAutoAck(uint8_t pipe=0);
+    bool getAutoAck(uint8_t pipe);
+
+    /**
+     * Fetch the status of the auto-ack feature for all pipes.
+     * @return A binary integer where each bit represents the
+     * auto-acknowledgement feature configuration for a specific pipe. Bit
+     * position 0 represents pipe 0, and bit position 5 represents pipe 5.
+     * A high bit (`1`) enables the feature for the corresponding pipe; a low
+     * bit (`0`) disables the feature for the corresponding pipe. Bit positions
+     * 6 and 7 will always be `0`.
+     */
+    uint8_t getAutoAck(void);
 
     /**
      * Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state

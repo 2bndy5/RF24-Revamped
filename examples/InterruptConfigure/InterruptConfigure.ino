@@ -116,7 +116,7 @@ void setup() {
     // setup for RX mode
 
     // let IRQ pin only trigger on "data ready" event in RX mode
-    radio.interruptConfig(1, 1, 0); // args = "data_sent", "data_fail", "data_ready"
+    radio.interruptConfig(true, false, false); // args = dataReady, dataSent, dataFail
 
     // Fill the TX FIFO with 3 ACK payloads for the first 3 received
     // transmissions on pipe 1
@@ -146,24 +146,24 @@ void loop() {
       // Test the "data ready" event with the IRQ pin
 
       Serial.println(F("\nConfiguring IRQ pin to ignore the 'data sent' event"));
-      radio.interruptConfig(true, false, false); // args = "data_sent", "data_fail", "data_ready"
+      radio.interruptConfig(true, false, true); // args = dataReady, dataSent, dataFail
       Serial.println(F("   Pinging RX node for 'data ready' event..."));
 
     } else if (pl_iterator == 1) {
       // Test the "data sent" event with the IRQ pin
 
       Serial.println(F("\nConfiguring IRQ pin to ignore the 'data ready' event"));
-      radio.interruptConfig(false, false, true); // args = "data_sent", "data_fail", "data_ready"
+      radio.interruptConfig(false, true, true); // args = dataReady, dataSent, dataFail
       Serial.println(F("   Pinging RX node for 'data sent' event..."));
 
     } else if (pl_iterator == 2) {
       // Use this iteration to fill the RX node's FIFO which sets us up for the next test.
 
       // send() uses virtual interrupt flags that work despite the masking of the IRQ pin
-      radio.interruptConfig(1, 1, 1); // disable IRQ masking for this step
+      radio.interruptConfig(false, false, false);; // disable IRQ masking for this step
 
       Serial.println(F("\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected."));
-      // send() will call flushTx() on 'data fail' events
+      // send() will call flushTx() before calling write()
       if (radio.send(&tx_payloads[pl_iterator], tx_pl_size)) {
         if (radio.isFifo(false, true)) {
           Serial.println(F("RX node's FIFO is full; it is not listening any more"));
@@ -179,7 +179,7 @@ void loop() {
       // test the "data fail" event with the IRQ pin
 
       Serial.println(F("\nConfiguring IRQ pin to reflect all events"));
-      radio.interruptConfig(0, 0, 0); // args = "data_sent", "data_fail", "data_ready"
+      radio.interruptConfig(); // all args default to true
       Serial.println(F("   Pinging inactive RX node for 'data fail' event..."));
     }
 
@@ -265,7 +265,7 @@ void loop() {
 
       role = false;
 
-      radio.interruptConfig(0, 0, 0); // the IRQ pin should only trigger on "data ready" event
+      radio.interruptConfig(); // the IRQ pin should only trigger on "data ready" event
 
       // Fill the TX FIFO with 3 ACK payloads for the first 3 received
       // transmissions on pipe 1
