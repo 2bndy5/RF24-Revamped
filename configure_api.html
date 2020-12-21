@@ -100,8 +100,8 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#palevel-enum">PaLevel enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#datarate-enum">Datarate enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-rate-enum">Data Rate enum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setdynamicpayloads">setDynamicPayloads()</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
@@ -215,25 +215,20 @@
             
   <div class="section" id="configuration-api">
 <h1>Configuration API<a class="headerlink" href="#configuration-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="palevel-enum">
-<h2>PaLevel enum<a class="headerlink" href="#palevel-enum" title="Permalink to this headline">¶</a></h2>
-<dl class="group">
-<dt>
-<span class="target" id="group__PaLevel"></span><em>group</em> <code class="sig-name descname">PaLevel</code></dt>
+<div class="section" id="power-amplifier-level-enum">
+<h2>Power Amplifier Level enum<a class="headerlink" href="#power-amplifier-level-enum" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp enum">
+<dt id="_CPPv413rf24_pa_dbm_e">
+<span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>) represents a logarithmic signal loss. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">RF24::setPaLevel()</span></a>, <a class="reference internal" href="#classRF24_1a9d78d3638af3245f840f5698e630c25f"><span class="std std-ref">RF24::getPaLevel()</span></a> </p>
 </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Enums</p>
-<dl class="cpp enum">
-<dt id="_CPPv413rf24_pa_dbm_e">
-<span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><em>Values:</em></p>
+<p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span class="target" id="group__PaLevel_1gga1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MIN</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MIN</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(0) represents:  <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -263,7 +258,7 @@
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span class="target" id="group__PaLevel_1gga1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_LOW</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_LOW</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(1) represents:  <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -293,7 +288,7 @@
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE">
-<span id="_CPPv3N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span id="_CPPv2N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span class="target" id="group__PaLevel_1gga1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_HIGH</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span id="_CPPv2N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_HIGH</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(2) represents:  <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -323,7 +318,7 @@
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span class="target" id="group__PaLevel_1gga1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MAX</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MAX</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(3) represents:  <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -353,53 +348,42 @@
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE">
-<span id="_CPPv3N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span id="_CPPv2N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span class="target" id="group__PaLevel_1gga1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_ERROR</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span id="_CPPv2N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span class="target" id="RF24_8h_1a1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_ERROR</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(4) This should not be used and remains for backward compatibility. </p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-</dd></dl>
-
-</div>
-<div class="section" id="datarate-enum">
-<h2>Datarate enum<a class="headerlink" href="#datarate-enum" title="Permalink to this headline">¶</a></h2>
-<dl class="group">
-<dt>
-<span class="target" id="group__Datarate"></span><em>group</em> <code class="sig-name descname">Datarate</code></dt>
+<div class="section" id="data-rate-enum">
+<h2>Data Rate enum<a class="headerlink" href="#data-rate-enum" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp enum">
+<dt id="_CPPv415rf24_datarate_e">
+<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>How fast data moves through the air. Units are in bits per second (bps). <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
 </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Enums</p>
-<dl class="cpp enum">
-<dt id="_CPPv415rf24_datarate_e">
-<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><em>Values:</em></p>
+<p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e10RF24_1MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="group__Datarate_1gga82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="RF24_8h_1a82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(0) represents 1 Mbps </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e10RF24_2MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="group__Datarate_1gga82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="RF24_8h_1a82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(1) represents 2 Mbps </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e12RF24_250KBPSE">
-<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="group__Datarate_1gga82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="RF24_8h_1a82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>(2) represents 250 kbps </p>
 </dd></dl>
 
-</dd></dl>
-
-</div>
 </dd></dl>
 
 </div>
@@ -804,7 +788,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
 <span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the transmission <a class="reference internal" href="#group__Datarate"><span class="std std-ref">datarate</span></a></p>
+<dd><p>Set the transmission Data Rate</p>
 <p> <p><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules (when
@@ -815,7 +799,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table class="docutils align-default">
+<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -833,7 +817,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <td><p>for 2 Mbps</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> (2)</p></td>
-<td><p>for 250 kbs</p></td>
+<td><p>for 250 kpbs</p></td>
 </tr>
 </tbody>
 </table>
@@ -851,8 +835,8 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411getDataRateEv">
 <span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetches the currently configured transmission <a class="reference internal" href="#group__Datarate"><span class="std std-ref">datarate</span></a> <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__Datarate_1ga82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
+<dd><p>Fetches the currently configured transmission Data Rate <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
 </dd>
 </dl>
 </p>
@@ -1031,8 +1015,8 @@ parameter.</p>
 </p>
  <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The desired <a class="reference internal" href="#group__PaLevel"><span class="std std-ref">Power Amplifier level</span></a> as defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>: Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below.<code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> only affects nRF24L01 modules with an LNA chip.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The desired Power Amplifier Level as defined by <a class="reference internal" href="#RF24_8h_1a1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>: Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below. <code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> only affects nRF24L01 modules with an LNA chip.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1045,8 +1029,8 @@ parameter.</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getPaLevelEv">
 <span id="_CPPv3N4RF2410getPaLevelEv"></span><span id="_CPPv2N4RF2410getPaLevelEv"></span><span id="RF24::getPaLevel__void"></span><span class="target" id="classRF24_1a9d78d3638af3245f840f5698e630c25f"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPaLevel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getPaLevelEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetches the current <a class="reference internal" href="#group__PaLevel"><span class="std std-ref">Power Amplifier level</span></a>. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#group__PaLevel_1ga1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. See tables in <a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">setPaLevel()</span></a> </p>
+<dd><p>Fetches the current Power Amplifier Level. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24_8h_1a1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. See tables in <a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">setPaLevel()</span></a> </p>
 </dd>
 </dl>
 </p>

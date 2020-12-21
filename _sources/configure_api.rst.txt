@@ -2,15 +2,15 @@
 Configuration API
 -----------------
 
-PaLevel enum
+Power Amplifier Level enum
+***************************
+
+.. doxygenenum:: rf24_pa_dbm_e
+
+Data Rate enum
 ****************
 
-.. doxygengroup:: PaLevel
-
-Datarate enum
-****************
-
-.. doxygengroup:: Datarate
+.. doxygenenum:: rf24_datarate_e
 
 setDynamicPayloads()
 ******************************
