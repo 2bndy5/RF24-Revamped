@@ -378,7 +378,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -450,8 +450,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="n">setRole</span><span class="p">();</span> <span class="c1">// calls master() or slave() based on user input</span>
@@ -489,20 +488,21 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cm"> * make this node act as the transmitter</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">master</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                          <span class="c1">// put radio in TX mode</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span> <span class="c1">// put radio in TX mode</span>
 
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">failure</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                                       <span class="c1">// keep track of failures</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">failure</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                              <span class="c1">// keep track of failures</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">failure</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_MONOTONIC_RAW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">startTimer</span><span class="p">);</span>            <span class="c1">// start the timer</span>
-        <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>         <span class="c1">// transmit &amp; save the report</span>
-        <span class="kt">uint32_t</span> <span class="n">timerEllapsed</span> <span class="o">=</span> <span class="n">getMicros</span><span class="p">();</span>                       <span class="c1">// end the timer</span>
+        <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_MONOTONIC_RAW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">startTimer</span><span class="p">);</span>   <span class="c1">// start the timer</span>
+        <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span> <span class="c1">// transmit &amp; save the report</span>
+        <span class="kt">uint32_t</span> <span class="n">timerEllapsed</span> <span class="o">=</span> <span class="n">getMicros</span><span class="p">();</span>              <span class="c1">// end the timer</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// payload was delivered</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission successful! Time to transmit = &quot;</span><span class="p">;</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">timerEllapsed</span><span class="p">;</span>                                  <span class="c1">// print the timer result</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; us. Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>               <span class="c1">// print payload sent</span>
-            <span class="n">payload</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>                                        <span class="c1">// increment float payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission successful! &quot;</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Time to transmit = &quot;</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">timerEllapsed</span><span class="p">;</span>                    <span class="c1">// print the timer result</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; us. Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// print payload sent</span>
+            <span class="n">payload</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>                          <span class="c1">// increment float payload</span>
 
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
             <span class="c1">// payload was not delivered</span>
@@ -521,18 +521,18 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">slave</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                  <span class="c1">// put radio in RX mode</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// put radio in RX mode</span>
 
-    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                       <span class="c1">// start a timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
-        <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                     <span class="c1">// fetch payload from FIFO</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span> <span class="c1">// print the pipe number</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>                 <span class="c1">// print the payload&#39;s value</span>
-            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                      <span class="c1">// reset timer</span>
+    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>         <span class="c1">// start a timer</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// use 6 second timeout</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>               <span class="c1">// is there a payload?</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>  <span class="c1">// get the pipe number that recieved it</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>  <span class="c1">// get the size of the payload</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>       <span class="c1">// fetch payload from FIFO</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pipe</span><span class="p">;</span> <span class="c1">// print the pipe number</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// print the payload&#39;s value</span>
+            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>        <span class="c1">// reset timer</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Nothing received in 6 seconds. Leaving RX role.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -784,7 +784,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -864,8 +864,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="n">setRole</span><span class="p">();</span> <span class="c1">// calls master() or slave() based on user input</span>
@@ -920,16 +919,16 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>                                <span class="c1">// print outgoing message</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>                  <span class="c1">// print outgoing counter counter</span>
 
-            <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
+                <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>               <span class="c1">// grab the pipe number that received it</span>
+                <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>               <span class="c1">// get the size of the payload</span>
                 <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-                <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>          <span class="c1">// get incoming ACK payload</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Received &quot;</span><span class="p">;</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>            <span class="c1">// print incoming payload size</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>  <span class="c1">// print pipe that received it</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>                 <span class="c1">// print incoming message</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// print incoming counter</span>
-                <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>           <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
+                <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>        <span class="c1">// get incoming ACK payload</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bytes</span><span class="p">;</span>                  <span class="c1">// print incoming payload size</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pipe</span><span class="p">;</span>              <span class="c1">// print pipe that received it</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>               <span class="c1">// print incoming message</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// print incoming counter</span>
+                <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>         <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
             <span class="p">}</span> <span class="c1">// if got an ACK payload</span>
             <span class="k">else</span> <span class="p">{</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Received an empty ACK packet.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// ACK had no payload</span>
@@ -951,27 +950,28 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cm"> * make this node act as the receiver</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">slave</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                    <span class="c1">// set the payload message</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the payload message</span>
 
     <span class="c1">// load the payload for the first received transmission on pipe 0</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
 
-    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                  <span class="c1">// put radio in RX mode</span>
-    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                       <span class="c1">// start a timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
-        <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>   <span class="c1">// get the size of the payload</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                         <span class="c1">// put radio in RX mode</span>
+    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>              <span class="c1">// start a timer</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>        <span class="c1">// use 6 second timeout</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                    <span class="c1">// is there a payload?</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>       <span class="c1">// get the pipe number that recieved it</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>       <span class="c1">// get the size of the payload</span>
             <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>         <span class="c1">// fetch payload from RX FIFO</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span> <span class="c1">// print the pipe number</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// fetch payload from RX FIFO</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bytes</span><span class="p">;</span>            <span class="c1">// print the size of the payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pipe</span><span class="p">;</span>       <span class="c1">// print the pipe number</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>          <span class="c1">// print received payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>  <span class="c1">// print received payload</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Sent: &quot;</span><span class="p">;</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// print ACK payload sent</span>
-            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                      <span class="c1">// reset timer</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>   <span class="c1">// print ACK payload sent</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>              <span class="c1">// reset timer</span>
 
             <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
             <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -1251,11 +1251,13 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 259
 260
 261
-262</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
+262
+263
+264</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -1337,8 +1339,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="n">setRole</span><span class="p">();</span> <span class="c1">// calls master() or slave() based on user input</span>
@@ -1380,49 +1381,49 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;Hello &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// put in TX mode</span>
 
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">failures</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                                <span class="c1">// keep track of failures</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">failures</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                               <span class="c1">// keep track of failures</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_MONOTONIC_RAW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">startTimer</span><span class="p">);</span>      <span class="c1">// start the timer</span>
+        <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_MONOTONIC_RAW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">startTimer</span><span class="p">);</span>     <span class="c1">// start the timer</span>
         <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// transmit &amp; save the report</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// transmission successful; wait for response and print results</span>
 
-            <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                          <span class="c1">// put in RX mode</span>
-            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timeout</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>          <span class="c1">// timer to detect no response</span>
-            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                     <span class="c1">// wait for response</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timeout</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>          <span class="c1">// only wait 200 ms</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                   <span class="c1">// put in RX mode</span>
+            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timeout</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>   <span class="c1">// timer to detect no response</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>              <span class="c1">// wait for response</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timeout</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>   <span class="c1">// only wait 200 ms</span>
                     <span class="k">break</span><span class="p">;</span>
             <span class="p">}</span>
-            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">ellapsedTime</span> <span class="o">=</span> <span class="n">getMicros</span><span class="p">();</span>        <span class="c1">// end the timer</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                           <span class="c1">// put back in TX mode</span>
+            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">ellapsedTime</span> <span class="o">=</span> <span class="n">getMicros</span><span class="p">();</span> <span class="c1">// end the timer</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                    <span class="c1">// put back in TX mode</span>
 
             <span class="c1">// print summary of transactions</span>
-            <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission successful! &quot;</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload received? grab the pipe number that received it</span>
-                <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>      <span class="c1">// grab the incoming payload size</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                      <span class="c1">// is there a payload received?</span>
+                <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>         <span class="c1">// grab the pipe number that received it</span>
+                <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>         <span class="c1">// grab the incoming payload size</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Round trip delay = &quot;</span><span class="p">;</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ellapsedTime</span><span class="p">;</span>                        <span class="c1">// print the timer result</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; us. Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>    <span class="c1">// print outgoing message</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>       <span class="c1">// print outgoing counter</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ellapsedTime</span><span class="p">;</span>                     <span class="c1">// print the timer result</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; us. Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span> <span class="c1">// print outgoing message</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>    <span class="c1">// print outgoing counter</span>
                 <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-                <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>     <span class="c1">// get incoming payload</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Recieved &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span> <span class="c1">// print incoming payload size</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>   <span class="c1">// print RX pipe number</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>            <span class="c1">// print the incoming message</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>      <span class="c1">// print the incoming counter</span>
+                <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>  <span class="c1">// get incoming payload</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Recieved &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bytes</span><span class="p">;</span>            <span class="c1">// print incoming payload size</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pipe</span><span class="p">;</span>              <span class="c1">// print RX pipe number</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>         <span class="c1">// print the incoming message</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>   <span class="c1">// print the incoming counter</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-                <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>          <span class="c1">// save incoming counter for next outgoing counter</span>
+                <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>       <span class="c1">// save incoming counter for next outgoing counter</span>
             <span class="p">}</span>
             <span class="k">else</span> <span class="p">{</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Recieved no response.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>     <span class="c1">// no response received</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Recieved no response.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// no response received</span>
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="k">else</span> <span class="p">{</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">;</span>      <span class="c1">// payload was not delivered</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">;</span> <span class="c1">// payload was not delivered</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-            <span class="n">failures</span><span class="o">++</span><span class="p">;</span>                                      <span class="c1">// increment failure counter</span>
+            <span class="n">failures</span><span class="o">++</span><span class="p">;</span>                                 <span class="c1">// increment failure counter</span>
         <span class="p">}</span> <span class="c1">// report</span>
 
         <span class="c1">// to make this example readable in the terminal</span>
@@ -1437,43 +1438,46 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cm"> * make this node act as the receiver</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">slave</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                    <span class="c1">// set the response message</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                  <span class="c1">// put in RX mode</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the response message</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>               <span class="c1">// put in RX mode</span>
 
-    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                       <span class="c1">// start a timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// use 6 second timeout</span>
-        <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                        <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>          <span class="c1">// get size of incoming payload</span>
+    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>               <span class="c1">// start a timer</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>         <span class="c1">// use 6 second timeout</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                     <span class="c1">// is there a payload?</span>
+            <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>             <span class="c1">// get the pipe number that recieved it</span>
+            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>             <span class="c1">// get size of incoming payload</span>
             <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>         <span class="c1">// get incoming payload</span>
-            <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>          <span class="c1">// increment payload for response</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get incoming payload</span>
+            <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// increment payload for response</span>
 
             <span class="c1">// transmit response &amp; save result to `report`</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                           <span class="c1">// put in TX mode</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                               <span class="c1">// put in TX mode</span>
             <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_response</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
             <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// send response</span>
             <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">report</span> <span class="o">&amp;&amp;</span> <span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_response</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>
+                <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>                         <span class="c1">// retry for 200 ms</span>
             <span class="p">}</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                          <span class="c1">// put back in RX mode</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                              <span class="c1">// put back in RX mode</span>
 
             <span class="c1">// print summary of transactions</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>      <span class="c1">// print the size of the payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span> <span class="c1">// print the size of the payload</span>
             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span><span class="p">;</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>                      <span class="c1">// print the pipe number</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>                <span class="c1">// print incoming message</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>          <span class="c1">// print incoming counter</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>                 <span class="c1">// print the pipe number</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>           <span class="c1">// print incoming message</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>     <span class="c1">// print incoming counter</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>        <span class="c1">// print outgoing message</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>       <span class="c1">// print outgoing counter</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>  <span class="c1">// print outgoing message</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span> <span class="c1">// print outgoing counter</span>
                 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
             <span class="p">}</span>
+
             <span class="k">else</span> <span class="p">{</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Response failed to send.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// failed to send response</span>
+                <span class="c1">// failed to send response</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Response failed to send.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
             <span class="p">}</span>
-            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                      <span class="c1">// reset timer</span>
+
+            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span> <span class="c1">// reset timer</span>
         <span class="p">}</span> <span class="c1">// available</span>
     <span class="p">}</span> <span class="c1">// while</span>
 
@@ -1767,7 +1771,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -1874,8 +1878,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">foundArgNode</span><span class="p">)</span> <span class="p">{</span>
@@ -1971,19 +1974,20 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 
-    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                        <span class="c1">// put radio in RX mode</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// put radio in RX mode</span>
 
-    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                             <span class="c1">// start a timer</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>                       <span class="c1">// use 6 second timeout</span>
-        <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                              <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-            <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>                <span class="c1">// get the size of the payload</span>
-            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                           <span class="c1">// fetch payload from FIFO</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">bytes</span><span class="p">;</span>            <span class="c1">// print the size of the payload</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">pipe</span><span class="p">;</span>       <span class="c1">// print the pipe number</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; from node &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">;</span>               <span class="c1">// print the payload&#39;s origin</span>
-            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;. PayloadID: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// print the payload&#39;s number</span>
-            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                            <span class="c1">// reset timer</span>
+    <span class="kt">time_t</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                    <span class="c1">// start a timer</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="o">-</span> <span class="n">startTimer</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// use 6 second timeout</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                          <span class="c1">// is there a payload?</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>             <span class="c1">// get the pipe number that recieved it</span>
+            <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>             <span class="c1">// get the size of the payload</span>
+            <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                  <span class="c1">// fetch payload from FIFO</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Received &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bytes</span><span class="p">;</span>                 <span class="c1">// print the size of the payload</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; bytes on pipe &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pipe</span><span class="p">;</span>            <span class="c1">// print the pipe number</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; from node &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">;</span>      <span class="c1">// print the payload&#39;s origin</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;. PayloadID: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">;</span> <span class="c1">// print the payload&#39;s number</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">startTimer</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>                   <span class="c1">// reset timer</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Nothing received in 6 seconds. Leaving RX role.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -2315,14 +2319,13 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 294
 295
 296
-297
-298</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">       // abs()</span><span class="cp"></span>
+297</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">       // abs()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="c1">     // strcmp()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay()</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -2455,8 +2458,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">foundArgRole</span><span class="p">)</span> <span class="p">{</span>           <span class="c1">// if CLI arg &quot;-r&quot;/&quot;--role&quot; was not specified</span>
@@ -2914,12 +2916,11 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 314
 315
 316
-317
-318</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
+317</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24/RF24.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="c1"> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -3005,8 +3006,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-    <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+    <span class="c1">// radio.printDetails();</span>
 
     <span class="c1">// setup the digital input pin connected to the nRF24L01&#39;s IRQ pin</span>
     <span class="n">pinMode</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>

@@ -507,7 +507,7 @@ during an ISR (Interrupt Service Routine).</p>
 <p>For example:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span> <span class="c1">// resets the IRQ pin to HIGH</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">();</span>                           <span class="c1">// returned data should now be reliable</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">();</span>        <span class="c1">// returned data should now be reliable</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
@@ -519,87 +519,13 @@ during an ISR (Interrupt Service Routine).</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ace7dd139fabc16b77cb8325faa07620f"><span class="std std-ref">available(uint8_t*)</span></a> </p>
+<dt><strong>See</strong></dt><dd><p>available(uint8_t*) </p>
 </dd>
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p>true if there is a payload available in the RX FIFO buffers</p></li>
 <li><p>false if there is no payload available in the RX FIFO buffers</p></li>
 </ul>
 </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N4RF249availableEP7uint8_t">
-<span id="_CPPv3N4RF249availableEP7uint8_t"></span><span id="_CPPv2N4RF249availableEP7uint8_t"></span><span id="RF24::available__uint8_tP"></span><span class="target" id="classRF24_1ace7dd139fabc16b77cb8325faa07620f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">available</code><span class="sig-paren">(</span>uint8_t *<em>pipe_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF249availableEP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Test whether there are bytes available to be read from the FIFO buffers.</p>
-<p> <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function is named <code class="docutils literal notranslate"><span class="pre">available_pipe()</span></code> in the python wrapper.
-Additionally, the <code class="docutils literal notranslate"><span class="pre">available_pipe()</span></code> function (which
-takes no arguments) returns a 2 item tuple containing (ordered by
-tuple’s indices):</p>
-<ul class="simple">
-<li><p>A boolean describing if there is a payload available to read from
-the RX FIFO buffers.</p></li>
-<li><p>The pipe number that received the next available payload in the RX
-FIFO buffers. If the item at the tuple’s index 0 is <cite>False</cite>, then
-this pipe number is invalid.</p></li>
-</ul>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To use this function in python:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instatiated RF24 object</span>
-<span class="n">has_payload</span><span class="p">,</span> <span class="n">pipe_number</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">available_pipe</span><span class="p">()</span>  <span class="c1"># expand the tuple to 2 variables</span>
-<span class="k">if</span> <span class="n">has_payload</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Received a payload with pipe&quot;</span><span class="p">,</span> <span class="n">pipe_number</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</p>
-</p>
-<p><dl class="simple">
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a payload available in the top (first out) level RX FIFO.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if there is nothing available in the RX FIFO because it is empty. </p></li>
-</ul>
-</p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">pipe_num</span></code>: Which pipe has the payload available  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">pipeNum</span><span class="p">;</span>
-<span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipeNum</span><span class="p">)){</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Received data on pipe &quot;</span><span class="p">);</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">pipeNum</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>According to the datasheet, the data saved to the <code class="docutils literal notranslate"><span class="pre">pipe_num</span></code>
-parameter is “unreliable” during a FALLING transition on the IRQ pin.
-This means you should call <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416clearStatusFlagsEbbb" title="RF24::clearStatusFlags"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">clearStatusFlags()</span></code></a> before calling this
-function during an ISR (Interrupt Service Routine).</p>
-</div>
-<p>For example:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span> <span class="c1">// resets the IRQ pin to HIGH</span>
-  <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>             <span class="c1">// initialize pipe data</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">);</span>   <span class="c1">// pipe data should now be reliable</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">pinMode</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
-  <span class="n">attachInterrupt</span><span class="p">(</span><span class="n">digitalPinToInterrupt</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">),</span> <span class="n">isrCallbackFunction</span><span class="p">,</span> <span class="n">FALLING</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</p></li>
-</ul>
 </dd>
 </dl>
 </p>
@@ -612,57 +538,35 @@ function during an ISR (Interrupt Service Routine).</p>
 <dt id="_CPPv4N4RF244readEPv7uint8_t">
 <span id="_CPPv3N4RF244readEPv7uint8_t"></span><span id="_CPPv2N4RF244readEPv7uint8_t"></span><span id="RF24::read__voidP.uint8_t"></span><span class="target" id="classRF24_1a8e2eacacfba96426c192066f04054c5b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">read</code><span class="sig-paren">(</span>void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244readEPv7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Read payload data from the RX FIFO buffer(s).</p>
-<p>The length of data read is usually the next available payload’s length <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To use this function in the python wrapper, remember that
-only the <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter is required because this function (in the
-python wrapper) returns the payload data as a buffer protocol object
-(bytearray object).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="k">if</span> <span class="n">radio</span><span class="o">.</span><span class="n">available</span><span class="p">():</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="n">received_payload</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</p>
-<dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>, getDynamicPayloadSize(), <a class="reference internal" href="#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a><p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">void*</span></code> was chosen specifically as a data type to make it easier
-for beginners to use (no casting needed).</p>
-</div>
-</p>
-</p>
+<p>The length of data read is usually the next available payload’s length <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
 </dd>
-<dt><strong>Remark</strong></dt><dd><p>Remember that each call to <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a> fetches data from the RX FIFO beginning with the first byte from the first available payload. A payload is not removed from the RX FIFO until it’s entire length (or more) is fetched using <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a>.<ul class="simple">
-<li><p>If <em>len</em> parameter’s value is less than the available payload’s length, then the payload remains in the RX FIFO.</p></li>
-<li><p>If <em>len</em> parameter’s value is greater than the first of multiple available payloads, then the data saved to the <em>buf</em> parameter’s object will be supplemented with data from the next available payload.</p></li>
-<li><p>If <em>len</em> parameter’s value is greater than the last available payload’s length, then the last byte in the payload is used as padding for the data saved to the <em>buf</em> parameter’s object. The nRF24L01 will repeatedly use the last byte from the last payload even when <a class="reference internal" href="#classRF24_1a8e2eacacfba96426c192066f04054c5b"><span class="std std-ref">read()</span></a> is called with an empty RX FIFO.</p></li>
-</ul>
-</p>
+<dt><strong>Return</strong></dt><dd><p>No return value. Use <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a>. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">buf</span></code>: Pointer to a buffer where the data should be written </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Maximum number of bytes to read into the buffer. This value should match the length of the object referenced using the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter. The absolute maximum number of bytes that can be read in one call is 32 (for dynamic payload lengths) or whatever number was previously passed to <a class="reference internal" href="configure_api.html#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength()</span></a> (for static payload lengths). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">buf</span></code>: Pointer to a buffer where the data should be written <code class="docutils literal notranslate"><span class="pre">void*</span></code> was chosen specifically as a data type to make it easier for beginners to use (no casting needed). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Maximum number of bytes to read into the buffer. This value should match the length of the object referenced using the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter. The absolute maximum number of bytes that can be read in one call is 32 (for dynamic payload lengths) or whatever number was previously passed to <a class="reference internal" href="configure_api.html#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength()</span></a> (for static payload lengths).  <p><p>Remember that each call to <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint8_t" title="RF24::read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">read()</span></code></a> fetches data from the
+RX FIFO beginning with the first byte from the first available
+payload. A payload is not removed from the RX FIFO until it’s
+entire length (or more) is fetched using read().</p>
+<blockquote>
+<div><ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter’s value is less than the available payload’s
+length, then the payload remains in the RX FIFO.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter’s value is greater than the first of multiple
+available payloads, then the data saved to the <code class="docutils literal notranslate"><span class="pre">buf</span></code>
+parameter’s object will be supplemented with data from the next
+available payload.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter’s value is greater than the last available
+payload’s length, then the last byte in the payload is used as
+padding for the data saved to the <code class="docutils literal notranslate"><span class="pre">buf</span></code> parameter’s object.
+The nRF24L01 will repeatedly use the last byte from the last
+payload even when read() is called with an empty RX FIFO.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </p>
-<p><dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>No return value. Use <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a>.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function no longer returns a boolean. Use available to
-determine if packets are available. The <a class="reference internal" href="advanced_api.html#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a> Interrupt flag is
-cleared with this function.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</p>
- </p>
+ </p></li>
+</ul>
 </dd>
 </dl>
 </p>
@@ -702,7 +606,7 @@ wrapper because the length of the payload is determined automatically.</p>
 </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">buf</span></code>: Pointer to the data to be sent </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: Number of bytes to be sent</p></li>
 </ul>
 </dd>

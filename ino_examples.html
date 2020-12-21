@@ -336,10 +336,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 150
 151
 152
-153
-154</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+153</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
@@ -413,9 +412,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span> <span class="c1">// setup</span>
 
@@ -445,16 +443,16 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// This device is a RX node</span>
 
-    <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>                   <span class="c1">// fetch payload from FIFO</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>              <span class="c1">// is there a payload?</span>
+      <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>        <span class="c1">// grab the pipe number that received it</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>        <span class="c1">// get the size of the payload</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>        <span class="c1">// fetch payload from FIFO</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                           <span class="c1">// print the size of the payload</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                <span class="c1">// print the size of the payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                            <span class="c1">// print the pipe number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>                       <span class="c1">// print the payload&#39;s value</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>            <span class="c1">// print the payload&#39;s value</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 
@@ -686,7 +684,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 207
 208</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
@@ -778,9 +776,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span>
 
@@ -789,34 +786,35 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// This device is a TX node</span>
 
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                    <span class="c1">// start the timer</span>
-    <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>    <span class="c1">// transmit &amp; save the report</span>
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                      <span class="c1">// end the timer</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                <span class="c1">// start the timer</span>
+    <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// transmit &amp; save the report</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                  <span class="c1">// end the timer</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful! &quot;</span><span class="p">));</span>          <span class="c1">// payload was delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful! &quot;</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Time to transmit = &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>                 <span class="c1">// print the timer result</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>        <span class="c1">// print the timer result</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us. Sent: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                         <span class="c1">// print the outgoing message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                         <span class="c1">// print the outgoing counter</span>
-      <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                          <span class="c1">// is there an ACK payload? grab the pipe number that received it</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                <span class="c1">// print the outgoing message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                <span class="c1">// print the outgoing counter</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                      <span class="c1">// is there an ACK payload?</span>
+        <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>                <span class="c1">// get the pipe number that received it</span>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>             <span class="c1">// get incoming ACK payload</span>
+        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>    <span class="c1">// get incoming ACK payload</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>         <span class="c1">// print incoming payload size</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                  <span class="c1">// print incoming payload size</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                                  <span class="c1">// print pipe number that received the ACK</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                         <span class="c1">// print pipe number that received the ACK</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                      <span class="c1">// print incoming message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                    <span class="c1">// print incoming counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>             <span class="c1">// print incoming message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>           <span class="c1">// print incoming counter</span>
 
         <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
         <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved: an empty ACK packet&quot;</span><span class="p">));</span> <span class="c1">// empty ACK packet received</span>
+        <span class="c1">// empty ACK packet received</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved: an empty ACK packet&quot;</span><span class="p">));</span>
       <span class="p">}</span>
 
 
@@ -830,21 +828,21 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// This device is a RX node</span>
 
-    <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                    <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                   <span class="c1">// is there a payload?</span>
+      <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>             <span class="c1">// grab the pipe number that received it</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>             <span class="c1">// get the size of the payload</span>
       <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>       <span class="c1">// get incoming payload</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get incoming payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                           <span class="c1">// print the size of the payload</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                     <span class="c1">// print the size of the payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                            <span class="c1">// print the pipe number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                      <span class="c1">// print the pipe number</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                <span class="c1">// print incoming message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                <span class="c1">// print incoming counter</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>          <span class="c1">// print incoming message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print incoming counter</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Sent: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                 <span class="c1">// print outgoing message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>               <span class="c1">// print outgoing counter</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>           <span class="c1">// print outgoing message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>         <span class="c1">// print outgoing counter</span>
 
       <span class="c1">// save incoming counter &amp; increment for next outgoing</span>
       <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -1092,9 +1090,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
 218
 219
 220
-221</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+221
+222
+223
+224</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
@@ -1181,9 +1182,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span> <span class="c1">// setup()</span>
 
@@ -1208,29 +1208,33 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                 <span class="c1">// put back in TX mode</span>
 
       <span class="c1">// print summary of transactions</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful!&quot;</span><span class="p">));</span>           <span class="c1">// payload was delivered</span>
-      <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>                          <span class="c1">// is there a payload received</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful!&quot;</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                     <span class="c1">// is there a payload received</span>
+        <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>               <span class="c1">// grab the pipe number that received it</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Round-trip delay: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>               <span class="c1">// print the timer result</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>     <span class="c1">// print the timer result</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us. Sent: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                       <span class="c1">// print the outgoing payload&#39;s message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                       <span class="c1">// print outgoing payload&#39;s counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>             <span class="c1">// print the outgoing payload&#39;s message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>             <span class="c1">// print outgoing payload&#39;s counter</span>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>             <span class="c1">// get payload from RX FIFO</span>
+        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>   <span class="c1">// get payload from RX FIFO</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Received &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                <span class="c1">// print the size of the payload</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                 <span class="c1">// print the size of the payload</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                                  <span class="c1">// print the pipe number</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                        <span class="c1">// print the pipe number</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                      <span class="c1">// print the incoming payload&#39;s message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                    <span class="c1">// print the incoming payload&#39;s counter</span>
-        <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>                  <span class="c1">// save incoming counter for next outgoing counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>            <span class="c1">// print the incoming payload&#39;s message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print the incoming payload&#39;s counter</span>
+        <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>        <span class="c1">// save incoming counter for next outgoing counter</span>
+
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved no response.&quot;</span><span class="p">));</span>         <span class="c1">// no response received</span>
+        <span class="c1">// no response received</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved no response.&quot;</span><span class="p">));</span>
       <span class="p">}</span>
+
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span> <span class="c1">// payload was not delivered</span>
+      <span class="c1">// payload was not delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span>
     <span class="p">}</span> <span class="c1">// report</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
@@ -1239,36 +1243,36 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// This device is a RX node</span>
 
-    <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>              <span class="c1">// is there a payload? get the pipe number that recieved it</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                   <span class="c1">// is there a payload?</span>
+      <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>             <span class="c1">// grab the pipe number that received it</span>
       <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get incoming payload</span>
       <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// increment incoming counter for next outgoing response</span>
 
       <span class="c1">// transmit response &amp; save result to `report`</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                   <span class="c1">// put in TX mode</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                <span class="c1">// put in TX mode</span>
       <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_response</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
       <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>  <span class="c1">// send response</span>
       <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">report</span> <span class="o">&amp;&amp;</span> <span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_response</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">resend</span><span class="p">();</span>                            <span class="c1">// retry for 200 ms</span>
       <span class="p">}</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                  <span class="c1">// put back in RX mode</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                               <span class="c1">// put back in RX mode</span>
 
       <span class="c1">// print summary of transactions</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>    <span class="c1">// print the size of the payload</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>          <span class="c1">// print the size of the payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                      <span class="c1">// print the pipe number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>          <span class="c1">// print incoming message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print incoming counter</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>     <span class="c1">// print incoming message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>     <span class="c1">// print incoming counter</span>
 
       <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Sent: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>         <span class="c1">// print outgoing message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>       <span class="c1">// print outgoing counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>       <span class="c1">// print outgoing message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>     <span class="c1">// print outgoing counter</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot; Response failed.&quot;</span><span class="p">);</span>   <span class="c1">// failed to send response</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot; Response failed.&quot;</span><span class="p">);</span> <span class="c1">// failed to send response</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
@@ -1486,10 +1490,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 194
 195
 196
-197
-198</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+197</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
@@ -1562,9 +1565,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="n">setRole</span><span class="p">();</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span> <span class="c1">// setup()</span>
 
@@ -1599,18 +1601,18 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// This device is the RX node</span>
 
-    <span class="kt">uint8_t</span> <span class="n">pipe</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pipe</span><span class="p">))</span> <span class="p">{</span>             <span class="c1">// is there a payload? get the pipe number that recieved it</span>
-      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span> <span class="c1">// get the size of the payload</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>            <span class="c1">// fetch payload from FIFO</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>              <span class="c1">// is there a payload?</span>
+      <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>        <span class="c1">// grab the pipe number that received it</span>
+      <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>        <span class="c1">// get the size of the payload</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>        <span class="c1">// fetch payload from FIFO</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                    <span class="c1">// print the size of the payload</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                <span class="c1">// print the size of the payload</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                     <span class="c1">// print the pipe number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; from node &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">);</span>           <span class="c1">// print the payload&#39;s origin</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">);</span>       <span class="c1">// print the payload&#39;s origin</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;. PayloadID: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">);</span>      <span class="c1">// print the payload&#39;s number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">);</span>  <span class="c1">// print the payload&#39;s number</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 
@@ -1859,10 +1861,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 188
 189
 190
-191
-192</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+191</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
@@ -1942,9 +1943,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span> <span class="c1">// setup()</span>
 
@@ -2379,10 +2379,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 341
 342
 343
-344
-345</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+344</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
 
 <span class="c1">// We will be using the nRF24L01&#39;s IRQ pin for this example</span>
 <span class="cp">#define IRQ_PIN 2 </span><span class="c1">// this needs to be a digital input capable pin</span>
@@ -2495,9 +2494,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span>
 
   <span class="c1">// For debugging info</span>
-  <span class="c1">// printf_begin();             // needed only once for printing details</span>
-  <span class="c1">// radio.printDetails();       // (smaller) function that prints raw register values</span>
-  <span class="c1">// radio.printPrettyDetails(); // (larger) function that prints human readable data</span>
+  <span class="c1">// printf_begin();       // needed only once for printing details</span>
+  <span class="c1">// radio.printDetails();</span>
 
 <span class="p">}</span>
 

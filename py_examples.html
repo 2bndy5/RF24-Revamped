@@ -401,10 +401,7 @@ To run this example, enter</p>
 197
 198
 199
-200
-201
-202
-203</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+200</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
@@ -586,11 +583,8 @@ To run this example, enter</p>
     <span class="c1"># struct.pack(); &quot;&lt;f&quot; means a little endian unsigned float</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;f&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># (smaller) function that prints raw register values</span>
+    <span class="c1"># for debugging</span>
     <span class="c1"># radio.printDetails()</span>
-    <span class="c1"># (larger) function that prints human readable data</span>
-    <span class="c1"># radio.printPrettyDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-r&#39;</span>
@@ -852,10 +846,7 @@ To run this example, enter</p>
 232
 233
 234
-235
-236
-237
-238</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+235</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">RF24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span>
@@ -1070,11 +1061,8 @@ To run this example, enter</p>
     <span class="c1"># set the RX address of the TX node into a RX pipe</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="ow">not</span> <span class="n">radio_number</span><span class="p">])</span>  <span class="c1"># using pipe 1</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># (smaller) function that prints raw register values</span>
+    <span class="c1"># for debugging</span>
     <span class="c1"># radio.printDetails()</span>
-    <span class="c1"># (larger) function that prints human readable data</span>
-    <span class="c1"># radio.printPrettyDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-r&#39;</span>
@@ -1340,10 +1328,7 @@ To run this example, enter</p>
 241
 242
 243
-244
-245
-246
-247</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+244</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
@@ -1562,11 +1547,8 @@ To run this example, enter</p>
     <span class="c1"># payload counter and 7 bytes for the payload message</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span> <span class="o">=</span> <span class="mi">8</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># (smaller) function that prints raw register values</span>
+    <span class="c1"># for debugging</span>
     <span class="c1"># radio.printDetails()</span>
-    <span class="c1"># (larger) function that prints human readable data</span>
-    <span class="c1"># radio.printPrettyDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-r&#39;</span>
@@ -1779,8 +1761,7 @@ To run this example, enter</p>
 186
 187
 188
-189
-190</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+189</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">struct</span>
@@ -1944,9 +1925,8 @@ To run this example, enter</p>
     <span class="c1"># &quot;&lt;ii&quot; means 2x little endian unsigned int</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;ii&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># radio.printDetails();  # (smaller) function that prints raw register values</span>
-    <span class="c1"># radio.printPrettyDetails();  # (larger) function that prints human readable data</span>
+    <span class="c1"># for debugging</span>
+    <span class="c1"># radio.printDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-n&#39;</span>
@@ -2201,10 +2181,7 @@ To run this example, enter</p>
 221
 222
 223
-224
-225
-226
-227</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+224</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">RF24</span> <span class="kn">import</span> <span class="n">RF24</span><span class="p">,</span> <span class="n">RF24_PA_LOW</span>
@@ -2409,11 +2386,8 @@ To run this example, enter</p>
     <span class="c1"># what we need. For this example, we&#39;ll be using the default maximum 32</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span> <span class="o">=</span> <span class="n">SIZE</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># (smaller) function that prints raw register values</span>
+    <span class="c1"># for debugging</span>
     <span class="c1"># radio.printDetails()</span>
-    <span class="c1"># (larger) function that prints human readable data</span>
-    <span class="c1"># radio.printPrettyDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-r&#39;</span>
@@ -2734,10 +2708,7 @@ To run this example, enter</p>
 293
 294
 295
-296
-297
-298
-299</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+296</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
@@ -3011,11 +2982,8 @@ To run this example, enter</p>
     <span class="c1"># set the RX address of the TX node into a RX pipe</span>
     <span class="n">radio</span><span class="o">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="ow">not</span> <span class="n">radio_number</span><span class="p">])</span>  <span class="c1"># using pipe 1</span>
 
-    <span class="c1"># for debugging, we have 2 options that print a large block of details</span>
-    <span class="c1"># (smaller) function that prints raw register values</span>
+    <span class="c1"># for debugging</span>
     <span class="c1"># radio.printDetails()</span>
-    <span class="c1"># (larger) function that prints human readable data</span>
-    <span class="c1"># radio.printPrettyDetails()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">role</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if not specified with CLI arg &#39;-r&#39;</span>
