@@ -15,7 +15,7 @@ Datarate enum
 setDynamicPayloads()
 ******************************
 
-Unilateral pipe control of Dynamic Payloads
+Unary pipe control of Dynamic Payloads
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. doxygenfunction:: setDynamicPayloads(bool)
@@ -23,7 +23,7 @@ Unilateral pipe control of Dynamic Payloads
 Binary pipe control of Dynamic Payloads
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: setDynamicPayloads(uint8_t)
+.. doxygenfunction:: setDynamicPayloadsBin(uint8_t)
 
 Individual pipe control of Dynamic Payloads
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,7 +52,28 @@ getPayloadLength()
 setAutoAck()
 ******************************
 
-Unilateral pipe control of AutoAck
+Auto-acknowledgement responds to every recieved payload with an empty
+ACK packet. These ACK packets get sent from the receiving radio back
+to the transmitting radio. To attach an ACK payload to a ACK packet,
+use :func:`writeAck()`.
+
+Pipe 0 is used for TX operations, which include sending ACK packets. If
+using this feature on both TX & RX nodes, then pipe 0 must have this
+feature enabled for the RX & TX operations. If this feature is disabled
+on a transmitting radio's pipe 0, then the transmitting radio will
+always report that the payload was recieved (even if it was not).
+Remember to also enable this feature for any pipe that is openly
+listening to a transmitting radio with this feature enabled.
+
+.. warning:: If this feature is enabled for pipe 0, then the ``multicast``
+    parameter to :func:`send()` can be used to disable this feature for an
+    individual payload. However, if this feature is disabled for pipe 0,
+    then the ``multicast`` parameter will have no effect.
+.. note:: If disabling auto-acknowledgment packets on pipe 0, the ACK
+    payloads feature is also disabled as this feature is required on pipe 0
+    to send ACK payloads.
+
+Unary pipe control of AutoAck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. doxygenfunction:: setAutoAck(bool)
@@ -60,7 +81,7 @@ Unilateral pipe control of AutoAck
 Binary pipe control of AutoAck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: setAutoAck(uint8_t)
+.. doxygenfunction:: setAutoAckBin(uint8_t)
 
 Individual pipe control of AutoAck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
