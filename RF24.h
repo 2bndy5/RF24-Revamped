@@ -1143,7 +1143,7 @@ public:
      * enables the feature for the corresponding pipe; a low bit (`0`) disables the feature
      * for the corresponding pipe.
      */
-    void setDynamicPayloads(uint8_t binary_enable);
+    void setDynamicPayloadsBin(uint8_t binary_enable);
 
     /**
      * Enable or disable dynamically sized payloads for a specific pipe.
@@ -1212,24 +1212,7 @@ public:
 
     /**
      * Enable or disable the auto-acknowledgement feature for all pipes. This
-     * feature is enabled by default. Auto-acknowledgement responds to every
-     * recieved payload with an empty ACK packet. These ACK packets get sent
-     * from the receiving radio back to the transmitting radio. To attach an
-     * ACK payload to a ACK packet, use writeAck().
-     *
-     * If this feature is disabled on a transmitting radio, then the
-     * transmitting radio will always report that the payload was recieved
-     * (even if it was not). Please remember that this feature's configuration
-     * needs to match for transmitting and receiving radios.
-     * @rst
-     * .. warning:: When using the ``multicast`` parameter to :func:`send()`, this
-     *     feature can be disabled for an individual payload. However, if this feature
-     *     is disabled, then the ``multicast`` parameter will have no effect.
-     *
-     * .. note:: If disabling auto-acknowledgment packets, the ACK payloads
-     *     feature is also disabled as this feature is required to send ACK
-     *     payloads.
-     * @endrst
+     * feature is enabled by default.
      * @param enable Whether to enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for all pipes
      */
@@ -1237,60 +1220,17 @@ public:
 
     /**
      * Enable or disable the auto-acknowledgement feature for a specific pipe.
-     * This feature is enabled by default for all pipes. Auto-acknowledgement
-     * responds to every recieved payload with an empty ACK packet. These ACK
-     * packets get sent from the receiving radio back to the transmitting
-     * radio. To attach an ACK payload to a ACK packet, use writeAck().
-     *
-     * Pipe 0 is used for TX operations, which include sending ACK packets. If
-     * using this feature on both TX & RX nodes, then pipe 0 must have this
-     * feature enabled for the RX & TX operations. If this feature is disabled
-     * on a transmitting radio's pipe 0, then the transmitting radio will
-     * always report that the payload was recieved (even if it was not).
-     * Remember to also enable this feature for any pipe that is openly
-     * listening to a transmitting radio with this feature enabled.
-     *
-     * @rst
-     * .. warning:: If this feature is enabled for pipe 0, then the ``multicast``
-     *     parameter to :func:`send()` can be used to disable this feature for an
-     *     individual payload. However, if this feature is disabled for pipe 0,
-     *     then the ``multicast`` parameter will have no effect.
-     * .. note:: If disabling auto-acknowledgment packets on pipe 0, the ACK
-     *     payloads feature is also disabled as this feature is required on pipe 0
-     *     to send ACK payloads.
-     * @endrst
+     * This feature is enabled by default for all pipes.
      * @param binary_enable A binary integer to control the auto-acknowledgement feature
      * for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (`1`)
      * enables the feature for the corresponding pipe; a low bit (`0`) disables the feature
      * for the corresponding pipe.
      */
-    void setAutoAck(uint8_t binary_enable);
+    void setAutoAckBin(uint8_t binary_enable);
 
     /**
      * Enable or disable the auto-acknowledgement feature for a specific pipe.
-     * This feature is enabled by default for all pipes. Auto-acknowledgement
-     * responds to every recieved payload with an empty ACK packet. These ACK
-     * packets get sent from the receiving radio back to the transmitting
-     * radio. To attach an ACK payload to a ACK packet, use writeAck().
-     *
-     * Pipe 0 is used for TX operations, which include sending ACK packets. If
-     * using this feature on both TX & RX nodes, then pipe 0 must have this
-     * feature enabled for the RX & TX operations. If this feature is disabled
-     * on a transmitting radio's pipe 0, then the transmitting radio will
-     * always report that the payload was recieved (even if it was not).
-     * Remember to also enable this feature for any pipe that is openly
-     * listening to a transmitting radio with this feature enabled.
-     *
-     * @rst
-     * .. warning:: If this feature is enabled for pipe 0, then the ``multicast``
-     *     parameter to :func:`send()` can be used to disable this feature for an
-     *     individual payload. However, if this feature is disabled for pipe 0,
-     *     then the ``multicast`` parameter will have no effect.
-     * .. note:: If disabling auto-acknowledgment packets on pipe 0, the ACK
-     *     payloads feature is also disabled as this feature is required on pipe 0
-     *     to send ACK payloads.
-     * @endrst
-     * @see send(), write(), writeAck(), enableAckPayload(), disableAckPayload()
+     * This feature is enabled by default for all pipes.
      * @param enable Whether to enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for the specified pipe
      * @param pipe Which pipe to configure. This number should be in range [0, 5].

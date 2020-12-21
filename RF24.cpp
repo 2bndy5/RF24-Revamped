@@ -1164,21 +1164,21 @@ void RF24::toggle_features(void)
 
 /****************************************************************************/
 
-void RF24::setDynamicPayloads(bool enable)
+void RF24::setDynamicPayloads(const bool enable)
 {
-    setDynamicPayloads(enable ? 0x3F : 0);
+    setDynamicPayloadsBin(enable ? 0x3F : 0);
 }
 
 /****************************************************************************/
 
-void RF24::setDynamicPayloads(uint8_t binary_enable)
+void RF24::setDynamicPayloadsBin(uint8_t binary_enable)
 {
     // Enable/Disable dynamic payloads on all pipes
     feature_reg = read_register(FEATURE) & ~_BV(EN_DPL);
     feature_reg |= (bool)binary_enable ? _BV(EN_DPL) : 0;
     write_register(FEATURE, feature_reg);
 
-    dyn_pl_enabled = binary_enable & 0x3F;
+    dyn_pl_enabled = (uint8_t)binary_enable & 0x3F;
     write_register(DYNPD, dyn_pl_enabled);
 
     auto_ack_enabled = read_register(EN_AA);
@@ -1197,7 +1197,7 @@ void RF24::setDynamicPayloads(bool enable, uint8_t pipe)
         // Enable/Disable dynamic payloads on per pipe
         dyn_pl_enabled = read_register(DYNPD) & ~_BV(pipe);
         dyn_pl_enabled |= enable ? _BV(pipe) : 0;
-        setDynamicPayloads(dyn_pl_enabled);
+        setDynamicPayloadsBin(dyn_pl_enabled);
     }
 }
 
@@ -1292,9 +1292,9 @@ bool RF24::isPVariant(void)
 
 /****************************************************************************/
 
-void RF24::setAutoAck(bool enable)
+void RF24::setAutoAck(const bool enable)
 {
-    setAutoAck(enable ? 0x3F : 0);
+    setAutoAckBin(enable ? 0x3F : 0);
 }
 
 /****************************************************************************/
@@ -1304,15 +1304,15 @@ void RF24::setAutoAck(bool enable, uint8_t pipe)
     if (pipe < 6) {
         auto_ack_enabled = read_register(EN_AA) & ~_BV(pipe);
         auto_ack_enabled |= enable ? _BV(pipe) : 0;
-        setAutoAck(auto_ack_enabled);
+        setAutoAckBin(auto_ack_enabled);
     }
 }
 
 /****************************************************************************/
 
-void RF24::setAutoAck(uint8_t binary_enable)
+void RF24::setAutoAckBin(uint8_t binary_enable)
 {
-    auto_ack_enabled = binary_enable & 0x3F;
+    auto_ack_enabled = (uint8_t)binary_enable & 0x3F;
     dyn_pl_enabled = read_register(DYNPD);
     feature_reg = read_register(FEATURE);
     if (~auto_ack_enabled & dyn_pl_enabled) {

@@ -115,7 +115,7 @@ void loop() {
         makePayload(i);                           // make the payload
       }
       radio.ce(true);
-      while(!radio.isFifo(true, true)) {
+      while (!radio.isFifo(true, true)) {
         if (radio.irqDf()) {
           failures++;
           radio.ce(false);
