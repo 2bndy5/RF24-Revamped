@@ -25,11 +25,9 @@
 
 
 /**
- * @defgroup PaLevel Power Amplifier level
  * Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>)
  * represents a logarithmic signal loss.
  * @see RF24::setPaLevel(), RF24::getPaLevel()
- * @{
  */
 typedef enum {
     /**
@@ -91,11 +89,8 @@ typedef enum {
 } rf24_pa_dbm_e;
 
 /**
- * @}
- * @defgroup Datarate datarate
  * How fast data moves through the air. Units are in bits per second (bps).
  * @see RF24::setDataRate(), RF24::getDataRate()
- * @{
  */
 typedef enum {
     /** (0) represents 1 Mbps */
@@ -107,7 +102,6 @@ typedef enum {
 } rf24_datarate_e;
 
 /**
- * @}
  * @brief Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver
  */
 
@@ -1261,9 +1255,9 @@ public:
 
     /**
      * Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state
-     * @param level The desired @ref PaLevel as defined by @ref rf24_pa_dbm_e.
+     * @param level The desired Power Amplifier Level as defined by @ref rf24_pa_dbm_e.
      * @param lnaEnable Enable or Disable the LNA (Low Noise Amplifier) Gain.
-     * See table for Si24R1 modules below.<br> @p lnaEnable only affects
+     * See table for Si24R1 modules below.  @p lnaEnable only affects
      * nRF24L01 modules with an LNA chip.
      *
      * @rst
@@ -1288,7 +1282,7 @@ public:
     void setPaLevel(uint8_t level, bool lnaEnable=1);
 
     /**
-     * Fetches the current @ref PaLevel.
+     * Fetches the current Power Amplifier Level.
      * @return One of the values defined by @ref rf24_pa_dbm_e. See tables in
      * setPaLevel()
      */
@@ -1307,7 +1301,7 @@ public:
     uint8_t lastTxArc(void);
 
     /**
-     * Set the transmission @ref Datarate
+     * Set the transmission Data Rate
      *
      * @rst
      * .. warning:: Setting :enumerator:`RF24_250KBPS` will fail for non-plus modules (when
@@ -1321,14 +1315,14 @@ public:
      *
      *     ":enumerator:`RF24_1MBPS` (0)", "for 1 Mbps"
      *     ":enumerator:`RF24_2MBPS` (1)", "for 2 Mbps"
-     *     ":enumerator:`RF24_250KBPS` (2)", "for 250 kbs"
+     *     ":enumerator:`RF24_250KBPS` (2)", "for 250 kpbs"
      * @endrst
      * @return true if the change was successful
      */
     void setDataRate(rf24_datarate_e speed);
 
     /**
-     * Fetches the currently configured transmission @ref Datarate
+     * Fetches the currently configured transmission Data Rate
      * @return One of the values defined by @ref rf24_datarate_e.
      * See table in setDataRate()
      */

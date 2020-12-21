@@ -1437,9 +1437,7 @@ rf24_datarate_e RF24::getDataRate(void)
     rf24_datarate_e result;
     uint8_t dataReady = read_register(RF_SETUP) & (_BV(RF_DR_LOW) | _BV(RF_DR_HIGH));
 
-    // switch uses RAM (evil!)
-    // Order matters in our case below
-    if (dataReady == _BV(RF_DR_LOW)) {
+    if (dataReady == _BV(RF_DR_LOW) && !_is_p_variant) {
         // '10' = 250KBPS
         result = RF24_250KBPS;
     } else if (dataReady == _BV(RF_DR_HIGH)) {
