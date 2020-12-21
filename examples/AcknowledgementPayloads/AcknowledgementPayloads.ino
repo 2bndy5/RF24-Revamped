@@ -13,7 +13,7 @@
  */
 #include <SPI.h>
 #include "printf.h"
-#include "RF24.h"
+#include "RF24Revamped.h"
 
 // instantiate an object for the nRF24L01 transceiver
 RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
@@ -105,9 +105,8 @@ void setup() {
   }
 
   // For debugging info
-  // printf_begin();             // needed only once for printing details
-  // radio.printDetails();       // (smaller) function that prints raw register values
-  // radio.printPrettyDetails(); // (larger) function that prints human readable data
+  // printf_begin();       // needed only once for printing details
+  // radio.printDetails();
 
 }
 
@@ -116,34 +115,35 @@ void loop() {
   if (role) {
     // This device is a TX node
 
-    unsigned long start_timer = micros();                    // start the timer
-    bool report = radio.send(&payload, sizeof(payload));    // transmit & save the report
-    unsigned long end_timer = micros();                      // end the timer
+    unsigned long start_timer = micros();                // start the timer
+    bool report = radio.send(&payload, sizeof(payload)); // transmit & save the report
+    unsigned long end_timer = micros();                  // end the timer
 
     if (report) {
-      Serial.print(F("Transmission successful! "));          // payload was delivered
+      Serial.print(F("Transmission successful! ")); // payload was delivered
       Serial.print(F("Time to transmit = "));
-      Serial.print(end_timer - start_timer);                 // print the timer result
+      Serial.print(end_timer - start_timer);        // print the timer result
       Serial.print(F(" us. Sent: "));
-      Serial.print(payload.message);                         // print the outgoing message
-      Serial.print(payload.counter);                         // print the outgoing counter
-      uint8_t pipe;
-      if (radio.available(&pipe)) {                          // is there an ACK payload? grab the pipe number that received it
+      Serial.print(payload.message);                // print the outgoing message
+      Serial.print(payload.counter);                // print the outgoing counter
+      if (radio.available()) {                      // is there an ACK payload?
+        uint8_t pipe = radio.pipe();                // get the pipe number that received it
         PayloadStruct received;
-        radio.read(&received, sizeof(received));             // get incoming ACK payload
+        radio.read(&received, sizeof(received));    // get incoming ACK payload
         Serial.print(F(" Recieved "));
-        Serial.print(radio.any());         // print incoming payload size
+        Serial.print(radio.any());                  // print incoming payload size
         Serial.print(F(" bytes on pipe "));
-        Serial.print(pipe);                                  // print pipe number that received the ACK
+        Serial.print(pipe);                         // print pipe number that received the ACK
         Serial.print(F(": "));
-        Serial.print(received.message);                      // print incoming message
-        Serial.println(received.counter);                    // print incoming counter
+        Serial.print(received.message);             // print incoming message
+        Serial.println(received.counter);           // print incoming counter
 
         // save incoming counter & increment for next outgoing
         payload.counter = received.counter + 1;
 
       } else {
-        Serial.println(F(" Recieved: an empty ACK packet")); // empty ACK packet received
+        // empty ACK packet received
+        Serial.println(F(" Recieved: an empty ACK packet"));
       }
 
 
@@ -157,21 +157,21 @@ void loop() {
   } else {
     // This device is a RX node
 
-    uint8_t pipe;
-    if (radio.available(&pipe)) {                    // is there a payload? get the pipe number that recieved it
-      uint8_t bytes = radio.any(); // get the size of the payload
+    if (radio.available()) {                   // is there a payload?
+      uint8_t pipe = radio.pipe();             // grab the pipe number that received it
+      uint8_t bytes = radio.any();             // get the size of the payload
       PayloadStruct received;
-      radio.read(&received, sizeof(received));       // get incoming payload
+      radio.read(&received, sizeof(received)); // get incoming payload
       Serial.print(F("Received "));
-      Serial.print(bytes);                           // print the size of the payload
+      Serial.print(bytes);                     // print the size of the payload
       Serial.print(F(" bytes on pipe "));
-      Serial.print(pipe);                            // print the pipe number
+      Serial.print(pipe);                      // print the pipe number
       Serial.print(F(": "));
-      Serial.print(received.message);                // print incoming message
-      Serial.print(received.counter);                // print incoming counter
+      Serial.print(received.message);          // print incoming message
+      Serial.print(received.counter);          // print incoming counter
       Serial.print(F(" Sent: "));
-      Serial.print(payload.message);                 // print outgoing message
-      Serial.println(payload.counter);               // print outgoing counter
+      Serial.print(payload.message);           // print outgoing message
+      Serial.println(payload.counter);         // print outgoing counter
 
       // save incoming counter & increment for next outgoing
       payload.counter = received.counter + 1;

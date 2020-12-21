@@ -184,11 +184,8 @@ if __name__ == "__main__":
     # struct.pack(); "<f" means a little endian unsigned float
     radio.payloadSize = len(struct.pack("<f", payload[0]))
 
-    # for debugging, we have 2 options that print a large block of details
-    # (smaller) function that prints raw register values
+    # for debugging
     # radio.printDetails()
-    # (larger) function that prints human readable data
-    # radio.printPrettyDetails()
 
     try:
         if args.role is None:  # if not specified with CLI arg '-r'

@@ -18,7 +18,7 @@
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
-#include <RF24/RF24.h> // RF24, RF24_PA_LOW, delay()
+#include <RF24Revamped.h> // RF24, RF24_PA_LOW, delay()
 
 using namespace std;
 
@@ -125,8 +125,7 @@ int main(int argc, char** argv) {
     radio.setPayloadLength(sizeof(payload)); // 2x int datatype occupy 8 bytes
 
     // For debugging info
-    // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    // radio.printDetails();
 
     // ready to execute program now
     if (!foundArgNode) {
@@ -222,19 +221,20 @@ void slave() {
     for (uint8_t i = 0; i < 6; ++i)
       radio.openReadingPipe(i, address[i]);
 
-    radio.startListening();                                        // put radio in RX mode
+    radio.startListening(); // put radio in RX mode
 
-    time_t startTimer = time(nullptr);                             // start a timer
-    while (time(nullptr) - startTimer < 6) {                       // use 6 second timeout
-        uint8_t pipe;
-        if (radio.available(&pipe)) {                              // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.any();                // get the size of the payload
-            radio.read(&payload, bytes);                           // fetch payload from FIFO
-            cout << "Received " << (unsigned int)bytes;            // print the size of the payload
-            cout << " bytes on pipe " << (unsigned int)pipe;       // print the pipe number
-            cout << " from node " << payload.nodeID;               // print the payload's origin
-            cout << ". PayloadID: " << payload.payloadID << endl;  // print the payload's number
-            startTimer = time(nullptr);                            // reset timer
+    time_t startTimer = time(nullptr);                    // start a timer
+    while (time(nullptr) - startTimer < 6) {              // use 6 second timeout
+        if (radio.available()) {                          // is there a payload?
+            unsigned int pipe = radio.pipe();             // get the pipe number that recieved it
+            unsigned int bytes = radio.any();             // get the size of the payload
+            radio.read(&payload, bytes);                  // fetch payload from FIFO
+            cout << "Received " << bytes;                 // print the size of the payload
+            cout << " bytes on pipe " << pipe;            // print the pipe number
+            cout << " from node " << payload.nodeID;      // print the payload's origin
+            cout << ". PayloadID: " << payload.payloadID; // print the payload's number
+            cout << endl;
+            startTimer = time(nullptr);                   // reset timer
         }
     }
     cout << "Nothing received in 6 seconds. Leaving RX role." << endl;

@@ -14,7 +14,7 @@
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
-#include <RF24/RF24.h> // RF24, RF24_PA_LOW, delay()
+#include <RF24Revamped.h> // RF24, RF24_PA_LOW, delay()
 
 using namespace std;
 
@@ -86,8 +86,7 @@ int main(int argc, char** argv) {
     radio.openReadingPipe(1, address[!radioNumber]); // using pipe 1
 
     // For debugging info
-    // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    // radio.printDetails();
 
     // ready to execute program now
     setRole(); // calls master() or slave() based on user input
@@ -125,20 +124,21 @@ void setRole() {
  * make this node act as the transmitter
  */
 void master() {
-    radio.stopListening();                                          // put radio in TX mode
+    radio.stopListening(); // put radio in TX mode
 
-    unsigned int failure = 0;                                       // keep track of failures
+    unsigned int failure = 0;                              // keep track of failures
     while (failure < 6) {
-        clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer);            // start the timer
-        bool report = radio.send(&payload, sizeof(float));         // transmit & save the report
-        uint32_t timerEllapsed = getMicros();                       // end the timer
+        clock_gettime(CLOCK_MONOTONIC_RAW, &startTimer);   // start the timer
+        bool report = radio.send(&payload, sizeof(float)); // transmit & save the report
+        uint32_t timerEllapsed = getMicros();              // end the timer
 
         if (report) {
             // payload was delivered
-            cout << "Transmission successful! Time to transmit = ";
-            cout << timerEllapsed;                                  // print the timer result
-            cout << " us. Sent: " << payload << endl;               // print payload sent
-            payload += 0.01;                                        // increment float payload
+            cout << "Transmission successful! ";
+            cout << "Time to transmit = ";
+            cout << timerEllapsed;                    // print the timer result
+            cout << " us. Sent: " << payload << endl; // print payload sent
+            payload += 0.01;                          // increment float payload
 
         } else {
             // payload was not delivered
@@ -157,18 +157,18 @@ void master() {
  */
 void slave() {
 
-    radio.startListening();                                  // put radio in RX mode
+    radio.startListening(); // put radio in RX mode
 
-    time_t startTimer = time(nullptr);                       // start a timer
-    while (time(nullptr) - startTimer < 6) {                 // use 6 second timeout
-        uint8_t pipe;
-        if (radio.available(&pipe)) {                        // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.any();   // get the size of the payload
-            radio.read(&payload, bytes);                     // fetch payload from FIFO
-            cout << "Received " << (unsigned int)bytes;      // print the size of the payload
-            cout << " bytes on pipe " << (unsigned int)pipe; // print the pipe number
-            cout << ": " << payload << endl;                 // print the payload's value
-            startTimer = time(nullptr);                      // reset timer
+    time_t startTimer = time(nullptr);         // start a timer
+    while (time(nullptr) - startTimer < 6) {   // use 6 second timeout
+        if (radio.available()) {               // is there a payload?
+            unsigned int pipe = radio.pipe();  // get the pipe number that recieved it
+            unsigned int bytes = radio.any();  // get the size of the payload
+            radio.read(&payload, bytes);       // fetch payload from FIFO
+            cout << "Received " << bytes;      // print the size of the payload
+            cout << " bytes on pipe " << pipe; // print the pipe number
+            cout << ": " << payload << endl;   // print the payload's value
+            startTimer = time(nullptr);        // reset timer
         }
     }
     cout << "Nothing received in 6 seconds. Leaving RX role." << endl;

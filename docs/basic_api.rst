@@ -50,9 +50,7 @@ any()
 available()
 ******************
 
-.. doxygenfunction:: available(void)
-
-.. doxygenfunction:: available(uint8_t* pipe_num)
+.. doxygenfunction:: available
 
 read()
 ******************

@@ -18,7 +18,7 @@
  */
 #include <SPI.h>
 #include "printf.h"
-#include "RF24.h"
+#include "RF24Revamped.h"
 
 // instantiate an object for the nRF24L01 transceiver
 RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
@@ -105,9 +105,8 @@ void setup() {
   }
 
   // For debugging info
-  // printf_begin();             // needed only once for printing details
-  // radio.printDetails();       // (smaller) function that prints raw register values
-  // radio.printPrettyDetails(); // (larger) function that prints human readable data
+  // printf_begin();       // needed only once for printing details
+  // radio.printDetails();
 
 } // setup()
 
@@ -132,29 +131,33 @@ void loop() {
       radio.stopListening();                                 // put back in TX mode
 
       // print summary of transactions
-      Serial.print(F("Transmission successful!"));           // payload was delivered
-      uint8_t pipe;
-      if (radio.available(&pipe)) {                          // is there a payload received
+      Serial.print(F("Transmission successful!")); // payload was delivered
+      if (radio.available()) {                     // is there a payload received
+        uint8_t pipe = radio.pipe();               // grab the pipe number that received it
         Serial.print(F(" Round-trip delay: "));
-        Serial.print(end_timer - start_timer);               // print the timer result
+        Serial.print(end_timer - start_timer);     // print the timer result
         Serial.print(F(" us. Sent: "));
-        Serial.print(payload.message);                       // print the outgoing payload's message
-        Serial.print(payload.counter);                       // print outgoing payload's counter
+        Serial.print(payload.message);             // print the outgoing payload's message
+        Serial.print(payload.counter);             // print outgoing payload's counter
         PayloadStruct received;
-        radio.read(&received, sizeof(received));             // get payload from RX FIFO
+        radio.read(&received, sizeof(received));   // get payload from RX FIFO
         Serial.print(F(" Received "));
-        Serial.print(radio.any());                // print the size of the payload
+        Serial.print(radio.any());                 // print the size of the payload
         Serial.print(F(" bytes on pipe "));
-        Serial.print(pipe);                                  // print the pipe number
+        Serial.print(pipe);                        // print the pipe number
         Serial.print(F(": "));
-        Serial.print(received.message);                      // print the incoming payload's message
-        Serial.println(received.counter);                    // print the incoming payload's counter
-        payload.counter = received.counter;                  // save incoming counter for next outgoing counter
+        Serial.print(received.message);            // print the incoming payload's message
+        Serial.println(received.counter);          // print the incoming payload's counter
+        payload.counter = received.counter;        // save incoming counter for next outgoing counter
+
       } else {
-        Serial.println(F(" Recieved no response."));         // no response received
+        // no response received
+        Serial.println(F(" Recieved no response."));
       }
+
     } else {
-      Serial.println(F("Transmission failed or timed out")); // payload was not delivered
+      // payload was not delivered
+      Serial.println(F("Transmission failed or timed out"));
     } // report
 
     // to make this example readable in the serial monitor
@@ -163,36 +166,36 @@ void loop() {
   } else {
     // This device is a RX node
 
-    uint8_t pipe;
-    if (radio.available(&pipe)) {              // is there a payload? get the pipe number that recieved it
+    if (radio.available()) {                   // is there a payload?
+      uint8_t pipe = radio.pipe();             // grab the pipe number that received it
       PayloadStruct received;
       radio.read(&received, sizeof(received)); // get incoming payload
       payload.counter = received.counter + 1;  // increment incoming counter for next outgoing response
 
       // transmit response & save result to `report`
-      radio.stopListening();                   // put in TX mode
+      radio.stopListening();                                // put in TX mode
       unsigned long start_response = millis();
       bool report = radio.send(&payload, sizeof(payload));  // send response
       while (!report && millis() - start_response < 200) {
-        report = radio.resend();
+        report = radio.resend();                            // retry for 200 ms
       }
-      radio.startListening();                  // put back in RX mode
+      radio.startListening();                               // put back in RX mode
 
       // print summary of transactions
       Serial.print(F("Received "));
-      Serial.print(radio.any());    // print the size of the payload
+      Serial.print(radio.any());          // print the size of the payload
       Serial.print(F(" bytes on pipe "));
-      Serial.print(pipe);                      // print the pipe number
+      Serial.print(pipe);                 // print the pipe number
       Serial.print(F(": "));
-      Serial.print(received.message);          // print incoming message
-      Serial.print(received.counter);          // print incoming counter
+      Serial.print(received.message);     // print incoming message
+      Serial.print(received.counter);     // print incoming counter
 
       if (report) {
         Serial.print(F(" Sent: "));
-        Serial.print(payload.message);         // print outgoing message
-        Serial.println(payload.counter);       // print outgoing counter
+        Serial.print(payload.message);       // print outgoing message
+        Serial.println(payload.counter);     // print outgoing counter
       } else {
-        Serial.println(" Response failed.");   // failed to send response
+        Serial.println(" Response failed."); // failed to send response
       }
     }
   } // role

@@ -22,7 +22,7 @@ Building options:
     --cpu-flags=<CFLAGS>        CPU defining/optimizing flags to be used. [configure autodetected]
     --extra-cflags=<CFLAGS>     Extra C flags passed to C/C++ compilation. []
     --extra-ldflags=<LDFLAGS>   Extra C flags passed to linking. []
-    --libname=<LIBNAME>         Library name. [rf24]
+    --libname=<LIBNAME>         Library name. [rf24revamped]
     --c_compiler=<CC>           C compiler. [arm-linux-gnueabihf-gcc][gcc]
     --cxx_compiler=<CXX>        C++ compiler [arm-linux-gnueabihf-g++][g++]
     --no-clean                  Don't clean previous build artifacts
@@ -356,13 +356,13 @@ PREFIX=${PREFIX:-/usr/local}
 REMOTE_PREFIX=${REMOTE_PREFIX:-/usr/local}
 LIB_DIR=${LIB_DIR:-${PREFIX}/lib}
 REMOTE_LIB_DIR=${REMOTE_LIB_DIR:-${REMOTE_PREFIX}/lib}
-HEADER_DIR=${HEADER_DIR:-${PREFIX}/include/RF24}
-REMOTE_HEADER_DIR=${REMOTE_HEADER_DIR:-${REMOTE_PREFIX}/include/RF24}
+HEADER_DIR=${HEADER_DIR:-${PREFIX}/include/RF24Revamped}
+REMOTE_HEADER_DIR=${REMOTE_HEADER_DIR:-${REMOTE_PREFIX}/include/RF24Revamped}
 EXAMPLES_DIR=${EXAMPLES_DIR:-${PREFIX}/bin}
 REMOTE_EXAMPLES_DIR=${REMOTE_EXAMPLES_DIR:-${REMOTE_PREFIX}/bin}
 LDCONFIG=${LDCONFIG-ldconfig}
 REMOTE_LDCONFIG=${REMOTE_LDCONFIG-/sbin/ldconfig}
-LIB=${LIB:-rf24}
+LIB=${LIB:-rf24revamped}
 LIB_VERSION=${LIB_VERSION:-$(awk -F "=" '/version/ {print $2}' library.properties)}
 LIB_DEPRECATE_NAME=${LIB_DEPRECATE_NAME:-"rf24-bcm"}
 LIB_DEPRECATE_VERSION=${LIB_DEPRECATE_VERSION:-""}

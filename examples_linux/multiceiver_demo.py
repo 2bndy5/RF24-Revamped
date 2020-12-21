@@ -170,9 +170,8 @@ if __name__ == "__main__":
     # "<ii" means 2x little endian unsigned int
     radio.payloadSize = len(struct.pack("<ii", 0, 0))
 
-    # for debugging, we have 2 options that print a large block of details
-    # radio.printDetails();  # (smaller) function that prints raw register values
-    # radio.printPrettyDetails();  # (larger) function that prints human readable data
+    # for debugging
+    # radio.printDetails()
 
     try:
         if args.node is None:  # if not specified with CLI arg '-n'

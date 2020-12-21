@@ -15,7 +15,7 @@
  */
 #include <SPI.h>
 #include "printf.h"
-#include "RF24.h"
+#include "RF24Revamped.h"
 
 // We will be using the nRF24L01's IRQ pin for this example
 #define IRQ_PIN 2 // this needs to be a digital input capable pin
@@ -128,9 +128,8 @@ void setup() {
   }
 
   // For debugging info
-  // printf_begin();             // needed only once for printing details
-  // radio.printDetails();       // (smaller) function that prints raw register values
-  // radio.printPrettyDetails(); // (larger) function that prints human readable data
+  // printf_begin();       // needed only once for printing details
+  // radio.printDetails();
 
 }
 

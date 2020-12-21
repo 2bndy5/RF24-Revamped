@@ -78,6 +78,7 @@ isFifo()
 .. doxygenfunction:: isFifo(bool)
 
 .. doxygenfunction:: isFifo(bool, bool)
+    :no-link:
 
 setAddressLength()
 ******************
@@ -103,11 +104,6 @@ testRpd()
 ******************************
 
 .. doxygenfunction:: testRpd
-
-testCarrier()
-******************************
-
-.. doxygenfunction:: testCarrier
 
 startCarrierWave()
 ******************************

@@ -208,11 +208,8 @@ if __name__ == "__main__":
     # what we need. For this example, we'll be using the default maximum 32
     radio.payloadSize = SIZE
 
-    # for debugging, we have 2 options that print a large block of details
-    # (smaller) function that prints raw register values
+    # for debugging
     # radio.printDetails()
-    # (larger) function that prints human readable data
-    # radio.printPrettyDetails()
 
     try:
         if args.role is None:  # if not specified with CLI arg '-r'

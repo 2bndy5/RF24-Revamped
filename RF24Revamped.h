@@ -12,8 +12,8 @@
  * Class declaration for RF24 and helper enums
  */
 
-#ifndef __RF24_H__
-#define __RF24_H__
+#ifndef __RF24REVAMPED_H__
+#define __RF24REVAMPED_H__
 
 #include "RF24_config.h"
 
@@ -124,7 +124,7 @@ private:
     uint16_t csn_pin; /** SPI Chip select */
     uint32_t spi_speed; /** SPI Bus Speed */
     #if defined (RF24_LINUX) || defined (XMEGA_D3)
-    uint8_t spi_rxbuff[32+1] ; //SPI receive buffer (payload max 32 bytes)
+    uint8_t spi_rxbuff[96+1] ; //SPI receive buffer (payload max 32 bytes)
     uint8_t spi_txbuff[32+1] ; //SPI transmit buffer (payload max 32 bytes + 1 byte for the command)
     #endif
     uint8_t status; /** The status byte returned from every SPI transaction */
@@ -160,7 +160,7 @@ protected:
     /**
      * Read a chunk of data in from a register
      * @param reg Which register. Use constants from nRF24L01.h
-     * @param buf Where to put the data
+     * @param[out] buf Where to put the data
      * @param len How many bytes of data to transfer
      * @return Nothing. Older versions of this function returned the status
      * byte, but that it now saved to a private member on all SPI transactions.
@@ -319,7 +319,7 @@ public:
      *
      *         void isrCallbackFunction() {
      *           radio.clearStatusFlags(); // resets the IRQ pin to HIGH
-     *           radio.available();                           // returned data should now be reliable
+     *           radio.available();        // returned data should now be reliable
      *         }
      *
      *         void setup() {
@@ -334,60 +334,34 @@ public:
      * Read payload data from the RX FIFO buffer(s).
      *
      * The length of data read is usually the next available payload's length
-     * @see getPayloadLength(), getDynamicPayloadSize(), any()
-     * @rst
-     * .. note:: ``void*`` was chosen specifically as a data type to make it easier
-     *     for beginners to use (no casting needed).
-     * @endrst
-     *
+     * @see any()
      * @param[out] buf Pointer to a buffer where the data should be written
+     * `void*` was chosen specifically as a data type to make it easier
+     * for beginners to use (no casting needed).
      * @param len Maximum number of bytes to read into the buffer. This
      * value should match the length of the object referenced using the
      * `buf` parameter. The absolute maximum number of bytes that can be read
      * in one call is 32 (for dynamic payload lengths) or whatever number was
      * previously passed to setPayloadLength() (for static payload lengths).
-     * @remark Remember that each call to read() fetches data from the
+     * @rst
+     * Remember that each call to :func:`read()` fetches data from the
      * RX FIFO beginning with the first byte from the first available
      * payload. A payload is not removed from the RX FIFO until it's
-     * entire length (or more) is fetched using read().<br>
-     * - If @a len parameter's value is less than the available payload's
-     *   length, then the payload remains in the RX FIFO.
-     * - If @a len parameter's value is greater than the first of multiple
-     *   available payloads, then the data saved to the @a buf
-     *   parameter's object will be supplemented with data from the next
-     *   available payload.
-     * - If @a len parameter's value is greater than the last available
-     *   payload's length, then the last byte in the payload is used as
-     *   padding for the data saved to the @a buf parameter's object.
-     *   The nRF24L01 will repeatedly use the last byte from the last
-     *   payload even when read() is called with an empty RX FIFO.
+     * entire length (or more) is fetched using read().
      *
-     * @rst
-     * .. note:: To use this function in the python wrapper, remember that
-     *     only the ``len`` parameter is required because this function (in the
-     *     python wrapper) returns the payload data as a buffer protocol object
-     *     (bytearray object).
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         if radio.available():
-     *             length = radio.any()
-     *             received_payload = radio.read(length)
+     *     - If ``len`` parameter's value is less than the available payload's
+     *       length, then the payload remains in the RX FIFO.
+     *     - If ``len`` parameter's value is greater than the first of multiple
+     *       available payloads, then the data saved to the ``buf``
+     *       parameter's object will be supplemented with data from the next
+     *       available payload.
+     *     - If ``len`` parameter's value is greater than the last available
+     *       payload's length, then the last byte in the payload is used as
+     *       padding for the data saved to the ``buf`` parameter's object.
+     *       The nRF24L01 will repeatedly use the last byte from the last
+     *       payload even when read() is called with an empty RX FIFO.
      * @endrst
-     *
      * @return No return value. Use available().
-     * @rst
-     * .. note:: This function no longer returns a boolean. Use available to
-     *     determine if packets are available. The :func:`irqDr` Interrupt flag is
-     *     cleared with this function.
-     *
-     *     .. code-block::
-     *
-     *         if(radio.available()) {
-     *           radio.read(&amp;data, sizeof(data));
-     *         }
-     * @endrst
      */
     void read(void* buf, uint8_t len);
 
@@ -406,7 +380,7 @@ public:
      * The irqDs() and irqDf() interrupt flags will be cleared upon entering
      * this function
      *
-     * @param buf Pointer to the data to be sent
+     * @param[out] buf Pointer to the data to be sent
      * @param len Number of bytes to be sent
      *
      * @rst
@@ -566,71 +540,6 @@ public:
      * @endrst
      */
     void printPrettyDetails(void);
-
-    /**
-     * Test whether there are bytes available to be read from the
-     * FIFO buffers.
-     *
-     * @rst
-     * .. note:: This function is named ``available_pipe()`` in the python wrapper.
-     *     Additionally, the ``available_pipe()`` function (which
-     *     takes no arguments) returns a 2 item tuple containing (ordered by
-     *     tuple's indices):
-     *
-     *     - A boolean describing if there is a payload available to read from
-     *       the RX FIFO buffers.
-     *     - The pipe number that received the next available payload in the RX
-     *       FIFO buffers. If the item at the tuple's index 0 is `False`, then
-     *       this pipe number is invalid.
-     * .. note:: To use this function in python:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instatiated RF24 object
-     *         has_payload, pipe_number = radio.available_pipe()  # expand the tuple to 2 variables
-     *         if has_payload:
-     *             print("Received a payload with pipe", pipe_number)
-     * @endrst
-     *
-     * @param[out] pipe_num Which pipe has the payload available
-     * @rst
-     * .. code-block::
-     *
-     *     uint8_t pipeNum;
-     *     if(radio.available(&amp;pipeNum)){
-     *       radio.read(&amp;data, sizeof(data));
-     *       Serial.print("Received data on pipe ");
-     *       Serial.println(pipeNum);
-     *     }
-     *
-     * .. warning:: According to the datasheet, the data saved to the ``pipe_num``
-     *     parameter is "unreliable" during a FALLING transition on the IRQ pin.
-     *     This means you should call :func:`clearStatusFlags()` before calling this
-     *     function during an ISR (Interrupt Service Routine).
-     *
-     * For example:
-     *
-     * .. code-block::
-     *
-     *     void isrCallbackFunction() {
-     *       radio.clearStatusFlags(); // resets the IRQ pin to HIGH
-     *       uint8_t pipe;             // initialize pipe data
-     *       radio.available(&amp;pipe);   // pipe data should now be reliable
-     *     }
-     *
-     *     void setup() {
-     *       pinMode(IRQ_PIN, INPUT);
-     *       attachInterrupt(digitalPinToInterrupt(IRQ_PIN), isrCallbackFunction, FALLING);
-     *     }
-     * @endrst
-     *
-     * @return
-     * - `true` if there is a payload available in the top (first out)
-     *   level RX FIFO.
-     * - `false` if there is nothing available in the RX FIFO because it is
-     *   empty.
-     */
-    bool available(uint8_t* pipe_num);
 
     /**
      * Use this function to check if the radio's RX FIFO levels are all
@@ -826,22 +735,8 @@ public:
      * - `true` if the payload was loaded into the TX FIFO.
      * - `false` if the payload wasn't loaded into the TX FIFO because it is
      *   already full.
-     * @rst
-     * .. note:: The ``len`` parameter must be omitted when using the python
-     *     wrapper because the length of the payload is determined automatically.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         buffer = b"Hello World"  # a `bytes` object
-     *         radio.send(buffer, False, True)  # 3rd parameter is optional
-     *         #     False means expecting ACK response (multicast parameter)
-     *         #     True means initiate transmission (write_only parameter)
-     * @endrst
      */
-    bool write(const void* buf, uint8_t len, const bool multicast, bool write_only=0);
+    bool write(const void* buf, uint8_t len, const bool multicast=0, bool write_only=0);
 
     /**
      * The function will instruct the radio to re-use the payload in the
@@ -875,39 +770,18 @@ public:
      * Empty all 3 of the TX (transmit) FIFO buffers. This is automatically
      * called by stopListening() if ACK payloads are enabled. However,
      * startListening() does not call this function.
-     * @return Current value of status register
      */
-    uint8_t flushTx(void);
+    void flushTx(void);
 
     /**
      * Empty all 3 of the RX (receive) FIFO buffers.
-     * @return Current value of status register
      */
-    uint8_t flushRx(void);
-
-    /**
-     * Test whether there was a carrier wave signal was detected during the
-     * previous listening period.
-     *
-     * Useful to check for interference on the current channel.
-     * @rst
-     * .. note:: This function is synonomous with :func:`testRpd()`, but the data
-     *     returned by both function differs slightly by variants of the nRF24L01.
-     *     This function is meant for the non-plus variant of the nRF24L01.
-     * @endrst
-     * @see isPVariant(), startCarrierWave(), stopCarrierWave()
-     * @return This data is reset upon entering RX mode.
-     * - `true` if a carrier wave was deteced
-     * - `false` if no carrier wave was detected
-     */
-    bool testCarrier(void);
+    void flushRx(void);
 
     /**
      * Test whether a signal (carrier wave or otherwise) greater than
-     * or equal to -64dBm is present on the channel. Valid only
-     * on nRF24L01P(+) hardware. On nRF24L01, use testCarrier().
-     *
-     * Useful to check for interference on the current channel and
+     * or equal to -64dBm is present on the channel. This can be used to
+     * check for interference on the current channel and
      * channel hopping strategies.
      *
      * @rst
@@ -919,17 +793,13 @@ public:
      *        radio.read(0, 0);
      *     }
      *
-     * .. note:: This function is synonomous with :func:`testCarrier()`, but the data
-     *     returned by both function differs slightly by variants of the nRF24L01.
-     *     This function is meant for the plus variant of the nRF24L01+.
      * @endrst
-     * @see isPVariant(), startCarrierWave(), stopCarrierWave()
+     * @see startCarrierWave(), stopCarrierWave()
      * @return This data is reset upon entering RX mode.
      * - `true` if a signal with an amplitude of greater than or equal to -64dBm
      * was detected.
      * - `false` if no signal with an amplitude of greater than or equal to -64 dBm
      * was detected.
-     *
      */
     bool testRpd(void);
 
@@ -1359,8 +1229,15 @@ public:
     uint8_t getCrc(void);
 
     /**
-     * Retrieve the current status of the chip
-     * @return Current value of status register
+     * Refresh data (from the STATUS register) used by the following functions:
+     * irqDf(), irqDd(), irqDr(), isTxFull(), pipe().
+     * @rst
+     * .. important:: The data that this function fetches is also refreshed on every
+     *     SPI transaction. The only functions that don't execute an SPI transaction
+     *     are :func:`irqDf()`, :func:`irqDd()`, :func:`irqDr()`, :func:`isTxFull()`,
+     *     and :func:`pipe()`.
+     * @endrst
+     * @return Current value of STATUS register
      */
     uint8_t update(void);
 
@@ -1368,10 +1245,12 @@ public:
     /**
      * A flag that describes when the "Data Ready" event has occured.
      * @rst
-     * .. note:: Calling this function does not update the data it returns. Use
+     * .. important:: Calling this function does not update the data it returns. Use
      *     :func:`update()` to refresh the data as needed.
-     * .. important:: This data is updated on every SPI transaction (which is pratically
-     *     every other function).
+     *
+     *     This data is updated on every SPI transaction. The only functions that
+     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
+     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
      * @endrst
      */
     bool irqDr(void);
@@ -1379,10 +1258,12 @@ public:
     /**
      * A flag that describes when the "Data Sent" event has occured.
      * @rst
-     * .. note:: Calling this function does not update the data it returns. Use
+     * .. important:: Calling this function does not update the data it returns. Use
      *     :func:`update()` to refresh the data as needed.
-     * .. important:: This data is updated on every SPI transaction (which is pratically
-     *     every other function).
+     *
+     *     This data is updated on every SPI transaction. The only functions that
+     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
+     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
      * @endrst
      */
     bool irqDs(void);
@@ -1390,10 +1271,12 @@ public:
     /**
      * A flag that describes when the "Data Fail" event has occured.
      * @rst
-     * .. note:: Calling this function does not update the data it returns. Use
+     * .. important:: Calling this function does not update the data it returns. Use
      *     :func:`update()` to refresh the data as needed.
-     * .. important:: This data is updated on every SPI transaction (which is pratically
-     *     every other function).
+     *
+     *     This data is updated on every SPI transaction. The only functions that
+     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
+     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
      * @endrst
      */
     bool irqDf(void);
@@ -1401,13 +1284,31 @@ public:
     /**
      * A flag that describes when all 3 levels of the TX FIFO are occupied with a payload.
      * @rst
-     * .. note:: Calling this function does not update the data it returns. Use
+     * .. important:: Calling this function does not update the data it returns. Use
      *     :func:`update()` to refresh the data as needed.
-     * .. important:: This data is updated on every SPI transaction (which is pratically
-     *     every other function).
+     *
+     *     This data is updated on every SPI transaction. The only functions that
+     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
+     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
      * @endrst
      */
     bool isTxFull(void);
+
+    /**
+     * The pipe number that received the next available payload in the RX FIFO.
+     * @rst
+     * .. important:: Calling this function does not update the data it returns. Use
+     *     :func:`update()` to refresh the data as needed.
+     *
+     *     This data is updated on every SPI transaction. The only functions that
+     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
+     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
+     * @endrst
+     * @return the pipe number that received the next available payload in the RX FIFO
+     * is in range [0, 5]. If there is no payload in the RX FIFO, then the number
+     * returned is 255.
+     */
+    uint8_t pipe(void);
 
     /**
      * This function is used to configure what events will trigger the Interrupt
@@ -1587,24 +1488,6 @@ private:
     void read_payload(void* buf, uint8_t len);
 
     #if !defined (MINIMAL)
-
-    /**
-     * Decode and print the given status to stdout
-     * @param status Status value to print
-     * @rst
-     * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
-     * @endrst
-     */
-    void print_status(uint8_t status);
-
-    /**
-     * Decode and print the given 'observe_tx' value to stdout
-     * @param value The observe_tx value to print
-     * @rst
-     * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
-     * @endrst
-     */
-    void print_observe_tx(uint8_t value);
 
     /**
      * Print the name and value of an 8-bit register to stdout

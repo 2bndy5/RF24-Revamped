@@ -83,7 +83,7 @@
  */
 
 #include "SPI.h"
-#include "RF24.h"
+#include "RF24Revamped.h"
 
 // CE and CSN are configurable, specified values for ATTiny85 as connected above
 #define CE_PIN 3

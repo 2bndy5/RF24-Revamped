@@ -17,7 +17,7 @@
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
-#include <RF24/RF24.h> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING
+#include <RF24Revamped.h> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING
 
 using namespace std;
 
@@ -103,8 +103,7 @@ int main(int argc, char** argv) {
     radio.openReadingPipe(1, address[!radioNumber]); // using pipe 1
 
     // For debugging info
-    // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    // radio.printDetails();
 
     // setup the digital input pin connected to the nRF24L01's IRQ pin
     pinMode(IRQ_PIN, INPUT);

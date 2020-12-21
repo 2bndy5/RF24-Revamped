@@ -12,7 +12,7 @@
  */
 #include <SPI.h>
 #include "printf.h"
-#include "RF24.h"
+#include "RF24Revamped.h"
 
 // instantiate an object for the nRF24L01 transceiver
 RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
@@ -92,9 +92,8 @@ void setup() {
   }
 
   // For debugging info
-  // printf_begin();             // needed only once for printing details
-  // radio.printDetails();       // (smaller) function that prints raw register values
-  // radio.printPrettyDetails(); // (larger) function that prints human readable data
+  // printf_begin();       // needed only once for printing details
+  // radio.printDetails();
 
 } // setup()
 
