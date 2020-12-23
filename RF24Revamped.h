@@ -574,7 +574,7 @@ public:
      *   packet. This condition can only be reported if the auto-ack feature
      *   is on.
      */
-    bool send(const void* buf, uint8_t len, const bool multicast);
+    bool send(const void* buf, uint8_t len, const bool multicast=0);
 
     /**
      * Write an acknowledgement (ACK) payload for the specified pipe
