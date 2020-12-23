@@ -49,7 +49,8 @@ Platform Support Pages
   * `MRAA (Galileo, Edison, etc) supported board <mraa.html>`_
   * `LittleWire <LittleWire.html>`_
 * `Cross-compilation for linux devices <cross_compilation.html>`_
-* `Python wrapper available for Linux devices <python_wrapper.html>`_
+
+.. * `Python wrapper available for Linux devices <python_wrapper.html>`_
 
 General Microcontroller Pin layout
 ----------------------------------
@@ -88,7 +89,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 
    ino_examples
    cpp_examples
-   py_examples
    attiny_examples
 
 .. toctree::
@@ -109,7 +109,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    linux_install
    mraa
    rpi_general
-   python_wrapper
    cross_compilation
    atxmega
    portability

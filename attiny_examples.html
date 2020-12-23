@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Basic API" href="basic_api.html" />
-    <link rel="prev" title="Python Wrapper examples" href="py_examples.html" /> 
+    <link rel="prev" title="Linux examples" href="cpp_examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +92,6 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ATTiny examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rf24ping85">rf24ping85</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#timingsearch3pin">timingSearch3pin</a></li>
@@ -113,7 +112,6 @@
 <li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
@@ -198,7 +196,7 @@ the RF24 class to communicate with another node.</p>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another
 with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
 This example still uses ACK packets, but they have no payloads. Instead the
-acknowledging response is sent with <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_t" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::send()</span></code></a>. This tactic allows
+acknowledging response is sent with <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_tKb" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::send()</span></code></a>. This tactic allows
 for more updated acknowledgement payload data, where actual ACK payloads’ data
 are outdated by 1 transmission because they have to loaded before receiving a
 transmission.</p>
@@ -861,7 +859,7 @@ intermediate results are written to TX (PB3, pin 2 – using Serial).</p>
         <a href="basic_api.html" class="btn btn-neutral float-right" title="Basic API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="py_examples.html" class="btn btn-neutral float-left" title="Python Wrapper examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cpp_examples.html" class="btn btn-neutral float-left" title="Linux examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

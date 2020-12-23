@@ -92,7 +92,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -143,7 +142,6 @@
 <li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
@@ -477,16 +475,6 @@
 <p>If the dynamic payload length feature is enabled for all pipes,
 then this setting is not used.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the python wrapper, this function is the setter of the
-<cite>payloadLength</cite> attribute.</p>
-<p>To use this function in the python wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">payloadSize</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1"># set the static payload size to 16 bytes</span>
-</pre></div>
-</div>
-</div>
 </p>
  <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -525,18 +513,7 @@ then this setting is not used for that pipe.</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416getPayloadLengthE7uint8_t">
 <span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get Static Payload length for a specific pipe  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the python wrapper, this function also serves as the getter of the
-<cite>payloadSize</cite> attribute concerning pipe 0.</p>
-<p>To use this function in the python wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="n">pl_size</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">payloadLength</span>  <span class="c1"># get the static payload size</span>
-</pre></div>
-</div>
-</div>
-</p>
- <dl class="simple">
+<dd><p>Get Static Payload length for a specific pipe <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aea623db854a91f5d271476df78895520"><span class="std std-ref">setPayloadLength(uint8_t, uint8_t)</span></a>, <a class="reference internal" href="#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength(uint8_t)</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
 </dd>
 <dt><strong>Return</strong></dt><dd><p>The payload length in bytes that a pipe is configured to use. </p>
@@ -666,7 +643,7 @@ to send ACK payloads.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait between each retry, in multiples of 250 us. The minumum of 0 means 250 us, and the maximum of 15 means 4000 us. The default value of 5 means 1500us (5 * 250 + 250). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many retries before giving up. The default/maximum is 15. Use 0 to disable the auto-retry feature all together.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Disable the auto-retry feature on a transmitter still uses the
+<p>Disabling the auto-retry feature on a transmitter still uses the
 auto-ack feature (if enabled), except it will not retry to transmit if
 the payload was not acknowledged on the first attempt.</p>
 </div>
@@ -736,6 +713,10 @@ about all outgoing payloads (using pipe 0) or incoming payloads
  <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a>, <a class="reference internal" href="#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
 </dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enables (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the affect of the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="basic_api.html#classRF24_1a45af53a31199a6bd80c6b8646da0af87"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a>. </p></li>
+</ul>
+</dd>
 </dl>
 </p>
 </dd></dl>
@@ -747,7 +728,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dt id="_CPPv4N4RF2416isAllowMulticastEv">
 <span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a013fcce587ddcb1eec3ba3492006495c"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
+<dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a45af53a31199a6bd80c6b8646da0af87"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -788,14 +769,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
 <span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the transmission Data Rate</p>
-<p> <p><div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules (when
-<a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
-</div>
-</p>
- <dl class="simple">
+<dd><p>Set the transmission Data Rate <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -821,6 +795,11 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules
+(when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+</div>
 </p>
  </p></li>
 </ul>
@@ -850,21 +829,9 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <span id="_CPPv3N4RF2410setChannelE7uint8_t"></span><span id="_CPPv2N4RF2410setChannelE7uint8_t"></span><span id="RF24::setChannel__uint8_t"></span><span class="target" id="classRF24_1a5e6e5a5f6c85d2638381cab2c0f3702e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setChannel</code><span class="sig-paren">(</span>uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setChannelE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set RF communication channel. The frequency used by a channel is calculated as:</p>
 <p>2400 MHz + &lt;channel number&gt;</p>
-<p>Meaning the default channel of 76 uses the approximate frequency of 2476 MHz.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the python wrapper, this function is the setter of the
-<code class="docutils literal notranslate"><span class="pre">channel</span></code> attribute.</p>
-<p>To use this function in the python wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="n">radio</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># set the channel to 2 (2402 MHz)</span>
-</pre></div>
-</div>
-</div>
-</p>
-</p>
-<p><dl class="simple">
+<p>Meaning the default channel of 76 uses the approximate frequency of 2476 MHz. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: Which RF channel to communicate on, 0-125 </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: Which RF channel to communicate on. This parameter is clamped to the range [0, 125]. </p></li>
 </ul>
 </dd>
 </dl>
@@ -877,18 +844,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getChannelEv">
 <span id="_CPPv3N4RF2410getChannelEv"></span><span id="_CPPv2N4RF2410getChannelEv"></span><span id="RF24::getChannel__void"></span><span class="target" id="classRF24_1a6a66a94609309e17edaa1919e66cea0a"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getChannel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getChannelEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get RF communication channel  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the python wrapper, this function is the getter of the
-<code class="docutils literal notranslate"><span class="pre">channel</span></code> attribute.</p>
-<p>To use this function in the python wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let `radio` be the instantiated RF24 object</span>
-<span class="n">chn</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">channel</span>  <span class="c1"># get the channel</span>
-</pre></div>
-</div>
-</div>
-</p>
- <dl class="simple">
+<dd><p>Get RF communication channel <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The currently configured RF Channel </p>
 </dd>
 </dl>

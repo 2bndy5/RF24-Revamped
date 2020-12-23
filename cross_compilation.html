@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ATXMEGA" href="atxmega.html" />
-    <link rel="prev" title="Python Wrapper Installation" href="python_wrapper.html" /> 
+    <link rel="prev" title="General Linux/Raspberry Pi" href="rpi_general.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +92,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="py_examples.html">Python Wrapper examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -109,15 +108,9 @@
 <li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python_wrapper.html">Python Wrapper Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Linux cross-compilation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#mandatory-prerequisites">Mandatory Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cross-compilation-steps">Cross compilation steps:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cross-comilation-steps-for-python-wrapper">Cross comilation steps for python wrapper</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python-prerequisites">Python Prerequisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#python-installation-steps">Python Installation steps</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
@@ -261,53 +254,6 @@ make
 </li>
 </ol>
 </div>
-<div class="section" id="cross-comilation-steps-for-python-wrapper">
-<h2>Cross comilation steps for python wrapper<a class="headerlink" href="#cross-comilation-steps-for-python-wrapper" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="python-prerequisites">
-<h3>Python Prerequisites<a class="headerlink" href="#python-prerequisites" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Python setuptools must be installed on both target and cross-compilation machines</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install setuptools
-</pre></div>
-</div>
-<p>or</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-setuptools
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="python-installation-steps">
-<h3>Python Installation steps<a class="headerlink" href="#python-installation-steps" title="Permalink to this headline">¶</a></h3>
-<ol>
-<li><p>Assure having libboost-python-dev library in your cross-compilation environment. Alternatively, you can install it into your target machine and copy /usr and /lib directories to the cross-compilation machine.</p>
-<p>For example:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p rpi_root <span class="o">&amp;&amp;</span> rsync -a pi@target_linux_host:/usr :/lib rpi_root
-<span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=/your/dir/rpi_root -I/your/dir/rpi_root/usr/include/python2.7/&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Build the python wrapper</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> pyRF24
-./setup.py build --compiler<span class="o">=</span>crossunix
-</pre></div>
-</div>
-</li>
-<li><p>Make the egg package</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./setup.py bdist_egg --plat-name<span class="o">=</span>cross
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">dist/RF24-&lt;version&gt;-cross.egg</span></code> should be created.</p>
-</li>
-<li><p>Upload it to the target machine and install there:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scp dist/RF24-*-cross.egg pi@target_linux_host:
-ssh pi@target_linux_host <span class="s1">&#39;sudo easy_install RF24-*-cross.egg&#39;</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-</div>
 </div>
 
 
@@ -321,7 +267,7 @@ ssh pi@target_linux_host <span class="s1">&#39;sudo easy_install RF24-*-cross.eg
         <a href="atxmega.html" class="btn btn-neutral float-right" title="ATXMEGA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="python_wrapper.html" class="btn btn-neutral float-left" title="Python Wrapper Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rpi_general.html" class="btn btn-neutral float-left" title="General Linux/Raspberry Pi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -60,6 +60,4 @@ read()
 send()
 ******************
 
-.. doxygenfunction:: send(const void *buf, uint8_t len)
-
 .. doxygenfunction:: send(const void *buf, uint8_t len, const bool multicast)
