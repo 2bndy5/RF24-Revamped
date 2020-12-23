@@ -806,11 +806,6 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
     return irqDs();
 }
 
-bool RF24::send(const void* buf, uint8_t len)
-{
-    return send(buf, len, 0);
-}
-
 /****************************************************************************/
 
 bool RF24::resend()

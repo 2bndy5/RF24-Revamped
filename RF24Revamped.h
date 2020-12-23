@@ -230,7 +230,7 @@ public:
      * Call this in setup(), before calling any other methods.
      * @rst
      * .. important:: Use this function to determine if there is a hardware problem
-     *     before continueing application.
+     *     before continuing application.
      *
      *     .. code-block::
      *
@@ -300,7 +300,7 @@ public:
      *     }
      *
      * @endrst
-     * @see available(uint8_t*)
+     * @see any()
      * @return
      * - true if there is a payload available in the RX FIFO buffers
      * - false if there is no payload available in the RX FIFO buffers
@@ -334,82 +334,36 @@ public:
      * Read payload data from the RX FIFO buffer(s).
      *
      * The length of data read is usually the next available payload's length
-     * @see any()
      * @param[out] buf Pointer to a buffer where the data should be written
-     * `void*` was chosen specifically as a data type to make it easier
-     * for beginners to use (no casting needed).
+     * @rst
+     * .. note:: ``void*`` was chosen specifically as a data type to make it easier
+     *     for beginners to use (no casting needed).
+     * @endrst
      * @param len Maximum number of bytes to read into the buffer. This
      * value should match the length of the object referenced using the
      * `buf` parameter. The absolute maximum number of bytes that can be read
-     * in one call is 32 (for dynamic payload lengths) or whatever number was
-     * previously passed to setPayloadLength() (for static payload lengths).
+     * in one call is 96.
      * @rst
-     * Remember that each call to :func:`read()` fetches data from the
-     * RX FIFO beginning with the first byte from the first available
-     * payload. A payload is not removed from the RX FIFO until it's
-     * entire length (or more) is fetched using read().
+     * .. hint:: Remember that each call to :func:`read()` fetches data from the
+     *     RX FIFO beginning with the first byte from the first available
+     *     payload. A payload is not removed from the RX FIFO until it's
+     *     entire length (or more) is fetched using :func:read().
      *
-     *     - If ``len`` parameter's value is less than the available payload's
-     *       length, then the payload remains in the RX FIFO.
-     *     - If ``len`` parameter's value is greater than the first of multiple
-     *       available payloads, then the data saved to the ``buf``
-     *       parameter's object will be supplemented with data from the next
-     *       available payload.
-     *     - If ``len`` parameter's value is greater than the last available
-     *       payload's length, then the last byte in the payload is used as
-     *       padding for the data saved to the ``buf`` parameter's object.
-     *       The nRF24L01 will repeatedly use the last byte from the last
-     *       payload even when read() is called with an empty RX FIFO.
+     *         - If ``len`` parameter's value is less than the available payload's
+     *           length, then the payload remains in the RX FIFO.
+     *         - If ``len`` parameter's value is greater than the first of multiple
+     *           available payloads, then the data saved to the ``buf``
+     *           parameter's object will be supplemented with data from the next
+     *           available payload.
+     *         - If ``len`` parameter's value is greater than the last available
+     *           payload's length, then the last byte in the payload is used as
+     *           padding for the data saved to the ``buf`` parameter's object.
+     *           The nRF24L01 will repeatedly use the last byte from the last
+     *           payload even when :func:`read()` is called with an empty RX FIFO.
      * @endrst
-     * @return No return value. Use available().
+     * @see any(), available()
      */
     void read(void* buf, uint8_t len);
-
-    /**
-     * Be sure to call openWritingPipe() first to set the destination
-     * of where to write to.
-     *
-     * This blocks until the message is successfully acknowledged by
-     * the receiver or the timeout/retransmit maxima are reached.  In
-     * the current configuration, the max delay here is 60-70ms.
-     *
-     * The maximum size of data written is the fixed payload size, see
-     * getPayloadLength().  However, you can write less, and the remainder
-     * will just be filled with zeroes.
-     *
-     * The irqDs() and irqDf() interrupt flags will be cleared upon entering
-     * this function
-     *
-     * @param[out] buf Pointer to the data to be sent
-     * @param len Number of bytes to be sent
-     *
-     * @rst
-     * .. code-block::
-     *
-     *     radio.stopListening();
-     *     radio.send(&amp;data, sizeof(data));
-     *
-     * .. note:: The ``len`` parameter must be omitted when using the python
-     *     wrapper because the length of the payload is determined automatically.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         buffer = b"Hello World"  # a `bytes` object
-     *         radio.send(buffer)
-     * @endrst
-     * @return
-     * - `true` if the payload was delivered successfully and an acknowledgement
-     *   (ACK packet) was received. If auto-ack is disabled, then any attempt
-     *   to transmit will also return true (even if the payload was not
-     *   received).
-     * - `false` if the payload was sent but was not acknowledged with an ACK
-     *   packet. This condition can only be reported if the auto-ack feature
-     *   is on.
-     */
-    bool send(const void* buf, uint8_t len);
 
     /**
      * New: Open a pipe for writing via byte array. Old addressing format retained
@@ -420,20 +374,17 @@ public:
      * here). Be sure to call stopListening() prior to calling this function.
      *
      * Addresses are assigned via a byte array, default is 5 byte address length
-     *
      * @rst
      * .. code-block::
      *
      *     uint8_t addresses[][6] = {"1Node", "2Node"};
      *     radio.openWritingPipe(addresses[0]);
-     *
      * .. code-block::
      *
      *      uint8_t address[] = {0xCC, 0xCE, 0xCC, 0xCE, 0xCC};
      *      radio.openWritingPipe(address);
      *      address[0] = 0x33;
      *      radio.openReadingPipe(1, address);
-     *
      * .. warning:: This function will overwrite the address set to reading pipe 0
      *     as stipulated by the datasheet for proper auto-ack functionality in TX
      *     mode. Use this function to ensure proper transmission acknowledgement
@@ -441,17 +392,14 @@ public:
      *     not match the address passed to this function. If the auto-ack feature is
      *     disabled, then this function will still overwrite the address for
      *     reading pipe 0 regardless.
-     *
+     * .. note:: There is no address length parameter because this function will
+     *     always write the number of bytes that the radio addresses are configured
+     *     to use (set with :func:`setAddressLength()`).
      * @endrst
      * @see setAddressLength(), startListening()
-     *
      * @param address The address to be used for outgoing transmissions (uses
      * pipe 0). Coordinate this address amongst other receiving nodes (the
      * pipe numbers don't need to match).
-     *
-     * @remark There is no address length parameter because this function will
-     * always write the number of bytes that the radio addresses are configured
-     * to use (set with setAddressLength()).
      */
     void openWritingPipe(const uint8_t* address);
 
@@ -480,28 +428,25 @@ public:
      *
      * .. warning:: If the reading pipe 0 is opened by this function, the address
      *     passed to this function (for pipe 0) will be restored at every call to
-     *     :func:`startListening()`, but the address for pipe 0 is ONLY restored if the LSB is a
-     *     non-zero value.
+     *     :func:`startListening()`, but the address for pipe 0 is ONLY restored
+     *     if the LSB is a non-zero value.
      *
-     *     Read http:\/\/maniacalbits.blogspot.com\/2013\/04\/rf24-addressing-nrf24l01-radios-require.html
+     *     Read `this article &lt;http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html&gt;`_
      *     to understand how to avoid using malformed addresses. This address
      *     restoration is implemented because of the underlying neccessary
      *     functionality of :func:`openWritingPipe()`.
+     * .. note:: There is no address length parameter because this function will
+     *     always write the number of bytes (for pipes 0 and 1) that the radio
+     *     addresses are configured to use (set with :func:`setAddressLength()`).
      * @endrst
      * @param number Which pipe to open. Only pipe numbers 0-5 are available,
      * an address assigned to any pipe number not in that range will be ignored.
-     * @param address The 24, 32 or 40 bit address of the pipe to open.
-     *
-     * There is no address length parameter because this function will
-     * always write the number of bytes (for pipes 0 and 1) that the radio
-     * addresses are configured to use (set with setAddressLength()).
+     * @param address The 3, 4, or 5 byte address to assign to an RX pipe.
      */
-
     void openReadingPipe(uint8_t number, const uint8_t* address);
 
     /**
      * Print a giant block of debugging information to stdout
-     *
      * @rst
      * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
      *     The printf.h file is included with the library for Arduino.
@@ -512,7 +457,7 @@ public:
      *         setup(){
      *           Serial.begin(115200);
      *           printf_begin();
-     *           ...
+     *           // ...
      *         }
      * @endrst
      */
@@ -523,8 +468,7 @@ public:
      * differs from printDetails() because it makes the information more
      * understandable without having to look up the datasheet or convert
      * hexadecimal to binary. Only use this function if your application can
-     * spare a few extra bytes of memory.
-     *
+     * spare about 600 extra bytes of memory.
      * @rst
      * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
      *     The printf.h file is included with the library for Arduino.
@@ -535,7 +479,7 @@ public:
      *         setup(){
      *           Serial.begin(115200);
      *           printf_begin();
-     *           ...
+     *           // ...
      *         }
      * @endrst
      */
@@ -603,16 +547,23 @@ public:
     void powerUp(void);
 
     /**
-     * Write for single NOACK writes. Optionally disable
-     * acknowledgements/auto-retries for a single payload using the
-     * multicast parameter set to true.
+     * This blocks until the message is successfully acknowledged by
+     * the receiver or the timeout/retransmit maxima are reached.
      *
-     * Can be used with enableAckPayload() to request a response
-     * @see setAutoAck(), send()
+     * Be sure to call openWritingPipe() first to set the destination
+     * of the paylooad.
+     *
+     * The irqDs() and irqDf() interrupt flags will be cleared upon entering
+     * this function
+     * @see setAutoAck()
      * @param buf Pointer to the data to be sent
-     * @param len Number of bytes to be sent
-     * @param multicast Request ACK response (false), or no ACK response
-     * (true). Be sure to have called allowMulticast() at least once before
+     * @param len Number of bytes to be sent. The maximum size of data from @p buf
+     * is 32 bytes (for dynamic payload lengths) or the static payload length
+     * specified by setPayloadLength(). If this parameter is less than what
+     * getPayloadLength() returns (about pipe 0), then the remainder will be padded
+     * with zeroes.
+     * @param multicast Request ACK response (`false`), or no ACK response
+     * (`true`). Be sure to have called allowMulticast() at least once before
      * setting this parameter.
      * @return
      * - `true` if the payload was delivered successfully and an acknowledgement
@@ -622,19 +573,6 @@ public:
      * - `false` if the payload was sent but was not acknowledged with an ACK
      *   packet. This condition can only be reported if the auto-ack feature
      *   is on.
-     *
-     * @rst
-     * .. note:: The ``len`` parameter must be omitted when using the python
-     *     wrapper because the length of the payload is determined automatically.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         buffer = b"Hello World"  # a `bytes` object
-     *         radio.send(buffer, False)  # False = the multicast parameter
-     * @endrst
      */
     bool send(const void* buf, uint8_t len, const bool multicast);
 
@@ -655,9 +593,7 @@ public:
      *
      * .. warning:: Only three of these can be pending at any time as there are
      *     only 3 FIFO buffers.
-     *
-     *     Dynamic payloads must be enabled.
-     *
+     * .. important:: Dynamic payloads must be enabled.
      * .. note:: ACK payloads are dynamic payloads. Calling :func:`enableAckPayload()`
      *     will automatically enable dynamic payloads on pipe 0 (required for TX
      *     mode when expecting ACK payloads). To use ACK payloads on any other
@@ -667,19 +603,6 @@ public:
      * @param buf Pointer to data that is sent
      * @param len Length of the data to send, up to 32 bytes max.  Not affected
      * by the static payload set by setPayloadLength().
-     *
-     * @rst
-     * .. note:: The ``len`` parameter must be omitted when using the python
-     *     wrapper because the length of the payload is determined automatically.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         buffer = b"Hello World"  # a `bytes` object
-     *         radio.writeAck(1, buffer)  # load an ACK payload for response on pipe 1
-     * @endrst
      * @return
      * - `true` if the payload was loaded into the TX FIFO.
      * - `false` if the payload wasn't loaded into the TX FIFO because it is
@@ -710,7 +633,8 @@ public:
     void clearStatusFlags(bool dataReady=true, bool dataSent=true, bool dataFail=true);
 
     /**
-     * Write a payload to the TX FIFO buffers.
+     * Write a payload to the TX FIFO buffers. This function actually serves as
+     * a helper to send().
      *
      * @rst
      * .. note:: This function leaves the CE pin HIGH, so the radio will remain in TX or
@@ -722,14 +646,14 @@ public:
      *     nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
      *     to clear by calling :func:`ce()` to the the CE pin inactive LOW.
      * @endrst
-     * @see send(); to control ACK responses: setAutoAck(bool, uint8_t)
+     * @see send(), setAutoAck(), allowMulticast()
      * @param buf Pointer to the data to be sent
      * @param len Number of bytes to be sent
      * @param multicast Request ACK packet response (`false`), or no ACK packet response
      * (`true`). Be sure to have called allowMulticast() at least once before setting
      * this parameter.
-     * @param write_only If this is set to `true`, then this function sets the
-     * CE pin to active (enabling TX transmissions). `false` has no
+     * @param write_only If this is set to `false`, then this function sets the
+     * CE pin to active (enabling TX transmissions). `true` has no
      * effect on the CE pin and simply loads the payload into the TX FIFO.
      * @return
      * - `true` if the payload was loaded into the TX FIFO.
@@ -845,7 +769,7 @@ public:
      * @param count How many retries before giving up. The default/maximum is 15. Use
      * 0 to disable the auto-retry feature all together.
      * @rst
-     * .. note:: Disable the auto-retry feature on a transmitter still uses the
+     * .. note:: Disabling the auto-retry feature on a transmitter still uses the
      *     auto-ack feature (if enabled), except it will not retry to transmit if
      *     the payload was not acknowledged on the first attempt.
      * @endrst
@@ -861,35 +785,13 @@ public:
      *
      * Meaning the default channel of 76 uses the approximate frequency of
      * 2476 MHz.
-     * @rst
-     * .. note:: In the python wrapper, this function is the setter of the
-     *     ``channel`` attribute.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *          # let `radio` be the instantiated RF24 object
-     *          radio.channel = 2  # set the channel to 2 (2402 MHz)
-     * @endrst
-     *
-     * @param channel Which RF channel to communicate on, 0-125
+     * @param channel Which RF channel to communicate on. This parameter is
+     * clamped to the range [0, 125].
      */
     void setChannel(uint8_t channel);
 
     /**
      * Get RF communication channel
-     * @rst
-     * .. note:: In the python wrapper, this function is the getter of the
-     *     ``channel`` attribute.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         chn = radio.channel  # get the channel
-     * @endrst
      * @return The currently configured RF Channel
      */
     uint8_t getChannel(void);
@@ -901,15 +803,6 @@ public:
      * @rst
      * .. note:: If the dynamic payload length feature is enabled for all pipes,
      *     then this setting is not used.
-     * .. note:: In the python wrapper, this function is the setter of the
-     *     `payloadLength` attribute.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         radio.payloadSize = 16  # set the static payload size to 16 bytes
      * @endrst
      * @param size The number of bytes to use for payload lengths handled by all
      * pipes. This parameter is clamped to the range [1, 32].
@@ -934,17 +827,6 @@ public:
 
     /**
      * Get Static Payload length for a specific pipe
-     * @rst
-     * .. note:: In the python wrapper, this function also serves as the getter of the
-     *     `payloadSize` attribute concerning pipe 0.
-     *
-     *     To use this function in the python wrapper:
-     *
-     *     .. code-block:: python
-     *
-     *         # let `radio` be the instantiated RF24 object
-     *         pl_size = radio.payloadLength  # get the static payload size
-     * @endrst
      * @param pipe the specific pipe about the configuration being fetched. If
      * not specified, then the data returned is about pipe 0.
      * @see setPayloadLength(uint8_t, uint8_t), setPayloadLength(uint8_t), any()
@@ -1058,6 +940,8 @@ public:
      *     radio.send(&amp;data, 32, 0); // Sends a payload using auto-retry/auto-ack features
      * @endrst
      * @see setAutoAck(bool), setAutoAck(bool, uint8_t)
+     * @param enable Enables (`true`) or disables (`false`) the affect of the
+     * `multicast` parameter to send() or write().
      */
     void allowMulticast(bool);
 
@@ -1070,7 +954,7 @@ public:
     /**
      * Determine whether the hardware is an nRF24L01+ or not.
      * @return `true` if the hardware is nRF24L01+ (or compatible) and `false`
-     * if its not.
+     * if it is not.
      */
     bool isPVariant(void);
 
@@ -1172,11 +1056,6 @@ public:
 
     /**
      * Set the transmission Data Rate
-     *
-     * @rst
-     * .. warning:: Setting :enumerator:`RF24_250KBPS` will fail for non-plus modules (when
-     *     :func:`isPVariant()` returns ``false``).
-     * @endrst
      * @param speed Specify one of the following values (as defined by
      * @ref rf24_datarate_e):
      * @rst
@@ -1186,6 +1065,8 @@ public:
      *     ":enumerator:`RF24_1MBPS` (0)", "for 1 Mbps"
      *     ":enumerator:`RF24_2MBPS` (1)", "for 2 Mbps"
      *     ":enumerator:`RF24_250KBPS` (2)", "for 250 kpbs"
+     * .. warning:: Setting :enumerator:`RF24_250KBPS` will fail for non-plus modules
+     *     (when :func:`isPVariant()` returns ``false``).
      * @endrst
      * @return true if the change was successful
      */
@@ -1424,7 +1305,8 @@ public:
      *     :func:`startListening()`, and the address is ONLY restored if the LSB is a
      *     non-zero value.
      *
-     *     Read http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html
+     *     Read `this article &lt;http://maniacalbits.blogspot.com/2013/04/rf24-addressing-nrf24l01-radios-require.html&gt;`_ to understand how to avoid
+     *     using malformed addresses.
      * @endrst
      * @param number Which pipe number to open, should be in range [0, 5].
      * @param address The 40-bit address of the pipe to open.

@@ -13,6 +13,19 @@
 import os
 import sys
 import subprocess
+import pygments.styles
+from pygments.style import Style
+from pygments.token import (
+    Text,
+    Other,
+    Comment,
+    Keyword,
+    Name,
+    Literal,
+    String,
+    Number,
+    Operator,
+)
 import recommonmark
 from recommonmark.transform import AutoStructify
 from recommonmark.parser import CommonMarkParser
@@ -80,8 +93,69 @@ exclude_patterns = [
 # Tell sphinx what the primary language being documented is.
 primary_domain = "cpp"
 
+# pygment custom style
+# --------------------------------------------------
+
+class DarkPlus(Style):
+    """A custom pygment highlighting scheme based on
+    VSCode's builtin `Dark Plus` theme"""
+
+    background_color = "#1E1E1E"
+    highlight_color = "#ff0000"
+    line_number_color = "#FCFCFC"
+    line_number_background_color = "#282828"
+
+    default_style = ""
+    styles = {
+        Text: "#FEFEFE",
+        Comment.Single: "#5E9955",
+        Comment.Multiline: "#5E9955",
+        Comment.Preproc: "#B369BF",
+        Other: "#FEFEFE",
+        Keyword: "#499CD6",
+        Keyword.Declaration: "#C586C0",
+        Keyword.Namespace: "#B369BF",
+        # Keyword.Pseudo: "#499CD6",
+        # Keyword.Reserved: "#499CD6",
+        Keyword.Type: "#48C999",
+        # Name: "#9CDCFE",
+        Name.Builtin: "#EAEB82",
+        Name.Builtin.Pseudo: "#499DC7",
+        Name.Class: "#48C999",
+        Name.Decorator: "#EAEB82",
+        Name.Exception: "#48C999",
+        Name.Attribute: "#569CD6",
+        Name.Variable:" #9CDCFE",
+        Name.Variable.Magic: "#EAEB82",
+        Name.Function: "#EAEB82",
+        Name.Function.Magic: "#EAEB82",
+        Literal: "#AC4C1E",
+        String: "#B88451",
+        String.Escape: "#DEA868",
+        String.Affix: "#499DC7",
+        Number: "#B3D495",
+        Operator: "#FEFEFE",
+        Operator.Word: "#499DC7",
+    }
+
+
+def pygments_monkeypatch_style(mod_name, cls):
+    """ function to inject a custom pygment style """
+    cls_name = cls.__name__
+    mod = type(__import__("os"))(mod_name)
+    setattr(mod, cls_name, cls)
+    setattr(pygments.styles, mod_name, mod)
+    sys.modules["pygments.styles." + mod_name] = mod
+    pygments.styles.STYLE_MAP[mod_name] = mod_name + "::" + cls_name
+
+pygments_monkeypatch_style("dark_plus", DarkPlus)
+
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = "dark_plus"
+
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = "cpp"
+
 
 # breathe configuration
 # ---------------------------------------------
@@ -98,10 +172,8 @@ breathe_default_project = "RF24"
 # recommonmark Configuration
 # -------------------------------------------------
 
-
 def visit_document(*_):
     pass
-
 
 # Removes irrelevant warning messages during md file parsing.
 # REF: https://github.com/readthedocs/recommonmark/issues/177
