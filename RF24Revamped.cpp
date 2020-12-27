@@ -1412,8 +1412,8 @@ void RF24::setRetries(uint16_t delay, uint8_t count)
 void RF24::getRetries(uint16_t* delay, uint8_t* count)
 {
     uint8_t setupRetry = read_register(SETUP_RETR);
-    delay = (setupRetry >> ARD) * 250 + 250;
-    count = (setupRetry & 0xf);
+    *delay = (setupRetry >> ARD) * 250 + 250;
+    *count = (setupRetry & 0xf);
 }
 
 /****************************************************************************/
