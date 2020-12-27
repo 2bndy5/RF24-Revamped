@@ -1402,9 +1402,18 @@ uint8_t RF24::getCrc(void)
 }
 
 /****************************************************************************/
-void RF24::setRetries(uint8_t delay, uint8_t count)
+void RF24::setRetries(uint16_t delay, uint8_t count)
 {
-    write_register(SETUP_RETR, (delay & 0xf) << ARD | (count & 0xf) << ARC);
+    delay = (rf24_max(250, rf24_min(delay, 4000)) - 250) / 250;
+    write_register(SETUP_RETR, (uint8_t)(delay & 0xf) << ARD | rf24_min(15, count));
+}
+
+/****************************************************************************/
+void RF24::getRetries(uint16_t* delay, uint8_t* count)
+{
+    uint8_t setupRetry = read_register(SETUP_RETR);
+    delay = (setupRetry >> ARD) * 250 + 250;
+    count = (setupRetry & 0xf);
 }
 
 /****************************************************************************/

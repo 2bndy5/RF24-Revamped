@@ -461,10 +461,10 @@ public:
      *           printf_begin();
      *           // ...
      *         }
-     * .. note If the automatic acknowledgements feature is configured differently
+     * .. note:: If the automatic acknowledgements feature is configured differently
      *     for each pipe, then a binary representation is used in which bits 0-5
-     *     represent pipes 0-5 respectively. A `0` means the feature is disabled and
-     *     a `1` means the feature is enabled.
+     *     represent pipes 0-5 respectively. A ``0`` means the feature is disabled and
+     *     a ``1`` means the feature is enabled.
      * @endrst
      */
     void printDetails(void);
@@ -747,11 +747,11 @@ public:
      * Set the number of retry attempts and delay between retry attempts when
      * transmitting a payload. The radio is waiting for an acknowledgement
      * (ACK) packet during the delay between retry attempts.
-     * @param delay How long to wait between each retry, in multiples of
-     * 250 us. The minumum of 0 means 250 us, and the maximum of 15 means
-     * 4000 us. The default value of 5 means 1500us (5 * 250 + 250).
-     * @param count How many retries before giving up. The default/maximum is 15. Use
-     * 0 to disable the auto-retry feature all together.
+     * @param delay How long to wait (in microseconds) between each auto-retry
+     * attempt. This parameter is clamped to the range [250, 4000]. The default is
+     * 1500 us.
+     * @param count How many auto-retry attempts before giving up. The default and
+     * maximum is 15. Use 0 to disable the auto-retry feature all together.
      * @rst
      * .. note:: Disabling the auto-retry feature on a transmitter still uses the
      *     auto-ack feature (if enabled), except it will not retry to transmit if
@@ -759,7 +759,27 @@ public:
      * @endrst
      * @see lastTxArc()
      */
-    void setRetries(uint8_t delay, uint8_t count);
+    void setRetries(uint16_t delay, uint8_t count);
+
+    /**
+     * Fetch the configuration of the auto-retry feature
+     * @param[out] delay The pointer to return the amount of microseconds that
+     * the radio waits for an acknowledgement (ACK) packet response between
+     * auto-retry attempted transmissions.
+     * @param[out] count The pointer to return the maximum number of auto-retry
+     * attempts allowed.
+     * @returns This function returns `void`. All returned data is stored in the
+     * referenced variables passed as arguments.
+     * @rst
+     * .. code-block::
+     *
+     *     uint16_t autoDelay;
+     *     uint8_t autoCount;
+     *     radio.getRetries(&amp;autoDelay, &amp;autoCount);
+     * @endrst
+     * @see setRetries()
+     */
+    void getRetries(uint16_t* delay, uint8_t* count);
 
     /**
      * Set RF communication channel. The frequency used by a channel is
