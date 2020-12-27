@@ -446,7 +446,9 @@ public:
     void openReadingPipe(uint8_t number, const uint8_t* address);
 
     /**
-     * Print a giant block of debugging information to stdout
+     * Print a giant block of debugging information to stdout.
+     * Only use this function if your application can
+     * spare extra bytes of memory.
      * @rst
      * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
      *     The printf.h file is included with the library for Arduino.
@@ -459,31 +461,13 @@ public:
      *           printf_begin();
      *           // ...
      *         }
+     * .. note If the automatic acknowledgements feature is configured differently
+     *     for each pipe, then a binary representation is used in which bits 0-5
+     *     represent pipes 0-5 respectively. A `0` means the feature is disabled and
+     *     a `1` means the feature is enabled.
      * @endrst
      */
     void printDetails(void);
-
-    /**
-     * Print a giant block of debugging information to stdout. This function
-     * differs from printDetails() because it makes the information more
-     * understandable without having to look up the datasheet or convert
-     * hexadecimal to binary. Only use this function if your application can
-     * spare about 600 extra bytes of memory.
-     * @rst
-     * .. warning:: Does nothing if stdout is not defined. See fdevopen in stdio.h
-     *     The printf.h file is included with the library for Arduino.
-     *
-     *     .. code-block::
-     *
-     *         #include "printf.h"
-     *         setup(){
-     *           Serial.begin(115200);
-     *           printf_begin();
-     *           // ...
-     *         }
-     * @endrst
-     */
-    void printPrettyDetails(void);
 
     /**
      * Use this function to check if the radio's RX FIFO levels are all
