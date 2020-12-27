@@ -114,3 +114,8 @@ stopCarrierWave()
 ******************************
 
 .. doxygenfunction:: stopCarrierWave
+
+printDetails()
+******************************
+
+.. doxygenfunction:: printDetails

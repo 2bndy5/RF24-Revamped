@@ -118,6 +118,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#getautoack">getAutoAck()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setretries">setRetries()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getretries">getRetries()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disableackpayload">disableAckPayload()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#allowmulticast">allowMulticast()</a></li>
@@ -634,14 +635,14 @@ to send ACK payloads.</p>
 <div class="section" id="setretries">
 <h2>setRetries()<a class="headerlink" href="#setretries" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2410setRetriesE7uint8_t7uint8_t">
-<span id="_CPPv3N4RF2410setRetriesE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2410setRetriesE7uint8_t7uint8_t"></span><span id="RF24::setRetries__uint8_t.uint8_t"></span><span class="target" id="classRF24_1a4c6d3959c8320e64568395f4ef507aef"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setRetries</code><span class="sig-paren">(</span>uint8_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setRetriesE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t">
+<span id="_CPPv3N4RF2410setRetriesE8uint16_t7uint8_t"></span><span id="_CPPv2N4RF2410setRetriesE8uint16_t7uint8_t"></span><span id="RF24::setRetries__uint16_t.uint8_t"></span><span class="target" id="classRF24_1ae4f9d645e92739c8c6083b2ff849877b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setRetries</code><span class="sig-paren">(</span>uint16_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the number of retry attempts and delay between retry attempts when transmitting a payload. The radio is waiting for an acknowledgement (ACK) packet during the delay between retry attempts. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait between each retry, in multiples of 250 us. The minumum of 0 means 250 us, and the maximum of 15 means 4000 us. The default value of 5 means 1500us (5 * 250 + 250). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many retries before giving up. The default/maximum is 15. Use 0 to disable the auto-retry feature all together.  <p><div class="admonition note">
+<li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait (in microseconds) between each auto-retry attempt. This parameter is clamped to the range [250, 4000]. The default is 1500 us. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many auto-retry attempts before giving up. The default and maximum is 15. Use 0 to disable the auto-retry feature all together.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Disabling the auto-retry feature on a transmitter still uses the
 auto-ack feature (if enabled), except it will not retry to transmit if
@@ -649,6 +650,32 @@ the payload was not acknowledged on the first attempt.</p>
 </div>
 </p>
  </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getretries">
+<h2>getRetries()<a class="headerlink" href="#getretries" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410getRetriesEP8uint16_tP7uint8_t">
+<span id="_CPPv3N4RF2410getRetriesEP8uint16_tP7uint8_t"></span><span id="_CPPv2N4RF2410getRetriesEP8uint16_tP7uint8_t"></span><span id="RF24::getRetries__uint16_tP.uint8_tP"></span><span class="target" id="classRF24_1ae489c1431a7b47736c5fadff72396c91"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getRetries</code><span class="sig-paren">(</span>uint16_t *<em>delay</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getRetriesEP8uint16_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetch the configuration of the auto-retry feature <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>This function returns <code class="docutils literal notranslate"><span class="pre">void</span></code>. All returned data is stored in the referenced variables passed as arguments.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span> <span class="n">autoDelay</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">autoCount</span><span class="p">;</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">getRetries</span><span class="p">(</span><span class="o">&amp;</span><span class="n">autoDelay</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">autoCount</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+ </p>
+</dd>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ae4f9d645e92739c8c6083b2ff849877b"><span class="std std-ref">setRetries()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">delay</span></code>: The pointer to return the amount of microseconds that the radio waits for an acknowledgement (ACK) packet response between auto-retry attempted transmissions. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">count</span></code>: The pointer to return the maximum number of auto-retry attempts allowed. </p></li>
 </ul>
 </dd>
 </dl>

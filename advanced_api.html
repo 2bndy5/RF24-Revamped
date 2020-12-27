@@ -120,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#testrpd">testRpd()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#startcarrierwave">startCarrierWave()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stopcarrierwave">stopCarrierWave()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#printdetails">printDetails()</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
@@ -209,7 +210,7 @@
 <dt id="_CPPv4N4RF246resendEv">
 <span id="_CPPv3N4RF246resendEv"></span><span id="_CPPv2N4RF246resendEv"></span><span id="RF24::resend"></span><span class="target" id="classRF24_1a4968f9e74eefc7809e5ba4bbc0a1271b"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">resend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246resendEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers when a TX failure occurs. The auto-retry feature is applied just like when calling <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a>. Calling this function prevents succefully sent payloads from being removed from the TX FIFO buffer until calling <a class="reference internal" href="#classRF24_1a201950051e1d6baeb75b2eaff0db4051"><span class="std std-ref">flushTx()</span></a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a>. If the TX FIFO has other payloads enqueued, then using <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> will attempt to enqueue a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="reference internal" href="basic_api.html#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> also calls <a class="reference internal" href="#classRF24_1a201950051e1d6baeb75b2eaff0db4051"><span class="std std-ref">flushTx()</span></a> when ACK payloads are enabled (via <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>).</p>
-<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1a4c6d3959c8320e64568395f4ef507aef"><span class="std std-ref">setRetries()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
+<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1ae4f9d645e92739c8c6083b2ff849877b"><span class="std std-ref">setRetries()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is to be used AFTER auto-retry fails if wanting to resend
 using the built-in payload reuse feature. In the event of a
@@ -601,7 +602,7 @@ bool <code class="sig-prename descclassname"><a class="reference internal" href=
 <dt><strong>Return</strong></dt><dd><p>Returns values from 0 to 15.  <p><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>the maximum limit of this number is controlled via the <code class="docutils literal notranslate"><span class="pre">count</span></code>
-parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE7uint8_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> function.</p>
+parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> function.</p>
 </div>
 </p>
  </p>
@@ -666,7 +667,7 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 measures that alter some settings. These settings alterations include:</p>
 <ul>
 <li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setAutoAckEb" title="RF24::setAutoAck"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoAck()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">false</span></code> (for all pipes)</p></li>
-<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE7uint8_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> to retry <code class="docutils literal notranslate"><span class="pre">0</span></code> times with a delay of 250 microseconds</p></li>
+<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> to retry <code class="docutils literal notranslate"><span class="pre">0</span></code> times with a delay of 250 microseconds</p></li>
 <li><p>set the TX address to 5 bytes of <code class="docutils literal notranslate"><span class="pre">0xFF</span></code></p></li>
 <li><p><a class="reference internal" href="#_CPPv4N4RF247flushTxEv" title="RF24::flushTx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">flushTx()</span></code></a></p></li>
 <li><p>load a 32 byte payload of <code class="docutils literal notranslate"><span class="pre">0xFF</span></code> into the TX FIFO’s top level</p></li>
@@ -709,6 +710,36 @@ re-configure the radio’s settings</p>
 </dd>
 </dl>
 </p>
+</dd></dl>
+
+</div>
+<div class="section" id="printdetails">
+<h2>printDetails()<a class="headerlink" href="#printdetails" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2412printDetailsEv">
+<span id="_CPPv3N4RF2412printDetailsEv"></span><span id="_CPPv2N4RF2412printDetailsEv"></span><span id="RF24::printDetails__void"></span><span class="target" id="classRF24_1adc95213ed4c8569a90eb33122e16cea6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">printDetails</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412printDetailsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Print a giant block of debugging information to stdout. Only use this function if your application can spare extra bytes of memory.  <p><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Does nothing if stdout is not defined. See fdevopen in stdio.h
+The printf.h file is included with the library for Arduino.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
+<span class="n">setup</span><span class="p">(){</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+  <span class="n">printf_begin</span><span class="p">();</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the automatic acknowledgements feature is configured differently
+for each pipe, then a binary representation is used in which bits 0-5
+represent pipes 0-5 respectively. A <code class="docutils literal notranslate"><span class="pre">0</span></code> means the feature is disabled and
+a <code class="docutils literal notranslate"><span class="pre">1</span></code> means the feature is enabled.</p>
+</div>
+</p>
+ </p>
 </dd></dl>
 
 </div>

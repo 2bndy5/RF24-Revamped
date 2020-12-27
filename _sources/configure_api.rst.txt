@@ -100,6 +100,11 @@ setRetries()
 
 .. doxygenfunction:: setRetries
 
+getRetries()
+******************************
+
+.. doxygenfunction:: getRetries
+
 enableAckPayload()
 ******************************
 
