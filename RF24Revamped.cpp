@@ -811,9 +811,12 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
     // Only going to be 1 packet in the FIFO at a time using this method, so just flush
     flushTx();
     write(buf, len, multicast);
+    uint8_t i = 0;
     while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
         // Wait until complete or failed
         update();
+        i++;
+        IF_SERIAL_DEBUG(printf("status(%d): dr=%d, ds=%d, df=%d", i, irqDr(), irqDs(), irqDf()););
     }
     ce(LOW);
     return irqDs();
