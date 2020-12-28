@@ -85,8 +85,9 @@ int main(int argc, char** argv) {
     // set the RX address of the TX node into a RX pipe
     radio.openReadingPipe(1, address[!radioNumber]); // using pipe 1
 
+    radio.setAutoRetry(4000, 15);
     // For debugging info
-    // radio.printDetails();
+    radio.printDetails();
 
     // ready to execute program now
     setRole(); // calls master() or slave() based on user input
