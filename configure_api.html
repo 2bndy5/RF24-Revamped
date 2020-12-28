@@ -99,39 +99,96 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-rate-enum">Data Rate enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setdynamicpayloads">setDynamicPayloads()</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#address-length-feature">Address Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setaddresslength">setAddressLength()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getaddresslength">getAddressLength()</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#getdynamicpayloads">getDynamicPayloads()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setpayloadlength">setPayloadLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getpayloadlength">getPayloadLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setautoack">setAutoAck()</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#unary-pipe-control-of-autoack">Unary pipe control of AutoAck</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-payload-length-feature">Dynamic Payload Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dynamic-payload-length-setters">Dynamic Payload Length setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#getautoack">getAutoAck()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setretries">setRetries()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getretries">getRetries()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#disableackpayload">disableAckPayload()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#allowmulticast">allowMulticast()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#isallowmulticast">isAllowMulticast()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamic-payload-length-getters">Dynamic Payload Length getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-representation-of-dynamic-payload-length">Individual Pipe Representation of Dynamic Payload Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binary-representation-of-dynamic-payload-length">Binary Representation of Dynamic Payload Length</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#static-payload-length-feature">Static Payload Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#static-payload-length-setters">Static Payload Length setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-static-payload-lengths">Unary pipe control of Static Payload Lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-static-payload-length">Individual pipe control of Static Payload Length</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#getpayloadlength">getPayloadLength()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#auto-ack-feature">Auto-Ack feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#auto-ack-setters">Auto-Ack setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-autoack">Unary pipe control of AutoAck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#auto-ack-getters">Auto-Ack getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#binary-representation-of-auto-ack">Binary Representation of Auto-Ack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-representation-of-auto-ack">Individual Pipe Representation of Auto-Ack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#auto-retry-feature">Auto-Retry feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#auto-retry-setters">Auto-Retry setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setautoretry">setAutoRetry()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setard">setArd()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setarc">setArc()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#auto-retry-getters">Auto-Retry getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getautoretry">getAutoRetry()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getarc">getArc()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getard">getArd()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ack-payload-feature">Ack Payload feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disableackpayload">disableAckPayload()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multicast-feature">Multicast feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#allowmulticast">allowMulticast()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#isallowmulticast">isAllowMulticast()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#interruptconfig">interruptConfig()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setdatarate">setDataRate()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getdatarate">getDataRate()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setchannel">setChannel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getchannel">getChannel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setcrc">setCrc()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getcrc">getCrc()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setpalevel">setPaLevel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getpalevel">getPaLevel()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rf-data-rate">RF Data Rate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-rate-enum">Data Rate enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setdatarate">setDataRate()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getdatarate">getDataRate()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rf-channel">RF Channel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setchannel">setChannel()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getchannel">getChannel()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#crc-checking">CRC checking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setcrc">setCrc()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getcrc">getCrc()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#power-amplifier-level">Power Amplifier Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setpalevel">setPaLevel()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getpalevel">getPaLevel()</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -214,8 +271,735 @@
             
   <div class="section" id="configuration-api">
 <h1>Configuration API<a class="headerlink" href="#configuration-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="address-length-feature">
+<h2>Address Length feature<a class="headerlink" href="#address-length-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setaddresslength">
+<h3>setAddressLength()<a class="headerlink" href="#setaddresslength" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416setAddressLengthE7uint8_t">
+<span id="_CPPv3N4RF2416setAddressLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setAddressLengthE7uint8_t"></span><span id="RF24::setAddressLength__uint8_t"></span><span class="target" id="classRF24_1af870ee715171a3612822190af5523d35"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAddressLength</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the address length from 3 to 5 bytes <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: The address length (in bytes) to use; this parameter is clamped to the range [3, 5]. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getaddresslength">
+<h3>getAddressLength()<a class="headerlink" href="#getaddresslength" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416getAddressLengthEv">
+<span id="_CPPv3N4RF2416getAddressLengthEv"></span><span id="_CPPv2N4RF2416getAddressLengthEv"></span><span id="RF24::getAddressLength__void"></span><span class="target" id="classRF24_1a846af539302100d54def2970526cae93"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAddressLength</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getAddressLengthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The address length (in bytes) currently configured by <a class="reference internal" href="#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>. This number will be in range [3, 5]. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="dynamic-payload-length-feature">
+<h2>Dynamic Payload Length feature<a class="headerlink" href="#dynamic-payload-length-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dynamic-payload-length-setters">
+<h3>Dynamic Payload Length setters<a class="headerlink" href="#dynamic-payload-length-setters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="unary-pipe-control-of-dynamic-payloads">
+<h4>Unary pipe control of Dynamic Payloads<a class="headerlink" href="#unary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418setDynamicPayloadsEb">
+<span id="_CPPv3N4RF2418setDynamicPayloadsEb"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb"></span><span id="RF24::setDynamicPayloads__b"></span><span class="target" id="classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable dynamically sized payloads for all pipes</p>
+<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the dynamic payload length feature for all pipes. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="binary-pipe-control-of-dynamic-payloads">
+<h4>Binary pipe control of Dynamic Payloads<a class="headerlink" href="#binary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t">
+<span id="_CPPv3N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="_CPPv2N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="RF24::setDynamicPayloadsBin__uint8_t"></span><span class="target" id="classRF24_1a4159b907821cd0c561f0dfbe6373bb7d"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloadsBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable dynamically sized payloads for all pipes using a binary integer.</p>
+<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the dynamic payload length feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-control-of-dynamic-payloads">
+<h4>Individual pipe control of Dynamic Payloads<a class="headerlink" href="#individual-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t">
+<span id="_CPPv3N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="RF24::setDynamicPayloads__b.uint8_t"></span><span class="target" id="classRF24_1a6c0a9dc68af50d365640fca65b285462"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable dynamically sized payloads for a specific pipe.</p>
+<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: the configuration of the dynamic payload length feature concerning specific pipe. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="dynamic-payload-length-getters">
+<h3>Dynamic Payload Length getters<a class="headerlink" href="#dynamic-payload-length-getters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="individual-pipe-representation-of-dynamic-payload-length">
+<h4>Individual Pipe Representation of Dynamic Payload Length<a class="headerlink" href="#individual-pipe-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418getDynamicPayloadsE7uint8_t">
+<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a4add0966514d1d41d8727cb080495c5a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the configuration of dynamically sized payloads for a specific pipe.</p>
+<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="binary-representation-of-dynamic-payload-length">
+<h4>Binary Representation of Dynamic Payload Length<a class="headerlink" href="#binary-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2418getDynamicPayloadsEv">
+<span id="_CPPv3N4RF2418getDynamicPayloadsEv"></span><span id="_CPPv2N4RF2418getDynamicPayloadsEv"></span><span id="RF24::getDynamicPayloads__void"></span><span class="target" id="classRF24_1aa9e7a1fc7eb38b8edd729b4739395db4"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the configuration of dynamically sized payloads for all pipes.</p>
+<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the dynamic payload feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit position 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="static-payload-length-feature">
+<h2>Static Payload Length feature<a class="headerlink" href="#static-payload-length-feature" title="Permalink to this headline">¶</a></h2>
+<p>All pipes are configured to use the maximum default length of 32 bytes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the
+<a class="reference external" href="configure_api.html#dynamic-payload-length-feature">Dynamic Payload Length feature</a>
+is enabled for any pipes, then the Static Payload Length setting is not used for that
+pipe(s).</p>
+</div>
+<div class="section" id="static-payload-length-setters">
+<h3>Static Payload Length setters<a class="headerlink" href="#static-payload-length-setters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="unary-pipe-control-of-static-payload-lengths">
+<h4>Unary pipe control of Static Payload Lengths<a class="headerlink" href="#unary-pipe-control-of-static-payload-lengths" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t">
+<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t"></span><span class="target" id="classRF24_1ad129a6a4052e1386b972541445b00a92"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set Static Payload length to be expected for all pipes. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by all pipes. This parameter is clamped to the range [1, 32]. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-control-of-static-payload-length">
+<h4>Individual pipe control of Static Payload Length<a class="headerlink" href="#individual-pipe-control-of-static-payload-length" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t">
+<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t.uint8_t"></span><span class="target" id="classRF24_1aea623db854a91f5d271476df78895520"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set Static Payload length to be expected for a specific pipe. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by the pipe specified by the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> parameter. This parameter is clamped to the range [1, 32]. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe to configure the length for static payloads. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="getpayloadlength">
+<h3>getPayloadLength()<a class="headerlink" href="#getpayloadlength" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416getPayloadLengthE7uint8_t">
+<span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get Static Payload length for a specific pipe <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aea623db854a91f5d271476df78895520"><span class="std std-ref">setPayloadLength(uint8_t, uint8_t)</span></a>, <a class="reference internal" href="#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength(uint8_t)</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>The payload length in bytes that a pipe is configured to use. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe about the configuration being fetched. If not specified, then the data returned is about pipe 0. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="auto-ack-feature">
+<h2>Auto-Ack feature<a class="headerlink" href="#auto-ack-feature" title="Permalink to this headline">¶</a></h2>
+<p>Auto-acknowledgement responds to every recieved payload with an empty
+ACK packet. These ACK packets get sent from the receiving radio back
+to the transmitting radio. To attach an ACK payload to a ACK packet,
+use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">writeAck()</span></code>.</p>
+<p>Pipe 0 is used for TX operations, which include sending ACK packets. If
+using this feature on both TX &amp; RX nodes, then pipe 0 must have this
+feature enabled for the RX &amp; TX operations. If this feature is disabled
+on a transmitting radio’s pipe 0, then the transmitting radio will
+always report that the payload was recieved (even if it was not).
+Remember to also enable this feature for any pipe that is openly
+listening to a transmitting radio with this feature enabled.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If this feature is enabled for pipe 0, then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code>
+parameter to <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code> can be used to disable this feature for an
+individual payload. However, if this feature is disabled for pipe 0,
+then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter will have no effect.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If disabling auto-acknowledgment packets on pipe 0, the ACK
+payloads feature is also disabled as this feature is required on pipe 0
+to send ACK payloads.</p>
+</div>
+<div class="section" id="auto-ack-setters">
+<h3>Auto-Ack setters<a class="headerlink" href="#auto-ack-setters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="unary-pipe-control-of-autoack">
+<h4>Unary pipe control of AutoAck<a class="headerlink" href="#unary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410setAutoAckEb">
+<span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable the auto-acknowledgement feature for all pipes. This feature is enabled by default. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="binary-pipe-control-of-autoack">
+<h4>Binary pipe control of AutoAck<a class="headerlink" href="#binary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2413setAutoAckBinE7uint8_t">
+<span id="_CPPv3N4RF2413setAutoAckBinE7uint8_t"></span><span id="_CPPv2N4RF2413setAutoAckBinE7uint8_t"></span><span id="RF24::setAutoAckBin__uint8_t"></span><span class="target" id="classRF24_1a19438fa13e02f82777bb92fba9885689"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAckBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413setAutoAckBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the auto-acknowledgement feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-control-of-autoack">
+<h4>Individual pipe control of AutoAck<a class="headerlink" href="#individual-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410setAutoAckEb7uint8_t">
+<span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: Which pipe to configure. This number should be in range [0, 5]. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="auto-ack-getters">
+<h3>Auto-Ack getters<a class="headerlink" href="#auto-ack-getters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="binary-representation-of-auto-ack">
+<h4>Binary Representation of Auto-Ack<a class="headerlink" href="#binary-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2413getAutoAckBinEv">
+<span id="_CPPv3N4RF2413getAutoAckBinEv"></span><span id="_CPPv2N4RF2413getAutoAckBinEv"></span><span id="RF24::getAutoAckBin__void"></span><span class="target" id="classRF24_1ae4f8fa6bcd5922681d91b901c8c32a18"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAckBin</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413getAutoAckBinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetch the status of the auto-ack feature for all pipes. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the auto-acknowledgement feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit positions 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="individual-pipe-representation-of-auto-ack">
+<h4>Individual Pipe Representation of Auto-Ack<a class="headerlink" href="#individual-pipe-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410getAutoAckE7uint8_t">
+<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the auto-ack feature is disabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe about which data to fetch. If this parameter is not specified, then the status of the auto-ack feature about pipe 0 is returned. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="auto-retry-feature">
+<h2>Auto-Retry feature<a class="headerlink" href="#auto-retry-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="auto-retry-setters">
+<h3>Auto-Retry setters<a class="headerlink" href="#auto-retry-setters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="setautoretry">
+<h4>setAutoRetry()<a class="headerlink" href="#setautoretry" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t">
+<span id="_CPPv3N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="_CPPv2N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="RF24::setAutoRetry__uint16_t.uint8_t"></span><span class="target" id="classRF24_1a2ee6921707bc524671c92b226fee6281"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoRetry</code><span class="sig-paren">(</span>uint16_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of retry attempts and delay between retry attempts when transmitting a payload. The radio is waiting for an acknowledgement (ACK) packet during the delay between retry attempts. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a>, <a class="reference internal" href="#classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"><span class="std std-ref">setArd()</span></a>, <a class="reference internal" href="#classRF24_1a73b87446d56639739f9a495f8cd6bb24"><span class="std std-ref">setArc()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait (in microseconds) between each auto-retry attempt. This parameter is clamped to the range [250, 4000]. The default is 1500 us. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many auto-retry attempts before giving up. The default and maximum is 15. Use 0 to disable the auto-retry feature all together.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Disabling the auto-retry feature on a transmitter still uses the
+auto-ack feature (if enabled), except it will not retry to transmit if
+the payload was not acknowledged on the first attempt.</p>
+</div>
+</p>
+ </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="setard">
+<h4>setArd()<a class="headerlink" href="#setard" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246setArdE8uint16_t">
+<span id="_CPPv3N4RF246setArdE8uint16_t"></span><span id="_CPPv2N4RF246setArdE8uint16_t"></span><span id="RF24::setArd__uint16_t"></span><span class="target" id="classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArd</code><span class="sig-paren">(</span>uint16_t <em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArdE8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the auto-retry feature’s delay (ARD). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait (in microseconds) between each auto-retry attempt. This parameter is clamped to the range [250, 4000]. The default is 1500 us. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="setarc">
+<h4>setArc()<a class="headerlink" href="#setarc" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246setArcE7uint8_t">
+<span id="_CPPv3N4RF246setArcE7uint8_t"></span><span id="_CPPv2N4RF246setArcE7uint8_t"></span><span id="RF24::setArc__uint8_t"></span><span class="target" id="classRF24_1a73b87446d56639739f9a495f8cd6bb24"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArc</code><span class="sig-paren">(</span>uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the auto-retry feature’s count (ARC). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many auto-retry attempts before giving up. The default and maximum is 15. Use 0 to disable the auto-retry feature all together. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="auto-retry-getters">
+<h3>Auto-Retry getters<a class="headerlink" href="#auto-retry-getters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getautoretry">
+<h4>getAutoRetry()<a class="headerlink" href="#getautoretry" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2412getAutoRetryEP8uint16_tP7uint8_t">
+<span id="_CPPv3N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="_CPPv2N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="RF24::getAutoRetry__uint16_tP.uint8_tP"></span><span class="target" id="classRF24_1a00d41cf7e7602276c1d7a937ab336e14"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoRetry</code><span class="sig-paren">(</span>uint16_t *<em>delay</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412getAutoRetryEP8uint16_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetch the configuration of the auto-retry feature <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>This function returns nothing (<code class="docutils literal notranslate"><span class="pre">void</span></code>). All returned data is stored in the referenced variables passed as arguments.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span> <span class="n">autoDelay</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">autoCount</span><span class="p">;</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">getAutoRetry</span><span class="p">(</span><span class="o">&amp;</span><span class="n">autoDelay</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">autoCount</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+ </p>
+</dd>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a9cbae7b3569ed6fcf713184b824ff37f"><span class="std std-ref">getArd()</span></a>, <a class="reference internal" href="#classRF24_1a9451702ef53481ba4f2b5fea5ab1f6c3"><span class="std std-ref">getArc()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">delay</span></code>: The reference variable that will store the amount of microseconds that the radio waits for an acknowledgement (ACK) packet response between auto-retry attempted transmissions. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">count</span></code>: The reference variable that will store the maximum number of auto-retry attempts allowed. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getarc">
+<h4>getArc()<a class="headerlink" href="#getarc" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246getArcEv">
+<span id="_CPPv3N4RF246getArcEv"></span><span id="_CPPv2N4RF246getArcEv"></span><span id="RF24::getArc__void"></span><span class="target" id="classRF24_1a9451702ef53481ba4f2b5fea5ab1f6c3"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the auto-retry feature’s count (ARC) configuration. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a00d41cf7e7602276c1d7a937ab336e14"><span class="std std-ref">getAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a73b87446d56639739f9a495f8cd6bb24"><span class="std std-ref">setArc()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getard">
+<h4>getArd()<a class="headerlink" href="#getard" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246getArdEv">
+<span id="_CPPv3N4RF246getArdEv"></span><span id="_CPPv2N4RF246getArdEv"></span><span id="RF24::getArd__void"></span><span class="target" id="classRF24_1a9cbae7b3569ed6fcf713184b824ff37f"></span>uint16_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArd</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the auto-retry feature’s delay (ARD) configuration, <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a00d41cf7e7602276c1d7a937ab336e14"><span class="std std-ref">getAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"><span class="std std-ref">setArd()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="ack-payload-feature">
+<h2>Ack Payload feature<a class="headerlink" href="#ack-payload-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="enableackpayload">
+<h3>enableAckPayload()<a class="headerlink" href="#enableackpayload" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416enableAckPayloadEv">
+<span id="_CPPv3N4RF2416enableAckPayloadEv"></span><span id="_CPPv2N4RF2416enableAckPayloadEv"></span><span id="RF24::enableAckPayload__void"></span><span class="target" id="classRF24_1abf8efced2ee9edbcc6510878b20edc1b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">enableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416enableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable custom payloads in the acknowledge packets</p>
+<p>ACK payloads are a handy way to return data back to senders without manually changing the radio modes on both units.</p>
+<p>The ACK payload feature requires the auto-ack feature to be enabled for any pipe using ACK payloads. This function does not automatically enable the auto-ack feature on pipe 0 since the auto-ack feature is enabled for all pipes by default. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a><p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ACK payloads are dynamic payloads. This function automatically
+enables dynamic payloads on pipe 0 by default. Call
+<a class="reference internal" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a> to enable on all pipes (especially for RX
+nodes that use pipes other than pipe 0 to receive transmissions expecting
+responses with ACK payloads).</p>
+</div>
+</p>
+ </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="disableackpayload">
+<h3>disableAckPayload()<a class="headerlink" href="#disableackpayload" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2417disableAckPayloadEv">
+<span id="_CPPv3N4RF2417disableAckPayloadEv"></span><span id="_CPPv2N4RF2417disableAckPayloadEv"></span><span id="RF24::disableAckPayload__void"></span><span class="target" id="classRF24_1a00e17eb6b56b915fd6df30a58784661f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">disableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2417disableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable custom payloads on the ackowledge packets <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="multicast-feature">
+<h2>Multicast feature<a class="headerlink" href="#multicast-feature" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="allowmulticast">
+<h3>allowMulticast()<a class="headerlink" href="#allowmulticast" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2414allowMulticastEb">
+<span id="_CPPv3N4RF2414allowMulticastEb"></span><span id="_CPPv2N4RF2414allowMulticastEb"></span><span id="RF24::allowMulticast__b"></span><span class="target" id="classRF24_1ad66301ac22535ffa7cea85db71b784eb"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable dynamic ACKs (single write multicast or unicast) for chosen messages.  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function must be called once before using the multicast
+parameter for any functions that offer it. To use multicast behavior
+about all outgoing payloads (using pipe 0) or incoming payloads
+(concerning all RX pipes), use <a class="reference internal" href="#_CPPv4N4RF2410setAutoAckEb" title="RF24::setAutoAck"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoAck()</span></code></a>.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Sends a payload with no acknowledgement requested</span>
+<span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Sends a payload using auto-retry/auto-ack features</span>
+</pre></div>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a>, <a class="reference internal" href="#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enables (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the affect of the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a>. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="isallowmulticast">
+<h3>isAllowMulticast()<a class="headerlink" href="#isallowmulticast" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2416isAllowMulticastEv">
+<span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="interruptconfig">
+<h2>interruptConfig()<a class="headerlink" href="#interruptconfig" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2415interruptConfigEbbb">
+<span id="_CPPv3N4RF2415interruptConfigEbbb"></span><span id="_CPPv2N4RF2415interruptConfigEbbb"></span><span id="RF24::interruptConfig__b.b.b"></span><span class="target" id="classRF24_1a7cc8e9fa014ef094c8810a24dd1203ca"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">interruptConfig</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415interruptConfigEbbb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This function is used to configure what events will trigger the Interrupt Request (IRQ) pin active LOW. The following events can be configured:<ol class="loweralpha simple">
+<li><p>”data sent”: This does not mean that the data transmitted was recieved, only that the attempt to send it was complete.</p></li>
+<li><p>”data failed”: This means the data being sent was not recieved. This event is only triggered when the auto-ack feature is enabled.</p></li>
+<li><p>”data received”: This means that data from a receiving payload has been loaded into the RX FIFO buffers. Remember that there are only 3 levels available in the RX FIFO buffers.</p></li>
+</ol>
+</p>
+<p>By default, all events are configured to trigger the IRQ pin active LOW. When the IRQ pin is active, use <a class="reference internal" href="advanced_api.html#classRF24_1aea33bc880fb660702e6217b7afbd6548"><span class="std std-ref">clearStatusFlags()</span></a> to determine what events triggered it. Remeber that calling <a class="reference internal" href="advanced_api.html#classRF24_1aea33bc880fb660702e6217b7afbd6548"><span class="std std-ref">clearStatusFlags()</span></a> also clears these events’ status, and the IRQ pin will then be reset to inactive HIGH.</p>
+<p>The following code configures the IRQ pin to only reflect the “data received” event:  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dataReady</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data received” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data received” event on the IRQ pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataSent</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data sent” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data sent” event on the IRQ pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataFail</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data failed” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data failed” event on the IRQ pin. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="rf-data-rate">
+<h2>RF Data Rate<a class="headerlink" href="#rf-data-rate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-rate-enum">
+<h3>Data Rate enum<a class="headerlink" href="#data-rate-enum" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp enum">
+<dt id="_CPPv415rf24_datarate_e">
+<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How fast data moves through the air. Units are in bits per second (bps). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
+</dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N15rf24_datarate_e10RF24_1MBPSE">
+<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>(0) represents 1 Mbps </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N15rf24_datarate_e10RF24_2MBPSE">
+<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>(1) represents 2 Mbps </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N15rf24_datarate_e12RF24_250KBPSE">
+<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>(2) represents 250 kbps </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="setdatarate">
+<h3>setDataRate()<a class="headerlink" href="#setdatarate" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
+<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmission Data Rate <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">speed</span></code> (enum value)</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="RF24_1MBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_1MBPS</span></code></a> (0)</p></td>
+<td><p>for 1 Mbps</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="RF24_2MBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_2MBPS</span></code></a> (1)</p></td>
+<td><p>for 2 Mbps</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> (2)</p></td>
+<td><p>for 250 kpbs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules
+(when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+</div>
+</p>
+ </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getdatarate">
+<h3>getDataRate()<a class="headerlink" href="#getdatarate" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2411getDataRateEv">
+<span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fetches the currently configured transmission Data Rate <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="rf-channel">
+<h2>RF Channel<a class="headerlink" href="#rf-channel" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setchannel">
+<h3>setChannel()<a class="headerlink" href="#setchannel" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410setChannelE7uint8_t">
+<span id="_CPPv3N4RF2410setChannelE7uint8_t"></span><span id="_CPPv2N4RF2410setChannelE7uint8_t"></span><span id="RF24::setChannel__uint8_t"></span><span class="target" id="classRF24_1a5e6e5a5f6c85d2638381cab2c0f3702e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setChannel</code><span class="sig-paren">(</span>uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setChannelE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set RF communication channel. The frequency used by a channel is calculated as:</p>
+<p>2400 MHz + &lt;channel number&gt;</p>
+<p>Meaning the default channel of 76 uses the approximate frequency of 2476 MHz. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: Which RF channel to communicate on. This parameter is clamped to the range [0, 125]. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getchannel">
+<h3>getChannel()<a class="headerlink" href="#getchannel" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF2410getChannelEv">
+<span id="_CPPv3N4RF2410getChannelEv"></span><span id="_CPPv2N4RF2410getChannelEv"></span><span id="RF24::getChannel__void"></span><span class="target" id="classRF24_1a6a66a94609309e17edaa1919e66cea0a"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getChannel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getChannelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get RF communication channel <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The currently configured RF Channel </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="crc-checking">
+<h2>CRC checking<a class="headerlink" href="#crc-checking" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setcrc">
+<h3>setCrc()<a class="headerlink" href="#setcrc" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246setCrcE7uint8_t">
+<span id="_CPPv3N4RF246setCrcE7uint8_t"></span><span id="_CPPv2N4RF246setCrcE7uint8_t"></span><span id="RF24::setCrc__uint8_t"></span><span class="target" id="classRF24_1af0461e493c60057679fdcfbbd066e141"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setCrc</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setCrcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the CRC checksum length (in bytes)  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CRC checking cannot be disabled if auto-ack is enabled.
+Additionally, CRC checksum is automatically used when the auto-ack
+feature is enabled.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>length</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>to disable using CRC checksums</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>to use 8-bit checksums</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>to use 16-bit checksums</p></td>
+</tr>
+</tbody>
+</table>
+</p>
+ </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="getcrc">
+<h3>getCrc()<a class="headerlink" href="#getcrc" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246getCrcEv">
+<span id="_CPPv3N4RF246getCrcEv"></span><span id="_CPPv2N4RF246getCrcEv"></span><span id="RF24::getCrc__void"></span><span class="target" id="classRF24_1af4921bc2ead573684fdca32e4a976f13"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getCrc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getCrcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the CRC checksum length (in bytes)  <p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CRC checksum is automatically used when the auto-ack feature is
+enabled.</p>
+</div>
+</p>
+ <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The number of bytes used for a CRC checksum (see table in <a class="reference internal" href="#classRF24_1af0461e493c60057679fdcfbbd066e141"><span class="std std-ref">setCrc()</span></a>) </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="power-amplifier-level">
+<h2>Power Amplifier Level<a class="headerlink" href="#power-amplifier-level" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="power-amplifier-level-enum">
-<h2>Power Amplifier Level enum<a class="headerlink" href="#power-amplifier-level-enum" title="Permalink to this headline">¶</a></h2>
+<h3>Power Amplifier Level enum<a class="headerlink" href="#power-amplifier-level-enum" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp enum">
 <dt id="_CPPv413rf24_pa_dbm_e">
 <span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br /></dt>
@@ -354,597 +1138,8 @@
 </dd></dl>
 
 </div>
-<div class="section" id="data-rate-enum">
-<h2>Data Rate enum<a class="headerlink" href="#data-rate-enum" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp enum">
-<dt id="_CPPv415rf24_datarate_e">
-<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>How fast data moves through the air. Units are in bits per second (bps). <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
-</dd>
-</dl>
-</p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt id="_CPPv4N15rf24_datarate_e10RF24_1MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(0) represents 1 Mbps </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4N15rf24_datarate_e10RF24_2MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(1) represents 2 Mbps </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4N15rf24_datarate_e12RF24_250KBPSE">
-<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(2) represents 250 kbps </p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="setdynamicpayloads">
-<h2>setDynamicPayloads()<a class="headerlink" href="#setdynamicpayloads" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="unary-pipe-control-of-dynamic-payloads">
-<h3>Unary pipe control of Dynamic Payloads<a class="headerlink" href="#unary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2418setDynamicPayloadsEb">
-<span id="_CPPv3N4RF2418setDynamicPayloadsEb"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb"></span><span id="RF24::setDynamicPayloads__b"></span><span class="target" id="classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable dynamically sized payloads for all pipes</p>
-<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the dynamic payload length feature for all pipes. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="binary-pipe-control-of-dynamic-payloads">
-<h3>Binary pipe control of Dynamic Payloads<a class="headerlink" href="#binary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t">
-<span id="_CPPv3N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="_CPPv2N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="RF24::setDynamicPayloadsBin__uint8_t"></span><span class="target" id="classRF24_1a4159b907821cd0c561f0dfbe6373bb7d"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloadsBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable dynamically sized payloads for all pipes using a binary integer.</p>
-<p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the dynamic payload length feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="individual-pipe-control-of-dynamic-payloads">
-<h3>Individual pipe control of Dynamic Payloads<a class="headerlink" href="#individual-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t">
-<span id="_CPPv3N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="RF24::setDynamicPayloads__b.uint8_t"></span><span class="target" id="classRF24_1a6c0a9dc68af50d365640fca65b285462"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable dynamically sized payloads for a specific pipe.</p>
-<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: the configuration of the dynamic payload length feature concerning specific pipe. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</div>
-<div class="section" id="getdynamicpayloads">
-<h2>getDynamicPayloads()<a class="headerlink" href="#getdynamicpayloads" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2418getDynamicPayloadsE7uint8_t">
-<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a4add0966514d1d41d8727cb080495c5a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the configuration of dynamically sized payloads for a specific pipe.</p>
-<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe concerning the dynamic payload length feature. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2418getDynamicPayloadsEv">
-<span id="_CPPv3N4RF2418getDynamicPayloadsEv"></span><span id="_CPPv2N4RF2418getDynamicPayloadsEv"></span><span id="RF24::getDynamicPayloads__void"></span><span class="target" id="classRF24_1aa9e7a1fc7eb38b8edd729b4739395db4"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the configuration of dynamically sized payloads for all pipes.</p>
-<p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the dynamic payload feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit position 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setpayloadlength">
-<h2>setPayloadLength()<a class="headerlink" href="#setpayloadlength" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t">
-<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t"></span><span class="target" id="classRF24_1ad129a6a4052e1386b972541445b00a92"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set Static Payload length to be expected for all pipes.</p>
-<p>All pipes are configured to use the maximum default length of 32 bytes.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the dynamic payload length feature is enabled for all pipes,
-then this setting is not used.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by all pipes. This parameter is clamped to the range [1, 32]. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t">
-<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t.uint8_t"></span><span class="target" id="classRF24_1aea623db854a91f5d271476df78895520"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set Static Payload length to be expected for a specific pipe.</p>
-<p>All pipes are configured to use the maximum default length of 32 bytes.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the dynamic payload length feature is enabled for any pipe,
-then this setting is not used for that pipe.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by the pipe specified by the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> parameter. This parameter is clamped to the range [1, 32]. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe to configure the length for static payloads. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="getpayloadlength">
-<h2>getPayloadLength()<a class="headerlink" href="#getpayloadlength" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416getPayloadLengthE7uint8_t">
-<span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get Static Payload length for a specific pipe <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aea623db854a91f5d271476df78895520"><span class="std std-ref">setPayloadLength(uint8_t, uint8_t)</span></a>, <a class="reference internal" href="#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength(uint8_t)</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
-</dd>
-<dt><strong>Return</strong></dt><dd><p>The payload length in bytes that a pipe is configured to use. </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: the specific pipe about the configuration being fetched. If not specified, then the data returned is about pipe 0. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setautoack">
-<h2>setAutoAck()<a class="headerlink" href="#setautoack" title="Permalink to this headline">¶</a></h2>
-<p>Auto-acknowledgement responds to every recieved payload with an empty
-ACK packet. These ACK packets get sent from the receiving radio back
-to the transmitting radio. To attach an ACK payload to a ACK packet,
-use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">writeAck()</span></code>.</p>
-<p>Pipe 0 is used for TX operations, which include sending ACK packets. If
-using this feature on both TX &amp; RX nodes, then pipe 0 must have this
-feature enabled for the RX &amp; TX operations. If this feature is disabled
-on a transmitting radio’s pipe 0, then the transmitting radio will
-always report that the payload was recieved (even if it was not).
-Remember to also enable this feature for any pipe that is openly
-listening to a transmitting radio with this feature enabled.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If this feature is enabled for pipe 0, then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code>
-parameter to <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code> can be used to disable this feature for an
-individual payload. However, if this feature is disabled for pipe 0,
-then the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter will have no effect.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If disabling auto-acknowledgment packets on pipe 0, the ACK
-payloads feature is also disabled as this feature is required on pipe 0
-to send ACK payloads.</p>
-</div>
-<div class="section" id="unary-pipe-control-of-autoack">
-<h3>Unary pipe control of AutoAck<a class="headerlink" href="#unary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410setAutoAckEb">
-<span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable the auto-acknowledgement feature for all pipes. This feature is enabled by default. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="binary-pipe-control-of-autoack">
-<h3>Binary pipe control of AutoAck<a class="headerlink" href="#binary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2413setAutoAckBinE7uint8_t">
-<span id="_CPPv3N4RF2413setAutoAckBinE7uint8_t"></span><span id="_CPPv2N4RF2413setAutoAckBinE7uint8_t"></span><span id="RF24::setAutoAckBin__uint8_t"></span><span class="target" id="classRF24_1a19438fa13e02f82777bb92fba9885689"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAckBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413setAutoAckBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the auto-acknowledgement feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="individual-pipe-control-of-autoack">
-<h3>Individual pipe control of AutoAck<a class="headerlink" href="#individual-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h3>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410setAutoAckEb7uint8_t">
-<span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: Which pipe to configure. This number should be in range [0, 5]. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</div>
-<div class="section" id="getautoack">
-<h2>getAutoAck()<a class="headerlink" href="#getautoack" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410getAutoAckEv">
-<span id="_CPPv3N4RF2410getAutoAckEv"></span><span id="_CPPv2N4RF2410getAutoAckEv"></span><span id="RF24::getAutoAck__void"></span><span class="target" id="classRF24_1ab6e303cf4919a6501ad88b2590528856"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetch the status of the auto-ack feature for all pipes. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the auto-acknowledgement feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit positions 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410getAutoAckE7uint8_t">
-<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a0ecdc7030ac70978dcfabb5645356c8d"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the auto-ack feature is disabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
-</ul>
-</p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe about whick data to fetch. If this parameter is not specified, then the status of the auto-ack feature about pipe 0 is returned. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setretries">
-<h2>setRetries()<a class="headerlink" href="#setretries" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t">
-<span id="_CPPv3N4RF2410setRetriesE8uint16_t7uint8_t"></span><span id="_CPPv2N4RF2410setRetriesE8uint16_t7uint8_t"></span><span id="RF24::setRetries__uint16_t.uint8_t"></span><span class="target" id="classRF24_1ae4f9d645e92739c8c6083b2ff849877b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setRetries</code><span class="sig-paren">(</span>uint16_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the number of retry attempts and delay between retry attempts when transmitting a payload. The radio is waiting for an acknowledgement (ACK) packet during the delay between retry attempts. <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">delay</span></code>: How long to wait (in microseconds) between each auto-retry attempt. This parameter is clamped to the range [250, 4000]. The default is 1500 us. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: How many auto-retry attempts before giving up. The default and maximum is 15. Use 0 to disable the auto-retry feature all together.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Disabling the auto-retry feature on a transmitter still uses the
-auto-ack feature (if enabled), except it will not retry to transmit if
-the payload was not acknowledged on the first attempt.</p>
-</div>
-</p>
- </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="getretries">
-<h2>getRetries()<a class="headerlink" href="#getretries" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410getRetriesEP8uint16_tP7uint8_t">
-<span id="_CPPv3N4RF2410getRetriesEP8uint16_tP7uint8_t"></span><span id="_CPPv2N4RF2410getRetriesEP8uint16_tP7uint8_t"></span><span id="RF24::getRetries__uint16_tP.uint8_tP"></span><span class="target" id="classRF24_1ae489c1431a7b47736c5fadff72396c91"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getRetries</code><span class="sig-paren">(</span>uint16_t *<em>delay</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getRetriesEP8uint16_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetch the configuration of the auto-retry feature <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>This function returns <code class="docutils literal notranslate"><span class="pre">void</span></code>. All returned data is stored in the referenced variables passed as arguments.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span> <span class="n">autoDelay</span><span class="p">;</span>
-<span class="kt">uint8_t</span> <span class="n">autoCount</span><span class="p">;</span>
-<span class="n">radio</span><span class="p">.</span><span class="n">getRetries</span><span class="p">(</span><span class="o">&amp;</span><span class="n">autoDelay</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">autoCount</span><span class="p">);</span>
-</pre></div>
-</div>
-</p>
- </p>
-</dd>
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ae4f9d645e92739c8c6083b2ff849877b"><span class="std std-ref">setRetries()</span></a> </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">delay</span></code>: The pointer to return the amount of microseconds that the radio waits for an acknowledgement (ACK) packet response between auto-retry attempted transmissions. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">count</span></code>: The pointer to return the maximum number of auto-retry attempts allowed. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="enableackpayload">
-<h2>enableAckPayload()<a class="headerlink" href="#enableackpayload" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416enableAckPayloadEv">
-<span id="_CPPv3N4RF2416enableAckPayloadEv"></span><span id="_CPPv2N4RF2416enableAckPayloadEv"></span><span id="RF24::enableAckPayload__void"></span><span class="target" id="classRF24_1abf8efced2ee9edbcc6510878b20edc1b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">enableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416enableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable custom payloads in the acknowledge packets</p>
-<p>ACK payloads are a handy way to return data back to senders without manually changing the radio modes on both units.</p>
-<p>The ACK payload feature requires the auto-ack feature to be enabled for any pipe using ACK payloads. This function does not automatically enable the auto-ack feature on pipe 0 since the auto-ack feature is enabled for all pipes by default. <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a><p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>ACK payloads are dynamic payloads. This function automatically
-enables dynamic payloads on pipe 0 by default. Call
-<a class="reference internal" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a> to enable on all pipes (especially for RX
-nodes that use pipes other than pipe 0 to receive transmissions expecting
-responses with ACK payloads).</p>
-</div>
-</p>
- </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="disableackpayload">
-<h2>disableAckPayload()<a class="headerlink" href="#disableackpayload" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2417disableAckPayloadEv">
-<span id="_CPPv3N4RF2417disableAckPayloadEv"></span><span id="_CPPv2N4RF2417disableAckPayloadEv"></span><span id="RF24::disableAckPayload__void"></span><span class="target" id="classRF24_1a00e17eb6b56b915fd6df30a58784661f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">disableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2417disableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Disable custom payloads on the ackowledge packets <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a> </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="allowmulticast">
-<h2>allowMulticast()<a class="headerlink" href="#allowmulticast" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2414allowMulticastEb">
-<span id="_CPPv3N4RF2414allowMulticastEb"></span><span id="_CPPv2N4RF2414allowMulticastEb"></span><span id="RF24::allowMulticast__b"></span><span class="target" id="classRF24_1ad66301ac22535ffa7cea85db71b784eb"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Enable dynamic ACKs (single write multicast or unicast) for chosen messages.  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function must be called once before using the multicast
-parameter for any functions that offer it. To use multicast behavior
-about all outgoing payloads (using pipe 0) or incoming payloads
-(concerning all RX pipes), use <a class="reference internal" href="#_CPPv4N4RF2410setAutoAckEb" title="RF24::setAutoAck"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoAck()</span></code></a>.</p>
-</div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Sends a payload with no acknowledgement requested</span>
-<span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Sends a payload using auto-retry/auto-ack features</span>
-</pre></div>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a>, <a class="reference internal" href="#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enables (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the affect of the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a>. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="isallowmulticast">
-<h2>isAllowMulticast()<a class="headerlink" href="#isallowmulticast" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416isAllowMulticastEv">
-<span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="interruptconfig">
-<h2>interruptConfig()<a class="headerlink" href="#interruptconfig" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2415interruptConfigEbbb">
-<span id="_CPPv3N4RF2415interruptConfigEbbb"></span><span id="_CPPv2N4RF2415interruptConfigEbbb"></span><span id="RF24::interruptConfig__b.b.b"></span><span class="target" id="classRF24_1a7cc8e9fa014ef094c8810a24dd1203ca"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">interruptConfig</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415interruptConfigEbbb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>This function is used to configure what events will trigger the Interrupt Request (IRQ) pin active LOW. The following events can be configured:<ol class="loweralpha simple">
-<li><p>”data sent”: This does not mean that the data transmitted was recieved, only that the attempt to send it was complete.</p></li>
-<li><p>”data failed”: This means the data being sent was not recieved. This event is only triggered when the auto-ack feature is enabled.</p></li>
-<li><p>”data received”: This means that data from a receiving payload has been loaded into the RX FIFO buffers. Remember that there are only 3 levels available in the RX FIFO buffers.</p></li>
-</ol>
-</p>
-<p>By default, all events are configured to trigger the IRQ pin active LOW. When the IRQ pin is active, use <a class="reference internal" href="advanced_api.html#classRF24_1aea33bc880fb660702e6217b7afbd6548"><span class="std std-ref">clearStatusFlags()</span></a> to determine what events triggered it. Remeber that calling <a class="reference internal" href="advanced_api.html#classRF24_1aea33bc880fb660702e6217b7afbd6548"><span class="std std-ref">clearStatusFlags()</span></a> also clears these events’ status, and the IRQ pin will then be reset to inactive HIGH.</p>
-<p>The following code configures the IRQ pin to only reflect the “data received” event:  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</pre></div>
-</div>
-</p>
-</p>
-<p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataReady</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data received” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data received” event on the IRQ pin. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dataSent</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data sent” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data sent” event on the IRQ pin. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dataFail</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data failed” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data failed” event on the IRQ pin. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setdatarate">
-<h2>setDataRate()<a class="headerlink" href="#setdatarate" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
-<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the transmission Data Rate <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">speed</span></code> (enum value)</p></th>
-<th class="head"><p>description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="RF24_1MBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_1MBPS</span></code></a> (0)</p></td>
-<td><p>for 1 Mbps</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="RF24_2MBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_2MBPS</span></code></a> (1)</p></td>
-<td><p>for 2 Mbps</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> (2)</p></td>
-<td><p>for 250 kpbs</p></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules
-(when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
-</div>
-</p>
- </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="getdatarate">
-<h2>getDataRate()<a class="headerlink" href="#getdatarate" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2411getDataRateEv">
-<span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fetches the currently configured transmission Data Rate <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setchannel">
-<h2>setChannel()<a class="headerlink" href="#setchannel" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410setChannelE7uint8_t">
-<span id="_CPPv3N4RF2410setChannelE7uint8_t"></span><span id="_CPPv2N4RF2410setChannelE7uint8_t"></span><span id="RF24::setChannel__uint8_t"></span><span class="target" id="classRF24_1a5e6e5a5f6c85d2638381cab2c0f3702e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setChannel</code><span class="sig-paren">(</span>uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setChannelE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set RF communication channel. The frequency used by a channel is calculated as:</p>
-<p>2400 MHz + &lt;channel number&gt;</p>
-<p>Meaning the default channel of 76 uses the approximate frequency of 2476 MHz. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: Which RF channel to communicate on. This parameter is clamped to the range [0, 125]. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="getchannel">
-<h2>getChannel()<a class="headerlink" href="#getchannel" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2410getChannelEv">
-<span id="_CPPv3N4RF2410getChannelEv"></span><span id="_CPPv2N4RF2410getChannelEv"></span><span id="RF24::getChannel__void"></span><span class="target" id="classRF24_1a6a66a94609309e17edaa1919e66cea0a"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getChannel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getChannelEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get RF communication channel <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>The currently configured RF Channel </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="setcrc">
-<h2>setCrc()<a class="headerlink" href="#setcrc" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF246setCrcE7uint8_t">
-<span id="_CPPv3N4RF246setCrcE7uint8_t"></span><span id="_CPPv2N4RF246setCrcE7uint8_t"></span><span id="RF24::setCrc__uint8_t"></span><span class="target" id="classRF24_1af0461e493c60057679fdcfbbd066e141"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setCrc</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setCrcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the CRC checksum length (in bytes)  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>CRC checking cannot be disabled if auto-ack is enabled.
-Additionally, CRC checksum is automatically used when the auto-ack
-feature is enabled.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 30%" />
-<col style="width: 70%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>length</p></th>
-<th class="head"><p>description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>to disable using CRC checksums</p></td>
-</tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>to use 8-bit checksums</p></td>
-</tr>
-<tr class="row-even"><td><p>2</p></td>
-<td><p>to use 16-bit checksums</p></td>
-</tr>
-</tbody>
-</table>
-</p>
- </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-<div class="section" id="getcrc">
-<h2>getCrc()<a class="headerlink" href="#getcrc" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF246getCrcEv">
-<span id="_CPPv3N4RF246getCrcEv"></span><span id="_CPPv2N4RF246getCrcEv"></span><span id="RF24::getCrc__void"></span><span class="target" id="classRF24_1af4921bc2ead573684fdca32e4a976f13"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getCrc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getCrcEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the CRC checksum length (in bytes)  <p><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>CRC checksum is automatically used when the auto-ack feature is
-enabled.</p>
-</div>
-</p>
- <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>The number of bytes used for a CRC checksum (see table in <a class="reference internal" href="#classRF24_1af0461e493c60057679fdcfbbd066e141"><span class="std std-ref">setCrc()</span></a>) </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
 <div class="section" id="setpalevel">
-<h2>setPaLevel()<a class="headerlink" href="#setpalevel" title="Permalink to this headline">¶</a></h2>
+<h3>setPaLevel()<a class="headerlink" href="#setpalevel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setPaLevelE7uint8_tb">
 <span id="_CPPv3N4RF2410setPaLevelE7uint8_tb"></span><span id="_CPPv2N4RF2410setPaLevelE7uint8_tb"></span><span id="RF24::setPaLevel__uint8_t.b"></span><span class="target" id="classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPaLevel</code><span class="sig-paren">(</span>uint8_t <em>level</em>, bool <em>lnaEnable</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="Permalink to this definition">¶</a><br /></dt>
@@ -1008,7 +1203,7 @@ parameter.</p>
 
 </div>
 <div class="section" id="getpalevel">
-<h2>getPaLevel()<a class="headerlink" href="#getpalevel" title="Permalink to this headline">¶</a></h2>
+<h3>getPaLevel()<a class="headerlink" href="#getpalevel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getPaLevelEv">
 <span id="_CPPv3N4RF2410getPaLevelEv"></span><span id="_CPPv2N4RF2410getPaLevelEv"></span><span id="RF24::getPaLevel__void"></span><span class="target" id="classRF24_1a9d78d3638af3245f840f5698e630c25f"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPaLevel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getPaLevelEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -1019,6 +1214,7 @@ parameter.</p>
 </p>
 </dd></dl>
 
+</div>
 </div>
 </div>
 

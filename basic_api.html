@@ -268,7 +268,7 @@ before continuing application.</p>
 <dd><p>Open a pipe for reading</p>
 <p>Up to 6 pipes can be open for reading at once. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
 <p><dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a><p><div class="admonition note">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a><p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pipes 0 and 1 will store a full 5-byte address. Pipes 2-5 will
 technically only store a single byte, borrowing up to 4 additional bytes
@@ -298,7 +298,7 @@ functionality of <a class="reference internal" href="#_CPPv4N4RF2415openWritingP
 <p class="admonition-title">Note</p>
 <p>There is no address length parameter because this function will
 always write the number of bytes (for pipes 0 and 1) that the radio
-addresses are configured to use (set with <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
+addresses are configured to use (set with <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
 </div>
 </p>
  </p>
@@ -394,11 +394,11 @@ reading pipe 0 regardless.</p>
 <p class="admonition-title">Note</p>
 <p>There is no address length parameter because this function will
 always write the number of bytes that the radio addresses are configured
-to use (set with <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
+to use (set with <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The address to be used for outgoing transmissions (uses pipe 0). Coordinate this address amongst other receiving nodes (the pipe numbers don’t need to match). </p></li>

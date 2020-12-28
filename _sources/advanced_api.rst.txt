@@ -10,7 +10,7 @@ resend()
 write()
 ******************************
 
-.. doxygenfunction:: RF24::write(const void*, uint8_t, const bool, bool)
+.. doxygenfunction:: RF24::write
 
 ce()
 ******************************
@@ -22,33 +22,48 @@ writeAck()
 
 .. doxygenfunction:: writeAck
 
-update()
+Status Byte
 ******************************
+
+.. important:: Calling most of these status byte related functions do not update the
+    data they return. Use :func:`~RF24::update()` to refresh the status byte data as needed.
+
+    The status byte data is updated on every SPI transaction. The only functions that
+    don't execute an SPI transaction are :func:`~RF24::irqDf()`, :func:`~RF24::irqDd()`,
+    :func:`~RF24::irqDr()`, :func:`~RF24::isTxFull()`, and :func:`~RF24::pipe()`.
+
+update()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: update
 
 isTxFull()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: isTxFull
 
+pipe()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfunction:: pipe
+
 irqDr()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: irqDr
 
 irqDf()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: irqDf
 
 irqDs()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: irqDs
 
 clearStatusFlags()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: clearStatusFlags
 
@@ -62,33 +77,31 @@ powerDown()
 
 .. doxygenfunction:: powerDown
 
-flushRx()
+FIFO managment
 ******************************
+
+flushRx()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: flushRx
 
 flushTx()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: flushTx
 
 isFifo()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: isFifo(bool)
+Empty OR Full condition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. doxygenfunction:: isFifo(bool, bool)
-    :no-link:
 
-setAddressLength()
-******************
+Empty AND Full condition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: setAddressLength
-
-getAddressLength()
-******************
-
-.. doxygenfunction:: getAddressLength
+.. doxygenfunction:: isFifo(bool)
 
 lastTxArc()
 ******************************
@@ -100,18 +113,21 @@ isPVariant()
 
 .. doxygenfunction:: isPVariant
 
-testRpd()
+Ambiguous Signal detection
 ******************************
+
+testRpd()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: testRpd
 
 startCarrierWave()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: startCarrierWave
 
 stopCarrierWave()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: stopCarrierWave
 

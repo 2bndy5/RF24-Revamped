@@ -379,61 +379,130 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.</p>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#write">write()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#ce">ce()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#writeack">writeAck()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#update">update()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#istxfull">isTxFull()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqdr">irqDr()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqdf">irqDf()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#irqds">irqDs()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#clearstatusflags">clearStatusFlags()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#status-byte">Status Byte</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#update">update()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#istxfull">isTxFull()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#pipe">pipe()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#irqdr">irqDr()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#irqdf">irqDf()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#irqds">irqDs()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#clearstatusflags">clearStatusFlags()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#powerup">powerUp()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#powerdown">powerDown()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#flushrx">flushRx()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#flushtx">flushTx()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#isfifo">isFifo()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#setaddresslength">setAddressLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#getaddresslength">getAddressLength()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#fifo-managment">FIFO managment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#flushrx">flushRx()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#flushtx">flushTx()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#isfifo">isFifo()</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="advanced_api.html#empty-or-full-condition">Empty OR Full condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="advanced_api.html#empty-and-full-condition">Empty AND Full condition</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#lasttxarc">lastTxArc()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#ispvariant">isPVariant()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#testrpd">testRpd()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#startcarrierwave">startCarrierWave()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#stopcarrierwave">stopCarrierWave()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_api.html#ambiguous-signal-detection">Ambiguous Signal detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#testrpd">testRpd()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#startcarrierwave">startCarrierWave()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_api.html#stopcarrierwave">stopCarrierWave()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_api.html#printdetails">printDetails()</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#data-rate-enum">Data Rate enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setdynamicpayloads">setDynamicPayloads()</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#address-length-feature">Address Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#setaddresslength">setAddressLength()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getaddresslength">getAddressLength()</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getdynamicpayloads">getDynamicPayloads()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setpayloadlength">setPayloadLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getpayloadlength">getPayloadLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setautoack">setAutoAck()</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#unary-pipe-control-of-autoack">Unary pipe control of AutoAck</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configure_api.html#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#dynamic-payload-length-feature">Dynamic Payload Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#dynamic-payload-length-setters">Dynamic Payload Length setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getautoack">getAutoAck()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setretries">setRetries()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getretries">getRetries()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#enableackpayload">enableAckPayload()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#disableackpayload">disableAckPayload()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#allowmulticast">allowMulticast()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#isallowmulticast">isAllowMulticast()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#dynamic-payload-length-getters">Dynamic Payload Length getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#individual-pipe-representation-of-dynamic-payload-length">Individual Pipe Representation of Dynamic Payload Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#binary-representation-of-dynamic-payload-length">Binary Representation of Dynamic Payload Length</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#static-payload-length-feature">Static Payload Length feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#static-payload-length-setters">Static Payload Length setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#unary-pipe-control-of-static-payload-lengths">Unary pipe control of Static Payload Lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#individual-pipe-control-of-static-payload-length">Individual pipe control of Static Payload Length</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getpayloadlength">getPayloadLength()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#auto-ack-feature">Auto-Ack feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#auto-ack-setters">Auto-Ack setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#unary-pipe-control-of-autoack">Unary pipe control of AutoAck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#auto-ack-getters">Auto-Ack getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#binary-representation-of-auto-ack">Binary Representation of Auto-Ack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#individual-pipe-representation-of-auto-ack">Individual Pipe Representation of Auto-Ack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#auto-retry-feature">Auto-Retry feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#auto-retry-setters">Auto-Retry setters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#setautoretry">setAutoRetry()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#setard">setArd()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#setarc">setArc()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#auto-retry-getters">Auto-Retry getters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#getautoretry">getAutoRetry()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#getarc">getArc()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure_api.html#getard">getArd()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#ack-payload-feature">Ack Payload feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#enableackpayload">enableAckPayload()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#disableackpayload">disableAckPayload()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#multicast-feature">Multicast feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#allowmulticast">allowMulticast()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#isallowmulticast">isAllowMulticast()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="configure_api.html#interruptconfig">interruptConfig()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setdatarate">setDataRate()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getdatarate">getDataRate()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setchannel">setChannel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getchannel">getChannel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setcrc">setCrc()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getcrc">getCrc()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#setpalevel">setPaLevel()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configure_api.html#getpalevel">getPaLevel()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#rf-data-rate">RF Data Rate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#data-rate-enum">Data Rate enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#setdatarate">setDataRate()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getdatarate">getDataRate()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#rf-channel">RF Channel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#setchannel">setChannel()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getchannel">getChannel()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#crc-checking">CRC checking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#setcrc">setCrc()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getcrc">getCrc()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configure_api.html#power-amplifier-level">Power Amplifier Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#setpalevel">setPaLevel()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configure_api.html#getpalevel">getPaLevel()</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

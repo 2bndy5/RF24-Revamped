@@ -102,24 +102,36 @@
 <li class="toctree-l2"><a class="reference internal" href="#write">write()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ce">ce()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writeack">writeAck()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#update">update()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#istxfull">isTxFull()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#irqdr">irqDr()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#irqdf">irqDf()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#irqds">irqDs()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#clearstatusflags">clearStatusFlags()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#status-byte">Status Byte</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#update">update()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#istxfull">isTxFull()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pipe">pipe()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irqdr">irqDr()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irqdf">irqDf()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irqds">irqDs()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clearstatusflags">clearStatusFlags()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#powerup">powerUp()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#powerdown">powerDown()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#flushrx">flushRx()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#flushtx">flushTx()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#isfifo">isFifo()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setaddresslength">setAddressLength()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getaddresslength">getAddressLength()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fifo-managment">FIFO managment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flushrx">flushRx()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flushtx">flushTx()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#isfifo">isFifo()</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#empty-or-full-condition">Empty OR Full condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empty-and-full-condition">Empty AND Full condition</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#lasttxarc">lastTxArc()</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ispvariant">isPVariant()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testrpd">testRpd()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#startcarrierwave">startCarrierWave()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#stopcarrierwave">stopCarrierWave()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ambiguous-signal-detection">Ambiguous Signal detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testrpd">testRpd()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#startcarrierwave">startCarrierWave()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stopcarrierwave">stopCarrierWave()</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#printdetails">printDetails()</a></li>
 </ul>
 </li>
@@ -210,7 +222,7 @@
 <dt id="_CPPv4N4RF246resendEv">
 <span id="_CPPv3N4RF246resendEv"></span><span id="_CPPv2N4RF246resendEv"></span><span id="RF24::resend"></span><span class="target" id="classRF24_1a4968f9e74eefc7809e5ba4bbc0a1271b"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">resend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246resendEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The function will instruct the radio to re-use the payload in the top level (first out) of the TX FIFO buffers when a TX failure occurs. The auto-retry feature is applied just like when calling <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a>. Calling this function prevents succefully sent payloads from being removed from the TX FIFO buffer until calling <a class="reference internal" href="#classRF24_1a201950051e1d6baeb75b2eaff0db4051"><span class="std std-ref">flushTx()</span></a>. If the TX FIFO has only the one payload (in the top level), the re-used payload can be overwritten by using <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a>. If the TX FIFO has other payloads enqueued, then using <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> or <a class="reference internal" href="#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> will attempt to enqueue a new payload in the TX FIFO (does not overwrite the top level of the TX FIFO). Currently, <a class="reference internal" href="basic_api.html#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> also calls <a class="reference internal" href="#classRF24_1a201950051e1d6baeb75b2eaff0db4051"><span class="std std-ref">flushTx()</span></a> when ACK payloads are enabled (via <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>).</p>
-<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1ae4f9d645e92739c8c6083b2ff849877b"><span class="std std-ref">setRetries()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
+<p>This function only applies when taking advantage of the auto-retry feature. See <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> and <a class="reference internal" href="configure_api.html#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a> to configure the auto-retry feature.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is to be used AFTER auto-retry fails if wanting to resend
 using the built-in payload reuse feature. In the event of a
@@ -299,9 +311,7 @@ description of this pin’s usage.</p>
 <dt id="_CPPv4N4RF248writeAckE7uint8_tPKv7uint8_t">
 <span id="_CPPv3N4RF248writeAckE7uint8_tPKv7uint8_t"></span><span id="_CPPv2N4RF248writeAckE7uint8_tPKv7uint8_t"></span><span id="RF24::writeAck__uint8_t.voidCP.uint8_t"></span><span class="target" id="classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">writeAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em>, <em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF248writeAckE7uint8_tPKv7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write an acknowledgement (ACK) payload for the specified pipe</p>
-<p>The next time a message is received on a specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, the data in <code class="docutils literal notranslate"><span class="pre">buf</span></code> will be sent back in the ACK payload.</p>
-<p><dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"><span class="std std-ref">setDynamicPayloads()</span></a><p><div class="admonition note">
+<p>The next time a message is received on a specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, the data in <code class="docutils literal notranslate"><span class="pre">buf</span></code> will be sent back in the ACK payload. <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>ACK payloads are handled automatically by the radio chip when a
 regular payload is received. It is important to discard regular payloads
@@ -311,10 +321,12 @@ into the TX FIFO. This function can be called before and after calling
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Only three of these can be pending at any time as there are
-only 3 FIFO buffers.</p>
+<p>Only 3 of these ACK payloads can be pending at any time because there
+are only 3 FIFO buffers.</p>
 </div>
-<div class="admonition important">
+</p>
+ <dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"><span class="std std-ref">setDynamicPayloads()</span></a><p><div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Dynamic payloads must be enabled.</p>
 </div>
@@ -326,7 +338,7 @@ mode when expecting ACK payloads). To use ACK payloads on any other
 pipe in RX mode, call <a class="reference internal" href="configure_api.html#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a>.</p>
 </div>
 </p>
- </p>
+</p>
 </dd>
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was loaded into the TX FIFO.</p></li>
@@ -345,20 +357,22 @@ pipe in RX mode, call <a class="reference internal" href="configure_api.html#_CP
 </dd></dl>
 
 </div>
+<div class="section" id="status-byte">
+<h2>Status Byte<a class="headerlink" href="#status-byte" title="Permalink to this headline">¶</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Calling most of these status byte related functions do not update the
+data they return. Use <a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the status byte data as needed.</p>
+<p>The status byte data is updated on every SPI transaction. The only functions that
+don’t execute an SPI transaction are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>,
+<a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>, and <a class="reference internal" href="#_CPPv4N4RF244pipeEv" title="RF24::pipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code></a>.</p>
+</div>
 <div class="section" id="update">
-<h2>update()<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<h3>update()<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246updateEv">
 <span id="_CPPv3N4RF246updateEv"></span><span id="_CPPv2N4RF246updateEv"></span><span id="RF24::update__void"></span><span class="target" id="classRF24_1a2a1be2cb92e9f14f7cf5921232b02ffc"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">update</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246updateEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Refresh data (from the STATUS register) used by the following functions: <a class="reference internal" href="#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a>, irqDd(), <a class="reference internal" href="#classRF24_1a7b864ca518c0e21085df8fc1dfb7204d"><span class="std std-ref">irqDr()</span></a>, <a class="reference internal" href="#classRF24_1abcf4ed7ba5cae2d80618f11f0254d2f8"><span class="std std-ref">isTxFull()</span></a>, pipe().  <p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The data that this function fetches is also refreshed on every
-SPI transaction. The only functions that don’t execute an SPI transaction
-are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>, <a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>,
-and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code>.</p>
-</div>
-</p>
- <dl class="simple">
+<dd><p>Refresh data (from the STATUS register) used by the following functions: <a class="reference internal" href="#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a>, irqDd(), <a class="reference internal" href="#classRF24_1a7b864ca518c0e21085df8fc1dfb7204d"><span class="std std-ref">irqDr()</span></a>, <a class="reference internal" href="#classRF24_1abcf4ed7ba5cae2d80618f11f0254d2f8"><span class="std std-ref">isTxFull()</span></a>, <a class="reference internal" href="#classRF24_1a3a0d1b825a376746d484c0b255319c7c"><span class="std std-ref">pipe()</span></a>. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Current value of STATUS register </p>
 </dd>
 </dl>
@@ -367,79 +381,72 @@ and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pr
 
 </div>
 <div class="section" id="istxfull">
-<h2>isTxFull()<a class="headerlink" href="#istxfull" title="Permalink to this headline">¶</a></h2>
+<h3>isTxFull()<a class="headerlink" href="#istxfull" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF248isTxFullEv">
 <span id="_CPPv3N4RF248isTxFullEv"></span><span id="_CPPv2N4RF248isTxFullEv"></span><span id="RF24::isTxFull__void"></span><span class="target" id="classRF24_1abcf4ed7ba5cae2d80618f11f0254d2f8"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isTxFull</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF248isTxFullEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A flag that describes when all 3 levels of the TX FIFO are occupied with a payload.  <p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Calling this function does not update the data it returns. Use
-<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
-<p>This data is updated on every SPI transaction. The only functions that
-don’t execute an SPI transaction are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>,
-<a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code>.</p>
-</div>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A bool flag that describes if all 3 levels of the TX FIFO are occupied with a payload. </p>
+</dd>
+</dl>
 </p>
- </p>
+</dd></dl>
+
+</div>
+<div class="section" id="pipe">
+<h3>pipe()<a class="headerlink" href="#pipe" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF244pipeEv">
+<span id="_CPPv3N4RF244pipeEv"></span><span id="_CPPv2N4RF244pipeEv"></span><span id="RF24::pipe__void"></span><span class="target" id="classRF24_1a3a0d1b825a376746d484c0b255319c7c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">pipe</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244pipeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The pipe number that received the next available payload in the RX FIFO is in range [0, 5]. If there is no payload in the RX FIFO, then the number returned is 255. </p>
+</dd>
+</dl>
+</p>
 </dd></dl>
 
 </div>
 <div class="section" id="irqdr">
-<h2>irqDr()<a class="headerlink" href="#irqdr" title="Permalink to this headline">¶</a></h2>
+<h3>irqDr()<a class="headerlink" href="#irqdr" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF245irqDrEv">
 <span id="_CPPv3N4RF245irqDrEv"></span><span id="_CPPv2N4RF245irqDrEv"></span><span id="RF24::irqDr__void"></span><span class="target" id="classRF24_1a7b864ca518c0e21085df8fc1dfb7204d"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">irqDr</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245irqDrEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A flag that describes when the “Data Ready” event has occured.  <p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Calling this function does not update the data it returns. Use
-<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
-<p>This data is updated on every SPI transaction. The only functions that
-don’t execute an SPI transaction are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>,
-<a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code>.</p>
-</div>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A bool flag that describes if the “Data Ready” event has occured. </p>
+</dd>
+</dl>
 </p>
- </p>
 </dd></dl>
 
 </div>
 <div class="section" id="irqdf">
-<h2>irqDf()<a class="headerlink" href="#irqdf" title="Permalink to this headline">¶</a></h2>
+<h3>irqDf()<a class="headerlink" href="#irqdf" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF245irqDfEv">
 <span id="_CPPv3N4RF245irqDfEv"></span><span id="_CPPv2N4RF245irqDfEv"></span><span id="RF24::irqDf__void"></span><span class="target" id="classRF24_1a138c84cda83cc15d157cfa3d518d4183"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">irqDf</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245irqDfEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A flag that describes when the “Data Fail” event has occured.  <p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Calling this function does not update the data it returns. Use
-<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
-<p>This data is updated on every SPI transaction. The only functions that
-don’t execute an SPI transaction are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>,
-<a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code>.</p>
-</div>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A bool flag that describes if the “Data Fail” event has occured. </p>
+</dd>
+</dl>
 </p>
- </p>
 </dd></dl>
 
 </div>
 <div class="section" id="irqds">
-<h2>irqDs()<a class="headerlink" href="#irqds" title="Permalink to this headline">¶</a></h2>
+<h3>irqDs()<a class="headerlink" href="#irqds" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF245irqDsEv">
 <span id="_CPPv3N4RF245irqDsEv"></span><span id="_CPPv2N4RF245irqDsEv"></span><span id="RF24::irqDs__void"></span><span class="target" id="classRF24_1a8f17ced7559d6ecfffad31858e7b3d15"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">irqDs</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245irqDsEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A flag that describes when the “Data Sent” event has occured.  <p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Calling this function does not update the data it returns. Use
-<a class="reference internal" href="#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> to refresh the data as needed.</p>
-<p>This data is updated on every SPI transaction. The only functions that
-don’t execute an SPI transaction are <a class="reference internal" href="#_CPPv4N4RF245irqDfEv" title="RF24::irqDf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDf()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDd()</span></code>,
-<a class="reference internal" href="#_CPPv4N4RF245irqDrEv" title="RF24::irqDr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">irqDr()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF248isTxFullEv" title="RF24::isTxFull"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isTxFull()</span></code></a>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pipe()</span></code>.</p>
-</div>
+<dd><p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A bool flag that describes if the “Data Sent” event has occured. </p>
+</dd>
+</dl>
 </p>
- </p>
 </dd></dl>
 
 </div>
 <div class="section" id="clearstatusflags">
-<h2>clearStatusFlags()<a class="headerlink" href="#clearstatusflags" title="Permalink to this headline">¶</a></h2>
+<h3>clearStatusFlags()<a class="headerlink" href="#clearstatusflags" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416clearStatusFlagsEbbb">
 <span id="_CPPv3N4RF2416clearStatusFlagsEbbb"></span><span id="_CPPv2N4RF2416clearStatusFlagsEbbb"></span><span id="RF24::clearStatusFlags__b.b.b"></span><span class="target" id="classRF24_1aea33bc880fb660702e6217b7afbd6548"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">clearStatusFlags</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416clearStatusFlagsEbbb" title="Permalink to this definition">¶</a><br /></dt>
@@ -457,6 +464,7 @@ don’t execute an SPI transaction are <a class="reference internal" href="#_CPP
 </p>
 </dd></dl>
 
+</div>
 </div>
 <div class="section" id="powerup">
 <h2>powerUp()<a class="headerlink" href="#powerup" title="Permalink to this headline">¶</a></h2>
@@ -496,8 +504,10 @@ In full powerDown mode, the radio will consume approximately 900nA (.0009mA)</p>
 </dd></dl>
 
 </div>
+<div class="section" id="fifo-managment">
+<h2>FIFO managment<a class="headerlink" href="#fifo-managment" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="flushrx">
-<h2>flushRx()<a class="headerlink" href="#flushrx" title="Permalink to this headline">¶</a></h2>
+<h3>flushRx()<a class="headerlink" href="#flushrx" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF247flushRxEv">
 <span id="_CPPv3N4RF247flushRxEv"></span><span id="_CPPv2N4RF247flushRxEv"></span><span id="RF24::flushRx__void"></span><span class="target" id="classRF24_1a31acd82243d7cd7d2bc73c4dae82590e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">flushRx</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF247flushRxEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -506,7 +516,7 @@ In full powerDown mode, the radio will consume approximately 900nA (.0009mA)</p>
 
 </div>
 <div class="section" id="flushtx">
-<h2>flushTx()<a class="headerlink" href="#flushtx" title="Permalink to this headline">¶</a></h2>
+<h3>flushTx()<a class="headerlink" href="#flushtx" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF247flushTxEv">
 <span id="_CPPv3N4RF247flushTxEv"></span><span id="_CPPv2N4RF247flushTxEv"></span><span id="RF24::flushTx__void"></span><span class="target" id="classRF24_1a201950051e1d6baeb75b2eaff0db4051"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">flushTx</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF247flushTxEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -515,7 +525,36 @@ In full powerDown mode, the radio will consume approximately 900nA (.0009mA)</p>
 
 </div>
 <div class="section" id="isfifo">
-<h2>isFifo()<a class="headerlink" href="#isfifo" title="Permalink to this headline">¶</a></h2>
+<h3>isFifo()<a class="headerlink" href="#isfifo" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="empty-or-full-condition">
+<h4>Empty OR Full condition<a class="headerlink" href="#empty-or-full-condition" title="Permalink to this headline">¶</a></h4>
+<dl class="cpp function">
+<dt id="_CPPv4N4RF246isFifoEbb">
+<span id="_CPPv3N4RF246isFifoEbb"></span><span id="_CPPv2N4RF246isFifoEbb"></span><span id="RF24::isFifo__b.b"></span><span class="target" id="classRF24_1aa9e041a325ce2e2f469ca68643587d03"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isFifo</code><span class="sig-paren">(</span>bool <em>about_tx</em>, bool <em>check_empty</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246isFifoEbb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Use this function to check if the radio’s RX FIFO levels are all occupied. This can be used to prevent data loss because any incoming transmissions are rejected if there is no unoccupied levels in the RX FIFO to store the incoming payload. Remember that each level can hold up to a maximum of 32 bytes. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A boolean that answers the question (according to the parameters)<p> Is the [TX or RX] FIFO [empty or full]? </p>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">about_tx</span></code>: Specify which FIFO the returned data should concern.<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> fetches data about the TX FIFO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> fetches data about the RX FIFO </p></li>
+</ul>
+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_empty</span></code>: Specify if the data returned about the specified FIFO describes it as empty or full.<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> checks if the specified FIFO is empty</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> checks if the specified FIFO is full </p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="empty-and-full-condition">
+<h4>Empty AND Full condition<a class="headerlink" href="#empty-and-full-condition" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246isFifoEb">
 <span id="_CPPv3N4RF246isFifoEb"></span><span id="_CPPv2N4RF246isFifoEb"></span><span id="RF24::isFifo__b"></span><span class="target" id="classRF24_1a36d055f91bdb071e40a2da882bcbaade"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isFifo</code><span class="sig-paren">(</span>bool <em>about_tx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246isFifoEb" title="Permalink to this definition">¶</a><br /></dt>
@@ -539,58 +578,8 @@ In full powerDown mode, the radio will consume approximately 900nA (.0009mA)</p>
 </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt>
-bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isFifo</code><span class="sig-paren">(</span>bool <em>about_tx</em>, bool <em>check_empty</em><span class="sig-paren">)</span><br /></dt>
-<dd><p>Use this function to check if the radio’s RX FIFO levels are all occupied. This can be used to prevent data loss because any incoming transmissions are rejected if there is no unoccupied levels in the RX FIFO to store the incoming payload. Remember that each level can hold up to a maximum of 32 bytes. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>A boolean that answers the question (according to the parameters)<p> Is the TX or RX FIFO empty or full? </p>
-</p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">about_tx</span></code>: Specify which FIFO the returned data should concern.<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> fetches data about the TX FIFO</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> fetches data about the RX FIFO </p></li>
-</ul>
-</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">check_empty</span></code>: Specify if the data returned about the specified FIFO describes it as empty or full.<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> checks if the specified FIFO is empty</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> checks if the specified FIFO is full </p></li>
-</ul>
-</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
 </div>
-<div class="section" id="setaddresslength">
-<h2>setAddressLength()<a class="headerlink" href="#setaddresslength" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416setAddressLengthE7uint8_t">
-<span id="_CPPv3N4RF2416setAddressLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setAddressLengthE7uint8_t"></span><span id="RF24::setAddressLength__uint8_t"></span><span class="target" id="classRF24_1af870ee715171a3612822190af5523d35"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAddressLength</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the address length from 3 to 5 bytes <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: The address length (in bytes) to use; this parameter is clamped to the range [3, 5]. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
 </div>
-<div class="section" id="getaddresslength">
-<h2>getAddressLength()<a class="headerlink" href="#getaddresslength" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp function">
-<dt id="_CPPv4N4RF2416getAddressLengthEv">
-<span id="_CPPv3N4RF2416getAddressLengthEv"></span><span id="_CPPv2N4RF2416getAddressLengthEv"></span><span id="RF24::getAddressLength__void"></span><span class="target" id="classRF24_1a846af539302100d54def2970526cae93"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAddressLength</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getAddressLengthEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>The address length (in bytes) currently configured by <a class="reference internal" href="#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>. This number will be in range [3, 5]. </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
 </div>
 <div class="section" id="lasttxarc">
 <h2>lastTxArc()<a class="headerlink" href="#lasttxarc" title="Permalink to this headline">¶</a></h2>
@@ -602,7 +591,7 @@ bool <code class="sig-prename descclassname"><a class="reference internal" href=
 <dt><strong>Return</strong></dt><dd><p>Returns values from 0 to 15.  <p><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>the maximum limit of this number is controlled via the <code class="docutils literal notranslate"><span class="pre">count</span></code>
-parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> function.</p>
+parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t" title="RF24::setAutoRetry"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoRetry()</span></code></a> function.</p>
 </div>
 </p>
  </p>
@@ -625,8 +614,10 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 </dd></dl>
 
 </div>
+<div class="section" id="ambiguous-signal-detection">
+<h2>Ambiguous Signal detection<a class="headerlink" href="#ambiguous-signal-detection" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="testrpd">
-<h2>testRpd()<a class="headerlink" href="#testrpd" title="Permalink to this headline">¶</a></h2>
+<h3>testRpd()<a class="headerlink" href="#testrpd" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF247testRpdEv">
 <span id="_CPPv3N4RF247testRpdEv"></span><span id="_CPPv2N4RF247testRpdEv"></span><span id="RF24::testRpd__void"></span><span class="target" id="classRF24_1a70406f376d9edd7be30fc7d9e1562d2f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">testRpd</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF247testRpdEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -640,7 +631,7 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a301af5ef53f9325683a0d86928c29388"><span class="std std-ref">startCarrierWave()</span></a>, <a class="reference internal" href="#classRF24_1a94bd33b2e759f7877588d3119aefdd80"><span class="std std-ref">stopCarrierWave()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aa98f93c9dfb1aa4267e9758b42acabf4"><span class="std std-ref">startCarrierWave()</span></a>, <a class="reference internal" href="#classRF24_1a94bd33b2e759f7877588d3119aefdd80"><span class="std std-ref">stopCarrierWave()</span></a> </p>
 </dd>
 <dt><strong>Return</strong></dt><dd><p>This data is reset upon entering RX mode.<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if a signal with an amplitude of greater than or equal to -64dBm was detected.</p></li>
@@ -654,37 +645,30 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 
 </div>
 <div class="section" id="startcarrierwave">
-<h2>startCarrierWave()<a class="headerlink" href="#startcarrierwave" title="Permalink to this headline">¶</a></h2>
+<h3>startCarrierWave()<a class="headerlink" href="#startcarrierwave" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t">
-<span id="_CPPv3N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t"></span><span id="_CPPv2N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t"></span><span id="RF24::startCarrierWave__rf24_pa_dbm_e.uint8_t"></span><span class="target" id="classRF24_1a301af5ef53f9325683a0d86928c29388"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">startCarrierWave</code><span class="sig-paren">(</span><a class="reference internal" href="configure_api.html#_CPPv413rf24_pa_dbm_e" title="rf24_pa_dbm_e">rf24_pa_dbm_e</a> <em>level</em>, uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416startCarrierWaveE13rf24_pa_dbm_e7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Transmission of constant carrier wave with defined frequency and output power <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: Output power to use </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: The channel to use  <p><div class="admonition warning">
+<dt id="_CPPv4N4RF2416startCarrierWaveEv">
+<span id="_CPPv3N4RF2416startCarrierWaveEv"></span><span id="_CPPv2N4RF2416startCarrierWaveEv"></span><span id="RF24::startCarrierWave__void"></span><span class="target" id="classRF24_1aa98f93c9dfb1aa4267e9758b42acabf4"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">startCarrierWave</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416startCarrierWaveEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmission of constant carrier wave with defined frequency and output power  <p><div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If <a class="reference internal" href="#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns true, then this function takes extra
+<p>If <a class="reference internal" href="#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, then this function takes extra
 measures that alter some settings. These settings alterations include:</p>
-<ul>
+<ul class="simple">
 <li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setAutoAckEb" title="RF24::setAutoAck"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoAck()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">false</span></code> (for all pipes)</p></li>
-<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setRetriesE8uint16_t7uint8_t" title="RF24::setRetries"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setRetries()</span></code></a> to retry <code class="docutils literal notranslate"><span class="pre">0</span></code> times with a delay of 250 microseconds</p></li>
+<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t" title="RF24::setAutoRetry"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoRetry()</span></code></a> to retry <code class="docutils literal notranslate"><span class="pre">0</span></code> times with a delay of 250 microseconds</p></li>
 <li><p>set the TX address to 5 bytes of <code class="docutils literal notranslate"><span class="pre">0xFF</span></code></p></li>
 <li><p><a class="reference internal" href="#_CPPv4N4RF247flushTxEv" title="RF24::flushTx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">flushTx()</span></code></a></p></li>
 <li><p>load a 32 byte payload of <code class="docutils literal notranslate"><span class="pre">0xFF</span></code> into the TX FIFO’s top level</p></li>
-<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF246setCrcE7uint8_t" title="RF24::setCrc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setCrc()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><a class="reference internal" href="configure_api.html#_CPPv4N4RF246setCrcE7uint8_t" title="RF24::setCrc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setCrc()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">0</span></code> (disabling CRC checking).</p></li>
 </ul>
 </div>
 </p>
- </p></li>
-</ul>
-</dd>
-</dl>
-</p>
+ </p>
 </dd></dl>
 
 </div>
 <div class="section" id="stopcarrierwave">
-<h2>stopCarrierWave()<a class="headerlink" href="#stopcarrierwave" title="Permalink to this headline">¶</a></h2>
+<h3>stopCarrierWave()<a class="headerlink" href="#stopcarrierwave" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415stopCarrierWaveEv">
 <span id="_CPPv3N4RF2415stopCarrierWaveEv"></span><span id="_CPPv2N4RF2415stopCarrierWaveEv"></span><span id="RF24::stopCarrierWave__void"></span><span class="target" id="classRF24_1a94bd33b2e759f7877588d3119aefdd80"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">stopCarrierWave</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415stopCarrierWaveEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -695,23 +679,24 @@ of datasheet.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If <a class="reference internal" href="#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns true, please remember to
+<p>If <a class="reference internal" href="#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, please remember to
 re-configure the radio’s settings</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// re-establish default settings</span>
 <span class="n">setCrc</span><span class="p">(</span><span class="n">RF24_CRC_16</span><span class="p">);</span>
 <span class="n">setAutoAck</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
-<span class="n">setRetries</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+<span class="n">setAutoRetry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </p>
  <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a301af5ef53f9325683a0d86928c29388"><span class="std std-ref">startCarrierWave()</span></a> </p>
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aa98f93c9dfb1aa4267e9758b42acabf4"><span class="std std-ref">startCarrierWave()</span></a> </p>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
+</div>
 </div>
 <div class="section" id="printdetails">
 <h2>printDetails()<a class="headerlink" href="#printdetails" title="Permalink to this headline">¶</a></h2>

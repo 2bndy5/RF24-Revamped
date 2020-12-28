@@ -1667,7 +1667,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// According to the datasheet, the auto-retry features&#39;s delay value should</span>
     <span class="c1">// be &quot;skewed&quot; to allow the RX node to receive 1 transmission at a time.</span>
     <span class="c1">// So, use varying delay between retry attempts and 15 (at most) retry attempts</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">setRetries</span><span class="p">(((</span><span class="n">role</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span> <span class="c1">// maximum value is 15 for both args</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">setAutoRetry</span><span class="p">(((</span><span class="n">role</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span> <span class="c1">// maximum value is 15 for both args</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="c1">// setRole</span>
 </pre></div>
