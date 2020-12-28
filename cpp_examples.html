@@ -372,7 +372,8 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 188
 189
 190
-191</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
+191
+192</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1">    // cin, cout, endl</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">      // string, getline()</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="c1">      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()</span><span class="cp"></span>
@@ -447,8 +448,9 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
     <span class="c1">// set the RX address of the TX node into a RX pipe</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
+    <span class="n">radio</span><span class="p">.</span><span class="n">setAutoRetry</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
     <span class="c1">// For debugging info</span>
-    <span class="c1">// radio.printDetails();</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">printDetails</span><span class="p">();</span>
 
     <span class="c1">// ready to execute program now</span>
     <span class="n">setRole</span><span class="p">();</span> <span class="c1">// calls master() or slave() based on user input</span>
