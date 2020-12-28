@@ -816,7 +816,7 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
         // Wait until complete or failed
         update();
         i++;
-        IF_SERIAL_DEBUG(printf("status(%d): dr=%d, ds=%d, df=%d", i, irqDr(), irqDs(), irqDf()););
+        IF_SERIAL_DEBUG(printf("status(%d): dr=%d, ds=%d, df=%d\r\n", i, irqDr(), irqDs(), irqDf()););
     }
     ce(LOW);
     return irqDs();
