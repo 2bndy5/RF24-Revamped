@@ -812,7 +812,7 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
     flushTx();
     write(buf, len, multicast);
     uint8_t i = 0;
-    while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
+    while (!(status & (_BV(TX_DS) | _BV(MAX_RT)))) {
         // Wait until complete or failed
         update();
         i++;
