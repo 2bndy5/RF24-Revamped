@@ -43,6 +43,7 @@ typedef enum {
      * @endrst
      */
     RF24_PA_MIN = 0,
+
     /**
      * (1) represents:
      * @rst
@@ -56,6 +57,7 @@ typedef enum {
      * @endrst
      */
     RF24_PA_LOW,
+
     /**
      * (2) represents:
      * @rst
@@ -69,6 +71,7 @@ typedef enum {
      * @endrst
      */
     RF24_PA_HIGH,
+
     /**
      * (3) represents:
      * @rst
@@ -483,7 +486,7 @@ public:
      * - `true` checks if the specified FIFO is empty
      * - `false` checks if the specified FIFO is full
      * @return A boolean that answers the question (according to the parameters)<br>
-     * Is the TX or RX FIFO empty or full?
+     * Is the [TX or RX] FIFO [empty or full]?
      */
     bool isFifo(bool about_tx, bool check_empty);
 
@@ -565,23 +568,23 @@ public:
      *
      * The next time a message is received on a specified @p pipe, the data in
      * @p buf will be sent back in the ACK payload.
-     *
      * @see enableAckPayload(), setDynamicPayloads()
      * @rst
-     *
-     * .. note:: ACK payloads are handled automatically by the radio chip when a
-     *     regular payload is received. It is important to discard regular payloads
-     *     in the TX FIFO (using :func:`flushTx()`) before loading the first ACK payload
-     *     into the TX FIFO. This function can be called before and after calling
-     *     :func:`startListening()`.
-     *
-     * .. warning:: Only three of these can be pending at any time as there are
-     *     only 3 FIFO buffers.
      * .. important:: Dynamic payloads must be enabled.
      * .. note:: ACK payloads are dynamic payloads. Calling :func:`enableAckPayload()`
      *     will automatically enable dynamic payloads on pipe 0 (required for TX
      *     mode when expecting ACK payloads). To use ACK payloads on any other
      *     pipe in RX mode, call :func:`setDynamicPayloads()`.
+     * @endrst
+     *
+     * @rst
+     * .. note:: ACK payloads are handled automatically by the radio chip when a
+     *     regular payload is received. It is important to discard regular payloads
+     *     in the TX FIFO (using :func:`flushTx()`) before loading the first ACK payload
+     *     into the TX FIFO. This function can be called before and after calling
+     *     :func:`startListening()`.
+     * .. warning:: Only 3 of these ACK payloads can be pending at any time because there
+     *     are only 3 FIFO buffers.
      * @endrst
      * @param pipe Which pipe# (typically 1-5) will get this response.
      * @param buf Pointer to data that is sent
@@ -660,7 +663,7 @@ public:
      * (via enableAckPayload()).
      *
      * This function only applies when taking advantage of the
-     * auto-retry feature. See setAutoAck() and setRetries() to configure the
+     * auto-retry feature. See setAutoAck() and setAutoRetry() to configure the
      * auto-retry feature.
      * @rst
      * .. note:: This is to be used AFTER auto-retry fails if wanting to resend
@@ -757,29 +760,58 @@ public:
      *     auto-ack feature (if enabled), except it will not retry to transmit if
      *     the payload was not acknowledged on the first attempt.
      * @endrst
-     * @see lastTxArc()
+     * @see lastTxArc(), setArd(), setArc()
      */
-    void setRetries(uint16_t delay, uint8_t count);
+    void setAutoRetry(uint16_t delay, uint8_t count);
 
     /**
      * Fetch the configuration of the auto-retry feature
-     * @param[out] delay The pointer to return the amount of microseconds that
-     * the radio waits for an acknowledgement (ACK) packet response between
-     * auto-retry attempted transmissions.
-     * @param[out] count The pointer to return the maximum number of auto-retry
-     * attempts allowed.
-     * @returns This function returns `void`. All returned data is stored in the
-     * referenced variables passed as arguments.
+     * @param[out] delay The reference variable that will store the amount
+     * of microseconds that the radio waits for an acknowledgement (ACK)
+     * packet response between auto-retry attempted transmissions.
+     * @param[out] count The reference variable that will store the maximum
+     * number of auto-retry attempts allowed.
+     * @returns This function returns nothing (`void`). All returned data is
+     * stored in the referenced variables passed as arguments.
      * @rst
      * .. code-block::
      *
      *     uint16_t autoDelay;
      *     uint8_t autoCount;
-     *     radio.getRetries(&amp;autoDelay, &amp;autoCount);
+     *     radio.getAutoRetry(&amp;autoDelay, &amp;autoCount);
      * @endrst
-     * @see setRetries()
+     * @see setAutoRetry(), getArd(), getArc()
      */
-    void getRetries(uint16_t* delay, uint8_t* count);
+    void getAutoRetry(uint16_t* delay, uint8_t* count);
+
+    /**
+     * Configure the auto-retry feature's delay (ARD).
+     * @see setAutoRetry()
+     * @param delay How long to wait (in microseconds) between each auto-retry
+     * attempt. This parameter is clamped to the range [250, 4000]. The default is
+     * 1500 us.
+     */
+    void setArd(uint16_t delay);
+
+    /**
+     * Get the auto-retry feature's delay (ARD) configuration,
+     * @see setAutoRetry(), getAutoRetry(), setArd()
+     */
+    uint16_t getArd(void);
+
+    /**
+     * Configure the auto-retry feature's count (ARC).
+     * @see setAutoRetry(), lastTxArc()
+     * @param count How many auto-retry attempts before giving up. The default and
+     * maximum is 15. Use 0 to disable the auto-retry feature all together.
+     */
+    void setArc(uint8_t count);
+
+    /**
+     * Get the auto-retry feature's count (ARC) configuration.
+     * @see setAutoRetry(), getAutoRetry(), setArc(), lastTxArc()
+     */
+    uint8_t getArc(void);
 
     /**
      * Set RF communication channel. The frequency used by a channel is
@@ -802,12 +834,6 @@ public:
 
     /**
      * Set Static Payload length to be expected for all pipes.
-     *
-     * All pipes are configured to use the maximum default length of 32 bytes.
-     * @rst
-     * .. note:: If the dynamic payload length feature is enabled for all pipes,
-     *     then this setting is not used.
-     * @endrst
      * @param size The number of bytes to use for payload lengths handled by all
      * pipes. This parameter is clamped to the range [1, 32].
      */
@@ -815,12 +841,6 @@ public:
 
     /**
      * Set Static Payload length to be expected for a specific pipe.
-     *
-     * All pipes are configured to use the maximum default length of 32 bytes.
-     * @rst
-     * .. note:: If the dynamic payload length feature is enabled for any pipe,
-     *     then this setting is not used for that pipe.
-     * @endrst
      * @param size The number of bytes to use for payload lengths handled by the
      * pipe specified by the @p pipe parameter. This parameter is clamped to the
      * range [1, 32].
@@ -991,14 +1011,14 @@ public:
 
     /**
      * Fetch the status of the auto-ack feature for a specific pipe.
-     * @param pipe The specific pipe about whick data to fetch. If this parameter
+     * @param pipe The specific pipe about which data to fetch. If this parameter
      * is not specified, then the status of the auto-ack feature about pipe 0 is
      * returned.
      * @return
      * - `true` if the auto-ack feature is enabled for the specified @p pipe
      * - `false` if the auto-ack feature is disabled for the specified @p pipe
      */
-    bool getAutoAck(uint8_t pipe);
+    bool getAutoAck(uint8_t pipe=0);
 
     /**
      * Fetch the status of the auto-ack feature for all pipes.
@@ -1009,7 +1029,7 @@ public:
      * bit (`0`) disables the feature for the corresponding pipe. Bit positions
      * 6 and 7 will always be `0`.
      */
-    uint8_t getAutoAck(void);
+    uint8_t getAutoAckBin(void);
 
     /**
      * Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state
@@ -1053,7 +1073,7 @@ public:
      * @return Returns values from 0 to 15.
      * @rst
      * .. hint:: the maximum limit of this number is controlled via the ``count``
-     *     parameter to the :func:`setRetries()` function.
+     *     parameter to the :func:`setAutoRetry()` function.
      * @endrst
      */
     uint8_t lastTxArc(void);
@@ -1116,80 +1136,34 @@ public:
     /**
      * Refresh data (from the STATUS register) used by the following functions:
      * irqDf(), irqDd(), irqDr(), isTxFull(), pipe().
-     * @rst
-     * .. important:: The data that this function fetches is also refreshed on every
-     *     SPI transaction. The only functions that don't execute an SPI transaction
-     *     are :func:`irqDf()`, :func:`irqDd()`, :func:`irqDr()`, :func:`isTxFull()`,
-     *     and :func:`pipe()`.
-     * @endrst
      * @return Current value of STATUS register
      */
     uint8_t update(void);
 
 
     /**
-     * A flag that describes when the "Data Ready" event has occured.
-     * @rst
-     * .. important:: Calling this function does not update the data it returns. Use
-     *     :func:`update()` to refresh the data as needed.
-     *
-     *     This data is updated on every SPI transaction. The only functions that
-     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
-     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
-     * @endrst
+     * @return A bool flag that describes if the "Data Ready" event has occured.
      */
     bool irqDr(void);
 
     /**
-     * A flag that describes when the "Data Sent" event has occured.
-     * @rst
-     * .. important:: Calling this function does not update the data it returns. Use
-     *     :func:`update()` to refresh the data as needed.
-     *
-     *     This data is updated on every SPI transaction. The only functions that
-     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
-     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
-     * @endrst
+     * @return A bool flag that describes if the "Data Sent" event has occured.
      */
     bool irqDs(void);
 
     /**
-     * A flag that describes when the "Data Fail" event has occured.
-     * @rst
-     * .. important:: Calling this function does not update the data it returns. Use
-     *     :func:`update()` to refresh the data as needed.
-     *
-     *     This data is updated on every SPI transaction. The only functions that
-     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
-     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
-     * @endrst
+     * @return A bool flag that describes if the "Data Fail" event has occured.
      */
     bool irqDf(void);
 
     /**
-     * A flag that describes when all 3 levels of the TX FIFO are occupied with a payload.
-     * @rst
-     * .. important:: Calling this function does not update the data it returns. Use
-     *     :func:`update()` to refresh the data as needed.
-     *
-     *     This data is updated on every SPI transaction. The only functions that
-     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
-     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
-     * @endrst
+     * @return A bool flag that describes if all 3 levels of the TX FIFO are
+     * occupied with a payload.
      */
     bool isTxFull(void);
 
     /**
-     * The pipe number that received the next available payload in the RX FIFO.
-     * @rst
-     * .. important:: Calling this function does not update the data it returns. Use
-     *     :func:`update()` to refresh the data as needed.
-     *
-     *     This data is updated on every SPI transaction. The only functions that
-     *     don't execute an SPI transaction are :func:`irqDf()`, :func:`irqDd()`,
-     *     :func:`irqDr()`, :func:`isTxFull()`, and :func:`pipe()`.
-     * @endrst
-     * @return the pipe number that received the next available payload in the RX FIFO
+     * @return The pipe number that received the next available payload in the RX FIFO
      * is in range [0, 5]. If there is no payload in the RX FIFO, then the number
      * returned is 255.
      */
@@ -1255,28 +1229,26 @@ public:
 
     /**
      * Transmission of constant carrier wave with defined frequency and output power
-     * @param level Output power to use
-     * @param channel The channel to use
      * @rst
-     * .. warning:: If :func:`isPVariant()` returns true, then this function takes extra
+     * .. warning:: If :func:`isPVariant()` returns ``true``, then this function takes extra
      *     measures that alter some settings. These settings alterations include:
      *
      *     - :func:`setAutoAck()` to ``false`` (for all pipes)
-     *     - :func:`setRetries()` to retry ``0`` times with a delay of 250 microseconds
+     *     - :func:`setAutoRetry()` to retry ``0`` times with a delay of 250 microseconds
      *     - set the TX address to 5 bytes of ``0xFF``
      *     - :func:`flushTx()`
      *     - load a 32 byte payload of ``0xFF`` into the TX FIFO's top level
-     *     - :func:`setCrc()` to ``0``.
+     *     - :func:`setCrc()` to ``0`` (disabling CRC checking).
      * @endrst
      */
-    void startCarrierWave(rf24_pa_dbm_e level, uint8_t channel);
+    void startCarrierWave(void);
 
     /**
      * Stop transmission of constant wave and reset PLL and CONT registers
      * @rst
      * .. warning:: this function will :func:`powerDown()` the radio per recommendation
      *     of datasheet.
-     * .. important:: If :func:`isPVariant()` returns true, please remember to
+     * .. important:: If :func:`isPVariant()` returns ``true``, please remember to
      *     re-configure the radio's settings
      *
      *     .. code-block::
@@ -1284,7 +1256,7 @@ public:
      *         // re-establish default settings
      *         setCrc(RF24_CRC_16);
      *         setAutoAck(true);
-     *         setRetries(5, 15);
+     *         setAutoRetry(5, 15);
      * @endrst
      * @see startCarrierWave()
      */

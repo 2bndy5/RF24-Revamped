@@ -82,13 +82,9 @@ exclude_patterns = [
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
-#
 # default_role = "any"
 
-# if this is set true, it appends parenthesis to function
-# signatures causing cross-reference errors in sphinx's cpp
-# domain. maybe also caused from using breathe?
-# add_function_parentheses = True
+# add_function_parentheses = False
 
 # Tell sphinx what the primary language being documented is.
 primary_domain = "cpp"

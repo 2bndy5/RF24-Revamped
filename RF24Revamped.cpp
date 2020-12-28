@@ -663,7 +663,7 @@ bool RF24::begin(void)
     // Set 1500uS (minimum for 32B payload in ESB@250KBPS) timeouts, to make testing a little easier
     // WARNING: If this is ever lowered, either 250KBS mode with AA is broken or maximum packet
     // sizes must never be used. See datasheet for a more complete explanation.
-    setRetries(5, 15);
+    setAutoRetry(5, 15);
 
     // Then set the data rate to the slowest (and most reliable) speed supported by all
     // hardware.
@@ -1266,7 +1266,7 @@ bool RF24::getAutoAck(uint8_t pipe)
 
 /****************************************************************************/
 
-uint8_t RF24::getAutoAck(void)
+uint8_t RF24::getAutoAckBin(void)
 {
     auto_ack_enabled = read_register(EN_AA);
     return auto_ack_enabled & 0x3F;
@@ -1402,28 +1402,54 @@ uint8_t RF24::getCrc(void)
 }
 
 /****************************************************************************/
-void RF24::setRetries(uint16_t delay, uint8_t count)
+void RF24::setAutoRetry(uint16_t delay, uint8_t count)
 {
     delay = (rf24_max(250, rf24_min(delay, 4000)) - 250) / 250;
     write_register(SETUP_RETR, (uint8_t)(delay & 0xf) << ARD | rf24_min(15, count));
 }
 
 /****************************************************************************/
-void RF24::getRetries(uint16_t* delay, uint8_t* count)
+void RF24::getAutoRetry(uint16_t* delay, uint8_t* count)
 {
     uint8_t setupRetry = read_register(SETUP_RETR);
-    *delay = (setupRetry >> ARD) * 250 + 250;
+    *delay = (uint16_t)(setupRetry >> ARD) * 250 + 250;
     *count = (setupRetry & 0xf);
 }
 
 /****************************************************************************/
-void RF24::startCarrierWave(rf24_pa_dbm_e level, uint8_t channel)
+void RF24::setArd(uint16_t delay)
+{
+    delay = (rf24_max(250, rf24_min(delay, 4000)) - 250) / 250;
+    write_register(SETUP_RETR, (uint8_t)(delay & 0xf) << ARD | (read_register(SETUP_RETR) & 0xf));
+}
+
+/****************************************************************************/
+uint16_t RF24::getArd(void)
+{
+    return (uint16_t)(read_register(SETUP_RETR) >> ARD) * 250 + 250;
+}
+
+/****************************************************************************/
+void RF24::setArc(uint8_t count)
+{
+    write_register(SETUP_RETR, rf24_min(count, 15) | (read_register(SETUP_RETR) & 0xF0));
+}
+
+/****************************************************************************/
+uint8_t RF24::getArc(void)
+{
+    return read_register(SETUP_RETR) & 0xF;
+}
+
+
+/****************************************************************************/
+void RF24::startCarrierWave(void)
 {
     stopListening();
     write_register(RF_SETUP, read_register(RF_SETUP) | _BV(CONT_WAVE) | _BV(PLL_LOCK));
     if (isPVariant()){
         setAutoAck(0);
-        setRetries(0, 0);
+        setAutoRetry(0, 0);
         uint8_t dummy_buf[32];
         for (uint8_t i = 0; i < 32; ++i)
             dummy_buf[i] = 0xFF;
@@ -1439,14 +1465,12 @@ void RF24::startCarrierWave(rf24_pa_dbm_e level, uint8_t channel)
 
         setCrc(0);  // disable CRC
     }
-    setPaLevel(level);
-    setChannel(channel);
-    IF_SERIAL_DEBUG(printf_P(PSTR("RF_SETUP=%02x\r\n"), read_register(RF_SETUP)));
     ce(HIGH);
     if (isPVariant()){
         delay(1); // datasheet says 1 ms is ok in this instance
         ce(LOW);
-        resend();
+        write_register(REUSE_TX_PL, RF24_NOP, true);
+        ce(HIGH);
     }
 }
 

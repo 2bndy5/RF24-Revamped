@@ -182,7 +182,7 @@ void master(unsigned int role) {
     // According to the datasheet, the auto-retry features's delay value should
     // be "skewed" to allow the RX node to receive 1 transmission at a time.
     // So, use varying delay between retry attempts and 15 (at most) retry attempts
-    radio.setRetries(((role * 3) % 12) + 3, 15); // maximum value is 15 for both args
+    radio.setAutoRetry(((role * 3) % 12) + 3, 15); // maximum value is 15 for both args
 
     unsigned int failures = 0;
     while (failures < 6) {

@@ -1,135 +1,3 @@
-/* -----------------------------code sections------------------------------ */
-
-/*
-.highlight {
-  background: #202020;
-}
-
-.highlight .s1 {
-  color: #da8c00;
-}
-
-.highlight .mi {
-  color: #9ff1c6;
-}
-
-.highlight .nb {
-  color: #f7ef84;
-}
-
-.highlight .ow {
-  color: #1f95cb;
-}
-
-.highlight .kc {
-  color: #2886e4;
-}
-
-.highlight .s2 {
-  color: #da8c00;
-}
-
-.highlight .mf {
-  color: #9ff1c6;
-}
-
-.highlight .se {
-  color: #e2c458;
-}
-
-.highlight .si {
-  color: #2886e4;
-}
-
-.highlight .sa {
-  color: #2886e4;
-}
-
-.highlight .nf {
-  color: #f7ef84;
-}
-
-.highlight .k {
-  color: #af63ab;
-}
-
-.highlight .c1 {
-  color: #4bbc3f;
-}
-
-.highlight .o {
-  color: #fefefe;
-}
-
-.highlight .sd {
-  color: #da8c00;
-}
-
-.highlight .nn {
-  color: #fff;
-}
-
-.highlight .kn {
-  color: #af63ab;
-}
-
-.highlight .bp {
-  color: #1f95cb;
-}
-
-.highlight .nd {
-  color: #f7ef84;
-}
-
-.highlight .ne {
-  color: #13d297;
-}
-
-.highlight .mh {
-  color: #9ff1c6;
-}
-
-.highlight .go {
-  color: #1afd00;
-}
-
-td.linenos pre {
-  color: #fff;
-  background-color: #373737;
-}
-
-.highlight .fm {
-  color: #f7ef84;
-}
-
-.highlight .nv {
-  color: #6F6CFF;
-}
-
-.highlight .s {
-  color: #FF915B;
-}
-
-.highlight .sc {
-  color: #FF915B;
-}
-
-.highlight .kt {
-  color: #306DFB;
-}
-
-.highlight .vm {
-  color: #45BFCC;
-}
-
-.highlight .nc {
-  color: #25C7E1;
-}
-
-.highlight .cp {
-  color: #FF69B6;
-}
-*/
 /* ----------------------table sections---------------------------------------- */
 
 thead .row-even {
@@ -192,7 +60,7 @@ thead .row-even {
 .rst-content .wy-alert-success.seealso .admonition-title,
 .rst-content .wy-alert-success.admonition-todo .admonition-title,
 .rst-content .wy-alert-success.admonition .admonition-title {
-  background: #05886e;
+  background: #006d57;
 }
 
 .wy-alert.wy-alert-success,
@@ -208,7 +76,7 @@ thead .row-even {
 .rst-content .wy-alert-success.seealso,
 .rst-content .wy-alert-success.admonition-todo,
 .rst-content .wy-alert-success.admonition {
-  background: #28443e;
+  background: #0b3129;
 }
 
 .wy-alert.wy-alert-info .wy-alert-title,
@@ -254,7 +122,7 @@ thead .row-even {
 .rst-content .seealso,
 .rst-content .wy-alert-info.admonition-todo,
 .rst-content .wy-alert-info.admonition {
-  background: #2d3d48;
+  background: #0a202f;
 }
 
 .wy-alert.wy-alert-warning .wy-alert-title,
@@ -284,7 +152,7 @@ thead .row-even {
 .rst-content .wy-alert-warning.seealso .admonition-title,
 .rst-content .admonition-todo .admonition-title,
 .rst-content .wy-alert-warning.admonition .admonition-title {
-  background: #ed2222;
+  background: #950303;
 }
 
 .wy-alert.wy-alert-warning,
@@ -300,7 +168,7 @@ thead .row-even {
 .rst-content .wy-alert-warning.seealso,
 .rst-content .admonition-todo,
 .rst-content .wy-alert-warning.admonition {
-  background: #490707;
+  background: #380808;
 }
 
 /* -------------------------------------general page styling-------------------------------------------- */
@@ -398,6 +266,10 @@ body {
 .wy-menu-vertical li.toctree-l3 a,
 .wy-menu-vertical li.toctree-l4 a {
   color: #f2f2f2;
+}
+.wy-menu-vertical li.toctree-l3.current>a,
+.wy-menu-vertical li.toctree-l3.current li.toctree-l4>a {
+  background:#446288;
 }
 
 .wy-menu-vertical li.current a:hover {
