@@ -25,6 +25,7 @@ from pygments.token import (
     String,
     Number,
     Operator,
+    Punctuation,
 )
 import recommonmark
 from recommonmark.transform import AutoStructify
@@ -92,6 +93,7 @@ primary_domain = "cpp"
 # pygment custom style
 # --------------------------------------------------
 
+
 class DarkPlus(Style):
     """A custom pygment highlighting scheme based on
     VSCode's builtin `Dark Plus` theme"""
@@ -114,14 +116,14 @@ class DarkPlus(Style):
         # Keyword.Pseudo: "#499CD6",
         # Keyword.Reserved: "#499CD6",
         Keyword.Type: "#48C999",
-        # Name: "#9CDCFE",
+        Name: "#FEFEFE",
         Name.Builtin: "#EAEB82",
         Name.Builtin.Pseudo: "#499DC7",
         Name.Class: "#48C999",
         Name.Decorator: "#EAEB82",
         Name.Exception: "#48C999",
         Name.Attribute: "#569CD6",
-        Name.Variable:" #9CDCFE",
+        Name.Variable: " #9CDCFE",
         Name.Variable.Magic: "#EAEB82",
         Name.Function: "#EAEB82",
         Name.Function.Magic: "#EAEB82",
@@ -132,6 +134,7 @@ class DarkPlus(Style):
         Number: "#B3D495",
         Operator: "#FEFEFE",
         Operator.Word: "#499DC7",
+        Punctuation: "#FEFEFE",
     }
 
 
@@ -143,6 +146,7 @@ def pygments_monkeypatch_style(mod_name, cls):
     setattr(pygments.styles, mod_name, mod)
     sys.modules["pygments.styles." + mod_name] = mod
     pygments.styles.STYLE_MAP[mod_name] = mod_name + "::" + cls_name
+
 
 pygments_monkeypatch_style("dark_plus", DarkPlus)
 
@@ -168,8 +172,10 @@ breathe_default_project = "RF24"
 # recommonmark Configuration
 # -------------------------------------------------
 
+
 def visit_document(*_):
     pass
+
 
 # Removes irrelevant warning messages during md file parsing.
 # REF: https://github.com/readthedocs/recommonmark/issues/177
@@ -212,28 +218,24 @@ if read_the_docs_build:
     html_theme = "sphinx_rtd_theme"
 else:
     html_theme = "sphinx_material"
-    # Material theme options (see theme.conf for more information)
+    # Material theme options
+    html_sidebars = {
+        "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+    }
     html_theme_options = {
-
         # Set the name of the project to appear in the navigation.
         "nav_title": "RF24 Revamped",
-
         # Specify a base_url used to generate sitemap.xml. If not
         # specified, then no sitemap will be built.
         "base_url": "https://2bndy5.github.io/RF24-Revamped/",
-
         # Set the color and the accent color
         "color_primary": "blue",
-        "color_accent": "light-blue",
-
+        "color_accent": "light-green",
         # Set the repo location to get a badge with stats
         "repo_url": "https://github.com/2bndy5/RF24-Revamped/",
         "repo_name": "RF24-Revamped",
-        "nav_links": [
-            {"href": "index", "internal": True, "title": "Material"},
-        ],
         # Visible levels of the global TOC; -1 means unlimited
-        "globaltoc_depth": 4,
+        "globaltoc_depth": 1,
         # If False, expand all TOC entries
         "globaltoc_collapse": True,
         # If True, show hidden TOC entries
