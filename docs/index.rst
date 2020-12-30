@@ -80,11 +80,11 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 .. [2] http://littlewire.cc/
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Examples
 
    ino_examples
@@ -92,7 +92,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    attiny_examples
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: API Reference
 
    basic_api
@@ -100,7 +100,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    configure_api
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: Related Pages
 
    common_issues

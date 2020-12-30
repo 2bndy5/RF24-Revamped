@@ -46,7 +46,7 @@ jobs:
       with:
         python-version: 3.7
     - name: install Sphinx, breathe, recommonmark, sphinx-rtd-theme
-      run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme
+      run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme sphinx-material
     - name: run Sphinx
       run: |
         cd docs
