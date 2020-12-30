@@ -1,194 +1,259 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Arduino examples &mdash; RF24 Revemped 2.0 documentation</title>
-  
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
 
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
   
   
+  
+    <title>Arduino examples &#8212; RF24 Revamped</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Linux examples" href="cpp_examples.html" />
-    <link rel="prev" title="Welcome to RF24 Revemped’s documentation!" href="index.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
+    <link rel="prev" title="Welcome to RF24 Revemped’s documentation!" href="index.html" />
+  
    
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
 
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue data-md-color-accent=light-blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#ino_examples" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="RF24 Revamped"
+           class="md-header-nav__button md-logo">
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+              <img src="_static/Logo large.png" height="26"
+                   alt="RF24 Revamped logo">
           
-
-          
-            
-            <img src="_static/Logo.png" class="logo" alt="Logo"/>
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">RF24 Revamped</span>
+          <span class="md-header-nav__topic"> Arduino examples </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="GET" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Examples</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Arduino examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#gettingstarted-ino">GettingStarted.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#acknowledgementpayloads-ino">AcknowledgementPayloads.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manualacknowledgements-ino">ManualAcknowledgements.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#multiceiverdemo-ino">MulticeiverDemo.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#streamingdata-ino">StreamingData.ino</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#interruptconfigure-ino">InterruptConfigure.ino</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configure_api.html">Configuration API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Related Pages</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
-</ul>
-
-            
-          
-        </div>
-        
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">RF24 Revemped</a>
-        
-      </nav>
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
 
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Arduino examples</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="_sources/ino_examples.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
+    </div>
+  </nav>
+</header>
 
   
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">RF24 Revamped</a></li>
             
-  <div class="section" id="arduino-examples">
-<h1>Arduino examples<a class="headerlink" href="#arduino-examples" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="gettingstarted-ino">
-<h2>GettingStarted.ino<a class="headerlink" href="#gettingstarted-ino" title="Permalink to this headline">¶</a></h2>
+            <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Material</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="RF24 Revamped" class="md-nav__button md-logo">
+      
+        <img src="_static/Logo large.png" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="index.html"
+       title="RF24 Revamped">RF24 Revamped</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+    </div>
+  
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#ino-examples--page-root" class="md-nav__link">Arduino examples</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#gettingstarted-ino" class="md-nav__link">GettingStarted.ino</a>
+        </li>
+        <li class="md-nav__item"><a href="#acknowledgementpayloads-ino" class="md-nav__link">AcknowledgementPayloads.ino</a>
+        </li>
+        <li class="md-nav__item"><a href="#manualacknowledgements-ino" class="md-nav__link">ManualAcknowledgements.ino</a>
+        </li>
+        <li class="md-nav__item"><a href="#multiceiverdemo-ino" class="md-nav__link">MulticeiverDemo.ino</a>
+        </li>
+        <li class="md-nav__item"><a href="#streamingdata-ino" class="md-nav__link">StreamingData.ino</a>
+        </li>
+        <li class="md-nav__item"><a href="#interruptconfigure-ino" class="md-nav__link">InterruptConfigure.ino</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/ino_examples.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  
+<h1 id="ino-examples--page-root">Arduino examples<a class="headerlink" href="#ino-examples--page-root" title="Permalink to this headline">¶</a></h1>
+
+<h2 id="gettingstarted-ino">GettingStarted.ino<a class="headerlink" href="#gettingstarted-ino" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another.
 This example was written to be used on 2 devices acting as “nodes”.
 Use the Serial Monitor to change each node’s behavior.</p>
@@ -335,14 +400,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
 151
 152
 153</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
 <span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 
@@ -353,7 +418,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// Used to control whether this node is sending or receiving</span>
 <span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX role, false = RX role</span>
 
-<span class="c1">// For this example, we&#39;ll be using a payload containing</span>
+<span class="c1">// For this example, we'll be using a payload containing</span>
 <span class="c1">// a single float number that will be incremented</span>
 <span class="c1">// on every successful transmission</span>
 <span class="kt">float</span> <span class="n">payload</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
@@ -367,25 +432,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/GettingStarted&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/GettingStarted"</span><span class="p">));</span>
 
   <span class="c1">// To set the radioNumber via the Serial monitor on startup</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39;&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Which radio is this? Enter '0' or '1'. Defaults to '0'"</span><span class="p">));</span>
   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// wait for user input</span>
   <span class="p">}</span>
   <span class="kt">char</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">parseInt</span><span class="p">();</span>
   <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radioNumber = &quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radioNumber = "</span><span class="p">));</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">radioNumber</span><span class="p">);</span>
 
   <span class="c1">// role variable is hardcoded to RX behavior, inform the user of this</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;T&#39; to begin transmitting to the other node&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'T' to begin transmitting to the other node"</span><span class="p">));</span>
 
   <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
   <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -402,7 +467,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// set the RX address of the TX node into a RX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
-  <span class="c1">// additional setup specific to the node&#39;s role</span>
+  <span class="c1">// additional setup specific to the node's role</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>  <span class="c1">// put radio in TX mode</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -425,14 +490,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                      <span class="c1">// end the timer</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful! &quot;</span><span class="p">));</span>          <span class="c1">// payload was delivered</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Time to transmit = &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission successful! "</span><span class="p">));</span>          <span class="c1">// payload was delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Time to transmit = "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>                 <span class="c1">// print the timer result</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us. Sent: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" us. Sent: "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>                               <span class="c1">// print payload sent</span>
       <span class="n">payload</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>                                       <span class="c1">// increment float payload</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span> <span class="c1">// payload was not delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission failed or timed out"</span><span class="p">));</span> <span class="c1">// payload was not delivered</span>
     <span class="p">}</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
@@ -445,12 +510,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>        <span class="c1">// grab the pipe number that received it</span>
       <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>        <span class="c1">// get the size of the payload</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>        <span class="c1">// fetch payload from FIFO</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Received "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                <span class="c1">// print the size of the payload</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>            <span class="c1">// print the payload&#39;s value</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">": "</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>            <span class="c1">// print the payload's value</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 
@@ -458,18 +523,18 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;T&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'T'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the TX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO TRANSMIT ROLE -- PRESS &#39;R&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO RECEIVE ROLE -- PRESS &#39;T&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
@@ -478,9 +543,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-<div class="section" id="acknowledgementpayloads-ino">
-<h2>AcknowledgementPayloads.ino<a class="headerlink" href="#acknowledgementpayloads-ino" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="acknowledgementpayloads-ino">AcknowledgementPayloads.ino<a class="headerlink" href="#acknowledgementpayloads-ino" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another with Acknowledgement (ACK) payloads attached to ACK packets.
 This example was written to be used on 2 devices acting as “nodes”.
 Use the Serial Monitor to change each node’s behavior.</p>
@@ -681,15 +746,15 @@ Use the Serial Monitor to change each node’s behavior.</p>
 206
 207
 208</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
 <span class="c1">// an identifying device destination</span>
 <span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 <span class="c1">// to use different addresses on a pair of radios, we need a variable to</span>
@@ -700,7 +765,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// Used to control whether this node is sending or receiving</span>
 <span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX role, false = RX role</span>
 
-<span class="c1">// For this example, we&#39;ll be using a payload containing</span>
+<span class="c1">// For this example, we'll be using a payload containing</span>
 <span class="c1">// a string &amp; an integer number that will be incremented</span>
 <span class="c1">// on every successful transmission.</span>
 <span class="c1">// Make a data structure to store the entire payload of different datatypes</span>
@@ -719,25 +784,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/AcknowledgementPayloads&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/AcknowledgementPayloads"</span><span class="p">));</span>
 
   <span class="c1">// To set the radioNumber via the Serial monitor on startup</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39;&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Which radio is this? Enter '0' or '1'. Defaults to '0'"</span><span class="p">));</span>
   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// wait for user input</span>
   <span class="p">}</span>
   <span class="kt">char</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">parseInt</span><span class="p">();</span>
   <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radioNumber = &quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radioNumber = "</span><span class="p">));</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">radioNumber</span><span class="p">);</span>
 
   <span class="c1">// role variable is hardcoded to RX behavior, inform the user of this</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;T&#39; to begin transmitting to the other node&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'T' to begin transmitting to the other node"</span><span class="p">));</span>
 
   <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
   <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -757,16 +822,16 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// set the RX address of the TX node into a RX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
-  <span class="c1">// additional setup specific to the node&#39;s role</span>
+  <span class="c1">// additional setup specific to the node's role</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// setup the TX payload</span>
 
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;Hello &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                      <span class="c1">// put radio in TX mode</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// setup the ACK payload &amp; load the first response into the FIFO</span>
 
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
     <span class="c1">// load the payload for the first received transmission on pipe 0</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
 
@@ -789,21 +854,21 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>                  <span class="c1">// end the timer</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful! &quot;</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Time to transmit = &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission successful! "</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Time to transmit = "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>        <span class="c1">// print the timer result</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us. Sent: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" us. Sent: "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>                <span class="c1">// print the outgoing message</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>                <span class="c1">// print the outgoing counter</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                      <span class="c1">// is there an ACK payload?</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>                <span class="c1">// get the pipe number that received it</span>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
         <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>    <span class="c1">// get incoming ACK payload</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Recieved "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                  <span class="c1">// print incoming payload size</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                         <span class="c1">// print pipe number that received the ACK</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">": "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>             <span class="c1">// print incoming message</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>           <span class="c1">// print incoming counter</span>
 
@@ -812,12 +877,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="c1">// empty ACK packet received</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved: an empty ACK packet&quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Recieved: an empty ACK packet"</span><span class="p">));</span>
       <span class="p">}</span>
 
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span>    <span class="c1">// payload was not delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission failed or timed out"</span><span class="p">));</span>    <span class="c1">// payload was not delivered</span>
     <span class="p">}</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
@@ -831,14 +896,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>             <span class="c1">// get the size of the payload</span>
       <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get incoming payload</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Received "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                     <span class="c1">// print the size of the payload</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                      <span class="c1">// print the pipe number</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">": "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>          <span class="c1">// print incoming message</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print incoming counter</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Sent: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Sent: "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>           <span class="c1">// print outgoing message</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>         <span class="c1">// print outgoing counter</span>
 
@@ -853,21 +918,21 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;T&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'T'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the TX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO TRANSMIT ROLE -- PRESS &#39;R&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"</span><span class="p">));</span>
 
-      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;Hello &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
+      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// this also discards any unused ACK payloads</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO RECEIVE ROLE -- PRESS &#39;T&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
-      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"</span><span class="p">));</span>
+      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
 
       <span class="c1">// load the payload for the first received transmission on pipe 0</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
@@ -878,9 +943,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-<div class="section" id="manualacknowledgements-ino">
-<h2>ManualAcknowledgements.ino<a class="headerlink" href="#manualacknowledgements-ino" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="manualacknowledgements-ino">ManualAcknowledgements.ino<a class="headerlink" href="#manualacknowledgements-ino" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi to transmit and respond with acknowledgment (ACK) transmissions. Notice that the auto-ack feature is enabled, but this example doesn’t use automatic ACK payloads because automatic ACK payloads’ data will always be outdated by 1 transmission. Instead, this example uses a call and response paradigm.
 This example was written to be used on 2 devices acting as “nodes”.
 Use the Serial Monitor to change each node’s behavior.</p>
@@ -1092,14 +1157,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
 222
 223
 224</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
 <span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 
@@ -1110,7 +1175,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// Used to control whether this node is sending or receiving</span>
 <span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX node, false = RX node</span>
 
-<span class="c1">// For this example, we&#39;ll be using a payload containing</span>
+<span class="c1">// For this example, we'll be using a payload containing</span>
 <span class="c1">// a string &amp; an integer number that will be incremented</span>
 <span class="c1">// on every successful transmission.</span>
 <span class="c1">// Make a data structure to store the entire payload of different datatypes</span>
@@ -1132,25 +1197,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/ManualAcknowledgements&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/ManualAcknowledgements"</span><span class="p">));</span>
 
   <span class="c1">// To set the radioNumber via the Serial monitor on startup</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39;&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Which radio is this? Enter '0' or '1'. Defaults to '0'"</span><span class="p">));</span>
   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// wait for user input</span>
   <span class="p">}</span>
   <span class="kt">char</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">parseInt</span><span class="p">();</span>
   <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radioNumber = &quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radioNumber = "</span><span class="p">));</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">radioNumber</span><span class="p">);</span>
 
   <span class="c1">// role variable is hardcoded to RX behavior, inform the user of this</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;T&#39; to begin transmitting to the other node&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'T' to begin transmitting to the other node"</span><span class="p">));</span>
 
   <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
   <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -1170,12 +1235,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// setup the TX node</span>
 
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;Hello &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// put radio in TX mode</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// setup the RX node</span>
 
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>               <span class="c1">// put radio in RX mode</span>
   <span class="p">}</span>
 
@@ -1206,33 +1271,33 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                 <span class="c1">// put back in TX mode</span>
 
       <span class="c1">// print summary of transactions</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission successful!&quot;</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission successful!"</span><span class="p">));</span> <span class="c1">// payload was delivered</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                     <span class="c1">// is there a payload received</span>
         <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>               <span class="c1">// grab the pipe number that received it</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Round-trip delay: &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Round-trip delay: "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>     <span class="c1">// print the timer result</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us. Sent: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>             <span class="c1">// print the outgoing payload&#39;s message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>             <span class="c1">// print outgoing payload&#39;s counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" us. Sent: "</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>             <span class="c1">// print the outgoing payload's message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>             <span class="c1">// print outgoing payload's counter</span>
         <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
         <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>   <span class="c1">// get payload from RX FIFO</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Received &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Received "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>                 <span class="c1">// print the size of the payload</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                        <span class="c1">// print the pipe number</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>            <span class="c1">// print the incoming payload&#39;s message</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print the incoming payload&#39;s counter</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">": "</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>            <span class="c1">// print the incoming payload's message</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>          <span class="c1">// print the incoming payload's counter</span>
         <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>        <span class="c1">// save incoming counter for next outgoing counter</span>
 
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="c1">// no response received</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Recieved no response.&quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Recieved no response."</span><span class="p">));</span>
       <span class="p">}</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
       <span class="c1">// payload was not delivered</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission failed or timed out"</span><span class="p">));</span>
     <span class="p">}</span> <span class="c1">// report</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
@@ -1257,20 +1322,20 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                               <span class="c1">// put back in RX mode</span>
 
       <span class="c1">// print summary of transactions</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Received "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">());</span>          <span class="c1">// print the size of the payload</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">": "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>     <span class="c1">// print incoming message</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>     <span class="c1">// print incoming counter</span>
 
       <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Sent: &quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Sent: "</span><span class="p">));</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>       <span class="c1">// print outgoing message</span>
         <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>     <span class="c1">// print outgoing counter</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot; Response failed.&quot;</span><span class="p">);</span> <span class="c1">// failed to send response</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">" Response failed."</span><span class="p">);</span> <span class="c1">// failed to send response</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
@@ -1279,20 +1344,20 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;T&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'T'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the TX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;Hello &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO TRANSMIT ROLE -- PRESS &#39;R&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// put in TX mode</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">&quot;World &quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the response message</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO RECEIVE ROLE -- PRESS &#39;T&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the response message</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>               <span class="c1">// put in RX mode</span>
     <span class="p">}</span>
   <span class="p">}</span>
@@ -1300,9 +1365,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-<div class="section" id="multiceiverdemo-ino">
-<h2>MulticeiverDemo.ino<a class="headerlink" href="#multiceiverdemo-ino" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="multiceiverdemo-ino">MulticeiverDemo.ino<a class="headerlink" href="#multiceiverdemo-ino" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from as many as 6 nRF24L01 transceivers to 1 receiving transceiver. This technique is trademarked by Nordic Semiconductors as “MultiCeiver”.
 Use the Serial Monitor to change each node’s behavior.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
@@ -1489,13 +1554,13 @@ Use the Serial Monitor to change each node’s behavior.</p>
 195
 196
 197</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
-<span class="c1">// For this example, we&#39;ll be using 6 addresses; 1 for each TX node</span>
+<span class="c1">// For this example, we'll be using 6 addresses; 1 for each TX node</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 <span class="c1">// Notice that the last byte is the only byte that changes in the last 5</span>
@@ -1513,9 +1578,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// transmit and only 1 node to receive, we will use a negative value in our</span>
 <span class="c1">// role variable to signify this node is a receiver.</span>
 <span class="c1">// role variable is used to control whether this node is sending or receiving</span>
-<span class="kt">char</span> <span class="n">role</span> <span class="o">=</span> <span class="sc">&#39;R&#39;</span><span class="p">;</span> <span class="c1">// 0-5 = TX node; any negative number = RX node</span>
+<span class="kt">char</span> <span class="n">role</span> <span class="o">=</span> <span class="sc">'R'</span><span class="p">;</span> <span class="c1">// 0-5 = TX node; any negative number = RX node</span>
 
-<span class="c1">// For this example, we&#39;ll be using a payload containing</span>
+<span class="c1">// For this example, we'll be using a payload containing</span>
 <span class="c1">// a node ID number and a single integer number that will be incremented</span>
 <span class="c1">// on every successful transmission.</span>
 <span class="c1">// Make a data structure to use as a payload.</span>
@@ -1527,8 +1592,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="n">PayloadStruct</span> <span class="n">payload</span><span class="p">;</span>
 
 <span class="c1">// This example uses all 6 pipes to receive while TX nodes only use 2 pipes</span>
-<span class="c1">// To make this easier we&#39;ll use a function to manage the addresses, and the</span>
-<span class="c1">// payload&#39;s nodeID</span>
+<span class="c1">// To make this easier we'll use a function to manage the addresses, and the</span>
+<span class="c1">// payload's nodeID</span>
 <span class="kt">void</span> <span class="nf">setRole</span><span class="p">();</span> <span class="c1">// declare a prototype; definition is found after the loop()</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
@@ -1540,14 +1605,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/MulticeiverDemo&quot;</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** Enter a number between 0 and 5 (inclusive) to change&quot;</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;    the identifying node number that transmits.&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/MulticeiverDemo"</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** Enter a number between 0 and 5 (inclusive) to change"</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"    the identifying node number that transmits."</span><span class="p">));</span>
 
   <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
   <span class="c1">// because these examples are likely run with nodes in close proximity of</span>
@@ -1559,7 +1624,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// 2x int datatype occupy 8 bytes</span>
 
   <span class="c1">// Set the pipe addresses accordingly. This function additionally also</span>
-  <span class="c1">// calls startListening() or stopListening() and sets the payload&#39;s nodeID</span>
+  <span class="c1">// calls startListening() or stopListening() and sets the payload's nodeID</span>
   <span class="n">setRole</span><span class="p">();</span>
 
   <span class="c1">// For debugging info</span>
@@ -1580,37 +1645,37 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// payload was delivered</span>
 
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission of payloadID &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission of payloadID "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">);</span>                       <span class="c1">// print payloadID</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; as node &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" as node "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">);</span>                          <span class="c1">// print nodeID</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; successful!&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; Time to transmit: &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" successful!"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" Time to transmit: "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>                 <span class="c1">// print the timer result</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" us"</span><span class="p">));</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out&quot;</span><span class="p">));</span> <span class="c1">// payload was not delivered</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission failed or timed out"</span><span class="p">));</span> <span class="c1">// payload was not delivered</span>
     <span class="p">}</span>
     <span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="o">++</span><span class="p">;</span>                                     <span class="c1">// increment payload number</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
     <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="c1">// slow transmissions down by 1 second</span>
 
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="sc">'R'</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// This device is the RX node</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>              <span class="c1">// is there a payload?</span>
       <span class="kt">uint8_t</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">pipe</span><span class="p">();</span>        <span class="c1">// grab the pipe number that received it</span>
       <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>        <span class="c1">// get the size of the payload</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>        <span class="c1">// fetch payload from FIFO</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Received "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>                <span class="c1">// print the size of the payload</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; bytes on pipe &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" bytes on pipe "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">);</span>                 <span class="c1">// print the pipe number</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; from node &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">);</span>       <span class="c1">// print the payload&#39;s origin</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;. PayloadID: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">);</span>  <span class="c1">// print the payload&#39;s number</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" from node "</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span><span class="p">);</span>       <span class="c1">// print the payload's origin</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">". PayloadID: "</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span><span class="p">);</span>  <span class="c1">// print the payload's number</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 
@@ -1618,25 +1683,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span> <span class="o">&lt;=</span> <span class="mi">53</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span> <span class="o">&lt;=</span> <span class="mi">53</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
 
-      <span class="n">role</span> <span class="o">=</span> <span class="sc">&#39;R&#39;</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING ROLE TO RECEIVER ***&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;--- Enter a number between 0 and 5 (inclusive) to act as&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;    a unique node number that transmits to the RX node.&quot;</span><span class="p">));</span>
+      <span class="n">role</span> <span class="o">=</span> <span class="sc">'R'</span><span class="p">;</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING ROLE TO RECEIVER ***"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"--- Enter a number between 0 and 5 (inclusive) to act as"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"    a unique node number that transmits to the RX node."</span><span class="p">));</span>
       <span class="n">setRole</span><span class="p">();</span> <span class="c1">// change address on all pipes to TX nodes</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="mi">48</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">53</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Become a TX node with identifier &#39;c&#39;</span>
+      <span class="c1">// Become a TX node with identifier 'c'</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">48</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING ROLE TO NODE &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING ROLE TO NODE "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; ***&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;--- Enter a number between 0 and 5 (inclusive) to change&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;    the identifying node number that transmits.&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;--- PRESS &#39;R&#39; to act as the RX node.&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" ***"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"--- Enter a number between 0 and 5 (inclusive) to change"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"    the identifying node number that transmits."</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"--- PRESS 'R' to act as the RX node."</span><span class="p">));</span>
       <span class="n">setRole</span><span class="p">();</span> <span class="c1">// change address on pipe 0 to the RX node</span>
     <span class="p">}</span>
   <span class="p">}</span>
@@ -1644,7 +1709,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="p">}</span> <span class="c1">// loop</span>
 
 <span class="kt">void</span> <span class="nf">setRole</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="sc">'R'</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// For the RX node</span>
 
     <span class="c1">// Set the addresses for all pipes to TX nodes</span>
@@ -1656,7 +1721,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// For the TX node</span>
 
-    <span class="c1">// set the payload&#39;s nodeID &amp; reset the payload&#39;s identifying number</span>
+    <span class="c1">// set the payload's nodeID &amp; reset the payload's identifying number</span>
     <span class="n">payload</span><span class="p">.</span><span class="n">nodeID</span> <span class="o">=</span> <span class="n">role</span><span class="p">;</span>
     <span class="n">payload</span><span class="p">.</span><span class="n">payloadID</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
@@ -1664,8 +1729,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span> <span class="c1">// put radio in TX mode</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">role</span><span class="p">]);</span>
 
-    <span class="c1">// According to the datasheet, the auto-retry features&#39;s delay value should</span>
-    <span class="c1">// be &quot;skewed&quot; to allow the RX node to receive 1 transmission at a time.</span>
+    <span class="c1">// According to the datasheet, the auto-retry features's delay value should</span>
+    <span class="c1">// be "skewed" to allow the RX node to receive 1 transmission at a time.</span>
     <span class="c1">// So, use varying delay between retry attempts and 15 (at most) retry attempts</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">setAutoRetry</span><span class="p">(((</span><span class="n">role</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span> <span class="c1">// maximum value is 15 for both args</span>
   <span class="p">}</span>
@@ -1673,9 +1738,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-<div class="section" id="streamingdata-ino">
-<h2>StreamingData.ino<a class="headerlink" href="#streamingdata-ino" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="streamingdata-ino">StreamingData.ino<a class="headerlink" href="#streamingdata-ino" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi for streaming multiple payloads.
 This example was written to be used on 2 devices acting as “nodes”.
 Use the Serial Monitor to change each node’s behavior.</p>
@@ -1860,14 +1925,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
 189
 190
 191</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
 <span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 
@@ -1878,7 +1943,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// Used to control whether this node is sending or receiving</span>
 <span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// true = TX node, false = RX node</span>
 
-<span class="c1">// For this example, we&#39;ll be sending 32 payloads each containing</span>
+<span class="c1">// For this example, we'll be sending 32 payloads each containing</span>
 <span class="c1">// 32 bytes of data that looks like ASCII art when printed to the serial</span>
 <span class="c1">// monitor. The TX node and RX node needs only a single 32 byte buffer.</span>
 <span class="cp">#define SIZE 32            </span><span class="c1">// this is the maximum for this example. (minimum is 1)</span>
@@ -1898,25 +1963,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/StreamingData&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/StreamingData"</span><span class="p">));</span>
 
   <span class="c1">// To set the radioNumber via the Serial monitor on startup</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39;&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Which radio is this? Enter '0' or '1'. Defaults to '0'"</span><span class="p">));</span>
   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// wait for user input</span>
   <span class="p">}</span>
   <span class="kt">char</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">parseInt</span><span class="p">();</span>
   <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radioNumber = &quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radioNumber = "</span><span class="p">));</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">radioNumber</span><span class="p">);</span>
 
   <span class="c1">// role variable is hardcoded to RX behavior, inform the user of this</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;T&#39; to begin transmitting to the other node&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'T' to begin transmitting to the other node"</span><span class="p">));</span>
 
   <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
   <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
@@ -1933,7 +1998,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// set the RX address of the TX node into a RX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
-  <span class="c1">// additional setup specific to the node&#39;s role</span>
+  <span class="c1">// additional setup specific to the node's role</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>  <span class="c1">// put radio in TX mode</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -1970,7 +2035,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
           <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>
           <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
           <span class="k">if</span> <span class="p">(</span><span class="n">failures</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Too many failures detected. Aborting at payload &quot;</span><span class="p">));</span>
+            <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Too many failures detected. Aborting at payload "</span><span class="p">));</span>
             <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
             <span class="k">break</span><span class="p">;</span>
           <span class="p">}</span>
@@ -1980,11 +2045,11 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="n">radio</span><span class="p">.</span><span class="n">ce</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">end_timer</span> <span class="o">=</span> <span class="n">micros</span><span class="p">();</span>         <span class="c1">// end the timer</span>
 
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Time to transmit = &quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Time to transmit = "</span><span class="p">));</span>
     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">end_timer</span> <span class="o">-</span> <span class="n">start_timer</span><span class="p">);</span>      <span class="c1">// print the timer result</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; us with &quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" us with "</span><span class="p">));</span>
     <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">failures</span><span class="p">);</span>                     <span class="c1">// print failures detected</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; failures detected&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" failures detected"</span><span class="p">));</span>
 
     <span class="c1">// to make this example readable in the serial monitor</span>
     <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>  <span class="c1">// slow transmissions down by 1 second</span>
@@ -1994,9 +2059,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>         <span class="c1">// is there a payload?</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">);</span>     <span class="c1">// fetch payload from FIFO</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Received: &quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>          <span class="c1">// print the payload&#39;s value</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot; - &quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Received: "</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>          <span class="c1">// print the payload's value</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">" - "</span><span class="p">));</span>
       <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">counter</span><span class="o">++</span><span class="p">);</span>     <span class="c1">// print the received counter</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
@@ -2005,19 +2070,19 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;T&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'T'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the TX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//reset the RX node&#39;s counter</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO TRANSMIT ROLE -- PRESS &#39;R&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//reset the RX node's counter</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO RECEIVE ROLE -- PRESS &#39;T&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
@@ -2030,7 +2095,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// This example employs function to save memory on certain boards.</span>
 
   <span class="c1">// let the first character be an identifying alphanumeric prefix</span>
-  <span class="c1">// this lets us see which payload didn&#39;t get received</span>
+  <span class="c1">// this lets us see which payload didn't get received</span>
   <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">26</span> <span class="o">?</span> <span class="mi">65</span> <span class="o">:</span> <span class="mi">71</span><span class="p">);</span>
   <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">char</span> <span class="n">chr</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">abs</span><span class="p">((</span><span class="n">SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
@@ -2041,9 +2106,9 @@ Use the Serial Monitor to change each node’s behavior.</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-<div class="section" id="interruptconfigure-ino">
-<h2>InterruptConfigure.ino<a class="headerlink" href="#interruptconfigure-ino" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="interruptconfigure-ino">InterruptConfigure.ino<a class="headerlink" href="#interruptconfigure-ino" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi to detecting (and verifying) the IRQ (interrupt) pin on the nRF24L01.
 This example was written to be used on 2 devices acting as “nodes”.
 Use the Serial Monitor to change each node’s behavior.</p>
@@ -2378,10 +2443,10 @@ Use the Serial Monitor to change each node’s behavior.</p>
 342
 343
 344</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;printf.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;RF24Revamped.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"printf.h"</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
-<span class="c1">// We will be using the nRF24L01&#39;s IRQ pin for this example</span>
+<span class="c1">// We will be using the nRF24L01's IRQ pin for this example</span>
 <span class="cp">#define IRQ_PIN 2 </span><span class="c1">// this needs to be a digital input capable pin</span>
 <span class="k">volatile</span> <span class="kt">bool</span> <span class="n">wait_for_event</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// used to wait for an IRQ event to trigger</span>
 
@@ -2389,7 +2454,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 
 <span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1Node&quot;</span><span class="p">,</span> <span class="s">&quot;2Node&quot;</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="c1">// It is very helpful to think of an address as a path instead of as</span>
 <span class="c1">// an identifying device destination</span>
 
@@ -2400,15 +2465,15 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="c1">// Used to control whether this node is sending or receiving</span>
 <span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX node, false = RX node</span>
 
-<span class="c1">// For this example, we&#39;ll be using a payload containing</span>
+<span class="c1">// For this example, we'll be using a payload containing</span>
 <span class="c1">// a string that changes on every transmission. (successful or not)</span>
 <span class="c1">// Make a couple arrays of payloads &amp; an iterator to traverse them</span>
 <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">tx_pl_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">ack_pl_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="kt">uint8_t</span> <span class="n">pl_iterator</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="c1">// The &quot; + 1&quot; compensates for the c-string&#39;s NULL terminating 0</span>
-<span class="kt">char</span> <span class="n">tx_payloads</span><span class="p">[][</span><span class="n">tx_pl_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Ping &quot;</span><span class="p">,</span> <span class="s">&quot;Pong &quot;</span><span class="p">,</span> <span class="s">&quot;Radio&quot;</span><span class="p">,</span> <span class="s">&quot;1FAIL&quot;</span><span class="p">};</span>
-<span class="kt">char</span> <span class="n">ack_payloads</span><span class="p">[][</span><span class="n">ack_pl_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Yak &quot;</span><span class="p">,</span> <span class="s">&quot;Back&quot;</span><span class="p">,</span> <span class="s">&quot; ACK&quot;</span><span class="p">};</span>
+<span class="c1">// The " + 1" compensates for the c-string's NULL terminating 0</span>
+<span class="kt">char</span> <span class="n">tx_payloads</span><span class="p">[][</span><span class="n">tx_pl_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Ping "</span><span class="p">,</span> <span class="s">"Pong "</span><span class="p">,</span> <span class="s">"Radio"</span><span class="p">,</span> <span class="s">"1FAIL"</span><span class="p">};</span>
+<span class="kt">char</span> <span class="n">ack_payloads</span><span class="p">[][</span><span class="n">ack_pl_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Yak "</span><span class="p">,</span> <span class="s">"Back"</span><span class="p">,</span> <span class="s">" ACK"</span><span class="p">};</span>
 
 <span class="kt">void</span> <span class="nf">interruptHandler</span><span class="p">();</span> <span class="c1">// prototype to handle IRQ events</span>
 <span class="kt">void</span> <span class="nf">printRxFifo</span><span class="p">();</span>      <span class="c1">// prototype to print RX FIFO with 1 buffer</span>
@@ -2422,25 +2487,25 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
   <span class="c1">// initialize the transceiver on the SPI bus</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radio hardware is not responding!!&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware is not responding!!"</span><span class="p">));</span>
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
   <span class="p">}</span>
 
-  <span class="c1">// print example&#39;s introductory prompt</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RF24/examples/InterruptConfigure&quot;</span><span class="p">));</span>
+  <span class="c1">// print example's introductory prompt</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RF24/examples/InterruptConfigure"</span><span class="p">));</span>
 
   <span class="c1">// To set the radioNumber via the Serial monitor on startup</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Which radio is this? Enter &#39;0&#39; or &#39;1&#39;. Defaults to &#39;0&#39;&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Which radio is this? Enter '0' or '1'. Defaults to '0'"</span><span class="p">));</span>
   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// wait for user input</span>
   <span class="p">}</span>
   <span class="kt">char</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">parseInt</span><span class="p">();</span>
   <span class="n">radioNumber</span> <span class="o">=</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;radioNumber = &quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radioNumber = "</span><span class="p">));</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">radioNumber</span><span class="p">);</span>
 
   <span class="c1">// role variable is hardcoded to RX behavior, inform the user of this</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;T&#39; to begin transmitting to the other node&quot;</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'T' to begin transmitting to the other node"</span><span class="p">));</span>
 
   <span class="c1">// setup the IRQ_PIN</span>
   <span class="n">pinMode</span><span class="p">(</span><span class="n">IRQ_PIN</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
@@ -2471,7 +2536,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// set the RX address of the TX node into a RX pipe</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
 
-  <span class="c1">// additional setup specific to the node&#39;s role</span>
+  <span class="c1">// additional setup specific to the node's role</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// setup for TX mode</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                                  <span class="c1">// put radio in TX mode</span>
@@ -2479,7 +2544,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// setup for RX mode</span>
 
-    <span class="c1">// let IRQ pin only trigger on &quot;data ready&quot; event in RX mode</span>
+    <span class="c1">// let IRQ pin only trigger on "data ready" event in RX mode</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
 
     <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
@@ -2506,44 +2571,44 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// NOT waiting for an IRQ event to happen</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Test the &quot;data ready&quot; event with the IRQ pin</span>
+      <span class="c1">// Test the "data ready" event with the IRQ pin</span>
 
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data sent&#39; event&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the 'data sent' event"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging RX node for &#39;data ready&#39; event...&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   Pinging RX node for 'data ready' event..."</span><span class="p">));</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Test the &quot;data sent&quot; event with the IRQ pin</span>
+      <span class="c1">// Test the "data sent" event with the IRQ pin</span>
 
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the &#39;data ready&#39; event&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Configuring IRQ pin to ignore the 'data ready' event"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="c1">// args = dataReady, dataSent, dataFail</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging RX node for &#39;data sent&#39; event...&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   Pinging RX node for 'data sent' event..."</span><span class="p">));</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Use this iteration to fill the RX node&#39;s FIFO which sets us up for the next test.</span>
+      <span class="c1">// Use this iteration to fill the RX node's FIFO which sets us up for the next test.</span>
 
       <span class="c1">// send() uses virtual interrupt flags that work despite the masking of the IRQ pin</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">);;</span> <span class="c1">// disable IRQ masking for this step</span>
 
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Sending 1 payload to fill RX node&#39;s FIFO. IRQ pin is neglected.&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Sending 1 payload to fill RX node's FIFO. IRQ pin is neglected."</span><span class="p">));</span>
       <span class="c1">// send() will call flushTx() before calling write()</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tx_payloads</span><span class="p">[</span><span class="n">pl_iterator</span><span class="p">],</span> <span class="n">tx_pl_size</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
-          <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;RX node&#39;s FIFO is full; it is not listening any more&quot;</span><span class="p">));</span>
+          <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"RX node's FIFO is full; it is not listening any more"</span><span class="p">));</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Transmission successful, but the RX node might still be listening.&quot;</span><span class="p">);</span>
+          <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Transmission successful, but the RX node might still be listening."</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Transmission failed or timed out. Continuing anyway.&quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Transmission failed or timed out. Continuing anyway."</span><span class="p">));</span>
         <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span> <span class="c1">// discard payload(s) that failed to transmit</span>
       <span class="p">}</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// test the &quot;data fail&quot; event with the IRQ pin</span>
+      <span class="c1">// test the "data fail" event with the IRQ pin</span>
 
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Configuring IRQ pin to reflect all events&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Configuring IRQ pin to reflect all events"</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// all args default to true</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   Pinging inactive RX node for &#39;data fail&#39; event...&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   Pinging inactive RX node for 'data fail' event..."</span><span class="p">));</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">pl_iterator</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
@@ -2553,12 +2618,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">wait_for_event</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 
       <span class="c1">// use the non-blocking call to write a payload and begin transmission</span>
-      <span class="c1">// the &quot;false&quot; argument means we are expecting an ACK packet response</span>
+      <span class="c1">// the "false" argument means we are expecting an ACK packet response</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">tx_payloads</span><span class="p">[</span><span class="n">pl_iterator</span><span class="o">++</span><span class="p">],</span> <span class="n">tx_pl_size</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 
-      <span class="c1">// In this example, the &quot;data fail&quot; event is always configured to</span>
+      <span class="c1">// In this example, the "data fail" event is always configured to</span>
       <span class="c1">// trigger the IRQ pin active. Because the auto-ACK feature is on by</span>
-      <span class="c1">// default, we don&#39;t need a timeout check to prevent an infinite loop.</span>
+      <span class="c1">// default, we don't need a timeout check to prevent an infinite loop.</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// all IRQ tests are done; flushTx() and print the ACK payloads for fun</span>
@@ -2572,8 +2637,8 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
 
       <span class="c1">// inform user what to do next</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">*** PRESS &#39;T&#39; to restart the transmissions&quot;</span><span class="p">));</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** PRESS &#39;R&#39; to change to Receive role</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">*** PRESS 'T' to restart the transmissions"</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** PRESS 'R' to change to Receive role</span><span class="se">\n</span><span class="s">"</span><span class="p">));</span>
 
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
@@ -2597,7 +2662,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ack_payloads</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ack_pl_size</span><span class="p">);</span>
 
       <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>             <span class="c1">// let TX node finish its role</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// We&#39;re ready to start over. Begin listening.</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span> <span class="c1">// We're ready to start over. Begin listening.</span>
     <span class="p">}</span>
 
   <span class="p">}</span> <span class="c1">// role</span>
@@ -2606,12 +2671,12 @@ Use the Serial Monitor to change each node’s behavior.</p>
     <span class="c1">// change the role via the serial monitor</span>
 
     <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">());</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;T&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'T'</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the TX node</span>
       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">role</span><span class="p">)</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO TRANSMIT ROLE -- PRESS &#39;R&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"</span><span class="p">));</span>
       <span class="k">else</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** RESTARTING IRQ PIN TEST ***&quot;</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** RESTARTING IRQ PIN TEST ***"</span><span class="p">));</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
       <span class="n">wait_for_event</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -2622,13 +2687,13 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="c1">// continued TX operations when a transmission fails.</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span> <span class="c1">// this also discards any unused ACK payloads</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'R'</span> <span class="o">&amp;&amp;</span> <span class="n">role</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Become the RX node</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;*** CHANGING TO RECEIVE ROLE -- PRESS &#39;T&#39; TO SWITCH BACK&quot;</span><span class="p">));</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"</span><span class="p">));</span>
 
       <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 
-      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// the IRQ pin should only trigger on &quot;data ready&quot; event</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">interruptConfig</span><span class="p">();</span> <span class="c1">// the IRQ pin should only trigger on "data ready" event</span>
 
       <span class="c1">// Fill the TX FIFO with 3 ACK payloads for the first 3 received</span>
       <span class="c1">// transmissions on pipe 1</span>
@@ -2646,21 +2711,21 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="cm"> * when the IRQ pin goes active LOW, call this fuction print out why</span>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">interruptHandler</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// print IRQ status and all masking flags&#39; states</span>
+  <span class="c1">// print IRQ status and all masking flags' states</span>
 
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">IRQ pin is actively LOW&quot;</span><span class="p">));</span> <span class="c1">// show that this function was called</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">IRQ pin is actively LOW"</span><span class="p">));</span> <span class="c1">// show that this function was called</span>
   <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">250</span><span class="p">);</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span>        <span class="c1">// get values for IRQ masks</span>
   <span class="c1">// clearStatusFlags() clears the IRQ masks also. This is required for</span>
   <span class="c1">// continued TX operations when a transmission fails.</span>
   <span class="c1">// clearing the IRQ masks resets the IRQ pin to its inactive state (HIGH)</span>
 
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">data_sent: &quot;</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDs</span><span class="p">());</span>                            <span class="c1">// print &quot;data sent&quot; mask state</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;, data_fail: &quot;</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">());</span>                            <span class="c1">// print &quot;data fail&quot; mask state</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;, data_ready: &quot;</span><span class="p">));</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDr</span><span class="p">());</span>                          <span class="c1">// print &quot;data ready&quot; mask state</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">data_sent: "</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDs</span><span class="p">());</span>                            <span class="c1">// print "data sent" mask state</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">", data_fail: "</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">());</span>                            <span class="c1">// print "data fail" mask state</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">", data_ready: "</span><span class="p">));</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDr</span><span class="p">());</span>                          <span class="c1">// print "data ready" mask state</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">())</span>                                      <span class="c1">// if TX payload failed</span>
     <span class="n">radio</span><span class="p">.</span><span class="n">flushTx</span><span class="p">();</span>                             <span class="c1">// clear all payloads from the TX FIFO</span>
@@ -2668,14 +2733,14 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="c1">// print if test passed or failed. Unintentional fails mean the RX node was not listening.</span>
   <span class="c1">// pl_iterator has already been incremented by now</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   &#39;Data Ready&#39; event test &quot;</span><span class="p">));</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDr</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;passed&quot;</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;failed&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   'Data Ready' event test "</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDr</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">"passed"</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">"failed"</span><span class="p">));</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   &#39;Data Sent&#39; event test &quot;</span><span class="p">));</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDs</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;passed&quot;</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;failed&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   'Data Sent' event test "</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDs</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">"passed"</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">"failed"</span><span class="p">));</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pl_iterator</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;   &#39;Data Fail&#39; event test &quot;</span><span class="p">));</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;passed&quot;</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">&quot;failed&quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"   'Data Fail' event test "</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">()</span> <span class="o">?</span> <span class="n">F</span><span class="p">(</span><span class="s">"passed"</span><span class="p">)</span> <span class="o">:</span> <span class="n">F</span><span class="p">(</span><span class="s">"failed"</span><span class="p">));</span>
   <span class="p">}</span>
   <span class="n">wait_for_event</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// ready to continue with loop() operations</span>
 <span class="p">}</span> <span class="c1">// interruptHandler</span>
@@ -2687,10 +2752,10 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="cm"> */</span>
 <span class="kt">void</span> <span class="nf">printRxFifo</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                   <span class="c1">// if there is data in the RX FIFO</span>
-    <span class="c1">// to flush the data from the RX FIFO, we&#39;ll fetch it all using 1 buffer</span>
+    <span class="c1">// to flush the data from the RX FIFO, we'll fetch it all using 1 buffer</span>
 
     <span class="kt">uint8_t</span> <span class="n">pl_size</span> <span class="o">=</span> <span class="o">!</span><span class="n">role</span> <span class="o">?</span> <span class="nl">tx_pl_size</span> <span class="p">:</span> <span class="n">ack_pl_size</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">rx_fifo</span><span class="p">[</span><span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>       <span class="c1">// RX FIFO is full &amp; we know ACK payloads&#39; size</span>
+    <span class="kt">char</span> <span class="n">rx_fifo</span><span class="p">[</span><span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>       <span class="c1">// RX FIFO is full &amp; we know ACK payloads' size</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
       <span class="n">rx_fifo</span><span class="p">[</span><span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// add a NULL terminating char to use as a c-string</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rx_fifo</span><span class="p">,</span> <span class="n">pl_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// this clears the RX FIFO (for this example)</span>
@@ -2702,70 +2767,72 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="p">}</span>
       <span class="n">rx_fifo</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">pl_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// add a NULL terminating char to use as a c-string</span>
     <span class="p">}</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">&quot;Complete RX FIFO: &quot;</span><span class="p">));</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"Complete RX FIFO: "</span><span class="p">));</span>
     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">rx_fifo</span><span class="p">);</span>                 <span class="c1">// print the entire RX FIFO with 1 buffer</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-</div>
-</div>
 
 
-           </div>
-           
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="cpp_examples.html" class="btn btn-neutral float-right" title="Linux examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to RF24 Revemped’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
-  <hr/>
 
-  <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2020, 2bndy5
-
-    </p>
-  </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-
+          </article>
         </div>
       </div>
-
-    </section>
-
+    </main>
   </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="index.html" title="Welcome to RF24 Revemped’s documentation!"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Welcome to RF24 Revemped’s documentation! </span>
+              </div>
+            </a>
+          
+          
+            <a href="cpp_examples.html" title="Linux examples"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Linux examples </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2020, 2bndy5.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
 </html>

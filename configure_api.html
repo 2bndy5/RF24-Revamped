@@ -1,283 +1,396 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Configuration API &mdash; RF24 Revemped 2.0 documentation</title>
-  
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/darkness.css" type="text/css" />
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
 
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
   
   
+  
+    <title>Configuration API &#8212; RF24 Revamped</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Common Issues" href="common_issues.html" />
-    <link rel="prev" title="Advanced API" href="advanced_api.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
+    <link rel="prev" title="Advanced API" href="advanced_api.html" />
+  
    
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
 
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue data-md-color-accent=light-blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#configure_api" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="RF24 Revamped"
+           class="md-header-nav__button md-logo">
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> RF24 Revemped
+              <img src="_static/Logo large.png" height="26"
+                   alt="RF24 Revamped logo">
           
-
-          
-            
-            <img src="_static/Logo.png" class="logo" alt="Logo"/>
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">RF24 Revamped</span>
+          <span class="md-header-nav__topic"> Configuration API </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="GET" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ino_examples.html">Arduino examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cpp_examples.html">Linux examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attiny_examples.html">ATTiny examples</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="basic_api.html">Basic API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_api.html">Advanced API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#address-length-feature">Address Length feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#setaddresslength">setAddressLength()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getaddresslength">getAddressLength()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#dynamic-payload-length-feature">Dynamic Payload Length feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dynamic-payload-length-setters">Dynamic Payload Length setters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#dynamic-payload-length-getters">Dynamic Payload Length getters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-representation-of-dynamic-payload-length">Individual Pipe Representation of Dynamic Payload Length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#binary-representation-of-dynamic-payload-length">Binary Representation of Dynamic Payload Length</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#static-payload-length-feature">Static Payload Length feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#static-payload-length-setters">Static Payload Length setters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-static-payload-lengths">Unary pipe control of Static Payload Lengths</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-static-payload-length">Individual pipe control of Static Payload Length</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#getpayloadlength">getPayloadLength()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#auto-ack-feature">Auto-Ack feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#auto-ack-setters">Auto-Ack setters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#unary-pipe-control-of-autoack">Unary pipe control of AutoAck</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#binary-pipe-control-of-autoack">Binary pipe control of AutoAck</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-control-of-autoack">Individual pipe control of AutoAck</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#auto-ack-getters">Auto-Ack getters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#binary-representation-of-auto-ack">Binary Representation of Auto-Ack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#individual-pipe-representation-of-auto-ack">Individual Pipe Representation of Auto-Ack</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#auto-retry-feature">Auto-Retry feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#auto-retry-setters">Auto-Retry setters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#setautoretry">setAutoRetry()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setard">setArd()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setarc">setArc()</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#auto-retry-getters">Auto-Retry getters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#getautoretry">getAutoRetry()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#getarc">getArc()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#getard">getArd()</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#ack-payload-feature">Ack Payload feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#enableackpayload">enableAckPayload()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#disableackpayload">disableAckPayload()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#multicast-feature">Multicast feature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#allowmulticast">allowMulticast()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#isallowmulticast">isAllowMulticast()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#interruptconfig">interruptConfig()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rf-data-rate">RF Data Rate</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data-rate-enum">Data Rate enum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setdatarate">setDataRate()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getdatarate">getDataRate()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#rf-channel">RF Channel</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#setchannel">setChannel()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getchannel">getChannel()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#crc-checking">CRC checking</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#setcrc">setCrc()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getcrc">getCrc()</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#power-amplifier-level">Power Amplifier Level</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#power-amplifier-level-enum">Power Amplifier Level enum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setpalevel">setPaLevel()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getpalevel">getPaLevel()</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p class="caption"><span class="caption-text">Related Pages</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="common_issues.html">Common Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduino</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attiny.html">ATTiny Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linux_install.html">Linux Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mraa.html">MRAA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rpi_general.html">General Linux/Raspberry Pi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cross_compilation.html">Linux cross-compilation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="atxmega.html">ATXMEGA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portability.html">RF24 Portability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">Templated Files for Platform Support</a></li>
-</ul>
-
-            
-          
-        </div>
-        
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">RF24 Revemped</a>
-        
-      </nav>
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
 
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Configuration API</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="_sources/configure_api.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
+    </div>
+  </nav>
+</header>
 
   
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">RF24 Revamped</a></li>
             
-  <div class="section" id="configuration-api">
-<h1>Configuration API<a class="headerlink" href="#configuration-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="address-length-feature">
-<h2>Address Length feature<a class="headerlink" href="#address-length-feature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="setaddresslength">
-<h3>setAddressLength()<a class="headerlink" href="#setaddresslength" title="Permalink to this headline">¶</a></h3>
+            <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Material</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="RF24 Revamped" class="md-nav__button md-logo">
+      
+        <img src="_static/Logo large.png" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="index.html"
+       title="RF24 Revamped">RF24 Revamped</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+    </div>
+  
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#configure-api--page-root" class="md-nav__link">Configuration API</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#address-length-feature" class="md-nav__link">Address Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setaddresslength" class="md-nav__link">setAddressLength()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getaddresslength" class="md-nav__link">getAddressLength()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#dynamic-payload-length-feature" class="md-nav__link">Dynamic Payload Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#dynamic-payload-length-setters" class="md-nav__link">Dynamic Payload Length setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-dynamic-payloads" class="md-nav__link">Unary pipe control of Dynamic Payloads</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-pipe-control-of-dynamic-payloads" class="md-nav__link">Binary pipe control of Dynamic Payloads</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-dynamic-payloads" class="md-nav__link">Individual pipe control of Dynamic Payloads</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#dynamic-payload-length-getters" class="md-nav__link">Dynamic Payload Length getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#individual-pipe-representation-of-dynamic-payload-length" class="md-nav__link">Individual Pipe Representation of Dynamic Payload Length</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-representation-of-dynamic-payload-length" class="md-nav__link">Binary Representation of Dynamic Payload Length</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#static-payload-length-feature" class="md-nav__link">Static Payload Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#static-payload-length-setters" class="md-nav__link">Static Payload Length setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-static-payload-lengths" class="md-nav__link">Unary pipe control of Static Payload Lengths</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-static-payload-length" class="md-nav__link">Individual pipe control of Static Payload Length</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#getpayloadlength" class="md-nav__link">getPayloadLength()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-ack-feature" class="md-nav__link">Auto-Ack feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#auto-ack-setters" class="md-nav__link">Auto-Ack setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-autoack" class="md-nav__link">Unary pipe control of AutoAck</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-pipe-control-of-autoack" class="md-nav__link">Binary pipe control of AutoAck</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-autoack" class="md-nav__link">Individual pipe control of AutoAck</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-ack-getters" class="md-nav__link">Auto-Ack getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#binary-representation-of-auto-ack" class="md-nav__link">Binary Representation of Auto-Ack</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-representation-of-auto-ack" class="md-nav__link">Individual Pipe Representation of Auto-Ack</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-retry-feature" class="md-nav__link">Auto-Retry feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#auto-retry-setters" class="md-nav__link">Auto-Retry setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setautoretry" class="md-nav__link">setAutoRetry()</a>
+        </li>
+        <li class="md-nav__item"><a href="#setard" class="md-nav__link">setArd()</a>
+        </li>
+        <li class="md-nav__item"><a href="#setarc" class="md-nav__link">setArc()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-retry-getters" class="md-nav__link">Auto-Retry getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#getautoretry" class="md-nav__link">getAutoRetry()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getarc" class="md-nav__link">getArc()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getard" class="md-nav__link">getArd()</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#ack-payload-feature" class="md-nav__link">Ack Payload feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#enableackpayload" class="md-nav__link">enableAckPayload()</a>
+        </li>
+        <li class="md-nav__item"><a href="#disableackpayload" class="md-nav__link">disableAckPayload()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#multicast-feature" class="md-nav__link">Multicast feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#allowmulticast" class="md-nav__link">allowMulticast()</a>
+        </li>
+        <li class="md-nav__item"><a href="#isallowmulticast" class="md-nav__link">isAllowMulticast()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#interruptconfig" class="md-nav__link">interruptConfig()</a>
+        </li>
+        <li class="md-nav__item"><a href="#rf-data-rate" class="md-nav__link">RF Data Rate</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#data-rate-enum" class="md-nav__link">Data Rate enum</a>
+        </li>
+        <li class="md-nav__item"><a href="#setdatarate" class="md-nav__link">setDataRate()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getdatarate" class="md-nav__link">getDataRate()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#rf-channel" class="md-nav__link">RF Channel</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setchannel" class="md-nav__link">setChannel()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getchannel" class="md-nav__link">getChannel()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#crc-checking" class="md-nav__link">CRC checking</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setcrc" class="md-nav__link">setCrc()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getcrc" class="md-nav__link">getCrc()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#power-amplifier-level" class="md-nav__link">Power Amplifier Level</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#power-amplifier-level-enum" class="md-nav__link">Power Amplifier Level enum</a>
+        </li>
+        <li class="md-nav__item"><a href="#setpalevel" class="md-nav__link">setPaLevel()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getpalevel" class="md-nav__link">getPaLevel()</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/configure_api.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  
+<h1 id="configure-api--page-root">Configuration API<a class="headerlink" href="#configure-api--page-root" title="Permalink to this headline">¶</a></h1>
+
+<h2 id="address-length-feature">Address Length feature<a class="headerlink" href="#address-length-feature" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="setaddresslength">setAddressLength()<a class="headerlink" href="#setaddresslength" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416setAddressLengthE7uint8_t">
-<span id="_CPPv3N4RF2416setAddressLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setAddressLengthE7uint8_t"></span><span id="RF24::setAddressLength__uint8_t"></span><span class="target" id="classRF24_1af870ee715171a3612822190af5523d35"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAddressLength</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416setAddressLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setAddressLengthE7uint8_t"></span><span id="RF24::setAddressLength__uint8_t"></span><span class="target" id="classRF24_1af870ee715171a3612822190af5523d35"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAddressLength</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set the address length from 3 to 5 bytes <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: The address length (in bytes) to use; this parameter is clamped to the range [3, 5]. </p></li>
@@ -287,12 +400,11 @@
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getaddresslength">
-<h3>getAddressLength()<a class="headerlink" href="#getaddresslength" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="getaddresslength">getAddressLength()<a class="headerlink" href="#getaddresslength" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416getAddressLengthEv">
-<span id="_CPPv3N4RF2416getAddressLengthEv"></span><span id="_CPPv2N4RF2416getAddressLengthEv"></span><span id="RF24::getAddressLength__void"></span><span class="target" id="classRF24_1a846af539302100d54def2970526cae93"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAddressLength</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getAddressLengthEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416getAddressLengthEv"></span><span id="_CPPv2N4RF2416getAddressLengthEv"></span><span id="RF24::getAddressLength__void"></span><span class="target" id="classRF24_1a846af539302100d54def2970526cae93"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAddressLength</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getAddressLengthEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The address length (in bytes) currently configured by <a class="reference internal" href="#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>. This number will be in range [3, 5]. </p>
 </dd>
@@ -300,17 +412,16 @@
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="dynamic-payload-length-feature">
-<h2>Dynamic Payload Length feature<a class="headerlink" href="#dynamic-payload-length-feature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="dynamic-payload-length-setters">
-<h3>Dynamic Payload Length setters<a class="headerlink" href="#dynamic-payload-length-setters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="unary-pipe-control-of-dynamic-payloads">
-<h4>Unary pipe control of Dynamic Payloads<a class="headerlink" href="#unary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+
+
+<h2 id="dynamic-payload-length-feature">Dynamic Payload Length feature<a class="headerlink" href="#dynamic-payload-length-feature" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="dynamic-payload-length-setters">Dynamic Payload Length setters<a class="headerlink" href="#dynamic-payload-length-setters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="unary-pipe-control-of-dynamic-payloads">Unary pipe control of Dynamic Payloads<a class="headerlink" href="#unary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418setDynamicPayloadsEb">
-<span id="_CPPv3N4RF2418setDynamicPayloadsEb"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb"></span><span id="RF24::setDynamicPayloads__b"></span><span class="target" id="classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2418setDynamicPayloadsEb"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb"></span><span id="RF24::setDynamicPayloads__b"></span><span class="target" id="classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable dynamically sized payloads for all pipes</p>
 <p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -321,12 +432,11 @@
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="binary-pipe-control-of-dynamic-payloads">
-<h4>Binary pipe control of Dynamic Payloads<a class="headerlink" href="#binary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="binary-pipe-control-of-dynamic-payloads">Binary pipe control of Dynamic Payloads<a class="headerlink" href="#binary-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t">
-<span id="_CPPv3N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="_CPPv2N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="RF24::setDynamicPayloadsBin__uint8_t"></span><span class="target" id="classRF24_1a4159b907821cd0c561f0dfbe6373bb7d"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloadsBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="_CPPv2N4RF2421setDynamicPayloadsBinE7uint8_t"></span><span id="RF24::setDynamicPayloadsBin__uint8_t"></span><span class="target" id="classRF24_1a4159b907821cd0c561f0dfbe6373bb7d"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloadsBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2421setDynamicPayloadsBinE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable dynamically sized payloads for all pipes using a binary integer.</p>
 <p>If this feature is enabled, then the static payload lengths configuration is not used. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -337,12 +447,11 @@
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="individual-pipe-control-of-dynamic-payloads">
-<h4>Individual pipe control of Dynamic Payloads<a class="headerlink" href="#individual-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="individual-pipe-control-of-dynamic-payloads">Individual pipe control of Dynamic Payloads<a class="headerlink" href="#individual-pipe-control-of-dynamic-payloads" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t">
-<span id="_CPPv3N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="RF24::setDynamicPayloads__b.uint8_t"></span><span class="target" id="classRF24_1a6c0a9dc68af50d365640fca65b285462"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="_CPPv2N4RF2418setDynamicPayloadsEb7uint8_t"></span><span id="RF24::setDynamicPayloads__b.uint8_t"></span><span class="target" id="classRF24_1a6c0a9dc68af50d365640fca65b285462"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDynamicPayloads</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418setDynamicPayloadsEb7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable dynamically sized payloads for a specific pipe.</p>
 <p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -354,15 +463,14 @@
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="dynamic-payload-length-getters">
-<h3>Dynamic Payload Length getters<a class="headerlink" href="#dynamic-payload-length-getters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="individual-pipe-representation-of-dynamic-payload-length">
-<h4>Individual Pipe Representation of Dynamic Payload Length<a class="headerlink" href="#individual-pipe-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
+
+
+<h3 id="dynamic-payload-length-getters">Dynamic Payload Length getters<a class="headerlink" href="#dynamic-payload-length-getters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="individual-pipe-representation-of-dynamic-payload-length">Individual Pipe Representation of Dynamic Payload Length<a class="headerlink" href="#individual-pipe-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418getDynamicPayloadsE7uint8_t">
-<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a4add0966514d1d41d8727cb080495c5a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="_CPPv2N4RF2418getDynamicPayloadsE7uint8_t"></span><span id="RF24::getDynamicPayloads__uint8_t"></span><span class="target" id="classRF24_1a4add0966514d1d41d8727cb080495c5a"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get the configuration of dynamically sized payloads for a specific pipe.</p>
 <p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -373,12 +481,11 @@
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="binary-representation-of-dynamic-payload-length">
-<h4>Binary Representation of Dynamic Payload Length<a class="headerlink" href="#binary-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="binary-representation-of-dynamic-payload-length">Binary Representation of Dynamic Payload Length<a class="headerlink" href="#binary-representation-of-dynamic-payload-length" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2418getDynamicPayloadsEv">
-<span id="_CPPv3N4RF2418getDynamicPayloadsEv"></span><span id="_CPPv2N4RF2418getDynamicPayloadsEv"></span><span id="RF24::getDynamicPayloads__void"></span><span class="target" id="classRF24_1aa9e7a1fc7eb38b8edd729b4739395db4"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2418getDynamicPayloadsEv"></span><span id="_CPPv2N4RF2418getDynamicPayloadsEv"></span><span id="RF24::getDynamicPayloads__void"></span><span class="target" id="classRF24_1aa9e7a1fc7eb38b8edd729b4739395db4"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDynamicPayloads</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2418getDynamicPayloadsEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get the configuration of dynamically sized payloads for all pipes.</p>
 <p>If this feature is enabled for any pipe, then the static payload length configuration for that pipe is not used. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the dynamic payload feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit position 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
@@ -387,11 +494,10 @@
 </p>
 </dd></dl>
 
-</div>
-</div>
-</div>
-<div class="section" id="static-payload-length-feature">
-<h2>Static Payload Length feature<a class="headerlink" href="#static-payload-length-feature" title="Permalink to this headline">¶</a></h2>
+
+
+
+<h2 id="static-payload-length-feature">Static Payload Length feature<a class="headerlink" href="#static-payload-length-feature" title="Permalink to this headline">¶</a></h2>
 <p>All pipes are configured to use the maximum default length of 32 bytes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -400,13 +506,13 @@
 is enabled for any pipes, then the Static Payload Length setting is not used for that
 pipe(s).</p>
 </div>
-<div class="section" id="static-payload-length-setters">
-<h3>Static Payload Length setters<a class="headerlink" href="#static-payload-length-setters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="unary-pipe-control-of-static-payload-lengths">
-<h4>Unary pipe control of Static Payload Lengths<a class="headerlink" href="#unary-pipe-control-of-static-payload-lengths" title="Permalink to this headline">¶</a></h4>
+
+<h3 id="static-payload-length-setters">Static Payload Length setters<a class="headerlink" href="#static-payload-length-setters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="unary-pipe-control-of-static-payload-lengths">Unary pipe control of Static Payload Lengths<a class="headerlink" href="#unary-pipe-control-of-static-payload-lengths" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t">
-<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t"></span><span class="target" id="classRF24_1ad129a6a4052e1386b972541445b00a92"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t"></span><span class="target" id="classRF24_1ad129a6a4052e1386b972541445b00a92"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set Static Payload length to be expected for all pipes. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by all pipes. This parameter is clamped to the range [1, 32]. </p></li>
@@ -416,12 +522,11 @@ pipe(s).</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="individual-pipe-control-of-static-payload-length">
-<h4>Individual pipe control of Static Payload Length<a class="headerlink" href="#individual-pipe-control-of-static-payload-length" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="individual-pipe-control-of-static-payload-length">Individual pipe control of Static Payload Length<a class="headerlink" href="#individual-pipe-control-of-static-payload-length" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t">
-<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t.uint8_t"></span><span class="target" id="classRF24_1aea623db854a91f5d271476df78895520"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t.uint8_t"></span><span class="target" id="classRF24_1aea623db854a91f5d271476df78895520"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set Static Payload length to be expected for a specific pipe. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"><span class="std std-ref">getPayloadLength()</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
 </dd>
@@ -434,13 +539,12 @@ pipe(s).</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="getpayloadlength">
-<h3>getPayloadLength()<a class="headerlink" href="#getpayloadlength" title="Permalink to this headline">¶</a></h3>
+
+
+<h3 id="getpayloadlength">getPayloadLength()<a class="headerlink" href="#getpayloadlength" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416getPayloadLengthE7uint8_t">
-<span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get Static Payload length for a specific pipe <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aea623db854a91f5d271476df78895520"><span class="std std-ref">setPayloadLength(uint8_t, uint8_t)</span></a>, <a class="reference internal" href="#classRF24_1ad129a6a4052e1386b972541445b00a92"><span class="std std-ref">setPayloadLength(uint8_t)</span></a>, <a class="reference internal" href="basic_api.html#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
 </dd>
@@ -454,10 +558,9 @@ pipe(s).</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="auto-ack-feature">
-<h2>Auto-Ack feature<a class="headerlink" href="#auto-ack-feature" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="auto-ack-feature">Auto-Ack feature<a class="headerlink" href="#auto-ack-feature" title="Permalink to this headline">¶</a></h2>
 <p>Auto-acknowledgement responds to every recieved payload with an empty
 ACK packet. These ACK packets get sent from the receiving radio back
 to the transmitting radio. To attach an ACK payload to a ACK packet,
@@ -482,13 +585,13 @@ then the <code class="docutils literal notranslate"><span class="pre">multicast<
 payloads feature is also disabled as this feature is required on pipe 0
 to send ACK payloads.</p>
 </div>
-<div class="section" id="auto-ack-setters">
-<h3>Auto-Ack setters<a class="headerlink" href="#auto-ack-setters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="unary-pipe-control-of-autoack">
-<h4>Unary pipe control of AutoAck<a class="headerlink" href="#unary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+
+<h3 id="auto-ack-setters">Auto-Ack setters<a class="headerlink" href="#auto-ack-setters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="unary-pipe-control-of-autoack">Unary pipe control of AutoAck<a class="headerlink" href="#unary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setAutoAckEb">
-<span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable the auto-acknowledgement feature for all pipes. This feature is enabled by default. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
@@ -498,12 +601,11 @@ to send ACK payloads.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="binary-pipe-control-of-autoack">
-<h4>Binary pipe control of AutoAck<a class="headerlink" href="#binary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="binary-pipe-control-of-autoack">Binary pipe control of AutoAck<a class="headerlink" href="#binary-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2413setAutoAckBinE7uint8_t">
-<span id="_CPPv3N4RF2413setAutoAckBinE7uint8_t"></span><span id="_CPPv2N4RF2413setAutoAckBinE7uint8_t"></span><span id="RF24::setAutoAckBin__uint8_t"></span><span class="target" id="classRF24_1a19438fa13e02f82777bb92fba9885689"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAckBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413setAutoAckBinE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2413setAutoAckBinE7uint8_t"></span><span id="_CPPv2N4RF2413setAutoAckBinE7uint8_t"></span><span id="RF24::setAutoAckBin__uint8_t"></span><span class="target" id="classRF24_1a19438fa13e02f82777bb92fba9885689"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAckBin</code><span class="sig-paren">(</span>uint8_t <em>binary_enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413setAutoAckBinE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">binary_enable</span></code>: A binary integer to control the auto-acknowledgement feature for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. </p></li>
@@ -513,12 +615,11 @@ to send ACK payloads.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="individual-pipe-control-of-autoack">
-<h4>Individual pipe control of AutoAck<a class="headerlink" href="#individual-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="individual-pipe-control-of-autoack">Individual pipe control of AutoAck<a class="headerlink" href="#individual-pipe-control-of-autoack" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setAutoAckEb7uint8_t">
-<span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
@@ -529,15 +630,14 @@ to send ACK payloads.</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="auto-ack-getters">
-<h3>Auto-Ack getters<a class="headerlink" href="#auto-ack-getters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="binary-representation-of-auto-ack">
-<h4>Binary Representation of Auto-Ack<a class="headerlink" href="#binary-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
+
+
+<h3 id="auto-ack-getters">Auto-Ack getters<a class="headerlink" href="#auto-ack-getters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="binary-representation-of-auto-ack">Binary Representation of Auto-Ack<a class="headerlink" href="#binary-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2413getAutoAckBinEv">
-<span id="_CPPv3N4RF2413getAutoAckBinEv"></span><span id="_CPPv2N4RF2413getAutoAckBinEv"></span><span id="RF24::getAutoAckBin__void"></span><span class="target" id="classRF24_1ae4f8fa6bcd5922681d91b901c8c32a18"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAckBin</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413getAutoAckBinEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2413getAutoAckBinEv"></span><span id="_CPPv2N4RF2413getAutoAckBinEv"></span><span id="RF24::getAutoAckBin__void"></span><span class="target" id="classRF24_1ae4f8fa6bcd5922681d91b901c8c32a18"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAckBin</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413getAutoAckBinEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetch the status of the auto-ack feature for all pipes. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>A binary integer where each bit represents the auto-acknowledgement feature configuration for a specific pipe. Bit position 0 represents pipe 0, and bit position 5 represents pipe 5. A high bit (<code class="docutils literal notranslate"><span class="pre">1</span></code>) enables the feature for the corresponding pipe; a low bit (<code class="docutils literal notranslate"><span class="pre">0</span></code>) disables the feature for the corresponding pipe. Bit positions 6 and 7 will always be <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
 </dd>
@@ -545,12 +645,11 @@ to send ACK payloads.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="individual-pipe-representation-of-auto-ack">
-<h4>Individual Pipe Representation of Auto-Ack<a class="headerlink" href="#individual-pipe-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="individual-pipe-representation-of-auto-ack">Individual Pipe Representation of Auto-Ack<a class="headerlink" href="#individual-pipe-representation-of-auto-ack" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getAutoAckE7uint8_t">
-<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
@@ -566,18 +665,17 @@ to send ACK payloads.</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-</div>
-<div class="section" id="auto-retry-feature">
-<h2>Auto-Retry feature<a class="headerlink" href="#auto-retry-feature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="auto-retry-setters">
-<h3>Auto-Retry setters<a class="headerlink" href="#auto-retry-setters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="setautoretry">
-<h4>setAutoRetry()<a class="headerlink" href="#setautoretry" title="Permalink to this headline">¶</a></h4>
+
+
+
+<h2 id="auto-retry-feature">Auto-Retry feature<a class="headerlink" href="#auto-retry-feature" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="auto-retry-setters">Auto-Retry setters<a class="headerlink" href="#auto-retry-setters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="setautoretry">setAutoRetry()<a class="headerlink" href="#setautoretry" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t">
-<span id="_CPPv3N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="_CPPv2N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="RF24::setAutoRetry__uint16_t.uint8_t"></span><span class="target" id="classRF24_1a2ee6921707bc524671c92b226fee6281"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoRetry</code><span class="sig-paren">(</span>uint16_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="_CPPv2N4RF2412setAutoRetryE8uint16_t7uint8_t"></span><span id="RF24::setAutoRetry__uint16_t.uint8_t"></span><span class="target" id="classRF24_1a2ee6921707bc524671c92b226fee6281"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoRetry</code><span class="sig-paren">(</span>uint16_t <em>delay</em>, uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412setAutoRetryE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set the number of retry attempts and delay between retry attempts when transmitting a payload. The radio is waiting for an acknowledgement (ACK) packet during the delay between retry attempts. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a>, <a class="reference internal" href="#classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"><span class="std std-ref">setArd()</span></a>, <a class="reference internal" href="#classRF24_1a73b87446d56639739f9a495f8cd6bb24"><span class="std std-ref">setArc()</span></a> </p>
 </dd>
@@ -590,19 +688,18 @@ auto-ack feature (if enabled), except it will not retry to transmit if
 the payload was not acknowledged on the first attempt.</p>
 </div>
 </p>
- </p></li>
+</p></li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="setard">
-<h4>setArd()<a class="headerlink" href="#setard" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="setard">setArd()<a class="headerlink" href="#setard" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246setArdE8uint16_t">
-<span id="_CPPv3N4RF246setArdE8uint16_t"></span><span id="_CPPv2N4RF246setArdE8uint16_t"></span><span id="RF24::setArd__uint16_t"></span><span class="target" id="classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArd</code><span class="sig-paren">(</span>uint16_t <em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArdE8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246setArdE8uint16_t"></span><span id="_CPPv2N4RF246setArdE8uint16_t"></span><span id="RF24::setArd__uint16_t"></span><span class="target" id="classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArd</code><span class="sig-paren">(</span>uint16_t <em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArdE8uint16_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Configure the auto-retry feature’s delay (ARD). <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a> </p>
 </dd>
@@ -614,12 +711,11 @@ the payload was not acknowledged on the first attempt.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="setarc">
-<h4>setArc()<a class="headerlink" href="#setarc" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="setarc">setArc()<a class="headerlink" href="#setarc" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246setArcE7uint8_t">
-<span id="_CPPv3N4RF246setArcE7uint8_t"></span><span id="_CPPv2N4RF246setArcE7uint8_t"></span><span id="RF24::setArc__uint8_t"></span><span class="target" id="classRF24_1a73b87446d56639739f9a495f8cd6bb24"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArc</code><span class="sig-paren">(</span>uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246setArcE7uint8_t"></span><span id="_CPPv2N4RF246setArcE7uint8_t"></span><span id="RF24::setArc__uint8_t"></span><span class="target" id="classRF24_1a73b87446d56639739f9a495f8cd6bb24"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setArc</code><span class="sig-paren">(</span>uint8_t <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setArcE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Configure the auto-retry feature’s count (ARC). <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
 </dd>
@@ -631,15 +727,14 @@ the payload was not acknowledged on the first attempt.</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="auto-retry-getters">
-<h3>Auto-Retry getters<a class="headerlink" href="#auto-retry-getters" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="getautoretry">
-<h4>getAutoRetry()<a class="headerlink" href="#getautoretry" title="Permalink to this headline">¶</a></h4>
+
+
+<h3 id="auto-retry-getters">Auto-Retry getters<a class="headerlink" href="#auto-retry-getters" title="Permalink to this headline">¶</a></h3>
+
+<h4 id="getautoretry">getAutoRetry()<a class="headerlink" href="#getautoretry" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2412getAutoRetryEP8uint16_tP7uint8_t">
-<span id="_CPPv3N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="_CPPv2N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="RF24::getAutoRetry__uint16_tP.uint8_tP"></span><span class="target" id="classRF24_1a00d41cf7e7602276c1d7a937ab336e14"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoRetry</code><span class="sig-paren">(</span>uint16_t *<em>delay</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412getAutoRetryEP8uint16_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="_CPPv2N4RF2412getAutoRetryEP8uint16_tP7uint8_t"></span><span id="RF24::getAutoRetry__uint16_tP.uint8_tP"></span><span class="target" id="classRF24_1a00d41cf7e7602276c1d7a937ab336e14"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoRetry</code><span class="sig-paren">(</span>uint16_t *<em>delay</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2412getAutoRetryEP8uint16_tP7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetch the configuration of the auto-retry feature <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>This function returns nothing (<code class="docutils literal notranslate"><span class="pre">void</span></code>). All returned data is stored in the referenced variables passed as arguments.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span> <span class="n">autoDelay</span><span class="p">;</span>
 <span class="kt">uint8_t</span> <span class="n">autoCount</span><span class="p">;</span>
@@ -647,7 +742,7 @@ the payload was not acknowledged on the first attempt.</p>
 </pre></div>
 </div>
 </p>
- </p>
+</p>
 </dd>
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a9cbae7b3569ed6fcf713184b824ff37f"><span class="std std-ref">getArd()</span></a>, <a class="reference internal" href="#classRF24_1a9451702ef53481ba4f2b5fea5ab1f6c3"><span class="std std-ref">getArc()</span></a> </p>
 </dd>
@@ -660,12 +755,11 @@ the payload was not acknowledged on the first attempt.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getarc">
-<h4>getArc()<a class="headerlink" href="#getarc" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="getarc">getArc()<a class="headerlink" href="#getarc" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246getArcEv">
-<span id="_CPPv3N4RF246getArcEv"></span><span id="_CPPv2N4RF246getArcEv"></span><span id="RF24::getArc__void"></span><span class="target" id="classRF24_1a9451702ef53481ba4f2b5fea5ab1f6c3"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArcEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246getArcEv"></span><span id="_CPPv2N4RF246getArcEv"></span><span id="RF24::getArc__void"></span><span class="target" id="classRF24_1a9451702ef53481ba4f2b5fea5ab1f6c3"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArcEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get the auto-retry feature’s count (ARC) configuration. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a00d41cf7e7602276c1d7a937ab336e14"><span class="std std-ref">getAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a73b87446d56639739f9a495f8cd6bb24"><span class="std std-ref">setArc()</span></a>, <a class="reference internal" href="advanced_api.html#classRF24_1a674d681164a517bece9beb44d69c30f1"><span class="std std-ref">lastTxArc()</span></a> </p>
 </dd>
@@ -673,12 +767,11 @@ the payload was not acknowledged on the first attempt.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getard">
-<h4>getArd()<a class="headerlink" href="#getard" title="Permalink to this headline">¶</a></h4>
+
+<h4 id="getard">getArd()<a class="headerlink" href="#getard" title="Permalink to this headline">¶</a></h4>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246getArdEv">
-<span id="_CPPv3N4RF246getArdEv"></span><span id="_CPPv2N4RF246getArdEv"></span><span id="RF24::getArd__void"></span><span class="target" id="classRF24_1a9cbae7b3569ed6fcf713184b824ff37f"></span>uint16_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArd</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArdEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246getArdEv"></span><span id="_CPPv2N4RF246getArdEv"></span><span id="RF24::getArd__void"></span><span class="target" id="classRF24_1a9cbae7b3569ed6fcf713184b824ff37f"></span>uint16_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getArd</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getArdEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get the auto-retry feature’s delay (ARD) configuration, <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a2ee6921707bc524671c92b226fee6281"><span class="std std-ref">setAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1a00d41cf7e7602276c1d7a937ab336e14"><span class="std std-ref">getAutoRetry()</span></a>, <a class="reference internal" href="#classRF24_1af24d4433662eadbf9ffcbab3f0f9919a"><span class="std std-ref">setArd()</span></a> </p>
 </dd>
@@ -686,16 +779,15 @@ the payload was not acknowledged on the first attempt.</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-</div>
-<div class="section" id="ack-payload-feature">
-<h2>Ack Payload feature<a class="headerlink" href="#ack-payload-feature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="enableackpayload">
-<h3>enableAckPayload()<a class="headerlink" href="#enableackpayload" title="Permalink to this headline">¶</a></h3>
+
+
+
+<h2 id="ack-payload-feature">Ack Payload feature<a class="headerlink" href="#ack-payload-feature" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="enableackpayload">enableAckPayload()<a class="headerlink" href="#enableackpayload" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416enableAckPayloadEv">
-<span id="_CPPv3N4RF2416enableAckPayloadEv"></span><span id="_CPPv2N4RF2416enableAckPayloadEv"></span><span id="RF24::enableAckPayload__void"></span><span class="target" id="classRF24_1abf8efced2ee9edbcc6510878b20edc1b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">enableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416enableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416enableAckPayloadEv"></span><span id="_CPPv2N4RF2416enableAckPayloadEv"></span><span id="RF24::enableAckPayload__void"></span><span class="target" id="classRF24_1abf8efced2ee9edbcc6510878b20edc1b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">enableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416enableAckPayloadEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable custom payloads in the acknowledge packets</p>
 <p>ACK payloads are a handy way to return data back to senders without manually changing the radio modes on both units.</p>
 <p>The ACK payload feature requires the auto-ack feature to be enabled for any pipe using ACK payloads. This function does not automatically enable the auto-ack feature on pipe 0 since the auto-ack feature is enabled for all pipes by default. <dl class="simple">
@@ -708,18 +800,17 @@ nodes that use pipes other than pipe 0 to receive transmissions expecting
 responses with ACK payloads).</p>
 </div>
 </p>
- </p>
+</p>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="disableackpayload">
-<h3>disableAckPayload()<a class="headerlink" href="#disableackpayload" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="disableackpayload">disableAckPayload()<a class="headerlink" href="#disableackpayload" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2417disableAckPayloadEv">
-<span id="_CPPv3N4RF2417disableAckPayloadEv"></span><span id="_CPPv2N4RF2417disableAckPayloadEv"></span><span id="RF24::disableAckPayload__void"></span><span class="target" id="classRF24_1a00e17eb6b56b915fd6df30a58784661f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">disableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2417disableAckPayloadEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2417disableAckPayloadEv"></span><span id="_CPPv2N4RF2417disableAckPayloadEv"></span><span id="RF24::disableAckPayload__void"></span><span class="target" id="classRF24_1a00e17eb6b56b915fd6df30a58784661f"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">disableAckPayload</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2417disableAckPayloadEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Disable custom payloads on the ackowledge packets <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a> </p>
 </dd>
@@ -727,15 +818,14 @@ responses with ACK payloads).</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="multicast-feature">
-<h2>Multicast feature<a class="headerlink" href="#multicast-feature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="allowmulticast">
-<h3>allowMulticast()<a class="headerlink" href="#allowmulticast" title="Permalink to this headline">¶</a></h3>
+
+
+<h2 id="multicast-feature">Multicast feature<a class="headerlink" href="#multicast-feature" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="allowmulticast">allowMulticast()<a class="headerlink" href="#allowmulticast" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2414allowMulticastEb">
-<span id="_CPPv3N4RF2414allowMulticastEb"></span><span id="_CPPv2N4RF2414allowMulticastEb"></span><span id="RF24::allowMulticast__b"></span><span class="target" id="classRF24_1ad66301ac22535ffa7cea85db71b784eb"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2414allowMulticastEb"></span><span id="_CPPv2N4RF2414allowMulticastEb"></span><span id="RF24::allowMulticast__b"></span><span class="target" id="classRF24_1ad66301ac22535ffa7cea85db71b784eb"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">allowMulticast</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414allowMulticastEb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable dynamic ACKs (single write multicast or unicast) for chosen messages.  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This function must be called once before using the multicast
@@ -748,7 +838,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </pre></div>
 </div>
 </p>
- <dl class="simple">
+<dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck(bool)</span></a>, <a class="reference internal" href="#classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"><span class="std std-ref">setAutoAck(bool, uint8_t)</span></a> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -759,12 +849,11 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="isallowmulticast">
-<h3>isAllowMulticast()<a class="headerlink" href="#isallowmulticast" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="isallowmulticast">isAllowMulticast()<a class="headerlink" href="#isallowmulticast" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416isAllowMulticastEv">
-<span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2416isAllowMulticastEv"></span><span id="_CPPv2N4RF2416isAllowMulticastEv"></span><span id="RF24::isAllowMulticast__void"></span><span class="target" id="classRF24_1a227782c6f5dc576cc9fea761da31928f"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">isAllowMulticast</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416isAllowMulticastEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">multicast</span></code> parameter to <a class="reference internal" href="advanced_api.html#classRF24_1a13bb2913fe9cc5f2a256f85e693e0e01"><span class="std std-ref">write()</span></a> or <a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a> will have any affect. This is configured using <a class="reference internal" href="#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a>. </p>
 </dd>
@@ -772,13 +861,12 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="interruptconfig">
-<h2>interruptConfig()<a class="headerlink" href="#interruptconfig" title="Permalink to this headline">¶</a></h2>
+
+
+<h2 id="interruptconfig">interruptConfig()<a class="headerlink" href="#interruptconfig" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415interruptConfigEbbb">
-<span id="_CPPv3N4RF2415interruptConfigEbbb"></span><span id="_CPPv2N4RF2415interruptConfigEbbb"></span><span id="RF24::interruptConfig__b.b.b"></span><span class="target" id="classRF24_1a7cc8e9fa014ef094c8810a24dd1203ca"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">interruptConfig</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415interruptConfigEbbb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2415interruptConfigEbbb"></span><span id="_CPPv2N4RF2415interruptConfigEbbb"></span><span id="RF24::interruptConfig__b.b.b"></span><span class="target" id="classRF24_1a7cc8e9fa014ef094c8810a24dd1203ca"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">interruptConfig</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415interruptConfigEbbb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>This function is used to configure what events will trigger the Interrupt Request (IRQ) pin active LOW. The following events can be configured:<ol class="loweralpha simple">
 <li><p>”data sent”: This does not mean that the data transmitted was recieved, only that the attempt to send it was complete.</p></li>
 <li><p>”data failed”: This means the data being sent was not recieved. This event is only triggered when the auto-ack feature is enabled.</p></li>
@@ -802,14 +890,13 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="rf-data-rate">
-<h2>RF Data Rate<a class="headerlink" href="#rf-data-rate" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="data-rate-enum">
-<h3>Data Rate enum<a class="headerlink" href="#data-rate-enum" title="Permalink to this headline">¶</a></h3>
+
+<h2 id="rf-data-rate">RF Data Rate<a class="headerlink" href="#rf-data-rate" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="data-rate-enum">Data Rate enum<a class="headerlink" href="#data-rate-enum" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp enum">
 <dt id="_CPPv415rf24_datarate_e">
-<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>How fast data moves through the air. Units are in bits per second (bps). <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">RF24::setDataRate()</span></a>, <a class="reference internal" href="#classRF24_1a72a7b11dafe8ffab6135f243decce0d7"><span class="std std-ref">RF24::getDataRate()</span></a> </p>
 </dd>
@@ -818,38 +905,34 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e10RF24_1MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e10RF24_1MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_1MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522afd01f3fd55247a67c0bcfd459fe17fdf"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_1MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_1MBPSE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(0) represents 1 Mbps </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e10RF24_2MBPSE">
-<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e10RF24_2MBPSE"></span><span id="_CPPv2N15rf24_datarate_e10RF24_2MBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522a53050a70cedbbf10620ba0fe2b043f1b"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_2MBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e10RF24_2MBPSE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(1) represents 2 Mbps </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N15rf24_datarate_e12RF24_250KBPSE">
-<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15rf24_datarate_e12RF24_250KBPSE"></span><span id="_CPPv2N15rf24_datarate_e12RF24_250KBPSE"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522ad6a241689903e120c99b6963cb98c97c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_250KBPS</code><a class="headerlink" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(2) represents 250 kbps </p>
 </dd></dl>
-
 </dd></dl>
 
-</div>
-<div class="section" id="setdatarate">
-<h3>setDataRate()<a class="headerlink" href="#setdatarate" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="setdatarate">setDataRate()<a class="headerlink" href="#setdatarate" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
-<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set the transmission Data Rate <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table class="docutils align-default">
+<li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table>
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50%"/>
+<col style="width: 50%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">speed</span></code> (enum value)</p></th>
@@ -874,19 +957,18 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 (when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
 </div>
 </p>
- </p></li>
+</p></li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getdatarate">
-<h3>getDataRate()<a class="headerlink" href="#getdatarate" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="getdatarate">getDataRate()<a class="headerlink" href="#getdatarate" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2411getDataRateEv">
-<span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2411getDataRateEv"></span><span id="_CPPv2N4RF2411getDataRateEv"></span><span id="RF24::getDataRate__void"></span><span class="target" id="classRF24_1a72a7b11dafe8ffab6135f243decce0d7"></span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getDataRate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411getDataRateEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetches the currently configured transmission Data Rate <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>. See table in <a class="reference internal" href="#classRF24_1a575cf2725afe0f787e30acb9b12b3200"><span class="std std-ref">setDataRate()</span></a> </p>
 </dd>
@@ -894,15 +976,14 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="rf-channel">
-<h2>RF Channel<a class="headerlink" href="#rf-channel" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="setchannel">
-<h3>setChannel()<a class="headerlink" href="#setchannel" title="Permalink to this headline">¶</a></h3>
+
+
+<h2 id="rf-channel">RF Channel<a class="headerlink" href="#rf-channel" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="setchannel">setChannel()<a class="headerlink" href="#setchannel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setChannelE7uint8_t">
-<span id="_CPPv3N4RF2410setChannelE7uint8_t"></span><span id="_CPPv2N4RF2410setChannelE7uint8_t"></span><span id="RF24::setChannel__uint8_t"></span><span class="target" id="classRF24_1a5e6e5a5f6c85d2638381cab2c0f3702e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setChannel</code><span class="sig-paren">(</span>uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setChannelE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410setChannelE7uint8_t"></span><span id="_CPPv2N4RF2410setChannelE7uint8_t"></span><span id="RF24::setChannel__uint8_t"></span><span class="target" id="classRF24_1a5e6e5a5f6c85d2638381cab2c0f3702e"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setChannel</code><span class="sig-paren">(</span>uint8_t <em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setChannelE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set RF communication channel. The frequency used by a channel is calculated as:</p>
 <p>2400 MHz + &lt;channel number&gt;</p>
 <p>Meaning the default channel of 76 uses the approximate frequency of 2476 MHz. <dl class="simple">
@@ -914,12 +995,11 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getchannel">
-<h3>getChannel()<a class="headerlink" href="#getchannel" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="getchannel">getChannel()<a class="headerlink" href="#getchannel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getChannelEv">
-<span id="_CPPv3N4RF2410getChannelEv"></span><span id="_CPPv2N4RF2410getChannelEv"></span><span id="RF24::getChannel__void"></span><span class="target" id="classRF24_1a6a66a94609309e17edaa1919e66cea0a"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getChannel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getChannelEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410getChannelEv"></span><span id="_CPPv2N4RF2410getChannelEv"></span><span id="RF24::getChannel__void"></span><span class="target" id="classRF24_1a6a66a94609309e17edaa1919e66cea0a"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getChannel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getChannelEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get RF communication channel <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The currently configured RF Channel </p>
 </dd>
@@ -927,15 +1007,14 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="crc-checking">
-<h2>CRC checking<a class="headerlink" href="#crc-checking" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="setcrc">
-<h3>setCrc()<a class="headerlink" href="#setcrc" title="Permalink to this headline">¶</a></h3>
+
+
+<h2 id="crc-checking">CRC checking<a class="headerlink" href="#crc-checking" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="setcrc">setCrc()<a class="headerlink" href="#setcrc" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246setCrcE7uint8_t">
-<span id="_CPPv3N4RF246setCrcE7uint8_t"></span><span id="_CPPv2N4RF246setCrcE7uint8_t"></span><span id="RF24::setCrc__uint8_t"></span><span class="target" id="classRF24_1af0461e493c60057679fdcfbbd066e141"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setCrc</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setCrcE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246setCrcE7uint8_t"></span><span id="_CPPv2N4RF246setCrcE7uint8_t"></span><span id="RF24::setCrc__uint8_t"></span><span class="target" id="classRF24_1af0461e493c60057679fdcfbbd066e141"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setCrc</code><span class="sig-paren">(</span>uint8_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246setCrcE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set the CRC checksum length (in bytes)  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>CRC checking cannot be disabled if auto-ack is enabled.
@@ -943,12 +1022,12 @@ Additionally, CRC checksum is automatically used when the auto-ack
 feature is enabled.</p>
 </div>
 </p>
- <dl class="simple">
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table class="colwidths-given docutils align-default">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Specify the CRC checksum length in bytes  <p><table>
 <colgroup>
-<col style="width: 30%" />
-<col style="width: 70%" />
+<col style="width: 30%"/>
+<col style="width: 70%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>length</p></th>
@@ -968,41 +1047,39 @@ feature is enabled.</p>
 </tbody>
 </table>
 </p>
- </p></li>
+</p></li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getcrc">
-<h3>getCrc()<a class="headerlink" href="#getcrc" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="getcrc">getCrc()<a class="headerlink" href="#getcrc" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF246getCrcEv">
-<span id="_CPPv3N4RF246getCrcEv"></span><span id="_CPPv2N4RF246getCrcEv"></span><span id="RF24::getCrc__void"></span><span class="target" id="classRF24_1af4921bc2ead573684fdca32e4a976f13"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getCrc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getCrcEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF246getCrcEv"></span><span id="_CPPv2N4RF246getCrcEv"></span><span id="RF24::getCrc__void"></span><span class="target" id="classRF24_1af4921bc2ead573684fdca32e4a976f13"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getCrc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF246getCrcEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get the CRC checksum length (in bytes)  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>CRC checksum is automatically used when the auto-ack feature is
 enabled.</p>
 </div>
 </p>
- <dl class="simple">
+<dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The number of bytes used for a CRC checksum (see table in <a class="reference internal" href="#classRF24_1af0461e493c60057679fdcfbbd066e141"><span class="std std-ref">setCrc()</span></a>) </p>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="power-amplifier-level">
-<h2>Power Amplifier Level<a class="headerlink" href="#power-amplifier-level" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="power-amplifier-level-enum">
-<h3>Power Amplifier Level enum<a class="headerlink" href="#power-amplifier-level-enum" title="Permalink to this headline">¶</a></h3>
+
+
+<h2 id="power-amplifier-level">Power Amplifier Level<a class="headerlink" href="#power-amplifier-level" title="Permalink to this headline">¶</a></h2>
+
+<h3 id="power-amplifier-level-enum">Power Amplifier Level enum<a class="headerlink" href="#power-amplifier-level-enum" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp enum">
 <dt id="_CPPv413rf24_pa_dbm_e">
-<span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>) represents a logarithmic signal loss. <dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">RF24::setPaLevel()</span></a>, <a class="reference internal" href="#classRF24_1a9d78d3638af3245f840f5698e630c25f"><span class="std std-ref">RF24::getPaLevel()</span></a> </p>
 </dd>
@@ -1011,12 +1088,12 @@ enabled.</p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MIN</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(0) represents:  <p><table class="docutils align-default">
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MIN</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="Permalink to this definition">¶</a><br/></dt>
+<dd><p>(0) represents:  <p><table>
 <colgroup>
-<col style="width: 24%" />
-<col style="width: 38%" />
-<col style="width: 38%" />
+<col style="width: 24%"/>
+<col style="width: 38%"/>
+<col style="width: 38%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
@@ -1036,17 +1113,16 @@ enabled.</p>
 </tbody>
 </table>
 </p>
- </p>
+</p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_LOW</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(1) represents:  <p><table class="docutils align-default">
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_LOW</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="Permalink to this definition">¶</a><br/></dt>
+<dd><p>(1) represents:  <p><table>
 <colgroup>
-<col style="width: 24%" />
-<col style="width: 38%" />
-<col style="width: 38%" />
+<col style="width: 24%"/>
+<col style="width: 38%"/>
+<col style="width: 38%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
@@ -1066,17 +1142,16 @@ enabled.</p>
 </tbody>
 </table>
 </p>
- </p>
+</p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE">
-<span id="_CPPv3N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span id="_CPPv2N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_HIGH</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(2) represents:  <p><table class="docutils align-default">
+<span id="_CPPv3N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span id="_CPPv2N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_HIGH</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="Permalink to this definition">¶</a><br/></dt>
+<dd><p>(2) represents:  <p><table>
 <colgroup>
-<col style="width: 24%" />
-<col style="width: 38%" />
-<col style="width: 38%" />
+<col style="width: 24%"/>
+<col style="width: 38%"/>
+<col style="width: 38%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
@@ -1096,17 +1171,16 @@ enabled.</p>
 </tbody>
 </table>
 </p>
- </p>
+</p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE">
-<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MAX</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>(3) represents:  <p><table class="docutils align-default">
+<span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MAX</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="Permalink to this definition">¶</a><br/></dt>
+<dd><p>(3) represents:  <p><table>
 <colgroup>
-<col style="width: 24%" />
-<col style="width: 38%" />
-<col style="width: 38%" />
+<col style="width: 24%"/>
+<col style="width: 38%"/>
+<col style="width: 38%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
@@ -1126,29 +1200,26 @@ enabled.</p>
 </tbody>
 </table>
 </p>
- </p>
+</p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt id="_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE">
-<span id="_CPPv3N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span id="_CPPv2N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_ERROR</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span id="_CPPv2N13rf24_pa_dbm_e13RF24_PA_ERRORE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea41eb829d0c99a0bb2fbb946dab04c7b7"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_ERROR</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e13RF24_PA_ERRORE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(4) This should not be used and remains for backward compatibility. </p>
 </dd></dl>
-
 </dd></dl>
 
-</div>
-<div class="section" id="setpalevel">
-<h3>setPaLevel()<a class="headerlink" href="#setpalevel" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="setpalevel">setPaLevel()<a class="headerlink" href="#setpalevel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410setPaLevelE7uint8_tb">
-<span id="_CPPv3N4RF2410setPaLevelE7uint8_tb"></span><span id="_CPPv2N4RF2410setPaLevelE7uint8_tb"></span><span id="RF24::setPaLevel__uint8_t.b"></span><span class="target" id="classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPaLevel</code><span class="sig-paren">(</span>uint8_t <em>level</em>, bool <em>lnaEnable</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state <p><table class="docutils align-default">
+<span id="_CPPv3N4RF2410setPaLevelE7uint8_tb"></span><span id="_CPPv2N4RF2410setPaLevelE7uint8_tb"></span><span id="RF24::setPaLevel__uint8_t.b"></span><span class="target" id="classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPaLevel</code><span class="sig-paren">(</span>uint8_t <em>level</em>, bool <em>lnaEnable</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="Permalink to this definition">¶</a><br/></dt>
+<dd><p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state <p><table>
 <colgroup>
-<col style="width: 39%" />
-<col style="width: 12%" />
-<col style="width: 24%" />
-<col style="width: 24%" />
+<col style="width: 39%"/>
+<col style="width: 12%"/>
+<col style="width: 24%"/>
+<col style="width: 24%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">level</span></code> (enum value)</p></th>
@@ -1191,7 +1262,7 @@ enabled.</p>
 parameter.</p>
 </div>
 </p>
- <dl class="simple">
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The desired Power Amplifier Level as defined by <a class="reference internal" href="#RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code>: Enable or Disable the LNA (Low Noise Amplifier) Gain. See table for Si24R1 modules below. <code class="docutils literal notranslate"><span class="pre">lnaEnable</span></code> only affects nRF24L01 modules with an LNA chip.</p></li>
@@ -1201,12 +1272,11 @@ parameter.</p>
 </p>
 </dd></dl>
 
-</div>
-<div class="section" id="getpalevel">
-<h3>getPaLevel()<a class="headerlink" href="#getpalevel" title="Permalink to this headline">¶</a></h3>
+
+<h3 id="getpalevel">getPaLevel()<a class="headerlink" href="#getpalevel" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2410getPaLevelEv">
-<span id="_CPPv3N4RF2410getPaLevelEv"></span><span id="_CPPv2N4RF2410getPaLevelEv"></span><span id="RF24::getPaLevel__void"></span><span class="target" id="classRF24_1a9d78d3638af3245f840f5698e630c25f"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPaLevel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getPaLevelEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N4RF2410getPaLevelEv"></span><span id="_CPPv2N4RF2410getPaLevelEv"></span><span id="RF24::getPaLevel__void"></span><span class="target" id="classRF24_1a9d78d3638af3245f840f5698e630c25f"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPaLevel</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getPaLevelEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetches the current Power Amplifier Level. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>One of the values defined by <a class="reference internal" href="#RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"><span class="std std-ref">rf24_pa_dbm_e</span></a>. See tables in <a class="reference internal" href="#classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"><span class="std std-ref">setPaLevel()</span></a> </p>
 </dd>
@@ -1214,64 +1284,65 @@ parameter.</p>
 </p>
 </dd></dl>
 
-</div>
-</div>
-</div>
 
 
-           </div>
-           
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="common_issues.html" class="btn btn-neutral float-right" title="Common Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="advanced_api.html" class="btn btn-neutral float-left" title="Advanced API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
-  <hr/>
 
-  <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2020, 2bndy5
-
-    </p>
-  </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-
+          </article>
         </div>
       </div>
-
-    </section>
-
+    </main>
   </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="advanced_api.html" title="Advanced API"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Advanced API </span>
+              </div>
+            </a>
+          
+          
+            <a href="common_issues.html" title="Common Issues"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Common Issues </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2020, 2bndy5.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
 </html>

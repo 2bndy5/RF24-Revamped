@@ -1,0 +1,55 @@
+body {
+  color: #fcfcfc;
+  background-color: #232323;
+}
+
+.sig-name.descname {
+  color: #b4e65c;
+}
+
+.sig-prename.descclassname {
+  color: #fffefe;
+}
+
+.md-typeset {
+  background-color: unset;
+}
+
+.sig-name.descname,
+.sig-prename.descclassname {
+  background-color: #403f3f;
+}
+
+.docutils.literal.notranslate {
+  background-color: hsla(0, 0%, 0%, 0);
+  color: #50e60c;
+}
+
+.reference.internal .docutils.literal.notranslate .pre {
+  color: #2196f3;
+}
+
+html body .md-typeset .headerlink {
+  color: rgb(94, 172, 15);
+}
+
+@media only screen and (max-width: 76.1875em) {
+  .md-nav {
+    background-color: #393939;
+  }
+}
+
+.md-nav__link[data-md-state="blur"] {
+  color: rgb(150, 125, 238);
+}
+
+.md-typeset h1 {
+  color: rgb(255, 255, 255);
+}
+
+html .md-nav--primary .md-nav__title--site .md-nav__button {
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: auto;
+}
