@@ -49,12 +49,15 @@
     <title>Basic API &#8212; RF24 Revamped</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -788,9 +791,8 @@ for beginners to use (no casting needed).</p>
 <p>Remember that each call to <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint8_t" title="RF24::read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">read()</span></code></a> fetches data from the
 RX FIFO beginning with the first byte from the first available
 payload. A payload is not removed from the RX FIFO until it’s
-entire length (or more) is fetched using :func:read().</p>
-<blockquote>
-<div><ul>
+entire length (or more) is fetched using <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint8_t" title="RF24::read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">read()</span></code></a>.</p>
+<ul>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter’s value is less than the available payload’s
 length, then the payload remains in the RX FIFO.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">len</span></code> parameter’s value is greater than the first of multiple
@@ -803,7 +805,6 @@ padding for the data saved to the <code class="docutils literal notranslate"><sp
 The nRF24L01 will repeatedly use the last byte from the last
 payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint8_t" title="RF24::read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">read()</span></code></a> is called with an empty RX FIFO.</p></li>
 </ul>
-</div></blockquote>
 </div>
 </p>
 </p></li>
