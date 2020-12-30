@@ -45,8 +45,8 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - name: install Sphinx, breathe, recommonmark, sphinx-rtd-theme
-      run: pip install install Sphinx breathe recommonmark sphinx-rtd-theme sphinx-material
+    - name: install Sphinx extensions
+      run: pip install -r docs/requirements.txt
     - name: run Sphinx
       run: |
         cd docs

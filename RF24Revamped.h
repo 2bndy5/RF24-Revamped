@@ -350,19 +350,19 @@ public:
      * .. hint:: Remember that each call to :func:`read()` fetches data from the
      *     RX FIFO beginning with the first byte from the first available
      *     payload. A payload is not removed from the RX FIFO until it's
-     *     entire length (or more) is fetched using :func:read().
+     *     entire length (or more) is fetched using :func:`read()`.
      *
-     *         - If ``len`` parameter's value is less than the available payload's
-     *           length, then the payload remains in the RX FIFO.
-     *         - If ``len`` parameter's value is greater than the first of multiple
-     *           available payloads, then the data saved to the ``buf``
-     *           parameter's object will be supplemented with data from the next
-     *           available payload.
-     *         - If ``len`` parameter's value is greater than the last available
-     *           payload's length, then the last byte in the payload is used as
-     *           padding for the data saved to the ``buf`` parameter's object.
-     *           The nRF24L01 will repeatedly use the last byte from the last
-     *           payload even when :func:`read()` is called with an empty RX FIFO.
+     *     - If ``len`` parameter's value is less than the available payload's
+     *       length, then the payload remains in the RX FIFO.
+     *     - If ``len`` parameter's value is greater than the first of multiple
+     *       available payloads, then the data saved to the ``buf``
+     *       parameter's object will be supplemented with data from the next
+     *       available payload.
+     *     - If ``len`` parameter's value is greater than the last available
+     *       payload's length, then the last byte in the payload is used as
+     *       padding for the data saved to the ``buf`` parameter's object.
+     *       The nRF24L01 will repeatedly use the last byte from the last
+     *       payload even when :func:`read()` is called with an empty RX FIFO.
      * @endrst
      * @see any(), available()
      */

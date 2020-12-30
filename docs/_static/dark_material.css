@@ -20,6 +20,10 @@ body {
   color: #FCFCFC;
 }
 
+span.highlighted {
+  background-color: #794502;
+}
+
 .sig-name.descname,
 .sig-prename.descclassname {
   background-color: #403f3f;

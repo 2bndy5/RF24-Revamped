@@ -52,6 +52,7 @@ extensions = [
     "breathe",
     "recommonmark",
     "sphinx.ext.autosectionlabel",
+    "sphinx_copybutton",
     # "sphinx.ext.intersphinx",
 ]
 
