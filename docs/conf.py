@@ -215,33 +215,31 @@ if read_the_docs_build:
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-if read_the_docs_build:
-    html_theme = "sphinx_rtd_theme"
-else:
-    html_theme = "sphinx_material"
-    # Material theme options
-    html_sidebars = {
-        "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
-    }
-    html_theme_options = {
-        # Set the name of the project to appear in the navigation.
-        "nav_title": "RF24 Revamped",
-        # Specify a base_url used to generate sitemap.xml. If not
-        # specified, then no sitemap will be built.
-        "base_url": "https://2bndy5.github.io/RF24-Revamped/",
-        # Set the color and the accent color
-        "color_primary": "blue",
-        "color_accent": "light-green",
-        # Set the repo location to get a badge with stats
-        "repo_url": "https://github.com/2bndy5/RF24-Revamped/",
-        "repo_name": "RF24-Revamped",
-        # Visible levels of the global TOC; -1 means unlimited
-        "globaltoc_depth": 1,
-        # If False, expand all TOC entries
-        "globaltoc_collapse": True,
-        # If True, show hidden TOC entries
-        "globaltoc_includehidden": False,
-    }
+html_theme = "sphinx_material"
+# Material theme options
+html_sidebars = {
+    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+}
+html_theme_options = {
+    # Set the name of the project to appear in the navigation.
+    "nav_title": "RF24 Revamped",
+    # Specify a base_url used to generate sitemap.xml. If not
+    # specified, then no sitemap will be built.
+    "base_url": "https://2bndy5.github.io/RF24-Revamped/",
+    # Set the color and the accent color
+    "color_primary": "blue",
+    "color_accent": "light-green",
+    # Set the repo location to get a badge with stats
+    "repo_url": "https://github.com/2bndy5/RF24-Revamped/",
+    "repo_name": "RF24-Revamped",
+    # Visible levels of the global TOC; -1 means unlimited
+    "globaltoc_depth": 1,
+    # If False, expand all TOC entries
+    "globaltoc_collapse": True,
+    # If True, show hidden TOC entries
+    "globaltoc_includehidden": False,
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -250,7 +248,7 @@ html_static_path = ["_static"]
 # These paths are either relative to html_static_path
 # or fully qualified paths (eg. https://...)
 html_css_files = [
-    "darkness.css" if read_the_docs_build else "dark_material.css",
+    "dark_material.css",
 ]
 
 # Set link name generated in the top bar.
@@ -261,7 +259,7 @@ html_title = "RF24 Revamped"
 # pixels large.
 html_favicon = "_static/favicon.ico"
 
-html_logo = "_static/Logo.png" if read_the_docs_build else "_static/Logo large.png"
+html_logo = "_static/Logo large.png"
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = "RF24RevampedLibrarydoc"
