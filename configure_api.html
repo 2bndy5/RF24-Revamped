@@ -65,7 +65,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-blue>
+        data-md-color-primary=blue data-md-color-accent=light-green>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -171,8 +171,6 @@
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">RF24 Revamped</a></li>
-            
-            <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Material</a></li>
       </ul>
     </div>
   </nav>
@@ -207,6 +205,299 @@
 </a>
     </div>
   
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Examples</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ino_examples.html" class="md-nav__link">Arduino examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cpp_examples.html" class="md-nav__link">Linux examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny_examples.html" class="md-nav__link">ATTiny examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">API Reference</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="basic_api.html" class="md-nav__link">Basic API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="advanced_api.html" class="md-nav__link">Advanced API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Configuration API </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Configuration API</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#configure-api--page-root" class="md-nav__link">Configuration API</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#address-length-feature" class="md-nav__link">Address Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setaddresslength" class="md-nav__link">setAddressLength()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getaddresslength" class="md-nav__link">getAddressLength()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#dynamic-payload-length-feature" class="md-nav__link">Dynamic Payload Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#dynamic-payload-length-setters" class="md-nav__link">Dynamic Payload Length setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-dynamic-payloads" class="md-nav__link">Unary pipe control of Dynamic Payloads</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-pipe-control-of-dynamic-payloads" class="md-nav__link">Binary pipe control of Dynamic Payloads</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-dynamic-payloads" class="md-nav__link">Individual pipe control of Dynamic Payloads</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#dynamic-payload-length-getters" class="md-nav__link">Dynamic Payload Length getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#individual-pipe-representation-of-dynamic-payload-length" class="md-nav__link">Individual Pipe Representation of Dynamic Payload Length</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-representation-of-dynamic-payload-length" class="md-nav__link">Binary Representation of Dynamic Payload Length</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#static-payload-length-feature" class="md-nav__link">Static Payload Length feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#static-payload-length-setters" class="md-nav__link">Static Payload Length setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-static-payload-lengths" class="md-nav__link">Unary pipe control of Static Payload Lengths</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-static-payload-length" class="md-nav__link">Individual pipe control of Static Payload Length</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#getpayloadlength" class="md-nav__link">getPayloadLength()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-ack-feature" class="md-nav__link">Auto-Ack feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#auto-ack-setters" class="md-nav__link">Auto-Ack setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#unary-pipe-control-of-autoack" class="md-nav__link">Unary pipe control of AutoAck</a>
+        </li>
+        <li class="md-nav__item"><a href="#binary-pipe-control-of-autoack" class="md-nav__link">Binary pipe control of AutoAck</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-control-of-autoack" class="md-nav__link">Individual pipe control of AutoAck</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-ack-getters" class="md-nav__link">Auto-Ack getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#binary-representation-of-auto-ack" class="md-nav__link">Binary Representation of Auto-Ack</a>
+        </li>
+        <li class="md-nav__item"><a href="#individual-pipe-representation-of-auto-ack" class="md-nav__link">Individual Pipe Representation of Auto-Ack</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-retry-feature" class="md-nav__link">Auto-Retry feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#auto-retry-setters" class="md-nav__link">Auto-Retry setters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setautoretry" class="md-nav__link">setAutoRetry()</a>
+        </li>
+        <li class="md-nav__item"><a href="#setard" class="md-nav__link">setArd()</a>
+        </li>
+        <li class="md-nav__item"><a href="#setarc" class="md-nav__link">setArc()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#auto-retry-getters" class="md-nav__link">Auto-Retry getters</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#getautoretry" class="md-nav__link">getAutoRetry()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getarc" class="md-nav__link">getArc()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getard" class="md-nav__link">getArd()</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#ack-payload-feature" class="md-nav__link">Ack Payload feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#enableackpayload" class="md-nav__link">enableAckPayload()</a>
+        </li>
+        <li class="md-nav__item"><a href="#disableackpayload" class="md-nav__link">disableAckPayload()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#multicast-feature" class="md-nav__link">Multicast feature</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#allowmulticast" class="md-nav__link">allowMulticast()</a>
+        </li>
+        <li class="md-nav__item"><a href="#isallowmulticast" class="md-nav__link">isAllowMulticast()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#interruptconfig" class="md-nav__link">interruptConfig()</a>
+        </li>
+        <li class="md-nav__item"><a href="#rf-data-rate" class="md-nav__link">RF Data Rate</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#data-rate-enum" class="md-nav__link">Data Rate enum</a>
+        </li>
+        <li class="md-nav__item"><a href="#setdatarate" class="md-nav__link">setDataRate()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getdatarate" class="md-nav__link">getDataRate()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#rf-channel" class="md-nav__link">RF Channel</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setchannel" class="md-nav__link">setChannel()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getchannel" class="md-nav__link">getChannel()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#crc-checking" class="md-nav__link">CRC checking</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setcrc" class="md-nav__link">setCrc()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getcrc" class="md-nav__link">getCrc()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#power-amplifier-level" class="md-nav__link">Power Amplifier Level</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#power-amplifier-level-enum" class="md-nav__link">Power Amplifier Level enum</a>
+        </li>
+        <li class="md-nav__item"><a href="#setpalevel" class="md-nav__link">setPaLevel()</a>
+        </li>
+        <li class="md-nav__item"><a href="#getpalevel" class="md-nav__link">getPaLevel()</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/configure_api.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Related Pages</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="common_issues.html" class="md-nav__link">Common Issues</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="arduino.html" class="md-nav__link">Arduino</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny.html" class="md-nav__link">ATTiny Support</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="linux_install.html" class="md-nav__link">Linux Installation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="mraa.html" class="md-nav__link">MRAA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="rpi_general.html" class="md-nav__link">General Linux/Raspberry Pi</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cross_compilation.html" class="md-nav__link">Linux cross-compilation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="atxmega.html" class="md-nav__link">ATXMEGA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="portability.html" class="md-nav__link">RF24 Portability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="templates.html" class="md-nav__link">Templated Files for Platform Support</a>
+      
+    
+    </li>
+  </ul>
   
 
 </nav>

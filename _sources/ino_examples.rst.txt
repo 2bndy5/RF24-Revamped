@@ -7,6 +7,7 @@
 .. |use_serial_mon| replace:: Use the Serial Monitor to change each node's behavior.
 .. |2_or_more_devs| replace:: This example was written to be used on 2 devices acting as "nodes".
 
+================
 Arduino examples
 ================
 

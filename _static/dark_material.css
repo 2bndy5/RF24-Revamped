@@ -15,6 +15,11 @@ body {
   background-color: unset;
 }
 
+.md-typeset .codehilitetable .linenos pre,
+.md-typeset .highlighttable .linenos pre {
+  color: #FCFCFC;
+}
+
 .sig-name.descname,
 .sig-prename.descclassname {
   background-color: #403f3f;
@@ -43,6 +48,10 @@ html body .md-typeset .headerlink {
   color: rgb(150, 125, 238);
 }
 
+.md-nav {
+  font-size:0.8rem;
+}
+
 .md-typeset h1 {
   color: rgb(255, 255, 255);
 }
@@ -52,4 +61,25 @@ html .md-nav--primary .md-nav__title--site .md-nav__button {
   left: 0;
   width: inherit;
   height: auto;
+}
+
+html .md-nav--primary .md-nav__title~.md-nav__list {
+  background-color: #fff0;
+}
+
+.md-nav span.caption {
+  background-color: #172353;
+}
+
+[data-md-color-primary=blue] .md-tabs {
+  background-color: #006b09;
+}
+
+[data-md-color-primary=blue] .md-header,
+[data-md-color-primary=blue] .md-hero {
+  background-color: #006b09;
+}
+
+html [data-md-color-primary=blue] .md-nav--primary .md-nav__title--site {
+  background-color: #006B09;
 }

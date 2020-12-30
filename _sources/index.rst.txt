@@ -1,9 +1,5 @@
-.. RF24 Revemped documentation master file, created by
-   sphinx-quickstart on Tue Dec 15 12:39:00 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-
+=========================================
 Welcome to RF24 Revemped's documentation!
 =========================================
 
@@ -79,9 +75,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 .. [1] http://highlowtech.org/?p=1695
 .. [2] http://littlewire.cc/
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Contents:
 
 .. toctree::
    :maxdepth: 1

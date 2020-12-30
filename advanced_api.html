@@ -65,7 +65,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-blue>
+        data-md-color-primary=blue data-md-color-accent=light-green>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -171,8 +171,6 @@
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">RF24 Revamped</a></li>
-            
-            <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Material</a></li>
       </ul>
     </div>
   </nav>
@@ -207,6 +205,217 @@
 </a>
     </div>
   
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Examples</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ino_examples.html" class="md-nav__link">Arduino examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cpp_examples.html" class="md-nav__link">Linux examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny_examples.html" class="md-nav__link">ATTiny examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">API Reference</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="basic_api.html" class="md-nav__link">Basic API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Advanced API </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Advanced API</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#advanced-api--page-root" class="md-nav__link">Advanced API</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#resend" class="md-nav__link">resend()</a>
+        </li>
+        <li class="md-nav__item"><a href="#write" class="md-nav__link">write()</a>
+        </li>
+        <li class="md-nav__item"><a href="#ce" class="md-nav__link">ce()</a>
+        </li>
+        <li class="md-nav__item"><a href="#writeack" class="md-nav__link">writeAck()</a>
+        </li>
+        <li class="md-nav__item"><a href="#status-byte" class="md-nav__link">Status Byte</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#update" class="md-nav__link">update()</a>
+        </li>
+        <li class="md-nav__item"><a href="#istxfull" class="md-nav__link">isTxFull()</a>
+        </li>
+        <li class="md-nav__item"><a href="#pipe" class="md-nav__link">pipe()</a>
+        </li>
+        <li class="md-nav__item"><a href="#irqdr" class="md-nav__link">irqDr()</a>
+        </li>
+        <li class="md-nav__item"><a href="#irqdf" class="md-nav__link">irqDf()</a>
+        </li>
+        <li class="md-nav__item"><a href="#irqds" class="md-nav__link">irqDs()</a>
+        </li>
+        <li class="md-nav__item"><a href="#clearstatusflags" class="md-nav__link">clearStatusFlags()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#powerup" class="md-nav__link">powerUp()</a>
+        </li>
+        <li class="md-nav__item"><a href="#powerdown" class="md-nav__link">powerDown()</a>
+        </li>
+        <li class="md-nav__item"><a href="#fifo-managment" class="md-nav__link">FIFO managment</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#flushrx" class="md-nav__link">flushRx()</a>
+        </li>
+        <li class="md-nav__item"><a href="#flushtx" class="md-nav__link">flushTx()</a>
+        </li>
+        <li class="md-nav__item"><a href="#isfifo" class="md-nav__link">isFifo()</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#empty-or-full-condition" class="md-nav__link">Empty OR Full condition</a>
+        </li>
+        <li class="md-nav__item"><a href="#empty-and-full-condition" class="md-nav__link">Empty AND Full condition</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#lasttxarc" class="md-nav__link">lastTxArc()</a>
+        </li>
+        <li class="md-nav__item"><a href="#ispvariant" class="md-nav__link">isPVariant()</a>
+        </li>
+        <li class="md-nav__item"><a href="#ambiguous-signal-detection" class="md-nav__link">Ambiguous Signal detection</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#testrpd" class="md-nav__link">testRpd()</a>
+        </li>
+        <li class="md-nav__item"><a href="#startcarrierwave" class="md-nav__link">startCarrierWave()</a>
+        </li>
+        <li class="md-nav__item"><a href="#stopcarrierwave" class="md-nav__link">stopCarrierWave()</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#printdetails" class="md-nav__link">printDetails()</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/advanced_api.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="configure_api.html" class="md-nav__link">Configuration API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Related Pages</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="common_issues.html" class="md-nav__link">Common Issues</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="arduino.html" class="md-nav__link">Arduino</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny.html" class="md-nav__link">ATTiny Support</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="linux_install.html" class="md-nav__link">Linux Installation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="mraa.html" class="md-nav__link">MRAA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="rpi_general.html" class="md-nav__link">General Linux/Raspberry Pi</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cross_compilation.html" class="md-nav__link">Linux cross-compilation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="atxmega.html" class="md-nav__link">ATXMEGA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="portability.html" class="md-nav__link">RF24 Portability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="templates.html" class="md-nav__link">Templated Files for Platform Support</a>
+      
+    
+    </li>
+  </ul>
   
 
 </nav>
