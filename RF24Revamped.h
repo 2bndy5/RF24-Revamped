@@ -27,7 +27,9 @@
 /**
  * Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>)
  * represents a logarithmic signal loss.
- * @see RF24::setPaLevel(), RF24::getPaLevel()
+ * @rst
+ * .. seealso:: :func:`RF24::setPaLevel()`, :func:`RF24::getPaLevel()`
+ * @endrst
  */
 typedef enum {
     /**
@@ -93,7 +95,9 @@ typedef enum {
 
 /**
  * How fast data moves through the air. Units are in bits per second (bps).
- * @see RF24::setDataRate(), RF24::getDataRate()
+ * @rst
+ * .. seealso:: :func:`RF24::setDataRate()`, :func:`RF24::getDataRate()`
+ * @endrst
  */
 typedef enum {
     /** (0) represents 1 Mbps */
@@ -302,13 +306,12 @@ public:
      *       radio.read(&amp;data, sizeof(data));
      *     }
      *
-     * @endrst
-     * @see any()
-     * @return
-     * - true if there is a payload available in the RX FIFO buffers
-     * - false if there is no payload available in the RX FIFO buffers
+     * .. seealso:: :func:`any()`
      *
-     * @rst
+     * :Return:
+     *     - ``true`` if there is a payload available in the RX FIFO buffers
+     *     - ``false`` if there is no payload available in the RX FIFO buffers
+     *
      * .. warning:: This function relies on the information about the pipe number
      *     that received the next available payload. According to the datasheet,
      *     the data about the pipe number that received the next available payload
@@ -363,14 +366,15 @@ public:
      *       padding for the data saved to the ``buf`` parameter's object.
      *       The nRF24L01 will repeatedly use the last byte from the last
      *       payload even when :func:`read()` is called with an empty RX FIFO.
+     *
+     * .. seealso:: :func:`any()`, :func:`available()`
      * @endrst
-     * @see any(), available()
      */
     void read(void* buf, uint8_t len);
 
     /**
-     * New: Open a pipe for writing via byte array. Old addressing format retained
-     * for compatibility.
+     * Open a pipe for writing with an array of bytes as an address. Use
+     * openWritingPipe(uint64_t) for passing a 64-bit integer as an address.
      *
      * Only one writing pipe can be opened at once, but this function changes
      * the address that is used to transmit (ACK payloads/packets do not apply
@@ -398,8 +402,9 @@ public:
      * .. note:: There is no address length parameter because this function will
      *     always write the number of bytes that the radio addresses are configured
      *     to use (set with :func:`setAddressLength()`).
+     *
+     * .. seealso:: :func:`setAddressLength()`, :func:`startListening()`
      * @endrst
-     * @see setAddressLength(), startListening()
      * @param address The address to be used for outgoing transmissions (uses
      * pipe 0). Coordinate this address amongst other receiving nodes (the
      * pipe numbers don't need to match).
@@ -407,13 +412,16 @@ public:
     void openWritingPipe(const uint8_t* address);
 
     /**
-     * Open a pipe for reading
+     * Open a pipe for reading with an array of bytes as an address. Use
+     * OpenReadingPipe(uint8_t, uint64_t) for passing a 64-bit integer as an
+     * address.
      *
-     * Up to 6 pipes can be open for reading at once.  Open all the required
+     * Up to 6 pipes can be open for simultaneous listening. Open all the required
      * reading pipes, and then call startListening().
      *
-     * @see openWritingPipe(), setAddressLength()
      * @rst
+     * .. seealso:: :func:`openWritingPipe()`, :func:`setAddressLength()`
+     *
      * .. note:: Pipes 0 and 1 will store a full 5-byte address. Pipes 2-5 will
      *     technically only store a single byte, borrowing up to 4 additional bytes
      *     from pipe 1 per the assigned address width.
@@ -542,7 +550,9 @@ public:
      *
      * The irqDs() and irqDf() interrupt flags will be cleared upon entering
      * this function
-     * @see setAutoAck()
+     * @rst
+     * .. seealso:: the `Auto-ACK feature &lt;configure_api.html#auto-ack-feature&gt;`_
+     * @endrst
      * @param buf Pointer to the data to be sent
      * @param len Number of bytes to be sent. The maximum size of data from @p buf
      * is 32 bytes (for dynamic payload lengths) or the static payload length
@@ -568,8 +578,8 @@ public:
      *
      * The next time a message is received on a specified @p pipe, the data in
      * @p buf will be sent back in the ACK payload.
-     * @see enableAckPayload(), setDynamicPayloads()
      * @rst
+     * .. seealso:: :func:`enableAckPayload()`, :func:`setDynamicPayloads()`
      * .. important:: Dynamic payloads must be enabled.
      * .. note:: ACK payloads are dynamic payloads. Calling :func:`enableAckPayload()`
      *     will automatically enable dynamic payloads on pipe 0 (required for TX
@@ -578,7 +588,7 @@ public:
      * @endrst
      *
      * @rst
-     * .. note:: ACK payloads are handled automatically by the radio chip when a
+     * .. tip:: ACK payloads are handled automatically by the radio chip when a
      *     regular payload is received. It is important to discard regular payloads
      *     in the TX FIFO (using :func:`flushTx()`) before loading the first ACK payload
      *     into the TX FIFO. This function can be called before and after calling
@@ -603,7 +613,9 @@ public:
      *
      * This function describes what event triggered the IRQ pin to go active
      * LOW and clears the status of all events.
-     * @see interruptConfig()
+     * @rst
+     * .. seealso:: :func:`interruptConfig()`
+     * @endrst
      * @param dataReady There is a newly received payload (RX_DR) saved to
      * RX FIFO buffers. Remember that the RX FIFO can only hold up to 3
      * payloads. Once the RX FIFO is full, all further received transmissions
@@ -632,8 +644,9 @@ public:
      *     for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the
      *     nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
      *     to clear by calling :func:`ce()` to the the CE pin inactive LOW.
+     * .. seealso:: :func:`send()`, :func:`setAutoAck()`,
+     *     :func:`allowMulticast()`
      * @endrst
-     * @see send(), setAutoAck(), allowMulticast()
      * @param buf Pointer to the data to be sent
      * @param len Number of bytes to be sent
      * @param multicast Request ACK packet response (`false`), or no ACK packet response
@@ -704,8 +717,8 @@ public:
      *        radio.read(0, 0);
      *     }
      *
+     * .. seealso:: :func:`startCarrierWave()`, :func:`stopCarrierWave()`
      * @endrst
-     * @see startCarrierWave(), stopCarrierWave()
      * @return This data is reset upon entering RX mode.
      * - `true` if a signal with an amplitude of greater than or equal to -64dBm
      * was detected.
@@ -744,28 +757,20 @@ public:
      * @return The address length (in bytes) currently configured by
      * setAddressLength(). This number will be in range [3, 5].
      */
-    bool getAddressLength(void);
+    uint8_t getAddressLength(void);
 
     /**
-     * Set the number of retry attempts and delay between retry attempts when
-     * transmitting a payload. The radio is waiting for an acknowledgement
-     * (ACK) packet during the delay between retry attempts.
-     * @param delay How long to wait (in microseconds) between each auto-retry
-     * attempt. This parameter is clamped to the range [250, 4000]. The default is
-     * 1500 us.
-     * @param count How many auto-retry attempts before giving up. The default and
-     * maximum is 15. Use 0 to disable the auto-retry feature all together.
-     * @rst
-     * .. note:: Disabling the auto-retry feature on a transmitter still uses the
-     *     auto-ack feature (if enabled), except it will not retry to transmit if
-     *     the payload was not acknowledged on the first attempt.
-     * @endrst
-     * @see lastTxArc(), setArd(), setArc()
+     * Configure of the auto-retry feature.
+     * @param delay How long to wait (in microseconds) for an acknowledgement (ACK)
+     * between each auto-retry attempt. This parameter is clamped to the range
+     * [250, 4000]. The default is 1500 us.
+     * @param count How many auto-retry attempts to make before giving up. The default and
+     * maximum is 15. Use 0 to disable the auto-retry feature.
      */
     void setAutoRetry(uint16_t delay, uint8_t count);
 
     /**
-     * Fetch the configuration of the auto-retry feature
+     * Get the auto-retry feature's configuration.
      * @param[out] delay The reference variable that will store the amount
      * of microseconds that the radio waits for an acknowledgement (ACK)
      * packet response between auto-retry attempted transmissions.
@@ -780,13 +785,11 @@ public:
      *     uint8_t autoCount;
      *     radio.getAutoRetry(&amp;autoDelay, &amp;autoCount);
      * @endrst
-     * @see setAutoRetry(), getArd(), getArc()
      */
     void getAutoRetry(uint16_t* delay, uint8_t* count);
 
     /**
      * Configure the auto-retry feature's delay (ARD).
-     * @see setAutoRetry()
      * @param delay How long to wait (in microseconds) between each auto-retry
      * attempt. This parameter is clamped to the range [250, 4000]. The default is
      * 1500 us.
@@ -795,13 +798,11 @@ public:
 
     /**
      * Get the auto-retry feature's delay (ARD) configuration,
-     * @see setAutoRetry(), getAutoRetry(), setArd()
      */
     uint16_t getArd(void);
 
     /**
      * Configure the auto-retry feature's count (ARC).
-     * @see setAutoRetry(), lastTxArc()
      * @param count How many auto-retry attempts before giving up. The default and
      * maximum is 15. Use 0 to disable the auto-retry feature all together.
      */
@@ -809,7 +810,6 @@ public:
 
     /**
      * Get the auto-retry feature's count (ARC) configuration.
-     * @see setAutoRetry(), getAutoRetry(), setArc(), lastTxArc()
      */
     uint8_t getArc(void);
 
@@ -817,7 +817,7 @@ public:
      * Set RF communication channel. The frequency used by a channel is
      * calculated as:
      *
-     * 2400 MHz + \<channel number>
+     * 2400 MHz + \<channel number\>
      *
      * Meaning the default channel of 76 uses the approximate frequency of
      * 2476 MHz.
@@ -845,15 +845,20 @@ public:
      * pipe specified by the @p pipe parameter. This parameter is clamped to the
      * range [1, 32].
      * @param pipe The specific pipe to configure the length for static payloads.
-     * @see getPayloadLength(), any()
+     *
+     * @rst
+     * .. seealso:: :func:`getPayloadLength()`, :func:`any()`
+     * @endrst
      */
     void setPayloadLength(uint8_t size, uint8_t pipe);
 
     /**
      * Get Static Payload length for a specific pipe
+     * @rst
+     * .. seealso:: `Static Payload Length setters`_, :func:`any()`
+     * @endrst
      * @param pipe the specific pipe about the configuration being fetched. If
      * not specified, then the data returned is about pipe 0.
-     * @see setPayloadLength(uint8_t, uint8_t), setPayloadLength(uint8_t), any()
      * @return The payload length in bytes that a pipe is configured to use.
      */
     uint8_t getPayloadLength(uint8_t pipe=0);
@@ -868,36 +873,27 @@ public:
 
     /**
      * Enable custom payloads in the acknowledge packets
-     *
-     * ACK payloads are a handy way to return data back to senders without
-     * manually changing the radio modes on both units.
-     *
-     * The ACK payload feature requires the auto-ack feature to be
-     * enabled for any pipe using ACK payloads. This function does not
-     * automatically enable the auto-ack feature on pipe 0 since the auto-ack
-     * feature is enabled for all pipes by default.
-     * @see setAutoAck()
      * @rst
-     * .. note:: ACK payloads are dynamic payloads. This function automatically
-     *     enables dynamic payloads on pipe 0 by default. Call
-     *     :func:`setDynamicPayloads()` to enable on all pipes (especially for RX
-     *     nodes that use pipes other than pipe 0 to receive transmissions expecting
-     *     responses with ACK payloads).
+     * .. note:: This function automatically enables the
+     *     `Dynamic Payload Length feature`_ and the `Auto-Ack feature`_ on
+     *     pipe 0 by default.
+     *
+     *     .. tip:: Use `Dynamic Payload Length setters`_ and
+     *         `Auto-Ack setters`_ to enable dynamic payloads and auto-ack
+     *         packets on any or all pipes (especially for RX nodes that use
+     *         pipes other than pipe 0 to receive transmissions expecting
+     *         responses with ACK payloads).
      * @endrst
      */
     void enableAckPayload(void);
 
     /**
-     * Disable custom payloads on the ackowledge packets
-     * @see enableAckPayload()
+     * Disable custom payloads in the ackowledge packets
      */
     void disableAckPayload(void);
 
     /**
      * Enable or disable dynamically sized payloads for all pipes
-     *
-     * If this feature is enabled, then the static payload lengths configuration
-     * is not used.
      * @param enable Enable (`true`) or disable (`false`) the dynamic payload length
      * feature for all pipes.
      */
@@ -905,9 +901,6 @@ public:
 
     /**
      * Enable or disable dynamically sized payloads for all pipes using a binary integer.
-     *
-     * If this feature is enabled, then the static payload lengths configuration
-     * is not used.
      * @param binary_enable A binary integer to control the dynamic payload length feature
      * for all pipes. Bit positions 0-5 represent pipes 0-5 respectively. A high bit (`1`)
      * enables the feature for the corresponding pipe; a low bit (`0`) disables the feature
@@ -917,9 +910,6 @@ public:
 
     /**
      * Enable or disable dynamically sized payloads for a specific pipe.
-     *
-     * If this feature is enabled for any pipe, then the static payload length
-     * configuration for that pipe is not used.
      * @param enable the configuration of the dynamic payload length feature
      * concerning specific pipe.
      * @param pipe the specific pipe concerning the dynamic payload length feature.
@@ -928,18 +918,15 @@ public:
 
     /**
      * Get the configuration of dynamically sized payloads for a specific pipe.
-     *
-     * If this feature is enabled for any pipe, then the static payload length
-     * configuration for that pipe is not used.
      * @param pipe the specific pipe concerning the dynamic payload length feature.
+     * If this parameter is not specified, then the configuration about pipe 0 is
+     * returned.
      */
-    bool getDynamicPayloads(uint8_t pipe);
+    bool getDynamicPayloads(uint8_t pipe=0);
 
     /**
-     * Get the configuration of dynamically sized payloads for all pipes.
-     *
-     * If this feature is enabled for any pipe, then the static payload length
-     * configuration for that pipe is not used.
+     * Get the configuration of dynamically sized payloads for all pipes as a binary
+     * representation.
      * @return A binary integer where each bit represents the dynamic payload
      * feature configuration for a specific pipe. Bit position 0 represents
      * pipe 0, and bit position 5 represents pipe 5. A high bit (`1`) enables
@@ -947,7 +934,7 @@ public:
      * feature for the corresponding pipe. Bit position 6 and 7 will always be
      * `0`.
      */
-    uint8_t getDynamicPayloads(void);
+    uint8_t getDynamicPayloadsBin(void);
 
     /**
      * Enable dynamic ACKs (single write multicast or unicast) for chosen
@@ -962,8 +949,8 @@ public:
      *
      *     radio.send(&amp;data, 32, 1); // Sends a payload with no acknowledgement requested
      *     radio.send(&amp;data, 32, 0); // Sends a payload using auto-retry/auto-ack features
+     * .. seealso:: `Auto-Ack setters`_
      * @endrst
-     * @see setAutoAck(bool), setAutoAck(bool, uint8_t)
      * @param enable Enables (`true`) or disables (`false`) the affect of the
      * `multicast` parameter to send() or write().
      */
@@ -1257,14 +1244,16 @@ public:
      *         setCrc(RF24_CRC_16);
      *         setAutoAck(true);
      *         setAutoRetry(5, 15);
+     * .. seealso:: :func:`startCarrierWave()`
      * @endrst
-     * @see startCarrierWave()
      */
     void stopCarrierWave(void);
 
     /**
-     * Open a pipe for reading
-     * @see openReadingPipe(uint8_t, const uint8_t*)
+     * Open a pipe for reading with a 64-but integer as an address. Use
+     * openReadingPipe(uint8_t, const uint8_t*) for passing an array of bytes
+     * as an address.
+     *
      * @rst
      * .. important:: Pipes 1-5 should share the first 32 bits.
      *     Only the least significant byte should be unique, e.g.
@@ -1290,10 +1279,10 @@ public:
     void openReadingPipe(uint8_t number, uint64_t address);
 
     /**
-     * Open a pipe for writing
-     * @see openWritingPipe(const uint8_t)
-     * @rst
+     * Open a pipe for writing using a 64-but integer as an address. Use
+     * openWritingPipe(const uint8_t*) for passing an array of bytes.
      *
+     * @rst
      * Addresses are 40-bit hex values, e.g.:
      *
      * .. code-block::
@@ -1323,25 +1312,21 @@ public:
 private:
 
     /**
-     * Write the transmit payload
+     * Write the transmit payload to the TX FIFO
      *
      * The size of data written is the fixed payload size, see getPayloadLength()
      * @param buf Where to get the data
      * @param len Number of bytes to be sent
      * @param writeType the SPI cmd to prefix the payload written to the TX FIFO
-     * @return Nothing. Older versions of this function returned the status
-     * byte, but that it now saved to a private member on all SPI transactions.
      */
     void write_payload(const void* buf, uint8_t len, const uint8_t writeType);
 
     /**
-     * Read the receive payload
+     * Read the receive payload from the RX FIFO
      *
      * The size of data read is the fixed payload size, see getPayloadLength()
      * @param buf Where to put the data
      * @param len Maximum number of bytes to read
-     * @return Nothing. Older versions of this function returned the status
-     * byte, but that it now saved to a private member on all SPI transactions.
      */
     void read_payload(void* buf, uint8_t len);
 
@@ -1371,7 +1356,7 @@ private:
      */
     void print_address_register(const char* name, uint8_t reg, uint8_t qty = 1);
 
-    #endif
+    #endif // !defined (MINIMAL)
 
     /**
      * Turn on or off the basic features of the chip.
