@@ -559,10 +559,13 @@ for more than 4ms at a time. If the auto retransmit/autoAck is enabled, the
 nRF24L01 is never in TX mode long enough to disobey this rule. Allow the FIFO
 to clear by calling <a class="reference internal" href="#_CPPv4N4RF242ceEb" title="RF24::ce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ce()</span></code></a> to the the CE pin inactive LOW.</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_tKb" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">send()</span></code></a>, <a class="reference internal" href="configure_api.html#_CPPv4N4RF2410setAutoAckEb" title="RF24::setAutoAck"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAutoAck()</span></code></a>,
+<a class="reference internal" href="configure_api.html#_CPPv4N4RF2414allowMulticastEb" title="RF24::allowMulticast"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">allowMulticast()</span></code></a></p>
+</div>
 </p>
 <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="basic_api.html#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1ad66301ac22535ffa7cea85db71b784eb"><span class="std std-ref">allowMulticast()</span></a> </p>
-</dd>
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was loaded into the TX FIFO.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload wasn’t loaded into the TX FIFO because it is already full. </p></li>
@@ -606,8 +609,25 @@ description of this pin’s usage.</p>
 <dt id="_CPPv4N4RF248writeAckE7uint8_tPKv7uint8_t">
 <span id="_CPPv3N4RF248writeAckE7uint8_tPKv7uint8_t"></span><span id="_CPPv2N4RF248writeAckE7uint8_tPKv7uint8_t"></span><span id="RF24::writeAck__uint8_t.voidCP.uint8_t"></span><span class="target" id="classRF24_1ab1cd93a2deb47f33e39aff0f6f0bda0c"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">writeAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em>, <em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF248writeAckE7uint8_tPKv7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Write an acknowledgement (ACK) payload for the specified pipe</p>
-<p>The next time a message is received on a specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, the data in <code class="docutils literal notranslate"><span class="pre">buf</span></code> will be sent back in the ACK payload. <p><div class="admonition note">
+<p>The next time a message is received on a specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, the data in <code class="docutils literal notranslate"><span class="pre">buf</span></code> will be sent back in the ACK payload.  <p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2416enableAckPayloadEv" title="RF24::enableAckPayload"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">enableAckPayload()</span></code></a>, <a class="reference internal" href="configure_api.html#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Dynamic payloads must be enabled.</p>
+</div>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>ACK payloads are dynamic payloads. Calling <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416enableAckPayloadEv" title="RF24::enableAckPayload"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">enableAckPayload()</span></code></a>
+will automatically enable dynamic payloads on pipe 0 (required for TX
+mode when expecting ACK payloads). To use ACK payloads on any other
+pipe in RX mode, call <a class="reference internal" href="configure_api.html#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a>.</p>
+</div>
+</p>
+</p>
+<p> <p><div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>ACK payloads are handled automatically by the radio chip when a
 regular payload is received. It is important to discard regular payloads
 in the TX FIFO (using <a class="reference internal" href="#_CPPv4N4RF247flushTxEv" title="RF24::flushTx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">flushTx()</span></code></a>) before loading the first ACK payload
@@ -621,20 +641,6 @@ are only 3 FIFO buffers.</p>
 </div>
 </p>
 <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1a2f58c80bf6448e71121f2ea947eef3a6"><span class="std std-ref">setDynamicPayloads()</span></a><p><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Dynamic payloads must be enabled.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>ACK payloads are dynamic payloads. Calling <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416enableAckPayloadEv" title="RF24::enableAckPayload"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">enableAckPayload()</span></code></a>
-will automatically enable dynamic payloads on pipe 0 (required for TX
-mode when expecting ACK payloads). To use ACK payloads on any other
-pipe in RX mode, call <a class="reference internal" href="configure_api.html#_CPPv4N4RF2418setDynamicPayloadsEb" title="RF24::setDynamicPayloads"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDynamicPayloads()</span></code></a>.</p>
-</div>
-</p>
-</p>
-</dd>
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was loaded into the TX FIFO.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload wasn’t loaded into the TX FIFO because it is already full or the ACK payload feature is not enabled using <a class="reference internal" href="configure_api.html#classRF24_1abf8efced2ee9edbcc6510878b20edc1b"><span class="std std-ref">enableAckPayload()</span></a>. </p></li>
@@ -739,9 +745,12 @@ don’t execute an SPI transaction are <a class="reference internal" href="#_CPP
 <dt id="_CPPv4N4RF2416clearStatusFlagsEbbb">
 <span id="_CPPv3N4RF2416clearStatusFlagsEbbb"></span><span id="_CPPv2N4RF2416clearStatusFlagsEbbb"></span><span id="RF24::clearStatusFlags__b.b.b"></span><span class="target" id="classRF24_1aea33bc880fb660702e6217b7afbd6548"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">clearStatusFlags</code><span class="sig-paren">(</span>bool <em>dataReady</em> = true, bool <em>dataSent</em> = true, bool <em>dataFail</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416clearStatusFlagsEbbb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Call this when you get an Interrupt Request (IRQ) to find out why</p>
-<p>This function describes what event triggered the IRQ pin to go active LOW and clears the status of all events. <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1a7cc8e9fa014ef094c8810a24dd1203ca"><span class="std std-ref">interruptConfig()</span></a> </p>
-</dd>
+<p>This function describes what event triggered the IRQ pin to go active LOW and clears the status of all events.  <p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2415interruptConfigEbbb" title="RF24::interruptConfig"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">interruptConfig()</span></code></a></p>
+</div>
+</p>
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dataReady</span></code>: There is a newly received payload (RX_DR) saved to RX FIFO buffers. Remember that the RX FIFO can only hold up to 3 payloads. Once the RX FIFO is full, all further received transmissions are rejected until there is space to save new data in the RX FIFO buffers. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dataSent</span></code>: The transmission attempt completed (TX_DS). This does not imply that the transmitted data was received by another radio, rather this only reports if the attempt to send was completed. This will always be <code class="docutils literal notranslate"><span class="pre">true</span></code> when the auto-ack feature is disabled. </p></li>
@@ -908,10 +917,12 @@ parameter to the <a class="reference internal" href="configure_api.html#_CPPv4N4
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#_CPPv4N4RF2416startCarrierWaveEv" title="RF24::startCarrierWave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">startCarrierWave()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2415stopCarrierWaveEv" title="RF24::stopCarrierWave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">stopCarrierWave()</span></code></a></p>
+</div>
 </p>
 <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aa98f93c9dfb1aa4267e9758b42acabf4"><span class="std std-ref">startCarrierWave()</span></a>, <a class="reference internal" href="#classRF24_1a94bd33b2e759f7877588d3119aefdd80"><span class="std std-ref">stopCarrierWave()</span></a> </p>
-</dd>
 <dt><strong>Return</strong></dt><dd><p>This data is reset upon entering RX mode.<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if a signal with an amplitude of greater than or equal to -64dBm was detected.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if no signal with an amplitude of greater than or equal to -64 dBm was detected. </p></li>
@@ -965,11 +976,11 @@ re-configure the radio’s settings</p>
 </pre></div>
 </div>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#_CPPv4N4RF2416startCarrierWaveEv" title="RF24::startCarrierWave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">startCarrierWave()</span></code></a></p>
+</div>
 </p>
-<dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1aa98f93c9dfb1aa4267e9758b42acabf4"><span class="std std-ref">startCarrierWave()</span></a> </p>
-</dd>
-</dl>
 </p>
 </dd></dl>
 

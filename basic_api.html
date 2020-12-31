@@ -504,10 +504,13 @@ before continuing application.</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t">
 <span id="_CPPv3N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="RF24::openReadingPipe__uint8_t.uint8_tCP"></span><span class="target" id="classRF24_1a9edc910ccc1ffcff56814b08faca5535"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openReadingPipe</code><span class="sig-paren">(</span>uint8_t <em>number</em>, <em class="property">const</em> uint8_t *<em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>Open a pipe for reading</p>
-<p>Up to 6 pipes can be open for reading at once. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
-<p><dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a>, <a class="reference internal" href="configure_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a><p><div class="admonition note">
+<dd><p>Open a pipe for reading with an array of bytes as an address. Use OpenReadingPipe(uint8_t, uint64_t) for passing a 64-bit integer as an address.</p>
+<p>Up to 6 pipes can be open for simultaneous listening. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
+<p> <p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="RF24::openWritingPipe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">openWritingPipe()</span></code></a>, <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a></p>
+</div>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pipes 0 and 1 will store a full 5-byte address. Pipes 2-5 will
 technically only store a single byte, borrowing up to 4 additional bytes
@@ -540,8 +543,7 @@ always write the number of bytes (for pipes 0 and 1) that the radio
 addresses are configured to use (set with <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
 </div>
 </p>
-</p>
-</dd>
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe to open. Only pipe numbers 0-5 are available, an address assigned to any pipe number not in that range will be ignored. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 3, 4, or 5 byte address to assign to an RX pipe. </p></li>
@@ -553,8 +555,8 @@ addresses are configured to use (set with <a class="reference internal" href="co
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t">
 <span id="_CPPv3N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="RF24::openReadingPipe__uint8_t.uint64_t"></span><span class="target" id="classRF24_1aa7e8523f86f9f8f20c274e0c89a5fd45"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openReadingPipe</code><span class="sig-paren">(</span>uint8_t <em>number</em>, uint64_t <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>Open a pipe for reading <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe(uint8_t, const uint8_t*)</span></a><p><div class="admonition important">
+<dd><p>Open a pipe for reading with a 64-but integer as an address. Use <a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe(uint8_t, const uint8_t*)</span></a> for passing an array of bytes as an address.</p>
+<p> <p><div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Pipes 1-5 should share the first 32 bits.
 Only the least significant byte should be unique, e.g.</p>
@@ -574,8 +576,7 @@ non-zero value.</p>
 using malformed addresses.</p>
 </div>
 </p>
-</p>
-</dd>
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: Which pipe number to open, should be in range [0, 5]. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
@@ -604,7 +605,7 @@ using malformed addresses.</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415openWritingPipeEPK7uint8_t">
 <span id="_CPPv3N4RF2415openWritingPipeEPK7uint8_t"></span><span id="_CPPv2N4RF2415openWritingPipeEPK7uint8_t"></span><span id="RF24::openWritingPipe__uint8_tCP"></span><span class="target" id="classRF24_1af2e409e62d49a23e372a70b904ae30e1"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openWritingPipe</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>New: Open a pipe for writing via byte array. Old addressing format retained for compatibility.</p>
+<dd><p>Open a pipe for writing with an array of bytes as an address. Use <a class="reference internal" href="#classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"><span class="std std-ref">openWritingPipe(uint64_t)</span></a> for passing a 64-bit integer as an address.</p>
 <p>Only one writing pipe can be opened at once, but this function changes the address that is used to transmit (ACK payloads/packets do not apply here). Be sure to call <a class="reference internal" href="#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> prior to calling this function.</p>
 <p>Addresses are assigned via a byte array, default is 5 byte address length  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">addresses</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
 <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">addresses</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
@@ -632,10 +633,12 @@ reading pipe 0 regardless.</p>
 always write the number of bytes that the radio addresses are configured
 to use (set with <a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>).</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="configure_api.html#_CPPv4N4RF2416setAddressLengthE7uint8_t" title="RF24::setAddressLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setAddressLength()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2414startListeningEv" title="RF24::startListening"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">startListening()</span></code></a></p>
+</div>
 </p>
 <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1af870ee715171a3612822190af5523d35"><span class="std std-ref">setAddressLength()</span></a>, <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a> </p>
-</dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The address to be used for outgoing transmissions (uses pipe 0). Coordinate this address amongst other receiving nodes (the pipe numbers don’t need to match). </p></li>
 </ul>
@@ -646,14 +649,13 @@ to use (set with <a class="reference internal" href="configure_api.html#_CPPv4N4
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2415openWritingPipeE8uint64_t">
 <span id="_CPPv3N4RF2415openWritingPipeE8uint64_t"></span><span id="_CPPv2N4RF2415openWritingPipeE8uint64_t"></span><span id="RF24::openWritingPipe__uint64_t"></span><span class="target" id="classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">openWritingPipe</code><span class="sig-paren">(</span>uint64_t <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeE8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>Open a pipe for writing <dl class="simple">
-<dt><strong>See</strong></dt><dd><p>openWritingPipe(const uint8_t)  <p><p>Addresses are 40-bit hex values, e.g.:</p>
+<dd><p>Open a pipe for writing using a 64-but integer as an address. Use <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe(const uint8_t*)</span></a> for passing an array of bytes.</p>
+<p> <p><p>Addresses are 40-bit hex values, e.g.:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">openWritingPipe</span><span class="p">(</span><span class="mh">0xF0F0F0F0F0</span><span class="p">);</span>
 </pre></div>
 </div>
 </p>
-</p>
-</dd>
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: The 40-bit address of the pipe to open. </p></li>
 </ul>
@@ -733,8 +735,19 @@ payloads that were not appended to acknowledgment packets.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</p>
-<p><div class="admonition warning">
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#_CPPv4N4RF243anyEv" title="RF24::any"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">any()</span></code></a></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a payload available in the RX FIFO buffers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if there is no payload available in the RX FIFO buffers</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This function relies on the information about the pipe number
 that received the next available payload. According to the datasheet,
@@ -756,16 +769,6 @@ during an ISR (Interrupt Service Routine).</p>
 </div>
 </div>
 </p>
-<dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a> </p>
-</dd>
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p>true if there is a payload available in the RX FIFO buffers</p></li>
-<li><p>false if there is no payload available in the RX FIFO buffers</p></li>
-</ul>
-</p>
-</dd>
-</dl>
 </p>
 </dd></dl>
 
@@ -776,8 +779,6 @@ during an ISR (Interrupt Service Routine).</p>
 <span id="_CPPv3N4RF244readEPv7uint8_t"></span><span id="_CPPv2N4RF244readEPv7uint8_t"></span><span id="RF24::read__voidP.uint8_t"></span><span class="target" id="classRF24_1a8e2eacacfba96426c192066f04054c5b"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">read</code><span class="sig-paren">(</span>void *<em>buf</em>, uint8_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244readEPv7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Read payload data from the RX FIFO buffer(s).</p>
 <p>The length of data read is usually the next available payload’s length <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classRF24_1af6b7754d874efe564e539de64e5c8ae8"><span class="std std-ref">any()</span></a>, <a class="reference internal" href="#classRF24_1a127105eb7a3b351cfe777c1cec50627a"><span class="std std-ref">available()</span></a> </p>
-</dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">[out]</span> <span class="pre">buf</span></code>: Pointer to a buffer where the data should be written  <p><div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -806,6 +807,10 @@ The nRF24L01 will repeatedly use the last byte from the last
 payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint8_t" title="RF24::read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">read()</span></code></a> is called with an empty RX FIFO.</p></li>
 </ul>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#_CPPv4N4RF243anyEv" title="RF24::any"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">any()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF249availableEv" title="RF24::available"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">available()</span></code></a></p>
+</div>
 </p>
 </p></li>
 </ul>
@@ -821,9 +826,12 @@ payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint
 <span id="_CPPv3N4RF244sendEPKv7uint8_tKb"></span><span id="_CPPv2N4RF244sendEPKv7uint8_tKb"></span><span id="RF24::send__voidCP.uint8_t.bC"></span><span class="target" id="classRF24_1a05e0638239513ce81bf11d8f08226a26"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>buf</em>, uint8_t <em>len</em>, <em class="property">const</em> bool <em>multicast</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_tKb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>This blocks until the message is successfully acknowledged by the receiver or the timeout/retransmit maxima are reached.</p>
 <p>Be sure to call <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a> first to set the destination of the paylooad.</p>
-<p>The <a class="reference internal" href="advanced_api.html#classRF24_1a8f17ced7559d6ecfffad31858e7b3d15"><span class="std std-ref">irqDs()</span></a> and <a class="reference internal" href="advanced_api.html#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a> interrupt flags will be cleared upon entering this function <dl class="simple">
-<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="configure_api.html#classRF24_1aec71746d59da978bcbb975167886a2cc"><span class="std std-ref">setAutoAck()</span></a> </p>
-</dd>
+<p>The <a class="reference internal" href="advanced_api.html#classRF24_1a8f17ced7559d6ecfffad31858e7b3d15"><span class="std std-ref">irqDs()</span></a> and <a class="reference internal" href="advanced_api.html#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a> interrupt flags will be cleared upon entering this function  <p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>the <a class="reference external" href="configure_api.html#auto-ack-feature">Auto-ACK feature</a></p>
+</div>
+</p>
+<dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the payload was delivered successfully and an acknowledgement (ACK packet) was received. If auto-ack is disabled, then any attempt to transmit will also return true (even if the payload was not received).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the payload was sent but was not acknowledged with an ACK packet. This condition can only be reported if the auto-ack feature is on. </p></li>
