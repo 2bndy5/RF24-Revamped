@@ -804,7 +804,10 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
         // Wait until complete or failed
         update();
         i++;
-        // IF_SERIAL_DEBUG(printf("status(%d): dr=%d, ds=%d, df=%d\n", i, irqDr(), irqDs(), irqDf()););
+        if (i > 8400) {
+            IF_SERIAL_DEBUG(printf("HARDWARE FAILURE DETECTED\n"););
+            break;
+        }
     }
     IF_SERIAL_DEBUG(printf("updated status byte %d times\n", i););
     ce(LOW);
