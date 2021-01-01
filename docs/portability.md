@@ -40,4 +40,4 @@ to be included for all supported Linux devices.
 3. *RF24.h* contains the declaration for SPI and GPIO objects 'spi' and 'gpio' to be
 used for porting-in related functions.
 ## Ported Code
-To have your ported code included in this library, or for assistance in porting, create a pull request or open an issue at <https://github.com/TMRh20/RF24>
+To have your ported code included in this library, or for assistance in porting, create a pull request or open an issue at <https://github.com/nRF24/RF24>

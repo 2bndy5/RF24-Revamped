@@ -10,31 +10,39 @@ Create an empty GCC Static Library project in AS7.
 As not all files are required, copy the following directory structure in the project:
 
 
-```text
-utility\
-ATXMegaD3\
-    compatibility.c
-    compatibility.h
-    gpio.cpp
-    gpio.h
-    gpio_helper.c
-    gpio_helper.h
-    includes.h
-    RF24_arch_config.h
-    spi.cpp
-    spi.h
-nRF24L01.h
-printf.h
-RF24.cpp
-RF24.h
-RF24_config.h
+```eval_rst
+.. |rev7| unicode:: u250c .. upsidedownL
+    :rtrim:
+.. |backL| unicode:: u2514 .. backwardsL
+    :rtrim:
+.. |T| unicode:: u251c .. T-joint
+    :rtrim:
+.. |indent| unicode:: u00a0 u00a0 u00a0 u00a0 .. tab4spaces
+    :rtrim:
+
+| |rev7| nRF24L01.h
+| |T| printf.h
+| |T| RF24.cpp
+| |T| RF24.h
+| |T| RF24_config.h
+| |backL| utility\\
+| |indent| |backL| ATXMegaD3\\
+| |indent| |indent| |T| compatibility.c
+| |indent| |indent| |T| compatibility.h
+| |indent| |indent| |T| gpio.cpp
+| |indent| |indent| |T| gpio.h
+| |indent| |indent| |T| gpio_helper.c
+| |indent| |indent| |T| gpio_helper.h
+| |indent| |indent| |T| includes.h
+| |indent| |indent| |T| RF24_arch_config.h
+| |indent| |indent| |T| spi.cpp
+| |indent| |indent| |backL| spi.h
 ```
 
 ## Usage
 Add the library to your project!
 
-In the file where the `main()` is put the following in order to update the millisecond functionality:
-
+In the file where the `main()` is located, put the following code snippet to update the millisecond functionality:
 ```cpp
 ISR(TCE0_OVF_vect)
 {
@@ -42,11 +50,13 @@ ISR(TCE0_OVF_vect)
 }
 ```
 
-Declare the rf24 radio with `RF24 radio(XMEGA_PORTC_PIN3, XMEGA_SPI_PORT_C);`
+Declare the rf24 radio with
+```c++
+RF24 radio(XMEGA_PORTC_PIN3, XMEGA_SPI_PORT_C);
+```
 
-First parameter is the CE pin which can be any available pin on the uC.
-
-Second parameter is the CS which can be on port C (`XMEGA_SPI_PORT_C`) or on port D (`XMEGA_SPI_PORT_D`).
+1. First parameter is the CE pin which can be any available pin on the uC.
+2. Second parameter is the CS which can be on port C (`XMEGA_SPI_PORT_C`) or on port D (`XMEGA_SPI_PORT_D`).
 
 Call the `__start_timer()` to start the millisecond timer.
 
@@ -55,4 +65,4 @@ Call the `__start_timer()` to start the millisecond timer.
 
     The millisecond functionality is based on the TCE0 so don't use these pins as IO.
 ```
-The operating frequency of the uC is 32MHz. If you have other frequency change the TCE0 registers appropriatly in function `__start_timer()` in *compatibility.c* file for your frequency.
+The operating frequency of the uC is 32MHz. If you have other frequency change the TCE0 registers appropriatly in function `__start_timer()` in [compatibility.c](templates.h#about-timing) file for your frequency.

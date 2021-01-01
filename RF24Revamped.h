@@ -28,20 +28,17 @@
  * Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>)
  * represents a logarithmic signal loss.
  * @rst
- * .. seealso:: :func:`RF24::setPaLevel()`, :func:`RF24::getPaLevel()`
+ * .. seealso:: :func:`~RF24::setPaLevel()`, :func:`~RF24::getPaLevel()`
  * @endrst
  */
 typedef enum {
     /**
      * (0) represents:
      * @rst
-     * +----------+----------------+----------------+
-     * | nRF24L01 | Si24R1 with    | Si24R1 with    |
-     * +----------+----------------+----------------+
-     * |          | lnaEnabled = 1 | lnaEnabled = 0 |
-     * +==========+================+================+
-     * | -18 dBm  |  -6 dBm        |  -12 dBm       |
-     * +----------+----------------+----------------+
+     * .. csv-table::
+     *     :header: "nRF24L01", "Si24R1 with ``lnaEnabled`` = 1", "Si24R1 with ``lnaEnabled`` = 0"
+     *
+     *     "-18 dBm", "-6 dBm", "-12 dBm"
      * @endrst
      */
     RF24_PA_MIN = 0,
@@ -49,13 +46,10 @@ typedef enum {
     /**
      * (1) represents:
      * @rst
-     * +----------+----------------+----------------+
-     * | nRF24L01 | Si24R1 with    | Si24R1 with    |
-     * +----------+----------------+----------------+
-     * |          | lnaEnabled = 1 | lnaEnabled = 0 |
-     * +==========+================+================+
-     * | -12 dBm  |  0 dBm         |    -4 dBm      |
-     * +----------+----------------+----------------+
+     * .. csv-table::
+     *     :header: "nRF24L01", "Si24R1 with ``lnaEnabled`` = 1", "Si24R1 with ``lnaEnabled`` = 0"
+     *
+     *     "-12 dBm", "0 dBm", "-4 dBm"
      * @endrst
      */
     RF24_PA_LOW,
@@ -63,13 +57,10 @@ typedef enum {
     /**
      * (2) represents:
      * @rst
-     * +----------+----------------+----------------+
-     * | nRF24L01 | Si24R1 with    | Si24R1 with    |
-     * +----------+----------------+----------------+
-     * |          | lnaEnabled = 1 | lnaEnabled = 0 |
-     * +==========+================+================+
-     * | -6 dBm   |    3 dBm       |    1 dBm       |
-     * +----------+----------------+----------------+
+     * .. csv-table::
+     *     :header: "nRF24L01", "Si24R1 with ``lnaEnabled`` = 1", "Si24R1 with ``lnaEnabled`` = 0"
+     *
+     *     "-6 dBm", "3 dBm", "1 dBm"
      * @endrst
      */
     RF24_PA_HIGH,
@@ -77,13 +68,10 @@ typedef enum {
     /**
      * (3) represents:
      * @rst
-     * +----------+----------------+----------------+
-     * | nRF24L01 | Si24R1 with    | Si24R1 with    |
-     * +----------+----------------+----------------+
-     * |          | lnaEnabled = 1 | lnaEnabled = 0 |
-     * +==========+================+================+
-     * |  0 dBm   |   7 dBm        |    4 dBm       |
-     * +----------+----------------+----------------+
+     * .. csv-table::
+     *     :header: "nRF24L01", "Si24R1 with ``lnaEnabled`` = 1", "Si24R1 with ``lnaEnabled`` = 0"
+     *
+     *     "0 dBm", "7 dBm", "4 dBm"
      * @endrst
      */
     RF24_PA_MAX,
@@ -96,7 +84,7 @@ typedef enum {
 /**
  * How fast data moves through the air. Units are in bits per second (bps).
  * @rst
- * .. seealso:: :func:`RF24::setDataRate()`, :func:`RF24::getDataRate()`
+ * .. seealso:: :func:`~RF24::setDataRate()`, :func:`~RF24::getDataRate()`
  * @endrst
  */
 typedef enum {
@@ -316,16 +304,25 @@ public:
      *     that received the next available payload. According to the datasheet,
      *     the data about the pipe number that received the next available payload
      *     is "unreliable" during a FALLING transition on the IRQ pin. This means
-     *     you should call :func:`clearStatusFlags()` before calling this function
-     *     during an ISR (Interrupt Service Routine).
+     *     you should call :func:`update()` then :func:`any()` instead of calling this
+     *     function during an ISR (Interrupt Service Routine).
      *
      *     For example:
      *
      *     .. code-block::
      *
      *         void isrCallbackFunction() {
-     *           radio.clearStatusFlags(); // resets the IRQ pin to HIGH
-     *           radio.available();        // returned data should now be reliable
+     *           radio.update();                  // allow time for the IRQ pin to settle
+     *           uint8_t bytes = radio.any();     // any() is slightly slower than available()
+     *                                            // but more reliable in this case
+     *           if (bytes) {
+     *             radio.read(&amp;buffer, bytes);    // event is related to RX operation
+     *           } else {
+     *             radio.clearStatusFlags(false); // event is related to TX operation
+     *             if (radio.irqDf()) {
+     *               // do some TX failure handling here
+     *             }
+     *           }
      *         }
      *
      *         void setup() {
@@ -472,29 +469,43 @@ public:
      *           printf_begin();
      *           // ...
      *         }
-     * .. note:: If the automatic acknowledgements feature is configured differently
-     *     for each pipe, then a binary representation is used in which bits 0-5
-     *     represent pipes 0-5 respectively. A ``0`` means the feature is disabled and
-     *     a ``1`` means the feature is enabled.
+     * .. note:: If the `Auto-Ack feature &lt;configure.html#auto-ack-feature&gt;`_
+     *     is configured differently for each pipe, then a binary representation is
+     *     used in which bits 0-5 represent pipes 0-5 respectively. A ``0`` means the
+     *     feature is disabled and a ``1`` means the feature is enabled.
      * @endrst
+     * @param dump_pipes If `true`, this parameter will append information about the
+     * data pipes including addresses (TX and RX), opened/closed status of RX pipes,
+     * and expected static payload lengths. If this parameter is not specified, then it
+     * defaults to `false`.
      */
-    void printDetails(void);
+    void printDetails(bool dump_pipes = false);
 
     /**
-     * Use this function to check if the radio's RX FIFO levels are all
+     * Use this function to check if the radio's RX or TX FIFO levels are all
      * occupied. This can be used to prevent data loss because any incoming
      * transmissions are rejected if there is no unoccupied levels in the RX
      * FIFO to store the incoming payload. Remember that each level can hold
      * up to a maximum of 32 bytes.
-     * @param about_tx Specify which FIFO the returned data should concern.
+     * @param about_tx Specify which FIFO the returned data should concern. If this
+     * parameter is not specified, then the default value is `false`.
      * - `true` fetches data about the TX FIFO
      * - `false` fetches data about the RX FIFO
      * @param check_empty Specify if the data returned about the specified FIFO
      * describes it as empty or full.
      * - `true` checks if the specified FIFO is empty
      * - `false` checks if the specified FIFO is full
-     * @return A boolean that answers the question (according to the parameters)<br>
-     * Is the [TX or RX] FIFO [empty or full]?
+     * @return
+     * - A boolean that answers the question (according to the parameters)
+     * @rst
+     * Is the [TX or RX](``about_tx``) FIFO [empty or full](``check_empty``)?
+     * @endrst
+     * - If the `check_empty` parameter is not specified, then this function returns
+     * a number consisting of 2 bits where each bit describes the empty
+     * and full state of the specified FIFO buffers.
+     *    - `2` means the FIFO is full
+     *    - `1` means the FIFO is empty
+     *    - `0` means the FIFO is neither full nor empty
      */
     bool isFifo(bool about_tx, bool check_empty);
 
@@ -509,7 +520,7 @@ public:
      * - `1` means the FIFO is empty
      * - `0` means the FIFO is neither full nor empty
      */
-    uint8_t isFifo(bool about_tx);
+    uint8_t isFifo(bool about_tx = false);
 
     /**
      * Enter low-power mode
@@ -540,6 +551,24 @@ public:
      * @endrst
      */
     void powerUp(void);
+
+    /**
+     * Set the power state of the radio.
+     * @rst
+     * .. seealso:: :func:`ce()` because the state of the CE pin has a direct affect on
+     *     current consumption.
+     * @endrst
+     * @param is_on
+     * - `true` ensures the radio is powered up and ready to receive or transmit.
+     * - `false` puts the radio to "powered down" mode which is like "sleep" mode.
+     */
+    void setPower(bool is_on);
+
+    /**
+     * Get the current power state of the radio.
+     * @return `true` when radio is powered up or `false` when radio is powered down.
+     */
+    bool isPower(void);
 
     /**
      * This blocks until the message is successfully acknowledged by
@@ -609,12 +638,12 @@ public:
     bool writeAck(uint8_t pipe, const void* buf, uint8_t len);
 
     /**
-     * Call this when you get an Interrupt Request (IRQ) to find out why
-     *
-     * This function describes what event triggered the IRQ pin to go active
-     * LOW and clears the status of all events.
+     * Call this to reset an Interrupt Request (IRQ) event flag after the
+     * approriate actions have been taken.
      * @rst
-     * .. seealso:: :func:`interruptConfig()`
+     * .. note:: After calling this function, the status flags :func:`irqDr()`,
+     *     :func:`irqDf()`, :func:`irqDs()` will be immediately outdated until
+     *     another function (that executes an SPI transaction) is called.
      * @endrst
      * @param dataReady There is a newly received payload (RX_DR) saved to
      * RX FIFO buffers. Remember that the RX FIFO can only hold up to 3
@@ -629,7 +658,7 @@ public:
      * too many retries (MAX_RT) were made while expecting an ACK packet. This
      * event is only triggered when auto-ack feature is enabled.
      */
-    void clearStatusFlags(bool dataReady=true, bool dataSent=true, bool dataFail=true);
+    void clearStatusFlags(bool dataReady = true, bool dataSent = true, bool dataFail = true);
 
     /**
      * Write a payload to the TX FIFO buffers. This function actually serves as
@@ -845,18 +874,11 @@ public:
      * pipe specified by the @p pipe parameter. This parameter is clamped to the
      * range [1, 32].
      * @param pipe The specific pipe to configure the length for static payloads.
-     *
-     * @rst
-     * .. seealso:: :func:`getPayloadLength()`, :func:`any()`
-     * @endrst
      */
     void setPayloadLength(uint8_t size, uint8_t pipe);
 
     /**
      * Get Static Payload length for a specific pipe
-     * @rst
-     * .. seealso:: `Static Payload Length setters`_, :func:`any()`
-     * @endrst
      * @param pipe the specific pipe about the configuration being fetched. If
      * not specified, then the data returned is about pipe 0.
      * @return The payload length in bytes that a pipe is configured to use.
@@ -963,16 +985,15 @@ public:
     bool isAllowMulticast(void);
 
     /**
-     * Determine whether the hardware is an nRF24L01+ or not.
-     * @return `true` if the hardware is nRF24L01+ (or compatible) and `false`
-     * if it is not.
+     * @return `true` if the hardware is nRF24L01+ (or compatible) or `false`
+     * if it is an older non-plus variant(nRF24L01).
      */
-    bool isPVariant(void);
+    bool isPlusVariant(void);
 
     /**
      * Enable or disable the auto-acknowledgement feature for all pipes. This
      * feature is enabled by default.
-     * @param enable Whether to enable (`true`) or disable (`false`) the
+     * @param enable Enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for all pipes
      */
     void setAutoAck(bool enable);
@@ -990,7 +1011,7 @@ public:
     /**
      * Enable or disable the auto-acknowledgement feature for a specific pipe.
      * This feature is enabled by default for all pipes.
-     * @param enable Whether to enable (`true`) or disable (`false`) the
+     * @param enable Enable (`true`) or disable (`false`) the
      * auto-acknowledgment feature for the specified pipe
      * @param pipe Which pipe to configure. This number should be in range [0, 5].
      */
@@ -1001,9 +1022,8 @@ public:
      * @param pipe The specific pipe about which data to fetch. If this parameter
      * is not specified, then the status of the auto-ack feature about pipe 0 is
      * returned.
-     * @return
-     * - `true` if the auto-ack feature is enabled for the specified @p pipe
-     * - `false` if the auto-ack feature is disabled for the specified @p pipe
+     * @return If the auto-ack feature is enabled (`true`) or disabled (`false`)
+     * for the specified @p pipe
      */
     bool getAutoAck(uint8_t pipe=0);
 
@@ -1022,29 +1042,23 @@ public:
      * Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state
      * @param level The desired Power Amplifier Level as defined by @ref rf24_pa_dbm_e.
      * @param lnaEnable Enable or Disable the LNA (Low Noise Amplifier) Gain.
-     * See table for Si24R1 modules below.  @p lnaEnable only affects
+     * See table for Si24R1 modules below. @p lnaEnable only affects
      * nRF24L01 modules with an LNA chip.
      *
      * @rst
-     * +--------------------------------+----------+--------------------+--------------------+
-     * | ``level`` (enum value)         | nRF24L01 | Si24R1 with        | Si24R1 with        |
-     * +--------------------------------+----------+--------------------+--------------------+
-     * |                                |          | ``lnaEnabled`` = 1 | ``lnaEnabled`` = 0 |
-     * +================================+==========+====================+====================+
-     * | :enumerator:`RF24_PA_MIN` (0)  | -18 dBm  |       -6 dBm       |   -12 dBm          |
-     * +--------------------------------+----------+--------------------+--------------------+
-     * | :enumerator:`RF24_PA_LOW` (1)  | -12 dBm  |        0 dBm       |    -4 dBm          |
-     * +--------------------------------+----------+--------------------+--------------------+
-     * | :enumerator:`RF24_PA_HIGH` (2) |  -6 dBm  |        3 dBm       |     1 dBm          |
-     * +--------------------------------+----------+--------------------+--------------------+
-     * | :enumerator:`RF24_PA_MAX` (3)  |   0 dBm  |        7 dBm       |     4 dBm          |
-     * +--------------------------------+----------+--------------------+--------------------+
+     * .. csv-table::
+     *     :header: "``level`` (enum value)", "nRF24L01", "Si24R1 with ``lnaEnabled`` = 1", "Si24R1 with ``lnaEnabled`` = 0"
+     *
+     *     ":enumerator:`RF24_PA_MIN` (0)", "-18 dBm", "-6 dBm", "-12 dBm"
+     *     ":enumerator:`RF24_PA_LOW` (1)", "-12 dBm", "0 dBm", "-4 dBm"
+     *     ":enumerator:`RF24_PA_HIGH` (2)", "-6 dBm", "3 dBm", "1 dBm"
+     *     ":enumerator:`RF24_PA_MAX` (3)", "0 dBm", "7 dBm", "4 dBm"
      *
      * .. note:: The :func:`getPaLevel()` function does not care what was passed ``lnaEnable``
      *     parameter.
      * @endrst
      */
-    void setPaLevel(uint8_t level, bool lnaEnable=1);
+    void setPaLevel(uint8_t level, bool lnaEnable = 1);
 
     /**
      * Fetches the current Power Amplifier Level.
@@ -1054,13 +1068,12 @@ public:
     uint8_t getPaLevel(void);
 
     /**
-     * Returns automatic retransmission count (ARC_CNT)
-     *
-     * Value resets with each new transmission. Allows roughly estimating signal strength.
-     * @return Returns values from 0 to 15.
+     * @return The number of auto-retry attempts made for the last transmision.
+     * This value ranges from 0 to 15. This value resets with each new transmission.
      * @rst
-     * .. hint:: the maximum limit of this number is controlled via the ``count``
-     *     parameter to the :func:`setAutoRetry()` function.
+     * .. note:: The maximum limit of this number is controlled via the ``count``
+     *     parameter to the :func:`setAutoRetry()` or :func:`setArc()` functions.
+     * .. hint:: This function can be used to get a rough estimate of signal strength.
      * @endrst
      */
     uint8_t lastTxArc(void);
@@ -1077,9 +1090,8 @@ public:
      *     ":enumerator:`RF24_2MBPS` (1)", "for 2 Mbps"
      *     ":enumerator:`RF24_250KBPS` (2)", "for 250 kpbs"
      * .. warning:: Setting :enumerator:`RF24_250KBPS` will fail for non-plus modules
-     *     (when :func:`isPVariant()` returns ``false``).
+     *     (when :func:`isPlusVariant()` returns ``false``).
      * @endrst
-     * @return true if the change was successful
      */
     void setDataRate(rf24_datarate_e speed);
 
@@ -1100,7 +1112,7 @@ public:
      * @param length Specify the CRC checksum length in bytes
      * @rst
      * .. csv-table::
-     *     :header: "length", "description"
+     *     :header: "``length``", "description"
      *     :widths: 3, 7
      *
      *     "0", "to disable using CRC checksums"
@@ -1122,24 +1134,23 @@ public:
 
     /**
      * Refresh data (from the STATUS register) used by the following functions:
-     * irqDf(), irqDd(), irqDr(), isTxFull(), pipe().
+     * irqDf(), irqDs(), irqDr(), isTxFull(), pipe().
      * @return Current value of STATUS register
      */
     uint8_t update(void);
 
-
     /**
-     * @return A bool flag that describes if the "Data Ready" event has occured.
+     * @return A bool flag that describes if the "Data Ready" event has occured. Use the `data_ready` parameter to clearStatusFlags() to reset this event.
      */
     bool irqDr(void);
 
     /**
-     * @return A bool flag that describes if the "Data Sent" event has occured.
+     * @return A bool flag that describes if the "Data Sent" event has occured. Use the `data_sent` parameter to clearStatusFlags() to reset this event.
      */
     bool irqDs(void);
 
     /**
-     * @return A bool flag that describes if the "Data Fail" event has occured.
+     * @return A bool flag that describes if the "Data Fail" event has occured. Use the `data_fail` parameter to clearStatusFlags() to reset this event.
      */
     bool irqDf(void);
 
@@ -1150,6 +1161,10 @@ public:
     bool isTxFull(void);
 
     /**
+     * @rst
+     * .. warning:: According to the datasheet, this data is "unreliable" while the IRQ
+     *     pin is transitioning from HIGH to LOW (a FALLING transition).
+     * @endrst
      * @return The pipe number that received the next available payload in the RX FIFO
      * is in range [0, 5]. If there is no payload in the RX FIFO, then the number
      * returned is 255.
@@ -1180,15 +1195,14 @@ public:
      *
      *     radio.interruptConfig(0, 0, 1);
      * @endrst
-     *
-     * @param dataReady `true` ignores the "data received" event, `false` reflects the
+     * @param dataReady `false` ignores the "data received" event, `true` reflects the
      * "data received" event on the IRQ pin.
-     * @param dataSent  `true` ignores the "data sent" event, `false` reflects the
+     * @param dataSent  `false` ignores the "data sent" event, `true` reflects the
      * "data sent" event on the IRQ pin.
-     * @param dataFail  `true` ignores the "data failed" event, `false` reflects the
+     * @param dataFail  `false` ignores the "data failed" event, `true` reflects the
      * "data failed" event on the IRQ pin.
      */
-    void interruptConfig(bool dataReady=true, bool dataSent=true, bool dataFail=true);
+    void interruptConfig(bool dataReady = true, bool dataSent = true, bool dataFail = true);
 
     /**
      * The driver will delay for this duration when stopListening() is called
@@ -1215,9 +1229,9 @@ public:
     uint32_t csDelay;
 
     /**
-     * Transmission of constant carrier wave with defined frequency and output power
+     * Transmission of constant carrier wave.
      * @rst
-     * .. warning:: If :func:`isPVariant()` returns ``true``, then this function takes extra
+     * .. warning:: If :func:`isPlusVariant()` returns ``true``, then this function takes extra
      *     measures that alter some settings. These settings alterations include:
      *
      *     - :func:`setAutoAck()` to ``false`` (for all pipes)
@@ -1231,11 +1245,11 @@ public:
     void startCarrierWave(void);
 
     /**
-     * Stop transmission of constant wave and reset PLL and CONT registers
+     * Stop transmission of the constant carrier wave initiated by startCarrierWave()
      * @rst
      * .. warning:: this function will :func:`powerDown()` the radio per recommendation
      *     of datasheet.
-     * .. important:: If :func:`isPVariant()` returns ``true``, please remember to
+     * .. important:: If :func:`isPlusVariant()` returns ``true``, please remember to
      *     re-configure the radio's settings
      *
      *     .. code-block::
@@ -1244,7 +1258,6 @@ public:
      *         setCrc(RF24_CRC_16);
      *         setAutoAck(true);
      *         setAutoRetry(5, 15);
-     * .. seealso:: :func:`startCarrierWave()`
      * @endrst
      */
     void stopCarrierWave(void);

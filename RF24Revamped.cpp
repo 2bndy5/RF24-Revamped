@@ -328,6 +328,63 @@ void RF24::flushTx(void)
 }
 
 /****************************************************************************/
+RF24::RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed)
+        :ce_pin(_cepin), csn_pin(_cspin),spi_speed(_spi_speed), open_pipes(0), auto_ack_enabled(0x3F), dyn_pl_enabled(0), feature_reg(0), addr_width(5), _is_p_variant(false),
+         csDelay(5)
+{
+    for (uint8_t i = 0; i < 6; ++i) {
+        payload_size[i] = 32;
+    }
+    pipe0_reading_address[0] = 0;
+    if(spi_speed <= 35000){ //Handle old BCM2835 speed constants, default to RF24_SPI_SPEED
+      spi_speed = RF24_SPI_SPEED;
+    }
+}
+
+/****************************************************************************/
+void RF24::setChannel(uint8_t channel)
+{
+    write_register(RF_CH, rf24_min(channel, 125));
+}
+
+uint8_t RF24::getChannel()
+{
+    return read_register(RF_CH);
+}
+
+/****************************************************************************/
+void RF24::setPayloadLength(uint8_t size)
+{
+    // payload size must be in range [1, 32]
+    size = rf24_max(1, rf24_min(32, size));
+
+    // write static payload size setting for all pipes
+    for (uint8_t i = 0; i < 6; ++i) {
+        payload_size[i] = size;
+        write_register(RX_PW_P0 + i, payload_size[i]);
+    }
+}
+
+/****************************************************************************/
+void RF24::setPayloadLength(uint8_t size, uint8_t pipe)
+{
+    // payload size must be in range [1, 32]
+    size = rf24_max(1, rf24_min(32, size));
+
+    // write static payload size setting for all pipes
+    if (pipe < 6) {
+        payload_size[pipe] = size;
+        write_register(RX_PW_P0 + pipe, payload_size[pipe]);
+    }
+}
+
+/****************************************************************************/
+uint8_t RF24::getPayloadLength(uint8_t pipe)
+{
+    return payload_size[pipe < 6 ? pipe : 0];
+}
+
+/****************************************************************************/
 #if !defined(MINIMAL)
 
 void RF24::print_byte_register(const char* name, uint8_t reg, uint8_t qty)
@@ -367,69 +424,6 @@ void RF24::print_address_register(const char* name, uint8_t reg, uint8_t qty)
 
     printf_P(PSTR("\r\n"));
 }
-
-#endif
-
-/****************************************************************************/
-RF24::RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed)
-        :ce_pin(_cepin), csn_pin(_cspin),spi_speed(_spi_speed), open_pipes(0), auto_ack_enabled(0x3F), dyn_pl_enabled(0), feature_reg(0), addr_width(5), _is_p_variant(false),
-         csDelay(5)
-{
-    for (uint8_t i = 0; i < 6; ++i) {
-        payload_size[i] = 32;
-    }
-    pipe0_reading_address[0] = 0;
-    if(spi_speed <= 35000){ //Handle old BCM2835 speed constants, default to RF24_SPI_SPEED
-      spi_speed = RF24_SPI_SPEED;
-    }
-}
-
-/****************************************************************************/
-void RF24::setChannel(uint8_t channel)
-{
-    write_register(RF_CH, rf24_min(channel, 125));
-}
-
-uint8_t RF24::getChannel()
-{
-
-    return read_register(RF_CH);
-}
-
-/****************************************************************************/
-void RF24::setPayloadLength(uint8_t size)
-{
-    // payload size must be in range [1, 32]
-    size = rf24_max(1, rf24_min(32, size));
-
-    // write static payload size setting for all pipes
-    for (uint8_t i = 0; i < 6; ++i) {
-        payload_size[i] = size;
-        write_register(RX_PW_P0 + i, payload_size[i]);
-    }
-}
-
-/****************************************************************************/
-void RF24::setPayloadLength(uint8_t size, uint8_t pipe)
-{
-    // payload size must be in range [1, 32]
-    size = rf24_max(1, rf24_min(32, size));
-
-    // write static payload size setting for all pipes
-    if (pipe < 6) {
-        payload_size[pipe] = size;
-        write_register(RX_PW_P0 + pipe, payload_size[pipe]);
-    }
-}
-
-/****************************************************************************/
-uint8_t RF24::getPayloadLength(uint8_t pipe)
-{
-    return payload_size[pipe < 6 ? pipe : 0];
-}
-
-/****************************************************************************/
-#if !defined(MINIMAL)
 
 static const PROGMEM char rf24_datarate_e_str_0[] = "= 1 MBPS";
 static const PROGMEM char rf24_datarate_e_str_1[] = "= 2 MBPS";
@@ -476,7 +470,8 @@ static const PROGMEM char * const rf24_feature_e_str_P[] = {
     rf24_feature_e_str_open
 };
 
-void RF24::printDetails(void)
+/****************************************************************************/
+void RF24::printDetails(bool dump_pipes)
 {
 
     #if defined(RF24_LINUX)
@@ -513,7 +508,7 @@ void RF24::printDetails(void)
 
     printf_P(PSTR("Address Length\t\t= %d bytes\r\n"), (getAddressLength()));
 
-    printf_P(PSTR("Static Payload Length\t= %d bytes\r\n"), getPayloadLength());
+    printf_P(PSTR("Static TX Payload Length\t= %d bytes\r\n"), getPayloadLength());
 
     uint8_t setupRetry = read_register(SETUP_RETR);
     printf_P(PSTR("Auto Retry Delay\t= %d microseconds\r\n"), (uint16_t)(setupRetry >> ARD) * 250 + 250);
@@ -555,19 +550,26 @@ void RF24::printDetails(void)
     config_reg = read_register(NRF_CONFIG);
     printf_P(PSTR("Primary Mode\t\t= %cX\r\n"), config_reg & _BV(PRIM_RX) ? 'R' : 'T');
 
-    print_address_register(PSTR("TX address\t"), TX_ADDR);
+    if (dump_pipes) {
+        print_address_register(PSTR("TX address\t"), TX_ADDR);
 
-    open_pipes = read_register(EN_RXADDR);
-    for (uint8_t i = 0; i < 6; ++i) {
-        bool isOpen = open_pipes & _BV(i);
-        printf_P(PSTR("pipe %u ("
-        PRIPSTR
-        ") bound"), i, (char*)pgm_read_ptr(&rf24_feature_e_str_P[isOpen + 3]));
-        if (i < 2) {
-            print_address_register(PSTR(""), RX_ADDR_P0 + i);
-        }
-        else {
-            print_byte_register(PSTR(""), RX_ADDR_P0 + i);
+        open_pipes = read_register(EN_RXADDR);
+        for (uint8_t i = 0; i < 6; ++i) {
+            bool isOpen = open_pipes & _BV(i);
+            printf_P(PSTR("pipe %u ("
+            PRIPSTR
+            ") bound"), i, (char*)pgm_read_ptr(&rf24_feature_e_str_P[isOpen + 3]));
+            if (i < 2) {
+                print_address_register(PSTR(""), RX_ADDR_P0 + i);
+            }
+            else {
+                print_byte_register(PSTR(""), RX_ADDR_P0 + i);
+            }
+
+            if (isOpen) {
+                // print static payload length
+                printf("\t\texpecting %d byte static payloads.", getPayloadLength(i));
+            }
         }
     }
 }
@@ -764,7 +766,6 @@ void RF24::powerDown(void)
 }
 
 /****************************************************************************/
-//Power up now. Radio will not power down unless instructed by MCU for config changes etc.
 void RF24::powerUp(void)
 {
     // if not powered up then power up and wait for the radio to initialize
@@ -780,10 +781,22 @@ void RF24::powerUp(void)
 }
 
 /****************************************************************************/
-//Similar to the previous write, clears the interrupt flags
+void RF24::setPower(bool is_on)
+{
+    is_on ? powerUp() : powerDown();
+}
+
+/****************************************************************************/
+bool RF24::isPower(void)
+{
+    config_reg = read_register(NRF_CONFIG);
+    return config_reg & _BV(PWR_UP);
+}
+
+/****************************************************************************/
 bool RF24::send(const void* buf, uint8_t len, const bool multicast)
 {
-    // Only going to be 1 packet in the FIFO at a time using this method, so just flush
+    // this method only uses 1 payload at a time using, so just flush
     flushTx();
     write(buf, len, multicast);
     uint16_t i = 0;
@@ -1161,7 +1174,7 @@ bool RF24::writeAck(uint8_t pipe, const void* buf, uint8_t len)
 }
 
 /****************************************************************************/
-bool RF24::isPVariant(void)
+bool RF24::isPlusVariant(void)
 {
     return _is_p_variant;
 }
@@ -1386,7 +1399,7 @@ void RF24::startCarrierWave(void)
 {
     stopListening();
     write_register(RF_SETUP, read_register(RF_SETUP) | _BV(CONT_WAVE) | _BV(PLL_LOCK));
-    if (isPVariant()){
+    if (isPlusVariant()){
         setAutoAck(0);
         setAutoRetry(0, 0);
         uint8_t dummy_buf[32];
@@ -1405,7 +1418,7 @@ void RF24::startCarrierWave(void)
         setCrc(0);  // disable CRC
     }
     ce(HIGH);
-    if (isPVariant()){
+    if (isPlusVariant()){
         delay(1); // datasheet says 1 ms is ok in this instance
         ce(LOW);
         write_register(REUSE_TX_PL, RF24_NOP, true);

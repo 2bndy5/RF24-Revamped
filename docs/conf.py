@@ -33,7 +33,7 @@ from recommonmark.parser import CommonMarkParser
 
 sys.path.insert(0, os.path.abspath("."))
 
-# -- Project information -----------------------------------------------------
+# Project information -----------------------------------------------------
 
 project = "RF24 Revemped"
 copyright = "2020, 2bndy5"
@@ -42,8 +42,15 @@ author = "2bndy5"
 # The full version, including alpha/beta/rc tags
 release = "2.0"
 
+# sitemap configuration
+# -------------------------------------------------
 
-# -- General configuration ---------------------------------------------------
+# set the base url, language, and version for sitemap generation
+html_baseurl = "https://rf24-revamped.readthedocs.io/"
+language = "en"
+version = "latest"
+
+# General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -53,6 +60,7 @@ extensions = [
     "recommonmark",
     "sphinx.ext.autosectionlabel",
     "sphinx_copybutton",
+    "sphinx_sitemap",
     # "sphinx.ext.intersphinx",
 ]
 
@@ -216,6 +224,7 @@ if read_the_docs_build:
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = "sphinx_material"
+
 # Material theme options
 html_sidebars = {
     "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
@@ -223,12 +232,9 @@ html_sidebars = {
 html_theme_options = {
     # Set the name of the project to appear in the navigation.
     "nav_title": "RF24 Revamped",
-    # Specify a base_url used to generate sitemap.xml. If not
-    # specified, then no sitemap will be built.
-    "base_url": "https://2bndy5.github.io/RF24-Revamped/",
     # Set the color and the accent color
     "color_primary": "blue",
-    "color_accent": "light-green",
+    "color_accent": "light-blue",
     # Set the repo location to get a badge with stats
     "repo_url": "https://github.com/2bndy5/RF24-Revamped/",
     "repo_name": "RF24-Revamped",

@@ -6,9 +6,12 @@ Generic Linux devices are supported via the following drivers:
 * LittleWire
 
 ```eval_rst
-.. note::
-    The ``./configure --driver=SPIDEV`` option should work
-    with most Linux systems supporting spi userspace device.
+.. note:: The following option should work with most Linux systems
+    supporting SPI userspace device.
+
+    .. code-block:: shell
+
+        ./configure --driver=SPIDEV
 ```
 
 ## Generic Manual Install
@@ -42,8 +45,14 @@ Generic Linux devices are supported via the following drivers:
 
     This script automatically detects device and build environment.
 
-    For overriding automatic detections, use command-line switches,
-    see `./configure --help` for description.
+    ```eval_rst
+    .. seealso:: For overriding automatic detections, use command-line
+        switches. Read the output descriptions from the following command:
+
+        .. code-block:: shell
+
+            ./configure --help`
+    ```
 6. Build the library, and run an example file
 
     ```shell
@@ -71,6 +80,6 @@ Generic Linux devices are supported via the following drivers:
     sudo make install
     ```
 3. Verify install by running an example.
-    ```eval_rst
-    See the `gettingstarted.cpp example <cpp_examples.html#gettingstarted-cpp>`_ for an example of pin configuration.
-    ```
+
+    See the [gettingstarted.cpp example](cpp_examples.html#gettingstarted-cpp) for
+    an example of pin configuration.

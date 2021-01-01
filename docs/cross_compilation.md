@@ -30,9 +30,16 @@ Following prerequisites need to be assured:
     ```shell
     ./configure --remote=pi@target_linux_host
     ```
-    or to manually specify a driver (see `./configure --help`)
+    or to manually specify a driver
     ```shell
     ./configure --remote=pi@target_linux_host --driver=<driver>
+    ```
+    ```eval_rst
+    .. seealso:: Read the output descriptions from the following command:
+
+        .. code-block:: shell
+
+            ./configure --help`
     ```
 3. build
     ```shell
