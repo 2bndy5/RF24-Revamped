@@ -64,7 +64,7 @@ Enabling:
 
 ```eval_rst
 .. csv-table:: SPI_UART SPI Pin Connections
-    :header: NRF, "Arduino Uno Pin"
+    :header: nRF24L01, "Arduino Uno Pin"
 
     MOSI, TX(0)
     MISO, RX(1)

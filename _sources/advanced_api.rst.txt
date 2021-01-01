@@ -29,7 +29,7 @@ Status Byte
     data they return. Use :func:`~RF24::update()` to refresh the status byte data as needed.
 
     The status byte data is updated on every SPI transaction. The only functions that
-    don't execute an SPI transaction are :func:`~RF24::irqDf()`, :func:`~RF24::irqDd()`,
+    don't execute an SPI transaction are :func:`~RF24::irqDf()`, :func:`~RF24::irqDs()`,
     :func:`~RF24::irqDr()`, :func:`~RF24::isTxFull()`, and :func:`~RF24::pipe()`.
 
 update()
@@ -67,15 +67,28 @@ clearStatusFlags()
 
 .. doxygenfunction:: clearStatusFlags
 
-powerUp()
+Power mode
 ******************************
+
+powerUp()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: powerUp
 
 powerDown()
-******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: powerDown
+
+setPower()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfunction:: setPower
+
+isPower()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfunction:: isPower
 
 FIFO managment
 ******************************
@@ -93,28 +106,25 @@ flushTx()
 isFifo()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Empty OR Full condition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. doxygenfunction:: isFifo(bool, bool)
-
-Empty AND Full condition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. doxygenfunction:: isFifo(bool)
 
 lastTxArc()
 ******************************
 
 .. doxygenfunction:: lastTxArc
 
-isPVariant()
+isPlusVariant()
 ******************************
 
-.. doxygenfunction:: isPVariant
+.. doxygenfunction:: isPlusVariant
 
 Ambiguous Signal detection
 ******************************
+
+The nRF24L01 comes with access to perform hardware specifications
+testing to ensure the radio is not defective. The constant carrier
+wave test and Received Power Detection (RPD) are common stipulations
+mandated by authoritative agencies (i.e. the FCC in the United States).
 
 testRpd()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/linux_install.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -407,8 +408,11 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">./configure</span> <span class="pre">--driver=SPIDEV</span></code> option should work
-with most Linux systems supporting spi userspace device.</p>
+<p>The following option should work with most Linux systems
+supporting SPI userspace device.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --driver<span class="o">=</span>SPIDEV
+</pre></div>
+</div>
 </div>
 
 <h2 id="generic-manual-install">Generic Manual Install<a class="headerlink" href="#generic-manual-install" title="Permalink to this headline">¶</a></h2>
@@ -441,8 +445,14 @@ for more info on installing MRAA</p>
 </pre></div>
 </div>
 <p>This script automatically detects device and build environment.</p>
-<p>For overriding automatic detections, use command-line switches,
-see <code class="docutils literal notranslate"><span class="pre">./configure</span> <span class="pre">--help</span></code> for description.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For overriding automatic detections, use command-line
+switches. Read the output descriptions from the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --help<span class="sb">`</span>
+</pre></div>
+</div>
+</div>
 </li>
 <li><p>Build the library, and run an example file</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make
@@ -471,7 +481,8 @@ sudo make install
 </div>
 </li>
 <li><p>Verify install by running an example.</p>
-<p>See the <a class="reference external" href="cpp_examples.html#gettingstarted-cpp">gettingstarted.cpp example</a> for an example of pin configuration.</p>
+<p>See the <a class="reference external" href="cpp_examples.html#gettingstarted-cpp">gettingstarted.cpp example</a> for
+an example of pin configuration.</p>
 </li>
 </ol>
 

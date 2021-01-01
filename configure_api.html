@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/configure_api.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -820,15 +821,10 @@ Payload Length setting is not used for that pipe(s).</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t">
 <span id="_CPPv3N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="_CPPv2N4RF2416setPayloadLengthE7uint8_t7uint8_t"></span><span id="RF24::setPayloadLength__uint8_t.uint8_t"></span><span class="target" id="classRF24_1aea623db854a91f5d271476df78895520"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>size</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416setPayloadLengthE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>Set Static Payload length to be expected for a specific pipe. <p><div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="RF24::getPayloadLength"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getPayloadLength()</span></code></a>, <a class="reference internal" href="basic_api.html#_CPPv4N4RF243anyEv" title="RF24::any"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">any()</span></code></a></p>
-</div>
-</p>
-<dl class="simple">
+<dd><p>Set Static Payload length to be expected for a specific pipe. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to use for payload lengths handled by the pipe specified by the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> parameter. This parameter is clamped to the range [1, 32]. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe to configure the length for static payloads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe to configure the length for static payloads. </p></li>
 </ul>
 </dd>
 </dl>
@@ -841,12 +837,7 @@ Payload Length setting is not used for that pipe(s).</p>
 <dl class="cpp function">
 <dt id="_CPPv4N4RF2416getPayloadLengthE7uint8_t">
 <span id="_CPPv3N4RF2416getPayloadLengthE7uint8_t"></span><span id="_CPPv2N4RF2416getPayloadLengthE7uint8_t"></span><span id="RF24::getPayloadLength__uint8_t"></span><span class="target" id="classRF24_1a8c2843fad7ad6e90025aa90b8c6f7c8c"></span>uint8_t <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getPayloadLength</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416getPayloadLengthE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
-<dd><p>Get Static Payload length for a specific pipe  <p><div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#static-payload-length-setters">Static Payload Length setters</a>, <a class="reference internal" href="basic_api.html#_CPPv4N4RF243anyEv" title="RF24::any"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">any()</span></code></a></p>
-</div>
-</p>
-<dl class="simple">
+<dd><p>Get Static Payload length for a specific pipe <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>The payload length in bytes that a pipe is configured to use. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -892,7 +883,7 @@ then the <code class="docutils literal notranslate"><span class="pre">multicast<
 <span id="_CPPv3N4RF2410setAutoAckEb"></span><span id="_CPPv2N4RF2410setAutoAckEb"></span><span id="RF24::setAutoAck__b"></span><span class="target" id="classRF24_1aec71746d59da978bcbb975167886a2cc"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable the auto-acknowledgement feature for all pipes. This feature is enabled by default. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for all pipes </p></li>
 </ul>
 </dd>
 </dl>
@@ -920,7 +911,7 @@ then the <code class="docutils literal notranslate"><span class="pre">multicast<
 <span id="_CPPv3N4RF2410setAutoAckEb7uint8_t"></span><span id="_CPPv2N4RF2410setAutoAckEb7uint8_t"></span><span id="RF24::setAutoAck__b.uint8_t"></span><span class="target" id="classRF24_1a943421fe5ab5cbd6d2ca1ee9df9e3e0c"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setAutoAck</code><span class="sig-paren">(</span>bool <em>enable</em>, uint8_t <em>pipe</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setAutoAckEb7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Enable or disable the auto-acknowledgement feature for a specific pipe. This feature is enabled by default for all pipes. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Whether to enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: Enable (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disable (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the auto-acknowledgment feature for the specified pipe </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: Which pipe to configure. This number should be in range [0, 5]. </p></li>
 </ul>
 </dd>
@@ -949,11 +940,7 @@ then the <code class="docutils literal notranslate"><span class="pre">multicast<
 <dt id="_CPPv4N4RF2410getAutoAckE7uint8_t">
 <span id="_CPPv3N4RF2410getAutoAckE7uint8_t"></span><span id="_CPPv2N4RF2410getAutoAckE7uint8_t"></span><span id="RF24::getAutoAck__uint8_t"></span><span class="target" id="classRF24_1a35e833dba71be218fd5cc769a3739516"></span>bool <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">getAutoAck</code><span class="sig-paren">(</span>uint8_t <em>pipe</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410getAutoAckE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Fetch the status of the auto-ack feature for a specific pipe. <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the auto-ack feature is enabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if the auto-ack feature is disabled for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p></li>
-</ul>
-</p>
+<dt><strong>Return</strong></dt><dd><p>If the auto-ack feature is enabled (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disabled (<code class="docutils literal notranslate"><span class="pre">false</span></code>) for the specified <code class="docutils literal notranslate"><span class="pre">pipe</span></code> </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pipe</span></code>: The specific pipe about which data to fetch. If this parameter is not specified, then the status of the auto-ack feature about pipe 0 is returned. </p></li>
@@ -1178,12 +1165,11 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 </pre></div>
 </div>
 </p>
-</p>
-<p><dl class="simple">
+<dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataReady</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data received” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data received” event on the IRQ pin. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dataSent</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data sent” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data sent” event on the IRQ pin. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dataFail</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> ignores the “data failed” event, <code class="docutils literal notranslate"><span class="pre">false</span></code> reflects the “data failed” event on the IRQ pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataReady</span></code>: <code class="docutils literal notranslate"><span class="pre">false</span></code> ignores the “data received” event, <code class="docutils literal notranslate"><span class="pre">true</span></code> reflects the “data received” event on the IRQ pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataSent</span></code>: <code class="docutils literal notranslate"><span class="pre">false</span></code> ignores the “data sent” event, <code class="docutils literal notranslate"><span class="pre">true</span></code> reflects the “data sent” event on the IRQ pin. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataFail</span></code>: <code class="docutils literal notranslate"><span class="pre">false</span></code> ignores the “data failed” event, <code class="docutils literal notranslate"><span class="pre">true</span></code> reflects the “data failed” event on the IRQ pin. </p></li>
 </ul>
 </dd>
 </dl>
@@ -1199,7 +1185,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <span id="_CPPv315rf24_datarate_e"></span><span id="_CPPv215rf24_datarate_e"></span><span class="target" id="RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"></span><em class="property">enum </em><code class="sig-name descname">rf24_datarate_e</code><a class="headerlink" href="#_CPPv415rf24_datarate_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>How fast data moves through the air. Units are in bits per second (bps).  <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="RF24::setDataRate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::setDataRate()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2411getDataRateEv" title="RF24::getDataRate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::getDataRate()</span></code></a></p>
+<p><a class="reference internal" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="RF24::setDataRate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setDataRate()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2411getDataRateEv" title="RF24::getDataRate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getDataRate()</span></code></a></p>
 </div>
 </p>
 </p>
@@ -1227,8 +1213,6 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <dt id="_CPPv4N4RF2411setDataRateE15rf24_datarate_e">
 <span id="_CPPv3N4RF2411setDataRateE15rf24_datarate_e"></span><span id="_CPPv2N4RF2411setDataRateE15rf24_datarate_e"></span><span id="RF24::setDataRate__rf24_datarate_e"></span><span class="target" id="classRF24_1a575cf2725afe0f787e30acb9b12b3200"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setDataRate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415rf24_datarate_e" title="rf24_datarate_e">rf24_datarate_e</a> <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2411setDataRateE15rf24_datarate_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set the transmission Data Rate <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>true if the change was successful </p>
-</dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">speed</span></code>: Specify one of the following values (as defined by <a class="reference internal" href="#RF24Revamped_8h_1a82745de4aa1251b7561564b3ed1d6522"><span class="std std-ref">rf24_datarate_e</span></a>):  <p><table>
 <colgroup>
@@ -1255,7 +1239,7 @@ about all outgoing payloads (using pipe 0) or incoming payloads
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Setting <a class="reference internal" href="#_CPPv4N15rf24_datarate_e12RF24_250KBPSE" title="RF24_250KBPS"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_250KBPS</span></code></a> will fail for non-plus modules
-(when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2410isPVariantEv" title="RF24::isPVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+(when <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2413isPlusVariantEv" title="RF24::isPlusVariant"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">isPlusVariant()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
 </div>
 </p>
 </p></li>
@@ -1331,7 +1315,7 @@ feature is enabled.</p>
 <col style="width: 70%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>length</p></th>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">length</span></code></p></th>
 <th class="head"><p>description</p></th>
 </tr>
 </thead>
@@ -1383,7 +1367,7 @@ enabled.</p>
 <span id="_CPPv313rf24_pa_dbm_e"></span><span id="_CPPv213rf24_pa_dbm_e"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aace"></span><em class="property">enum </em><code class="sig-name descname">rf24_pa_dbm_e</code><a class="headerlink" href="#_CPPv413rf24_pa_dbm_e" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>) represents a logarithmic signal loss.  <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="RF24::setPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::setPaLevel()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2410getPaLevelEv" title="RF24::getPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::getPaLevel()</span></code></a></p>
+<p><a class="reference internal" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="RF24::setPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">setPaLevel()</span></code></a>, <a class="reference internal" href="#_CPPv4N4RF2410getPaLevelEv" title="RF24::getPaLevel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">getPaLevel()</span></code></a></p>
 </div>
 </p>
 </p>
@@ -1393,22 +1377,18 @@ enabled.</p>
 <span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MINE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea445515b775236bb9db3cb4b0b828adff"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MIN</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(0) represents:  <p><table>
 <colgroup>
-<col style="width: 24%"/>
-<col style="width: 38%"/>
-<col style="width: 38%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-</tr>
-<tr class="row-even"><th class="head"></th>
-<th class="head"><p>lnaEnabled = 1</p></th>
-<th class="head"><p>lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td><p>-18 dBm</p></td>
+<tr class="row-even"><td><p>-18 dBm</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>-12 dBm</p></td>
 </tr>
@@ -1422,22 +1402,18 @@ enabled.</p>
 <span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_LOWE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aacea7d8d09f4a047b7c22655e56c98ca010c"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_LOW</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(1) represents:  <p><table>
 <colgroup>
-<col style="width: 24%"/>
-<col style="width: 38%"/>
-<col style="width: 38%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-</tr>
-<tr class="row-even"><th class="head"></th>
-<th class="head"><p>lnaEnabled = 1</p></th>
-<th class="head"><p>lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td><p>-12 dBm</p></td>
+<tr class="row-even"><td><p>-12 dBm</p></td>
 <td><p>0 dBm</p></td>
 <td><p>-4 dBm</p></td>
 </tr>
@@ -1451,22 +1427,18 @@ enabled.</p>
 <span id="_CPPv3N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span id="_CPPv2N13rf24_pa_dbm_e12RF24_PA_HIGHE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceaf00c265e162bfbef00cd5366b2796533"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_HIGH</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(2) represents:  <p><table>
 <colgroup>
-<col style="width: 24%"/>
-<col style="width: 38%"/>
-<col style="width: 38%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-</tr>
-<tr class="row-even"><th class="head"></th>
-<th class="head"><p>lnaEnabled = 1</p></th>
-<th class="head"><p>lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td><p>-6 dBm</p></td>
+<tr class="row-even"><td><p>-6 dBm</p></td>
 <td><p>3 dBm</p></td>
 <td><p>1 dBm</p></td>
 </tr>
@@ -1480,22 +1452,18 @@ enabled.</p>
 <span id="_CPPv3N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span id="_CPPv2N13rf24_pa_dbm_e11RF24_PA_MAXE"></span><span class="target" id="RF24Revamped_8h_1a1e4cd0bea93e6b43422855fb0120aaceab0bfc94c4095e9495b2e49530b623d0d"></span><em class="property">enumerator </em><code class="sig-name descname">RF24_PA_MAX</code><a class="headerlink" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>(3) represents:  <p><table>
 <colgroup>
-<col style="width: 24%"/>
-<col style="width: 38%"/>
-<col style="width: 38%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-</tr>
-<tr class="row-even"><th class="head"></th>
-<th class="head"><p>lnaEnabled = 1</p></th>
-<th class="head"><p>lnaEnabled = 0</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td><p>0 dBm</p></td>
+<tr class="row-even"><td><p>0 dBm</p></td>
 <td><p>7 dBm</p></td>
 <td><p>4 dBm</p></td>
 </tr>
@@ -1518,40 +1486,35 @@ enabled.</p>
 <span id="_CPPv3N4RF2410setPaLevelE7uint8_tb"></span><span id="_CPPv2N4RF2410setPaLevelE7uint8_tb"></span><span id="RF24::setPaLevel__uint8_t.b"></span><span class="target" id="classRF24_1ac7d6260f84ce6e7d796bdc4dffa753ff"></span>void <code class="sig-prename descclassname"><a class="reference internal" href="basic_api.html#_CPPv44RF24" title="RF24">RF24</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">setPaLevel</code><span class="sig-paren">(</span>uint8_t <em>level</em>, bool <em>lnaEnable</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2410setPaLevelE7uint8_tb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Set Power Amplifier (PA) level and Low Noise Amplifier (LNA) state <p><table>
 <colgroup>
-<col style="width: 39%"/>
-<col style="width: 12%"/>
-<col style="width: 24%"/>
-<col style="width: 24%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">level</span></code> (enum value)</p></th>
 <th class="head"><p>nRF24L01</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-<th class="head"><p>Si24R1 with</p></th>
-</tr>
-<tr class="row-even"><th class="head"></th>
-<th class="head"></th>
-<th class="head"><p><code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
-<th class="head"><p><code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 1</p></th>
+<th class="head"><p>Si24R1 with <code class="docutils literal notranslate"><span class="pre">lnaEnabled</span></code> = 0</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="RF24_PA_MIN"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MIN</span></code></a> (0)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MINE" title="RF24_PA_MIN"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MIN</span></code></a> (0)</p></td>
 <td><p>-18 dBm</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>-12 dBm</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="RF24_PA_LOW"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_LOW</span></code></a> (1)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_LOWE" title="RF24_PA_LOW"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_LOW</span></code></a> (1)</p></td>
 <td><p>-12 dBm</p></td>
 <td><p>0 dBm</p></td>
 <td><p>-4 dBm</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="RF24_PA_HIGH"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_HIGH</span></code></a> (2)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e12RF24_PA_HIGHE" title="RF24_PA_HIGH"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_HIGH</span></code></a> (2)</p></td>
 <td><p>-6 dBm</p></td>
 <td><p>3 dBm</p></td>
 <td><p>1 dBm</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="RF24_PA_MAX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MAX</span></code></a> (3)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#_CPPv4N13rf24_pa_dbm_e11RF24_PA_MAXE" title="RF24_PA_MAX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">RF24_PA_MAX</span></code></a> (3)</p></td>
 <td><p>0 dBm</p></td>
 <td><p>7 dBm</p></td>
 <td><p>4 dBm</p></td>

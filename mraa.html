@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/mraa.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -418,14 +419,17 @@ sudo make install
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano /etc/ld.so.conf
 </pre></div>
 </div>
-<p>Add the line <code class="docutils literal notranslate"><span class="pre">/usr/local/lib/arm-linux-gnueabihf</span></code></p>
+<p>Add the line</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/arm-linux-gnueabihf
+</pre></div>
+</div>
 <p>Run</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ldconfig
 </pre></div>
 </div>
 </li>
 <li><p>Install RF24, using MRAA</p>
-<p>See <a class="reference external" href="linux_install.html">Linux Installation</a></p>
+<p>See <a class="reference external" href="linux_install.html#linux-installation">Linux Installation</a></p>
 </li>
 </ol>
 

@@ -26,7 +26,10 @@ MRAA is not included.
     nano /etc/ld.so.conf
     ```
 
-    Add the line `/usr/local/lib/arm-linux-gnueabihf`
+    Add the line
+    ```text
+    /usr/local/lib/arm-linux-gnueabihf
+    ```
 
     Run
     ```shell
@@ -34,6 +37,4 @@ MRAA is not included.
     ```
 3. Install RF24, using MRAA
 
-    ```eval_rst
-    See `Linux Installation <linux_install.html>`_
-    ```
+    See [Linux Installation](linux_install.html#linux-installation)

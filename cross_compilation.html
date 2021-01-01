@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/cross_compilation.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -436,9 +437,16 @@ git checkout revamp
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --remote<span class="o">=</span>pi@target_linux_host
 </pre></div>
 </div>
-<p>or to manually specify a driver (see <code class="docutils literal notranslate"><span class="pre">./configure</span> <span class="pre">--help</span></code>)</p>
+<p>or to manually specify a driver</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --remote<span class="o">=</span>pi@target_linux_host --driver<span class="o">=</span>&lt;driver&gt;
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Read the output descriptions from the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --help<span class="sb">`</span>
+</pre></div>
+</div>
 </div>
 </li>
 <li><p>build</p>

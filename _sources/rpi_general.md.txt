@@ -44,15 +44,21 @@ address correct spi device at /dev/spidev\<a\>.\<b\>
 Choose any GPIO output pin for radio CE pin.
 
 ### General Contructor
-`RF24 radio(22, 0);`
+```c++
+RF24 radio(22, 0);
+```
 
 ### MRAA Constructor
-`RF24 radio(15, 0);`
+```c++
+RF24 radio(15, 0);
+```
 
 See [MRAA docs about the Raspberry Pi](http://iotdk.intel.com/docs/master/mraa/rasppi.html)
 
 ### SPI_DEV Constructor
-`RF24 radio(22, 0);`
+```c++
+RF24 radio(22, 0);
+```
 
 See [Raspberry Pi Documentation](https://www.raspberrypi.org/documentation/usage/gpio/)
 about using the GPIO pins

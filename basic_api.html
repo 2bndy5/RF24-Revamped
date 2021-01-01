@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/basic_api.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -753,12 +754,21 @@ payloads that were not appended to acknowledgment packets.</p>
 that received the next available payload. According to the datasheet,
 the data about the pipe number that received the next available payload
 is “unreliable” during a FALLING transition on the IRQ pin. This means
-you should call <a class="reference internal" href="advanced_api.html#_CPPv4N4RF2416clearStatusFlagsEbbb" title="RF24::clearStatusFlags"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">clearStatusFlags()</span></code></a> before calling this function
-during an ISR (Interrupt Service Routine).</p>
+you should call <a class="reference internal" href="advanced_api.html#_CPPv4N4RF246updateEv" title="RF24::update"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update()</span></code></a> then <a class="reference internal" href="#_CPPv4N4RF243anyEv" title="RF24::any"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">any()</span></code></a> instead of calling this
+function during an ISR (Interrupt Service Routine).</p>
 <p>For example:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">isrCallbackFunction</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">();</span> <span class="c1">// resets the IRQ pin to HIGH</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">();</span>        <span class="c1">// returned data should now be reliable</span>
+  <span class="n">radio</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>                  <span class="c1">// allow time for the IRQ pin to settle</span>
+  <span class="kt">uint8_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>     <span class="c1">// any() is slightly slower than available()</span>
+                                   <span class="c1">// but more reliable in this case</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">bytes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>    <span class="c1">// event is related to RX operation</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">clearStatusFlags</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span> <span class="c1">// event is related to TX operation</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">irqDf</span><span class="p">())</span> <span class="p">{</span>
+      <span class="c1">// do some TX failure handling here</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>

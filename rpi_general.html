@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,6 +58,7 @@
     <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/rpi_general.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,7 +69,7 @@
 
   </head>
   <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-green>
+        data-md-color-primary=blue data-md-color-accent=light-blue>
   
   <svg class="md-svg">
     <defs data-children-count="0">
@@ -470,16 +471,22 @@ address correct spi device at /dev/spidev&lt;a&gt;.&lt;b&gt;</p>
 <p>Choose any GPIO output pin for radio CE pin.</p>
 
 <h3 id="general-contructor">General Contructor<a class="headerlink" href="#general-contructor" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(22,</span> <span class="pre">0);</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
 
 
 <h3 id="mraa-constructor">MRAA Constructor<a class="headerlink" href="#mraa-constructor" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(15,</span> <span class="pre">0);</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>See <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/rasppi.html">MRAA docs about the Raspberry Pi</a></p>
 
 
 <h3 id="spi-dev-constructor">SPI_DEV Constructor<a class="headerlink" href="#spi-dev-constructor" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(22,</span> <span class="pre">0);</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>See <a class="reference external" href="https://www.raspberrypi.org/documentation/usage/gpio/">Raspberry Pi Documentation</a>
 about using the GPIO pins</p>
 <table>
