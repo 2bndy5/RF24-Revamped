@@ -1,6 +1,6 @@
 
-Welcome to RF24 Revemped's documentation!
-=========================================
+Home
+====
 
 RF24 Revamped is a simplified and extensible API for TMRh20's popular
 Optimized High Speed Driver for nRF24L01(+) 2.4GHz Wireless Transceiver
@@ -32,6 +32,7 @@ Useful References
 * `Source Code <https://github.com/2bndy5/RF24/tree/revamp>`_
 * `nRF24L01 v2.0 Datasheet <http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01_datasheet_v2.pdf>`_
 * `nRF24L01+ v1.0 Datasheet <http://github.com/2bndy5/RF24/raw/master/datasheets/nRF24L01P_datasheet_v1.pdf>`_
+* `Glossary <genindex.html>`_
 
 Platform Support Pages
 ----------------------
@@ -74,18 +75,22 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 .. [1] http://highlowtech.org/?p=1695
 .. [2] http://littlewire.cc/
 
+.. toctree::
+   :hidden:
+
+   self
 
 .. toctree::
-   :maxdepth: 1
    :caption: Examples
+   :hidden:
 
    ino_examples
    cpp_examples
    attiny_examples
 
 .. toctree::
-   :maxdepth: 1
    :caption: API Reference
+   :hidden:
 
    basic_api
    advanced_api
@@ -94,6 +99,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 .. toctree::
    :maxdepth: 1
    :caption: Related Pages
+   :hidden:
 
    common_issues
    arduino
@@ -105,10 +111,3 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    atxmega
    portability
    templates
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

@@ -215,6 +215,13 @@
   <ul class="md-nav__list">
     <li class="md-nav__item">
     
+    
+      <a href="index.html" class="md-nav__link">Home</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
       <span class="md-nav__link caption"><span class="caption-text">Examples</span></span>
     
     </li>
@@ -302,7 +309,7 @@
             </nav>
         </li>
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/arduino.md.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/arduino.rst.txt">Show Source</a> </li>
 
   </ul>
 </nav>
@@ -392,7 +399,7 @@
             </nav>
         </li>
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/arduino.md.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/arduino.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -408,8 +415,12 @@
   
 <h1 id="arduino--page-root">Arduino<a class="headerlink" href="#arduino--page-root" title="Permalink to this headline">¶</a></h1>
 <p>RF24 is fully compatible with Arduino boards</p>
-<p>See <a class="reference external" href="http://www.arduino.cc/en/Reference/Board">Arduino Board Reference</a>
-and <a class="reference external" href="http://arduino.cc/en/Reference/SPI">SPI Reference</a> for more information</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="http://www.arduino.cc/en/Reference/Board">Arduino Board Reference</a>
+and <a class="reference external" href="http://arduino.cc/en/Reference/SPI">SPI Reference</a>
+have more information</p>
+</div>
 <p>RF24 makes use of the standard hardware SPI pins (MISO, MOSI, SCK) and requires two additional pins, to control
 the chip-select and chip-enable functions.</p>
 <p>These pins must be chosen and designated by the user, in
@@ -419,18 +430,24 @@ the chip-select and chip-enable functions.</p>
 <p>RF24 supports alternate SPI methods, in case the standard hardware SPI pins are otherwise unavailable.</p>
 
 <h3 id="software-driven-spi">Software Driven SPI<a class="headerlink" href="#software-driven-spi" title="Permalink to this headline">¶</a></h3>
-<p>Software driven SPI is provided by the <a class="reference external" href="https://github.com/greiman/DigitalIO">DigitalIO</a> library</p>
+<p>Software driven SPI is provided by the <a class="reference external" href="https://github.com/greiman/DigitalIO">DigitalIO</a> library.</p>
 <p>Setup:</p>
-<ol>
-<li><p>Install the digitalIO library<br/></p></li>
+<ol class="arabic">
+<li><p>Install the digitalIO library</p></li>
 <li><p>Open RF24_config.h in a text editor.
 Uncomment the line</p>
-<p><code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">SOFTSPI</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define SOFTSPI</span>
+</pre></div>
+</div>
 <p>or add the build flag/option</p>
-<p><code class="docutils literal notranslate"><span class="pre">-DSOFTSPI</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DSOFTSPI
+</pre></div>
+</div>
 </li>
 <li><p>In your sketch, add</p>
-<p><code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">DigitalIO.h</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include DigitalIO.h</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pins are listed as follows and can be modified by editing the RF24_config.h file.</p>
@@ -451,10 +468,18 @@ Uncomment the line</p>
 default SPI hardware cannot.</p>
 <p>The SPI_UART library is available at <a class="reference external" href="https://github.com/TMRh20/Sketches/tree/master/SPI_UART">TMRh20’s Sketches repo</a></p>
 <p>Enabling:</p>
-<ol class="simple">
+<ol class="arabic">
 <li><p>Install the SPI_UART library</p></li>
-<li><p>Edit RF24_config.h and uncomment <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">SPI_UART</span></code></p></li>
-<li><p>In your sketch, add <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;SPI_UART.h&gt;</span></code></p></li>
+<li><p>Edit RF24_config.h and uncomment</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define SPI_UART</span>
+</pre></div>
+</div>
+</li>
+<li><p>In your sketch, add</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI_UART.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+</li>
 </ol>
 <table id="id2">
 <caption><span class="caption-text">SPI_UART SPI Pin Connections</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>

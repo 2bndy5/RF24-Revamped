@@ -215,6 +215,13 @@
   <ul class="md-nav__list">
     <li class="md-nav__item">
     
+    
+      <a href="index.html" class="md-nav__link">Home</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
       <span class="md-nav__link caption"><span class="caption-text">Examples</span></span>
     
     </li>
@@ -313,7 +320,7 @@
             </nav>
         </li>
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/attiny.md.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/attiny.rst.txt">Show Source</a> </li>
 
   </ul>
 </nav>
@@ -400,7 +407,7 @@
             </nav>
         </li>
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/attiny.md.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/attiny.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -419,8 +426,8 @@
 Be sure to have added this core to the Arduino Boards Manager by
 <a class="reference external" href="http://highlowtech.org/?p=1695">following this guide</a></p>
 <p>See the included rf24ping85 example for pin info and usage</p>
-<p>Some versions of Arduino IDE may require a patch to allow use of the full program space on ATTiny<br/>
-See https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC for ATTiny patch</p>
+<p>Some versions of Arduino IDE may require a patch to allow use of the full program space on ATTiny&lt;br&gt;
+See <a class="reference external" href="https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC">https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC</a> for ATTiny patch</p>
 
 <h2 id="hardware-hardware-configuration">Hardware Hardware Configuration<a class="headerlink" href="#hardware-hardware-configuration" title="Permalink to this headline">¶</a></h2>
 <p>ATTiny board support initially added from <a class="reference external" href="https://github.com/jscrane/RF24">jscrane’s fork</a>
@@ -428,12 +435,12 @@ The pin layouts found here and rf24_ATTiny example written by <a class="referenc
 
 <h3 id="attiny25-45-85">ATtiny25/45/85<a class="headerlink" href="#attiny25-45-85" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 3 and CSN_PIN 4</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                          +-\/-+
-                    PB5  1|o   |8  Vcc --- nRF24L01  VCC --- LED --- 5V
-   nRF24L01  CE --- PB3  2|    |7  PB2 --- nRF24L01  SCK
-   nRF24L01 CSN --- PB4  3|    |6  PB1 --- nRF24L01 MOSI
-   nRF24L01 GND --- GND  4|    |5  PB0 --- nRF24L01 MISO
-                          +----+
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                       +-\/-+
+                 PB5  1|o   |8  Vcc --- nRF24L01  VCC --- LED --- 5V
+nRF24L01  CE --- PB3  2|    |7  PB2 --- nRF24L01  SCK
+nRF24L01 CSN --- PB4  3|    |6  PB1 --- nRF24L01 MOSI
+nRF24L01 GND --- GND  4|    |5  PB0 --- nRF24L01 MISO
+                       +----+
 </pre></div>
 </div>
 
@@ -445,49 +452,49 @@ Original RC combination was 1K/100nF. 22K/10nF combination worked better.
 For best settletime delay value in RF24::csn() the timingSearch3pin.ino sketch can be used.
 This configuration is enabled when CE_PIN and CSN_PIN are equal, e.g. both 3
 Because CE is always high the power consumption is higher than for 5 pins solution</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                                                                               ^^
-                          +-\/-+           nRF24L01   CE ------|              //
-                    PB5  1|o   |8  Vcc --- nRF24L01  VCC ------x----------x--|&lt;|-- 5V
-                    PB3  2|    |7  PB2 --- nRF24L01  SCK --|&lt;|---x-[22k]--|  LED
-                    PB4  3|    |6  PB1 --- nRF24L01 MOSI  1n4148 |
-   nRF24L01 GND -x- GND  4|    |5  PB0 --- nRF24L01 MISO         |
-                 |        +----+                                 |
-                 |-----------------------------------------||----x-- nRF24L01 CSN, pin4
-                                                               10nF
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                                                                            ^^
+                       +-\/-+           nRF24L01   CE ------|              //
+                 PB5  1|o   |8  Vcc --- nRF24L01  VCC ------x----------x--|&lt;|-- 5V
+                 PB3  2|    |7  PB2 --- nRF24L01  SCK --|&lt;|---x-[22k]--|  LED
+                 PB4  3|    |6  PB1 --- nRF24L01 MOSI  1n4148 |
+nRF24L01 GND -x- GND  4|    |5  PB0 --- nRF24L01 MISO         |
+              |        +----+                                 |
+              |-----------------------------------------||----x-- nRF24L01 CSN, pin4
+                                                            10nF
 </pre></div>
 </div>
 
 
 <h3 id="attiny24-44-84">ATtiny24/44/84<a class="headerlink" href="#attiny24-44-84" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 8 and CSN_PIN 7</p>
-<p>Schematic provided and successfully tested by Carmine Pastore (https://github.com/Carminepz)</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                           +-\/-+
-   nRF24L01  VCC --- VCC  1|o   |14 GND --- nRF24L01  GND
-                     PB0  2|    |13 AREF
-                     PB1  3|    |12 PA1
-                     PB3  4|    |11 PA2 --- nRF24L01   CE
-                     PB2  5|    |10 PA3 --- nRF24L01  CSN
-                     PA7  6|    |9  PA4 --- nRF24L01  SCK
-   nRF24L01 MISO --- PA6  7|    |8  PA5 --- nRF24L01 MOSI
-                           +----+
+<p>Schematic provided and successfully tested by <a class="reference external" href="https://github.com/Carminepz">Carmine Pastore</a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                        +-\/-+
+nRF24L01  VCC --- VCC  1|o   |14 GND --- nRF24L01  GND
+                  PB0  2|    |13 AREF
+                  PB1  3|    |12 PA1
+                  PB3  4|    |11 PA2 --- nRF24L01   CE
+                  PB2  5|    |10 PA3 --- nRF24L01  CSN
+                  PA7  6|    |9  PA4 --- nRF24L01  SCK
+nRF24L01 MISO --- PA6  7|    |8  PA5 --- nRF24L01 MOSI
+                        +----+
 </pre></div>
 </div>
 
 
 <h3 id="attiny2313-4313">ATtiny2313/4313<a class="headerlink" href="#attiny2313-4313" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 12 and CSN_PIN 13</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                           +-\/-+
-                     PA2  1|o   |20 VCC --- nRF24L01  VCC
-                     PD0  2|    |19 PB7 --- nRF24L01  SCK
-                     PD1  3|    |18 PB6 --- nRF24L01 MOSI
-                     PA1  4|    |17 PB5 --- nRF24L01 MISO
-                     PA0  5|    |16 PB4 --- nRF24L01  CSN
-                     PD2  6|    |15 PB3 --- nRF24L01   CE
-                     PD3  7|    |14 PB2
-                     PD4  8|    |13 PB1
-                     PD5  9|    |12 PB0
-   nRF24L01  GND --- GND 10|    |11 PD6
-                           +----+
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                        +-\/-+
+                  PA2  1|o   |20 VCC --- nRF24L01  VCC
+                  PD0  2|    |19 PB7 --- nRF24L01  SCK
+                  PD1  3|    |18 PB6 --- nRF24L01 MOSI
+                  PA1  4|    |17 PB5 --- nRF24L01 MISO
+                  PA0  5|    |16 PB4 --- nRF24L01  CSN
+                  PD2  6|    |15 PB3 --- nRF24L01   CE
+                  PD3  7|    |14 PB2
+                  PD4  8|    |13 PB1
+                  PD5  9|    |12 PB0
+nRF24L01  GND --- GND 10|    |11 PD6
+                        +----+
 </pre></div>
 </div>
 
