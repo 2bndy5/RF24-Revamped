@@ -1,17 +1,21 @@
-# Common Issues
-## Settings that must match
+Common Issues
+=============
+
+Settings that must match
+************************
+
 Before you report undesirable behavior, please make sure that the
 following RF24 configurations match on both receiving and transmitting
 nRF24L01 transceivers:
 
-1. [setAddressLength()](advanced_api.html#setaddresswidth)
-2. [setChannel()](configure_api.html#setchannel)
-3. [setDataRate()](configure_api.html#setdatarate)
-4. [setAutoAck()](configure_api.html#setautoack)
-5. [setDynamicPayloads()](configure_api.html#enabledynamicpayloads) or [disableDynamicPayloads()](configure_api.html#disabledynamicpayloads)
-6. [enableAckPayload()](configure_api.html#enableackpayload) or [disableAckPayload()](configure_api.html#disableackpayload) (requires auto-ack and dynamic payloads features)
-7. [setPayloadLength()](configure_api.html#setpayloadsize) (only if the dynamic payloads feature is disabled -- it is disabled by default)
-8. [setCrc()](configure_api.html#setcrc) (the auto-ack feature automatically enables CRC because it is required)
+1. :func:`~RF24::setAddressLength()`
+2. :func:`~RF24::setChannel()`
+3. :func:`~RF24::setDataRate()`
+4. :func:`~RF24::setAutoAck()`
+5. :func:`~RF24::setDynamicPayloads()`
+6. :func:`~RF24::enableAckPayload()` or :func:`~RF24::disableAckPayload()` (requires auto-ack and dynamic payloads features)
+7. :func:`~RF24::setPayloadLength()` (only if the dynamic payloads feature is disabled -- it is disabled by default)
+8. :func:`~RF24::setCrc()` (the auto-ack feature automatically enables CRC because it is required)
 
 Also, it helps to think of an address as a path (a commonly shared route)
 instead of an identifying device destination. This means that addresses
@@ -21,13 +25,21 @@ to match. You can think of pipes as parking spots for the packets, while
 all packets' payloads live in a TX or RX FIFO buffer. Remember that the
 TX FIFO buffers and the RX FIFO buffers both have a maximum occupancy of
 3 payloads (regardless of the maximum 32-byte payload size).
-## The most common issues and their solutions
-### send() always returns true after setAutoAck(false)
-Don't disabled the auto-ack feature. [send()](basic_api.html#send) has no reason to doubt
+
+The most common issues and their solutions
+******************************************
+
+send() always returns true after setAutoAck(false)
+--------------------------------------------------
+
+Don't disabled the auto-ack feature. :func:`~R24::send()` has no reason to doubt
 that the payload was delivered if the auto-ack feature is disabled. We
-recommend you read the docs about [setAutoAck()](configure_api.html#setautoack) before disabling the
+recommend you read the docs about :func:`~RF24::setAutoAck()` before disabling the
 auto-ack feature.
-### send() returns false when the payload was received
+
+send() returns false when the payload was received
+--------------------------------------------------
+
 If the settings match on both endpoint transceivers, then this can only
 mean that the receiving nRF24L01 failed to send an acknowledgement (ACK)
 packet back to the transmitting nRF24L01. Usually this is due to
@@ -36,8 +48,8 @@ the receiving nRF24L01.
 
 If you're not receiving ACK packets correctly/reliably on data rates
 lower than 2MBPS, try adding a big capacitor close to the module/chip.
-Example issues: [#264](https://github.com/nRF24/RF24/issues/264)
-[#211](https://github.com/nRF24/RF24/issues/211).
+Example issues: `#264 <https://github.com/nRF24/RF24/issues/26>`_)
+`#211 <https://github.com/nRF24/RF24/issues/211>`_.
 
 For reliability, please use Electrolytic or Tantalum capacitors. Ceramic
 capacitors may not be good enough (depending on the manufacturing source).

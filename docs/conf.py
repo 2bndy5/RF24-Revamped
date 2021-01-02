@@ -57,8 +57,6 @@ version = "latest"
 # ones.
 extensions = [
     "breathe",
-    "recommonmark",
-    "sphinx.ext.autosectionlabel",
     "sphinx_copybutton",
     "sphinx_sitemap",
     # "sphinx.ext.intersphinx",
@@ -71,8 +69,6 @@ templates_path = ["_templates"]
 
 source_suffix = {
     ".rst": "restructuredtext",
-    ".txt": "markdown",
-    ".md": "markdown",
 }
 
 # The master toctree document.
@@ -243,7 +239,7 @@ html_theme_options = {
     # If False, expand all TOC entries
     "globaltoc_collapse": True,
     # If True, show hidden TOC entries
-    "globaltoc_includehidden": False,
+    "globaltoc_includehidden": True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

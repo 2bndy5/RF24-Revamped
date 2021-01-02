@@ -1,5 +1,4 @@
 breathe
-recommonmark
 sphinx-material
 sphinx-copybutton
 sphinx-sitemap
