@@ -48,7 +48,7 @@ the receiving nRF24L01.
 
 If you're not receiving ACK packets correctly/reliably on data rates
 lower than 2MBPS, try adding a big capacitor close to the module/chip.
-Example issues: `#264 <https://github.com/nRF24/RF24/issues/26>`_)
+Example issues: `#264 <https://github.com/nRF24/RF24/issues/26>`_
 `#211 <https://github.com/nRF24/RF24/issues/211>`_.
 
 For reliability, please use Electrolytic or Tantalum capacitors. Ceramic
