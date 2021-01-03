@@ -336,6 +336,7 @@ RF24::RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed)
         payload_size[i] = 32;
     }
     pipe0_reading_address[0] = 0;
+    _is_pipe0_rx = false;
     if(spi_speed <= 35000){ //Handle old BCM2835 speed constants, default to RF24_SPI_SPEED
       spi_speed = RF24_SPI_SPEED;
     }
@@ -722,18 +723,18 @@ void RF24::startListening(void)
     write_register(NRF_STATUS, _BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT));
     ce(HIGH);
 
-    // Restore the pipe0 address, if exists
-    if (pipe0_reading_address[0] > 0) {
-        write_register(RX_ADDR_P0, pipe0_reading_address, addr_width);
-    } else {
-        closeReadingPipe(0);
+    // Restore the pipe0 address, if auto-ack needed it
+    if (auto_ack_enabled & 1) {
+        // only needed if it was designated for RX-ing
+        if (_is_pipe0_rx) {
+            write_register(RX_ADDR_P0, pipe0_reading_address, addr_width);
+        } else {
+            write_register(EN_RXADDR, read_register(EN_RXADDR) & ~_BV(ERX_P0));
+        }
     }
 }
 
 /****************************************************************************/
-static const PROGMEM uint8_t child_pipe_enable[] = {ERX_P0, ERX_P1, ERX_P2,
-                                                    ERX_P3, ERX_P4, ERX_P5};
-
 void RF24::stopListening(void)
 {
     ce(LOW);
@@ -754,7 +755,10 @@ void RF24::stopListening(void)
       powerUp();
     }
     #endif
-    write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[0]))); // Enable RX on pipe0
+    if (!_is_pipe0_rx && (auto_ack_enabled & 1)) {
+        // Enable RX on pipe0 for auto-ack
+        write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(ERX_P0));
+    }
 }
 
 /****************************************************************************/
@@ -971,6 +975,7 @@ void RF24::openReadingPipe(uint8_t child, uint64_t address)
     // openWritingPipe() will overwrite the pipe 0 address, so
     // startListening() will have to restore it.
     if (child == 0) {
+        _is_pipe0_rx = true;
         memcpy(pipe0_reading_address, &address, addr_width);
     }
 
@@ -985,7 +990,7 @@ void RF24::openReadingPipe(uint8_t child, uint64_t address)
         // Note it would be more efficient to set all of the bits for all open
         // pipes at once.  However, I thought it would make the calling code
         // more simple to do it this way.
-        write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
+        write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(child & 7));
     }
 }
 
@@ -1029,6 +1034,7 @@ void RF24::openReadingPipe(uint8_t child, const uint8_t* address)
     // openWritingPipe() will overwrite the pipe 0 address, so
     // startListening() will have to restore it.
     if (child == 0) {
+        _is_pipe0_rx = true;
         memcpy(pipe0_reading_address, address, addr_width);
     }
     if (child <= 5) {
@@ -1042,7 +1048,7 @@ void RF24::openReadingPipe(uint8_t child, const uint8_t* address)
         // Note it would be more efficient to set all of the bits for all open
         // pipes at once.  However, I thought it would make the calling code
         // more simple to do it this way.
-        write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
+        write_register(EN_RXADDR, read_register(EN_RXADDR) | _BV(child & 7));
 
     }
 }
@@ -1050,7 +1056,10 @@ void RF24::openReadingPipe(uint8_t child, const uint8_t* address)
 /****************************************************************************/
 void RF24::closeReadingPipe(uint8_t pipe)
 {
-    write_register(EN_RXADDR, read_register(EN_RXADDR) & ~_BV(pgm_read_byte(&child_pipe_enable[pipe])));
+    write_register(EN_RXADDR, read_register(EN_RXADDR) & ~_BV(pipe & 7));
+    if (!pipe) {
+        _is_pipe0_rx = false;
+    }
 }
 
 /****************************************************************************/

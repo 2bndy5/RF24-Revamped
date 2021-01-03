@@ -128,7 +128,8 @@ private:
     uint8_t auto_ack_enabled; /** Whether automatic acknowledgements are enabled or not for each pipe. */
     uint8_t dyn_pl_enabled; /** Whether dynamic payloads are enabled or not for each pipe. */
     uint8_t feature_reg; /** Whether ack payloads are enabled. */
-    uint8_t pipe0_reading_address[5]; /** Last address set on pipe 0 for reading. */
+    uint8_t pipe0_reading_address[5]; /** Last address set on pipe 0 for receiving. */
+    bool _is_pipe0_rx; /** flag to signify if pipe 0 was deisgnated for receiving */
     uint8_t addr_width; /** The address width to use - 3,4 or 5 bytes. */
     uint8_t config_reg; /** For storing the value of the NRF_CONFIG register */
     bool _is_p_variant; /** For storing the result of testing the toggleFeatures() affect */
