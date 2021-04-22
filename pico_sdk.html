@@ -438,12 +438,12 @@
 <a class="reference external" href="https://rptl.io/pico-get-started">“Getting Started with Pico” document</a> to
 setup a proper development environment on your host PC (the machine that
 will build your project).</p>
-<p>Either set an environment variable named <cite>PICO_SDK_PATH</cite> that points to your
+<p>Either set an environment variable named <code class="docutils literal notranslate"><span class="pre">PICO_SDK_PATH</span></code> that points to your
 local clone of the pico-sdk or put the pico-sdk next to the RF24 folder or
 next to the folder containing your project using the RF24 library:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/github/repos/
     pico-sdk/
-    RF24/
+    RF24-Revamped/
     my_rf24_project/
 </pre></div>
 </div>
@@ -497,9 +497,7 @@ below instructions to use different pins for the SPI bus.</p>
 libraries) in a “lib” directory located in your project’s root directory.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/my/project/
     lib/
-        RF24/
-        RF24Network/
-        RF24Mesh/
+        RF24-Revamped/
     src/
         CMakeLists.txt
         ...
@@ -545,7 +543,7 @@ project’s source code where applicable.</p>
 
 <h2 id="using-different-pins-for-the-spi-bus">Using different pins for the SPI bus<a class="headerlink" href="#using-different-pins-for-the-spi-bus" title="Permalink to this headline">¶</a></h2>
 <p>Initially (without modification), the SPI bus uses the default pins defined in the
-Pico SDK repository’s [pico-sdk/src/boards/include/boards/&lt;board_name&gt;.h files](<a class="reference external" href="https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards">https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards</a>).
+Pico SDK repository’s <a class="reference external" href="https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards">pico-sdk/src/boards/include/boards/&lt;board_name&gt;.h files</a>.
 However, the some boards do not define the necessary pins to use as defaults. This can
 be rememdied using either project source code or build-time configuration.</p>
 <div class="admonition note">
@@ -553,18 +551,18 @@ be rememdied using either project source code or build-time configuration.</p>
 <p>There is no support for software driven SPI on RP2040 based boards at this time.
 If someone is so inclined to implement this using the Pico SDK’s PIO (Programable Input
 Output) feature, please submit an issue or pull request to the
-[RF24 repository](<a class="reference external" href="http://github.com/nRF24/RF24">http://github.com/nRF24/RF24</a>).</p>
+<a class="reference external" href="http://github.com/nRF24/RF24">RF24 repository</a>.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Before deciding what pins to use for the SPI bus, review the
-[GPIO pins’ “Function Select Table” in the Pico SDK documentation](<a class="reference external" href="https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details">https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details</a>).
+<a class="reference external" href="https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details">GPIO pins’ “Function Select Table” in the Pico SDK documentation</a>.
 There are essentially 2 SPI buses with multiple pin options for each.</p>
 </div>
 
 <h3 id="project-source-code-option">Project Source code option<a class="headerlink" href="#project-source-code-option" title="Permalink to this headline">¶</a></h3>
 <p>This option is the most reliable and flexible. It involves calling <cite>SPI.begin()</cite> and
-then passing the <code class="docutils literal notranslate"><span class="pre">SPI</span></code> object to <cite>RF24::begin(_SPI*)</cite>.</p>
+then passing the <code class="docutils literal notranslate"><span class="pre">SPI</span></code> object to <a class="reference external" href="basic_api.html#begin-spi">RF24::begin(_SPI*)</a>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
 
 <span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// pin numbers connected to the radio's CE and CSN pins (respectively)</span>

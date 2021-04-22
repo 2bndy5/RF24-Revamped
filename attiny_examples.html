@@ -548,9 +548,7 @@ transmission.</p>
 <span class="normal">198</span>
 <span class="normal">199</span>
 <span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">"SPI.h"</span><span class="cp"></span>
+<span class="normal">201</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">"SPI.h"</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 
 <span class="c1">// CE and CSN are configurable, specified values for ATTiny85 as connected above</span>
@@ -661,11 +659,9 @@ transmission.</p>
       <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>     <span class="c1">// increment incoming counter for next outgoing response</span>
 
       <span class="c1">// transmit response &amp; save result to `report`</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                      <span class="c1">// put in TX mode</span>
-
-      <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// load response to TX FIFO</span>
-
-      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                     <span class="c1">// put back in RX mode</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                 <span class="c1">// put in TX mode</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// load response to TX FIFO</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                <span class="c1">// put back in RX mode</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="c1">// role</span>
 <span class="p">}</span> <span class="c1">// loop</span>

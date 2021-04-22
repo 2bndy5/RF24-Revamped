@@ -104,7 +104,7 @@ cores that implement a software-driven (AKA bit-banged) SPI bus that does not us
 library.
 
 .. warning:: The SPI bus object's ``SPIClass::begin()`` method **must** be called before
-    calling the overloaded `begin(_SPI* spiBus) <basic_api.html#begin-spi>`_ method.
+    calling the overloaded `begin(_SPI*) <basic_api.html#begin-spi>`_ method.
 
 Below are some example snippets that demonstrate how this can be done.
 

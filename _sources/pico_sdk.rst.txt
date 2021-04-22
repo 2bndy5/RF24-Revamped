@@ -10,7 +10,7 @@ Follow the Raspberry Pi Foundation's
 setup a proper development environment on your host PC (the machine that
 will build your project).
 
-Either set an environment variable named `PICO_SDK_PATH` that points to your
+Either set an environment variable named ``PICO_SDK_PATH`` that points to your
 local clone of the pico-sdk or put the pico-sdk next to the RF24 folder or
 next to the folder containing your project using the RF24 library:
 
@@ -18,7 +18,7 @@ next to the folder containing your project using the RF24 library:
 
     path/to/github/repos/
         pico-sdk/
-        RF24/
+        RF24-Revamped/
         my_rf24_project/
 
 Alternatively, the RF24 repository (and optionally the RF24Network and RF24Mesh
@@ -75,9 +75,7 @@ In order to use the RF24 libraries in your RP2040 based project:
 
         path/to/my/project/
             lib/
-                RF24/
-                RF24Network/
-                RF24Mesh/
+                RF24-Revamped/
             src/
                 CMakeLists.txt
                 ...
@@ -125,24 +123,24 @@ Using different pins for the SPI bus
 ************************************
 
 Initially (without modification), the SPI bus uses the default pins defined in the
-Pico SDK repository's [pico-sdk/src/boards/include/boards/\<board_name>.h files](https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards).
+Pico SDK repository's `pico-sdk/src/boards/include/boards/\<board_name>.h files <https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards>`_.
 However, the some boards do not define the necessary pins to use as defaults. This can
 be rememdied using either project source code or build-time configuration.
 
 .. note:: There is no support for software driven SPI on RP2040 based boards at this time.
     If someone is so inclined to implement this using the Pico SDK's PIO (Programable Input
     Output) feature, please submit an issue or pull request to the
-    [RF24 repository](http://github.com/nRF24/RF24).
+    `RF24 repository <http://github.com/nRF24/RF24>`_.
 
 .. warning:: Before deciding what pins to use for the SPI bus, review the
-    [GPIO pins' "Function Select Table" in the Pico SDK documentation](https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details).
+    `GPIO pins' "Function Select Table" in the Pico SDK documentation <https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details>`_.
     There are essentially 2 SPI buses with multiple pin options for each.
 
 Project Source code option
 --------------------------
 
 This option is the most reliable and flexible. It involves calling `SPI.begin()` and
-then passing the ``SPI`` object to `RF24::begin(_SPI*)`.
+then passing the ``SPI`` object to `RF24::begin(_SPI*) <basic_api.html#begin-spi>`_.
 
 .. code-block:: cpp
 
