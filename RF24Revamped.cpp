@@ -261,7 +261,7 @@ void RF24::write_register(uint8_t reg, const uint8_t* buf, uint8_t len)
 void RF24::write_register(uint8_t reg, uint8_t value, bool is_cmd_only)
 {
     if (is_cmd_only) {
-        if (reg != RF24_NOP) { // don't print the get_status() operation
+        if (reg != RF24_NOP) { // don't print the update() operation
             IF_SERIAL_DEBUG(printf_P(PSTR("write_register(%02x)\r\n"), reg));
         }
         beginTransaction();
@@ -315,15 +315,14 @@ void RF24::write_payload(const void* buf, uint8_t data_len, const uint8_t writeT
     const uint8_t* current = reinterpret_cast<const uint8_t*>(buf);
 
     uint8_t blank_len = !data_len ? 1 : 0;
-    if (!dynamic_payloads_enabled) {
-        data_len = rf24_min(data_len, payload_size);
-        blank_len = payload_size - data_len;
+    if (!(dyn_pl_enabled & 1)) {
+        data_len = rf24_min(data_len, payload_size[0]);
+        blank_len = payload_size[0] - data_len;
     }
     else {
         data_len = rf24_min(data_len, 32);
     }
 
-    //printf("[Writing %u bytes %u blanks]",data_len,blank_len);
     IF_SERIAL_DEBUG(printf("[Writing %u bytes %u blanks]\n", data_len, blank_len); );
 
     #if defined (RF24_LINUX) || defined (RF24_RP2)
@@ -371,14 +370,7 @@ void RF24::read_payload(void* buf, uint8_t data_len)
 {
     uint8_t* current = reinterpret_cast<uint8_t*>(buf);
 
-    uint8_t blank_len = 0;
-    if (!dynamic_payloads_enabled) {
-        data_len = rf24_min(data_len, payload_size);
-        blank_len = payload_size - data_len;
-    }
-    else {
-        data_len = rf24_min(data_len, 32);
-    }
+    data_len = rf24_min(data_len, 96);
 
     //printf("[Reading %u bytes %u blanks]",data_len,blank_len);
 
@@ -388,13 +380,12 @@ void RF24::read_payload(void* buf, uint8_t data_len)
     beginTransaction();
     uint8_t * prx = spi_rxbuff;
     uint8_t * ptx = spi_txbuff;
-    uint8_t size;
-    size = data_len + blank_len + 1; // Add register value to transmit buffer
+    uint8_t size = data_len + 1; // Add register value to transmit buffer
 
     *ptx++ =  R_RX_PAYLOAD;
     while(--size) { *ptx++ = RF24_NOP; }
 
-    size = data_len + blank_len + 1; // Size has been lost during while, re affect
+    size = data_len + 1; // Size has been lost during while, re affect
 
         #if defined (RF24_RP2)
     _spi->transfernb((const uint8_t*)spi_txbuff, spi_rxbuff, size);
@@ -418,12 +409,9 @@ void RF24::read_payload(void* buf, uint8_t data_len)
     status = _spi->transfer(R_RX_PAYLOAD);
     while (data_len--) { *current++ = _spi->transfer(0xFF); }
 
-    while (blank_len--) { _spi->transfer(0xFF); }
-
         #else // !defined(RF24_SPI_PTR)
     status = _SPI.transfer(R_RX_PAYLOAD);
     while (data_len--) { *current++ = _SPI.transfer(0xFF); }
-    while (blank_len--) { _SPI.transfer(0xff); }
 
         #endif // !defined(RF24_SPI_PTR)
     endTransaction();
