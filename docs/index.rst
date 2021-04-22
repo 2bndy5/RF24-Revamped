@@ -45,6 +45,7 @@ Platform Support Pages
   * `MRAA (Galileo, Edison, etc) supported board <mraa.html>`_
   * `LittleWire <LittleWire.html>`_
 * `Cross-compilation for linux devices <cross_compilation.html>`_
+* `Pico SDK support for RP2040-based boards <pico_sdk.html>`_
 
 .. * `Python wrapper available for Linux devices <python_wrapper.html>`_
 
