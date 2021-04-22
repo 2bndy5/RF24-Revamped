@@ -374,7 +374,7 @@ void RF24::read_payload(void* buf, uint8_t data_len)
 
     //printf("[Reading %u bytes %u blanks]",data_len,blank_len);
 
-    IF_SERIAL_DEBUG(printf("[Reading %u bytes %u blanks]\n", data_len, blank_len); );
+    IF_SERIAL_DEBUG(printf("[Reading %u bytes]\n", data_len););
 
     #if defined (RF24_LINUX) || defined (RF24_RP2)
     beginTransaction();
@@ -435,10 +435,8 @@ void RF24::flushTx(void)
 
 /****************************************************************************/
 
-/****************************************************************************/
-
 RF24::RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed)
-        :ce_pin(_cepin), csn_pin(_cspin), spi_speed(_spi_speed), payload_size(32), dynamic_payloads_enabled(true), addr_width(5), _is_p_variant(false),
+        :ce_pin(_cepin), csn_pin(_cspin), spi_speed(_spi_speed), open_pipes(0), auto_ack_enabled(0x3F), dyn_pl_enabled(0), feature_reg(0), addr_width(5), _is_p_variant(false),
          csDelay(5)
 {
     _init_obj();
@@ -447,7 +445,7 @@ RF24::RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed)
 /****************************************************************************/
 
 RF24::RF24(uint32_t _spi_speed)
-        :ce_pin(0xFFFF), csn_pin(0xFFFF), spi_speed(_spi_speed), payload_size(32), dynamic_payloads_enabled(true), addr_width(5), _is_p_variant(false),
+        :ce_pin(0xFFFF), csn_pin(0xFFFF), spi_speed(_spi_speed), open_pipes(0), auto_ack_enabled(0x3F), dyn_pl_enabled(0), feature_reg(0), addr_width(5), _is_p_variant(false),
          csDelay(5)
 {
     _init_obj();
