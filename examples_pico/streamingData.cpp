@@ -106,21 +106,26 @@ void loop() {
         uint8_t i = 0;
         uint8_t failures = 0;
         uint64_t start_timer = to_us_since_boot(get_absolute_time()); // start the timer
-        while (i < SIZE) {
-            makePayload(i);                                           // make the payload
-            if (!radio.writeFast(&buffer, SIZE)) {
-                failures++;
-                radio.reUseTX();
-            }
-            else {
+        while (i < SIZE && failures < 100) {
+            while (!radio.write(&buffer, SIZE, false, true) && i < SIZE) {
                 i++;
+                makePayload(i);                           // make the payload
             }
-
-            if (failures >= 100) {
-                printf("Too many failures detected. Aborting at payload %c\n", buffer[0]);
-                break;
+            radio.ce(true);
+            while (!radio.isFifo(true, true)) {
+                if (radio.irqDf()) {
+                failures++;
+                radio.ce(false);
+                radio.clearStatusFlags();
+                radio.ce(true);
+                    if (failures >= 100) {
+                        printf("Too many failures detected. Aborting at payload %c\n", buffer[0]);
+                        break;
+                    }
+                }
             }
         }
+        radio.ce(false);
         uint64_t end_timer = to_us_since_boot(get_absolute_time()); // end the timer
 
         // print results from transmitting stream

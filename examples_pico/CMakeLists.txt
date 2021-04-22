@@ -33,10 +33,10 @@ pico_add_extra_outputs(gettingStarted)
 set(EXAMPLES_LIST
     gettingStarted
     acknowledgementPayloads
-    # streamingData
-    # manualAcknowledgements
+    streamingData
+    manualAcknowledgements
     multiceiverDemo
-    # interruptConfigure
+    interruptConfigure
     )
 
 foreach(example ${EXAMPLES_LIST})

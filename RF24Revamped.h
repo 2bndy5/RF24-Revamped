@@ -204,8 +204,8 @@ public:
      * unique pins that this chip is connected to.
      *
      * @rst
-     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, `Linux &lt;rpi_general&gt;`_
-     *     `Pico SDK &lt;pico_sdk&gt;`_ pages for device specific information.
+     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny.html&gt;`_, `Linux &lt;rpi_general&gt;`_,
+     *     `Pico SDK &lt;pico_sdk.html&gt;`_ pages for device specific information.
      * @endrst
      *
      * @param _cepin The pin attached to Chip Enable on the radio module
@@ -225,8 +225,8 @@ public:
      * A constructor for initializing the radio's hardware dynamically
      *
      * @rst
-     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, `Linux &lt;rpi_general&gt;`_,
-     *     `Pico SDK &lt;pico_sdk&gt;`_ pages for device specific information.
+     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny.html&gt;`_, `Linux &lt;rpi_general.html&gt;`_,
+     *     `Pico SDK &lt;pico_sdk.html&gt;`_ pages for device specific information.
      * @endrst
      * @warning You MUST use `begin(uint16_t, uint16_t)`_ or `begin(_SPI*, uint16_t, uint16_t)`_ to pass both
      * the digital output pin numbers connected to the radio's CE and CSN pins.

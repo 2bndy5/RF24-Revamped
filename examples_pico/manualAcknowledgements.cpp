@@ -176,10 +176,13 @@ void loop()
             payload.counter = received.counter + 1;  // increment incoming counter for next outgoing response
 
             // transmit response & save result to `report`
-            radio.stopListening();                       // put in TX mode
-            radio.writeFast(&payload, sizeof(payload));  // load response to TX FIFO
-            bool report = radio.txStandBy(150);          // keep retrying for 150 ms
-            radio.startListening();                      // put back in RX mode
+            radio.stopListening();                                // put in TX mode
+            uint32_t start_response = to_ms_since_boot(get_absolute_time());
+            bool report = radio.send(&payload, sizeof(payload));  // send response
+            while (!report && to_ms_since_boot(get_absolute_time()) - start_response < 200) {
+                report = radio.resend();                          // retry for 200 ms
+            }
+            radio.startListening();                               // put back in RX mode
 
             // print summary of transactions, starting with details about incoming payload
             printf("Received %d bytes on pipe %d: %s%d",
@@ -190,7 +193,7 @@ void loop()
 
             if (report) {
                 // print outgoing payload and its counter
-                printf(" Sent: %s%d", payload.message, payload.counter);
+                printf(" Sent: %s%d\n", payload.message, payload.counter);
             }
             else {
                 printf(" Response failed.\n");   // failed to send response

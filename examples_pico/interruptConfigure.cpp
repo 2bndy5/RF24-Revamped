@@ -296,31 +296,30 @@ void interruptHandler(uint gpio, uint32_t events)
 
     // print IRQ status and all masking flags' states
     printf("\tIRQ pin is actively LOW\n");   // show that this function was called
-    bool tx_ds, tx_df, rx_dr;                // declare variables for IRQ masks
-    radio.whatHappened(tx_ds, tx_df, rx_dr); // get values for IRQ masks
-    // whatHappened() clears the IRQ masks also. This is required for
+    radio.clearStatusFlags();                // get values for IRQ masks
+    // clearStatusFlags() clears the IRQ masks also. This is required for
     // continued TX operations when a transmission fails.
     // clearing the IRQ masks resets the IRQ pin to its inactive state (HIGH)
 
     // print "data sent", "data fail", "data ready" mask states
     printf("\tdata_sent: %s, data_fail: %s, data_ready: %s\n",
-           tx_ds ? "true" : "false",
-           tx_df ? "true" : "false",
-           rx_dr ? "true" : "false");
+           radio.irqDs() ? "true" : "false",
+           radio.irqDf() ? "true" : "false",
+           radio.irqDr() ? "true" : "false");
 
-    if (tx_df)            // if TX payload failed
+    if (radio.irqDf())    // if TX payload failed
         radio.flush_tx(); // clear all payloads from the TX FIFO
 
     // print if test passed or failed. Unintentional fails mean the RX node was not listening.
     // pl_iterator has already been incremented by now
     if (pl_iterator <= 1) {
-        printf("   'Data Ready' event test %s\n", rx_dr ? "passed" : "failed");
+        printf("   'Data Ready' event test %s\n", radio.irqDr() ? "passed" : "failed");
     }
     else if (pl_iterator == 2) {
-        printf("   'Data Sent' event test %s\n", tx_ds ? "passed" : "failed");
+        printf("   'Data Sent' event test %s\n", radio.irqDs() ? "passed" : "failed");
     }
     else if (pl_iterator == 4) {
-        printf("   'Data Fail' event test %s\n", tx_df ? "passed" : "failed");
+        printf("   'Data Fail' event test %s\n", radio.irqDf() ? "passed" : "failed");
     }
     wait_for_event = false; // ready to continue with loop() operations
 } // interruptHandler
