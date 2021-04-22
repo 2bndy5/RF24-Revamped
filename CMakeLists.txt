@@ -65,6 +65,6 @@ endif()
 ######################################
 
 add_subdirectory(utility)
-# RF24.cpp is common for every library
-add_library(RF24 STATIC RF24.cpp)
-target_link_libraries(RF24 INTERFACE rf24DriverUtility project_options project_warnings)
+# RF24Revamped.cpp is common for every library
+add_library(RF24Revamped STATIC RF24Revamped.cpp)
+target_link_libraries(RF24Revamped INTERFACE rf24DriverUtility project_options project_warnings)

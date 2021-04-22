@@ -13,9 +13,9 @@
  * This example was written to be used on 2 devices acting as "nodes".
  * Use the Serial Terminal to change each node's behavior.
  */
-#include "pico/stdlib.h" // printf(), sleep_ms(), getchar_timeout_us(), to_us_since_boot(), get_absolute_time()
-#include <tusb.h>        // tud_cdc_connected()
-#include <RF24.h>        // RF24 radio object
+#include "pico/stdlib.h"  // printf(), sleep_ms(), getchar_timeout_us(), to_us_since_boot(), get_absolute_time()
+#include <tusb.h>         // tud_cdc_connected()
+#include <RF24Revamped.h> // RF24 radio object
 
 // We will be using the nRF24L01's IRQ pin for this example
 #define IRQ_PIN 6 // this needs to be a digital input capable pin

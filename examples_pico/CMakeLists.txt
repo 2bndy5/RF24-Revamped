@@ -19,7 +19,7 @@ add_executable(gettingStarted gettingStarted.cpp)
 
 # link the necessary libs to the target
 target_link_libraries(gettingStarted PUBLIC
-    RF24
+    RF24Revamped
     pico_stdlib
     hardware_spi
     hardware_gpio
@@ -43,7 +43,7 @@ foreach(example ${EXAMPLES_LIST})
     add_executable(${example} ${example}.cpp)
 
     target_link_libraries(${example} PUBLIC
-        RF24
+        RF24Revamped
         pico_stdlib
         hardware_spi
         hardware_gpio
