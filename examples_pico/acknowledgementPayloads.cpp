@@ -94,7 +94,7 @@ bool setup() {
 
         memcpy(payload.message, "World ", 6);                       // set the payload message
         // load the payload for the first received transmission on pipe 0
-        radio.writeAckPayload(1, &payload, sizeof(PayloadStruct));
+        radio.writeAck(1, &payload, sizeof(PayloadStruct));
 
         radio.startListening();                                     // put radio in RX mode
     }
@@ -176,7 +176,7 @@ void loop() {
             // save incoming counter & increment for next outgoing
             payload.counter = received.counter + 1;
             // load the payload for the first received transmission on pipe 0
-            radio.writeAckPayload(1, &payload, sizeof(payload));
+            radio.writeAck(1, &payload, sizeof(payload));
         }
     } // role
 
@@ -202,7 +202,7 @@ void loop() {
             memcpy(payload.message, "World ", 6); // change payload message
 
             // load the payload for the first received transmission on pipe 0
-            radio.writeAckPayload(1, &payload, sizeof(PayloadStruct));
+            radio.writeAck(1, &payload, sizeof(PayloadStruct));
             radio.startListening();
         }
     }

@@ -115,9 +115,9 @@ bool setup()
 
         // Fill the TX FIFO with 3 ACK payloads for the first 3 received
         // transmissions on pipe 1
-        radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-        radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-        radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+        radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+        radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+        radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
         radio.startListening(); // put radio in RX mode
     }
@@ -231,9 +231,9 @@ void loop()
 
             // Fill the TX FIFO with 3 ACK payloads for the first 3 received
             // transmissions on pipe 1.
-            radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-            radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-            radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
             sleep_ms(100);          // let TX node finish its role
             radio.startListening(); // We're ready to start over. Begin listening.
@@ -272,9 +272,9 @@ void loop()
             // Fill the TX FIFO with 3 ACK payloads for the first 3 received
             // transmissions on pipe 1
             radio.flush_tx(); // make sure there is room for 3 new ACK payloads
-            radio.writeAckPayload(1, &ack_payloads[0], ack_pl_size);
-            radio.writeAckPayload(1, &ack_payloads[1], ack_pl_size);
-            radio.writeAckPayload(1, &ack_payloads[2], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+            radio.writeAck(1, &ack_payloads[2], ack_pl_size);
             radio.startListening();
         }
     } // user input
