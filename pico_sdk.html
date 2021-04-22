@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Using the RaspberryPi Pico SDK (for the RP2040) &#8212; RF24 Revamped</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <link rel="canonical" href="https://rf24-revamped.readthedocs.io/pico_sdk.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ATTiny Support" href="attiny.html" />
+    <link rel="prev" title="Arduino" href="arduino.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue data-md-color-accent=light-blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#pico_sdk" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="RF24 Revamped"
+           class="md-header-nav__button md-logo">
+          
+              <img src="_static/Logo large.png" height="26"
+                   alt="RF24 Revamped logo">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">RF24 Revamped</span>
+          <span class="md-header-nav__topic"> Using the RaspberryPi Pico SDK (for the RP2040) </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="GET" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">RF24 Revamped</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="RF24 Revamped" class="md-nav__button md-logo">
+      
+        <img src="_static/Logo large.png" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="index.html"
+       title="RF24 Revamped">RF24 Revamped</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    RF24-Revamped
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="index.html" class="md-nav__link">Home</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Examples</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ino_examples.html" class="md-nav__link">Arduino examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cpp_examples.html" class="md-nav__link">Linux examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny_examples.html" class="md-nav__link">ATTiny examples</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">API Reference</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="basic_api.html" class="md-nav__link">Basic API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="advanced_api.html" class="md-nav__link">Advanced API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="configure_api.html" class="md-nav__link">Configuration API</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Related Pages</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="common_issues.html" class="md-nav__link">Common Issues</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="arduino.html" class="md-nav__link">Arduino</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Using the RaspberryPi Pico SDK (for the RP2040) </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Using the RaspberryPi Pico SDK (for the RP2040)</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#pico-sdk--page-root" class="md-nav__link">Using the RaspberryPi Pico SDK (for the RP2040)</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#prerequisite" class="md-nav__link">Prerequisite</a>
+        </li>
+        <li class="md-nav__item"><a href="#building-the-rf24-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24 examples for the Pico SDK</a>
+        </li>
+        <li class="md-nav__item"><a href="#incorporating-rf24-libs-into-your-project" class="md-nav__link">Incorporating RF24 libs into your project</a>
+        </li>
+        <li class="md-nav__item"><a href="#using-different-pins-for-the-spi-bus" class="md-nav__link">Using different pins for the SPI bus</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#project-source-code-option" class="md-nav__link">Project Source code option</a>
+        </li>
+        <li class="md-nav__item"><a href="#build-time-configuration-option" class="md-nav__link">Build-time configuration option</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/pico_sdk.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="attiny.html" class="md-nav__link">ATTiny Support</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="linux_install.html" class="md-nav__link">Linux Installation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="mraa.html" class="md-nav__link">MRAA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="rpi_general.html" class="md-nav__link">General Linux/Raspberry Pi</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="cross_compilation.html" class="md-nav__link">Linux cross-compilation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="atxmega.html" class="md-nav__link">ATXMEGA</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="portability.html" class="md-nav__link">RF24 Portability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="templates.html" class="md-nav__link">Templated Files for Platform Support</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#pico-sdk--page-root" class="md-nav__link">Using the RaspberryPi Pico SDK (for the RP2040)</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#prerequisite" class="md-nav__link">Prerequisite</a>
+        </li>
+        <li class="md-nav__item"><a href="#building-the-rf24-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24 examples for the Pico SDK</a>
+        </li>
+        <li class="md-nav__item"><a href="#incorporating-rf24-libs-into-your-project" class="md-nav__link">Incorporating RF24 libs into your project</a>
+        </li>
+        <li class="md-nav__item"><a href="#using-different-pins-for-the-spi-bus" class="md-nav__link">Using different pins for the SPI bus</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#project-source-code-option" class="md-nav__link">Project Source code option</a>
+        </li>
+        <li class="md-nav__item"><a href="#build-time-configuration-option" class="md-nav__link">Build-time configuration option</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="_sources/pico_sdk.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  
+<h1 id="pico-sdk--page-root">Using the RaspberryPi Pico SDK (for the RP2040)<a class="headerlink" href="#pico-sdk--page-root" title="Permalink to this headline">¶</a></h1>
+
+<h2 id="prerequisite">Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h2>
+<p>Follow the Raspberry Pi Foundation’s
+<a class="reference external" href="https://rptl.io/pico-get-started">“Getting Started with Pico” document</a> to
+setup a proper development environment on your host PC (the machine that
+will build your project).</p>
+<p>Either set an environment variable named <cite>PICO_SDK_PATH</cite> that points to your
+local clone of the pico-sdk or put the pico-sdk next to the RF24 folder or
+next to the folder containing your project using the RF24 library:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/github/repos/
+    pico-sdk/
+    RF24/
+    my_rf24_project/
+</pre></div>
+</div>
+<p>Alternatively, the RF24 repository (and optionally the RF24Network and RF24Mesh
+repositories) can be included into your project’s “lib” folder as copies or
+git submodules. For more detail, see the below instructions to incorporate
+RF24 libs into your project.</p>
+
+
+<h2 id="building-the-rf24-examples-for-the-pico-sdk">Building the RF24 examples for the Pico SDK<a class="headerlink" href="#building-the-rf24-examples-for-the-pico-sdk" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Create a “build” directory in the RF24 repository’s root directory and
+navigate to it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> RF24
+mkdir build
+<span class="nb">cd</span> build
+</pre></div>
+</div>
+</li>
+<li><p>Configure CMake for your desired build type and specific RP2040-based board</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake ../examples_pico -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DPICO_BOARD<span class="o">=</span>pico
+</pre></div>
+</div>
+<p>The supported RP2040-based boards are listed in header files in the Pico SDK
+repository’s <a class="reference external" href="https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards">pico-sdk/src/boards/include/boards/&lt;board_name&gt;.h files</a>.
+If the <code class="docutils literal notranslate"><span class="pre">-DPICO_BOARD</span></code> option is not specified, then the Pico SDK will default to
+building for the Raspberry Pi Pico board.</p>
+</li>
+<li><p>Build the examples using the CMakeLists.txt file located in the
+RF24/examples_pico directory.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake --build . --config Release
+</pre></div>
+</div>
+<p>Notice we specified the build type again using the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you see an error stating
+<code class="docutils literal notranslate"><span class="pre">'PICO_DEFAULT_SPI_SCK_PIN'</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">declared</span> <span class="pre">in</span> <span class="pre">this</span> <span class="pre">scope</span></code>, then it means
+the board you selected with the <cite>-DPICO_BOARD</cite> option (in step 2) does not have a
+default set of SPI pins defined for it. To workaround this error, see the
+below instructions to use different pins for the SPI bus.</p>
+</div>
+</li>
+</ol>
+
+
+<h2 id="incorporating-rf24-libs-into-your-project">Incorporating RF24 libs into your project<a class="headerlink" href="#incorporating-rf24-libs-into-your-project" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the RF24 libraries in your RP2040 based project:</p>
+<ol class="arabic">
+<li><p>Make a copy of the RF24 library (and optionally RF24Network and RF24Mesh
+libraries) in a “lib” directory located in your project’s root directory.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/my/project/
+    lib/
+        RF24/
+        RF24Network/
+        RF24Mesh/
+    src/
+        CMakeLists.txt
+        ...
+</pre></div>
+</div>
+<p>Alternatively you can add the RF24* repositories as <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a>.</p>
+</li>
+<li><p>Include their CMakeLists.txt files from the RF24 libraries in your project’s top-level
+CMakeLists.txt file (usually located in the “src” directory). The following snippet
+assumes that your project’s “src” directory is on the same level as the previously
+mentioned “lib” directory.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24/CMakeLists.txt</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24Network/CMakeLists.txt</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24Mesh/CMakeLists.txt</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>In the same CMakeLists.txt file from step 2, add the RF24 libraries into the
+<cite>target_link_libraries</cite> configuration:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_PROJECT_NAME</span><span class="o">}</span>
+    <span class="c"># ... Your project's other libraries ...</span>
+    <span class="s">RF24</span>
+    <span class="s">RF24Network</span>
+    <span class="s">RF24Mesh</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are using tinyUSB, this line (or similar) should already exist:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_PROJECT_NAME</span><span class="o">}</span> <span class="s">PRIVATE</span> <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finally, remember to include the necessary RF24* libraries’ header files in your
+project’s source code where applicable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Network.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24Mesh.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+</li>
+</ol>
+
+
+<h2 id="using-different-pins-for-the-spi-bus">Using different pins for the SPI bus<a class="headerlink" href="#using-different-pins-for-the-spi-bus" title="Permalink to this headline">¶</a></h2>
+<p>Initially (without modification), the SPI bus uses the default pins defined in the
+Pico SDK repository’s [pico-sdk/src/boards/include/boards/&lt;board_name&gt;.h files](<a class="reference external" href="https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards">https://github.com/raspberrypi/pico-sdk/tree/master/src/boards/include/boards</a>).
+However, the some boards do not define the necessary pins to use as defaults. This can
+be rememdied using either project source code or build-time configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no support for software driven SPI on RP2040 based boards at this time.
+If someone is so inclined to implement this using the Pico SDK’s PIO (Programable Input
+Output) feature, please submit an issue or pull request to the
+[RF24 repository](<a class="reference external" href="http://github.com/nRF24/RF24">http://github.com/nRF24/RF24</a>).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before deciding what pins to use for the SPI bus, review the
+[GPIO pins’ “Function Select Table” in the Pico SDK documentation](<a class="reference external" href="https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details">https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__gpio.html#details</a>).
+There are essentially 2 SPI buses with multiple pin options for each.</p>
+</div>
+
+<h3 id="project-source-code-option">Project Source code option<a class="headerlink" href="#project-source-code-option" title="Permalink to this headline">¶</a></h3>
+<p>This option is the most reliable and flexible. It involves calling <cite>SPI.begin()</cite> and
+then passing the <code class="docutils literal notranslate"><span class="pre">SPI</span></code> object to <cite>RF24::begin(_SPI*)</cite>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+
+<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// pin numbers connected to the radio's CE and CSN pins (respectively)</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// again please review the GPIO pins' "Function Select Table" in the Pico SDK docs</span>
+    <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">spi0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// must use spi0 or spi1 as 1st parameter</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SPI</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Radio hardware is not responding!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// continue with program as normal ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+
+
+<h3 id="build-time-configuration-option">Build-time configuration option<a class="headerlink" href="#build-time-configuration-option" title="Permalink to this headline">¶</a></h3>
+<p>To specify the default SPI pins used at build time, you can use either:</p>
+<ol class="arabic">
+<li><p>declare these pins in the CMakeLists.txt file</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_PROJECT_NAME</span><span class="o">}</span>
+    <span class="s">PUBLIC</span> <span class="s">PICO_DEFAULT_SPI=0</span> <span class="c"># can only be 0 or 1 (as in `spi0` or `spi1`)</span>
+    <span class="s">PUBLIC</span> <span class="s">PICO_DEFAULT_SPI_SCK_PIN=2</span> <span class="c"># depends on which SPI bus (0 or 1) is being used</span>
+    <span class="s">PUBLIC</span> <span class="s">PICO_DEFAULT_SPI_TX_PIN=3</span>  <span class="c"># depends on which SPI bus (0 or 1) is being used</span>
+    <span class="s">PUBLIC</span> <span class="s">PICO_DEFAULT_SPI_RX_PIN=4</span>  <span class="c"># depends on which SPI bus (0 or 1) is being used</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>additional command line arguments</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake --build . --config Release -DPICO_DEFAULT_SPI<span class="o">=</span><span class="m">0</span> -DPICO_DEFAULT_SPI_SCK_PIN<span class="o">=</span><span class="m">2</span> -DPICO_DEFAULT_SPI_TX_PIN<span class="o">=</span><span class="m">3</span> -DPICO_DEFAULT_SPI_RX_PIN<span class="o">=</span><span class="m">4</span>
+</pre></div>
+</div>
+</li>
+</ol>
+
+
+
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="arduino.html" title="Arduino"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Arduino </span>
+              </div>
+            </a>
+          
+          
+            <a href="attiny.html" title="ATTiny Support"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> ATTiny Support </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2020, 2bndy5.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

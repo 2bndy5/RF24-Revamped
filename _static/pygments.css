@@ -1,7 +1,7 @@
 pre { line-height: 125%; }
-td.linenos pre { color: #FCFCFC; background-color: #282828; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: #FCFCFC; background-color: #282828; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: #FCFCFC; background-color: #282828; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ff0000 }
 .highlight { background: #1E1E1E; color: #FEFEFE }

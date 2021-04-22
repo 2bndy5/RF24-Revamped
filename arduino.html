@@ -55,14 +55,13 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <link rel="canonical" href="https://rf24-revamped.readthedocs.io/arduino.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ATTiny Support" href="attiny.html" />
+    <link rel="next" title="Using the RaspberryPi Pico SDK (for the RP2040)" href="pico_sdk.html" />
     <link rel="prev" title="Common Issues" href="common_issues.html" />
   
    
@@ -303,6 +302,16 @@
         <li class="md-nav__item"><a href="#software-driven-spi" class="md-nav__link">Software Driven SPI</a>
         </li>
         <li class="md-nav__item"><a href="#alternate-hardware-uart-driven-spi" class="md-nav__link">Alternate Hardware (UART) Driven  SPI</a>
+        </li>
+        <li class="md-nav__item"><a href="#using-a-specific-spi-bus" class="md-nav__link">Using a specific SPI Bus</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#esp8266-example" class="md-nav__link">ESP8266 example</a>
+        </li>
+        <li class="md-nav__item"><a href="#esp32-example" class="md-nav__link">ESP32 example</a>
+        </li>
+        <li class="md-nav__item"><a href="#teensy-example" class="md-nav__link">Teensy example</a>
+        </li></ul>
+            </nav>
         </li></ul>
             </nav>
         </li></ul>
@@ -313,6 +322,13 @@
 
   </ul>
 </nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="pico_sdk.html" class="md-nav__link">Using the RaspberryPi Pico SDK (for the RP2040)</a>
       
     
     </li>
@@ -393,6 +409,16 @@
         <li class="md-nav__item"><a href="#software-driven-spi" class="md-nav__link">Software Driven SPI</a>
         </li>
         <li class="md-nav__item"><a href="#alternate-hardware-uart-driven-spi" class="md-nav__link">Alternate Hardware (UART) Driven  SPI</a>
+        </li>
+        <li class="md-nav__item"><a href="#using-a-specific-spi-bus" class="md-nav__link">Using a specific SPI Bus</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#esp8266-example" class="md-nav__link">ESP8266 example</a>
+        </li>
+        <li class="md-nav__item"><a href="#esp32-example" class="md-nav__link">ESP32 example</a>
+        </li>
+        <li class="md-nav__item"><a href="#teensy-example" class="md-nav__link">Teensy example</a>
+        </li></ul>
+            </nav>
         </li></ul>
             </nav>
         </li></ul>
@@ -518,6 +544,143 @@ SPI_UART.</p>
 </div>
 
 
+<h3 id="using-a-specific-spi-bus">Using a specific SPI Bus<a class="headerlink" href="#using-a-specific-spi-bus" title="Permalink to this headline">¶</a></h3>
+<p>An alternate SPI bus can be specified using the overloaded <cite>RF24::begin(_SPI*)</cite> method.
+This is useful for some boards that offer more than 1 hardware-driven SPI bus or cetain Arduino
+cores that implement a software-driven (AKA bit-banged) SPI bus that does not use the DigitalIO
+library.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The SPI bus object’s <code class="docutils literal notranslate"><span class="pre">SPIClass::begin()</span></code> method <strong>must</strong> be called before
+calling the overloaded <a class="reference external" href="basic_api.html#begin-spi">begin(_SPI* spiBus)</a> method.</p>
+</div>
+<p>Below are some example snippets that demonstrate how this can be done.</p>
+
+<h4 id="esp8266-example">ESP8266 example<a class="headerlink" href="#esp8266-example" title="Permalink to this headline">¶</a></h4>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The following example code is meant for the popular NodeMCU board. Please refer to the
+<a class="reference external" href="https://arduino-esp8266.readthedocs.io/en/latest/libraries.html#spi">ESP8266 ArduinoCore’s SPI documentation</a>
+for <a class="reference external" href="https://arduino-esp8266.readthedocs.io/en/latest/boards.html#">other ESP8266-based boards</a>.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// notice these pin numbers are not the same used in the library examples</span>
+<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="n">D4</span><span class="p">,</span> <span class="n">D3</span><span class="p">);</span> <span class="c1">// the (ce_pin, csn_pin) connected to the radio</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">//some boards need this</span>
+
+  <span class="c1">// by default (with no arguments passed) SPI uses D5 (HSCLK), D6 (HMISO), D7 (HMOSI)</span>
+  <span class="n">SPI</span><span class="p">.</span><span class="n">pins</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="c1">// this means the following pins are used for the SPI bus:</span>
+  <span class="c1">// MOSI = SD1</span>
+  <span class="c1">// MISO = SD0</span>
+  <span class="c1">// SCLK = CLK</span>
+  <span class="c1">// CSN = GPIO0 (labeled D3 on the board)</span>
+  <span class="c1">// **notice we also passed `D3` to the RF24 contructor's csn_pin parameter**</span>
+
+  <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SPI</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware not responding!!"</span><span class="p">));</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold program in infinite loop to prevent subsequent errors</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ... continue with program as normal (see library examples/ folder)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+
+
+<h4 id="esp32-example">ESP32 example<a class="headerlink" href="#esp32-example" title="Permalink to this headline">¶</a></h4>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Please review the Espressif’s
+<a class="reference external" href="https://github.com/espressif/arduino-esp32/blob/master/libraries/SPI/examples/SPI_Multiple_Buses/SPI_Multiple_Buses.ino">SPI_Multiple_Buses.ino example for the ESP32</a>
+located in their ArduinoCore repository (along with the SPI library for the ESP32).</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// to use custom-defined pins, uncomment the following</span>
+<span class="c1">// #define MY_MISO 26</span>
+<span class="c1">// #define MY_MOSI 27</span>
+<span class="c1">// #define MY_SCLK 25</span>
+<span class="c1">// #define MY_SS   32  // pass MY_SS as the csn_pin parameter to the RF24 constructor</span>
+
+<span class="c1">// notice these pin numbers are not the same used in the library examples</span>
+<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// the (ce_pin, csn_pin) connected to the radio</span>
+
+<span class="n">SPIClass</span><span class="o">*</span> <span class="n">hspi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// we'll instantiate this in the `setup()` function</span>
+<span class="c1">// by default the HSPI bus predefines the following pins</span>
+<span class="c1">// HSPI_MISO = 12</span>
+<span class="c1">// HSPI_MOSI = 13</span>
+<span class="c1">// HSPI_SCLK = 14</span>
+<span class="c1">// HSPI_SS   = 15</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">//some boards need this</span>
+
+  <span class="n">hspi</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SPIClass</span><span class="p">(</span><span class="n">HSPI</span><span class="p">);</span> <span class="c1">// by default VSPI is used</span>
+  <span class="n">hspi</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
+  <span class="c1">// to use the custom defined pins, uncomment the following</span>
+  <span class="c1">// hspi-&gt;begin(MY_SCLK, MY_MISO, MY_MOSI, MY_SS)</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">hspi</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware not responding!!"</span><span class="p">));</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold program in infinite loop to prevent subsequent errors</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ... continue with program as normal (see library examples/ folder)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+
+
+<h4 id="teensy-example">Teensy example<a class="headerlink" href="#teensy-example" title="Permalink to this headline">¶</a></h4>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The overloaded RF24::begin(_SPI*) is not needed according to the
+<a class="reference external" href="https://www.pjrc.com/teensy/td_libs_SPI.html">Teensyduino SPI documentation</a>.
+Please review the table provided in the
+<a class="reference external" href="https://www.pjrc.com/teensy/td_libs_SPI.html">Teensyduino documentation</a> for what pins are used by
+default for certain Teensy boards.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// these pins are the alternate SPI pins available for Teensy LC/3.0/3.1/3.2/3.5/3.6</span>
+<span class="cp">#define MY_MISO 8</span>
+<span class="cp">#define MY_MOSI 7</span>
+<span class="cp">#define MY_SCLK 14</span>
+
+<span class="c1">// notice these pin numbers are not the same used in the library examples</span>
+<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// the (ce_pin, csn_pin) connected to the radio</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">//some boards need this</span>
+
+  <span class="n">SPI</span><span class="p">.</span><span class="n">setMOSI</span><span class="p">(</span><span class="n">MY_MOSI</span><span class="p">);</span>
+  <span class="n">SPI</span><span class="p">.</span><span class="n">setMISO</span><span class="p">(</span><span class="n">MY_MISO</span><span class="p">);</span>
+  <span class="n">SPI</span><span class="p">.</span><span class="n">setSCK</span><span class="p">(</span><span class="n">MY_SCLK</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="s">"radio hardware not responding!!"</span><span class="p">));</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold program in infinite loop to prevent subsequent errors</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ... continue with program as normal (see library examples/ folder)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+
+
+
 
 
 
@@ -544,12 +707,12 @@ SPI_UART.</p>
             </a>
           
           
-            <a href="attiny.html" title="ATTiny Support"
+            <a href="pico_sdk.html" title="Using the RaspberryPi Pico SDK (for the RP2040)"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> ATTiny Support </span>
+                class="md-footer-nav__direction"> Next </span> Using the RaspberryPi Pico SDK (for the RP2040) </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
@@ -567,7 +730,7 @@ SPI_UART.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

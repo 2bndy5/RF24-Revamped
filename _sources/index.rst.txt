@@ -103,6 +103,7 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
 
    common_issues
    arduino
+   pico_sdk
    attiny
    linux_install
    mraa
