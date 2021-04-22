@@ -464,7 +464,12 @@ void RF24::_init_obj()
         #endif // !defined(SOFTSPI)
     #endif // defined (RF24_SPI_PTR)
 
+    for (uint8_t i = 0; i < 6; ++i) {
+        payload_size[i] = 32;
+    }
+
     pipe0_reading_address[0] = 0;
+    _is_pipe0_rx = false;
     if(spi_speed <= 35000){ //Handle old BCM2835 speed constants, default to RF24_SPI_SPEED
         spi_speed = RF24_SPI_SPEED;
     }
@@ -863,11 +868,11 @@ bool RF24::_init_radio()
         // allow use of multicast parameter and dynamic payloads by default
         write_register(FEATURE, feature_reg);
     }
-    write_register(DYNPD, dyn_pl_enabled);         // disable dynamic payloads by default (for all pipes)
-    write_register(EN_AA, auto_ack_enabled);      // enable auto-ack on all pipes
-    write_register(EN_RXADDR, open_pipes);     // close all RX pipes
-    setPayloadLength(payload_size[0]);    // set all pipe's static payload size to max
-    setAddressLength(5);               // set default address length to (max) 5 bytes
+    write_register(DYNPD, dyn_pl_enabled);   // disable dynamic payloads by default (for all pipes)
+    write_register(EN_AA, auto_ack_enabled); // enable auto-ack on all pipes
+    write_register(EN_RXADDR, open_pipes);   // close all RX pipes
+    setPayloadLength(payload_size[0]);       // set all pipe's static payload size to max
+    setAddressLength(5);                     // set default address length to (max) 5 bytes
 
     // Set up default configuration.  Callers can always change it later.
     // This channel should be universally safe and not bleed over into adjacent
