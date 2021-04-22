@@ -337,7 +337,7 @@ void printRxFifo()
 
         uint8_t pl_size = !role ? tx_pl_size : ack_pl_size;
         char rx_fifo[pl_size * 3 + 1];         // RX FIFO is full & we know ACK payloads' size
-        if (radio.rxFifoFull()) {
+        if (radio.isFifo(false, false)) {
             rx_fifo[pl_size * 3] = 0;          // add a NULL terminating char to use as a c-string
             radio.read(&rx_fifo, pl_size * 3); // this clears the RX FIFO (for this example)
         }

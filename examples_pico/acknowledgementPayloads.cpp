@@ -128,12 +128,13 @@ void loop() {
 
             if (radio.available()) {                     // is there an ACK payload?
                 uint8_t pipe = radio.pipe();             // grab the pipe number that received it
+                uint8_t bytes = radio.any();             // get the size of the payload
                 PayloadStruct received;
                 radio.read(&received, sizeof(received)); // get incoming ACK payload
 
                 // print details about incoming payload
                 printf(" Recieved %d bytes on pipe %d: %s%d\n",
-                       radio.getDynamicPayloadSize(),
+                       bytes,
                        pipe,
                        received.message,
                        received.counter);
@@ -159,10 +160,12 @@ void loop() {
         // This device is a RX node
 
         uint8_t pipe;
-        if (radio.available(&pipe)) {                    // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.getDynamicPayloadSize(); // get the size of the payload
+        if (radio.available()) {         // is there a payload?
+            uint8_t pipe = radio.pipe(); // grab the pipe number that received it
+            uint8_t bytes = radio.any(); // get the size of the payload
+
             PayloadStruct received;
-            radio.read(&received, sizeof(received));       // get incoming payload
+            radio.read(&received, sizeof(received)); // get incoming payload
 
             // print the details of transaction
             printf("Received %d bytes on pipe %d: %s%d Sent: %s%d\n",

@@ -127,10 +127,10 @@ void loop()
     else if (role == 'R') {
         // This device is the RX node
 
-        while (radio.available()) {                   // is there a payload?
-            uint8_t pipe = radio.pipe();              // grab the pipe number that received it
-            uint8_t bytes = radio.getPayloadLength(); // get the size of the payload
-            radio.read(&payload, bytes);              // fetch payload from FIFO
+        while (radio.available()) {      // is there a payload?
+            uint8_t pipe = radio.pipe(); // grab the pipe number that received it
+            uint8_t bytes = radio.any(); // get the size of the payload
+            radio.read(&payload, bytes); // fetch payload from FIFO
 
             // print details about incoming payload
             printf("Received %d bytes on pipe %d from node %ld. PayloadID: %ld\n",

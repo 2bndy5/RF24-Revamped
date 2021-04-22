@@ -132,8 +132,9 @@ void loop()
             // print summary of transactions
             printf("Transmission successful!"); // payload was delivered
 
-            if (radio.available()) {            // is there a recieved payload?
-                uint8_t pipe = radio.pipe();    // grab the pipe number that received it
+            if (radio.available()) {         // is there a recieved payload?
+                uint8_t pipe = radio.pipe(); // grab the pipe number that received it
+                uint8_t bytes = radio.any(); // get the size of the payload
 
                 // print details about outgoing payload
                 printf(" Round-trip delay: %llu us. Sent: %s%d",
@@ -146,7 +147,7 @@ void loop()
 
                 // print details about incoming payload
                 printf(" Received %d bytes on pipe %d: %s%d\n",
-                       radio.getPayloadLength(),
+                       bytes,
                        pipe,
                        received.message,
                        received.counter);
@@ -167,8 +168,9 @@ void loop()
     else {
         // This device is a RX node
 
-        uint8_t pipe;
-        if (radio.available(&pipe)) {                // is there a payload? get the pipe number that recieved it
+        if (radio.available()) {                     // is there an ACK payload?
+            uint8_t pipe = radio.pipe();             // grab the pipe number that received it
+            uint8_t bytes = radio.any();             // get the size of the payload
             PayloadStruct received;
             radio.read(&received, sizeof(received)); // get incoming payload
             payload.counter = received.counter + 1;  // increment incoming counter for next outgoing response
@@ -181,7 +183,7 @@ void loop()
 
             // print summary of transactions, starting with details about incoming payload
             printf("Received %d bytes on pipe %d: %s%d",
-                   radio.getPayloadLength(),
+                   bytes,
                    pipe,
                    received.message,
                    received.counter);

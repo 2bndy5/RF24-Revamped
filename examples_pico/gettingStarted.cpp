@@ -117,10 +117,10 @@ void loop()
     else {
         // This device is a RX node
 
-        if (radio.available()) {                      // is there a payload?
-            uint8_t pipe = radio.pipe();              // grab the pipe number that received it
-            uint8_t bytes = radio.getPayloadLength(); // get the size of the payload
-            radio.read(&payload, bytes);              // fetch payload from FIFO
+        if (radio.available()) {         // is there a payload?
+            uint8_t pipe = radio.pipe(); // grab the pipe number that received it
+            uint8_t bytes = radio.any(); // get the size of the payload
+            radio.read(&payload, bytes); // fetch payload from FIFO
 
             // print the size of the payload, the pipe number, payload's value
             printf("Received %d bytes on pipe %d: %f\n", bytes, pipe, payload);
