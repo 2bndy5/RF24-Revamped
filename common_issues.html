@@ -297,6 +297,8 @@
         <li class="md-nav__item"><a href="#send-always-returns-true-after-setautoack-false" class="md-nav__link">send() always returns true after setAutoAck(false)</a>
         </li>
         <li class="md-nav__item"><a href="#send-returns-false-when-the-payload-was-received" class="md-nav__link">send() returns false when the payload was received</a>
+        </li>
+        <li class="md-nav__item"><a href="#my-pa-lna-module-fails-to-transmit" class="md-nav__link">my PA/LNA module fails to transmit</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -403,6 +405,8 @@
         <li class="md-nav__item"><a href="#send-always-returns-true-after-setautoack-false" class="md-nav__link">send() always returns true after setAutoAck(false)</a>
         </li>
         <li class="md-nav__item"><a href="#send-returns-false-when-the-payload-was-received" class="md-nav__link">send() returns false when the payload was received</a>
+        </li>
+        <li class="md-nav__item"><a href="#my-pa-lna-module-fails-to-transmit" class="md-nav__link">my PA/LNA module fails to transmit</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -470,6 +474,47 @@ Example issues: <a class="reference external" href="https://github.com/nRF24/RF2
 <a class="reference external" href="https://github.com/nRF24/RF24/issues/211">#211</a>.</p>
 <p>For reliability, please use Electrolytic or Tantalum capacitors. Ceramic
 capacitors may not be good enough (depending on the manufacturing source).</p>
+
+
+<h3 id="my-pa-lna-module-fails-to-transmit">my PA/LNA module fails to transmit<a class="headerlink" href="#my-pa-lna-module-fails-to-transmit" title="Permalink to this headline">¶</a></h3>
+<p>You may find variants of the nRF24L01 transceiver that are marketed as “nRF24L01+PA+LNA”. These modules are distinct in the fact that they come with a detachable (SMA-type) antenna. They employ seperate RFX24C01 IC with the antenna for enhanced Power Amplification (PA) and Low Noise Amplification (LNA) features. While they boast greater range with the same functionality, they are subject to a couple lesser known (and lesser advertised) drawbacks:</p>
+<ol class="arabic">
+<li><p>Stronger power source. Below is a chart of advertised current requirements that many MCU boards’ 3V regulators may not be able to provide (after supplying power to internal components).</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Specification | Value</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Emission mode current(peak)</p></td>
+<td><p>115 mA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Receive Mode current(peak)</p></td>
+<td><p>45 mA</p></td>
+</tr>
+<tr class="row-even"><td><p>Power-down mode current</p></td>
+<td><p>4.2 µA</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Needs shielding from electromagnetic interference. Shielding usually works best when it has a path to ground (GND pin), but this connection to the GND pin is not required. It is important that the sheilding does not touch any current carrying parts.</p>
+<ul>
+<li><p>Professionals tend to use a faraday cage/mesh to implement electromagnetic shielding, but it can be pricey for this scenario.</p></li>
+<li><p>A quick do-it-yourself solution (as proof-of-concept) would be to wrap the PA/LNA module with electrical tape and then wrap foil around the electrical tape (for shielding) while being very careful to not let the foil touch any current carrying parts (like the GPIO pins, the antenna mount, and the soldier joints for the antenna mount). &lt;br&gt;
+See</p>
+<a class="reference external image-reference" href="https://github.com/nRF24/RF24/blob/master/images/ghetto_sheilding_1.png"><img alt="ghetto_shielding_1.png" src="https://github.com/nRF24/RF24/blob/master/images/ghetto_sheilding_1.png"/></a>
+<p>and</p>
+<a class="reference external image-reference" href="https://github.com/nRF24/RF24/blob/master/images/ghetto_sheilding_2.png"><img alt="ghetto_shielding_2.png" src="https://github.com/nRF24/RF24/blob/master/images/ghetto_sheilding_2.png"/></a>
+</li>
+</ul>
+</li>
+</ol>
 
 
 
