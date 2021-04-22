@@ -108,9 +108,12 @@ private:
     SPIUARTClass uspi;
     #endif
 
-    #if defined (RF24_LINUX) || defined (XMEGA_D3) /* XMEGA can use SPI class */
+    #if defined (RF24_LINUX) || defined (XMEGA_D3) || defined (RF24_RP2) /* XMEGA can use SPI class */
     SPI spi;
-    #endif
+    #endif // defined (RF24_LINUX) || defined (XMEGA_D3)
+    #if defined (RF24_SPI_PTR)
+    _SPI* _spi;
+    #endif // defined (RF24_SPI_PTR)
     #if defined (MRAA)
     GPIO gpio;
     #endif
@@ -201,20 +204,39 @@ public:
      * unique pins that this chip is connected to.
      *
      * @rst
-     * See `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, or `Linux &lt;rpi_general&gt;`_ pages for device specific information.
-     *
-     * .. note::
-     *     Users can specify default SPI speed by modifying ``#define RF24_SPI_SPEED`` in RF24_config.h
-     *     For Arduino, SPI speed will only be properly configured this way on devices supporting SPI TRANSACTIONS.
-     *     Older\/Unsupported Arduino devices will use a default clock divider and settings configuration
-     *     Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed
+     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, `Linux &lt;rpi_general&gt;`_
+     *     `Pico SDK &lt;pico_sdk&gt;`_ pages for device specific information.
      * @endrst
      *
-     * @param _cepin The pin attached to Chip Enable on the RF module
-     * @param _cspin The pin attached to Chip Select
-     * @param _spispeed The SPI speed in Hz ie: 1000000 == 1Mhz
+     * @param _cepin The pin attached to Chip Enable on the radio module
+     * @param _cspin The pin attached to Chip Select (often labeled CSN) on the radio module.
+     * For the Arduino Due board, the [Arduino Due extended SPI feature](https://www.arduino.cc/en/Reference/DueExtendedSPI)
+     * is not supported. This means that the Due's pins 4, 10, or 52 are not mandated options (can use any digital output pin)
+     * for the radio's CSN pin.
+     * @param _spi_speed The SPI speed in Hz ie: 1000000 == 1Mhz.
+     * Users can specify default SPI speed by modifying `#define RF24_SPI_SPEED` in RF24_config.h
+     * - For Arduino, the default SPI speed will only be properly configured this way on devices supporting SPI TRANSACTIONS
+     * - Older/Unsupported Arduino devices will use a default clock divider & settings configuration
+     * - For Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed as of v1.3.7
      */
     RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spispeed = RF24_SPI_SPEED);
+
+    /**
+     * A constructor for initializing the radio's hardware dynamically
+     *
+     * @rst
+     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny&gt;`_, `Linux &lt;rpi_general&gt;`_,
+     *     `Pico SDK &lt;pico_sdk&gt;`_ pages for device specific information.
+     * @endrst
+     * @warning You MUST use `begin(uint16_t, uint16_t)`_ or `begin(_SPI*, uint16_t, uint16_t)`_ to pass both
+     * the digital output pin numbers connected to the radio's CE and CSN pins.
+     * @param _spi_speed The SPI speed in Hz ie: 1000000 == 1Mhz.
+     * Users can specify default SPI speed by modifying `#define RF24_SPI_SPEED` in RF24_config.h
+     * - For Arduino, the default SPI speed will only be properly configured this way on devices supporting SPI TRANSACTIONS
+     * - Older/Unsupported Arduino devices will use a default clock divider & settings configuration
+     * - For Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed as of v1.3.7
+     */
+    RF24(uint32_t _spi_speed = RF24_SPI_SPEED);
 
     #if defined (RF24_LINUX)
     virtual ~RF24() {};
@@ -240,10 +262,87 @@ public:
      */
     bool begin(void);
 
+    #if defined (RF24_SPI_PTR) || defined (DOXYGEN_FORCED)
+    /**
+     * Same as begin(), but allows specifying a non-default SPI bus to use.
+     *
+     * @rst
+     * .. seealso:: Review the `Arduino support page &lt;arduino.html#using-a-specific-spi-bus&gt;`_.
+     * .. important:: This function assumes the ``SPI.begin()`` method was called before to
+     *     calling this function.
+     *
+     * .. warning:: This function is for the Arduino platform only, but is not supported on the following boards/architecture:
+     *
+     *     - Arduino Due
+     *     - Any ATTiny device
+     *     - LittleWire
+     *     - `SPI_UART implementation &lt;arduino.html#alternate-hardware-uart-driven-spi&gt;`_
+     * @endrst
+     * @param spiBus A pointer or reference to an instantiated SPI bus object.
+     * @rst
+     * .. hint:: The ``_SPI`` datatype is a "wrapped" definition that will represent
+     *     various SPI implementations based on the specified platform (or SoftSPI).
+     * @endrst
+     * @return same result as begin()
+     */
+    bool begin(_SPI* spiBus);
+
+    /**
+     * Same as begin(), but allows dynamically specifying a SPI bus, CE pin,
+     * and CSN pin to use.
+     *
+     * @rst
+     * .. seealso:: Review the `Arduino support page &lt;arduino.html#using-a-specific-spi-bus&gt;`_.
+     * .. important:: This function assumes the ``SPI.begin()`` method was called before to
+     *     calling this function.
+     *
+     * .. warning:: This function is for the Arduino platform only, but is not supported on the following boards/architecture:
+     *
+     *     - Arduino Due
+     *     - Any ATTiny device
+     *     - LittleWire
+     *     - `SPI_UART implementation &lt;arduino.html#alternate-hardware-uart-driven-spi&gt;`_
+     * @endrst
+     * @param spiBus A pointer or reference to an instantiated SPI bus object.
+     * @rst
+     * .. hint:: The ``_SPI`` datatype is a "wrapped" definition that will represent
+     *     various SPI implementations based on the specified platform (or SoftSPI).
+     * @endrst
+     * @param _cepin The pin attached to Chip Enable on the RF module
+     * @param _cspin The pin attached to Chip Select (often labeled CSN) on the radio module.
+     * For the Arduino Due board, the [Arduino Due extended SPI feature](https://www.arduino.cc/en/Reference/DueExtendedSPI)
+     * is not supported. This means that the Due's pins 4, 10, or 52 are not mandated options (can use any digital output pin)
+     * for the radio's CSN pin.
+     * @return same result as begin()
+     */
+    bool begin(_SPI* spiBus, uint16_t _cepin, uint16_t _cspin);
+    #endif // defined (RF24_SPI_PTR) || defined (DOXYGEN_FORCED)
+
+    /**
+     * Same as begin(), but allows dynamically specifying a CE pin
+     * and CSN pin to use.
+     * @param _cepin The pin attached to Chip Enable on the radio module
+     * @param _cspin The pin attached to Chip Select (often labeled CSN) on the radio module.
+     * For the Arduino Due board, the [Arduino Due extended SPI feature](https://www.arduino.cc/en/Reference/DueExtendedSPI)
+     * is not supported. This means that the Due's pins 4, 10, or 52 are not mandated options (can use any digital output pin)
+     * for the radio's CSN pin.
+     * @return same result as begin()
+     */
+    bool begin(uint16_t _cepin, uint16_t _cspin);
+
     /**
      * Checks if the chip is connected to the SPI bus
      */
     bool isChipConnected();
+
+    /**
+     * Test whether this is a real radio, or a mock shim for
+     * debugging.  Setting either pin to 0xff is the way to
+     * indicate that this is not a real radio.
+     *
+     * @return true if this is a legitimate radio
+     */
+    bool isValid();
 
     /**
      * Start listening on the pipes opened for reading.
@@ -1324,6 +1423,23 @@ public:
     void ce(bool level);
 
 private:
+    /**
+     * initializing function specific to all constructors
+     * (regardless of constructor parameters)
+     */
+    void _init_obj();
+
+    /**
+     * initialize radio by performing a soft reset.
+     * @warning This function assumes the SPI bus object's begin() method has been
+     * previously called.
+     */
+    bool _init_radio();
+
+    /**
+     * initialize the GPIO pins
+     */
+    bool _init_pins();
 
     /**
      * Write the transmit payload to the TX FIFO

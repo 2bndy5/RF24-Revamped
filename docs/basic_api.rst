@@ -2,7 +2,7 @@
 Basic API
 ---------
 
-Constructor
+Constructors
 ******************
 
 .. doxygenclass:: RF24
@@ -11,7 +11,22 @@ Constructor
 begin()
 **********************
 
-.. doxygenfunction:: RF24::begin
+.. doxygenfunction:: RF24::begin(void)
+
+begin(_SPI*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. doxygenfunction:: RF24::begin(_SPI*)
+
+begin(uint16_t, uint16_t)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. doxygenfunction:: RF24::begin(uint16_t, uint16_t)
+
+begin(_SPI*, uint16_t, uint16_t)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. doxygenfunction:: RF24::begin(_SPI*, uint16_t, uint16_t)
 
 openReadingPipe()
 ******************

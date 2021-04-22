@@ -37,13 +37,20 @@
 #define rf24_max(a, b) (a>b?a:b)
 #define rf24_min(a, b) (a<b?a:b)
 
+/** @brief The default SPI speed (in Hz) */
+#ifndef RF24_SPI_SPEED
 #define RF24_SPI_SPEED 10000000
+#endif
 
 //ATXMega
 #if defined (__AVR_ATxmega64D3__) || defined (__AVR_ATxmega128D3__) || defined (__AVR_ATxmega192D3__) || defined (__AVR_ATxmega256D3__) || defined (__AVR_ATxmega384D3__) // In order to be available both in Windows and Linux this should take presence here.
     #define XMEGA
     #define XMEGA_D3
     #include "utility/ATXMegaD3/RF24_arch_config.h"
+
+// RaspberryPi rp2xxx-based devices (e.g. RPi Pico board)
+#elif defined (PICO_BUILD) && !defined (ARDUINO)
+    #include "utility/rp2/includes.h"
 
 #elif ( !defined (ARDUINO) ) // Any non-arduino device is handled via configure/Makefile
     // The configure script detects device and copies the correct includes.h file to /utility/includes.h
@@ -86,11 +93,17 @@
             #endif // SOFT_SPI_SCK_PIN
 
             const uint8_t SPI_MODE = 0;
-            #define _SPI spi
+            #define _SPI SoftSPI<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN, SPI_MODE>
+            #define RF24_SPI_PTR
+
+        #elif defined (ARDUINO_SAM_DUE)
+            #include <SPI.h>
+            #define _SPI SPI
 
         #else // !defined (SPI_UART) && !defined (SOFTSPI)
             #include <SPI.h>
-            #define _SPI SPI
+            #define _SPI SPIClass
+            #define RF24_SPI_PTR
         #endif // !defined (SPI_UART) && !defined (SOFTSPI)
 
     #else // defined (ARDUINO) && !defined (__arm__) && !defined (__ARDUINO_X86__)
@@ -106,11 +119,15 @@
 
             #else // !defined (__arm__) || !defined (SPI_UART)
                 #include <SPI.h>
-                #define _SPI SPI
+                #define _SPI SPIClass
+                #define RF24_SPI_PTR
 
             #endif // !defined (__arm__) || !defined (SPI_UART)
         #elif !defined(__arm__) && !defined (__ARDUINO_X86__)
+            // fallback to unofficially supported Hardware (courtesy of ManiacBug)
             extern HardwareSPI SPI;
+            #define _SPI HardwareSPI
+            #define RF24_SPI_PTR
 
         #endif // !defined(__arm__) && !defined (__ARDUINO_X86__)
 
@@ -151,10 +168,19 @@
         #if !defined (ARDUINO) // This doesn't work on Arduino DUE
             typedef char const char;
 
-        #else // Fill in pgm_read_byte that is used, but missing from DUE
-          #ifdef ARDUINO_ARCH_AVR
-            #include <avr/pgmspace.h>
-          #endif
+        #else
+            #if defined (ARDUINO_ARCH_AVR) || defined (ARDUINO_ARCH_SAMD) || defined (ARDUINO_SAM_DUE)
+                #include <avr/pgmspace.h> // added to ArduinoCore-sam (Due core) in 2013
+            #endif
+
+            // Since the official arduino/ArduinoCore-samd repo switched to a unified API in 2016,
+            // Serial.printf() is no longer defined in the unifying Arduino/ArduinoCore-API repo
+            #if defined (ARDUINO_ARCH_SAMD) && !defined (ARDUINO_API_VERSION)
+                // likely using the adafruit/ArduinoCore-samd repo
+                #define printf_P Serial.printf
+            #endif // defined (ARDUINO_ARCH_SAMD)
+
+          // Fill in pgm_read_byte that is used
           #ifndef pgm_read_byte
             #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
           #endif

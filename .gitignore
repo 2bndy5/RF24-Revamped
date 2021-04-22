@@ -32,5 +32,6 @@ examples_linux/**/*
 .idea
 doxygenAction
 .vscode/
-*venv
+*env
 *.pyc
+build/
