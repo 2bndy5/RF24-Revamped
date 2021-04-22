@@ -8,14 +8,14 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 # Define the RF24 core library
-add_library(RF24 INTERFACE)
+add_library(RF24Revamped INTERFACE)
 
-target_sources(RF24 INTERFACE
-    ${CMAKE_CURRENT_LIST_DIR}/../../RF24.cpp
+target_sources(RF24Revamped INTERFACE
+    ${CMAKE_CURRENT_LIST_DIR}/../../RF24Revamped.cpp
     ${CMAKE_CURRENT_LIST_DIR}/gpio.cpp
     ${CMAKE_CURRENT_LIST_DIR}/spi.cpp
 )
 
-target_include_directories(RF24 INTERFACE
+target_include_directories(RF24Revamped INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/../../
 )
