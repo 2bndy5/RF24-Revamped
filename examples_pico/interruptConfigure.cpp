@@ -83,7 +83,7 @@ bool setup()
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW);    // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW);    // RF24_PA_MAX is default.
 
     // For this example we use acknowledgment (ACK) payloads to trigger the
     // IRQ pin when data is received on the TX node.

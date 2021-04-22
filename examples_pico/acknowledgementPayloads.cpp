@@ -67,7 +67,7 @@ bool setup() {
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPALevel(RF24_PA_LOW);     // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW);     // RF24_PA_MAX is default.
 
     // to use ACK payloads, we need to enable dynamic payload lengths (for all nodes)
     radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
