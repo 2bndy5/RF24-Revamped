@@ -1,13 +1,15 @@
-/*
- Copyright (C) 2011 J. Coliz <maniacbug@ymail.com>
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- version 2 as published by the Free Software Foundation.
+/**
+ * Copyright (C)
+ *  2011    J. Coliz <maniacbug@ymail.com>
+ *  2021    Brendan Doherty (2bndy5)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2 as published by the Free Software Foundation.
  */
 
 /**
- * @file RF24.h
+ * @file RF24Revamped.h
  *
  * Class declaration for RF24 and helper enums
  */
@@ -204,7 +206,7 @@ public:
      * unique pins that this chip is connected to.
      *
      * @rst
-     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny.html&gt;`_, `Linux &lt;rpi_general&gt;`_,
+     * .. seealso:: `Arduino &lt;arduino.html&gt;`_, `ATTiny &lt;attiny.html&gt;`_, `Linux &lt;rpi_general.html&gt;`_,
      *     `Pico SDK &lt;pico_sdk.html&gt;`_ pages for device specific information.
      * @endrst
      *
@@ -219,7 +221,7 @@ public:
      * - Older/Unsupported Arduino devices will use a default clock divider & settings configuration
      * - For Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed as of v1.3.7
      */
-    RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spispeed = RF24_SPI_SPEED);
+    RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed = RF24_SPI_SPEED);
 
     /**
      * A constructor for initializing the radio's hardware dynamically

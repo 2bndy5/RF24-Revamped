@@ -140,7 +140,7 @@ Project Source code option
 --------------------------
 
 This option is the most reliable and flexible. It involves calling `SPI.begin()` and
-then passing the ``SPI`` object to `RF24::begin(_SPI* spiBus) <basic_api.html#begin-spi>`_.
+then passing the ``SPI`` object to `RF24::begin(_SPI*) <basic_api.html#begin-spi>`_.
 
 .. code-block:: cpp
 

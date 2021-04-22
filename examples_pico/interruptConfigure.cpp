@@ -143,7 +143,7 @@ void loop()
             // Test the "data ready" event with the IRQ pin
 
             printf("\nConfiguring IRQ pin to ignore the 'data sent' event\n");
-            radio.maskIRQ(true, false, false); // args = "data_sent", "data_fail", "data_ready"
+            radio.interruptConfig(true, false, true); // args = dataReady, dataSent, dataFail
             printf("   Pinging RX node for 'data ready' event...\n");
 
         }
@@ -151,7 +151,7 @@ void loop()
             // Test the "data sent" event with the IRQ pin
 
             printf("\nConfiguring IRQ pin to ignore the 'data ready' event\n");
-            radio.maskIRQ(false, false, true); // args = "data_sent", "data_fail", "data_ready"
+            radio.interruptConfig(false, true, true); // args = dataReady, dataSent, dataFail
             printf("   Pinging RX node for 'data sent' event...\n");
 
         }
@@ -159,10 +159,10 @@ void loop()
             // Use this iteration to fill the RX node's FIFO which sets us up for the next test.
 
             // write() uses virtual interrupt flags that work despite the masking of the IRQ pin
-            radio.maskIRQ(1, 1, 1); // disable IRQ masking for this step
+            radio.interruptConfig(false, false, false); // disable IRQ masking for this step
 
             printf("\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected.\n");
-            // write() will call flush_tx() on 'data fail' events
+            // write() will call flushTx() on 'data fail' events
             if (radio.write(&tx_payloads[pl_iterator], tx_pl_size)) {
                 if (radio.rxFifoFull()) {
                     printf("RX node's FIFO is full; it is not listening any more\n");
@@ -173,7 +173,7 @@ void loop()
             }
             else {
                 printf("Transmission failed or timed out. Continuing anyway.\n");
-                radio.flush_tx(); // discard payload(s) that failed to transmit
+                radio.flushTx(); // discard payload(s) that failed to transmit
             }
 
         }
@@ -181,7 +181,7 @@ void loop()
             // test the "data fail" event with the IRQ pin
 
             printf("\nConfiguring IRQ pin to reflect all events\n");
-            radio.maskIRQ(0, 0, 0); // args = "data_sent", "data_fail", "data_ready"
+            radio.interruptConfig(); // all args default to true
             printf("   Pinging inactive RX node for 'data fail' event...\n");
         }
 
@@ -200,11 +200,11 @@ void loop()
             // default, we don't need a timeout check to prevent an infinite loop.
         }
         else if (pl_iterator == 4) {
-            // all IRQ tests are done; flush_tx() and print the ACK payloads for fun
+            // all IRQ tests are done; flushTx() and print the ACK payloads for fun
 
             // CE pin is still HIGH which consumes more power. Example is now idling so...
             radio.stopListening(); // ensure CE pin is LOW
-            // stopListening() also calls flush_tx() when ACK payloads are enabled
+            // stopListening() also calls flushTx() when ACK payloads are enabled
 
             printRxFifo();
             pl_iterator++;
@@ -255,7 +255,7 @@ void loop()
             role = true;
             wait_for_event = false;
             pl_iterator = 0;   // reset the iterator
-            radio.flush_tx();  // discard any payloads in the TX FIFO
+            radio.flushTx();  // discard any payloads in the TX FIFO
 
             // startListening() clears the IRQ masks also. This is required for
             // continued TX operations when a transmission fails.
@@ -271,7 +271,7 @@ void loop()
 
             // Fill the TX FIFO with 3 ACK payloads for the first 3 received
             // transmissions on pipe 1
-            radio.flush_tx(); // make sure there is room for 3 new ACK payloads
+            radio.flushTx(); // make sure there is room for 3 new ACK payloads
             radio.writeAck(1, &ack_payloads[0], ack_pl_size);
             radio.writeAck(1, &ack_payloads[1], ack_pl_size);
             radio.writeAck(1, &ack_payloads[2], ack_pl_size);
@@ -308,7 +308,7 @@ void interruptHandler(uint gpio, uint32_t events)
            radio.irqDr() ? "true" : "false");
 
     if (radio.irqDf())    // if TX payload failed
-        radio.flush_tx(); // clear all payloads from the TX FIFO
+        radio.flushTx(); // clear all payloads from the TX FIFO
 
     // print if test passed or failed. Unintentional fails mean the RX node was not listening.
     // pl_iterator has already been incremented by now

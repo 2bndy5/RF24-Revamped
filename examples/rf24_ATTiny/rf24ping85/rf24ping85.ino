@@ -193,11 +193,9 @@ void loop() {
       payload.counter = received.counter + 1;     // increment incoming counter for next outgoing response
 
       // transmit response & save result to `report`
-      radio.stopListening();                      // put in TX mode
-
-      bool report = radio.send(&payload, sizeof(payload)); // load response to TX FIFO
-
-      radio.startListening();                     // put back in RX mode
+      radio.stopListening();                 // put in TX mode
+      radio.send(&payload, sizeof(payload)); // load response to TX FIFO
+      radio.startListening();                // put back in RX mode
     }
   } // role
 } // loop

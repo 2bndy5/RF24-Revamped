@@ -1,9 +1,11 @@
-/*
- Copyright (C) 2011 J. Coliz <maniacbug@ymail.com>
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- version 2 as published by the Free Software Foundation.
+/**
+ * Copyright (C)
+ *  2011    J. Coliz <maniacbug@ymail.com>
+ *  2021    Brendan Doherty (2bndy5)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2 as published by the Free Software Foundation.
  */
 
 #include "nRF24L01.h"

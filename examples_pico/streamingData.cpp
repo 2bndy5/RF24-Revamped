@@ -102,7 +102,7 @@ void loop() {
     if (role) {
         // This device is a TX node
 
-        radio.flush_tx();
+        radio.flushTx();
         uint8_t i = 0;
         uint8_t failures = 0;
         uint64_t start_timer = to_us_since_boot(get_absolute_time()); // start the timer

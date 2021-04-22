@@ -140,7 +140,7 @@ jobs:
           - ATTinyCore:avr:attiny828opti
           - ATTinyCore:avr:attiny1634
           - ATTinyCore:avr:attiny1634opti
-          - ATTinyCore:avr:attinyx313
+          # - ATTinyCore:avr:attinyx313  # extremely low mem capacity
 
     steps:
       - name: Checkout
