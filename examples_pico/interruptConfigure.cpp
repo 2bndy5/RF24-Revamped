@@ -193,7 +193,7 @@ void loop()
 
             // use the non-blocking call to write a payload and begin transmission
             // the "false" argument means we are expecting an ACK packet response
-            radio.startFastWrite(tx_payloads[pl_iterator++], tx_pl_size, false);
+            radio.write(tx_payloads[pl_iterator++], tx_pl_size, false);
 
             // In this example, the "data fail" event is always configured to
             // trigger the IRQ pin active. Because the auto-ACK feature is on by
@@ -267,7 +267,7 @@ void loop()
 
             role = false;
 
-            radio.maskIRQ(0, 0, 0); // the IRQ pin should only trigger on "data ready" event
+            radio.interruptConfig(); // the IRQ pin should only trigger on "data ready" event
 
             // Fill the TX FIFO with 3 ACK payloads for the first 3 received
             // transmissions on pipe 1

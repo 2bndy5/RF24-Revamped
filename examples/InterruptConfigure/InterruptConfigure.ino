@@ -219,7 +219,7 @@ void loop() {
   } else if (!role) {
     // This device is a RX node
 
-    if (radio.isFifo(false, true)) {
+    if (radio.isFifo(false, false)) {
       // wait until RX FIFO is full then stop listening
 
       delay(100);             // let ACK payload finish transmitting
