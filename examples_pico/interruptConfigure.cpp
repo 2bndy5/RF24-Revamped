@@ -164,7 +164,7 @@ void loop()
             printf("\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected.\n");
             // write() will call flushTx() on 'data fail' events
             if (radio.write(&tx_payloads[pl_iterator], tx_pl_size)) {
-                if (radio.rxFifoFull()) {
+                if (radio.isFifo(false, false)) {
                     printf("RX node's FIFO is full; it is not listening any more\n");
                 }
                 else {
@@ -222,7 +222,7 @@ void loop()
     else if (!role) {
         // This device is a RX node
 
-        if (radio.isFifo(false, true)) {
+        if (radio.isFifo(false, false)) {
             // wait until RX FIFO is full then stop listening
 
             sleep_ms(100);          // let ACK payload finish transmitting
