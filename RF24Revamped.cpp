@@ -1308,8 +1308,13 @@ void RF24::closeReadingPipe(uint8_t pipe)
 void RF24::toggle_features(void)
 {
     beginTransaction();
+    #if defined (RF24_SPI_PTR)
+    status = _spi->transfer(ACTIVATE);
+    _spi->transfer(0x73);
+    #else
     status = _SPI.transfer(ACTIVATE);
     _SPI.transfer(0x73);
+    #endif
     endTransaction();
 }
 
