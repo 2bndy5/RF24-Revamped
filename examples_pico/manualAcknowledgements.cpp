@@ -77,7 +77,7 @@ bool setup()
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
-    radio.setPayloadSize(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
+    radio.setPayloadLength(sizeof(payload)); // char[7] & uint8_t datatypes occupy 8 bytes
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
@@ -130,9 +130,11 @@ void loop()
             radio.stopListening();                                               // put back in TX mode
 
             // print summary of transactions
-            printf("Transmission successful!");            // payload was delivered
-            uint8_t pipe;
-            if (radio.available(&pipe)) {                  // is there a payload received
+            printf("Transmission successful!"); // payload was delivered
+
+            if (radio.available()) {            // is there a recieved payload?
+                uint8_t pipe = radio.pipe();    // grab the pipe number that received it
+
                 // print details about outgoing payload
                 printf(" Round-trip delay: %llu us. Sent: %s%d",
                        end_timer - start_timer,
@@ -144,7 +146,7 @@ void loop()
 
                 // print details about incoming payload
                 printf(" Received %d bytes on pipe %d: %s%d\n",
-                       radio.getPayloadSize(),
+                       radio.getPayloadLength(),
                        pipe,
                        received.message,
                        received.counter);
@@ -179,7 +181,7 @@ void loop()
 
             // print summary of transactions, starting with details about incoming payload
             printf("Received %d bytes on pipe %d: %s%d",
-                   radio.getPayloadSize(),
+                   radio.getPayloadLength(),
                    pipe,
                    received.message,
                    received.counter);

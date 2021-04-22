@@ -64,7 +64,7 @@ bool setup()
 
     // save on transmission time by setting the radio to only transmit the
     // number of bytes we need to transmit a float
-    radio.setPayloadSize(sizeof(payload)); // float datatype occupies 4 bytes
+    radio.setPayloadLength(sizeof(payload)); // float datatype occupies 4 bytes
 
     // set the TX address of the RX node into the TX pipe
     radio.openWritingPipe(address[radioNumber]); // always uses pipe 0
@@ -117,10 +117,10 @@ void loop()
     else {
         // This device is a RX node
 
-        uint8_t pipe;
-        if (radio.available(&pipe)) {               // is there a payload? get the pipe number that recieved it
-            uint8_t bytes = radio.getPayloadSize(); // get the size of the payload
-            radio.read(&payload, bytes);            // fetch payload from FIFO
+        if (radio.available()) {                      // is there a payload?
+            uint8_t pipe = radio.pipe();              // grab the pipe number that received it
+            uint8_t bytes = radio.getPayloadLength(); // get the size of the payload
+            radio.read(&payload, bytes);              // fetch payload from FIFO
 
             // print the size of the payload, the pipe number, payload's value
             printf("Received %d bytes on pipe %d: %f\n", bytes, pipe, payload);

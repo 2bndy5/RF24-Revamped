@@ -126,10 +126,10 @@ void loop() {
                    payload.message,
                    payload.counter);
 
-            uint8_t pipe;
-            if (radio.available(&pipe)) {                          // is there an ACK payload? grab the pipe number that received it
+            if (radio.available()) {                     // is there an ACK payload?
+                uint8_t pipe = radio.pipe();             // grab the pipe number that received it
                 PayloadStruct received;
-                radio.read(&received, sizeof(received));             // get incoming ACK payload
+                radio.read(&received, sizeof(received)); // get incoming ACK payload
 
                 // print details about incoming payload
                 printf(" Recieved %d bytes on pipe %d: %s%d\n",
