@@ -111,7 +111,7 @@ bool setup()
         // setup for RX mode
 
         // let IRQ pin only trigger on "data ready" event in RX mode
-        radio.maskIRQ(1, 1, 0); // args = "data_sent", "data_fail", "data_ready"
+        radio.interruptConfig(true, false, false); // args = "data_sent", "data_fail", "data_ready"
 
         // Fill the TX FIFO with 3 ACK payloads for the first 3 received
         // transmissions on pipe 1
