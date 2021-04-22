@@ -857,17 +857,6 @@ public:
     bool testRpd(void);
 
     /**
-     * Test whether this is a real radio, or a mock shim for debugging. Setting
-     * both CE & CSN pins to `0xFF` is the way to indicate that this is not a
-     * real radio.
-     * @return `true` if this is a legitimate radio, `false` if not.
-     */
-    bool isValid()
-    {
-        return ce_pin != 0xff && csn_pin != 0xff;
-    }
-
-    /**
      * Close a pipe after it has been previously opened.
      * Can be safely called without having previously opened a pipe.
      * @param pipe Which pipe number to close, any integer not in range [0, 5]
