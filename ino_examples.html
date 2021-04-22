@@ -2824,7 +2824,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// This device is a RX node</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">isFifo</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
       <span class="c1">// wait until RX FIFO is full then stop listening</span>
 
       <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>             <span class="c1">// let ACK payload finish transmitting</span>
