@@ -83,12 +83,12 @@ bool setup()
     // Set the PA Level low to try preventing power supply related problems
     // because these examples are likely run with nodes in close proximity to
     // each other.
-    radio.setPaLevel(RF24_PA_LOW);    // RF24_PA_MAX is default.
+    radio.setPaLevel(RF24_PA_LOW); // RF24_PA_MAX is default.
 
     // For this example we use acknowledgment (ACK) payloads to trigger the
     // IRQ pin when data is received on the TX node.
     // to use ACK payloads, we need to enable dynamic payload lengths
-    radio.enableDynamicPayloads();    // ACK payloads are dynamically sized
+    radio.setDynamicPayloads(true); // ACK payloads are dynamically sized
 
     // Acknowledgement packets have no payloads by default. We need to enable
     // this feature for all nodes (TX & RX) to use ACK payloads.
@@ -96,7 +96,7 @@ bool setup()
     // Fot this example, we use the same address to send data back and forth
 
     // set the TX address of the RX node into the TX pipe
-    radio.openWritingPipe(address[radioNumber]);     // always uses pipe 0
+    radio.openWritingPipe(address[radioNumber]); // always uses pipe 0
 
     // set the RX address of the TX node into a RX pipe
     radio.openReadingPipe(1, address[!radioNumber]); // using pipe 1
