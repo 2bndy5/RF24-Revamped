@@ -1050,17 +1050,22 @@ bool RF24::resend()
         return 0;
     }
 
+    // exit active TX mode
+    ce(LOW);
+
     // issue re-use tx cmd
     write_register(REUSE_TX_PL, RF24_NOP, true);
 
-    // start transmission
-    ce(LOW);
+    // re-start transmission
     ce(HIGH);
+    uint32 count = 0;
     while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
+        count++;
         // Wait until complete or failed
         update();
     }
-    ce(LOW);
+    // ce(LOW); // keep it HIGH for speed
+    printf("resend did %i updates\n", count);
 
     return irqDs();
 }

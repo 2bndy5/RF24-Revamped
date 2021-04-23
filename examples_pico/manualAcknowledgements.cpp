@@ -32,8 +32,8 @@ bool role = false;  // true = TX node, false = RX node
 // on every successful transmission.
 // Make a data structure to store the entire payload of different datatypes
 struct PayloadStruct {
-  char message[7];          // only using 6 characters for TX & RX payloads
-  uint8_t counter;
+    char message[7]; // only using 6 characters for TX & RX payloads
+    uint8_t counter;
 };
 PayloadStruct payload;
 
@@ -102,7 +102,7 @@ bool setup()
     // For debugging info
     // printf_begin();             // needed only once for printing details
     // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    radio.printPrettyDetails(); // (larger) function that prints human readable data
 
     // role variable is hardcoded to RX behavior, inform the user of this
     printf("*** PRESS 'T' to begin transmitting to the other node\n");
@@ -124,10 +124,10 @@ void loop()
             radio.startListening();                                              // put in RX mode
             uint64_t start_timeout = to_ms_since_boot(get_absolute_time());      // timer to detect timeout
             while (!radio.available()) {                                         // wait for response
-                if (to_ms_since_boot(get_absolute_time()) - start_timeout > 200)                  // only wait 200 ms
+                if (to_ms_since_boot(get_absolute_time()) - start_timeout > 200) // only wait 200 ms
                     break;
             }
-            unsigned long end_timer = to_us_since_boot(get_absolute_time());     // end the timer
+            uint64_t end_timer = to_us_since_boot(get_absolute_time());          // end the timer
             radio.stopListening();                                               // put back in TX mode
 
             // print summary of transactions
@@ -180,7 +180,10 @@ void loop()
             radio.stopListening();                                // put in TX mode
             uint32_t start_response = to_ms_since_boot(get_absolute_time());
             bool report = radio.send(&payload, sizeof(payload));  // send response
-            while (!report && to_ms_since_boot(get_absolute_time()) - start_response < 200) {
+            while (!report) {
+                if (to_ms_since_boot(get_absolute_time()) - start_response < 200) {
+                    break;
+                }
                 report = radio.resend();                          // retry for 200 ms
             }
             radio.startListening();                               // put back in RX mode
