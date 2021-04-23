@@ -1023,17 +1023,17 @@ bool RF24::send(const void* buf, uint8_t len, const bool multicast)
     // this method only uses 1 payload at a time using, so just flush
     flushTx();
     write(buf, len, multicast);
-    uint16_t i = 0;
+    uint32_t i = 0;
     while (!(status & (_BV(TX_DS) | _BV(MAX_RT)))) {
         // Wait until complete or failed
         update();
         i++;
-        if (i > 8400) {
+        if (i > 0xFFFFFF00) {
             IF_SERIAL_DEBUG(printf("HARDWARE FAILURE DETECTED\n"););
             break;
         }
     }
-    IF_SERIAL_DEBUG(printf("updated status byte %d times\n", i););
+    IF_SERIAL_DEBUG(printf("send did %i updates\n", i););
     ce(LOW);
     return irqDs();
 }
@@ -1063,9 +1063,13 @@ bool RF24::resend()
         count++;
         // Wait until complete or failed
         update();
+        if (i > 0xFFFFFF00) {
+            IF_SERIAL_DEBUG(printf("HARDWARE FAILURE DETECTED\n"););
+            break;
+        }
     }
     // ce(LOW); // keep it HIGH for speed
-    printf("resend did %i updates\n", count);
+    IF_SERIAL_DEBUG(printf("resend did %i updates\n", count););
 
     return irqDs();
 }
