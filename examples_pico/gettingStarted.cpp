@@ -96,7 +96,7 @@ void loop()
         // This device is a TX node
 
         uint64_t start_timer = to_us_since_boot(get_absolute_time()); // start the timer
-        bool report = radio.write(&payload, sizeof(payload));         // transmit & save the report
+        bool report = radio.send(&payload, sizeof(payload));         // transmit & save the report
         uint64_t end_timer = to_us_since_boot(get_absolute_time());   // end the timer
 
         if (report) {

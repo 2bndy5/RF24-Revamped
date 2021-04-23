@@ -162,7 +162,7 @@ void loop()
 
             printf("\nSending 1 payload to fill RX node's FIFO. IRQ pin is neglected.\n");
             // write() will call flushTx() on 'data fail' events
-            if (radio.write(&tx_payloads[pl_iterator], tx_pl_size)) {
+            if (radio.send(&tx_payloads[pl_iterator], tx_pl_size)) {
                 if (radio.isFifo(false, false)) {
                     printf("RX node's FIFO is full; it is not listening any more\n");
                 }

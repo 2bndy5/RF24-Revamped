@@ -114,10 +114,10 @@ void loop() {
             radio.ce(true);
             while (!radio.isFifo(true, true)) {
                 if (radio.irqDf()) {
-                failures++;
-                radio.ce(false);
-                radio.clearStatusFlags();
-                radio.ce(true);
+                    failures++;
+                    radio.ce(false);
+                    radio.clearStatusFlags();
+                    radio.ce(true);
                     if (failures >= 100) {
                         printf("Too many failures detected. Aborting at payload %c\n", buffer[0]);
                         break;

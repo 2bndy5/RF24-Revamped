@@ -95,7 +95,7 @@ bool setup() {
 
         memcpy(payload.message, "World ", 6);                       // set the payload message
         // load the payload for the first received transmission on pipe 0
-        radio.writeAck(1, &payload, sizeof(PayloadStruct));
+        radio.writeAck(1, &payload, sizeof(payload));
 
         radio.startListening();                                     // put radio in RX mode
     }
@@ -115,7 +115,7 @@ void loop() {
         // This device is a TX node
 
         uint64_t start_timer = to_us_since_boot(get_absolute_time()); // start the timer
-        bool report = radio.write(&payload, sizeof(payload));         // transmit & save the report
+        bool report = radio.send(&payload, sizeof(payload));         // transmit & save the report
         uint64_t end_timer = to_us_since_boot(get_absolute_time());   // end the timer
 
         if (report) {
@@ -146,8 +146,6 @@ void loop() {
             else {
                 printf(" Recieved: an empty ACK packet\n"); // empty ACK packet received
             }
-
-
         }
         else {
             printf("Transmission failed or timed out\n");    // payload was not delivered
