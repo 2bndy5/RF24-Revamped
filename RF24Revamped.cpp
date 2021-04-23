@@ -1063,7 +1063,7 @@ bool RF24::resend()
         count++;
         // Wait until complete or failed
         update();
-        if (i > 0xFFFFFF00) {
+        if (count > 0xFFFFFF00) {
             IF_SERIAL_DEBUG(printf("HARDWARE FAILURE DETECTED\n"););
             break;
         }
