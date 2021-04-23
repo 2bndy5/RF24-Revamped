@@ -220,25 +220,23 @@ void loop()
         }
 
     }
-    else if (!role) {
+    else if (!role && radio.isFifo(false, false)) {
         // This device is a RX node
+        //
+        // The RX role waits until RX FIFO is full then stops listening while
+        // the FIFOs get reset and starts listening again.
 
-        if (radio.isFifo(false, false)) {
-            // wait until RX FIFO is full then stop listening
+        radio.stopListening();  // also discards unused ACK payloads
+        printRxFifo();          // flush the RX FIFO
 
-            sleep_ms(100);          // let ACK payload finish transmitting
-            radio.stopListening();  // also discards unused ACK payloads
-            printRxFifo();          // flush the RX FIFO
+        // Fill the TX FIFO with 3 ACK payloads for the first 3 received
+        // transmissions on pipe 1.
+        radio.writeAck(1, &ack_payloads[0], ack_pl_size);
+        radio.writeAck(1, &ack_payloads[1], ack_pl_size);
+        radio.writeAck(1, &ack_payloads[2], ack_pl_size);
 
-            // Fill the TX FIFO with 3 ACK payloads for the first 3 received
-            // transmissions on pipe 1.
-            radio.writeAck(1, &ack_payloads[0], ack_pl_size);
-            radio.writeAck(1, &ack_payloads[1], ack_pl_size);
-            radio.writeAck(1, &ack_payloads[2], ack_pl_size);
-
-            sleep_ms(100);          // let TX node finish its role
-            radio.startListening(); // We're ready to start over. Begin listening.
-        }
+        sleep_ms(100);          // let TX node finish its role
+        radio.startListening(); // We're ready to start over. Begin listening.
 
     } // role
 
@@ -250,6 +248,8 @@ void loop()
             // Become the TX node
             if (!role)
                 printf("*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK\n");
+            else if (role && wait_for_event) // don't interrupt on ongoing test
+                return;                      // exit now; start next loop()
             else
                 printf("*** RESTARTING IRQ PIN TEST ***\n");
 
@@ -292,13 +292,10 @@ void loop()
  */
 void interruptHandler(uint gpio, uint32_t events)
 {
-    /*
-    if (gpio != IRQ_PIN && events != GPIO_IRQ_EDGE_FALL) {
+    if (gpio != IRQ_PIN && !(events | GPIO_IRQ_EDGE_FALL)) {
         // the gpio pin and event does not match the configuration we specified
         return;
-    } */
-    printf("gpio = %i, event = %d\n", gpio, events);
-
+    }
 
     // print IRQ status and all masking flags' states
     printf("\tIRQ pin is actively LOW\n");   // show that this function was called
@@ -318,15 +315,13 @@ void interruptHandler(uint gpio, uint32_t events)
 
     // print if test passed or failed. Unintentional fails mean the RX node was not listening.
     // pl_iterator has already been incremented by now
-    if (pl_iterator <= 1) {
+    if (pl_iterator <= 1)
         printf("   'Data Ready' event test %s\n", radio.irqDr() ? "passed" : "failed");
-    }
-    else if (pl_iterator == 2) {
+    else if (pl_iterator == 2)
         printf("   'Data Sent' event test %s\n", radio.irqDs() ? "passed" : "failed");
-    }
-    else if (pl_iterator == 4) {
+    else if (pl_iterator == 4)
         printf("   'Data Fail' event test %s\n", radio.irqDf() ? "passed" : "failed");
-    }
+
     wait_for_event = false; // ready to continue with loop() operations
 } // interruptHandler
 
