@@ -14,6 +14,7 @@
  * Use the Serial Terminal to change each node's behavior.
  */
 #include "pico/stdlib.h"  // printf(), sleep_ms(), getchar_timeout_us(), to_us_since_boot(), get_absolute_time()
+#include "pico/bootrom.h" // reset_usb_boot()
 #include <tusb.h>         // tud_cdc_connected()
 #include <RF24Revamped.h> // RF24 radio object
 
@@ -110,8 +111,8 @@ bool setup()
     else {
         // setup for RX mode
 
-        // let IRQ pin only trigger on "data ready" event in RX mode
-        radio.interruptConfig(true, false, false); // args = "data_sent", "data_fail", "data_ready"
+        // prevent IRQ pin triggering during the RX rode
+        radio.interruptConfig(false, false, false); // args = "data_sent", "data_fail", "data_ready"
 
         // Fill the TX FIFO with 3 ACK payloads for the first 3 received
         // transmissions on pipe 1
@@ -241,7 +242,7 @@ void loop()
 
     } // role
 
-    char input = getchar_timeout_us(500); // wait 0.5 second for user input
+    char input = getchar_timeout_us(0); // get char from buffer for user input
     if (input != PICO_ERROR_TIMEOUT) {
         // change the role via the serial terminal
 
@@ -267,7 +268,7 @@ void loop()
 
             role = false;
 
-            radio.interruptConfig(); // the IRQ pin should only trigger on "data ready" event
+            radio.interruptConfig(0, 0, 0); // the IRQ pin should not trigger during RX role
 
             // Fill the TX FIFO with 3 ACK payloads for the first 3 received
             // transmissions on pipe 1
@@ -276,6 +277,11 @@ void loop()
             radio.writeAck(1, &ack_payloads[1], ack_pl_size);
             radio.writeAck(1, &ack_payloads[2], ack_pl_size);
             radio.startListening();
+        }
+        else if (input == 'b' || input == 'B') {
+            // reset to bootloader
+            radio.powerDown();
+            reset_usb_boot(0, 0);
         }
     } // user input
 } // loop

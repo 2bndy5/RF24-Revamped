@@ -12,6 +12,7 @@
  */
 #include <math.h>         // abs()
 #include "pico/stdlib.h"  // printf(), sleep_ms(), getchar_timeout_us(), to_us_since_boot(), get_absolute_time()
+#include "pico/bootrom.h" // reset_usb_boot()
 #include <tusb.h>         // tud_cdc_connected()
 #include <RF24Revamped.h> // RF24 radio object
 
@@ -145,7 +146,7 @@ void loop() {
         }
     } // role
 
-    char input = getchar_timeout_us(500); // wait 0.5 second for user input
+    char input = getchar_timeout_us(0); // get char from buffer for user input
     if (input != PICO_ERROR_TIMEOUT) {
         // change the role via the serial terminal
 
@@ -164,6 +165,11 @@ void loop() {
             role = false;
             printf("*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK\n");
             radio.startListening();
+        }
+        else if (input == 'b' || input == 'B') {
+            // reset to bootloader
+            radio.powerDown();
+            reset_usb_boot(0, 0);
         }
     }
 } // loop
