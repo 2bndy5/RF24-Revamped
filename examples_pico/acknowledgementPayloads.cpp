@@ -27,8 +27,8 @@ bool role = false;  // true = TX role, false = RX role
 // on every successful transmission.
 // Make a data structure to store the entire payload of different datatypes
 struct PayloadStruct {
-  char message[7];          // only using 6 characters for TX & ACK payloads
-  uint8_t counter;
+    char message[7];   // only using 6 characters for TX & ACK payloads
+    uint8_t counter;
 };
 PayloadStruct payload;
 
@@ -203,7 +203,7 @@ void loop() {
             memcpy(payload.message, "World ", 6); // change payload message
 
             // load the payload for the first received transmission on pipe 0
-            radio.writeAck(1, &payload, sizeof(PayloadStruct));
+            radio.writeAck(1, &payload, sizeof(payload));
             radio.startListening();
         }
         else if (input == 'b' || input == 'B') {

@@ -1190,7 +1190,7 @@ bool RF24::irqDf(void)
 
 bool RF24::isTxFull(void)
 {
-    return status & _BV(TX_EMPTY);
+    return status & _BV(TX_FULL);
 }
 
 /****************************************************************************/
@@ -1444,10 +1444,10 @@ bool RF24::isAllowMulticast(void)
 
 bool RF24::writeAck(uint8_t pipe, const void* buf, uint8_t len)
 {
-    if (feature_reg & _BV(EN_ACK_PAY)){
+    if (feature_reg & _BV(EN_ACK_PAY)) {
         const uint8_t* current = reinterpret_cast<const uint8_t*>(buf);
 
-        write_payload(current, len, W_ACK_PAYLOAD | (pipe & 0x07));
+        write_payload(current, len, W_ACK_PAYLOAD | rf24_min(pipe, 5));
         return !(status & _BV(TX_FULL));
     }
     return 0;
