@@ -1058,7 +1058,7 @@ bool RF24::resend()
 
     // re-start transmission
     ce(HIGH);
-    uint32 count = 0;
+    uint32_t count = 0;
     while (status & (_BV(TX_DS) | _BV(MAX_RT))) {
         count++;
         // Wait until complete or failed
