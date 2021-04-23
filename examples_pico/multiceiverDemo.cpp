@@ -88,9 +88,7 @@ bool setup()
     setRole();
 
     // For debugging info
-    // printf_begin();             // needed only once for printing details
-    // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    // radio.printDetails(); // function that prints raw register values
 
     // role variable is hardcoded to RX behavior, inform the user of this
     printf("*** Enter a number between 0 and 5 (inclusive) to change\n");

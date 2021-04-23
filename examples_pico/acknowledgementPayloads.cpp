@@ -101,8 +101,7 @@ bool setup() {
     }
 
     // For debugging info
-    // radio.printDetails();       // (smaller) function that prints raw register values
-    // radio.printPrettyDetails(); // (larger) function that prints human readable data
+    // radio.printDetails(); // function that prints raw register values
 
     // role variable is hardcoded to RX behavior, inform the user of this
     printf("*** PRESS 'T' to begin transmitting to the other node\n");
