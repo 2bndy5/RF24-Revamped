@@ -1009,7 +1009,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 
     <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>                       <span class="c1">// set the payload message</span>
     <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
+    <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
 
     <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                                     <span class="c1">// put radio in RX mode</span>
   <span class="p">}</span>
@@ -1111,7 +1111,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
       <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// change payload message</span>
 
       <span class="c1">// load the payload for the first received transmission on pipe 0</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">PayloadStruct</span><span class="p">));</span>
+      <span class="n">radio</span><span class="p">.</span><span class="n">writeAck</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
       <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
