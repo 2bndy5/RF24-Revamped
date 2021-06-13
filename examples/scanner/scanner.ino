@@ -118,7 +118,7 @@ void loop(void)
         radio.stopListening();
 
         // Did we get a carrier?
-        if ( radio.testCarrier() ) {
+        if (radio.testRpd()) {
           ++values[i];
         }
       }

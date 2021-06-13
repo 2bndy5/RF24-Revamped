@@ -25,7 +25,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <RF24/RF24.h>
+#include <RF24Revamped/RF24Revamped.h>
 
 using namespace std;
 
@@ -106,7 +106,7 @@ int main(int argc, char** argv)
                 radio.stopListening();
 
                 // Did we get a carrier?
-                if (radio.testCarrier()) {
+                if (radio.testRpd()) {
                     ++values[i];
                 }
             }

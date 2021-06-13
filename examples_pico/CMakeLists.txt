@@ -30,7 +30,7 @@ foreach(example ${EXAMPLES_LIST})
 
     # link the necessary libs to the target
     target_link_libraries(${example} PUBLIC
-        RF24
+        RF24Revamped
         pico_stdlib
         hardware_spi
         hardware_gpio
