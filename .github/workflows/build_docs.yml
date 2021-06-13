@@ -2,20 +2,37 @@ name: DoxyGen to Sphinx
 
 on:
   pull_request:
-    branches:
-      - revamp
-      - master
+    branches: [revamp]
+    types: [opened, reopened]
+    paths:
+      - "*.h"
+      - "docs/**"
+      - "!docs/README.md"
+      - "utility/template/*.h"
+      - "examples**.cpp"
+      - "examples**.ino"
+      - "images/**"
+      - "datasheets/**"
+      - ".github/workflows/doxygen.yml"
+      - "Doxyfile"
+      - "library.properties" # get lib version from here
   push:
-    branches:
-      - revamp
-      - master
+    branches: [revamp]
+    paths:
+      - "*.h"
+      - "docs/**"
+      - "!docs/README.md"
+      - "utility/template/*.h"
+      - "examples**.cpp"
+      - "examples**.ino"
+      - "images/**"
+      - "datasheets/**"
+      - ".github/workflows/doxygen.yml"
+      - "Doxyfile"
+      - "library.properties" # get lib version from here
   release:
-    branches:
-      - revamp
-      - master
-    types:
-      - published
-      - edited
+    branches: [revamp]
+    types: [published, edited]
 
 jobs:
   build:

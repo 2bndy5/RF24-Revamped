@@ -1,6 +1,27 @@
-name: RP2xxx build
+name: Pico SDK build
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - ".github/workflows/build_rp2xxx.yml"
+      - "*.h"
+      - "!printf.h" # Pico SDK has its own printf solution
+      - "*.cpp"
+      - "CMakeLists.txt"
+      - "cmake/"
+      - "utility/rp2/*"
+      - "examples_pico/*"
+  pull_request:
+    types: [opened, reopened]
+    paths:
+      - ".github/workflows/build_rp2xxx.yml"
+      - "*.h"
+      - "!printf.h" # Pico SDK has its own printf solution
+      - "*.cpp"
+      - "CMakeLists.txt"
+      - "cmake/**"
+      - "utility/rp2/*"
+      - "examples_pico/*"
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -16,16 +37,20 @@ jobs:
       matrix:
         board:
           - "pico"
-          - "vgaboard"
           - "adafruit_feather_rp2040"
           - "adafruit_itsybitsy_rp2040"
           - "adafruit_qtpy_rp2040"
-          # - "sparkfun_micromod" # awaiting resolution of https://github.com/raspberrypi/pico-sdk/issues/328
-          # - "sparkfun_promicro" # awaiting resolution of https://github.com/raspberrypi/pico-sdk/issues/328
-          # - "sparkfun_thingplus" # awaiting resolution of https://github.com/raspberrypi/pico-sdk/issues/328
+          - "pimoroni_tiny2040" # examples require PicoSDK v1.2.0
+          - "sparkfun_micromod" # examples require PicoSDK v1.2.0
+          - "sparkfun_promicro" # examples require PicoSDK v1.2.0
+          - "sparkfun_thingplus" # examples require PicoSDK v1.2.0
+          # - "vgaboard" # examples require PicoSDK v1.2.0 (this can be enabled on request)
+          - "arduino_nano_rp2040_connect" # requires PicoSDK v1.2.0
+          - "pimoroni_picolipo_4mb" # requires PicoSDK v1.2.0
+          - "pimoroni_picolipo_16mb" # requires PicoSDK v1.2.0
+          - "pimoroni_pga2040" # requires PicoSDK v1.2.0
           # - "pimoroni_keybow2040" # no SPI bus exposed
-          # - "pimoroni_picosystem" # missing links to schematics/pinout
-          # - "pimoroni_tiny2040" # boards' pins not labeled for SPI usage
+          # - "pimoroni_picosystem" # SPI is reserved for LCD
 
     steps:
     - name: checkout RF24 lib
@@ -38,7 +63,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: raspberrypi/pico-sdk
-        ref: 1.1.2
+        # master branch is latest stable release
         path: pico-sdk
         clean: false
         submodules: true
@@ -69,6 +94,6 @@ jobs:
         name: examples_pico_${{ matrix.board }}
         path: |
           ${{ github.workspace }}/build/*.uf2
-        # ${{ github.workspace }}/build/*.elf
+          ${{ github.workspace }}/build/*.elf
         # ${{ github.workspace }}/build/*.hex
         # ${{ github.workspace }}/build/*.bin
