@@ -17,7 +17,7 @@
 #include <iostream>    // cin, cout, endl
 #include <string>      // string, getline()
 #include <time.h>      // CLOCK_MONOTONIC_RAW, timespec, clock_gettime()
-#include <RF24Revamped.h> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING
+#include <RF24Revamped/RF24Revamped.h> // RF24, RF24_PA_LOW, delay(), pinMode(), INPUT, attachInterrupt(), INT_EDGE_FALLING
 
 using namespace std;
 

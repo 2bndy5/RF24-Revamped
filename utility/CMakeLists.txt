@@ -14,7 +14,7 @@ if ("${RF24_DRIVER}" STREQUAL  "wiringPi") # Use wiringPi
             ${RF24_DRIVER}/includes.h
             ${RF24_DRIVER}/spi.h
             ${RF24_DRIVER}/RF24_arch_config.h
-        DESTINATION include/RF24/utility/${RF24_DRIVER}
+        DESTINATION include/RF24Revamped/utility/${RF24_DRIVER}
     )
 elseif("${RF24_DRIVER}" STREQUAL "RPi") # use RPi
     set(RF24_DRIVER_SOURCES
@@ -33,7 +33,7 @@ elseif("${RF24_DRIVER}" STREQUAL "RPi") # use RPi
             ${RF24_DRIVER}/compatibility.h
             ${RF24_DRIVER}/RF24_arch_config.h
             ${RF24_DRIVER}/interrupt.h
-        DESTINATION include/RF24/utility/${RF24_DRIVER}
+        DESTINATION include/RF24Revamped/utility/${RF24_DRIVER}
     )
 elseif("${RF24_DRIVER}" STREQUAL "SPIDEV") # use SPIDEV
     if(CHECK_SPIDEV_ERROR)
@@ -55,7 +55,7 @@ elseif("${RF24_DRIVER}" STREQUAL "SPIDEV") # use SPIDEV
             ${RF24_DRIVER}/compatibility.h
             ${RF24_DRIVER}/RF24_arch_config.h
             ${RF24_DRIVER}/interrupt.h
-        DESTINATION include/RF24/utility/${RF24_DRIVER}
+        DESTINATION include/RF24Revamped/utility/${RF24_DRIVER}
     )
 elseif("${RF24_DRIVER}" STREQUAL "MRAA") # use MRAA
     set(RF24_LINKED_DRIVER ${LibMRAA} PARENT_SCOPE)
@@ -73,7 +73,7 @@ elseif("${RF24_DRIVER}" STREQUAL "MRAA") # use MRAA
             ${RF24_DRIVER}/spi.h
             ${RF24_DRIVER}/compatibility.h
             ${RF24_DRIVER}/RF24_arch_config.h
-        DESTINATION include/RF24/utility/${RF24_DRIVER}
+        DESTINATION include/RF24Revamped/utility/${RF24_DRIVER}
     )
 elseif("${RF24_DRIVER}" STREQUAL "LittleWire") # use LittleWire
     set(RF24_LINKED_DRIVER ${LibLittleWire} PARENT_SCOPE)
@@ -85,7 +85,7 @@ elseif("${RF24_DRIVER}" STREQUAL "LittleWire") # use LittleWire
     install(FILES
             ${RF24_DRIVER}/includes.h
             ${RF24_DRIVER}/RF24_arch_config.h
-        DESTINATION include/RF24/utility/${RF24_DRIVER}
+        DESTINATION include/RF24Revamped/utility/${RF24_DRIVER}
     )
 else() # No valid/supported driver selected nor detected... this is vital
     message(FATAL_ERROR "No valid/supported driver selected or auto-detection failed to resolve one.

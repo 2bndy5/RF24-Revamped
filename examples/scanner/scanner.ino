@@ -89,10 +89,10 @@ void loop(void)
       radio.stopListening();
       delay(2);
       Serial.println("Starting Carrier Out");
-      radio.startConstCarrier(RF24_PA_LOW, 40);
+      radio.startCarrierWave(RF24_PA_LOW, 40);
     } else if (c == 'e') {
       constCarrierMode = 0;
-      radio.stopConstCarrier();
+      radio.stopCarrierWave();
       Serial.println("Stopping Carrier Out");
     }
   }
