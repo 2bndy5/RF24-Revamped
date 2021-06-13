@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>ATTiny examples &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -410,9 +411,9 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="attiny-examples">
 <h1 id="attiny-examples--page-root">ATTiny examples<a class="headerlink" href="#attiny-examples--page-root" title="Permalink to this headline">¶</a></h1>
-
+<section id="rf24ping85">
 <h2 id="rf24ping85">rf24ping85<a class="headerlink" href="#rf24ping85" title="Permalink to this headline">¶</a></h2>
 <p>2014 Contribution by <a class="reference external" href="https://github.com/tong67">tong67</a></p>
 <p>Updated 2020 by <a class="reference external" href="http://github.com/2bndy5">2bndy5</a> for the
@@ -432,244 +433,128 @@ transmission.</p>
 <p>This example was written to be used on 2 devices acting as “nodes”.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">/examples/rf24_ATTiny/rf24ping85/rf24ping85.ino</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">"SPI.h"</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
-
-<span class="c1">// CE and CSN are configurable, specified values for ATTiny85 as connected above</span>
-<span class="cp">#define CE_PIN 3</span>
-<span class="cp">#define CSN_PIN 4</span>
-<span class="c1">//#define CSN_PIN 3 // uncomment for ATTiny85 3 pins solution</span>
-
-<span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">);</span>
-
-<span class="c1">// Let these addresses be used for the pair</span>
-<span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
-<span class="c1">// It is very helpful to think of an address as a path instead of as</span>
-<span class="c1">// an identifying device destination</span>
-
-<span class="c1">// to use different addresses on a pair of radios, we need a variable to</span>
-<span class="c1">// uniquely identify which address this radio will use to transmit</span>
-<span class="kt">bool</span> <span class="n">radioNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 0 uses address[0] to transmit, 1 uses address[1] to transmit</span>
-
-<span class="c1">// Used to control whether this node is sending or receiving</span>
-<span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX node, false = RX node</span>
-
-<span class="c1">// For this example, we'll be using a payload containing</span>
-<span class="c1">// a string &amp; an integer number that will be incremented</span>
-<span class="c1">// on every successful transmission.</span>
-<span class="c1">// Make a data structure to store the entire payload of different datatypes</span>
-<span class="k">struct</span> <span class="nc">PayloadStruct</span> <span class="p">{</span>
-  <span class="kt">char</span> <span class="n">message</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>          <span class="c1">// only using 6 characters for TX &amp; RX payloads</span>
-  <span class="kt">uint8_t</span> <span class="n">counter</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="n">PayloadStruct</span> <span class="n">payload</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-
-  <span class="c1">// append a NULL terminating character for printing as a c-string</span>
-  <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-  <span class="c1">// initialize the transceiver on the SPI bus</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
-  <span class="p">}</span>
-
-  <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
-  <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
-  <span class="c1">// each other.</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPaLevel</span><span class="p">(</span><span class="n">RF24_PA_LOW</span><span class="p">);</span> <span class="c1">// RF24_PA_MAX is default.</span>
-
-  <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
-  <span class="c1">// number of bytes we need to transmit a float</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
-
-  <span class="c1">// set the TX address of the RX node into the TX pipe</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
-
-  <span class="c1">// set the RX address of the TX node into a RX pipe</span>
-  <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// setup the TX node</span>
-
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// put radio in TX mode</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// setup the RX node</span>
-
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
-    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>               <span class="c1">// put radio in RX mode</span>
-  <span class="p">}</span>
-<span class="p">}</span> <span class="c1">// setup()</span>
-
-<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// This device is a TX node</span>
-
-    <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// transmit &amp; save the report</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// transmission successful; wait for response and print results</span>
-
-      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                    <span class="c1">// put in RX mode</span>
-      <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timeout</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>    <span class="c1">// timer to detect no response</span>
-      <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// wait for response or timeout</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timeout</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>      <span class="c1">// only wait 200 ms</span>
-          <span class="k">break</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                     <span class="c1">// put back in TX mode</span>
-
-      <span class="c1">// print summary of transactions</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                   <span class="c1">// is there a payload received?</span>
-
-        <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get payload from RX FIFO</span>
-        <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>      <span class="c1">// save incoming counter for next outgoing counter</span>
-      <span class="p">}</span>
-    <span class="p">}</span> <span class="c1">// report</span>
-
-    <span class="c1">// to make this example readable in the serial monitor</span>
-    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>  <span class="c1">// slow transmissions down by 1 second</span>
-
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// This device is a RX node</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                      <span class="c1">// is there a payload?</span>
-
-      <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>    <span class="c1">// get incoming payload</span>
-      <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>     <span class="c1">// increment incoming counter for next outgoing response</span>
-
-      <span class="c1">// transmit response &amp; save result to `report`</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                 <span class="c1">// put in TX mode</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// load response to TX FIFO</span>
-      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                <span class="c1">// put back in RX mode</span>
-    <span class="p">}</span>
-  <span class="p">}</span> <span class="c1">// role</span>
-<span class="p">}</span> <span class="c1">// loop</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 85</span><span class="cp">#include</span> <span class="cpf">"SPI.h"</span><span class="cp"></span>
+<span class="linenos"> 86</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span><span class="c1">// CE and CSN are configurable, specified values for ATTiny85 as connected above</span>
+<span class="linenos"> 89</span><span class="cp">#define CE_PIN 3</span>
+<span class="linenos"> 90</span><span class="cp">#define CSN_PIN 4</span>
+<span class="linenos"> 91</span><span class="c1">//#define CSN_PIN 3 // uncomment for ATTiny85 3 pins solution</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
+<span class="linenos"> 94</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">);</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span><span class="c1">// Let these addresses be used for the pair</span>
+<span class="linenos"> 97</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
+<span class="linenos"> 98</span><span class="c1">// It is very helpful to think of an address as a path instead of as</span>
+<span class="linenos"> 99</span><span class="c1">// an identifying device destination</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="c1">// to use different addresses on a pair of radios, we need a variable to</span>
+<span class="linenos">102</span><span class="c1">// uniquely identify which address this radio will use to transmit</span>
+<span class="linenos">103</span><span class="kt">bool</span> <span class="n">radioNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 0 uses address[0] to transmit, 1 uses address[1] to transmit</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="c1">// Used to control whether this node is sending or receiving</span>
+<span class="linenos">106</span><span class="kt">bool</span> <span class="n">role</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// true = TX node, false = RX node</span>
+<span class="linenos">107</span>
+<span class="linenos">108</span><span class="c1">// For this example, we'll be using a payload containing</span>
+<span class="linenos">109</span><span class="c1">// a string &amp; an integer number that will be incremented</span>
+<span class="linenos">110</span><span class="c1">// on every successful transmission.</span>
+<span class="linenos">111</span><span class="c1">// Make a data structure to store the entire payload of different datatypes</span>
+<span class="linenos">112</span><span class="k">struct</span> <span class="nc">PayloadStruct</span> <span class="p">{</span>
+<span class="linenos">113</span>  <span class="kt">char</span> <span class="n">message</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>          <span class="c1">// only using 6 characters for TX &amp; RX payloads</span>
+<span class="linenos">114</span>  <span class="kt">uint8_t</span> <span class="n">counter</span><span class="p">;</span>
+<span class="linenos">115</span><span class="p">};</span>
+<span class="linenos">116</span><span class="n">PayloadStruct</span> <span class="n">payload</span><span class="p">;</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">119</span>
+<span class="linenos">120</span>  <span class="c1">// append a NULL terminating character for printing as a c-string</span>
+<span class="linenos">121</span>  <span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span>  <span class="c1">// initialize the transceiver on the SPI bus</span>
+<span class="linenos">124</span>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span>
+<span class="linenos">125</span>    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// hold in infinite loop</span>
+<span class="linenos">126</span>  <span class="p">}</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span>  <span class="c1">// Set the PA Level low to try preventing power supply related problems</span>
+<span class="linenos">129</span>  <span class="c1">// because these examples are likely run with nodes in close proximity to</span>
+<span class="linenos">130</span>  <span class="c1">// each other.</span>
+<span class="linenos">131</span>  <span class="n">radio</span><span class="p">.</span><span class="n">setPaLevel</span><span class="p">(</span><span class="n">RF24_PA_LOW</span><span class="p">);</span> <span class="c1">// RF24_PA_MAX is default.</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span>  <span class="c1">// save on transmission time by setting the radio to only transmit the</span>
+<span class="linenos">134</span>  <span class="c1">// number of bytes we need to transmit a float</span>
+<span class="linenos">135</span>  <span class="n">radio</span><span class="p">.</span><span class="n">setPayloadLength</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// char[7] &amp; uint8_t datatypes occupy 8 bytes</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span>  <span class="c1">// set the TX address of the RX node into the TX pipe</span>
+<span class="linenos">138</span>  <span class="n">radio</span><span class="p">.</span><span class="n">openWritingPipe</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="n">radioNumber</span><span class="p">]);</span>     <span class="c1">// always uses pipe 0</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span>  <span class="c1">// set the RX address of the TX node into a RX pipe</span>
+<span class="linenos">141</span>  <span class="n">radio</span><span class="p">.</span><span class="n">openReadingPipe</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">address</span><span class="p">[</span><span class="o">!</span><span class="n">radioNumber</span><span class="p">]);</span> <span class="c1">// using pipe 1</span>
+<span class="linenos">142</span>
+<span class="linenos">143</span>  <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">144</span>    <span class="c1">// setup the TX node</span>
+<span class="linenos">145</span>
+<span class="linenos">146</span>    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
+<span class="linenos">147</span>    <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                <span class="c1">// put radio in TX mode</span>
+<span class="linenos">148</span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos">149</span>    <span class="c1">// setup the RX node</span>
+<span class="linenos">150</span>
+<span class="linenos">151</span>    <span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">message</span><span class="p">,</span> <span class="s">"World "</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// set the outgoing message</span>
+<span class="linenos">152</span>    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>               <span class="c1">// put radio in RX mode</span>
+<span class="linenos">153</span>  <span class="p">}</span>
+<span class="linenos">154</span><span class="p">}</span> <span class="c1">// setup()</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">157</span>
+<span class="linenos">158</span>  <span class="k">if</span> <span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">159</span>    <span class="c1">// This device is a TX node</span>
+<span class="linenos">160</span>
+<span class="linenos">161</span>    <span class="kt">bool</span> <span class="n">report</span> <span class="o">=</span> <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// transmit &amp; save the report</span>
+<span class="linenos">162</span>
+<span class="linenos">163</span>    <span class="k">if</span> <span class="p">(</span><span class="n">report</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">164</span>      <span class="c1">// transmission successful; wait for response and print results</span>
+<span class="linenos">165</span>
+<span class="linenos">166</span>      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                    <span class="c1">// put in RX mode</span>
+<span class="linenos">167</span>      <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_timeout</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>    <span class="c1">// timer to detect no response</span>
+<span class="linenos">168</span>      <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// wait for response or timeout</span>
+<span class="linenos">169</span>        <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_timeout</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span>      <span class="c1">// only wait 200 ms</span>
+<span class="linenos">170</span>          <span class="k">break</span><span class="p">;</span>
+<span class="linenos">171</span>      <span class="p">}</span>
+<span class="linenos">172</span>      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                     <span class="c1">// put back in TX mode</span>
+<span class="linenos">173</span>
+<span class="linenos">174</span>      <span class="c1">// print summary of transactions</span>
+<span class="linenos">175</span>      <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                   <span class="c1">// is there a payload received?</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span>        <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
+<span class="linenos">178</span>        <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span> <span class="c1">// get payload from RX FIFO</span>
+<span class="linenos">179</span>        <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span><span class="p">;</span>      <span class="c1">// save incoming counter for next outgoing counter</span>
+<span class="linenos">180</span>      <span class="p">}</span>
+<span class="linenos">181</span>    <span class="p">}</span> <span class="c1">// report</span>
+<span class="linenos">182</span>
+<span class="linenos">183</span>    <span class="c1">// to make this example readable in the serial monitor</span>
+<span class="linenos">184</span>    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>  <span class="c1">// slow transmissions down by 1 second</span>
+<span class="linenos">185</span>
+<span class="linenos">186</span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos">187</span>    <span class="c1">// This device is a RX node</span>
+<span class="linenos">188</span>
+<span class="linenos">189</span>    <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span>                      <span class="c1">// is there a payload?</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span>      <span class="n">PayloadStruct</span> <span class="n">received</span><span class="p">;</span>
+<span class="linenos">192</span>      <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">received</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">received</span><span class="p">));</span>    <span class="c1">// get incoming payload</span>
+<span class="linenos">193</span>      <span class="n">payload</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">received</span><span class="p">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>     <span class="c1">// increment incoming counter for next outgoing response</span>
+<span class="linenos">194</span>
+<span class="linenos">195</span>      <span class="c1">// transmit response &amp; save result to `report`</span>
+<span class="linenos">196</span>      <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>                 <span class="c1">// put in TX mode</span>
+<span class="linenos">197</span>      <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span> <span class="c1">// load response to TX FIFO</span>
+<span class="linenos">198</span>      <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>                <span class="c1">// put back in RX mode</span>
+<span class="linenos">199</span>    <span class="p">}</span>
+<span class="linenos">200</span>  <span class="p">}</span> <span class="c1">// role</span>
+<span class="linenos">201</span><span class="p">}</span> <span class="c1">// loop</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+<section id="timingsearch3pin">
 <h2 id="timingsearch3pin">timingSearch3pin<a class="headerlink" href="#timingsearch3pin" title="Permalink to this headline">¶</a></h2>
 <p>2014 Contribution by <a class="reference external" href="https://github.com/tong67">tong67</a></p>
 <p>Updated 2020 by <a class="reference external" href="http://github.com/2bndy5">2bndy5</a> for the
@@ -688,390 +573,201 @@ intermediate results are written to TX (PB3, pin 2 – using Serial).</p>
 <p>For schematic details, see introductory comment block in the rf24ping85.ino sketch.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">/examples/rf24_ATTiny/timingSearch3pin/timingSearch3pin.ino</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;nRF24L01.h&gt;</span><span class="cp"></span>
-
-
-<span class="cp">#if defined (ARDUINO) &amp;&amp; !defined (__arm__)</span>
-<span class="cp">#if defined(__AVR_ATtinyX5__) || defined(__AVR_ATtinyX4__)</span>
-<span class="cp">#define RF24_TINY</span>
-<span class="cp">#endif</span>
-<span class="cp">#endif</span>
-
-<span class="cm">/****************************************************************************/</span>
-
-<span class="cp">#if defined(RF24_TINY)</span>
-
-<span class="c1">// when Attiny84 or Attiny85 is detected</span>
-<span class="cp">#define CE_PIN   3 </span><span class="cm">/** "Chip Enable" pin, activates the RX or TX role */</span><span class="cp"></span>
-<span class="cp">#define CSN_PIN  3 </span><span class="cm">/** SPI Chip Select Not */</span><span class="cp"></span>
-
-<span class="cp">#else</span>
-<span class="c1">// when not running on an ATTiny84 or ATTiny85</span>
-<span class="cp">#define CE_PIN   7 </span><span class="cm">/** "Chip Enable" pin, activates the RX or TX role */</span><span class="cp"></span>
-<span class="cp">#define CSN_PIN  8 </span><span class="cm">/** SPI Chip Select Not */</span><span class="cp"></span>
-
-<span class="cp">#endif</span>
-
-<span class="cp">#define MAX_HIGH	100</span>
-<span class="cp">#define MAX_LOW		100</span>
-<span class="cp">#define MINIMAL		8</span>
-
-<span class="c1">// Use these adjustable variables to test for best configuration to be used on</span>
-<span class="c1">// the ATTiny chips. These variables are defined as macros in the library's</span>
-<span class="c1">// RF24/utility/ATTiny/RF24_arch_config.h file. To change them, simply define</span>
-<span class="c1">// the corresponding macro(s) before #include &lt;RF24&gt; in your sketch.</span>
-<span class="kt">uint8_t</span> <span class="n">csnHighSettle</span> <span class="o">=</span> <span class="n">MAX_HIGH</span><span class="p">;</span> <span class="c1">// defined as RF24_CSN_SETTLE_HIGH_DELAY</span>
-<span class="kt">uint8_t</span> <span class="n">csnLowSettle</span> <span class="o">=</span> <span class="n">MAX_LOW</span><span class="p">;</span>   <span class="c1">// defined as RF24_CSN_SETTLE_LOW_DELAY</span>
-
-<span class="cm">/****************************************************************************/</span>
-<span class="kt">void</span> <span class="nf">ce</span><span class="p">(</span><span class="kt">bool</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">CE_PIN</span> <span class="o">!=</span> <span class="n">CSN_PIN</span><span class="p">)</span> <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">level</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="cm">/****************************************************************************/</span>
-<span class="kt">void</span> <span class="nf">csn</span><span class="p">(</span><span class="kt">bool</span> <span class="n">mode</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">CE_PIN</span> <span class="o">!=</span> <span class="n">CSN_PIN</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CSN_PIN</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// digitalWrite(SCK, mode);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">HIGH</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">PORTB</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PINB2</span><span class="p">);</span> <span class="c1">// SCK-&gt;CSN HIGH</span>
-      <span class="n">delayMicroseconds</span><span class="p">(</span><span class="n">csnHighSettle</span><span class="p">);</span> <span class="c1">// allow csn to settle</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">PORTB</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PINB2</span><span class="p">);</span> <span class="c1">// SCK-&gt;CSN LOW</span>
-      <span class="n">delayMicroseconds</span><span class="p">(</span><span class="n">csnLowSettle</span><span class="p">);</span>  <span class="c1">// allow csn to settle</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="cm">/****************************************************************************/</span>
-<span class="kt">uint8_t</span> <span class="nf">read_register</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">reg</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">csn</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
-  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">R_REGISTER</span> <span class="o">|</span> <span class="n">reg</span><span class="p">);</span>
-  <span class="kt">uint8_t</span> <span class="n">result</span> <span class="o">=</span> <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="mh">0xff</span><span class="p">);</span>
-  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="cm">/****************************************************************************/</span>
-<span class="kt">void</span> <span class="nf">write_register</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">reg</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">csn</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
-  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">W_REGISTER</span> <span class="o">|</span> <span class="n">reg</span><span class="p">);</span>
-  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
-  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="cm">/****************************************************************************/</span>
-<span class="kt">void</span> <span class="nf">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="cp">#ifndef __AVR_ATtinyX313__</span>
-  <span class="c1">// not enough memory on ATTiny4313 or ATTint2313(a) to use Serial I/O for this sketch</span>
-
-  <span class="c1">// start serial port and SPI</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-  <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-  <span class="c1">// configure CE and CSN as output when used</span>
-  <span class="n">pinMode</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">CSN_PIN</span> <span class="o">!=</span> <span class="n">CE_PIN</span><span class="p">)</span>
-    <span class="n">pinMode</span><span class="p">(</span><span class="n">CSN_PIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-
-  <span class="c1">// csn is used in SPI transfers. Set to LOW at start and HIGH after transfer. Set to HIGH to reflect no transfer active</span>
-  <span class="c1">// SPI command are accepted in Power Down state.</span>
-  <span class="c1">// CE pin represent PRX (LOW) or PTX (HIGH) mode apart from register settings. Start in PRX mode.</span>
-  <span class="n">ce</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
-  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
-
-  <span class="c1">// nRF24L01 goes from to Power Down state 100ms after Power on Reset ( Vdd &gt; 1.9V) or when PWR_UP is 0 in config register</span>
-  <span class="c1">// Goto Power Down state (Powerup or force) and set in transmit mode</span>
-  <span class="n">write_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">,</span> <span class="n">read_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">_BV</span><span class="p">(</span><span class="n">PWR_UP</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">_BV</span><span class="p">(</span><span class="n">PRIM_RX</span><span class="p">));</span>
-  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-
-  <span class="c1">// Goto Standby-I</span>
-  <span class="c1">// Technically we require 4.5ms Tpd2stby+ 14us as a worst case. We'll just call it 5ms for good measure.</span>
-  <span class="c1">// WARNING: Delay is based on P-variant whereby non-P *may* require different timing.</span>
-  <span class="n">write_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">,</span> <span class="n">read_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">)</span> <span class="o">|</span> <span class="n">_BV</span><span class="p">(</span><span class="n">PWR_UP</span><span class="p">));</span>
-  <span class="n">delay</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">;</span>
-
-  <span class="c1">// Goto Standby-II</span>
-  <span class="n">ce</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Scanning for optimal setting time for csn"</span><span class="p">);</span>
-
-
-  <span class="cm">/************************** Main program *********************************/</span>
-
-  <span class="kt">uint8_t</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// used to compare read/write results with read/write cmds</span>
-  <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bottom_success</span><span class="p">;</span>
-  <span class="kt">bool</span> <span class="n">bottom_found</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">};</span>
-  <span class="kt">uint8_t</span> <span class="n">limit</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">MAX_HIGH</span><span class="p">,</span> <span class="n">MAX_LOW</span><span class="p">};</span>
-  <span class="kt">uint8_t</span> <span class="n">advice</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">MAX_HIGH</span><span class="p">,</span> <span class="n">MAX_LOW</span><span class="p">};</span>
-
-  <span class="c1">// check max values give correct behavior</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">bottom_success</span> <span class="o">&lt;</span> <span class="mi">255</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">csnHighSettle</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-      <span class="n">csnLowSettle</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-      <span class="c1">// check current values</span>
-      <span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">255</span> <span class="o">&amp;&amp;</span> <span class="n">success</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">write_register</span><span class="p">(</span><span class="n">EN_AA</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-          <span class="n">result</span> <span class="o">=</span> <span class="n">read_register</span><span class="p">(</span><span class="n">EN_AA</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">success</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="c1">// process result of current values</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle Not OK. csnHigh="</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-        <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle OK. csnHigh="</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
-        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bottom_found</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-          <span class="k">if</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">MINIMAL</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-            <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-          <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">bottom_success</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span> <span class="c1">// while (bottom_success &lt; 255)</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle value found for "</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"csnHigh: "</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"csnLow: "</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-    <span class="n">advice</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-  <span class="p">}</span> <span class="c1">// for (uint8_t k = 0; k &lt; 2; k++)</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Advised Settle times are: csnHigh="</span><span class="p">);</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">advice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
-  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">advice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
-
-<span class="cp">#endif </span><span class="c1">// not defined __AVR_ATtinyX313__</span>
-<span class="p">}</span>
-
-
-<span class="kt">void</span> <span class="nf">loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// this program runs only once, thus it resides in setup()</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 20</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 21</span><span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 22</span><span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 23</span><span class="cp">#include</span> <span class="cpf">&lt;nRF24L01.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span><span class="cp">#if defined (ARDUINO) &amp;&amp; !defined (__arm__)</span>
+<span class="linenos"> 27</span><span class="cp">#if defined(__AVR_ATtinyX5__) || defined(__AVR_ATtinyX4__)</span>
+<span class="linenos"> 28</span><span class="cp">#define RF24_TINY</span>
+<span class="linenos"> 29</span><span class="cp">#endif</span>
+<span class="linenos"> 30</span><span class="cp">#endif</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span><span class="cp">#if defined(RF24_TINY)</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span><span class="c1">// when Attiny84 or Attiny85 is detected</span>
+<span class="linenos"> 37</span><span class="cp">#define CE_PIN   3 </span><span class="cm">/** "Chip Enable" pin, activates the RX or TX role */</span><span class="cp"></span>
+<span class="linenos"> 38</span><span class="cp">#define CSN_PIN  3 </span><span class="cm">/** SPI Chip Select Not */</span><span class="cp"></span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span><span class="cp">#else</span>
+<span class="linenos"> 41</span><span class="c1">// when not running on an ATTiny84 or ATTiny85</span>
+<span class="linenos"> 42</span><span class="cp">#define CE_PIN   7 </span><span class="cm">/** "Chip Enable" pin, activates the RX or TX role */</span><span class="cp"></span>
+<span class="linenos"> 43</span><span class="cp">#define CSN_PIN  8 </span><span class="cm">/** SPI Chip Select Not */</span><span class="cp"></span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="cp">#endif</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="cp">#define MAX_HIGH	100</span>
+<span class="linenos"> 48</span><span class="cp">#define MAX_LOW		100</span>
+<span class="linenos"> 49</span><span class="cp">#define MINIMAL		8</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span><span class="c1">// Use these adjustable variables to test for best configuration to be used on</span>
+<span class="linenos"> 52</span><span class="c1">// the ATTiny chips. These variables are defined as macros in the library's</span>
+<span class="linenos"> 53</span><span class="c1">// RF24/utility/ATTiny/RF24_arch_config.h file. To change them, simply define</span>
+<span class="linenos"> 54</span><span class="c1">// the corresponding macro(s) before #include &lt;RF24&gt; in your sketch.</span>
+<span class="linenos"> 55</span><span class="kt">uint8_t</span> <span class="n">csnHighSettle</span> <span class="o">=</span> <span class="n">MAX_HIGH</span><span class="p">;</span> <span class="c1">// defined as RF24_CSN_SETTLE_HIGH_DELAY</span>
+<span class="linenos"> 56</span><span class="kt">uint8_t</span> <span class="n">csnLowSettle</span> <span class="o">=</span> <span class="n">MAX_LOW</span><span class="p">;</span>   <span class="c1">// defined as RF24_CSN_SETTLE_LOW_DELAY</span>
+<span class="linenos"> 57</span>
+<span class="linenos"> 58</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 59</span><span class="kt">void</span> <span class="nf">ce</span><span class="p">(</span><span class="kt">bool</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 60</span>  <span class="k">if</span> <span class="p">(</span><span class="n">CE_PIN</span> <span class="o">!=</span> <span class="n">CSN_PIN</span><span class="p">)</span> <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">level</span><span class="p">);</span>
+<span class="linenos"> 61</span><span class="p">}</span>
+<span class="linenos"> 62</span>
+<span class="linenos"> 63</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 64</span><span class="kt">void</span> <span class="nf">csn</span><span class="p">(</span><span class="kt">bool</span> <span class="n">mode</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 65</span>  <span class="k">if</span> <span class="p">(</span><span class="n">CE_PIN</span> <span class="o">!=</span> <span class="n">CSN_PIN</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 66</span>    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CSN_PIN</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
+<span class="linenos"> 67</span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos"> 68</span>    <span class="c1">// digitalWrite(SCK, mode);</span>
+<span class="linenos"> 69</span>    <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">HIGH</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 70</span>      <span class="n">PORTB</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PINB2</span><span class="p">);</span> <span class="c1">// SCK-&gt;CSN HIGH</span>
+<span class="linenos"> 71</span>      <span class="n">delayMicroseconds</span><span class="p">(</span><span class="n">csnHighSettle</span><span class="p">);</span> <span class="c1">// allow csn to settle</span>
+<span class="linenos"> 72</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos"> 73</span>      <span class="n">PORTB</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PINB2</span><span class="p">);</span> <span class="c1">// SCK-&gt;CSN LOW</span>
+<span class="linenos"> 74</span>      <span class="n">delayMicroseconds</span><span class="p">(</span><span class="n">csnLowSettle</span><span class="p">);</span>  <span class="c1">// allow csn to settle</span>
+<span class="linenos"> 75</span>    <span class="p">}</span>
+<span class="linenos"> 76</span>  <span class="p">}</span>
+<span class="linenos"> 77</span><span class="p">}</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 80</span><span class="kt">uint8_t</span> <span class="nf">read_register</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">reg</span><span class="p">)</span>
+<span class="linenos"> 81</span><span class="p">{</span>
+<span class="linenos"> 82</span>  <span class="n">csn</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos"> 83</span>  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">R_REGISTER</span> <span class="o">|</span> <span class="n">reg</span><span class="p">);</span>
+<span class="linenos"> 84</span>  <span class="kt">uint8_t</span> <span class="n">result</span> <span class="o">=</span> <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="mh">0xff</span><span class="p">);</span>
+<span class="linenos"> 85</span>  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos"> 86</span>  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="linenos"> 87</span><span class="p">}</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 90</span><span class="kt">void</span> <span class="nf">write_register</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">reg</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">)</span>
+<span class="linenos"> 91</span><span class="p">{</span>
+<span class="linenos"> 92</span>  <span class="n">csn</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos"> 93</span>  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">W_REGISTER</span> <span class="o">|</span> <span class="n">reg</span><span class="p">);</span>
+<span class="linenos"> 94</span>  <span class="n">SPI</span><span class="p">.</span><span class="n">transfer</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="linenos"> 95</span>  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos"> 96</span><span class="p">}</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span><span class="cm">/****************************************************************************/</span>
+<span class="linenos"> 99</span><span class="kt">void</span> <span class="nf">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="cp">#ifndef __AVR_ATtinyX313__</span>
+<span class="linenos">102</span>  <span class="c1">// not enough memory on ATTiny4313 or ATTint2313(a) to use Serial I/O for this sketch</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span>  <span class="c1">// start serial port and SPI</span>
+<span class="linenos">105</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="linenos">106</span>  <span class="n">SPI</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="linenos">107</span>  <span class="c1">// configure CE and CSN as output when used</span>
+<span class="linenos">108</span>  <span class="n">pinMode</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="linenos">109</span>  <span class="k">if</span> <span class="p">(</span><span class="n">CSN_PIN</span> <span class="o">!=</span> <span class="n">CE_PIN</span><span class="p">)</span>
+<span class="linenos">110</span>    <span class="n">pinMode</span><span class="p">(</span><span class="n">CSN_PIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="linenos">111</span>
+<span class="linenos">112</span>  <span class="c1">// csn is used in SPI transfers. Set to LOW at start and HIGH after transfer. Set to HIGH to reflect no transfer active</span>
+<span class="linenos">113</span>  <span class="c1">// SPI command are accepted in Power Down state.</span>
+<span class="linenos">114</span>  <span class="c1">// CE pin represent PRX (LOW) or PTX (HIGH) mode apart from register settings. Start in PRX mode.</span>
+<span class="linenos">115</span>  <span class="n">ce</span><span class="p">(</span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos">116</span>  <span class="n">csn</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>  <span class="c1">// nRF24L01 goes from to Power Down state 100ms after Power on Reset ( Vdd &gt; 1.9V) or when PWR_UP is 0 in config register</span>
+<span class="linenos">119</span>  <span class="c1">// Goto Power Down state (Powerup or force) and set in transmit mode</span>
+<span class="linenos">120</span>  <span class="n">write_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">,</span> <span class="n">read_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">_BV</span><span class="p">(</span><span class="n">PWR_UP</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">_BV</span><span class="p">(</span><span class="n">PRIM_RX</span><span class="p">));</span>
+<span class="linenos">121</span>  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span>  <span class="c1">// Goto Standby-I</span>
+<span class="linenos">124</span>  <span class="c1">// Technically we require 4.5ms Tpd2stby+ 14us as a worst case. We'll just call it 5ms for good measure.</span>
+<span class="linenos">125</span>  <span class="c1">// WARNING: Delay is based on P-variant whereby non-P *may* require different timing.</span>
+<span class="linenos">126</span>  <span class="n">write_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">,</span> <span class="n">read_register</span><span class="p">(</span><span class="n">NRF_CONFIG</span><span class="p">)</span> <span class="o">|</span> <span class="n">_BV</span><span class="p">(</span><span class="n">PWR_UP</span><span class="p">));</span>
+<span class="linenos">127</span>  <span class="n">delay</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">;</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span>  <span class="c1">// Goto Standby-II</span>
+<span class="linenos">130</span>  <span class="n">ce</span><span class="p">(</span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos">131</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Scanning for optimal setting time for csn"</span><span class="p">);</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span>
+<span class="linenos">134</span>  <span class="cm">/************************** Main program *********************************/</span>
+<span class="linenos">135</span>
+<span class="linenos">136</span>  <span class="kt">uint8_t</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// used to compare read/write results with read/write cmds</span>
+<span class="linenos">137</span>  <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="linenos">138</span>  <span class="kt">uint8_t</span> <span class="n">bottom_success</span><span class="p">;</span>
+<span class="linenos">139</span>  <span class="kt">bool</span> <span class="n">bottom_found</span><span class="p">;</span>
+<span class="linenos">140</span>  <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">};</span>
+<span class="linenos">141</span>  <span class="kt">uint8_t</span> <span class="n">limit</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">MAX_HIGH</span><span class="p">,</span> <span class="n">MAX_LOW</span><span class="p">};</span>
+<span class="linenos">142</span>  <span class="kt">uint8_t</span> <span class="n">advice</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">MAX_HIGH</span><span class="p">,</span> <span class="n">MAX_LOW</span><span class="p">};</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>  <span class="c1">// check max values give correct behavior</span>
+<span class="linenos">145</span>  <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">146</span>    <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="linenos">147</span>    <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">148</span>    <span class="k">while</span> <span class="p">(</span><span class="n">bottom_success</span> <span class="o">&lt;</span> <span class="mi">255</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">149</span>      <span class="n">csnHighSettle</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="linenos">150</span>      <span class="n">csnLowSettle</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="linenos">151</span>      <span class="c1">// check current values</span>
+<span class="linenos">152</span>      <span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">153</span>      <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">255</span> <span class="o">&amp;&amp;</span> <span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">154</span>        <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">155</span>          <span class="n">write_register</span><span class="p">(</span><span class="n">EN_AA</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+<span class="linenos">156</span>          <span class="n">result</span> <span class="o">=</span> <span class="n">read_register</span><span class="p">(</span><span class="n">EN_AA</span><span class="p">);</span>
+<span class="linenos">157</span>          <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">158</span>            <span class="n">success</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="linenos">159</span>          <span class="p">}</span>
+<span class="linenos">160</span>        <span class="p">}</span>
+<span class="linenos">161</span>        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos">162</span>      <span class="p">}</span>
+<span class="linenos">163</span>      <span class="c1">// process result of current values</span>
+<span class="linenos">164</span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">165</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle Not OK. csnHigh="</span><span class="p">);</span>
+<span class="linenos">166</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">167</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
+<span class="linenos">168</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">169</span>        <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos">170</span>        <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="linenos">171</span>        <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">172</span>        <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="linenos">173</span>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos">174</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle OK. csnHigh="</span><span class="p">);</span>
+<span class="linenos">175</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">176</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
+<span class="linenos">177</span>        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">178</span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bottom_found</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">179</span>          <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+<span class="linenos">180</span>          <span class="k">if</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">MINIMAL</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">181</span>            <span class="n">bottom_found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="linenos">182</span>            <span class="n">bottom_success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">183</span>            <span class="n">success</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="linenos">184</span>          <span class="p">}</span>
+<span class="linenos">185</span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos">186</span>          <span class="n">bottom_success</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos">187</span>        <span class="p">}</span>
+<span class="linenos">188</span>      <span class="p">}</span>
+<span class="linenos">189</span>    <span class="p">}</span> <span class="c1">// while (bottom_success &lt; 255)</span>
+<span class="linenos">190</span>    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Settle value found for "</span><span class="p">);</span>
+<span class="linenos">191</span>    <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">192</span>      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"csnHigh: "</span><span class="p">);</span>
+<span class="linenos">193</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="linenos">194</span>      <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"csnLow: "</span><span class="p">);</span>
+<span class="linenos">195</span>    <span class="p">}</span>
+<span class="linenos">196</span>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">197</span>    <span class="n">advice</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
+<span class="linenos">198</span>    <span class="n">limit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="linenos">199</span>  <span class="p">}</span> <span class="c1">// for (uint8_t k = 0; k &lt; 2; k++)</span>
+<span class="linenos">200</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"Advised Settle times are: csnHigh="</span><span class="p">);</span>
+<span class="linenos">201</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">advice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">202</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" csnLow="</span><span class="p">);</span>
+<span class="linenos">203</span>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">advice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DEC</span><span class="p">);</span>
+<span class="linenos">204</span>
+<span class="linenos">205</span><span class="cp">#endif </span><span class="c1">// not defined __AVR_ATtinyX313__</span>
+<span class="linenos">206</span><span class="p">}</span>
+<span class="linenos">207</span>
+<span class="linenos">208</span>
+<span class="linenos">209</span><span class="kt">void</span> <span class="nf">loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// this program runs only once, thus it resides in setup()</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+</section>
 
 
           </article>
@@ -1120,7 +816,7 @@ intermediate results are written to TX (PB3, pin 2 – using Serial).</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

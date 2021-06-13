@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>ATTiny Support &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -426,7 +427,7 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="attiny-support">
 <h1 id="attiny--page-root">ATTiny Support<a class="headerlink" href="#attiny--page-root" title="Permalink to this headline">¶</a></h1>
 <p>ATTiny support for this library relys on the SpenceKonde ATTinyCore.
 Be sure to have added this core to the Arduino Boards Manager by
@@ -434,11 +435,11 @@ Be sure to have added this core to the Arduino Boards Manager by
 <p>See the included rf24ping85 example for pin info and usage</p>
 <p>Some versions of Arduino IDE may require a patch to allow use of the full program space on ATTiny&lt;br&gt;
 See <a class="reference external" href="https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC">https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC</a> for ATTiny patch</p>
-
+<section id="hardware-hardware-configuration">
 <h2 id="hardware-hardware-configuration">Hardware Hardware Configuration<a class="headerlink" href="#hardware-hardware-configuration" title="Permalink to this headline">¶</a></h2>
 <p>ATTiny board support initially added from <a class="reference external" href="https://github.com/jscrane/RF24">jscrane’s fork</a>
 The pin layouts found here and rf24_ATTiny example written by <a class="reference external" href="https://github.com/tong67">tong67</a></p>
-
+<section id="attiny25-45-85">
 <h3 id="attiny25-45-85">ATtiny25/45/85<a class="headerlink" href="#attiny25-45-85" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 3 and CSN_PIN 4</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                       +-\/-+
@@ -449,8 +450,8 @@ nRF24L01 GND --- GND  4|    |5  PB0 --- nRF24L01 MISO
                        +----+
 </pre></div>
 </div>
-
-
+</section>
+<section id="attiny25-45-85-using-3-pins">
 <h3 id="attiny25-45-85-using-3-pins">ATtiny25/45/85 using 3 pins<a class="headerlink" href="#attiny25-45-85-using-3-pins" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 3 and CSN_PIN 3. PB3 and PB4 are free to use for application
 Circuit idea from <a class="reference external" href="http://nerdralph.blogspot.ca/2014/01/nrf24l01-control-with-3-attiny85-pins.html">NerdRalph’ 3 pin solution</a>
@@ -469,8 +470,8 @@ nRF24L01 GND -x- GND  4|    |5  PB0 --- nRF24L01 MISO         |
                                                             10nF
 </pre></div>
 </div>
-
-
+</section>
+<section id="attiny24-44-84">
 <h3 id="attiny24-44-84">ATtiny24/44/84<a class="headerlink" href="#attiny24-44-84" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 8 and CSN_PIN 7</p>
 <p>Schematic provided and successfully tested by <a class="reference external" href="https://github.com/Carminepz">Carmine Pastore</a></p>
@@ -485,8 +486,8 @@ nRF24L01 MISO --- PA6  7|    |8  PA5 --- nRF24L01 MOSI
                         +----+
 </pre></div>
 </div>
-
-
+</section>
+<section id="attiny2313-4313">
 <h3 id="attiny2313-4313">ATtiny2313/4313<a class="headerlink" href="#attiny2313-4313" title="Permalink to this headline">¶</a></h3>
 <p>Pin map with CE_PIN 12 and CSN_PIN 13</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                        +-\/-+
@@ -503,9 +504,9 @@ nRF24L01  GND --- GND 10|    |11 PD6
                         +----+
 </pre></div>
 </div>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -554,7 +555,7 @@ nRF24L01  GND --- GND 10|    |11 PD6
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

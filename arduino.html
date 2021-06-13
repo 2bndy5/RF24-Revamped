@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>Arduino &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -438,7 +439,7 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="arduino">
 <h1 id="arduino--page-root">Arduino<a class="headerlink" href="#arduino--page-root" title="Permalink to this headline">¶</a></h1>
 <p>RF24 is fully compatible with Arduino boards</p>
 <div class="admonition seealso">
@@ -451,10 +452,10 @@ have more information</p>
 the chip-select and chip-enable functions.</p>
 <p>These pins must be chosen and designated by the user, in
 <code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(ce_pin,</span> <span class="pre">cs_pin);</span></code> and can use any available pins.</p>
-
+<section id="alternate-spi-support">
 <h2 id="alternate-spi-support">Alternate SPI Support<a class="headerlink" href="#alternate-spi-support" title="Permalink to this headline">¶</a></h2>
 <p>RF24 supports alternate SPI methods, in case the standard hardware SPI pins are otherwise unavailable.</p>
-
+<section id="software-driven-spi">
 <h3 id="software-driven-spi">Software Driven SPI<a class="headerlink" href="#software-driven-spi" title="Permalink to this headline">¶</a></h3>
 <p>Software driven SPI is provided by the <a class="reference external" href="https://github.com/greiman/DigitalIO">DigitalIO</a> library.</p>
 <p>Setup:</p>
@@ -487,8 +488,8 @@ Uncomment the line</p>
 </div>
 </li>
 </ol>
-
-
+</section>
+<section id="alternate-hardware-uart-driven-spi">
 <h3 id="alternate-hardware-uart-driven-spi">Alternate Hardware (UART) Driven  SPI<a class="headerlink" href="#alternate-hardware-uart-driven-spi" title="Permalink to this headline">¶</a></h3>
 <p>The Serial Port (UART) on Arduino can also function in SPI mode, and can double-buffer data, while the
 default SPI hardware cannot.</p>
@@ -542,8 +543,8 @@ default SPI hardware cannot.</p>
 See <a class="reference external" href="https://github.com/TMRh20/RF24/issues/24">#24</a>  for more information on
 SPI_UART.</p>
 </div>
-
-
+</section>
+<section id="using-a-specific-spi-bus">
 <h3 id="using-a-specific-spi-bus">Using a specific SPI Bus<a class="headerlink" href="#using-a-specific-spi-bus" title="Permalink to this headline">¶</a></h3>
 <p>An alternate SPI bus can be specified using the overloaded <cite>RF24::begin(_SPI*)</cite> method.
 This is useful for some boards that offer more than 1 hardware-driven SPI bus or cetain Arduino
@@ -555,7 +556,7 @@ library.</p>
 calling the overloaded <a class="reference external" href="basic_api.html#begin-spi">begin(_SPI*)</a> method.</p>
 </div>
 <p>Below are some example snippets that demonstrate how this can be done.</p>
-
+<section id="esp8266-example">
 <h4 id="esp8266-example">ESP8266 example<a class="headerlink" href="#esp8266-example" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -593,8 +594,8 @@ for <a class="reference external" href="https://arduino-esp8266.readthedocs.io/e
 <span class="p">}</span>
 </pre></div>
 </div>
-
-
+</section>
+<section id="esp32-example">
 <h4 id="esp32-example">ESP32 example<a class="headerlink" href="#esp32-example" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -639,8 +640,8 @@ located in their ArduinoCore repository (along with the SPI library for the ESP3
 <span class="p">}</span>
 </pre></div>
 </div>
-
-
+</section>
+<section id="teensy-example">
 <h4 id="teensy-example">Teensy example<a class="headerlink" href="#teensy-example" title="Permalink to this headline">¶</a></h4>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -678,10 +679,10 @@ default for certain Teensy boards.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-
-
-
-
+</section>
+</section>
+</section>
+</section>
 
 
           </article>
@@ -730,7 +731,7 @@ default for certain Teensy boards.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

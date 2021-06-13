@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>General Linux/Raspberry Pi &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -438,11 +439,11 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="general-linux-raspberry-pi">
 <h1 id="rpi-general--page-root">General Linux/Raspberry Pi<a class="headerlink" href="#rpi-general--page-root" title="Permalink to this headline">¶</a></h1>
 <p>RF24 supports a variety of Linux based devices via various drivers.
 Some boards like RPi can utilize multiple methods to drive the GPIO and SPI functionality.</p>
-
+<section id="potential-preconfiguration">
 <h2 id="potential-preconfiguration">Potential PreConfiguration<a class="headerlink" href="#potential-preconfiguration" title="Permalink to this headline">¶</a></h2>
 <p>If SPI is not already enabled, load it on boot:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo raspi-config
@@ -458,8 +459,8 @@ sudo apt-get upgrade
 </div>
 </li>
 </ol>
-
-
+</section>
+<section id="build-options">
 <h2 id="build-options">Build Options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h2>
 <p>The default build on Raspberry Pi utilizes the included <a class="reference external" href="http://www.airspayce.com/mikem/bcm2835">BCM2835 driver</a></p>
 <div class="admonition seealso">
@@ -473,35 +474,35 @@ sudo apt-get upgrade
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure
 </pre></div>
 </div>
-
+<section id="manual-install">
 <h3 id="manual-install">Manual install<a class="headerlink" href="#manual-install" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make
 sudo make install
 </pre></div>
 </div>
-
-
-
+</section>
+</section>
+<section id="pins-connections-and-pin-configuration">
 <h2 id="pins-connections-and-pin-configuration">Pins Connections and Pin Configuration<a class="headerlink" href="#pins-connections-and-pin-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Using pin 15/GPIO 22 for CE, pin 24/GPIO8 (CE0) for CSN</p>
 <p>Can use any available SPI BUS for CSN.</p>
 <p>In general, use <code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(&lt;ce_pin&gt;,</span> <span class="pre">&lt;a&gt;*10+&lt;b&gt;);</span></code> for proper constructor to
 address correct spi device at /dev/spidev&lt;a&gt;.&lt;b&gt;</p>
 <p>Choose any GPIO output pin for radio CE pin.</p>
-
+<section id="general-contructor">
 <h3 id="general-contructor">General Contructor<a class="headerlink" href="#general-contructor" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
-
-
+</section>
+<section id="mraa-constructor">
 <h3 id="mraa-constructor">MRAA Constructor<a class="headerlink" href="#mraa-constructor" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/rasppi.html">MRAA docs about the Raspberry Pi</a></p>
-
-
+</section>
+<section id="spi-dev-constructor">
 <h3 id="spi-dev-constructor">SPI_DEV Constructor<a class="headerlink" href="#spi-dev-constructor" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
@@ -569,9 +570,9 @@ about using the GPIO pins</p>
 <p>the library was berryfied by <a class="reference external" href="mailto:purinda%40gmail.com">Purinda Gunasekara</a></p>
 <p>then forked from <a class="reference external" href="https://github.com/stanleyseow/RF24">https://github.com/stanleyseow/RF24</a> to <a class="reference external" href="https://github.com/jscrane/RF24-rpi">https://github.com/jscrane/RF24-rpi</a></p>
 <p>Network lib also based on <a class="reference external" href="https://github.com/farconada/RF24Network">https://github.com/farconada/RF24Network</a></p>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -620,7 +621,7 @@ about using the GPIO pins</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

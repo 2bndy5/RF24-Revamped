@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>Linux Installation &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -318,9 +319,13 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#linux-install--page-root" class="md-nav__link">Linux Installation</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#generic-manual-install" class="md-nav__link">Generic Manual Install</a>
+        <li class="md-nav__item"><a href="#using-a-package-manager" class="md-nav__link">Using a package manager</a>
         </li>
-        <li class="md-nav__item"><a href="#build-using-spidev" class="md-nav__link">Build using SPIDEV</a>
+        <li class="md-nav__item"><a href="#building-from-source" class="md-nav__link">Building from Source</a>
+        </li>
+        <li class="md-nav__item"><a href="#cross-compiling-the-library" class="md-nav__link">Cross-compiling the library</a>
+        </li>
+        <li class="md-nav__item"><a href="#installing-the-library-remotely" class="md-nav__link">Installing the library remotely</a>
         </li></ul>
             </nav>
         </li>
@@ -390,9 +395,13 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#linux-install--page-root" class="md-nav__link">Linux Installation</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#generic-manual-install" class="md-nav__link">Generic Manual Install</a>
+        <li class="md-nav__item"><a href="#using-a-package-manager" class="md-nav__link">Using a package manager</a>
         </li>
-        <li class="md-nav__item"><a href="#build-using-spidev" class="md-nav__link">Build using SPIDEV</a>
+        <li class="md-nav__item"><a href="#building-from-source" class="md-nav__link">Building from Source</a>
+        </li>
+        <li class="md-nav__item"><a href="#cross-compiling-the-library" class="md-nav__link">Cross-compiling the library</a>
+        </li>
+        <li class="md-nav__item"><a href="#installing-the-library-remotely" class="md-nav__link">Installing the library remotely</a>
         </li></ul>
             </nav>
         </li>
@@ -410,7 +419,7 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="linux-installation">
 <h1 id="linux-install--page-root">Linux Installation<a class="headerlink" href="#linux-install--page-root" title="Permalink to this headline">¶</a></h1>
 <p>Generic Linux devices are supported via the following drivers:</p>
 <ul class="simple">
@@ -421,16 +430,66 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The following option should work with most Linux systems
+<p>The following <code class="docutils literal notranslate"><span class="pre">SPIDEV</span></code> option should work with most Linux systems
 supporting SPI userspace device.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --driver<span class="o">=</span>SPIDEV
+</div>
+<section id="using-a-package-manager">
+<h2 id="using-a-package-manager">Using a package manager<a class="headerlink" href="#using-a-package-manager" title="Permalink to this headline">¶</a></h2>
+<p>The RF24 library now (as of v1.4.1) has pre-built packages (*.deb or *.rpm files) that can be installed on a
+Raspberry Pi. These packages can be found on the library’s
+<a class="reference external" href="https://GitHub.com/2bndy5/RF24/releases">GitHub release page</a></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have previously installed the library from source code, then you will need
+to uninstall it manually to avoid runtime conflicts.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo rm /usr/local/lib/librf24revamped.*
+sudo rm -r /usr/local/include/RF24Revamped
 </pre></div>
 </div>
+<ol class="arabic">
+<li><p>Download the appropriate package for your machine</p>
+<p>Go to the library’s [GitHub release page](<a class="reference external" href="https://GitHub.com/2bndy5/RF24/releases">https://GitHub.com/2bndy5/RF24/releases</a>), and look for
+the latest release’s assets.</p>
+<p>For all Raspberry Pi variants using the Raspberry Pi OS (aka Raspbian), you need the file marked
+for <strong>armhf</strong> architecture.</p>
+<p>For Raspberry Pi variants using a 64-bit OS (like Ubuntu), you need the file marked for
+<strong>arm64</strong> architecture.</p>
+<p>Notice that the filenames will include the name of the utility driver that the package was built with.
+This does not mean that the LittleWire, MRAA, or wiringPi libraries are included in the package (you will still
+need to install those yourself beforehand).</p>
+</li>
+<li><p>Install the downloaded pkg</p>
+<p>If you downloaded the file directly from your target machine using the desktop environment, then
+you only need to double-click the package (deb or rpm) file, and the OS should do the rest.</p>
+<p>If you downloaded the file remotely and want to copy it over ssh, then use the <code class="docutils literal notranslate"><span class="pre">scp</span></code> command in a terminal.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scp pkg_filename.deb pi@host_name:~/Downloads
+</pre></div>
 </div>
-
-<h2 id="generic-manual-install">Generic Manual Install<a class="headerlink" href="#generic-manual-install" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You do not need to do this from within an ssh session. Also, you can use the target machine’s IP
+address instead of its host name</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">scp</span></code> command will ask you for a password belonging to the user’s name on the remote machine (we used
+<code class="docutils literal notranslate"><span class="pre">pi</span></code> in the above example).</p>
+<p>Now you can open up a ssh session and install the copied package from the terminal.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh pi@host_name
+<span class="nb">cd</span> Downloads
+dpkg -i pkg_filename.deb
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="building-from-source">
+<h2 id="building-from-source">Building from Source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Install prerequisites if there are any (MRAA, LittleWire libraries, setup SPI device etc)</p>
+<p>CMake may need to be installed</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install cmake
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See the <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/index.html">MRAA documentation</a>
@@ -443,63 +502,102 @@ for more info on installing MRAA</p>
 </pre></div>
 </div>
 </li>
-<li><p>Clone the RF24 repo</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/2bndy5/RF24.git RF24
+<li><p>Clone the RF24 repo and navigate to it</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/2bndy5/RF24.git RF24Revamped
+<span class="nb">cd</span> RF24Revamped
 </pre></div>
 </div>
 </li>
-<li><p>Change to the new RF24 directory</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> RF24
+<li><p>Create a build directory inside the RF24 directory and navigate to it.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir build
+<span class="nb">cd</span> build
 </pre></div>
 </div>
 </li>
-<li><p>Configure build environment using</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure
+<li><p>Configure build environment</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">RF24_DRIVER</span><span class="o">=</span>SPIDEV
 </pre></div>
 </div>
-<p>This script automatically detects device and build environment.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>For overriding automatic detections, use command-line
-switches. Read the output descriptions from the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --help
-</pre></div>
-</div>
+<p>Instead of using <code class="docutils literal notranslate"><span class="pre">SPIDEV</span></code> driver (recommended), you can also specify the <code class="docutils literal notranslate"><span class="pre">RPi</span></code>, <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MRAA</span></code>, or <code class="docutils literal notranslate"><span class="pre">LittleWire</span></code> as alternative drivers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">RF24_DRIVER</span></code> option is not specified, then it will be automatically configured based
+on the detected CPU or installed libraries (defaults to <code class="docutils literal notranslate"><span class="pre">SPIDEV</span></code> when auto-detection fails).</p>
 </div>
 </li>
-<li><p>Build the library, and run an example file</p>
+<li><p>Build and install the library</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make
 sudo make install
-<span class="nb">cd</span> examples_linux
 </pre></div>
 </div>
-<p>Edit the gettingstarted example to set your pin configuration.</p>
+</li>
+<li><p>Build the examples</p>
+<p>Navigate to the <em>examples_linux</em> directory</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../examples_linux
+</pre></div>
+</div>
+<p>Make sure the pins used in the examples match the pins you used to connect the radio module</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano gettingstarted.cpp
+</pre></div>
+</div>
+<p>and edit the pin numbers as directed in the <a class="reference external" href="rpi_general.html">linux/RPi general documation</a>.</p>
+<p>Create a build directory in the examples_linux directory and navigate to it.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir build
+<span class="nb">cd</span> build
+</pre></div>
+</div>
+<p>Now you are ready to build the examples.&lt;br&gt;</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake ..
 make
-sudo ./gettingstarted
+</pre></div>
+</div>
+<p>If using the <code class="docutils literal notranslate"><span class="pre">MRAA</span></code> or <code class="docutils literal notranslate"><span class="pre">wiringPi</span></code> drivers, then you may need to specify the <cite>RF24_DRIVER</cite>
+option again.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">RF24_DRIVER</span><span class="o">=</span>wiringPi
+make
+</pre></div>
+</div>
+</li>
+<li><p>Run an example file</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ./gettingstarted
 </pre></div>
 </div>
 </li>
 </ol>
-
-
-<h2 id="build-using-spidev">Build using SPIDEV<a class="headerlink" href="#build-using-spidev" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p>Make sure that spi device support is enabled and /dev/spidev&lt;a&gt;.&lt;b&gt; is present</p></li>
-<li><p>Manual Install using SPIDEV:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure --driver<span class="o">=</span>SPIDEV
+</section>
+<section id="cross-compiling-the-library">
+<h2 id="cross-compiling-the-library">Cross-compiling the library<a class="headerlink" href="#cross-compiling-the-library" title="Permalink to this headline">¶</a></h2>
+<p>The RF24 library comes with some pre-made toolchain files (located in the <em>RF24/cmake/toolchains</em>
+directory) to use in CMake. To use these toolchain files, additional command line options are needed
+when configuring CMake to build the library (step 5 in the above instructions to build from source).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">CMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>cmake/toolchains/armhf.cmake
+make
+</pre></div>
+</div>
+<p>If you plan on using the cross-compiled library with your personal cross-compiled project, then
+it is advised to specify the path that your project will look in when linking to the RF24 library:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/arm-linux-gnueabihf -D <span class="nv">CMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>cmake/toolchains/armhf.cmake
 make
 sudo make install
 </pre></div>
 </div>
-</li>
-<li><p>Verify install by running an example.</p>
-<p>See the <a class="reference external" href="cpp_examples.html#gettingstarted-cpp">gettingstarted.cpp example</a> for
-an example of pin configuration.</p>
-</li>
-</ol>
-
-
+<p>Remember to also specify the <code class="docutils literal notranslate"><span class="pre">RF24_DRIVER</span></code> option if not using the auto-configuration feature (see step 5
+in the above instructions to build from source).</p>
+</section>
+<section id="installing-the-library-remotely">
+<h2 id="installing-the-library-remotely">Installing the library remotely<a class="headerlink" href="#installing-the-library-remotely" title="Permalink to this headline">¶</a></h2>
+<p>To install remotely, you can create an installable package file using CMake’s built-in program called CPack.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">CMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>cmake/toolchains/armhf.cmake
+make
+cpack
+</pre></div>
+</div>
+<p>This will create a deb file and a rpm file in a new sub-directory called “pkgs” within the build directory.
+You can use either of these packages to install the library to your target machine (see the above
+instructions about using a package manager).</p>
+</section>
+</section>
 
 
           </article>
@@ -548,7 +646,7 @@ an example of pin configuration.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

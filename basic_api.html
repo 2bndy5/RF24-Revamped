@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>Basic API &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -462,19 +463,19 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="basic-api">
 <h1 id="basic-api--page-root">Basic API<a class="headerlink" href="#basic-api--page-root" title="Permalink to this headline">¶</a></h1>
-
+<section id="constructors">
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp class">
-<dt id="_CPPv44RF24">
-<span id="_CPPv34RF24"></span><span id="_CPPv24RF24"></span><span id="RF24"></span><span class="target" id="classRF24"></span><em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RF24</span></code><a class="headerlink" href="#_CPPv44RF24" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv44RF24">
+<span id="_CPPv34RF24"></span><span id="_CPPv24RF24"></span><span id="RF24"></span><span class="target" id="classRF24"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RF24</span></span></span><a class="headerlink" href="#_CPPv44RF24" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t">
-<span id="_CPPv3N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="RF24::RF24__uint16_t.uint16_t.uint32_t"></span><span class="target" id="classRF24_1a123231bd955698373d221a84ad40055a"></span><code class="sig-name descname"><span class="pre">RF24</span></code><span class="sig-paren">(</span><span class="pre">uint16_t</span> <em><span class="pre">_cepin</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">_cspin</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">_spi_speed</span></em> <span class="pre">=</span> <span class="pre">RF24_SPI_SPEED</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t">
+<span id="_CPPv3N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint16_t8uint16_t8uint32_t"></span><span id="RF24::RF24__uint16_t.uint16_t.uint32_t"></span><span class="target" id="classRF24_1a123231bd955698373d221a84ad40055a"></span><span class="sig-name descname"><span class="n"><span class="pre">RF24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cepin</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cspin</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_spi_speed</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">RF24_SPI_SPEED</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint16_t8uint16_t8uint32_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Creates a new instance of this driver. </p>
 <p><a class="reference internal" href="#classRF24"><span class="std std-ref">RF24</span></a> Constructor</p>
 <p>Before using, you create an instance and send in the unique pins that this chip is connected to.</p>
@@ -501,8 +502,8 @@
 </dl>
 </dd></dl>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF244RF24E8uint32_t">
-<span id="_CPPv3N4RF244RF24E8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint32_t"></span><span id="RF24::RF24__uint32_t"></span><span class="target" id="classRF24_1aa08204a6c77e9d03bd1075cf0759fccd"></span><code class="sig-name descname"><span class="pre">RF24</span></code><span class="sig-paren">(</span><span class="pre">uint32_t</span> <em><span class="pre">_spi_speed</span></em> <span class="pre">=</span> <span class="pre">RF24_SPI_SPEED</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint32_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF244RF24E8uint32_t">
+<span id="_CPPv3N4RF244RF24E8uint32_t"></span><span id="_CPPv2N4RF244RF24E8uint32_t"></span><span id="RF24::RF24__uint32_t"></span><span class="target" id="classRF24_1aa08204a6c77e9d03bd1075cf0759fccd"></span><span class="sig-name descname"><span class="n"><span class="pre">RF24</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_spi_speed</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">RF24_SPI_SPEED</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244RF24E8uint32_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>A constructor for initializing the radio’s hardware dynamically</p>
 <p> <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -528,12 +529,12 @@
 </dd></dl>
 </div>
 </dd></dl>
-
-
+</section>
+<section id="begin">
 <h2 id="begin">begin()<a class="headerlink" href="#begin" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF245beginEv">
-<span id="_CPPv3N4RF245beginEv"></span><span id="_CPPv2N4RF245beginEv"></span><span id="RF24::begin__void"></span><span class="target" id="classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">begin</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEv" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF245beginEv">
+<span id="_CPPv3N4RF245beginEv"></span><span id="_CPPv2N4RF245beginEv"></span><span id="RF24::begin__void"></span><span class="target" id="classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Begin operation of the chip</p>
 <p>Call this in setup(), before calling any other methods.  <p><div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -557,11 +558,11 @@ before continuing application.</p>
 </dd>
 </dl>
 </dd></dl>
-
+<section id="begin-spi">
 <h3 id="begin-spi">begin(_SPI*)<a class="headerlink" href="#begin-spi" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF245beginEP4_SPI">
-<span id="_CPPv3N4RF245beginEP4_SPI"></span><span id="_CPPv2N4RF245beginEP4_SPI"></span><span id="RF24::begin___SPIP"></span><span class="target" id="classRF24_1a388fa99b0400ce0cd887f742ef53192b"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">begin</span></code><span class="sig-paren">(</span><span class="pre">_SPI</span> <span class="pre">*</span><em><span class="pre">spiBus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEP4_SPI" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF245beginEP4_SPI">
+<span id="_CPPv3N4RF245beginEP4_SPI"></span><span id="_CPPv2N4RF245beginEP4_SPI"></span><span id="RF24::begin___SPIP"></span><span class="target" id="classRF24_1a388fa99b0400ce0cd887f742ef53192b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_SPI</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">spiBus</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEP4_SPI" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Same as <a class="reference internal" href="#classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"><span class="std std-ref">begin()</span></a>, but allows specifying a non-default SPI bus to use.</p>
 <p> <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -599,12 +600,12 @@ various SPI implementations based on the specified platform (or SoftSPI).</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="begin-uint16-t-uint16-t">
 <h3 id="begin-uint16-t-uint16-t">begin(uint16_t, uint16_t)<a class="headerlink" href="#begin-uint16-t-uint16-t" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF245beginE8uint16_t8uint16_t">
-<span id="_CPPv3N4RF245beginE8uint16_t8uint16_t"></span><span id="_CPPv2N4RF245beginE8uint16_t8uint16_t"></span><span id="RF24::begin__uint16_t.uint16_t"></span><span class="target" id="classRF24_1a59573f754a51dfe32f195435d27622a8"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">begin</span></code><span class="sig-paren">(</span><span class="pre">uint16_t</span> <em><span class="pre">_cepin</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">_cspin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginE8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF245beginE8uint16_t8uint16_t">
+<span id="_CPPv3N4RF245beginE8uint16_t8uint16_t"></span><span id="_CPPv2N4RF245beginE8uint16_t8uint16_t"></span><span id="RF24::begin__uint16_t.uint16_t"></span><span class="target" id="classRF24_1a59573f754a51dfe32f195435d27622a8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cepin</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cspin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginE8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Same as <a class="reference internal" href="#classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"><span class="std std-ref">begin()</span></a>, but allows dynamically specifying a CE pin and CSN pin to use. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -618,12 +619,12 @@ various SPI implementations based on the specified platform (or SoftSPI).</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="begin-spi-uint16-t-uint16-t">
 <h3 id="begin-spi-uint16-t-uint16-t">begin(_SPI*, uint16_t, uint16_t)<a class="headerlink" href="#begin-spi-uint16-t-uint16-t" title="Permalink to this headline">¶</a></h3>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF245beginEP4_SPI8uint16_t8uint16_t">
-<span id="_CPPv3N4RF245beginEP4_SPI8uint16_t8uint16_t"></span><span id="_CPPv2N4RF245beginEP4_SPI8uint16_t8uint16_t"></span><span id="RF24::begin___SPIP.uint16_t.uint16_t"></span><span class="target" id="classRF24_1ae9277681d834410ee6b38f1dda7de36e"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">begin</span></code><span class="sig-paren">(</span><span class="pre">_SPI</span> <span class="pre">*</span><em><span class="pre">spiBus</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">_cepin</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">_cspin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEP4_SPI8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF245beginEP4_SPI8uint16_t8uint16_t">
+<span id="_CPPv3N4RF245beginEP4_SPI8uint16_t8uint16_t"></span><span id="_CPPv2N4RF245beginEP4_SPI8uint16_t8uint16_t"></span><span id="RF24::begin___SPIP.uint16_t.uint16_t"></span><span class="target" id="classRF24_1ae9277681d834410ee6b38f1dda7de36e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_SPI</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">spiBus</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cepin</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_cspin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF245beginEP4_SPI8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Same as <a class="reference internal" href="#classRF24_1a048a20c73c7d9b2e02dcbae6fb9c4ba8"><span class="std std-ref">begin()</span></a>, but allows dynamically specifying a SPI bus, CE pin, and CSN pin to use.</p>
 <p> <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -665,13 +666,13 @@ various SPI implementations based on the specified platform (or SoftSPI).</p>
 </dd>
 </dl>
 </dd></dl>
-
-
-
+</section>
+</section>
+<section id="openreadingpipe">
 <h2 id="openreadingpipe">openReadingPipe()<a class="headerlink" href="#openreadingpipe" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t">
-<span id="_CPPv3N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="RF24::openReadingPipe__uint8_t.uint8_tCP"></span><span class="target" id="classRF24_1a9edc910ccc1ffcff56814b08faca5535"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">openReadingPipe</span></code><span class="sig-paren">(</span><span class="pre">uint8_t</span> <em><span class="pre">number</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">uint8_t</span> <span class="pre">*</span><em><span class="pre">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t">
+<span id="_CPPv3N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_tPK7uint8_t"></span><span id="RF24::openReadingPipe__uint8_t.uint8_tCP"></span><span class="target" id="classRF24_1a9edc910ccc1ffcff56814b08faca5535"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">openReadingPipe</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">address</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_tPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Open a pipe for reading with an array of bytes as an address. Use OpenReadingPipe(uint8_t, uint64_t) for passing a 64-bit integer as an address.</p>
 <p>Up to 6 pipes can be open for simultaneous listening. Open all the required reading pipes, and then call <a class="reference internal" href="#classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"><span class="std std-ref">startListening()</span></a>.</p>
 <p> <p><div class="admonition seealso">
@@ -722,8 +723,8 @@ functionality of <a class="reference internal" href="#_CPPv4N4RF2415openWritingP
 </dl>
 </dd></dl>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t">
-<span id="_CPPv3N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="RF24::openReadingPipe__uint8_t.uint64_t"></span><span class="target" id="classRF24_1aa7e8523f86f9f8f20c274e0c89a5fd45"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">openReadingPipe</span></code><span class="sig-paren">(</span><span class="pre">uint8_t</span> <em><span class="pre">number</span></em>, <span class="pre">uint64_t</span> <em><span class="pre">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t">
+<span id="_CPPv3N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="_CPPv2N4RF2415openReadingPipeE7uint8_t8uint64_t"></span><span id="RF24::openReadingPipe__uint8_t.uint64_t"></span><span class="target" id="classRF24_1aa7e8523f86f9f8f20c274e0c89a5fd45"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">openReadingPipe</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">address</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openReadingPipeE7uint8_t8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Open a pipe for reading with a 64-but integer as an address. Use <a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe(uint8_t, const uint8_t*)</span></a> for passing an array of bytes as an address.</p>
 <p> <p><div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -755,12 +756,12 @@ using malformed addresses.</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="closereadingpipe">
 <h2 id="closereadingpipe">closeReadingPipe()<a class="headerlink" href="#closereadingpipe" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2416closeReadingPipeE7uint8_t">
-<span id="_CPPv3N4RF2416closeReadingPipeE7uint8_t"></span><span id="_CPPv2N4RF2416closeReadingPipeE7uint8_t"></span><span id="RF24::closeReadingPipe__uint8_t"></span><span class="target" id="classRF24_1a9944d93994a80037e3586f340f5e0107"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">closeReadingPipe</span></code><span class="sig-paren">(</span><span class="pre">uint8_t</span> <em><span class="pre">pipe</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416closeReadingPipeE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2416closeReadingPipeE7uint8_t">
+<span id="_CPPv3N4RF2416closeReadingPipeE7uint8_t"></span><span id="_CPPv2N4RF2416closeReadingPipeE7uint8_t"></span><span id="RF24::closeReadingPipe__uint8_t"></span><span class="target" id="classRF24_1a9944d93994a80037e3586f340f5e0107"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">closeReadingPipe</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pipe</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2416closeReadingPipeE7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Close a pipe after it has been previously opened. Can be safely called without having previously opened a pipe. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -768,12 +769,12 @@ using malformed addresses.</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="openwritingpipe">
 <h2 id="openwritingpipe">openWritingPipe()<a class="headerlink" href="#openwritingpipe" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2415openWritingPipeEPK7uint8_t">
-<span id="_CPPv3N4RF2415openWritingPipeEPK7uint8_t"></span><span id="_CPPv2N4RF2415openWritingPipeEPK7uint8_t"></span><span id="RF24::openWritingPipe__uint8_tCP"></span><span class="target" id="classRF24_1af2e409e62d49a23e372a70b904ae30e1"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">openWritingPipe</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">uint8_t</span> <span class="pre">*</span><em><span class="pre">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2415openWritingPipeEPK7uint8_t">
+<span id="_CPPv3N4RF2415openWritingPipeEPK7uint8_t"></span><span id="_CPPv2N4RF2415openWritingPipeEPK7uint8_t"></span><span id="RF24::openWritingPipe__uint8_tCP"></span><span class="target" id="classRF24_1af2e409e62d49a23e372a70b904ae30e1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">openWritingPipe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">address</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeEPK7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Open a pipe for writing with an array of bytes as an address. Use <a class="reference internal" href="#classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"><span class="std std-ref">openWritingPipe(uint64_t)</span></a> for passing a 64-bit integer as an address.</p>
 <p>Only one writing pipe can be opened at once, but this function changes the address that is used to transmit (ACK payloads/packets do not apply here). Be sure to call <a class="reference internal" href="#classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"><span class="std std-ref">stopListening()</span></a> prior to calling this function.</p>
 <p>Addresses are assigned via a byte array, default is 5 byte address length  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">addresses</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -815,8 +816,8 @@ reading pipe 0 regardless.</p>
 </dl>
 </dd></dl>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2415openWritingPipeE8uint64_t">
-<span id="_CPPv3N4RF2415openWritingPipeE8uint64_t"></span><span id="_CPPv2N4RF2415openWritingPipeE8uint64_t"></span><span id="RF24::openWritingPipe__uint64_t"></span><span class="target" id="classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">openWritingPipe</span></code><span class="sig-paren">(</span><span class="pre">uint64_t</span> <em><span class="pre">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeE8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2415openWritingPipeE8uint64_t">
+<span id="_CPPv3N4RF2415openWritingPipeE8uint64_t"></span><span id="_CPPv2N4RF2415openWritingPipeE8uint64_t"></span><span id="RF24::openWritingPipe__uint64_t"></span><span class="target" id="classRF24_1a50c8e68ee840e1860a31dbdc83afbd77"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">openWritingPipe</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">address</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2415openWritingPipeE8uint64_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Open a pipe for writing using a 64-but integer as an address. Use <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe(const uint8_t*)</span></a> for passing an array of bytes.</p>
 <p> <p><p>Addresses are 40-bit hex values, e.g.:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">openWritingPipe</span><span class="p">(</span><span class="mh">0xF0F0F0F0F0</span><span class="p">);</span>
@@ -830,12 +831,12 @@ reading pipe 0 regardless.</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="startlistening">
 <h2 id="startlistening">startListening()<a class="headerlink" href="#startlistening" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2414startListeningEv">
-<span id="_CPPv3N4RF2414startListeningEv"></span><span id="_CPPv2N4RF2414startListeningEv"></span><span id="RF24::startListening__void"></span><span class="target" id="classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">startListening</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414startListeningEv" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2414startListeningEv">
+<span id="_CPPv3N4RF2414startListeningEv"></span><span id="_CPPv2N4RF2414startListeningEv"></span><span id="RF24::startListening__void"></span><span class="target" id="classRF24_1a30a2733a3889bdc331fe2d2f4f0f7b39"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">startListening</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2414startListeningEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Start listening on the pipes opened for reading.</p>
 <p><ol class="loweralpha simple">
 <li><p>Be sure to call <a class="reference internal" href="#classRF24_1a9edc910ccc1ffcff56814b08faca5535"><span class="std std-ref">openReadingPipe()</span></a> first.</p></li>
@@ -859,12 +860,12 @@ will overwrite the address to reading pipe 0 for proper auto-ack
 functionality.</p>
 </div>
 </dd></dl>
-
-
+</section>
+<section id="stoplistening">
 <h2 id="stoplistening">stopListening()<a class="headerlink" href="#stoplistening" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF2413stopListeningEv">
-<span id="_CPPv3N4RF2413stopListeningEv"></span><span id="_CPPv2N4RF2413stopListeningEv"></span><span id="RF24::stopListening__void"></span><span class="target" id="classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">stopListening</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413stopListeningEv" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF2413stopListeningEv">
+<span id="_CPPv3N4RF2413stopListeningEv"></span><span id="_CPPv2N4RF2413stopListeningEv"></span><span id="RF24::stopListening__void"></span><span class="target" id="classRF24_1a6f144d73fc447c8ac2d1a4166210fd88"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">stopListening</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF2413stopListeningEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Stop listening for incoming messages, and switch to transmit mode.</p>
 <p>Do this before calling <a class="reference internal" href="#classRF24_1a05e0638239513ce81bf11d8f08226a26"><span class="std std-ref">send()</span></a>.  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
 <span class="n">radio</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
@@ -879,12 +880,12 @@ flushed when calling this function. This is meant to discard any ACK
 payloads that were not appended to acknowledgment packets.</p>
 </div>
 </dd></dl>
-
-
+</section>
+<section id="any">
 <h2 id="any">any()<a class="headerlink" href="#any" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF243anyEv">
-<span id="_CPPv3N4RF243anyEv"></span><span id="_CPPv2N4RF243anyEv"></span><span id="RF24::any__void"></span><span class="target" id="classRF24_1af6b7754d874efe564e539de64e5c8ae8"></span><span class="pre">uint8_t</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">any</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF243anyEv" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF243anyEv">
+<span id="_CPPv3N4RF243anyEv"></span><span id="_CPPv2N4RF243anyEv"></span><span id="RF24::any__void"></span><span class="target" id="classRF24_1af6b7754d874efe564e539de64e5c8ae8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">any</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF243anyEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Get next available payload length in bytes. This function is compatible with static or dynamic payloads. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -892,12 +893,12 @@ payloads that were not appended to acknowledgment packets.</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="available">
 <h2 id="available">available()<a class="headerlink" href="#available" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF249availableEv">
-<span id="_CPPv3N4RF249availableEv"></span><span id="_CPPv2N4RF249availableEv"></span><span id="RF24::available__void"></span><span class="target" id="classRF24_1a127105eb7a3b351cfe777c1cec50627a"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">available</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF249availableEv" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF249availableEv">
+<span id="_CPPv3N4RF249availableEv"></span><span id="_CPPv2N4RF249availableEv"></span><span id="RF24::available__void"></span><span class="target" id="classRF24_1a127105eb7a3b351cfe777c1cec50627a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">available</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF249availableEv" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Check whether there are bytes available to be read  <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>
   <span class="n">radio</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
 <span class="p">}</span>
@@ -948,12 +949,12 @@ function during an ISR (Interrupt Service Routine).</p>
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="read">
 <h2 id="read">read()<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF244readEPv7uint8_t">
-<span id="_CPPv3N4RF244readEPv7uint8_t"></span><span id="_CPPv2N4RF244readEPv7uint8_t"></span><span id="RF24::read__voidP.uint8_t"></span><span class="target" id="classRF24_1a8e2eacacfba96426c192066f04054c5b"></span><span class="pre">void</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><span class="pre">void</span> <span class="pre">*</span><em><span class="pre">buf</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">len</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244readEPv7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF244readEPv7uint8_t">
+<span id="_CPPv3N4RF244readEPv7uint8_t"></span><span id="_CPPv2N4RF244readEPv7uint8_t"></span><span id="RF24::read__voidP.uint8_t"></span><span class="target" id="classRF24_1a8e2eacacfba96426c192066f04054c5b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244readEPv7uint8_t" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>Read payload data from the RX FIFO buffer(s).</p>
 <p>The length of data read is usually the next available payload’s length </p>
 <dl class="field-list simple">
@@ -996,12 +997,12 @@ payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+<section id="send">
 <h2 id="send">send()<a class="headerlink" href="#send" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt id="_CPPv4N4RF244sendEPKv7uint8_tKb">
-<span id="_CPPv3N4RF244sendEPKv7uint8_tKb"></span><span id="_CPPv2N4RF244sendEPKv7uint8_tKb"></span><span id="RF24::send__voidCP.uint8_t.bC"></span><span class="target" id="classRF24_1a05e0638239513ce81bf11d8f08226a26"></span><span class="pre">bool</span> <code class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="pre">RF24</span></a><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">send</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">buf</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">len</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">bool</span> <em><span class="pre">multicast</span></em> <span class="pre">=</span> <span class="pre">0</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_tKb" title="Permalink to this definition">¶</a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N4RF244sendEPKv7uint8_tKb">
+<span id="_CPPv3N4RF244sendEPKv7uint8_tKb"></span><span id="_CPPv2N4RF244sendEPKv7uint8_tKb"></span><span id="RF24::send__voidCP.uint8_t.bC"></span><span class="target" id="classRF24_1a05e0638239513ce81bf11d8f08226a26"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><a class="reference internal" href="#_CPPv44RF24" title="RF24"><span class="n"><span class="pre">RF24</span></span></a><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">multicast</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RF244sendEPKv7uint8_tKb" title="Permalink to this definition">¶</a><br/></dt>
 <dd><p>This blocks until the message is successfully acknowledged by the receiver or the timeout/retransmit maxima are reached.</p>
 <p>Be sure to call <a class="reference internal" href="#classRF24_1af2e409e62d49a23e372a70b904ae30e1"><span class="std std-ref">openWritingPipe()</span></a> first to set the destination of the paylooad.</p>
 <p>The <a class="reference internal" href="advanced_api.html#classRF24_1a8f17ced7559d6ecfffad31858e7b3d15"><span class="std std-ref">irqDs()</span></a> and <a class="reference internal" href="advanced_api.html#classRF24_1a138c84cda83cc15d157cfa3d518d4183"><span class="std std-ref">irqDf()</span></a> interrupt flags will be cleared upon entering this function  <p><div class="admonition seealso">
@@ -1027,8 +1028,8 @@ payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint
 </dd>
 </dl>
 </dd></dl>
-
-
+</section>
+</section>
 
 
           </article>
@@ -1077,7 +1078,7 @@ payload even when <a class="reference internal" href="#_CPPv4N4RF244readEPv7uint
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

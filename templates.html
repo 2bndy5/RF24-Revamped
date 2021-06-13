@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>Templated Files for Platform Support &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -421,448 +422,251 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="templated-files-for-platform-support">
 <h1 id="templates--page-root">Templated Files for Platform Support<a class="headerlink" href="#templates--page-root" title="Permalink to this headline">¶</a></h1>
-
+<section id="about-general">
 <h2 id="about-general">About General<a class="headerlink" href="#about-general" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/utility/Template/RF24_arch_config.h</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef __ARCH_CONFIG_H__</span>
-<span class="cp">#define __ARCH_CONFIG_H__</span>
-
-<span class="cp">#define RF24_LINUX</span>
-
-<span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">"spi.h"</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">"gpio.h"</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">"compatibility.h"</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
-
-<span class="cp">#define _BV(x) (1 &lt;&lt; (x))</span>
-<span class="cp">#define _SPI spi</span>
-
-<span class="cp">#undef SERIAL_DEBUG</span>
-<span class="cp">#ifdef SERIAL_DEBUG</span>
-    <span class="cp">#define IF_SERIAL_DEBUG(x) ({x;})</span>
-<span class="cp">#else</span>
-    <span class="cp">#define IF_SERIAL_DEBUG(x)</span>
-<span class="cp">#endif</span>
-
-<span class="c1">// Avoid spurious warnings</span>
-<span class="cp">#if 1</span>
-    <span class="cp">#if !defined(NATIVE) &amp;&amp; defined(ARDUINO)</span>
-        <span class="cp">#undef PROGMEM</span>
-        <span class="cp">#define PROGMEM __attribute__(( section(".progmem.data") ))</span>
-        <span class="cp">#undef PSTR</span>
-        <span class="cp">#define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &amp;__c[0];}))</span>
-    <span class="cp">#endif</span>
-<span class="cp">#endif</span>
-
-<span class="k">typedef</span> <span class="kt">uint16_t</span> <span class="n">prog_uint16_t</span><span class="p">;</span>
-<span class="cp">#define PSTR(x) (x)</span>
-<span class="cp">#define printf_P printf</span>
-<span class="cp">#define strlen_P strlen</span>
-<span class="cp">#define PROGMEM</span>
-<span class="cp">#define pgm_read_word(p) (*(p))</span>
-<span class="cp">#define PRIPSTR "%s"</span>
-<span class="cp">#define pgm_read_byte(p) (*(p))</span>
-
-<span class="c1">// Function, constant map as a result of migrating from Arduino</span>
-<span class="cp">#define LOW GPIO::OUTPUT_LOW</span>
-<span class="cp">#define HIGH GPIO::OUTPUT_HIGH</span>
-<span class="cp">#define INPUT GPIO::DIRECTION_IN</span>
-<span class="cp">#define OUTPUT GPIO::DIRECTION_OUT</span>
-<span class="cp">#define digitalWrite(pin, value) GPIO::write(pin, value)</span>
-<span class="cp">#define pinMode(pin, direction) GPIO::open(pin, direction)</span>
-<span class="cp">#define delay(milisec) __msleep(milisec)</span>
-<span class="cp">#define delayMicroseconds(usec) __usleep(usec)</span>
-<span class="cp">#define millis() __millis()</span>
-
-<span class="cp">#endif </span><span class="c1">// __ARCH_CONFIG_H__</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">16</span><span class="cp">#ifndef __ARCH_CONFIG_H__</span>
+<span class="linenos">17</span><span class="cp">#define __ARCH_CONFIG_H__</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="cp">#define RF24_LINUX</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="linenos">22</span><span class="cp">#include</span> <span class="cpf">"spi.h"</span><span class="cp"></span>
+<span class="linenos">23</span><span class="cp">#include</span> <span class="cpf">"gpio.h"</span><span class="cp"></span>
+<span class="linenos">24</span><span class="cp">#include</span> <span class="cpf">"compatibility.h"</span><span class="cp"></span>
+<span class="linenos">25</span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="linenos">26</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="linenos">27</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<span class="linenos">28</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="linenos">29</span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="cp">#define _BV(x) (1 &lt;&lt; (x))</span>
+<span class="linenos">32</span><span class="cp">#define _SPI spi</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="cp">#undef SERIAL_DEBUG</span>
+<span class="linenos">35</span><span class="cp">#ifdef SERIAL_DEBUG</span>
+<span class="linenos">36</span>    <span class="cp">#define IF_SERIAL_DEBUG(x) ({x;})</span>
+<span class="linenos">37</span><span class="cp">#else</span>
+<span class="linenos">38</span>    <span class="cp">#define IF_SERIAL_DEBUG(x)</span>
+<span class="linenos">39</span><span class="cp">#endif</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="c1">// Avoid spurious warnings</span>
+<span class="linenos">42</span><span class="cp">#if 1</span>
+<span class="linenos">43</span>    <span class="cp">#if !defined(NATIVE) &amp;&amp; defined(ARDUINO)</span>
+<span class="linenos">44</span>        <span class="cp">#undef PROGMEM</span>
+<span class="linenos">45</span>        <span class="cp">#define PROGMEM __attribute__(( section(".progmem.data") ))</span>
+<span class="linenos">46</span>        <span class="cp">#undef PSTR</span>
+<span class="linenos">47</span>        <span class="cp">#define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &amp;__c[0];}))</span>
+<span class="linenos">48</span>    <span class="cp">#endif</span>
+<span class="linenos">49</span><span class="cp">#endif</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="k">typedef</span> <span class="kt">uint16_t</span> <span class="n">prog_uint16_t</span><span class="p">;</span>
+<span class="linenos">52</span><span class="cp">#define PSTR(x) (x)</span>
+<span class="linenos">53</span><span class="cp">#define printf_P printf</span>
+<span class="linenos">54</span><span class="cp">#define strlen_P strlen</span>
+<span class="linenos">55</span><span class="cp">#define PROGMEM</span>
+<span class="linenos">56</span><span class="cp">#define pgm_read_word(p) (*(p))</span>
+<span class="linenos">57</span><span class="cp">#define PRIPSTR "%s"</span>
+<span class="linenos">58</span><span class="cp">#define pgm_read_byte(p) (*(p))</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="c1">// Function, constant map as a result of migrating from Arduino</span>
+<span class="linenos">61</span><span class="cp">#define LOW GPIO::OUTPUT_LOW</span>
+<span class="linenos">62</span><span class="cp">#define HIGH GPIO::OUTPUT_HIGH</span>
+<span class="linenos">63</span><span class="cp">#define INPUT GPIO::DIRECTION_IN</span>
+<span class="linenos">64</span><span class="cp">#define OUTPUT GPIO::DIRECTION_OUT</span>
+<span class="linenos">65</span><span class="cp">#define digitalWrite(pin, value) GPIO::write(pin, value)</span>
+<span class="linenos">66</span><span class="cp">#define pinMode(pin, direction) GPIO::open(pin, direction)</span>
+<span class="linenos">67</span><span class="cp">#define delay(milisec) __msleep(milisec)</span>
+<span class="linenos">68</span><span class="cp">#define delayMicroseconds(usec) __usleep(usec)</span>
+<span class="linenos">69</span><span class="cp">#define millis() __millis()</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span><span class="cp">#endif </span><span class="c1">// __ARCH_CONFIG_H__</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+<section id="about-includes">
 <h2 id="about-includes">About Includes<a class="headerlink" href="#about-includes" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">/utility/Template/includes.h</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef __RF24_INCLUDES_H__</span>
-<span class="cp">#define __RF24_INCLUDES_H__</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Define a specific platform for this configuration. For example.</span>
-<span class="cm"> * our platform is named "BBB".</span>
-<span class="cm"> */</span>
-<span class="cp">#define RF24_BBB</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Load the correct configuration for this platform</span>
-<span class="cm"> */</span>
-<span class="cp">#include</span> <span class="cpf">"BBB/RF24_arch_config.h"</span><span class="cp"></span>
-
-<span class="cp">#endif</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 6</span><span class="cp">#ifndef __RF24_INCLUDES_H__</span>
+<span class="linenos"> 7</span><span class="cp">#define __RF24_INCLUDES_H__</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="cm">/**</span>
+<span class="linenos">10</span><span class="cm"> * Define a specific platform for this configuration. For example.</span>
+<span class="linenos">11</span><span class="cm"> * our platform is named "BBB".</span>
+<span class="linenos">12</span><span class="cm"> */</span>
+<span class="linenos">13</span><span class="cp">#define RF24_BBB</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="cm">/**</span>
+<span class="linenos">16</span><span class="cm"> * Load the correct configuration for this platform</span>
+<span class="linenos">17</span><span class="cm"> */</span>
+<span class="linenos">18</span><span class="cp">#include</span> <span class="cpf">"BBB/RF24_arch_config.h"</span><span class="cp"></span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="cp">#endif</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+<section id="about-timing">
 <h2 id="about-timing">About Timing<a class="headerlink" href="#about-timing" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">/utility/Template/compatibility.h</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifndef COMPATIBLITY_H</span>
-<span class="cp">#define COMPATIBLITY_H</span>
-
-<span class="cp">#ifdef __cplusplus</span>
-<span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
-<span class="cp">#endif</span>
-
-<span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
-
-<span class="kt">void</span> <span class="nf">__msleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
-
-<span class="kt">void</span> <span class="nf">__usleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
-
-<span class="kt">void</span> <span class="nf">__start_timer</span><span class="p">();</span>
-
-<span class="kt">long</span> <span class="nf">__millis</span><span class="p">();</span>
-
-<span class="cp">#ifdef    __cplusplus</span>
-<span class="p">}</span>
-<span class="cp">#endif</span>
-
-<span class="cp">#endif    </span><span class="cm">/* COMPATIBLITY_H */</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">13</span><span class="cp">#ifndef COMPATIBLITY_H</span>
+<span class="linenos">14</span><span class="cp">#define COMPATIBLITY_H</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="cp">#ifdef __cplusplus</span>
+<span class="linenos">17</span><span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+<span class="linenos">18</span><span class="cp">#endif</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="linenos">21</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<span class="linenos">22</span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="kt">void</span> <span class="nf">__msleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="kt">void</span> <span class="nf">__usleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">milisec</span><span class="p">);</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="kt">void</span> <span class="nf">__start_timer</span><span class="p">();</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="kt">long</span> <span class="nf">__millis</span><span class="p">();</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="cp">#ifdef    __cplusplus</span>
+<span class="linenos">33</span><span class="p">}</span>
+<span class="linenos">34</span><span class="cp">#endif</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="cp">#endif    </span><span class="cm">/* COMPATIBLITY_H */</span><span class="cp"></span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+<section id="about-gpio">
 <h2 id="about-gpio">About GPIO<a class="headerlink" href="#about-gpio" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">/utility/Template/gpio.h</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
-
-<span class="k">class</span> <span class="nc">GPIO</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="cm">/* Constants */</span>
-    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_OUT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_IN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_HIGH</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_LOW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="n">GPIO</span><span class="p">();</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     * Similar to Arduino pinMode(pin, mode);</span>
-<span class="cm">     * @param port</span>
-<span class="cm">     * @param DDR</span>
-<span class="cm">     */</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">open</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">DDR</span><span class="p">);</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param port</span>
-<span class="cm">     */</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
-
-    <span class="cm">/**</span>
-<span class="cm">     * Similar to Arduino digitalRead(pin);</span>
-<span class="cm">     * @param port</span>
-<span class="cm">     */</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">read</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
-
-    <span class="cm">/**</span>
-<span class="cm">    * Similar to Arduino digitalWrite(pin, state);</span>
-<span class="cm">    * @param port</span>
-<span class="cm">    * @param value</span>
-<span class="cm">    */</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
-
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">GPIO</span><span class="p">();</span>
-<span class="p">};</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 8</span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">class</span> <span class="nc">GPIO</span> <span class="p">{</span>
+<span class="linenos">11</span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">12</span>    <span class="cm">/* Constants */</span>
+<span class="linenos">13</span>    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_OUT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos">14</span>    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">DIRECTION_IN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_HIGH</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos">17</span>    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">OUTPUT_LOW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="n">GPIO</span><span class="p">();</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="cm">/**</span>
+<span class="linenos">22</span><span class="cm">     * Similar to Arduino pinMode(pin, mode);</span>
+<span class="linenos">23</span><span class="cm">     * @param port</span>
+<span class="linenos">24</span><span class="cm">     * @param DDR</span>
+<span class="linenos">25</span><span class="cm">     */</span>
+<span class="linenos">26</span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">open</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">DDR</span><span class="p">);</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="cm">/**</span>
+<span class="linenos">29</span><span class="cm">     *</span>
+<span class="linenos">30</span><span class="cm">     * @param port</span>
+<span class="linenos">31</span><span class="cm">     */</span>
+<span class="linenos">32</span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>    <span class="cm">/**</span>
+<span class="linenos">35</span><span class="cm">     * Similar to Arduino digitalRead(pin);</span>
+<span class="linenos">36</span><span class="cm">     * @param port</span>
+<span class="linenos">37</span><span class="cm">     */</span>
+<span class="linenos">38</span>    <span class="k">static</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>    <span class="cm">/**</span>
+<span class="linenos">41</span><span class="cm">    * Similar to Arduino digitalWrite(pin, state);</span>
+<span class="linenos">42</span><span class="cm">    * @param port</span>
+<span class="linenos">43</span><span class="cm">    * @param value</span>
+<span class="linenos">44</span><span class="cm">    */</span>
+<span class="linenos">45</span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>    <span class="k">virtual</span> <span class="o">~</span><span class="n">GPIO</span><span class="p">();</span>
+<span class="linenos">48</span><span class="p">};</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+<section id="about-spi">
 <h2 id="about-spi">About SPI<a class="headerlink" href="#about-spi" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">/utility/Template/spi.h</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;inttypes.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linux/types.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linux/spi/spidev.h&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">SPI</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-
-	<span class="cm">/**</span>
-<span class="cm">	 * SPI constructor</span>
-<span class="cm">	 */</span>
-	<span class="n">SPI</span><span class="p">();</span>
-
-	<span class="cm">/**</span>
-<span class="cm">	 * Start SPI</span>
-<span class="cm">	 */</span>
-	<span class="kt">void</span> <span class="nf">begin</span><span class="p">(</span><span class="kt">int</span> <span class="n">busNo</span><span class="p">);</span>
-
-	<span class="cm">/**</span>
-<span class="cm">	 * Transfer a single byte</span>
-<span class="cm">	 * @param tx_ Byte to send</span>
-<span class="cm">	 * @return Data returned via spi</span>
-<span class="cm">	 */</span>
-	<span class="kt">uint8_t</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">tx_</span><span class="p">);</span>
-
-	<span class="cm">/**</span>
-<span class="cm">	 * Transfer a buffer of data</span>
-<span class="cm">	 * @param tbuf Transmit buffer</span>
-<span class="cm">	 * @param rbuf Receive buffer</span>
-<span class="cm">	 * @param len Length of the data</span>
-<span class="cm">	 */</span>
-	<span class="kt">void</span> <span class="nf">transfernb</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">tbuf</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rbuf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
-
-	<span class="cm">/**</span>
-<span class="cm">	 * Transfer a buffer of data without an rx buffer</span>
-<span class="cm">	 * @param buf Pointer to a buffer of data</span>
-<span class="cm">	 * @param len Length of the data</span>
-<span class="cm">	 */</span>
-	<span class="kt">void</span> <span class="nf">transfern</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
-
-	<span class="k">virtual</span> <span class="o">~</span> <span class="n">SPI</span><span class="p">();</span>
-
-<span class="k">private</span><span class="o">:</span>
-
-	<span class="cm">/** Default SPI device */</span>
-	<span class="n">string</span> <span class="n">device</span><span class="p">;</span>
-	<span class="cm">/** SPI Mode set */</span>
-	<span class="kt">uint8_t</span> <span class="n">mode</span><span class="p">;</span>
-	<span class="cm">/** word size*/</span>
-	<span class="kt">uint8_t</span> <span class="n">bits</span><span class="p">;</span>
-	<span class="cm">/** Set SPI speed*/</span>
-	<span class="kt">uint32_t</span> <span class="n">speed</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
-
-	<span class="kt">void</span> <span class="nf">init</span><span class="p">();</span>
-
-<span class="p">};</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 6</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="linenos"> 7</span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 8</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 9</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="linenos">10</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="linenos">11</span><span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
+<span class="linenos">12</span><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="linenos">13</span><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp"></span>
+<span class="linenos">14</span><span class="cp">#include</span> <span class="cpf">&lt;inttypes.h&gt;</span><span class="cp"></span>
+<span class="linenos">15</span><span class="cp">#include</span> <span class="cpf">&lt;linux/types.h&gt;</span><span class="cp"></span>
+<span class="linenos">16</span><span class="cp">#include</span> <span class="cpf">&lt;linux/spi/spidev.h&gt;</span><span class="cp"></span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">using</span> <span class="k">namespace</span> <span class="nn">std</span><span class="p">;</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="k">class</span> <span class="nc">SPI</span> <span class="p">{</span>
+<span class="linenos">21</span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>	<span class="cm">/**</span>
+<span class="linenos">24</span><span class="cm">	 * SPI constructor</span>
+<span class="linenos">25</span><span class="cm">	 */</span>
+<span class="linenos">26</span>	<span class="n">SPI</span><span class="p">();</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>	<span class="cm">/**</span>
+<span class="linenos">29</span><span class="cm">	 * Start SPI</span>
+<span class="linenos">30</span><span class="cm">	 */</span>
+<span class="linenos">31</span>	<span class="kt">void</span> <span class="nf">begin</span><span class="p">(</span><span class="kt">int</span> <span class="n">busNo</span><span class="p">);</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>	<span class="cm">/**</span>
+<span class="linenos">34</span><span class="cm">	 * Transfer a single byte</span>
+<span class="linenos">35</span><span class="cm">	 * @param tx_ Byte to send</span>
+<span class="linenos">36</span><span class="cm">	 * @return Data returned via spi</span>
+<span class="linenos">37</span><span class="cm">	 */</span>
+<span class="linenos">38</span>	<span class="kt">uint8_t</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">tx_</span><span class="p">);</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>	<span class="cm">/**</span>
+<span class="linenos">41</span><span class="cm">	 * Transfer a buffer of data</span>
+<span class="linenos">42</span><span class="cm">	 * @param tbuf Transmit buffer</span>
+<span class="linenos">43</span><span class="cm">	 * @param rbuf Receive buffer</span>
+<span class="linenos">44</span><span class="cm">	 * @param len Length of the data</span>
+<span class="linenos">45</span><span class="cm">	 */</span>
+<span class="linenos">46</span>	<span class="kt">void</span> <span class="nf">transfernb</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">tbuf</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rbuf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>	<span class="cm">/**</span>
+<span class="linenos">49</span><span class="cm">	 * Transfer a buffer of data without an rx buffer</span>
+<span class="linenos">50</span><span class="cm">	 * @param buf Pointer to a buffer of data</span>
+<span class="linenos">51</span><span class="cm">	 * @param len Length of the data</span>
+<span class="linenos">52</span><span class="cm">	 */</span>
+<span class="linenos">53</span>	<span class="kt">void</span> <span class="nf">transfern</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">);</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>	<span class="k">virtual</span> <span class="o">~</span> <span class="n">SPI</span><span class="p">();</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>	<span class="cm">/** Default SPI device */</span>
+<span class="linenos">60</span>	<span class="n">string</span> <span class="n">device</span><span class="p">;</span>
+<span class="linenos">61</span>	<span class="cm">/** SPI Mode set */</span>
+<span class="linenos">62</span>	<span class="kt">uint8_t</span> <span class="n">mode</span><span class="p">;</span>
+<span class="linenos">63</span>	<span class="cm">/** word size*/</span>
+<span class="linenos">64</span>	<span class="kt">uint8_t</span> <span class="n">bits</span><span class="p">;</span>
+<span class="linenos">65</span>	<span class="cm">/** Set SPI speed*/</span>
+<span class="linenos">66</span>	<span class="kt">uint32_t</span> <span class="n">speed</span><span class="p">;</span>
+<span class="linenos">67</span>	<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span>	<span class="kt">void</span> <span class="nf">init</span><span class="p">();</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span><span class="p">};</span>
 </pre></div>
-</td></tr></table></div>
 </div>
-
-
+</div>
+</section>
+</section>
 
 
           </article>
@@ -900,7 +704,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

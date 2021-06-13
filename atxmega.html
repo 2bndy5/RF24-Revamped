@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -47,11 +48,11 @@
   
   
     <title>ATXMEGA &#8212; RF24 Revamped</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/material.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/dark_material.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -410,11 +411,11 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
+  <section id="atxmega">
 <h1 id="atxmega--page-root">ATXMEGA<a class="headerlink" href="#atxmega--page-root" title="Permalink to this headline">¶</a></h1>
 <p>The RF24 driver can be build as a static library with Atmel Studio 7 in order to be included as any other library in another program for the XMEGA family.</p>
 <p>Currently only the <strong>ATXMEGA D3</strong> family is implemented.</p>
-
+<section id="preparation">
 <h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
 <p>Create an empty GCC Static Library project in AS7.</p>
 <p>As not all files are required, copy the following directory structure in the project:</p>
@@ -437,8 +438,8 @@
 <div class="line">        ├spi.cpp</div>
 <div class="line">        └spi.h</div>
 </div>
-
-
+</section>
+<section id="usage">
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Add the library to your project!</p>
 <p>In the file where the <code class="docutils literal notranslate"><span class="pre">main()</span></code> is located, put the following code snippet to update the millisecond functionality:</p>
@@ -463,8 +464,8 @@
 <p>The millisecond functionality is based on the TCE0 so don’t use these pins as IO.</p>
 </div>
 <p>The operating frequency of the uC is 32MHz. If you have other frequency change the TCE0 registers appropriatly in function <code class="docutils literal notranslate"><span class="pre">__start_timer()</span></code> in <a class="reference external" href="templates.h#about-timing">compatibility.c</a> file for your frequency.</p>
-
-
+</section>
+</section>
 
 
           </article>
@@ -513,7 +514,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
