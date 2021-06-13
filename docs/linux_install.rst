@@ -16,19 +16,19 @@ Using a package manager
 
 The RF24 library now (as of v1.4.1) has pre-built packages (\*.deb or \*.rpm files) that can be installed on a
 Raspberry Pi. These packages can be found on the library's
-`GitHub release page <https://GitHub.com/2bndy5/RF24/releases>`_
+`GitHub release page <https://github.com/2bndy5/RF24/releases>`_
 
 .. warning:: If you have previously installed the library from source code, then you will need
     to uninstall it manually to avoid runtime conflicts.
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    sudo rm /usr/local/lib/librf24revamped.*
-    sudo rm -r /usr/local/include/RF24Revamped
+        sudo rm /usr/local/lib/librf24revamped.*
+        sudo rm -r /usr/local/include/RF24Revamped
 
 1. Download the appropriate package for your machine
 
-   Go to the library's [GitHub release page](https://GitHub.com/2bndy5/RF24/releases), and look for
+   Go to the library's `GitHub release page <https://github.com/2bndy5/RF24/releases>`_, and look for
    the latest release's assets.
 
    For all Raspberry Pi variants using the Raspberry Pi OS (aka Raspbian), you need the file marked
