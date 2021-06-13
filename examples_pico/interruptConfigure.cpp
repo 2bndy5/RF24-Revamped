@@ -17,13 +17,12 @@
 #include "pico/bootrom.h" // reset_usb_boot()
 #include <tusb.h>         // tud_cdc_connected()
 #include <RF24Revamped.h> // RF24 radio object
-
-// We will be using the nRF24L01's IRQ pin for this example
-#define IRQ_PIN 6 // this needs to be a digital input capable pin
-volatile bool wait_for_event = false; // used to wait for an IRQ event to trigger
+#include "defaultPins.h"  // board presumptive default pin numbers for CE_PIN and CSN_PIN
 
 // instantiate an object for the nRF24L01 transceiver
-RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
+RF24 radio(CE_PIN, CSN_PIN);
+
+volatile bool wait_for_event = false; // used to wait for an IRQ event to trigger
 
 // Used to control whether this node is sending or receiving
 bool role = false;  // true = TX node, false = RX node

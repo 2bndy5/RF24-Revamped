@@ -14,12 +14,12 @@ Generic Linux devices are supported via the following drivers:
 Using a package manager
 ***********************
 
-The RF24 library now (as of v1.4.1) has pre-built packages (*.deb or *.rpm files) that can be installed on a
+The RF24 library now (as of v1.4.1) has pre-built packages (\*.deb or \*.rpm files) that can be installed on a
 Raspberry Pi. These packages can be found on the library's
-[GitHub release page](https://GitHub.com/2bndy5/RF24/releases)
+`GitHub release page <https://GitHub.com/2bndy5/RF24/releases>`_
 
 .. warning:: If you have previously installed the library from source code, then you will need
-to uninstall it manually to avoid runtime conflicts.
+    to uninstall it manually to avoid runtime conflicts.
 
 .. code-block:: shell
 
@@ -74,6 +74,7 @@ Building from Source
    CMake may need to be installed
 
    .. code-block:: shell
+
        sudo apt-get install cmake
 
    .. note:: See the `MRAA documentation <http://iotdk.intel.com/docs/master/mraa/index.html>`_

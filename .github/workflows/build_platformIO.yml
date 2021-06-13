@@ -37,7 +37,7 @@ jobs:
       - name: Save artifact
         uses: actions/upload-artifact@v2
         with:
-          name: "PIO_pkg_RF24"
+          name: "PIO_pkg_RF24Revamped"
           path: PlatformIO*.tar.gz
       - name: Upload Release assets
         if: github.event_name == 'release'

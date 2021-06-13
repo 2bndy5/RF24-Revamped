@@ -22,51 +22,41 @@
  * See http://arduino.cc/forum/index.php/topic,54795.0.html
  */
 
-#include "RF24.h"
+#include <SPI.h>
 #include "printf.h"
+#include "RF24Revamped.h"
 
-//
-// Hardware configuration
-//
+// instantiate an object for the nRF24L01 transceiver
+RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
 
-// Set up nRF24L01 radio on SPI bus plus pins 7 & 8
-
-RF24 radio(7, 8);
-
-//
 // Channel info
-//
-
 const uint8_t num_channels = 126;
 uint8_t values[num_channels];
 
-//
-// Setup
-//
-
 void setup(void)
 {
-  //
-  // Print preamble
-  //
-
   Serial.begin(115200);
-  printf_begin();
-  Serial.println(F("\n\rRF24/examples/scanner/"));
+  while (!Serial) {
+    // some boards need to wait to ensure access to serial over USB
+  }
 
-  //
-  // Setup and configure rf radio
-  //
+  // initialize the transceiver on the SPI bus
+  if (!radio.begin()) {
+    Serial.println(F("radio hardware is not responding!!"));
+    while (1) {} // hold in infinite loop
+  }
 
-  radio.begin();
+  Serial.println(F("RF24/examples/scanner/"));
+
   radio.setAutoAck(false);
 
   // Get into standby mode
   radio.startListening();
   radio.stopListening();
+
+  printf_begin(); // needed for printDetails()
   radio.printDetails();
 
-  //delay(1000);
   // Print out header, high then low digit
   int i = 0;
   while ( i < num_channels )
@@ -82,12 +72,7 @@ void setup(void)
     ++i;
   }
   Serial.println();
-  //delay(1000);
 }
-
-//
-// Loop
-//
 
 const int num_reps = 100;
 bool constCarrierMode = 0;
