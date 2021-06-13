@@ -46,7 +46,7 @@ void setup(void)
     while (1) {} // hold in infinite loop
   }
 
-  Serial.println(F("RF24/examples/scanner/"));
+  Serial.println(F("RF24Revamped/examples/scanner/"));
 
   radio.setAutoAck(false);
 
@@ -89,7 +89,9 @@ void loop(void)
       radio.stopListening();
       delay(2);
       Serial.println("Starting Carrier Out");
-      radio.startCarrierWave(RF24_PA_LOW, 40);
+      radio.setChannel(40);
+      radio.setPaLevel(RF24_PA_LOW);
+      radio.startCarrierWave();
     } else if (c == 'e') {
       constCarrierMode = 0;
       radio.stopCarrierWave();
