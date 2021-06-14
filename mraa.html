@@ -355,7 +355,7 @@
     <li class="md-nav__item">
     
     
-      <a href="portability.html" class="md-nav__link">RF24 Portability</a>
+      <a href="portability.html" class="md-nav__link">RF24Revamped Portability</a>
       
     
     </li>
@@ -418,25 +418,17 @@ mkdir build
 <span class="nb">cd</span> build
 cmake .. -DBUILDSWIGNODE<span class="o">=</span>OFF
 sudo make install
+sudo ldconfig
 </pre></div>
 </div>
-</li>
-<li><p>Complete the install</p>
-<p>open a text editor</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano /etc/ld.so.conf
-</pre></div>
-</div>
-<p>Add the line</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/arm-linux-gnueabihf
-</pre></div>
-</div>
-<p>Run</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ldconfig
-</pre></div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>These instructions are taken generically from the MRAA library documentation.
+For more details, please review the <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/building.html">MRAA library’s building instructions</a>.</p>
 </div>
 </li>
 <li><p>Install RF24, using MRAA</p>
-<p>See <a class="reference external" href="linux_install.html#linux-installation">Linux Installation</a></p>
+<p>See <a class="reference external" href="linux_install.html#linux-installation">Linux Installation</a>.</p>
 </li>
 </ol>
 </section>

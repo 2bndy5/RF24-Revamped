@@ -4,6 +4,7 @@
 .. |multiceiver_desc| replace:: A simple example of sending data from as many as 6 nRF24L01 transceivers to 1 receiving transceiver. This technique is trademarked by Nordic Semiconductors as "MultiCeiver".
 .. |streaming_desc| replace:: This is a simple example of using the RF24 class on a Raspberry Pi for streaming multiple payloads.
 .. |interrupt_desc| replace:: This is a simple example of using the RF24 class on a Raspberry Pi to detecting (and verifying) the IRQ (interrupt) pin on the nRF24L01.
+.. |scanner_desc| replace:: This example is best used as a diagnostic tool to determine what RF channels have less interference in your vicinity.
 .. |ctrl_c_quit| replace:: Use ``ctrl+c`` to quit at any time, but remember state the radio will persist until another example or application uses it.
 .. |2_or_more_devs| replace:: This example was written to be used on 2 devices acting as "nodes".
 
@@ -80,3 +81,16 @@ interruptConfigure.cpp
     :caption: /examples_linux/interruptConfigure.cpp
     :lineno-start: 16
     :lines: 16-
+
+
+scanner.cpp
+--------------------------
+
+|scanner_desc|
+|2_or_more_devs|
+|ctrl_c_quit|
+
+.. literalinclude:: ../examples_linux/scanner.cpp
+    :caption: /examples_linux/scanner.cpp
+    :lineno-start: 25
+    :lines: 25-

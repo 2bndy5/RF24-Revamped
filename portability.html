@@ -47,7 +47,7 @@
   
   
   
-    <title>RF24 Portability &#8212; RF24 Revamped</title>
+    <title>RF24Revamped Portability &#8212; RF24 Revamped</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -101,7 +101,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">RF24 Revamped</span>
-          <span class="md-header-nav__topic"> RF24 Portability </span>
+          <span class="md-header-nav__topic"> RF24Revamped Portability </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -337,19 +337,19 @@
     
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    <label class="md-nav__link md-nav__link--active" for="__toc"> RF24 Portability </label>
+    <label class="md-nav__link md-nav__link--active" for="__toc"> RF24Revamped Portability </label>
     
-      <a href="#" class="md-nav__link md-nav__link--active">RF24 Portability</a>
+      <a href="#" class="md-nav__link md-nav__link--active">RF24Revamped Portability</a>
       
         
 <nav class="md-nav md-nav--secondary">
     <label class="md-nav__title" for="__toc">Contents</label>
   <ul class="md-nav__list" data-md-scrollfix="">
-        <li class="md-nav__item"><a href="#portability--page-root" class="md-nav__link">RF24 Portability</a><nav class="md-nav">
+        <li class="md-nav__item"><a href="#portability--page-root" class="md-nav__link">RF24Revamped Portability</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#basic-hardware-template" class="md-nav__link">Basic Hardware Template</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#rf24-utility" class="md-nav__link">RF24/utility</a>
+        <li class="md-nav__item"><a href="#rf24revamped-utility" class="md-nav__link">RF24Revamped/utility</a>
         </li>
         <li class="md-nav__item"><a href="#device-detection" class="md-nav__link">Device Detection</a>
         </li></ul>
@@ -388,11 +388,11 @@
 <nav class="md-nav md-nav--secondary">
     <label class="md-nav__title" for="__toc">Contents</label>
   <ul class="md-nav__list" data-md-scrollfix="">
-        <li class="md-nav__item"><a href="#portability--page-root" class="md-nav__link">RF24 Portability</a><nav class="md-nav">
+        <li class="md-nav__item"><a href="#portability--page-root" class="md-nav__link">RF24Revamped Portability</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#basic-hardware-template" class="md-nav__link">Basic Hardware Template</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#rf24-utility" class="md-nav__link">RF24/utility</a>
+        <li class="md-nav__item"><a href="#rf24revamped-utility" class="md-nav__link">RF24Revamped/utility</a>
         </li>
         <li class="md-nav__item"><a href="#device-detection" class="md-nav__link">Device Detection</a>
         </li></ul>
@@ -416,21 +416,21 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="rf24-portability">
-<h1 id="portability--page-root">RF24 Portability<a class="headerlink" href="#portability--page-root" title="Permalink to this headline">¶</a></h1>
-<p>The RF24 radio driver mainly utilizes the <a class="reference external" href="http://arduino.cc/en/reference/homePage">Arduino API</a>
+  <section id="rf24revamped-portability">
+<h1 id="portability--page-root">RF24Revamped Portability<a class="headerlink" href="#portability--page-root" title="Permalink to this headline">¶</a></h1>
+<p>The RF24Revamped radio driver mainly utilizes the <a class="reference external" href="http://arduino.cc/en/reference/homePage">Arduino API</a>
 for GPIO, SPI, and timing functions, which are easily replicated
 on various platforms.</p>
-<p>Support files for these platforms are stored under <em>RF24/utility</em>, and can be modified to provide
+<p>Support files for these platforms are stored under <em>RF24Revamped/utility</em>, and can be modified to provide
 the required functionality.</p>
 <section id="basic-hardware-template">
 <h2 id="basic-hardware-template">Basic Hardware Template<a class="headerlink" href="#basic-hardware-template" title="Permalink to this headline">¶</a></h2>
-<section id="rf24-utility">
-<h3 id="rf24-utility">RF24/utility<a class="headerlink" href="#rf24-utility" title="Permalink to this headline">¶</a></h3>
-<p>The RF24 library now includes a basic hardware template to assist in porting to various platforms.</p>
+<section id="rf24revamped-utility">
+<h3 id="rf24revamped-utility">RF24Revamped/utility<a class="headerlink" href="#rf24revamped-utility" title="Permalink to this headline">¶</a></h3>
+<p>The RF24Revamped library now includes a basic hardware template to assist in porting to various platforms.</p>
 <p>The following files can be included to replicate standard Arduino functions
 as needed, allowing devices from ATTiny to Raspberry Pi to utilize the same
-core RF24 driver.</p>
+core RF24Revamped driver.</p>
 <table>
 <colgroup>
 <col style="width: 50%"/>
@@ -462,16 +462,16 @@ core RF24 driver.</p>
 </tr>
 </tbody>
 </table>
-<p>Examples are provided via the included hardware support templates in <a class="reference external" href="templates.html#">RF24/utility/Template</a></p>
+<p>Examples are provided via the included hardware support templates in <a class="reference external" href="templates.html#">RF24Revamped/utility/Template</a></p>
 </section>
 <section id="device-detection">
 <h3 id="device-detection">Device Detection<a class="headerlink" href="#device-detection" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>The main detection for Linux devices is done in the configure script, with the
-<em>includes.h</em> from the proper hardware directory copied to <em>RF24/utility/includes.h</em></p></li>
+<em>includes.h</em> from the proper hardware directory copied to <em>RF24Revamped/utility/includes.h</em></p></li>
 <li><p>Secondary detection is completed in <em>RF24_config.h</em>, causing the <em>include.h</em> file
 to be included for all supported Linux devices.</p></li>
-<li><p><em>RF24.h</em> contains the declaration for SPI and GPIO objects <code class="docutils literal notranslate"><span class="pre">spi</span></code> and <code class="docutils literal notranslate"><span class="pre">gpio</span></code> to be
+<li><p><em>RF24Revamped.h</em> contains the declaration for SPI and GPIO objects <code class="docutils literal notranslate"><span class="pre">spi</span></code> and <code class="docutils literal notranslate"><span class="pre">gpio</span></code> to be
 used for porting-in related functions.</p></li>
 </ol>
 </section>

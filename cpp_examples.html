@@ -257,6 +257,8 @@
         <li class="md-nav__item"><a href="#streamingdata-cpp" class="md-nav__link">streamingData.cpp</a>
         </li>
         <li class="md-nav__item"><a href="#interruptconfigure-cpp" class="md-nav__link">interruptConfigure.cpp</a>
+        </li>
+        <li class="md-nav__item"><a href="#scanner-cpp" class="md-nav__link">scanner.cpp</a>
         </li></ul>
             </nav>
         </li>
@@ -365,7 +367,7 @@
     <li class="md-nav__item">
     
     
-      <a href="portability.html" class="md-nav__link">RF24 Portability</a>
+      <a href="portability.html" class="md-nav__link">RF24Revamped Portability</a>
       
     
     </li>
@@ -403,6 +405,8 @@
         <li class="md-nav__item"><a href="#streamingdata-cpp" class="md-nav__link">streamingData.cpp</a>
         </li>
         <li class="md-nav__item"><a href="#interruptconfigure-cpp" class="md-nav__link">interruptConfigure.cpp</a>
+        </li>
+        <li class="md-nav__item"><a href="#scanner-cpp" class="md-nav__link">scanner.cpp</a>
         </li></ul>
             </nav>
         </li>
@@ -1971,6 +1975,123 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos">315</span>    <span class="c1">// print the entire RX FIFO with 1 buffer</span>
 <span class="linenos">316</span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Complete RX FIFO: "</span> <span class="o">&lt;&lt;</span> <span class="n">rx_fifo</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="linenos">317</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="scanner-cpp">
+<h2 id="scanner-cpp">scanner.cpp<a class="headerlink" href="#scanner-cpp" title="Permalink to this headline">¶</a></h2>
+<p>This example is best used as a diagnostic tool to determine what RF channels have less interference in your vicinity.
+This example was written to be used on 2 devices acting as “nodes”.
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">/examples_linux/scanner.cpp</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 25</span><span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="linenos"> 26</span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="linenos"> 27</span><span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped/RF24Revamped.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="k">using</span> <span class="k">namespace</span> <span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span><span class="cm">/****************** Linux ***********************/</span>
+<span class="linenos"> 32</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
+<span class="linenos"> 33</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
+<span class="linenos"> 34</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
+<span class="linenos"> 35</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1">// Generic:</span>
+<span class="linenos"> 38</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 39</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
+<span class="linenos"> 40</span><span class="c1">// See http://nRF24.github.io/RF24/pages.html for more information on usage</span>
+<span class="linenos"> 41</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
+<span class="linenos"> 42</span><span class="c1">// See https://www.kernel.org/doc/Documentation/spi/spidev for more information on SPIDEV</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="c1">// Channel info</span>
+<span class="linenos"> 45</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">num_channels</span> <span class="o">=</span> <span class="mi">126</span><span class="p">;</span>
+<span class="linenos"> 46</span><span class="kt">uint8_t</span> <span class="n">values</span><span class="p">[</span><span class="n">num_channels</span><span class="p">];</span>
+<span class="linenos"> 47</span>
+<span class="linenos"> 48</span><span class="k">const</span> <span class="kt">int</span> <span class="n">num_reps</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="linenos"> 49</span><span class="kt">int</span> <span class="n">reset_array</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="linenos"> 52</span><span class="p">{</span>
+<span class="linenos"> 53</span>    <span class="c1">// Print preamble</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>    <span class="c1">// print example's name</span>
+<span class="linenos"> 56</span>    <span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="linenos"> 57</span>
+<span class="linenos"> 58</span>    <span class="c1">//</span>
+<span class="linenos"> 59</span>    <span class="c1">// Setup and configure rf radio</span>
+<span class="linenos"> 60</span>    <span class="c1">//</span>
+<span class="linenos"> 61</span>    <span class="n">radio</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="linenos"> 62</span>
+<span class="linenos"> 63</span>    <span class="n">radio</span><span class="p">.</span><span class="n">setAutoAck</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span>    <span class="c1">// Get into standby mode</span>
+<span class="linenos"> 66</span>    <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
+<span class="linenos"> 67</span>    <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span>    <span class="n">radio</span><span class="p">.</span><span class="n">printDetails</span><span class="p">();</span>
+<span class="linenos"> 70</span>
+<span class="linenos"> 71</span>    <span class="c1">// Print out header, high then low digit</span>
+<span class="linenos"> 72</span>    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span>    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_channels</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 75</span>        <span class="n">printf</span><span class="p">(</span><span class="s">"%x"</span><span class="p">,</span> <span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">);</span>
+<span class="linenos"> 76</span>        <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="linenos"> 77</span>    <span class="p">}</span>
+<span class="linenos"> 78</span>    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 81</span>    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_channels</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 82</span>        <span class="n">printf</span><span class="p">(</span><span class="s">"%x"</span><span class="p">,</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="p">);</span>
+<span class="linenos"> 83</span>        <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="linenos"> 84</span>    <span class="p">}</span>
+<span class="linenos"> 85</span>    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="linenos"> 86</span>
+<span class="linenos"> 87</span>    <span class="c1">// forever loop</span>
+<span class="linenos"> 88</span>    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 89</span>        <span class="c1">// Clear measurement values</span>
+<span class="linenos"> 90</span>        <span class="n">memset</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">values</span><span class="p">));</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span>        <span class="c1">// Scan all channels num_reps times</span>
+<span class="linenos"> 93</span>        <span class="kt">int</span> <span class="n">rep_counter</span> <span class="o">=</span> <span class="n">num_reps</span><span class="p">;</span>
+<span class="linenos"> 94</span>        <span class="k">while</span> <span class="p">(</span><span class="n">rep_counter</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span>            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">num_channels</span><span class="p">;</span>
+<span class="linenos"> 97</span>            <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span>                <span class="c1">// Select this channel</span>
+<span class="linenos">100</span>                <span class="n">radio</span><span class="p">.</span><span class="n">setChannel</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span>                <span class="c1">// Listen for a little</span>
+<span class="linenos">103</span>                <span class="n">radio</span><span class="p">.</span><span class="n">startListening</span><span class="p">();</span>
+<span class="linenos">104</span>                <span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span>
+<span class="linenos">105</span>                <span class="n">radio</span><span class="p">.</span><span class="n">stopListening</span><span class="p">();</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>                <span class="c1">// Did we get a carrier?</span>
+<span class="linenos">108</span>                <span class="k">if</span> <span class="p">(</span><span class="n">radio</span><span class="p">.</span><span class="n">testRpd</span><span class="p">())</span> <span class="p">{</span>
+<span class="linenos">109</span>                    <span class="o">++</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="linenos">110</span>                <span class="p">}</span>
+<span class="linenos">111</span>            <span class="p">}</span>
+<span class="linenos">112</span>        <span class="p">}</span>
+<span class="linenos">113</span>
+<span class="linenos">114</span>        <span class="c1">// Print out channel measurements, clamped to a single hex digit</span>
+<span class="linenos">115</span>        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">116</span>        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_channels</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">117</span>            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">118</span>                <span class="n">printf</span><span class="p">(</span><span class="s">"%x"</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="mh">0xf</span><span class="p">,</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="p">)));</span>
+<span class="linenos">119</span>            <span class="k">else</span>
+<span class="linenos">120</span>                <span class="n">printf</span><span class="p">(</span><span class="s">"-"</span><span class="p">);</span>
+<span class="linenos">121</span>
+<span class="linenos">122</span>            <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="linenos">123</span>        <span class="p">}</span>
+<span class="linenos">124</span>        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="linenos">125</span>    <span class="p">}</span>
+<span class="linenos">126</span>
+<span class="linenos">127</span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos">128</span><span class="p">}</span>
+<span class="linenos">129</span>
+<span class="linenos">130</span><span class="c1">// vim:ai:cin:sts=2 sw=2 ft=cpp</span>
 </pre></div>
 </div>
 </div>
