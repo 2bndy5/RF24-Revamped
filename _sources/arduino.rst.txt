@@ -50,14 +50,17 @@ Setup:
    .. note::
        Pins are listed as follows and can be modified by editing the RF24_config.h file.
 
-       .. code-block::
+       .. code-block:: cpp
 
            #define SOFT_SPI_MISO_PIN 16
            #define SOFT_SPI_MOSI_PIN 15
            #define SOFT_SPI_SCK_PIN 14
 
        Or add the build flag/option
-       ``-DSOFT_SPI_MISO_PIN=16 -DSOFT_SPI_MOSI_PIN=15 -DSOFT_SPI_SCK_PIN=14``
+
+       .. code-block:: shell
+
+           -DSOFT_SPI_MISO_PIN=16 -DSOFT_SPI_MOSI_PIN=15 -DSOFT_SPI_SCK_PIN=14
 
 Alternate Hardware (UART) Driven  SPI
 -------------------------------------
@@ -98,7 +101,7 @@ Enabling:
 Using a specific SPI Bus
 ------------------------
 
-An alternate SPI bus can be specified using the overloaded `RF24::begin(_SPI*)` method.
+An alternate SPI bus can be specified using the overloaded `RF24Revamped::begin(_SPI*) <basic_api.html#begin-spi>`_ method.
 This is useful for some boards that offer more than 1 hardware-driven SPI bus or cetain Arduino
 cores that implement a software-driven (AKA bit-banged) SPI bus that does not use the DigitalIO
 library.
@@ -118,10 +121,10 @@ ESP8266 example
 .. code-block:: cpp
 
     #include <SPI.h>
-    #include <RF24.h>
+    #include <RF24Revamped.h>
 
     // notice these pin numbers are not the same used in the library examples
-    RF24 radio(D4, D3); // the (ce_pin, csn_pin) connected to the radio
+    RF24Revamped radio(D4, D3); // the (ce_pin, csn_pin) connected to the radio
 
     void setup() {
       Serial.begin(115200);
@@ -134,7 +137,7 @@ ESP8266 example
       // MISO = SD0
       // SCLK = CLK
       // CSN = GPIO0 (labeled D3 on the board)
-      // **notice we also passed `D3` to the RF24 contructor's csn_pin parameter**
+      // **notice we also passed `D3` to the RF24Revamped contructor's csn_pin parameter**
 
       SPI.begin();
 
@@ -156,7 +159,7 @@ ESP32 example
 .. code-block:: cpp
 
     #include <SPI.h>
-    #include <RF24.h>
+    #include <RF24Revamped.h>
 
     // to use custom-defined pins, uncomment the following
     // #define MY_MISO 26
@@ -165,7 +168,7 @@ ESP32 example
     // #define MY_SS   32  // pass MY_SS as the csn_pin parameter to the RF24 constructor
 
     // notice these pin numbers are not the same used in the library examples
-    RF24 radio(2, 0); // the (ce_pin, csn_pin) connected to the radio
+    RF24Revamped radio(2, 0); // the (ce_pin, csn_pin) connected to the radio
 
     SPIClass* hspi = nullptr; // we'll instantiate this in the `setup()` function
     // by default the HSPI bus predefines the following pins
@@ -194,7 +197,7 @@ ESP32 example
 Teensy example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. seealso:: The overloaded RF24::begin(_SPI*) is not needed according to the
+.. seealso:: The overloaded `RF24Revamped::begin(_SPI*) <basic_api.html#begin-spi>`_ is not needed according to the
     `Teensyduino SPI documentation <https://www.pjrc.com/teensy/td_libs_SPI.html>`_.
     Please review the table provided in the
     `Teensyduino documentation <https://www.pjrc.com/teensy/td_libs_SPI.html>`_ for what pins are used by
@@ -204,7 +207,7 @@ Teensy example
 .. code-block:: cpp
 
     #include <SPI.h>
-    #include <RF24.h>
+    #include <RF24Revamped.h>
 
     // these pins are the alternate SPI pins available for Teensy LC/3.0/3.1/3.2/3.5/3.6
     #define MY_MISO 8
@@ -212,7 +215,7 @@ Teensy example
     #define MY_SCLK 14
 
     // notice these pin numbers are not the same used in the library examples
-    RF24 radio(2, 0); // the (ce_pin, csn_pin) connected to the radio
+    RF24Revamped radio(2, 0); // the (ce_pin, csn_pin) connected to the radio
 
     void setup() {
       Serial.begin(115200);

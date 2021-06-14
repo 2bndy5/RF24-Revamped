@@ -136,7 +136,7 @@
       
         <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
-            <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+            <a href="https://github.com/2bndy5/RF24Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
     <div class="md-source__icon">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
@@ -145,7 +145,7 @@
     </div>
   
   <div class="md-source__repository">
-    RF24-Revamped
+    RF24Revamped
   </div>
 </a>
           </div>
@@ -195,7 +195,7 @@
        title="RF24 Revamped">RF24 Revamped</a>
   </label>
     <div class="md-nav__source">
-      <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+      <a href="https://github.com/2bndy5/RF24Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
     <div class="md-source__icon">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
@@ -204,7 +204,7 @@
     </div>
   
   <div class="md-source__repository">
-    RF24-Revamped
+    RF24Revamped
   </div>
 </a>
     </div>
@@ -307,9 +307,9 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#prerequisite" class="md-nav__link">Prerequisite</a>
         </li>
-        <li class="md-nav__item"><a href="#building-the-rf24-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24 examples for the Pico SDK</a>
+        <li class="md-nav__item"><a href="#building-the-rf24revamped-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24Revamped examples for the Pico SDK</a>
         </li>
-        <li class="md-nav__item"><a href="#incorporating-rf24-libs-into-your-project" class="md-nav__link">Incorporating RF24 libs into your project</a>
+        <li class="md-nav__item"><a href="#incorporating-rf24revamped-libs-into-your-project" class="md-nav__link">Incorporating RF24Revamped libs into your project</a>
         </li>
         <li class="md-nav__item"><a href="#using-different-pins-for-the-spi-bus" class="md-nav__link">Using different pins for the SPI bus</a><nav class="md-nav">
               <ul class="md-nav__list">
@@ -360,13 +360,6 @@
     <li class="md-nav__item">
     
     
-      <a href="cross_compilation.html" class="md-nav__link">Linux cross-compilation</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="atxmega.html" class="md-nav__link">ATXMEGA</a>
       
     
@@ -403,9 +396,9 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#prerequisite" class="md-nav__link">Prerequisite</a>
         </li>
-        <li class="md-nav__item"><a href="#building-the-rf24-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24 examples for the Pico SDK</a>
+        <li class="md-nav__item"><a href="#building-the-rf24revamped-examples-for-the-pico-sdk" class="md-nav__link">Building the RF24Revamped examples for the Pico SDK</a>
         </li>
-        <li class="md-nav__item"><a href="#incorporating-rf24-libs-into-your-project" class="md-nav__link">Incorporating RF24 libs into your project</a>
+        <li class="md-nav__item"><a href="#incorporating-rf24revamped-libs-into-your-project" class="md-nav__link">Incorporating RF24Revamped libs into your project</a>
         </li>
         <li class="md-nav__item"><a href="#using-different-pins-for-the-spi-bus" class="md-nav__link">Using different pins for the SPI bus</a><nav class="md-nav">
               <ul class="md-nav__list">
@@ -440,25 +433,24 @@
 setup a proper development environment on your host PC (the machine that
 will build your project).</p>
 <p>Either set an environment variable named <code class="docutils literal notranslate"><span class="pre">PICO_SDK_PATH</span></code> that points to your
-local clone of the pico-sdk or put the pico-sdk next to the RF24 folder or
-next to the folder containing your project using the RF24 library:</p>
+local clone of the pico-sdk or put the pico-sdk next to the RF24Revamped folder or
+next to the folder containing your project using the RF24Revamped library:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/github/repos/
     pico-sdk/
-    RF24-Revamped/
+    RF24Revamped/
     my_rf24_project/
 </pre></div>
 </div>
-<p>Alternatively, the RF24 repository (and optionally the RF24Network and RF24Mesh
-repositories) can be included into your project’s “lib” folder as copies or
-git submodules. For more detail, see the below instructions to incorporate
-RF24 libs into your project.</p>
+<p>Alternatively, the RF24Revamped repository can be included into your project’s
+“lib” folder as copies or git submodules. For more detail, see the below
+instructions to incorporate RF24Revamped library into your project.</p>
 </section>
-<section id="building-the-rf24-examples-for-the-pico-sdk">
-<h2 id="building-the-rf24-examples-for-the-pico-sdk">Building the RF24 examples for the Pico SDK<a class="headerlink" href="#building-the-rf24-examples-for-the-pico-sdk" title="Permalink to this headline">¶</a></h2>
+<section id="building-the-rf24revamped-examples-for-the-pico-sdk">
+<h2 id="building-the-rf24revamped-examples-for-the-pico-sdk">Building the RF24Revamped examples for the Pico SDK<a class="headerlink" href="#building-the-rf24revamped-examples-for-the-pico-sdk" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>Create a “build” directory in the RF24 repository’s root directory and
+<li><p>Create a “build” directory in the RF24Revamped repository’s root directory and
 navigate to it:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> RF24
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> RF24Revamped
 mkdir build
 <span class="nb">cd</span> build
 </pre></div>
@@ -474,7 +466,7 @@ If the <code class="docutils literal notranslate"><span class="pre">-DPICO_BOARD
 building for the Raspberry Pi Pico board.</p>
 </li>
 <li><p>Build the examples using the CMakeLists.txt file located in the
-RF24/examples_pico directory.</p>
+RF24Revamped/examples_pico directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake --build . --config Release
 </pre></div>
 </div>
@@ -490,40 +482,36 @@ below instructions to use different pins for the SPI bus.</p>
 </li>
 </ol>
 </section>
-<section id="incorporating-rf24-libs-into-your-project">
-<h2 id="incorporating-rf24-libs-into-your-project">Incorporating RF24 libs into your project<a class="headerlink" href="#incorporating-rf24-libs-into-your-project" title="Permalink to this headline">¶</a></h2>
-<p>In order to use the RF24 libraries in your RP2040 based project:</p>
+<section id="incorporating-rf24revamped-libs-into-your-project">
+<h2 id="incorporating-rf24revamped-libs-into-your-project">Incorporating RF24Revamped libs into your project<a class="headerlink" href="#incorporating-rf24revamped-libs-into-your-project" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the RF24Revamped libraries in your RP2040 based project:</p>
 <ol class="arabic">
-<li><p>Make a copy of the RF24 library (and optionally RF24Network and RF24Mesh
+<li><p>Make a copy of the RF24Revamped library (and optionally RF24Network and RF24Mesh
 libraries) in a “lib” directory located in your project’s root directory.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>path/to/my/project/
     lib/
-        RF24-Revamped/
+        RF24Revamped/
     src/
         CMakeLists.txt
         ...
 </pre></div>
 </div>
-<p>Alternatively you can add the RF24* repositories as <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a>.</p>
+<p>Alternatively you can add the RF24Revamped repository as <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a>.</p>
 </li>
-<li><p>Include their CMakeLists.txt files from the RF24 libraries in your project’s top-level
+<li><p>Include their CMakeLists.txt files from the RF24Revamped library in your project’s top-level
 CMakeLists.txt file (usually located in the “src” directory). The following snippet
 assumes that your project’s “src” directory is on the same level as the previously
 mentioned “lib” directory.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24/CMakeLists.txt</span><span class="p">)</span>
-<span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24Network/CMakeLists.txt</span><span class="p">)</span>
-<span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24Mesh/CMakeLists.txt</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">../lib/RF24Revamped/CMakeLists.txt</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>In the same CMakeLists.txt file from step 2, add the RF24 libraries into the
-<cite>target_link_libraries</cite> configuration:</p>
+<li><p>In the same CMakeLists.txt file from step 2, add the RF24Revamped library into the
+<code class="docutils literal notranslate"><span class="pre">target_link_libraries</span></code> configuration:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_PROJECT_NAME</span><span class="o">}</span>
     <span class="c"># ... Your project's other libraries ...</span>
-    <span class="s">RF24</span>
-    <span class="s">RF24Network</span>
-    <span class="s">RF24Mesh</span>
-    <span class="p">)</span>
+    <span class="s">RF24Revamped</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p>If you are using tinyUSB, this line (or similar) should already exist:</p>
@@ -531,11 +519,9 @@ mentioned “lib” directory.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Finally, remember to include the necessary RF24* libraries’ header files in your
+<li><p>Finally, remember to include the necessary RF24Revamped* library’s header files in your
 project’s source code where applicable.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24Network.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;RF24Mesh.h&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="cp"></span>
 </pre></div>
 </div>
 </li>
@@ -563,10 +549,10 @@ There are essentially 2 SPI buses with multiple pin options for each.</p>
 <section id="project-source-code-option">
 <h3 id="project-source-code-option">Project Source code option<a class="headerlink" href="#project-source-code-option" title="Permalink to this headline">¶</a></h3>
 <p>This option is the most reliable and flexible. It involves calling <cite>SPI.begin()</cite> and
-then passing the <code class="docutils literal notranslate"><span class="pre">SPI</span></code> object to <a class="reference external" href="basic_api.html#begin-spi">RF24::begin(_SPI*)</a>.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24.h&gt;</span><span class="cp"></span>
+then passing the <code class="docutils literal notranslate"><span class="pre">SPI</span></code> object to <a class="reference external" href="basic_api.html#begin-spi">RF24Revamped::begin(_SPI*)</a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;RF24Revamped.h&gt;</span><span class="cp"></span>
 
-<span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// pin numbers connected to the radio's CE and CSN pins (respectively)</span>
+<span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// pin numbers connected to the radio's CE and CSN pins (respectively)</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>

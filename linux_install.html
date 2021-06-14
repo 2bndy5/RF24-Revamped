@@ -136,7 +136,7 @@
       
         <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
-            <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+            <a href="https://github.com/2bndy5/RF24Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
     <div class="md-source__icon">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
@@ -145,7 +145,7 @@
     </div>
   
   <div class="md-source__repository">
-    RF24-Revamped
+    RF24Revamped
   </div>
 </a>
           </div>
@@ -195,7 +195,7 @@
        title="RF24 Revamped">RF24 Revamped</a>
   </label>
     <div class="md-nav__source">
-      <a href="https://github.com/2bndy5/RF24-Revamped/" title="Go to repository" class="md-source" data-md-source="github">
+      <a href="https://github.com/2bndy5/RF24Revamped/" title="Go to repository" class="md-source" data-md-source="github">
 
     <div class="md-source__icon">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
@@ -204,7 +204,7 @@
     </div>
   
   <div class="md-source__repository">
-    RF24-Revamped
+    RF24Revamped
   </div>
 </a>
     </div>
@@ -354,13 +354,6 @@
     <li class="md-nav__item">
     
     
-      <a href="cross_compilation.html" class="md-nav__link">Linux cross-compilation</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="atxmega.html" class="md-nav__link">ATXMEGA</a>
       
     
@@ -435,21 +428,21 @@ supporting SPI userspace device.</p>
 </div>
 <section id="using-a-package-manager">
 <h2 id="using-a-package-manager">Using a package manager<a class="headerlink" href="#using-a-package-manager" title="Permalink to this headline">¶</a></h2>
-<p>The RF24 library now (as of v1.4.1) has pre-built packages (*.deb or *.rpm files) that can be installed on a
+<p>The RF24Revamped library now (as of v1.4.1) has pre-built packages (*.deb or *.rpm files) that can be installed on a
 Raspberry Pi. These packages can be found on the library’s
-<a class="reference external" href="https://GitHub.com/2bndy5/RF24/releases">GitHub release page</a></p>
+<a class="reference external" href="https://github.com/2bndy5/RF24Revamped/releases">GitHub releases page</a></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you have previously installed the library from source code, then you will need
 to uninstall it manually to avoid runtime conflicts.</p>
-</div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo rm /usr/local/lib/librf24revamped.*
 sudo rm -r /usr/local/include/RF24Revamped
 </pre></div>
 </div>
+</div>
 <ol class="arabic">
 <li><p>Download the appropriate package for your machine</p>
-<p>Go to the library’s [GitHub release page](<a class="reference external" href="https://GitHub.com/2bndy5/RF24/releases">https://GitHub.com/2bndy5/RF24/releases</a>), and look for
+<p>Go to the library’s <a class="reference external" href="https://github.com/2bndy5/RF24Revamped/releases">GitHub release page</a>, and look for
 the latest release’s assets.</p>
 <p>For all Raspberry Pi variants using the Raspberry Pi OS (aka Raspbian), you need the file marked
 for <strong>armhf</strong> architecture.</p>
@@ -496,13 +489,7 @@ dpkg -i pkg_filename.deb
 for more info on installing MRAA</p>
 </div>
 </li>
-<li><p>Make a directory to contain the RF24 and possibly RF24Network lib and enter it</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir ~/rf24libs
-<span class="nb">cd</span> ~/rf24libs
-</pre></div>
-</div>
-</li>
-<li><p>Clone the RF24 repo and navigate to it</p>
+<li><p>Clone the RF24Revamped repo and navigate to it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/2bndy5/RF24.git RF24Revamped
 <span class="nb">cd</span> RF24Revamped
 </pre></div>
@@ -568,9 +555,9 @@ make
 </section>
 <section id="cross-compiling-the-library">
 <h2 id="cross-compiling-the-library">Cross-compiling the library<a class="headerlink" href="#cross-compiling-the-library" title="Permalink to this headline">¶</a></h2>
-<p>The RF24 library comes with some pre-made toolchain files (located in the <em>RF24/cmake/toolchains</em>
+<p>The RF24 library comes with some pre-made toolchain files (located in the <em>RF24Revamped/cmake/toolchains</em>
 directory) to use in CMake. To use these toolchain files, additional command line options are needed
-when configuring CMake to build the library (step 5 in the above instructions to build from source).</p>
+when configuring CMake to build the library (step 4 in the above instructions to build from source).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -D <span class="nv">CMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>cmake/toolchains/armhf.cmake
 make
 </pre></div>
@@ -582,7 +569,7 @@ make
 sudo make install
 </pre></div>
 </div>
-<p>Remember to also specify the <code class="docutils literal notranslate"><span class="pre">RF24_DRIVER</span></code> option if not using the auto-configuration feature (see step 5
+<p>Remember to also specify the <code class="docutils literal notranslate"><span class="pre">RF24_DRIVER</span></code> option if not using the auto-configuration feature (see step 4
 in the above instructions to build from source).</p>
 </section>
 <section id="installing-the-library-remotely">

@@ -14,21 +14,21 @@ Generic Linux devices are supported via the following drivers:
 Using a package manager
 ***********************
 
-The RF24 library now (as of v1.4.1) has pre-built packages (\*.deb or \*.rpm files) that can be installed on a
+The RF24Revamped library now (as of v1.4.1) has pre-built packages (\*.deb or \*.rpm files) that can be installed on a
 Raspberry Pi. These packages can be found on the library's
-`GitHub release page <https://GitHub.com/2bndy5/RF24/releases>`_
+`GitHub releases page <https://github.com/2bndy5/RF24Revamped/releases>`_
 
 .. warning:: If you have previously installed the library from source code, then you will need
     to uninstall it manually to avoid runtime conflicts.
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    sudo rm /usr/local/lib/librf24revamped.*
-    sudo rm -r /usr/local/include/RF24Revamped
+        sudo rm /usr/local/lib/librf24revamped.*
+        sudo rm -r /usr/local/include/RF24Revamped
 
 1. Download the appropriate package for your machine
 
-   Go to the library's [GitHub release page](https://GitHub.com/2bndy5/RF24/releases), and look for
+   Go to the library's `GitHub release page <https://github.com/2bndy5/RF24Revamped/releases>`_, and look for
    the latest release's assets.
 
    For all Raspberry Pi variants using the Raspberry Pi OS (aka Raspbian), you need the file marked
@@ -79,25 +79,19 @@ Building from Source
 
    .. note:: See the `MRAA documentation <http://iotdk.intel.com/docs/master/mraa/index.html>`_
        for more info on installing MRAA
-2. Make a directory to contain the RF24 and possibly RF24Network lib and enter it
-
-   .. code-block:: shell
-
-       mkdir ~/rf24libs
-       cd ~/rf24libs
-3. Clone the RF24 repo and navigate to it
+2. Clone the RF24Revamped repo and navigate to it
 
    .. code-block:: shell
 
        git clone https://github.com/2bndy5/RF24.git RF24Revamped
        cd RF24Revamped
-4. Create a build directory inside the RF24 directory and navigate to it.
+3. Create a build directory inside the RF24 directory and navigate to it.
 
    .. code-block:: shell
 
        mkdir build
        cd build
-5. Configure build environment
+4. Configure build environment
 
    .. code-block:: shell
 
@@ -109,13 +103,13 @@ Building from Source
    .. note::
        If the ``RF24_DRIVER`` option is not specified, then it will be automatically configured based
        on the detected CPU or installed libraries (defaults to ``SPIDEV`` when auto-detection fails).
-6. Build and install the library
+5. Build and install the library
 
    .. code-block:: shell
 
        make
        sudo make install
-7. Build the examples
+6. Build the examples
 
    Navigate to the *examples_linux* directory
 
@@ -152,7 +146,7 @@ Building from Source
 
        cmake .. -D RF24_DRIVER=wiringPi
        make
-8. Run an example file
+7. Run an example file
 
    .. code-block:: shell
 
@@ -161,9 +155,9 @@ Building from Source
 Cross-compiling the library
 ***************************
 
-The RF24 library comes with some pre-made toolchain files (located in the *RF24/cmake/toolchains*
+The RF24 library comes with some pre-made toolchain files (located in the *RF24Revamped/cmake/toolchains*
 directory) to use in CMake. To use these toolchain files, additional command line options are needed
-when configuring CMake to build the library (step 5 in the above instructions to build from source).
+when configuring CMake to build the library (step 4 in the above instructions to build from source).
 
 .. code-block:: shell
 
@@ -179,7 +173,7 @@ it is advised to specify the path that your project will look in when linking to
     make
     sudo make install
 
-Remember to also specify the ``RF24_DRIVER`` option if not using the auto-configuration feature (see step 5
+Remember to also specify the ``RF24_DRIVER`` option if not using the auto-configuration feature (see step 4
 in the above instructions to build from source).
 
 Installing the library remotely
