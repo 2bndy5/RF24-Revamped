@@ -86,7 +86,6 @@ scanner.ino
 ----------------------------
 
 |scanner_desc|
-|2_or_more_devs|
 |use_serial_mon|
 
 .. literalinclude:: ../examples/scanner/scanner.ino
