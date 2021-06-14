@@ -449,7 +449,7 @@ nRF24L01 GND --- GND  4|    |5  PB0 --- nRF24L01 MISO
 <p>Pin map with CE_PIN 3 and CSN_PIN 3. PB3 and PB4 are free to use for application
 Circuit idea from <a class="reference external" href="http://nerdralph.blogspot.ca/2014/01/nrf24l01-control-with-3-attiny85-pins.html">NerdRalph’ 3 pin solution</a>
 Original RC combination was 1K/100nF. 22K/10nF combination worked better.
-For best settletime delay value in RF24::csn() the timingSearch3pin.ino sketch can be used.
+For best settletime delay value in RF24Revamped::csn() the timingSearch3pin.ino sketch can be used.
 This configuration is enabled when CE_PIN and CSN_PIN are equal, e.g. both 3
 Because CE is always high the power consumption is higher than for 5 pins solution</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                                                                            ^^

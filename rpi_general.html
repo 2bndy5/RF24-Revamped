@@ -479,25 +479,25 @@ sudo make install
 <h2 id="pins-connections-and-pin-configuration">Pins Connections and Pin Configuration<a class="headerlink" href="#pins-connections-and-pin-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Using pin 15/GPIO 22 for CE, pin 24/GPIO8 (CE0) for CSN</p>
 <p>Can use any available SPI BUS for CSN.</p>
-<p>In general, use <code class="docutils literal notranslate"><span class="pre">RF24</span> <span class="pre">radio(&lt;ce_pin&gt;,</span> <span class="pre">&lt;a&gt;*10+&lt;b&gt;);</span></code> for proper constructor to
+<p>In general, use <code class="docutils literal notranslate"><span class="pre">RF24Revamped</span> <span class="pre">radio(&lt;ce_pin&gt;,</span> <span class="pre">&lt;a&gt;*10+&lt;b&gt;);</span></code> for proper constructor to
 address correct spi device at /dev/spidev&lt;a&gt;.&lt;b&gt;</p>
 <p>Choose any GPIO output pin for radio CE pin.</p>
 <section id="general-contructor">
 <h3 id="general-contructor">General Contructor<a class="headerlink" href="#general-contructor" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="mraa-constructor">
 <h3 id="mraa-constructor">MRAA Constructor<a class="headerlink" href="#mraa-constructor" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="http://iotdk.intel.com/docs/master/mraa/rasppi.html">MRAA docs about the Raspberry Pi</a></p>
 </section>
 <section id="spi-dev-constructor">
 <h3 id="spi-dev-constructor">SPI_DEV Constructor<a class="headerlink" href="#spi-dev-constructor" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://www.raspberrypi.org/documentation/usage/gpio/">Raspberry Pi Documentation</a>

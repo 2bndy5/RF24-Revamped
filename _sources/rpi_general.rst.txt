@@ -54,7 +54,7 @@ Using pin 15/GPIO 22 for CE, pin 24/GPIO8 (CE0) for CSN
 
 Can use any available SPI BUS for CSN.
 
-In general, use ``RF24 radio(<ce_pin>, <a>*10+<b>);`` for proper constructor to
+In general, use ``RF24Revamped radio(<ce_pin>, <a>*10+<b>);`` for proper constructor to
 address correct spi device at /dev/spidev<a>.<b>
 
 Choose any GPIO output pin for radio CE pin.
@@ -64,14 +64,14 @@ General Contructor
 
 .. code-block:: c++
 
-    RF24 radio(22, 0);
+    RF24Revamped radio(22, 0);
 
 MRAA Constructor
 ----------------
 
 .. code-block:: c++
 
-    RF24 radio(15, 0);
+    RF24Revamped radio(15, 0);
 
 See `MRAA docs about the Raspberry Pi <http://iotdk.intel.com/docs/master/mraa/rasppi.html>`_
 
@@ -80,7 +80,7 @@ SPI_DEV Constructor
 
 .. code-block:: c++
 
-    RF24 radio(22, 0);
+    RF24Revamped radio(22, 0);
 
 See `Raspberry Pi Documentation <https://www.raspberrypi.org/documentation/usage/gpio/>`_
 about using the GPIO pins

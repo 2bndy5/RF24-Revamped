@@ -8,14 +8,14 @@ Before you report undesirable behavior, please make sure that the
 following RF24 configurations match on both receiving and transmitting
 nRF24L01 transceivers:
 
-1. :func:`~RF24::setAddressLength()`
-2. :func:`~RF24::setChannel()`
-3. :func:`~RF24::setDataRate()`
-4. :func:`~RF24::setAutoAck()`
-5. :func:`~RF24::setDynamicPayloads()`
-6. :func:`~RF24::enableAckPayload()` or :func:`~RF24::disableAckPayload()` (requires auto-ack and dynamic payloads features)
-7. :func:`~RF24::setPayloadLength()` (only if the dynamic payloads feature is disabled -- it is disabled by default)
-8. :func:`~RF24::setCrc()` (the auto-ack feature automatically enables CRC because it is required)
+1. :func:`~RF24Revamped::setAddressLength()`
+2. :func:`~RF24Revamped::setChannel()`
+3. :func:`~RF24Revamped::setDataRate()`
+4. :func:`~RF24Revamped::setAutoAck()`
+5. :func:`~RF24Revamped::setDynamicPayloads()`
+6. :func:`~RF24Revamped::enableAckPayload()` or :func:`~RF24Revamped::disableAckPayload()` (requires auto-ack and dynamic payloads features)
+7. :func:`~RF24Revamped::setPayloadLength()` (only if the dynamic payloads feature is disabled -- it is disabled by default)
+8. :func:`~RF24Revamped::setCrc()` (the auto-ack feature automatically enables CRC because it is required)
 
 Also, it helps to think of an address as a path (a commonly shared route)
 instead of an identifying device destination. This means that addresses
@@ -34,7 +34,7 @@ send() always returns true after setAutoAck(false)
 
 Don't disabled the auto-ack feature. :func:`~R24::send()` has no reason to doubt
 that the payload was delivered if the auto-ack feature is disabled. We
-recommend you read the docs about :func:`~RF24::setAutoAck()` before disabling the
+recommend you read the docs about :func:`~RF24Revamped::setAutoAck()` before disabling the
 auto-ack feature.
 
 send() returns false when the payload was received

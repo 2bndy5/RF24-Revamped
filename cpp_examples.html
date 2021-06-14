@@ -430,7 +430,7 @@
 <h2 id="gettingstarted-cpp">gettingstarted.cpp<a class="headerlink" href="#gettingstarted-cpp" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another.
 This example was written to be used on 2 devices acting as “nodes”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/gettingstarted.cpp</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 13</span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
@@ -445,10 +445,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 22</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 23</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 24</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 25</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 25</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 26</span>
 <span class="linenos"> 27</span><span class="c1">// Generic:</span>
-<span class="linenos"> 28</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 28</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 29</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 30</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 31</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -621,7 +621,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <h2 id="acknowledgementpayloads-cpp">acknowledgementPayloads.cpp<a class="headerlink" href="#acknowledgementpayloads-cpp" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another with Acknowledgement (ACK) payloads attached to ACK packets.
 This example was written to be used on 2 devices acting as “nodes”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/acknowledgementPayloads.cpp</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 14</span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
@@ -636,10 +636,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 23</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 24</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 25</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 26</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 26</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 27</span>
 <span class="linenos"> 28</span><span class="c1">// Generic:</span>
-<span class="linenos"> 29</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 29</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 30</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 31</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 32</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -849,7 +849,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <h2 id="manualacknowledgements-cpp">manualAcknowledgements.cpp<a class="headerlink" href="#manualacknowledgements-cpp" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi to transmit and respond with acknowledgment (ACK) transmissions. Notice that the auto-ack feature is enabled, but this example doesn’t use automatic ACK payloads because automatic ACK payloads’ data will always be outdated by 1 transmission. Instead, this example uses a call and response paradigm.
 This example was written to be used on 2 devices acting as “nodes”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/manualAcknowledgements.cpp</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 19</span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
@@ -864,10 +864,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 28</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 29</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 30</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 31</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 31</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 32</span>
 <span class="linenos"> 33</span><span class="c1">// Generic:</span>
-<span class="linenos"> 34</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 34</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 35</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 36</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 37</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -1105,7 +1105,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <section id="multiceiverdemo-cpp">
 <h2 id="multiceiverdemo-cpp">multiceiverDemo.cpp<a class="headerlink" href="#multiceiverdemo-cpp" title="Permalink to this headline">¶</a></h2>
 <p>A simple example of sending data from as many as 6 nRF24L01 transceivers to 1 receiving transceiver. This technique is trademarked by Nordic Semiconductors as “MultiCeiver”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/multiceiverDemo.cpp</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 16</span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
@@ -1121,10 +1121,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 26</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 27</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 28</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 29</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 29</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 30</span>
 <span class="linenos"> 31</span><span class="c1">// Generic:</span>
-<span class="linenos"> 32</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 32</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 33</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 34</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 35</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -1374,7 +1374,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <h2 id="streamingdata-cpp">streamingData.cpp<a class="headerlink" href="#streamingdata-cpp" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi for streaming multiple payloads.
 This example was written to be used on 2 devices acting as “nodes”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/streamingData.cpp</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 13</span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">       // abs()</span><span class="cp"></span>
@@ -1391,10 +1391,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 24</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 25</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 26</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 27</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 27</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 28</span>
 <span class="linenos"> 29</span><span class="c1">// Generic:</span>
-<span class="linenos"> 30</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 30</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 31</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 32</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 33</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -1670,7 +1670,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <h2 id="interruptconfigure-cpp">interruptConfigure.cpp<a class="headerlink" href="#interruptconfigure-cpp" title="Permalink to this headline">¶</a></h2>
 <p>This is a simple example of using the RF24 class on a Raspberry Pi to detecting (and verifying) the IRQ (interrupt) pin on the nRF24L01.
 This example was written to be used on 2 devices acting as “nodes”.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/interruptConfigure.cpp</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 16</span><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="c1">       // time()</span><span class="cp"></span>
@@ -1691,10 +1691,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 31</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 32</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 33</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 34</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 34</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 35</span>
 <span class="linenos"> 36</span><span class="c1">// Generic:</span>
-<span class="linenos"> 37</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 37</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 38</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 39</span><span class="c1">// See http://2bndy5.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 40</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>
@@ -1982,7 +1982,7 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <section id="scanner-cpp">
 <h2 id="scanner-cpp">scanner.cpp<a class="headerlink" href="#scanner-cpp" title="Permalink to this headline">¶</a></h2>
 <p>This example is best used as a diagnostic tool to determine what RF channels have less interference in your vicinity.
-Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state the radio will persist until another example or application uses it.</p>
+Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> to quit at any time, but remember state of the radio will persist until another example or application uses it.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">/examples_linux/scanner.cpp</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 25</span><span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
@@ -1995,10 +1995,10 @@ Use <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></
 <span class="linenos"> 32</span><span class="c1">// Radio CE Pin, CSN Pin, SPI Speed</span>
 <span class="linenos"> 33</span><span class="c1">// CE Pin uses GPIO number with BCM and SPIDEV drivers, other platforms use their own pin numbering</span>
 <span class="linenos"> 34</span><span class="c1">// CS Pin addresses the SPI bus number at /dev/spidev&lt;a&gt;.&lt;b&gt;</span>
-<span class="linenos"> 35</span><span class="c1">// ie: RF24 radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
+<span class="linenos"> 35</span><span class="c1">// ie: RF24Revamped radio(&lt;ce_pin&gt;, &lt;a&gt;*10+&lt;b&gt;); spidev1.0 is 10, spidev1.1 is 11 etc..</span>
 <span class="linenos"> 36</span>
 <span class="linenos"> 37</span><span class="c1">// Generic:</span>
-<span class="linenos"> 38</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="linenos"> 38</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="linenos"> 39</span><span class="cm">/****************** Linux (BBB,x86,etc) ***********************/</span>
 <span class="linenos"> 40</span><span class="c1">// See http://nRF24.github.io/RF24/pages.html for more information on usage</span>
 <span class="linenos"> 41</span><span class="c1">// See http://iotdk.intel.com/docs/master/mraa/ for more information on MRAA</span>

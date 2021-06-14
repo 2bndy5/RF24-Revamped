@@ -85,7 +85,7 @@ Auto-Ack feature
 Auto-acknowledgement responds to every recieved payload with an empty
 ACK packet. These ACK packets get sent from the receiving radio back
 to the transmitting radio. To attach an ACK payload to a ACK packet,
-use :func:`~RF24::writeAck()`.
+use :func:`~RF24Revamped::writeAck()`.
 
 Pipe 0 is used for TX operations, which include sending ACK packets. If
 using this feature on both TX & RX nodes, then pipe 0 must have this
@@ -96,7 +96,7 @@ Remember to also enable this feature for any pipe that is openly
 listening to a transmitting radio with this feature enabled.
 
 .. warning:: If this feature is enabled for pipe 0, then the ``multicast``
-    parameter to :func:`~RF24::send()` can be used to disable this feature for an
+    parameter to :func:`~RF24Revamped::send()` can be used to disable this feature for an
     individual payload. However, if this feature is disabled for pipe 0,
     then the ``multicast`` parameter will have no effect.
 .. note:: If disabling auto-acknowledgment packets on pipe 0, the
@@ -141,7 +141,7 @@ Auto-Retry feature
 .. hint:: Disabling the auto-retry feature on a transmitter still uses the
     auto-ack feature (if enabled), except it will not retry to transmit if
     the payload was not acknowledged on the first attempt.
-.. seealso:: :func:`~RF24::lastTxArc()`
+.. seealso:: :func:`~RF24Revamped::lastTxArc()`
 
 Auto-Retry setters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,17 +189,17 @@ manually changing the radio modes on both units.
     feature requires the `Auto-Ack feature`_ and the
     `Dynamic Payload Length feature`_ to be enabled for any pipe using ACK payloads.
 
-.. seealso:: :func:`~RF24::setAutoAck()`, :func:`~RF24::writeAck()`
+.. seealso:: :func:`~RF24Revamped::setAutoAck()`, :func:`~RF24Revamped::writeAck()`
 
 enableAckPayload()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: enableAckPayload
+.. doxygenfunction:: RF24Revamped::enableAckPayload
 
 disableAckPayload()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: disableAckPayload
+.. doxygenfunction:: RF24Revamped::disableAckPayload
 
 Multicast feature
 **********************************
@@ -230,12 +230,12 @@ Data Rate enum
 setDataRate()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: setDataRate
+.. doxygenfunction:: RF24Revamped::setDataRate
 
 getDataRate()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: getDataRate
+.. doxygenfunction:: RF24Revamped::getDataRate
 
 RF Channel
 ******************************
@@ -243,12 +243,12 @@ RF Channel
 setChannel()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: setChannel
+.. doxygenfunction:: RF24Revamped::setChannel
 
 getChannel()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: getChannel
+.. doxygenfunction:: RF24Revamped::getChannel
 
 CRC checking
 ******************************

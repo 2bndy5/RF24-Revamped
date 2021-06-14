@@ -438,7 +438,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 15</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 16</span>
 <span class="linenos"> 17</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 18</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 18</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 19</span>
 <span class="linenos"> 20</span><span class="c1">// Let these addresses be used for the pair</span>
 <span class="linenos"> 21</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -590,7 +590,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 16</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 17</span>
 <span class="linenos"> 18</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 19</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 19</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 20</span>
 <span class="linenos"> 21</span><span class="c1">// an identifying device destination</span>
 <span class="linenos"> 22</span><span class="c1">// Let these addresses be used for the pair</span>
@@ -796,7 +796,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 21</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 22</span>
 <span class="linenos"> 23</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 24</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 24</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 25</span>
 <span class="linenos"> 26</span><span class="c1">// Let these addresses be used for the pair</span>
 <span class="linenos"> 27</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -1012,7 +1012,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 18</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 19</span>
 <span class="linenos"> 20</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 21</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 21</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 22</span>
 <span class="linenos"> 23</span><span class="c1">// For this example, we'll be using 6 addresses; 1 for each TX node</span>
 <span class="linenos"> 24</span><span class="c1">// It is very helpful to think of an address as a path instead of as</span>
@@ -1205,7 +1205,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 15</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 16</span>
 <span class="linenos"> 17</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 18</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 18</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 19</span>
 <span class="linenos"> 20</span><span class="c1">// Let these addresses be used for the pair</span>
 <span class="linenos"> 21</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -1399,7 +1399,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 22</span><span class="k">volatile</span> <span class="kt">bool</span> <span class="n">wait_for_event</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// used to wait for an IRQ event to trigger</span>
 <span class="linenos"> 23</span>
 <span class="linenos"> 24</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 25</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 25</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 26</span>
 <span class="linenos"> 27</span><span class="c1">// Let these addresses be used for the pair</span>
 <span class="linenos"> 28</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -1734,7 +1734,7 @@ Use the Serial Monitor to change each node’s behavior.</p>
 <span class="linenos"> 27</span><span class="cp">#include</span> <span class="cpf">"RF24Revamped.h"</span><span class="cp"></span>
 <span class="linenos"> 28</span>
 <span class="linenos"> 29</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 30</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
+<span class="linenos"> 30</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// using pin 7 for the CE pin, and pin 8 for the CSN pin</span>
 <span class="linenos"> 31</span>
 <span class="linenos"> 32</span><span class="c1">// Channel info</span>
 <span class="linenos"> 33</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">num_channels</span> <span class="o">=</span> <span class="mi">126</span><span class="p">;</span>

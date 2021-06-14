@@ -419,7 +419,7 @@ the RF24 class to communicate with another node.</p>
 <p>A simple example of sending data from 1 nRF24L01 transceiver to another
 with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
 This example still uses ACK packets, but they have no payloads. Instead the
-acknowledging response is sent with <a class="reference internal" href="basic_api.html#_CPPv4N4RF244sendEPKv7uint8_tKb" title="RF24::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24::send()</span></code></a>. This tactic allows
+acknowledging response is sent with <a class="reference internal" href="basic_api.html#_CPPv4N12RF24Revamped4sendEPKv7uint8_tKb" title="RF24Revamped::send"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">RF24Revamped::send()</span></code></a>. This tactic allows
 for more updated acknowledgement payload data, where actual ACK payloads’ data
 are outdated by 1 transmission because they have to loaded before receiving a
 transmission.</p>
@@ -435,7 +435,7 @@ transmission.</p>
 <span class="linenos"> 91</span><span class="c1">//#define CSN_PIN 3 // uncomment for ATTiny85 3 pins solution</span>
 <span class="linenos"> 92</span>
 <span class="linenos"> 93</span><span class="c1">// instantiate an object for the nRF24L01 transceiver</span>
-<span class="linenos"> 94</span><span class="n">RF24</span> <span class="nf">radio</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">);</span>
+<span class="linenos"> 94</span><span class="n">RF24Revamped</span> <span class="nf">radio</span><span class="p">(</span><span class="n">CE_PIN</span><span class="p">,</span> <span class="n">CSN_PIN</span><span class="p">);</span>
 <span class="linenos"> 95</span>
 <span class="linenos"> 96</span><span class="c1">// Let these addresses be used for the pair</span>
 <span class="linenos"> 97</span><span class="kt">uint8_t</span> <span class="n">address</span><span class="p">[][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"1Node"</span><span class="p">,</span> <span class="s">"2Node"</span><span class="p">};</span>
@@ -555,10 +555,10 @@ transmission.</p>
 <p>The RF24 library uses the <a class="reference external" href="https://github.com/SpenceKonde/ATTinyCore">ATTinyCore by SpenceKonde</a></p>
 <p>This sketch can determine the best settle time values to use for
 macros, defined as <code class="docutils literal notranslate"><span class="pre">RF24_CSN_SETTLE_HIGH_DELAY</span></code> and <code class="docutils literal notranslate"><span class="pre">RF24_CSN_SETTLE_LOW_DELAY</span></code>,
-<code class="xref cpp cpp-var docutils literal notranslate"><span class="pre">RF24::csDelay</span></code> in RF24::csn() (private function).</p>
+<code class="xref cpp cpp-var docutils literal notranslate"><span class="pre">RF24Revamped::csDelay</span></code> in RF24Revamped::csn() (private function).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref cpp cpp-var docutils literal notranslate"><span class="pre">RF24::csDelay</span></code></p>
+<p><code class="xref cpp cpp-var docutils literal notranslate"><span class="pre">RF24Revamped::csDelay</span></code></p>
 </div>
 <p>The settle time values used here are 100/20. However, these values depend
 on the actual used RC combiniation and voltage drop by LED. The
