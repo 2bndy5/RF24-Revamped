@@ -22,7 +22,6 @@
  * Inspired by cpixip.
  * See http://arduino.cc/forum/index.php/topic,54795.0.html
  */
-
 #include <cstdlib>
 #include <iostream>
 #include <RF24Revamped/RF24Revamped.h>
