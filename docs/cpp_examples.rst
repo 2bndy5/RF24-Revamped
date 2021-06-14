@@ -87,7 +87,6 @@ scanner.cpp
 --------------------------
 
 |scanner_desc|
-|2_or_more_devs|
 |ctrl_c_quit|
 
 .. literalinclude:: ../examples_linux/scanner.cpp
