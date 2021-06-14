@@ -32,7 +32,7 @@ sys.path.insert(0, os.path.abspath("."))
 
 # Project information -----------------------------------------------------
 
-project = "RF24 Revemped"
+project = "RF24Revemped"
 copyright = "2020, 2bndy5"
 author = "2bndy5"
 
@@ -168,8 +168,8 @@ highlight_language = "cpp"
 #     ("../", ["RF24.h", "RF24.cpp", "RF24_config.h", "nRF24L01.h"])
 # }
 
-breathe_projects = {"RF24": "./doxygen/xml"}
-breathe_default_project = "RF24"
+breathe_projects = {"RF24Revamped": "./doxygen/xml"}
+breathe_default_project = "RF24Revamped"
 
 # ReadTheDocs configuration
 # ---------------------------------------------
@@ -196,8 +196,8 @@ html_theme_options = {
     "color_primary": "blue",
     "color_accent": "light-blue",
     # Set the repo location to get a badge with stats
-    "repo_url": "https://github.com/2bndy5/RF24-Revamped/",
-    "repo_name": "RF24-Revamped",
+    "repo_url": "https://github.com/2bndy5/RF24Revamped/",
+    "repo_name": "RF24Revamped",
     # Visible levels of the global TOC; -1 means unlimited
     "globaltoc_depth": 1,
     # If False, expand all TOC entries

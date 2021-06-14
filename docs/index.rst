@@ -109,7 +109,6 @@ different boards. Only the IRQ, CE, and CSN pins are configurable.
    linux_install
    mraa
    rpi_general
-   cross_compilation
    atxmega
    portability
    templates

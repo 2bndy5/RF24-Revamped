@@ -11,30 +11,29 @@ setup a proper development environment on your host PC (the machine that
 will build your project).
 
 Either set an environment variable named ``PICO_SDK_PATH`` that points to your
-local clone of the pico-sdk or put the pico-sdk next to the RF24 folder or
-next to the folder containing your project using the RF24 library:
+local clone of the pico-sdk or put the pico-sdk next to the RF24Revamped folder or
+next to the folder containing your project using the RF24Revamped library:
 
 .. code-block:: text
 
     path/to/github/repos/
         pico-sdk/
-        RF24-Revamped/
+        RF24Revamped/
         my_rf24_project/
 
-Alternatively, the RF24 repository (and optionally the RF24Network and RF24Mesh
-repositories) can be included into your project's "lib" folder as copies or
-git submodules. For more detail, see the below instructions to incorporate
-RF24 libs into your project.
+Alternatively, the RF24Revamped repository can be included into your project's
+"lib" folder as copies or git submodules. For more detail, see the below
+instructions to incorporate RF24Revamped library into your project.
 
-Building the RF24 examples for the Pico SDK
-*******************************************
+Building the RF24Revamped examples for the Pico SDK
+***************************************************
 
-1. Create a "build" directory in the RF24 repository's root directory and
+1. Create a "build" directory in the RF24Revamped repository's root directory and
    navigate to it:
 
    .. code-block:: shell
 
-      cd RF24
+      cd RF24Revamped
       mkdir build
       cd build
 
@@ -49,7 +48,7 @@ Building the RF24 examples for the Pico SDK
    If the ``-DPICO_BOARD`` option is not specified, then the Pico SDK will default to
    building for the Raspberry Pi Pico board.
 3. Build the examples using the CMakeLists.txt file located in the
-   RF24/examples_pico directory.
+   RF24Revamped/examples_pico directory.
 
    .. code-block:: shell
 
@@ -63,46 +62,42 @@ Building the RF24 examples for the Pico SDK
        default set of SPI pins defined for it. To workaround this error, see the
        below instructions to use different pins for the SPI bus.
 
-Incorporating RF24 libs into your project
-*****************************************
+Incorporating RF24Revamped libs into your project
+*************************************************
 
-In order to use the RF24 libraries in your RP2040 based project:
+In order to use the RF24Revamped libraries in your RP2040 based project:
 
-1. Make a copy of the RF24 library (and optionally RF24Network and RF24Mesh
+1. Make a copy of the RF24Revamped library (and optionally RF24Network and RF24Mesh
    libraries) in a "lib" directory located in your project's root directory.
 
    .. code-block:: text
 
-        path/to/my/project/
-            lib/
-                RF24-Revamped/
-            src/
-                CMakeLists.txt
-                ...
+       path/to/my/project/
+           lib/
+               RF24Revamped/
+           src/
+               CMakeLists.txt
+               ...
 
-   Alternatively you can add the RF24* repositories as `git submodules <https://git-scm.com/book/en/v2/Git-Tools-Submodules>`_.
-2. Include their CMakeLists.txt files from the RF24 libraries in your project's top-level
+   Alternatively you can add the RF24Revamped repository as `git submodules <https://git-scm.com/book/en/v2/Git-Tools-Submodules>`_.
+2. Include their CMakeLists.txt files from the RF24Revamped library in your project's top-level
    CMakeLists.txt file (usually located in the "src" directory). The following snippet
    assumes that your project's "src" directory is on the same level as the previously
    mentioned "lib" directory.
 
    .. code-block:: cmake
 
-       include(../lib/RF24/CMakeLists.txt)
-       include(../lib/RF24Network/CMakeLists.txt)
-       include(../lib/RF24Mesh/CMakeLists.txt)
+       include(../lib/RF24Revamped/CMakeLists.txt)
 
-3. In the same CMakeLists.txt file from step 2, add the RF24 libraries into the
-   `target_link_libraries` configuration:
+3. In the same CMakeLists.txt file from step 2, add the RF24Revamped library into the
+   ``target_link_libraries`` configuration:
 
    .. code-block:: cmake
 
        target_link_libraries(${CMAKE_PROJECT_NAME}
            # ... Your project's other libraries ...
-           RF24
-           RF24Network
-           RF24Mesh
-           )
+           RF24Revamped
+       )
 
    If you are using tinyUSB, this line (or similar) should already exist:
 
@@ -110,14 +105,12 @@ In order to use the RF24 libraries in your RP2040 based project:
 
        target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
-4. Finally, remember to include the necessary RF24* libraries' header files in your
+4. Finally, remember to include the necessary RF24Revamped* library's header files in your
    project's source code where applicable.
 
    .. code-block:: cpp
 
-       #include <RF24.h>
-       #include <RF24Network.h>
-       #include <RF24Mesh.h>
+       #include <RF24Revamped.h>
 
 Using different pins for the SPI bus
 ************************************
@@ -140,13 +133,13 @@ Project Source code option
 --------------------------
 
 This option is the most reliable and flexible. It involves calling `SPI.begin()` and
-then passing the ``SPI`` object to `RF24::begin(_SPI*) <basic_api.html#begin-spi>`_.
+then passing the ``SPI`` object to `RF24Revamped::begin(_SPI*) <basic_api.html#begin-spi>`_.
 
 .. code-block:: cpp
 
-    #include <RF24.h>
+    #include <RF24Revamped.h>
 
-    RF24 radio(7, 8); // pin numbers connected to the radio's CE and CSN pins (respectively)
+    RF24Revamped radio(7, 8); // pin numbers connected to the radio's CE and CSN pins (respectively)
 
     int main()
     {
