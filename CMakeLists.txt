@@ -84,6 +84,7 @@ include(cmake/CPackInfo.cmake)
 
 add_library(${LibTargetName} SHARED
     RF24Revamped.cpp
+    RF24.h
     ${RF24_DRIVER_SOURCES}
 )
 
@@ -124,6 +125,7 @@ install(FILES
         nRF24L01.h
         printf.h
         RF24_config.h
+        RF24.h
     DESTINATION include/RF24Revamped
 )
 

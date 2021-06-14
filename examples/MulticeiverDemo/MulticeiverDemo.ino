@@ -18,7 +18,7 @@
 #include "RF24Revamped.h"
 
 // instantiate an object for the nRF24L01 transceiver
-RF24 radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
+RF24Revamped radio(7, 8); // using pin 7 for the CE pin, and pin 8 for the CSN pin
 
 // For this example, we'll be using 6 addresses; 1 for each TX node
 // It is very helpful to think of an address as a path instead of as

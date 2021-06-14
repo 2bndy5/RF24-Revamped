@@ -12,7 +12,7 @@ RF24 makes use of the standard hardware SPI pins (MISO, MOSI, SCK) and requires 
 the chip-select and chip-enable functions.
 
 These pins must be chosen and designated by the user, in
-``RF24 radio(ce_pin, cs_pin);`` and can use any available pins.
+``RF24Revamped radio(ce_pin, cs_pin);`` and can use any available pins.
 
 Alternate SPI Support
 *********************

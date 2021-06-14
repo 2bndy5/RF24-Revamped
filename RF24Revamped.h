@@ -11,7 +11,7 @@
 /**
  * @file RF24Revamped.h
  *
- * Class declaration for RF24 and helper enums
+ * Class declaration for RF24Revamped and helper enums
  */
 
 #ifndef __RF24REVAMPED_H__
@@ -30,7 +30,7 @@
  * Power Amplifier level. The units dBm (decibel-milliwatts or dB<sub>mW</sub>)
  * represents a logarithmic signal loss.
  * @rst
- * .. seealso:: :func:`~RF24::setPaLevel()`, :func:`~RF24::getPaLevel()`
+ * .. seealso:: :func:`~RF24Revamped::setPaLevel()`, :func:`~RF24Revamped::getPaLevel()`
  * @endrst
  */
 typedef enum {
@@ -86,7 +86,7 @@ typedef enum {
 /**
  * How fast data moves through the air. Units are in bits per second (bps).
  * @rst
- * .. seealso:: :func:`~RF24::setDataRate()`, :func:`~RF24::getDataRate()`
+ * .. seealso:: :func:`~RF24Revamped::setDataRate()`, :func:`~RF24Revamped::getDataRate()`
  * @endrst
  */
 typedef enum {
@@ -102,7 +102,8 @@ typedef enum {
  * @brief Driver class for nRF24L01(+) 2.4GHz Wireless Transceiver
  */
 
-class RF24 {
+class RF24Revamped
+{
 private:
     #ifdef SOFTSPI
     SoftSPI<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN, SPI_MODE> spi;
@@ -221,7 +222,7 @@ public:
      * - Older/Unsupported Arduino devices will use a default clock divider & settings configuration
      * - For Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed as of v1.3.7
      */
-    RF24(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed = RF24_SPI_SPEED);
+    RF24Revamped(uint16_t _cepin, uint16_t _cspin, uint32_t _spi_speed = RF24_SPI_SPEED);
 
     /**
      * A constructor for initializing the radio's hardware dynamically
@@ -238,10 +239,10 @@ public:
      * - Older/Unsupported Arduino devices will use a default clock divider & settings configuration
      * - For Linux: The old way of setting SPI speeds using BCM2835 driver enums has been removed as of v1.3.7
      */
-    RF24(uint32_t _spi_speed = RF24_SPI_SPEED);
+    RF24Revamped(uint32_t _spi_speed = RF24_SPI_SPEED);
 
     #if defined (RF24_LINUX)
-    virtual ~RF24() {};
+    virtual ~RF24Revamped() {};
     #endif
 
     /**
@@ -611,6 +612,7 @@ public:
      */
     bool isFifo(bool about_tx, bool check_empty);
 
+    #if !defined (__RF24_H_)
     /**
      * Get 2 binary bits of data about either FIFO buffers.
      * @param about_tx Specify which FIFO the returned data should concern.
@@ -623,6 +625,7 @@ public:
      * - `0` means the FIFO is neither full nor empty
      */
     uint8_t isFifo(bool about_tx = false);
+    #endif // !defined (__RF24_H_)
 
     /**
      * Enter low-power mode
@@ -654,6 +657,7 @@ public:
      */
     void powerUp(void);
 
+    #if !defined (__RF24_H_)
     /**
      * Set the power state of the radio.
      * @rst
@@ -703,6 +707,7 @@ public:
      *   is on.
      */
     bool send(const void* buf, uint8_t len, const bool multicast=0);
+    #endif // defined(__RF24_H_)
 
     /**
      * Write an acknowledgement (ACK) payload for the specified pipe
@@ -762,6 +767,7 @@ public:
      */
     void clearStatusFlags(bool dataReady = true, bool dataSent = true, bool dataFail = true);
 
+    #if !defined (__RF24_H_)
     /**
      * Write a payload to the TX FIFO buffers. This function actually serves as
      * a helper to send().
@@ -820,6 +826,7 @@ public:
      * - `false` if the re-transmission failed or the TX FIFO was already empty.
      */
     bool resend();
+    #endif // !defined (__RF24_H_)
 
     /**
      * Empty all 3 of the TX (transmit) FIFO buffers. This is automatically
@@ -889,6 +896,7 @@ public:
      */
     void setAutoRetry(uint16_t delay, uint8_t count);
 
+    #if !defined (__RF24_H_)
     /**
      * Get the auto-retry feature's configuration.
      * @param[out] delay The reference variable that will store the amount
@@ -932,6 +940,7 @@ public:
      * Get the auto-retry feature's count (ARC) configuration.
      */
     uint8_t getArc(void);
+    #endif // !defined (__RF24_H_)
 
     /**
      * Set RF communication channel. The frequency used by a channel is
@@ -976,6 +985,7 @@ public:
      */
     uint8_t getPayloadLength(uint8_t pipe=0);
 
+    #if !defined (__RF24_H_)
     /**
      * Get next available payload length in bytes. This function is compatible
      * with static or dynamic payloads.
@@ -983,6 +993,7 @@ public:
      * If no payload is available then this function returns 0.
      */
     uint8_t any(void);
+    #endif // !defined (__RF24_H_)
 
     /**
      * Enable custom payloads in the acknowledge packets
@@ -1295,6 +1306,7 @@ public:
      */
     void interruptConfig(bool dataReady = true, bool dataSent = true, bool dataFail = true);
 
+    #if !defined (__RF24_H_)
     /**
      * The driver will delay for this duration when stopListening() is called
      *
@@ -1318,6 +1330,7 @@ public:
      * If using interrupts or timed requests, this can be set to 0 Default:5
      */
     uint32_t csDelay;
+    #endif // __RF24_H_
 
     /**
      * Transmission of constant carrier wave.

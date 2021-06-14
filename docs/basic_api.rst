@@ -5,57 +5,57 @@ Basic API
 Constructors
 ******************
 
-.. doxygenclass:: RF24
-    :members: RF24
+.. doxygenclass:: RF24Revamped
+    :members: RF24Revamped
 
 begin()
 **********************
 
-.. doxygenfunction:: RF24::begin(void)
+.. doxygenfunction:: RF24Revamped::begin(void)
 
 begin(_SPI*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: RF24::begin(_SPI*)
+.. doxygenfunction:: RF24Revamped::begin(_SPI*)
 
 begin(uint16_t, uint16_t)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: RF24::begin(uint16_t, uint16_t)
+.. doxygenfunction:: RF24Revamped::begin(uint16_t, uint16_t)
 
 begin(_SPI*, uint16_t, uint16_t)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: RF24::begin(_SPI*, uint16_t, uint16_t)
+.. doxygenfunction:: RF24Revamped::begin(_SPI*, uint16_t, uint16_t)
 
 openReadingPipe()
 ******************
 
-.. doxygenfunction:: RF24::openReadingPipe(uint8_t number, const uint8_t* address)
+.. doxygenfunction:: RF24Revamped::openReadingPipe(uint8_t number, const uint8_t* address)
 
-.. doxygenfunction:: RF24::openReadingPipe(uint8_t number, uint64_t address)
+.. doxygenfunction:: RF24Revamped::openReadingPipe(uint8_t number, uint64_t address)
 
 closeReadingPipe()
 ******************
 
-.. doxygenfunction:: closeReadingPipe
+.. doxygenfunction:: RF24Revamped::closeReadingPipe
 
 openWritingPipe()
 ******************
 
-.. doxygenfunction:: openWritingPipe(const uint8_t* address)
+.. doxygenfunction:: RF24Revamped::openWritingPipe(const uint8_t* address)
 
-.. doxygenfunction:: openWritingPipe(uint64_t address)
+.. doxygenfunction:: RF24Revamped::openWritingPipe(uint64_t address)
 
 startListening()
 ******************
 
-.. doxygenfunction:: startListening
+.. doxygenfunction:: RF24Revamped::startListening
 
 stopListening()
 ******************
 
-.. doxygenfunction:: stopListening
+.. doxygenfunction:: RF24Revamped::stopListening
 
 any()
 ******************
@@ -65,12 +65,12 @@ any()
 available()
 ******************
 
-.. doxygenfunction:: available
+.. doxygenfunction:: RF24Revamped::available
 
 read()
 ******************
 
-.. doxygenfunction:: RF24::read
+.. doxygenfunction:: RF24Revamped::read
 
 send()
 ******************

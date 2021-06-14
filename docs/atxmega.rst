@@ -54,11 +54,11 @@ In the file where the ``main()`` is located, put the following code snippet to u
         update_milisec();
     }
 
-Declare the rf24 radio with
+Declare the RF24Revamped radio with
 
 .. code-block:: cpp
 
-    RF24 radio(XMEGA_PORTC_PIN3, XMEGA_SPI_PORT_C);
+    RF24Revamped radio(XMEGA_PORTC_PIN3, XMEGA_SPI_PORT_C);
 
 1. First parameter is the CE pin which can be any available pin on the uC.
 2. Second parameter is the CS which can be on port C (``XMEGA_SPI_PORT_C``) or on port D (``XMEGA_SPI_PORT_D``).

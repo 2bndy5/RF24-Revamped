@@ -22,7 +22,7 @@ the RF24 class to communicate with another node.
 A simple example of sending data from 1 nRF24L01 transceiver to another
 with manually transmitted (non-automatic) Acknowledgement (ACK) payloads.
 This example still uses ACK packets, but they have no payloads. Instead the
-acknowledging response is sent with :func:`RF24::send()`. This tactic allows
+acknowledging response is sent with :func:`RF24Revamped::send()`. This tactic allows
 for more updated acknowledgement payload data, where actual ACK payloads' data
 are outdated by 1 transmission because they have to loaded before receiving a
 transmission.
@@ -47,9 +47,9 @@ The RF24 library uses the `ATTinyCore by SpenceKonde
 
 This sketch can determine the best settle time values to use for
 macros, defined as ``RF24_CSN_SETTLE_HIGH_DELAY`` and ``RF24_CSN_SETTLE_LOW_DELAY``,
-:var:`RF24::csDelay` in RF24::csn() (private function).
+:var:`RF24Revamped::csDelay` in RF24Revamped::csn() (private function).
 
-.. seealso:: :var:`RF24::csDelay`
+.. seealso:: :var:`RF24Revamped::csDelay`
 
 The settle time values used here are 100/20. However, these values depend
 on the actual used RC combiniation and voltage drop by LED. The
@@ -61,4 +61,3 @@ For schematic details, see introductory comment block in the rf24ping85.ino sket
     :caption: /examples/rf24_ATTiny/timingSearch3pin/timingSearch3pin.ino
     :lines: 20-
     :lineno-start: 20
-

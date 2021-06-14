@@ -9,6 +9,7 @@
     2016            akatran
     2017-2019 Avamander <avamander@gmail.com>
     2019            IkpeohaGodson
+    2021            2bndy5
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -25,7 +26,7 @@
 // #define SOFTSPI     // Requires library from https://github.com/greiman/DigitalIO
 
 /**
- * User access to internally used delay time (in microseconds) during RF24::powerUp()
+ * User access to internally used delay time (in microseconds) during RF24Revamped::powerUp()
  * @warning This default value compensates for all supported hardware. Only adjust this if you
  * know your radio's hardware is, in fact, genuine and reliable.
  */
@@ -52,7 +53,7 @@
 #elif defined (PICO_BUILD) && !defined (ARDUINO)
     #include "utility/rp2/includes.h"
 
-#elif ( !defined (ARDUINO) ) // Any non-arduino device is handled via configure/Makefile
+#elif (!defined(ARDUINO)) // Any non-arduino device is handled via configure/Makefile
     // The configure script detects device and copies the correct includes.h file to /utility/includes.h
     // This behavior can be overridden by calling configure with respective parameters
     // The includes.h file defines either RF24_RPi, MRAA, LITTLEWIRE or RF24_SPIDEV and includes the correct RF24_arch_config.h file
@@ -93,8 +94,7 @@
             #endif // SOFT_SPI_SCK_PIN
 
             const uint8_t SPI_MODE = 0;
-            #define _SPI SoftSPI<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN, SPI_MODE>
-            #define RF24_SPI_PTR
+            #define _SPI spi
 
         #elif defined (ARDUINO_SAM_DUE)
             #include <SPI.h>

@@ -14,11 +14,11 @@
 #include "pico/stdlib.h"  // printf(), sleep_ms(), getchar_timeout_us(), to_us_since_boot(), get_absolute_time()
 #include "pico/bootrom.h" // reset_usb_boot()
 #include <tusb.h>         // tud_cdc_connected()
-#include <RF24Revamped.h> // RF24 radio object
+#include <RF24Revamped.h> // RF24Revamped radio object
 #include "defaultPins.h"  // board presumptive default pin numbers for CE_PIN and CSN_PIN
 
 // instantiate an object for the nRF24L01 transceiver
-RF24 radio(CE_PIN, CSN_PIN);
+RF24Revamped radio(CE_PIN, CSN_PIN);
 
 // Used to control whether this node is sending or receiving
 bool role = false; // true = TX node, false = RX node

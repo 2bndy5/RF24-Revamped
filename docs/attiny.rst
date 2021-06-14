@@ -36,7 +36,7 @@ ATtiny25/45/85 using 3 pins
 Pin map with CE_PIN 3 and CSN_PIN 3. PB3 and PB4 are free to use for application
 Circuit idea from `NerdRalph' 3 pin solution <http://nerdralph.blogspot.ca/2014/01/nrf24l01-control-with-3-attiny85-pins.html>`_
 Original RC combination was 1K/100nF. 22K/10nF combination worked better.
-For best settletime delay value in RF24::csn() the timingSearch3pin.ino sketch can be used.
+For best settletime delay value in RF24Revamped::csn() the timingSearch3pin.ino sketch can be used.
 This configuration is enabled when CE_PIN and CSN_PIN are equal, e.g. both 3
 Because CE is always high the power consumption is higher than for 5 pins solution
 

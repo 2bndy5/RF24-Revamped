@@ -49,7 +49,7 @@
  * http://nerdralph.blogspot.ca/2014/01/nrf24l01-control-with-3-attiny85-pins.html
  * Original RC combination was 1K/100nF. 22K/10nF combination worked better.
  *
- * For best settle time delay value to use for RF24::csDelay in RF24::csn(), use
+ * For best settle time delay value to use for RF24Revamped::csDelay in RF24Revamped::csn(), use
  * the examples/rf24_ATTiny/timingSearch3pin/timingSearch3pin.ino sketch.
  *
  * This configuration is enabled in the RF24 library when CE_PIN and
@@ -91,7 +91,7 @@
 //#define CSN_PIN 3 // uncomment for ATTiny85 3 pins solution
 
 // instantiate an object for the nRF24L01 transceiver
-RF24 radio(CE_PIN, CSN_PIN);
+RF24Revamped radio(CE_PIN, CSN_PIN);
 
 // Let these addresses be used for the pair
 uint8_t address[][6] = {"1Node", "2Node"};

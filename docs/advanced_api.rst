@@ -10,7 +10,7 @@ resend()
 write()
 ******************************
 
-.. doxygenfunction:: RF24::write
+.. doxygenfunction:: RF24Revamped::write
 
 ce()
 ******************************
@@ -26,11 +26,11 @@ Status Byte
 ******************************
 
 .. important:: Calling most of these status byte related functions do not update the
-    data they return. Use :func:`~RF24::update()` to refresh the status byte data as needed.
+    data they return. Use :func:`~RF24Revamped::update()` to refresh the status byte data as needed.
 
     The status byte data is updated on every SPI transaction. The only functions that
-    don't execute an SPI transaction are :func:`~RF24::irqDf()`, :func:`~RF24::irqDs()`,
-    :func:`~RF24::irqDr()`, :func:`~RF24::isTxFull()`, and :func:`~RF24::pipe()`.
+    don't execute an SPI transaction are :func:`~RF24Revamped::irqDf()`, :func:`~RF24Revamped::irqDs()`,
+    :func:`~RF24Revamped::irqDr()`, :func:`~RF24Revamped::isTxFull()`, and :func:`~RF24Revamped::pipe()`.
 
 update()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -73,12 +73,12 @@ Power mode
 powerUp()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: powerUp
+.. doxygenfunction:: RF24Revamped::powerUp
 
 powerDown()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. doxygenfunction:: powerDown
+.. doxygenfunction:: RF24Revamped::powerDown
 
 setPower()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -144,4 +144,4 @@ stopCarrierWave()
 printDetails()
 ******************************
 
-.. doxygenfunction:: printDetails
+.. doxygenfunction:: RF24Revamped::printDetails
