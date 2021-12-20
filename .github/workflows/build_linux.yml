@@ -78,7 +78,7 @@ jobs:
 
     steps:
       - name: Checkout RF24 repo
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       # - name: provide toolchain (for x86_64)
       #   if: ${{ matrix.toolchain.compiler == 'x86_64' }}
