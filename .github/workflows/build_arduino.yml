@@ -112,6 +112,7 @@ jobs:
           #   - examples/old_backups/recipes/nordic_fob
           #   - examples/old_backups/recipes/pingpair_maple
           fqbn: ${{ matrix.fqbn }}
+          verbose: true
   attiny:
     needs: check_formatting
     runs-on: ubuntu-latest
